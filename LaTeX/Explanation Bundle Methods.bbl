@@ -1,0 +1,80 @@
+\begin{thebibliography}{10}
+
+\bibitem{Clarke1990}
+Frank~H. Clarke.
+\newblock {\em Optimization and nonsmooth analysis}.
+\newblock Classics in Applied Mathematics. Society for Industrial and Applied
+  Mathematics Philadelphia, 1990.
+
+\bibitem{Fuduli2004}
+A.~Fuduli, M.~Gaudioso, and G.~Giallombardo.
+\newblock A dc piecewise affine model and a bundling technique in nonconvex
+  nonsmooth minimization.
+\newblock {\em Optimization Methods and Software}, 19(1), 2004.
+
+\bibitem{Fuduli2004a}
+A.~Fuduli, M.~Gaudioso, and G.~Giallombardo.
+\newblock Minimizing nonconvex nonsmooth functions via cutting planes and
+  proximity control.
+\newblock {\em SIAM Journal of Optimization}, 14(3):743--756, 2004.
+
+\bibitem{Haarala2007}
+Napsu Haarala, Kaisa Miettinen, and Marko~M. M{\"a}kel{\"a}.
+\newblock Globally convergent limited memory bundle method for large-scale
+  nonsmooth optimization.
+\newblock {\em Mathematical Programming}, 109(1):181--205, 2007.
+
+\bibitem{Hare2010}
+Warren Hare and Claudia Sagastizábal.
+\newblock A redistributed proximal bundle method for nonconvex optimization.
+\newblock {\em SIAM Journal on Optimization}, 20(5):2442--2473, 2010.
+
+\bibitem{Hiriart-Urruty1993}
+Jean-Baptiste Hiriart-Urruty and Claude Lemaréchal.
+\newblock {\em Convex analysis and minimization algorithms II}, volume 306 of
+  {\em Grundlehren der mathematischen Wissenschaften}.
+\newblock Springer-Verlag Berlin Heidelberg, 1993.
+
+\bibitem{Kiwiel1986}
+Krzysztof~C. Kiwiel.
+\newblock An aggregate subgradient method for nonsmooth and nonconvex
+  minimization.
+\newblock {\em Journal of Computational and Applied Mathematics}, 14:391--400,
+  1986.
+
+\bibitem{Mifflin1982}
+Robert Mifflin.
+\newblock A modification and an extension of lemaréchal's algorithm for
+  nonsmooth minimization.
+\newblock {\em Mathematical Programming Study}, 17:77--90, 1982.
+
+\bibitem{Mifflin2012}
+Robert Mifflin and Claudia Sagastizábal.
+\newblock A science fiction story in nonsmooth optimization originating at
+  iiasa.
+\newblock {\em Documenta Mathematica}, Extra Volume ISMP:291--300, 2012.
+
+\bibitem{Noll2012}
+Dominikus Noll, Olivier Prot, and Aude Rondepierre.
+\newblock A proximity control algorithm to minimize nonsmooth and nonconvex
+  functions.
+\newblock {\em Pacific Journal of Optimization}, 4(3):571--604, 2012.
+
+\bibitem{Rockafellar2009}
+R.~Tyrell Rockafellar and Roger J-B Wets.
+\newblock {\em Variational Analysis}, volume 317 of {\em Grundlehren der
+  mathematischen Wissenschaften}.
+\newblock Springer-Verlag Berlin Heidelberg, 3rd edition, 2009.
+
+\bibitem{Hare2009}
+Claudia~Sagastizábal Warren~Hare.
+\newblock Computing proximal points of nonconvex functions.
+\newblock {\em Mathematical Programming}, 116:221--258, 2009.
+
+\bibitem{Hare2016}
+Mikhail~Solodov Warren~Hare, Claudia~Sagastizábal.
+\newblock A proximal bundle method for nonsmooth nonconvex functions with
+  inexact information.
+\newblock {\em Computational Optimization and Applications}, 63:1--28, 2016.
+
+\end{thebibliography}

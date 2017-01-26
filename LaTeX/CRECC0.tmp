@@ -1,0 +1,330 @@
+\documentclass[12pt, a4paper]{scrartcl}
+\usepackage{fullpage}
+\usepackage[latin1]{inputenc} %Zeichensatzkodierung (auch Sonderzeichen -> ä,ö,ü)
+\usepackage[english, ngerman]{babel} %Sprache -> Silbentrennung, automatisch generierte Texte auf deutsch; ngerman -> NEUE deutsche Rechtschreibung
+\usepackage[T1]{fontenc} %Sonderzeichen allg
+\usepackage{lmodern} %PDF-optimierte Schrift
+
+\usepackage{amsmath, amssymb, amsbsy, amsthm} %Mathepakete ; amsthm: Theorem-Umgebung; muss nach amsmath eingebunden werden
+\usepackage[x11names]{xcolor} % muss vor "`mcode"' da dieses bereits intern das color-Paket lädt und es dann einmal mit und einmal ohne Option geladen wird, was nicht geht 
+\usepackage{graphicx} % Grafiken einfügen
+%\usepackage{listings} % zum Einbinden von Code, ist bereits in "`mcode"' enthalten
+\usepackage{enumerate}
+\usepackage{tabularx}
+\usepackage{here}
+% \usepackage{extarrows} % Pfeile mit Beschriftung, deren Länge automatisch angepasst wird
+\usepackage{algorithm2e} % Pseudocode
+
+\usepackage{setspace}
+% um Zeilenabstand zu setzen
+
+\usepackage{bibgerm} % Für das Literaturverzeichnis
+
+
+
+%Definition der gewünschten Theorem-Stile:
+\newtheorem{satz}{Satz}[section]
+\newtheorem{lemma}[satz]{Lemma} %hier [section] nicht noch einmal wiederholen, da durch [satz] die Nummerierung schon genauo wie in "Satz" definiert
+\newtheorem{korollar}[satz]{Korrolar}
+
+\theoremstyle{definition}
+\newtheorem{definition}[satz]{Definition}
+\newtheorem{konvention}[satz]{Konvention}
+\newtheorem{beispiel}[satz]{Beispiel}
+
+\newtheoremstyle{my_remark}
+{}{}{}{}{\itshape}{:}{.5em}{}
+
+\theoremstyle{my_remark}
+\newtheorem*{bemerkung}{Bemerkung}
+
+\newenvironment{beweis}{\begin{proof}[Beweis:]}{\end{proof}}
+
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\blangle}{\big\langle}
+\newcommand{\brangle}{\big\rangle}
+\newcommand{\erl}{\textcolor{Green3}{ - erledigt}}
+
+\allowdisplaybreaks[0] % Umgebungen wie align dürfen Seitenumbrüche enthalten
+
+%\setlength{\voffset}{-28.4mm}
+%\setlength{\hoffset}{-1in}
+%\setlength{\topmargin}{20mm}
+%\setlength{\oddsidemargin}{25mm}
+%\setlength{\evensidemargin}{25mm}
+%\setlength{\textwidth}{160mm}
+%
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{1ex}
+%
+%\setlength{\textheight}{235mm}
+%\setlength{\footskip}{20mm}
+%\setlength{\headsep}{50pt}
+%\setlength{\headheight}{0pt}
+
+
+
+\begin{document}
+
+\section{Berechnungen und erste Gedanken zur Masterarbeit}
+
+\subsection{Gedanken zu Linearisierungsfehlern \(e_j\)}
+
+\textbf{Problem:} \(e_j\) häufig negativ, selbst in konvexem Fall, wo dies in der Theorie nicht auftritt. \\
+\textbf{Grund (wahrscheinlich):} Rundungsfehler des Computers \\
+Theorie: Das Bundle-Verfahren ist eine "`Weiterentwicklung"' des Schnittebenen-Verfahrens. Im Schnittebenen-verfahren, wird die zu minimierende Funktion durch die Tangenten in den Iterierten angenähert. Die "`Lücke"' zwischen den tatsächlichen Funktionswerten und denen der Approximation bei den Iterierten nennt man den Linearisierungsfehler \(e_j\).
+Dieser ist in der Theorie bei konvexen Funktionen immer positiv.
+Durch Rundungsfehler im Rechner kann es dazu kommen, dass die Linearisierungsfehler nicht mehr positiv sind. Da Tangenten für die Annäherung der Funktion benutzt werden, führt jede Änderung in der Steigung dazu, dass aus der Tangente eine Sekante wird. Wenn diese Änderung "`groß genug"' ist, wird der Linearisierungsfehler in einer nahen Iterierten negativ.
+Bei den Tests ergab sich, dass der Linearisierungsfehler tnedenziell häufiger negativ ist, wenn die Dimension höher ist. Außerdem ist er im eindimensionalen Fall immer \(geq 0\). \\
+\textbf{Woran kann das liegen?} Mehr Dimensionen \(=\) mehr "`Kipprichtungen"' für den Gradienten, daher \(e_j\) häufiger negativ?
+Abstieg nicht so schnell in höherer Dimension, daher Iterierte näher beieinander?
+Warum bei 1D gar kein Problem???
+\(\rightarrow\) Algorithmus in verschiedenen Dimensionen durchgehen. Sind die Iterierten unterschiedlich weit voneinander entfernt? Sonstige Unterschiede? \\
+\textbf{1D, Prabel:} Iterierte liegen sehr weit auseinander, aber schwer allgemeingültige Aussagen zu treffen, weil Parabel ein sehr einfaches Problem
+Auch bei \(f=x^4\) kein Problem. (Obwohl zB. das Minimum nicht gefunden wird, Funktion wahrscheinlich zu flach.)
+Hier fällt auf: Größen wie zB. \(\alpha\) werden exakt berechnet. Vielleicht in 1D alles exakter (warum???) und deswegen \(e\) nie \(< 0\)?
+Edit: nach einer größeren Anzahl Iterationen ist \(\alpha\) nicht mehr genau \(1\), aber noch sehr nah dran. Wahrscheinlich in 1D tatsächlich alles genauer (zB. weil Subproblem genauer gelöst werden kann?) 
+\textbf{Idee:} t könnte etwas damit zu tun haben, wie \(e_j\) sich ändert, da es die Zielfuntion konvexifiziert. \\
+\textbf{!!!} \(t\) tritt nur im Subproblem auf, hat nichts mit der Annäherung der eigentlichen Funktion zu tun.
+
+\subsection{Nonconvex, exact}
+\subsubsection{Berechnungen}
+
+\textbf{Zusammenhang \(\delta\), \(\xi\):}
+\[ \delta_{k+1} = f(\hat{x}^k)+\frac{\eta_k}{2}|x^{k+1}-\hat{x}^k|^2 - m_k(x^{k+1}) \]
+\[ \xi_k = m_k(x^{k+1}) - f(\hat{x}^k)\]
+\[ \Rightarrow \delta_{k+1} = -\xi_k + \frac{\eta_k}{2}|x^{k+1}-\hat{x}^k|^2 = -\xi_k + \frac{\eta_k}{2}|d^k|^2\]
+
+Außerdem gilt (aus den KKT-Bedingungen):
+\[ \lambda_j \xi_k = \lambda_j (s_j^\top d_k - c_j^k) \quad \forall j \in J\]
+\[ \Rightarrow \xi_k = \sum_{j \in J}{\lambda_j \xi_k} = \sum_{j \in J}{\lambda_j (s_j^\top d_k - c_j^k)} = S^\top d_k - C\]
+
+\textbf{Umschreiben der beiden \(\delta_{n+1}\):}
+Es gilt:
+\[g^{-n}+\eta_n \Delta^k_{-n} = \mu_n(\hat{x}^k - x^{n+1})\]
+und
+\[\varphi_n(x^{n+1} = f(\hat{x}^k) - e^k_l-\eta_n d^k_l + \langle g^l + \eta_n \Delta^k_l, x^{n+1}-\hat{x}^k\rangle\]
+Setzt man dies in \(\delta_{n+1}\) ein, erhält man folgende Gleichungskette:
+\begin{align*}
+	\delta_{n+1} &= f(\hat{x}^k)+\frac{\eta_k}{2}|x^{n+1}-\hat{x}^k|^2 - m_k(x^{n+1}) \\
+	&= \frac{\eta_k}{2}|x^{n+1}-\hat{x}^k|^2 + e^k_l+\eta_n d^k_l - \langle g^l + \eta_n \Delta^k_l, x^{n+1}-\hat{x}^k\rangle \\
+	&= \frac{\eta_k}{2}|x^{n+1}-\hat{x}^k|^2 + e^k_l+\eta_n d^k_l - \langle \mu_n(\hat{x}^k - x^{n+1}), x^{n+1} - \hat{x}^k \rangle \\
+	&= \frac{\eta_k}{2}|x^{n+1}-\hat{x}^k|^2 + e^k_l+\eta_n d^k_l + \mu_n |x^{n+1} - \hat{x}^k|^2 \\
+	&= \frac{R+\mu_n}{2}|x^{n+1}-\hat{x}^k|^2 +e^k_l+\eta_n d^k_l
+\end{align*}
+Mit \(l = -n\) und der Benennung aus dem Paper. \\
+Mit eigener Benennung: 
+\[c_j^k = e_k + \frac{\eta}{2}|x_j^{k+1}-\hat{x}^k|^2, \qquad C = \sum{\alpha_j c_j^k} = E + \frac{\eta}{2}\sum{\alpha_j|x^j - \hat{x}^k|^2}\]
+\[ \Rightarrow \delta_{k+1} = \frac{R+\mu_n}{2}|d|^2 + C = \frac{R+\mu_n}{2}|d|^2 + E + \frac{\eta}{2}\sum{\alpha_j|x^j - \hat{x}^k|^2}\]
+Mit obiger Formulierung für \(\xi_k\) folgt:
+\[\xi = -\mu|d^k|^2 - C\]
+
+\subsubsection{Unterschiedliche Formulierungen von Größen}
+
+Die Formulierungen sind auf jeden Fall numerisch nicht exakt gleich, wenn in einer ein Term mit \(\alpha\) vorkommt und in der anderen nicht, da \(alpha\) nicht völlig exakt berechnet werden kann und durch das "`Aggregieren"' keine Umformung von schon vorhandenen Größen stattfindet, sondern die besagte Größe tatsächlich anders berechnet wird.
+
+\textbf{\(\delta\):}
+\[\delta_{k+1} = -\xi_k + \frac{\eta_k}{2}|d^k|^2 = \frac{R+\mu_n}{2}|d|^2 + C\]
+
+\textbf{\(\xi\):}
+\[ \xi_k = m_k(x^{k+1}) - f(\hat{x}^k) = S^\top d_k - C\]
+!hier müssen beide Gleichheitszeichen geprüft werden, da \(\xi\) aus der Optimierung von \textbf{quadProg} kommt! Erste Gleichheit jedoch blöd zu testen, da Modellfunktion nicht implementiert (blöd zu implementieren wegen \(\max\)).\\
+!Beachte, dass \(S = -\frac{1}{t}d^k\) ersetzt. und somit die zwei Formulierungen von \(\xi\) nur gleich sein können, wenn auch diese Gleichung stimmt! Dies gilt jedoch nur, wenn man die Umformung auch verwendet und \(S\) durch \(-\frac{1}{t}d^k\) ersetzt.
+
+\textbf{\(C\):}
+\[ C = \sum{\alpha_i c_i} = E + \frac{\eta}{2}\sum{\alpha_j|x^j - \hat{x}^k|^2}\]
+
+\subsection{Testfunktionen aus nonconv-exact-Paper}
+
+Im Paper werden 5 Testfunktionen \(f_1, ... f_5\) verwendet. Diese sind aus den Funktionen \(h_i\) aufgebaut, welche folgendermaßen definiert sind:
+
+\[h_i: \R^n \rightarrow \R; \qquad h_i(x) = (ix_i^2-2x_i-K) + \sum_{j=1}^n{x_j}\]
+Wobei \(K \in \R\) eine Konstante ist, die erst einmal \(=0\) gesetzt wird.
+
+Der Gradient von der Funktion \(h_i\) sieht folgendermaßen aus:
+\[\nabla h_i (x) = \begin{pmatrix} 1\\ \vdots \\ 1 \end{pmatrix} + \begin{pmatrix} 0 \\ \vdots \\ 2ix_i-2 \\ \vdots \\ 0 \end{pmatrix} \leftarrow i\text{'te Position}\]
+
+\subsubsection{Testfunktionen und ihre Ableitungen}
+
+Hier werden die Testfunktionen und je ein spezieller Subgradient von ihnen aufgeschrieben.
+
+\begin{equation*}
+	\begin{split}
+		&f_1(x) = \sum_{i=1}^n{|h_i(x)|}\\
+		&\nabla f_1(x) = \sum_{i=1}^n{\text{sgn}(h_i(x)) \cdot \left(\begin{pmatrix} 1 \\ \vdots \\ 1 \end{pmatrix} + \begin{pmatrix}  0 \\ \vdots \\ 2ix_i-2 \\ \vdots \\ 0 \end{pmatrix}\right) = \sum_{i=1}^n\text{sgn}(h_i(x)) \cdot \nabla h_i(x)}
+	\end{split}
+\end{equation*}
+Wenn ein \(h_i(x)\) gleich \(0\) ist, kann man als Subgradienten den Nullvektor verwenden. Dies steckt bereits implizit in sgn\((h_i(x))\), da gilt: sgn\((0) = 0\).
+
+\begin{equation*}
+	\begin{split}
+		&f_2(x) = \sum_{i=1}^n{(h_i(x))^2}\\
+		&\nabla f_2(x) = \sum_{i=1}^n{2h_i(x) \cdot \left(\begin{pmatrix} 1 \\ \vdots \\ 1 \end{pmatrix} + \begin{pmatrix}  0 \\ \vdots \\ 2ix_i-2 \\ \vdots \\ 0 \end{pmatrix}\right)}  = \sum_{i=1}^n{2h_i(x) \cdot \nabla h_i(x)}
+	\end{split}
+\end{equation*}
+
+\begin{equation*}
+	\begin{split}
+		&f_3(x) = \max_{i \in \{1, \dots n\}}{|h_i(x)|}\\
+		&\nabla f_3(x) = \text{sgn}(h_I(x))\cdot \nabla h_I(x) \qquad \text{mit } I \text{ sodass } h_I(x) = f_5(x)
+	\end{split}
+\end{equation*}
+
+\begin{equation*}
+	\begin{split}
+		&f_4(x) = \sum_{i = 1}^n{|h_i(x)| + \frac{1}{2} ||x||^2}\\
+		&\nabla f_4(x) = \nabla f_1+x
+	\end{split}
+\end{equation*}
+
+\begin{equation*}
+	\begin{split}
+		&f_5(x) = \sum_{i = 1}^n{|h_i(x)| + \frac{1}{2} ||x||}\\
+		&\nabla f_5(x) = \nabla f_1+\frac{1}{2} \cdot \frac{x}{||x||}
+	\end{split}
+\end{equation*}
+
+\section{Assumptions (about functions) in papers}
+
+\subsection{Nonconvex inexact}
+
+\textbf{objective function}: proper, regular, locally Lipschitz with full domain. (Citations given) \\
+something on lower \(\mathcal{C}^1/\mathcal{C}^2\); didn't understand, what exactly.
+
+\subsection{Nonconvex, exact}
+
+\textbf{objective function:} lower \(\mathcal{C}^2\).
+
+\section{Convergence proofs}
+
+\textbf{Lemma 5} \textit{Suppose the cardinality of the set \(\{j \in J^k| \alpha_j^k > 0\}\) is uniformly bounded in k. \\
+If \(E^k \to 0\) as \(k \to \infty\), then \\
+(i) \(\sum_{j \in J^k}{\alpha_j^k|x^j-\hat{x}^k| \to 0}\) as \(k \to \infty\)
+If, in addition, for some subset \(K \subseteq {1,2,\dots}\), 
+\[ \hat{x}^k \to \bar{x}, G^k \to \bar{G} as K \ni  k \to \infty, \text{ with } \{\eta^k|k \in K\} \text{bounded}, \]
+then we also have \\
+(ii) \( \bar{G} \in \partial f(\bar{x})+B_{\bar{\theta}}(0)\). \\
+If, in addition, \(G^k+\nu^k \to 0 \text{ as } K \ni k \to \infty,\) then \\
+(iii) \(\bar{x} \) satisfies the following approximate stationary condition:
+\[ 0 \in \left( \partial f(\bar{x}) + \partial \mathtt{i}_D(\bar{x}) \right) + B_{\bar{\theta}}(0). \]
+Finally, if in addition, \(f\) is lower-\(\mathcal{C}^1\), then \\
+(iv) for each \(\varepsilon > 0\) there exists \(\rho > 0 \) such that 
+\[ f(y) \geq f(\bar{x})  - (\bar{theta}+\varepsilon)|y - \bar{x}| - 2 \bar{\sigma}, \quad \text{for all }y \in D\cap B_{rho}(\bar{x}). \] }
+
+!!! Is the assumption of the uniformly bounded set reasonable?
+
+\textsl{Proof:} Recall that the first term in the right hand side of \(\eta^k \geq \max\left\{\max_{j \in J^k, x^j\neq \hat{x}^k}\frac{-2e_j^k}{|x^j-\hat{x}^k|^2}, 0\right\} + \gamma\) is the minimal value of \(\eta \geq\)  to imply that 
+\[ e_j^k + \frac{\eta}{2}|x^j-\hat{x}^k|^2 \geq 0 \]
+for all \(j \in J^k\). It is then easily seen that, for such \(\eta\) and for \(\eta^k \geq \eta + \gamma\), we have that 
+\[ c_j^k = e_j^k + \frac{\eta^k}{2}|x^j-\hat{x}^k|^2 \geq \frac{\gamma}{2}|x^j+\hat{x}^k|^2. \]
+
+Taking into account that \(\alpha_j^k\) and \(c_j^k\) are nonnegative, if \(E^k \to 0\) then it follows from \(E^k = \sum_{j \in J^k}{\alpha_j^kc_j^k}\) that \(\alpha_j^kc_j^k \to 0\) for all \( j \in J^k\). Hence, 
+\[ \alpha_j^kc_j^k \geq (\alpha_j^k)^2 c_j^k \geq \frac{\gamma}{2}\left(\alpha_j^k|x^j-\hat{x}^k| \right)^2 \to 0 .\]
+
+Thus,  \(\alpha_j^k|x^j-\hat{x}^k| \) for all \(j \in J^k\). As , by the assumption, the sum in the item (i) is over a finite set of indices and each element in the sum tends to zero, the assertion (i) follows. \\
+For each \(j\), let \(p^j\) be the orthogonal projection of \(g^j\) onto the (convex, closed) set \(\partial f(x^j)\). It holds that \(|g^j-p^j|\leq \theta^j  \leq \bar{\theta}\). By 
+\[ d^k = -t^k(G^k+\nu^k), \text{ where } G^k:= \sum_{j\in J^k}{\alpha_j^k s_j^k}, \quad  \nu^k \in \partial\mathtt{i}_D (x_{k+1})\]
+and 
+\[ s_j^k := g^j + \eta^k\left(x^j - \hat{x}^k \right) \]
+we have that 
+
+\begin{align*}
+	G^k &= \sum_{j \in J^k}{\alpha_j^k g^j} + \eta \sum_{j \in J^k}{\alpha_j^k (x^j-\hat{x}^k)} \\
+	&= \sum_{j \in J^k}{\alpha_j^k p^j} + \sum_{j \in J^k}{\alpha_j^k(g^j-p^j)} + \eta^k\sum_{j \in J^k}{\alpha(x^j-\hat{x}^k)}.
+\end{align*}
+
+As the number of the active indices is uniformly bounded in \(k\), by renumbering the indices and filling unused indices with \(\alpha_j^k =0\), we can consider that \(J^k\) is some fixed index set (say, \(\{1,\dots,N\}\)). Let \(J\) be the set of all \(j \in J^k\) such that \(\lim \inf \alpha_j^k > 0\). Then item (i) implies that \(|x^j-\hat{x}^k| \to 0\). Thus, \(|x^j-\bar{x}| \leq |x^j-\hat{x}^k|+|\hat{x}^k-\bar{x}| \to 0\) for \(j \notin J\), passing onto a further subsequence in the set \(K\) , if necessary, outer semicontinuity of the Clarke subdifferential implies that
+\[ \lim_{k \to \infty}  \sum_{j \in J^k}{\alpha_j^k p^j} \in \partial f(\bar{x}). \]
+
+As \( \sum_{j \in J^k}{\alpha_j^k(g^j-p^j)}\) is clearly in \(B_{\bar{\theta}}(0)\), while \(\eta^k\sum_{j \in J^k}{\alpha(x^j-\hat{x}^k)}\) tends to zero by item (i), this shows the assertion (ii). \\
+Item (iii) follows from noting that \((G^k+\nu^k) \to 0\) as \(K \ni k \to \infty\) implies that \(\{\nu^k\} \to -\bar{G}\). As \(\nu^k \in \partial\mathtt{i}_D(\bar{x})\). Adding the latter inclusion and result (ii) gives the desired result. \\
+We finally consider item (iv). Fix any \(\varepsilon >0 \). Let \(\rho > 0 \) be such that 
+
+\[ \forall \bar{x} \in \Omega, \forall \varepsilon > 0 \exists \rho >0: \forall x \in B_{\rho}(\bar{x}) \text{ and } g \in \partial f (x) \Rightarrow f(x+u) \geq f(x)+\langle g, u \rangle - \varepsilon|u| \]
+
+holds for \(\bar{x}\). Let \(y \in D \cap B_{rho}(\bar{x})\) be arbitrary but fixed. Again, we can consider that  \(J^k\) is a fixed index set. Let \(J\) be the set of \(j\in J^k\) for which \(|x^j-\hat{x}^k| \to 0\). In particular, it then holds that \(x^j \in B_{\rho}(\bar{x})\). By item (i)  , we have that \(\{\alpha_j^k \to 0\}\) for \(j \notin J\). \\
+Using (3) with the error bounds given in (4), for \(j \in J\) we obtain that 
+
+\begin{align*}
+	f(y) & \geq f^j + \blangle g^j, y-x^j \brangle + \sigma^j + \blangle p^j - g^j, y - x^j \brangle - \varepsilon |y - x^j| \\
+	&\geq f^j+ \blangle g^j, y-x^j \brangle + \sigma^j - (\theta^j+\varepsilon)|y - x^j|.
+\end{align*}
+
+By \(0 \leq c_j^k := e_j^k + b_j^k\) and the linearization error definition,
+\[ f^j + \blangle g^j, -x^j \brangle = \hat{f}^k - \blangle g^j, \hat{x}^k \brangle + b_j^k - c_j^k. \]
+As a result, it holds that 
+\[ f(y) \geq \hat{f}^k - c_j^k + b_j^k + \blangle g^j , y - \hat{x}^k + \sigma ^j - (\theta^j + \varepsilon)|y-x^j|.  \]
+
+Since \(b_j^k \geq 0\) and \(g^j = s_j^k - \eta^k(x^j - \hat{x}^k)\), we obtain that
+\[ f(y) \geq  f(\hat{x}^k) - c_j^k + \blangle s_j^k, y-\hat{x}^k \brangle - \eta^k\blangle x^j-\hat{x}^k, y-\hat{x}^k \brangle + \sigma^j + \hat{\sigma}^k -(\theta^j+\varepsilon)|y-x^j| \]
+
+Taking the convex combination in the latter relation using the simplicial multipliers in  
+
+
+\section{...}
+
+\subsection{Einleitung / Abstract}
+Dise Arbeit beschäftigt sich mit dem im... Paper vorgestellten bundle Verfahren für nichtkonvexe Probleme mit inexakter Infaormation.
+
+\subsection{Description of the method}
+
+The method described by ... in the paper generalizes the bundle method for optimizing nonsmooth functions to nonconvex objective functions. The objective function as well as all subgradients may be given in an inexact way.
+
+\subsubsection{General description of a bundle method}
+The general idea of bundle methods consists in approximating 
+\begin{itemize}
+	\item Verbesserung des Schnittebenenverfahrens
+	\item generelle Idee: Aapprooximation der nichtglatten Zielfunction durch eine stückweise lineare Funktion
+	\item gibt auch duale Sichtweise des Verfahrens \(\rightarrow\) Approximation des \(\varepsilon\)-Subdifferentials und dann Verfahren des steilsten Abstieges
+\end{itemize}
+
+Bundle-verfahren wurden zunächst für konvexe Funktionen entwickelt.
+Hier soll zunächst der einfachste Fall eines Bundle.Verfahrens vorgestellt werden, um dann besser auf wichtige Unterschiede zum im Paper vorgestellten Algorithmus eingehen zu können.
+
+\subsubsection{Primales Bundle Verfahren}
+
+\begin{itemize}
+	\item wie bei Schnittebenen-Verfahren: Bündel aus bisher berechneten Funktionswerten und Subgradienten \(\rightarrow\) daraus können Suchrichtungen berechnet werden
+	\item Schritte werden im Bundle-Verfahren durch Minimierung einer stückweise linearen Modellfunktion + ein Penaltyterm / Regularisierung berechnet
+	\item Regularisierung verhindert zu lange Schrittweiten und sorgt für eindeutige Lösung des Modells
+\end{itemize}
+
+Etwas genauer
+
+\begin{itemize}
+	\item in jeder Iteration wird der x-Wert, (Funktionswert) und der Subgradient gespeichert
+	\item die Lineare Funktion mit Steigung des Subgradienten und ``Aufpunkt'' Funktionswert ist Tangente an objective function
+	(wie ist das mit der dualen Sichtweise und den \(\varepsilon\)-Subgradienten \(\rightarrow\) die berühren ja nicht, aber diese Gradienten schon?)
+	\item bildet man eine stückweise lineare Funktion indem man das Punktweise Maximum betrachtet ist diese Funktion überall eine untere Schranke für die Zeilfunktion.
+	\item je mehr Informationen im Bundle, desto besser ist die Approximation
+	\item Idee: minimiere statt Zielfunktioen die (hoffentlich, sonst sinnlos) einfach-Strukturierte Modell-Funktion (VL: Struktur hängt von Menge \(X\) ab, aus der die \(x\) kommen \(\rightarrow\) \(X\) kann eine beliebig beschränkte Menge sein \(\rightarrow\) dann die ``entsprechenden'' Probleme der glatten Optimierung???)
+	\item Problem: Lösung nicht immer eindeutig (oder überhaupt existent (wenn \(X\) nicht kompakt ist)
+	\item daher einfhren eines Penalty/regularisierungsterms, der die Lösung eindeutig macht (und immer existent)
+	\item Penalty-term kann auch wie in Trust-Region gesehen werden: Die Modellfunktion nähert nur in Umgebung von \(x^k\) die Zielfunktion gut an, daher möchte man sich nicht weiter als einen bestimmten Wert von dort entfernen
+	\item neue itterierte wird berechnet \(\rightarrow\) kann sein dass nicht genügend Abstieg erreicht, dann  lieber Modell verbessern(sieh auch Trust Region) \(\rightarrow\) serious and null.steps
+	\item Bundle-Update? wichtig? Speziell für bundle verfahren???
+\end{itemize}
+
+Damit hat man ein Grundlegendes Bundle-Verfahren
+
+\subsubsection{Einfaches Primales Bundleverfahren nach Lemaréchal?}
+
+
+
+
+\subsubsection{Unterschiede zu conv, inex}
+Algorithmus aus Paper
+
+\pagebreak
+
+Abbruchbedingung Schnittebenenverfahren mit anderen abbruchbedingungen vergleichen \\
+Für all die Aussagen oben, die aus der VL kommen eine quelle finden (VL-Quellen anschauen) \\
+(Lemaréchal Convex Analysis and Minimization Algorithms II
+Advanced Theory and Bundle Methods). \\
+It is immediate to verify that a function f is \(\alpha\)-strongly convex if and only if \(x \mapsto f(x) - \frac{\alpha}{2} \|x\|^2\) is convex \(\rightarrow\) gleichmäßig konvex, Funktion muss quasi ``konvexer'' als die gestauchte (gestreckte) Parabel sein (https://blogs.princeton.edu/imabandit/2013/04/04/orf523-strong-convexity/) Quelle??? Aber reicht nicht schon strikte konvexität? ist in diesem Fall glm. nur einfacher zu erreichen???
+
+
+
+\end{document}
