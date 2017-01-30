@@ -51,13 +51,25 @@ if k == 1
     lambda = [l1,l2,l3];
 else
     SS = [s_hat, s, S];
-    r = [0 c C];
+    r = [0 c C]';
     DS = Dv(SS, U1, U2, R, UU, CC, phi, step, i_C,rho);
     SDS = SS'*DS;
     Ds1 = Dv(s_hatS, U1, U2, R, UU, CC, phi, step, i_C,rho);
     sDs1 = sS'*Ds1;
     sDs2 = s_hatS'*Ds1;
     if (C*sDs1) == ((C-c)*sDs2)
+        if cond(SDS) > 1e10
+            [u,si,v] = svd(SDS,'econ');
+            for i = size(si):-1:1
+                if abs(si(i,i)) <= 1e-10
+                    v(i,:) = [];
+                    si(:,i) = [];
+                end
+            end 
+            SS = u*si*v;
+            DS = Dv(SS, U1, U2, R, UU, CC, phi, step, i_C,rho);
+            SDS = SS'*DS;
+        end
         lambda = -SDS\r;
     else
         if norm(s_hatS) > 1e-5
@@ -86,14 +98,14 @@ else
         else 
             l2_2 = 1;
         end
-        lambda1 = [l1, 0, 1-l1];
-        lambda2 = [0, l2, 1-l2];
-        lambda3 = [1-l2_2, l2_2, 0];
+        lambda1 = [l1, 0, 1-l1]';
+        lambda2 = [0, l2, 1-l2]';
+        lambda3 = [1-l2_2, l2_2, 0]';
         phi1 = lambda1'*SDS*lambda1+2*r'*lambda1;
         phi2 = lambda2'*SDS*lambda2+2*r'*lambda2;
         phi3 = lambda3'*SDS*lambda3+2*r'*lambda3;
 
-        [~,i] = min(phi1,phi2,phi3);
+        [~,i] = min([phi1,phi2,phi3]);
 
         if i == 1
             lambda = lambda1;

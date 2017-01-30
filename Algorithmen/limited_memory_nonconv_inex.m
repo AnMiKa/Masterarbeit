@@ -199,7 +199,7 @@ else
     C = lambda(2)*c+lambda(3)*C;
     step = 0;
 end
-    fprintf('iteration: %d      function value: %d \n', k, f_hat)
+    fprintf('iteration: %d  function value: %d  step: %d \n', k, f_hat, step)
 end    
 %% END of the algorithm    
 end
