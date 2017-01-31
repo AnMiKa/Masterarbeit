@@ -37,6 +37,7 @@ ss_hat = s-s_hat;
 % if yes -> unconstrained optimization by one Newton-step
 % if no  -> check minima on the edges of the feasible set
 
+% check again if I need this!!!
 if k == 1
     a = -c/((s_hat'*s)^2/(s_hat'*s_hat)+s'*s);
     if 0 <= a && a <= 1
@@ -50,9 +51,8 @@ if k == 1
     end
     lambda = [l1,l2,l3];
 else
-    SS = [s_hat, s, S];
-    r = [0 c C]';
-    DS = Dv(SS, U1, U2, R, UU, CC, phi, step, i_C,rho);
+    r = [C c-C]';
+    DS1 = Dv(s_hatS, U1, U2, R, UU, CC, phi, step, i_C,rho);
     SDS = SS'*DS;
     Ds1 = Dv(s_hatS, U1, U2, R, UU, CC, phi, step, i_C,rho);
     sDs1 = sS'*Ds1;

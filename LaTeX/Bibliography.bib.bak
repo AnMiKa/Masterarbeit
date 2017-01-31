@@ -4,7 +4,7 @@
   title     = {Convex analysis and minimization algorithms II},
   publisher = {Springer-Verlag Berlin Heidelberg},
   year      = {1993},
-  author    = {Jean-Baptiste Hiriart-Urruty and Claude Lemaréchal},
+  author    = {Jean-Baptiste Hiriart-Urruty and Claude Lemar\'{e}chal},
   volume    = {306},
   series    = {Grundlehren der mathematischen Wissenschaften},
 }
@@ -19,7 +19,7 @@
 }
 
 @Article{Hare2010,
-  author  = {Warren Hare and Claudia Sagastizábal},
+  author  = {Warren Hare and Claudia Sagastiz\`{a}bal},
   title   = {A redistributed proximal bundle method for nonconvex optimization},
   journal = {SIAM Journal on Optimization},
   year    = {2010},
@@ -29,7 +29,7 @@
 }
 
 @Article{Oliveira2014,
-  author  = {Welington de Oliveira, Claudia Sagastizábal, Claude Lemaréchal},
+  author  = {Welington de Oliveira, Claudia Sagastiz\`{a}bal, Claude Lemar\'{e}chal},
   title   = {Convex proximal bundle methods in depth: a unified analysis for inexact oracles},
   journal = {Mathematical Programming},
   year    = {2014},
@@ -38,7 +38,7 @@
 }
 
 @Article{Mifflin2012,
-  author  = {Robert Mifflin and Claudia Sagastizábal},
+  author  = {Robert Mifflin and Claudia Sagastiz\`{a}bal},
   title   = {A science fiction story in nonsmooth optimization originating at IIASA},
   journal = {Documenta Mathematica},
   year    = {2012},
@@ -59,14 +59,14 @@
   title     = {Convex analysis and minimization algorithms I},
   publisher = {Springer-Verlag Berlin Heidelberg},
   year      = {1996},
-  author    = {Jean-Baptiste Hiriart-Urruty and Claude Lemaréchal},
+  author    = {Jean-Baptiste Hiriart-Urruty and Claude Lemar\'{e}chal},
   volume    = {305},
   series    = {Grundlehren der mathematischen Wissenschaften},
   edition   = {2},
 }
 
 @Article{Hare2009,
-  author  = {Warren Hare, Claudia Sagastizábal},
+  author  = {Warren Hare, Claudia Sagastiz\`{a}bal},
   title   = {Computing proximal points of nonconvex functions},
   journal = {Mathematical Programming},
   year    = {2009},
@@ -140,6 +140,44 @@
   volume  = {14},
   number  = {3},
   pages   = {743-756},
+}
+
+@Article{Noll2012,
+  author  = {Dominikus Noll and Olivier Prot and Aude Rondepierre},
+  title   = {A proximity control algorithm to minimize nonsmooth and nonconvex functions},
+  journal = {Pacific Journal of Optimization},
+  year    = {2012},
+  volume  = {4},
+  number  = {3},
+  pages   = {571-604},
+}
+
+@Article{Haarala2004,
+  author  = {M. Haarala and K. Miettinen and M.M. Mäkelä},
+  title   = {New limited memory bundle method for large-scale nonsmooth optimization},
+  journal = {Journal of Optimization Methods and Software},
+  year    = {2004},
+  volume  = {19},
+  number  = {6},
+}
+
+@Article{Karmitsa2010,
+  author  = {N. Karmitsa and M. M. Mäkelä},
+  title   = {Adaptive limited memory bundle method for bound constrained large-scale nonsmooth optimization},
+  journal = {Journal of Optimization},
+  year    = {2010},
+  volume  = {59},
+  number  = {6},
+}
+
+@Article{Vlcek2001,
+  author  = {J. Vl\v{c}ek and L. Lu\v{k}san},
+  title   = {Globally convergent variable metric bundle method for nonconvex nondifferentiable unconstrained minimization},
+  journal = {Journal of Optimization Theory and Applications},
+  year    = {2001},
+  volume  = {111},
+  number  = {2},
+  pages   = {407-430},
 }
 
 @Comment{jabref-meta: databaseType:bibtex;}

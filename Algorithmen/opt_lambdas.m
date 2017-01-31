@@ -37,6 +37,7 @@ ss_hat = s-s_hat;
 % if yes -> unconstrained optimization by one Newton-step
 % if no  -> check minima on the edges of the feasible set
 
+% check again if I need this!!!
 if k == 1
     a = -c/((s_hat'*s)^2/(s_hat'*s_hat)+s'*s);
     if 0 <= a && a <= 1
@@ -50,26 +51,23 @@ if k == 1
     end
     lambda = [l1,l2,l3];
 else
-    SS = [s_hat, s, S];
-    r = [0 c C]';
-    DS = Dv(SS, U1, U2, R, UU, CC, phi, step, i_C,rho);
-    SDS = SS'*DS;
-    Ds1 = Dv(s_hatS, U1, U2, R, UU, CC, phi, step, i_C,rho);
-    sDs1 = sS'*Ds1;
-    sDs2 = s_hatS'*Ds1;
-    if (C*sDs1) == ((C-c)*sDs2)
-        if cond(SDS) > 1e10
-            [u,si,v] = svd(SDS,'econ');
-            for i = size(si):-1:1
-                if abs(si(i,i)) <= 1e-10
-                    v(i,:) = [];
-                    si(:,i) = [];
-                end
-            end 
-            SS = u*si*v;
-            DS = Dv(SS, U1, U2, R, UU, CC, phi, step, i_C,rho);
-            SDS = SS'*DS;
-        end
+    r = [C c-C]';
+    DS1 = Dv(s_hatS, U1, U2, R, UU, CC, phi, step, i_C,rho);
+    SDS1 = s_hatS'*DS1;
+    DS2 = Dv(sS, U1, U2, R, UU, CC, phi, step, i_C,rho);
+    SDS2 = s_hatS'*DS2;
+    SDS3 = sS'*DS2;
+    SDS = [SDS1 SDS2; SDS2 SDS3];
+    if (C*SDS2) == ((C-c)*SDS1)
+%         if cond(SDS) > 1e10
+%             [u,si,v] = svd(SDS,'econ');
+%             for i = size(si):-1:1
+%                 if abs(si(i,i)) <= 1e-10
+%                     v(i,:) = [];
+%                     si(:,i) = [];
+%                 end
+%             end 
+%        end
         lambda = -SDS\r;
     else
         if norm(s_hatS) > 1e-5

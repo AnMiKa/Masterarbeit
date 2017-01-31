@@ -6,6 +6,7 @@
 \usepackage{lmodern} %PDF-optimierte Schrift
 
 \usepackage{amsmath, amssymb, amsbsy, amsthm} %Mathepakete ; amsthm: Theorem-Umgebung; muss nach amsmath eingebunden werden
+\usepackage{eqnarray}
 \usepackage[x11names]{xcolor} % muss vor "`mcode"' da dieses bereits intern das color-Paket lädt und es dann einmal mit und einmal ohne Option geladen wird, was nicht geht 
 \usepackage{graphicx} % Grafiken einfügen
 %\usepackage{listings} % zum Einbinden von Code, ist bereits in "`mcode"' enthalten
@@ -440,7 +441,7 @@ In the context of inexact information it is important to make a distinction betw
 The objective function \(f:\R^n \to \R\) is assumed to be proper, (subdifferentially) regular and locally Lipschitz continuous with full domain.
 
 \begin{definition} \cite{Rockafellar2009}
-	A function \(f:\R^n \to \bar{\R} = [-\infty, + \infty]\) is called \emph{proper} if \(f(x) < \infty\) for at least one \(x\in \R^n\) and \(f(x) > \infty \forall x \R^n\).
+	A function \(f:\R^n \to \bar{\R} = [-\infty, + \infty]\) is called \emph{proper} if \(f(x) < \infty\) for at least one \(x\in \R^n\) and \(f(x) > \infty ~ \forall x \in \R^n\).
 \end{definition}
 
 \begin{definition} \cite{Rockafellar2009}
@@ -458,8 +459,8 @@ The objective function \(f:\R^n \to \R\) is assumed to be proper, (subdifferenti
 	the sequence \(\{\langle g^k, d \rangle\}\) has exactly one accumulation point.
 \end{definition}
 
-\begin{definition}
-\emph{Stationary point}: (for nonsmooth optimization, possibly nonconvex) \(\rightarrow\) see Mifflin ``Modification''? or Kiwiel ``aggregate subgradients'' \\
+\begin{definition} % as in \cite{Haarala2004a}
+A point \(x \in \R^n\) that satisfies \(0 \in \partial f(x)\) is called a \emph{stationary point} of \(f\).
 \end{definition}
 
 \textcolor{blue}{explanation}
@@ -623,7 +624,7 @@ There are different approaches for handling nonconvexity of the objective functi
 As the nonnegativity property of the linearization errors \(e_j^k\) is crucial for the convergence proof of convex bundle methods an early idea was forcing the errors to be so by different downshifting strategies. A very common one is using the \emph{subgradient locality measure} \cite{Kiwiel1986, Mifflin1982}. Here the linearization error is essentially replaced by the nonnegative number
 
 \begin{equation}
-	\tilde{e}_j^k := \max_{j \in J_k} \{|e_j^k|,\gamma \|\hat{x}^k-x^j\|^2.
+	\tilde{e}_j^k := \max_{j \in J_k} \{|e_j^k|,\gamma \|\hat{x}^k-x^j\|^2\}.
 \label{subgr_loc_measure}
 \end{equation}
 
@@ -725,9 +726,9 @@ Convergence for inexact convex functions:
 	\item remark on that inexactness makes objective nonconvex \(\rightarrow\) relate to nonconvexity paper?
 	\item check again uniformly bounded \(J_k\) \\
 		 aggregated objects (3.4), 5.2, 7.1 in ``depth''
-	\item generalized gradients may only be shifted not tilted? \\
-		is this realistic assumption?
-		\item ask Simon to \(\varepsilon\)-subdifferentials
+	\item \textcolor{Green4}{generalized gradients may only be shifted not tilted? \\
+		is this realistic assumption? \(\rightarrow\) all ok, tilted and shifted!}
+		\item \textcolor{Green4}{ask Simon to \(\varepsilon\)-subdifferentials}
 	\item Algorithm:
 	\begin{itemize}
 		\item print something useful in every iteration
@@ -743,6 +744,13 @@ Convergence for inexact convex functions:
 
 \section{Extension with Limited Memory approach}
 
+Variable metric methods are also known as quasi-Newton methods. \\
+
+PhD Thesis (p. 33) inheritance of positive definiteness of matrix update formulas \\
+p. 34: number of correction pairs usually  \(3\leq m \leq 30\)
+
+
+
 \subsubsection{Thoughts about line search}
 \begin{itemize}
 	\item after what is written in ``nonconv, inex''-paper: Line search not provable to be finite if inexact information
@@ -754,6 +762,87 @@ Convergence for inexact convex functions:
 	\end{itemize}
 	\item does prox-parameter \(t_k\) have some relation to linesearch/stepsize?
 \end{itemize}
+
+\textbf{Algorithm 1 in \cite{Haarala2007}}
+\vspace{1em}
+
+\hrule  \vspace{0.4ex} \hrule
+\vspace{1ex}
+\textbf{Variable metric limited memory bundle method with inexact information}
+\vspace{1ex}
+\hrule
+\vspace{1ex}
+Select parameters \( m \in (0,1),~\gamma > 0,~ K>0,~ \rho \in (0,~ \frac{1}{2}) \) and a stopping tolerance \( \mathtt{tol} \geq 0\). \\
+Set the initial metric matrix \(D_1=\mathbb{I}_{n\times n}\). Choose a starting point \(x^1 \in \R^n\) and compute \(f_1\) and \(s^1 = g^1 = S^1\). Set the initial serious iterate \(\hat{x}^1 := x^1\), \(\hat{f}_1 = f_1\), and \(\hat{s}^1 = s^1\), and \(c_1 = C_1 = 0\). \\
+\textcolor{orange}{Set the correction indicator and the correction indicator for consecutive null steps \(i_C = 0\).}
+
+For \(k = 1,2,3,  \dotsc \)   
+
+\begin{enumerate}
+	\item Compute \[d^k = -D_k S^k\]
+	by using a limited memory BFGS update if the step before was a serious step and by using a limited memory SR1 update otherwise. \\
+	For \(k=1\): \(d^1 = -S^1\).
+	\item If \(-{S^k}^{\top}d^k < \rho {S^k}^{\top}S^k\) or \(i_{CN} = 1\) then set
+	\begin{equation}
+		d^k = d^k - \rho S^k,
+	\end{equation}
+	and \(i_C=1\). If the previous step was a null step set also \(i_{CN} = 1\).\\
+	Otherwise set \(i_C = 0\).
+	\item Set 
+		\begin{align}
+			\delta^w_k &= -{S^k}^{\top}d^k+2C_k \quad \text{ and} \\
+			\delta^q_k &= \frac{1}{2} {S^k}^{\top}S^k + C_k.
+		\end{align}
+	If  \(\delta^w_k < \mathtt{tol}\) and \(\delta^q_k < \mathtt{tol}\) stop with \(\hat{x}_k\) as the final solution.
+	\item Set 
+		\begin{align}
+		  \theta_k &= \min\{1, K/\|d^k\|\} \\
+			x^{k+1} &= \hat{x}^k+\theta_kd^k.
+		\end{align}
+	Calculate the inexact function value \(f_{k+1}\) and an inexact subgradient \(g^{k+1}\).
+\item If 
+	\[f^{k+1} \leq \hat{f}^k - m\textcolor{red}{\delta^w_k} \quad \rightarrow \text{ serious step} \]
+	\textcolor{red}{Which \(\delta\)???} \\
+	Set \(\hat{x}^{k+1} = x^{k+1}, \hat{f}_{k+1} = f_{k+1}\), \(s^{k+1} = S^{k+1} = g^{k+1}\).\\
+	Otherwise \(\rightarrow\) nullstep \\
+	Compute the convexification parameter 
+\[ \eta_{k+1} = \max\{e_{k+1}, 0\} + \gamma \]
+with \(e_{k+1} = \hat{f}_{k+1}-f_{k+1}+\langle g^{k+1},d^k\rangle\). \\
+	Set 
+	\begin{align}
+		\hat{x}^{k+1} &= \hat{x}^k \\
+		\hat{f}^{k+1} &= \hat{f}^{k}\\
+		s^{k+1} &= g^{k+1}+\eta_{k+1}*(x^{k+1}-\hat{x}^{k+1}) \\
+		c_{k+1} &= \max\{e_{k+1},0\} + \frac{\gamma}{2}.
+	\end{align}
+	
+	Compute the new correction pair \(u_1^k = \theta_kd^k\) and \(u_2^k = s^{k+1}-\hat{s}^{k+1}\).
+	\item If this step was a serious step, go to 1. \\
+	In case of a null step determine multipliers \(\alpha_i ^k\geq 0,~ i = \{1,2,3\},~ \sum_i{\alpha^k_i} =1\) that minimize the function
+\begin{eqnarray*}
+	\phi(\alpha_1, \alpha_2,\alpha_3) &=& (\alpha_1\hat{s}^{k+1}+\alpha_2s^{k+1}+\alpha_3S^{k})D_k(\alpha_1\hat{s}^{k+1}+\alpha_2s^{k+1}+\alpha_3S^{k}) \\
+	&&+ 2(\alpha_2c_{k+1}+\alpha_3C_{k})
+\end{eqnarray*}
+where \(D_k\) is calculated by the same updating formula as in step 1 and \(D_k = D_k + \rho \mathbb{I} \) if \(i_C=1\). \\
+Compute the aggregate subgradient and error
+
+\begin{align}
+	S^{k+1} &= \alpha_1\hat{s}^{k+1}+\alpha_2s^{k+1}+\alpha_3S^{k} \\
+	C_{k+1} & = (\alpha_2c_{k+1}+\alpha_3C_{k})
+\end{align}
+and go back to step 1.
+\end{enumerate}
+\vspace{1ex}
+\hrule
+
+\vspace{1.5em}
+
+\subsection{Convergence}
+
+
+
+
+
 
 \addcontentsline{toc}{section}{Bibliography}
 \bibliography{Bibliography}

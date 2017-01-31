@@ -1,5 +1,5 @@
 function [f_hat, x_hat, delta] = limited_memory_nonconv_inex(x0, fun, subgr_fun, ...
-    kmax, m, t, tol, gamma, L, rho, mmax)
+    kmax, m, t, tol, gamma, K, rho, mmax)
 
 % variable metric bundle algorihtm that can handle nonsmooth nonconvex functions with
 % inexact information on function value and gradient
@@ -68,17 +68,17 @@ end
 % Fill in unset optional values.
 switch nargin
     case 3
-        [kmax, m, t, tol, gamma, L, rho, mmax] = defaults{:};
+        [kmax, m, t, tol, gamma, K, rho, mmax] = defaults{:};
     case 4
-        [m, t, tol, gamma, L, rho, mmax] = defaults{2:8};
+        [m, t, tol, gamma, K, rho, mmax] = defaults{2:8};
     case 5
-        [t, tol, gamma, L, rho, mmax] = defaults{3:8};
+        [t, tol, gamma, K, rho, mmax] = defaults{3:8};
     case 6
-        [tol, gamma, L, rho, mmax] = defaults{4:8};
+        [tol, gamma, K, rho, mmax] = defaults{4:8};
     case 7
-        [gamma, L, rho, mmax] = defaults{5:8};
+        [gamma, K, rho, mmax] = defaults{5:8};
     case 8
-        [L, rho, mmax] = defaults{6:8};
+        [K, rho, mmax] = defaults{6:8};
     case 9
         [rho, mmax] = defaults{7:8};
     case 10
@@ -92,98 +92,80 @@ tic;
 %n = length(x0);
 i_null = 0;              % null-step counter
 i_null_C = 0;            % consecutive null-step counter
-
-%x = x0;                  % trial point, important for bundle information
-x_hat = x0;              % serious point
-eta = 0;                 % convexification parameter for modelfunction
-C = 0;                   % augmented linearization error (error of convexified model-function)
-%J = zeros(1,3);          % index set defining bundle information
-f_hat = feval(fun, x0);      % (inexact) function values at bundle points
-%f_hat = f;               % function value at x_hat
-g = feval(subgr_fun, x0);% subgradient at point bundle points
-s = g;                   % augmented subgradient at bundle points
-S = g;                   % aggregate augmented subgradient
-d = -S;                  % descent direction
 step = 1;                % saves whether serious (= 1) or null step (= 0) has been done 
 i_C = 0;                 % correction indicator
 i_CN = 0;                % correction indicator for consecutive null steps
 
+x_hat = x0;              % initial serious point
+%eta = 0;                 % initial convexification parameter for modelfunction
+C = 0;                   % initial augmented linearization error (error of convexified model-function)
+%J = zeros(1,3);          % index set defining bundle information
+f_hat = feval(fun, x0);  % initial inexact function value
+%f_hat = f;               % function value at x_hat
+g = feval(subgr_fun, x0);% initial inexact subgradient
+s = g;                   % initial augmented subgradient
+S = g;                   % initial aggregate augmented subgradient
+d = -S;                  % initial descent direction
+
 % initial matrices for lambda-optimization in first step
-U1 = eye(n);
-U2 
-R
-CC
-UU
+U1 = [];
+U2 = [];
+R = [];
+CC = [];
+UU = [];
 phi = 1;
 %% Global loop
 for k = 1 : kmax;
     
 %% 1st step: direction finding
-if k > 2
+if k > 1
     if step
         % subfunction to calculate descent direction via LBFGS-update
-        [d, U1, U2, R, CC, UU, phi] = lbfgs(u1, u2, s, U1, U2, R, CC, UU,...
-            mmax, phi);
+        [d,U1,U2,R,CC,UU,phi] = lbfgs(u1,u2,s,U1,U2,R,CC,UU,mmax,phi);
     else
         % subalgorithm to calculate descent direction via SR1-update
-        [d, U1, U2, R, CC, UU, phi] = sr1(u1, u2, U1, U2, R, CC, UU,...
-            S_prev, S, d, i_null_c, mmax, phi);
-    end
-elseif k == 2
-    if step
-        % subfunction to calculate descent direction via LBFGS-update
-        [d, U1, U2, R, CC, UU, phi] = lbfgs(u1, u2, s, [], [], [], [], [],...
-            mmax, phi);
-    else
-        % subalgorithm to calculate descent direction via SR1-update
-        [d, U1, U2, R, CC, UU, phi] = sr1(u1, u2, [], [], [], [], [],...
-            S_prev, S, d, i_null_c, mmax, phi);
+        [d,U1,U2,R,CC,UU,phi] = sr1(u1,u2,U1,U2,R,CC,UU,S_prev,S,d,...
+            i_null_C,mmax,phi);
     end
 end
+
 %% 2nd step: correction
 if -S'*d < rho*sum(S.^2) || i_CN == 1;
     d = d-rho*S;
-    i_C = 0;
+    i_C = 1;
     if step == 0
         i_CN = 1;
     end
 else
-    i_C = 1;
+    i_C = 0;
 end
 
 %% 3rd step: stopping test
-
 delta = -S'*d+2*C;
-delta_q = 1/2*norm(S)+C;
+delta_q = 1/2*sum(S.^2)+C;
 
 if delta < tol && delta_q < tol
     fprintf('Algorithm stopped successfully by meeting the tolerance after %d iterations and %d null-steps. \n', k, i_null);
     break
 end
-%% 4th step: iterarte update
 
-theta = min(1, L/norm(d)); % is this really needed??? can it be done by using set D???
+%% 4th step: iterate update
+theta = min(1, K/norm(d)); % is this really needed??? can it be done by using set D???
 x = x_hat+theta*d;
 f = feval(fun, x);
 g = feval(subgr_fun,x);
-s_hat = s;
-s = g+eta*d;
-
-% vectors for limited memory update
-u1 = theta*d;
-u2 = s-s_hat;
 
 %% 5th step: serious step test
-
 if f-f_hat <= -m*delta  % serious step
     step = 1;
     f_hat = f;
     x_hat = x;
+    s = g;
     s_hat = s;
-    c = 0;
     S = s;
+    c = 0;
     C = 0;
-    i_CN =0;
+    %i_CN =0;
 else
     e = f_hat-f+g'*d;
     eta = max(-2*e/norm(d),0)+gamma;
@@ -193,13 +175,16 @@ else
     %% 6th step: aggregation
     % formulation of subproblem for lambdas, use i_C to know if correction
     % needed
-    lambda = opt_lambdas(s,s_hat,S,d,c,C,U1,U2,R,CC,UU,phi,step,i_C,rho);
+    lambda = opt_lambdas(s,s_hat,S,d,c,C,U1,U2,R,CC,UU,phi,step,i_C,rho,k);
     S_prev = S;
     S = lambda(1)*s_hat+lambda(2)*s+lambda(3)*S;
     C = lambda(2)*c+lambda(3)*C;
     step = 0;
 end
-    
+% vectors for limited memory update
+u1 = theta*d;
+u2 = s-s_hat;
+fprintf('iteration: %d  function value: %d  step: %d \n', k, f_hat, step)
 end    
 %% END of the algorithm    
 end

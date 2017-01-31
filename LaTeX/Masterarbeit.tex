@@ -456,35 +456,39 @@ Wie ordnen????? \\
 kann Term ``convexified'' benutzt werden? welche Bennenung findet sich noch??? \\
 auch Formeln oder so dazuschreiben????
 
-\begin{tabular}{cl}
-	\(x^k\) & iterates \\
-	\(\hat{x}^k\) & current stability center \\
-	\(f(x)\) & exact evaluation of \(f\) at point \(x\) \\
-	\(f_k\) & value of \(f\) at point \(x^k\) from the oracle, may be inexact \\
-	\(\hat{f}_k\) & value of \(f\) at stability center \(\hat{x}^k\) from the oracle, may be inexact \\
-	\(g^k\) & a subgradient of \(f\) at \(x^k\) (can be exact or inexact) \\
-	\(s^k\) & a subgradient of the convexified objective at \(x^k\) (can be exact or inexact) \\
-	\(m_k\) & cutting plane model of the objective function \(f\) \\
-	\(M_k\) & cutting plane model of the convexified objective function \\
-	\(e_j^k\) & linearization error \\
-	\(c_j^k\) & linearization error of the convexified objective function \\
-	\(\eta_k\) & convexification parameter \\
-  \(\alpha_j^k\) & Lagrange multipliers of the subproblem \\
-	\(d^k\) & minimizer of the subproblem \\
-	\(\xi\) & variable from reformulation of the subproblem \\
-	\(J_k\) & index set at iteration \(k\) \\
-	\(t_k\) & prox-parameter \\
-	\(\delta_k\) & nominal decrease \\
-	\(m\) & decrease parameter \\
-	\(G^k\) & aggregate subgradient \\
-	\(S^k\) & aggregate subgradient of convexified objective \\
-	\(E^k\) & aggregate error \\
-	\(C^k\)	& aggregate error of convexified objective
+\begin{tabular}{c@{}c@{} l@{}}
+	\(x^k\) && iterates \\
+	\(\hat{x}^k\) && current stability center \\
+	\(f(x)\) && exact evaluation of \(f\) at point \(x\) \\
+	\(f_k\) && value of \(f\) at point \(x^k\) from the oracle, may be inexact \\
+	\(\hat{f}_k\) && value of \(f\) at stability center \(\hat{x}^k\) from the oracle, may be inexact \\
+	\(g^k\) && a subgradient of \(f\) at \(x^k\) (can be exact or inexact) \\
+	\(s^k\) && a subgradient of the convexified objective at \(x^k\) (can be exact or inexact) \\
+	\(m_k\) && cutting plane model of the objective function \(f\) \\
+	\(M_k\) && cutting plane model of the convexified objective function \\
+	\(e_j^k\) && linearization error \\
+	\(c_j^k\) && linearization error of the convexified objective function \\
+	\(\eta_k\) && convexification parameter \\
+	\(\gamma\) & \(>0\) & safeguarding parameter for \(\eta\)-calculation \\
+  \(\alpha_j^k\) && Lagrange multipliers of the subproblem \\
+	\(d^k\) && minimizer of the subproblem \\
+	\(\xi\) && variable from reformulation of the subproblem \\
+	\(J_k\) && index set at iteration \(k\) \\
+	\(t_k\) &\(>0\)& prox-parameter \\
+	\(\delta_k\) && nominal decrease \\
+	\(m\) &\(\in (0,1) \quad\)& decrease parameter \\
+	\(G^k\) && aggregate subgradient \\
+	\(S^k\) && aggregate subgradient of convexified objective \\
+	\(E^k\) && aggregate error \\
+	\(C^k\)	&& aggregate error of convexified objective \\
+	\(\rho\) & \(\in (0,\frac{1}{2}) \quad \) & correction parameter \\
+	K & \(>0\) & control parameter for length of direction vector 
+	\(\theta_k\) && length control factor
 \end{tabular}
 
 \subsubsection{Convergence proofs}
 
-\textbf{Unterschiede in Results:} \\
+\textbf{differences in Results:} \\
 stationary points vs. minimum in nonconvex vs. convex case \\
 error vs. no error in inexact vs. exact \\
 only one accumulation point vs. all accumulation points it \(t_k\) not bounded from below \(\rightarrow\) is \(t_k\) so important? Why on just leave it out? \\
@@ -536,7 +540,9 @@ It is immediate to verify that a function f is \(\alpha\)-strongly convex if and
 	\item seems that after ''right'' convexification of the objective function no more thinking about nonconvexity necessary
 \end{itemize}
 
-\textcolor{red}{!!! has \(D\) anything to do with these parameters???} 
+\textcolor{red}{!!! has \(D\) anything to do with these parameters???}
+
+write (stopping test), (serious step test)... in Algorithms???
 
 
 \addcontentsline{toc}{section}{Bibliography}

@@ -1,7 +1,9 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=pdflatex 2015.5.19)  20 JAN 2017 15:51
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=pdflatex 2015.5.19)  30 JAN 2017 17:21
 entering extended mode
 **Explanation*Bundle*Methods.tex
-("D:\Annika\Uni\10. Semester\Masterarbeit\Proximal Bundle Inexact Information\LaTeX\Explanation Bundle Methods.tex"
+
+("D:\Annika\Uni\10. Semester\Masterarbeit\Proximal Bundle Inexact Information\Git Hub\Masterarbeit\LaTeX\Explanation Bun
+dle Methods.tex"
 LaTeX2e <2011/06/27>
 Babel <v3.8m> and hyphenation patterns for english, afrikaans, ancientgreek, arabic, armenian, assamese, basque, bengali
 , bokmal, bulgarian, catalan, coptic, croatian, czech, danish, dutch, esperanto, estonian, farsi, finnish, french, galic
@@ -260,6 +262,19 @@ Package: amsthm 2004/08/06 v2.20
 \thm@headsep=\skip54
 \dth@everypar=\toks27
 )
+(C:\Users\as\AppData\Roaming\MiKTeX\2.9\tex\latex\eqnarray\eqnarray.sty
+equationarray 1.3 <December 1, 2010>
+Package: eqnarray 
+("C:\Program Files\Annika Programme\MiKTeX\tex\latex\tools\array.sty"
+Package: array 2008/09/09 v2.4c Tabular extension package (FMi)
+\col@sep=\dimen113
+\extrarowheight=\dimen114
+\NC@list=\toks28
+\extratabsurround=\skip55
+\backup@length=\skip56
+)
+\@eqargcnt=\count101
+)
 (C:\Users\as\AppData\Roaming\MiKTeX\2.9\tex\latex\xcolor\xcolor.sty
 Package: xcolor 2007/01/21 v2.11 LaTeX color extensions (UK)
 
@@ -277,7 +292,7 @@ Package: infwarerr 2010/04/08 v1.3 Providing info/warning/error messages (HO)
 ("C:\Program Files\Annika Programme\MiKTeX\tex\generic\oberdiek\ltxcmds.sty"
 Package: ltxcmds 2011/11/09 v1.22 LaTeX kernel commands for general use (HO)
 )
-\Gread@gobject=\count101
+\Gread@gobject=\count102
 )
 Package xcolor Info: Model `cmy' substituted by `cmy0' on input line 1337.
 Package xcolor Info: Model `hsb' substituted by `rgb' on input line 1341.
@@ -306,30 +321,21 @@ File: graphics.cfg 2007/01/18 v1.5 graphics configuration of teTeX/TeXLive
 )
 Package graphics Info: Driver file: pdftex.def on input line 91.
 )
-\Gin@req@height=\dimen113
-\Gin@req@width=\dimen114
+\Gin@req@height=\dimen115
+\Gin@req@width=\dimen116
 )
 ("C:\Program Files\Annika Programme\MiKTeX\tex\latex\tools\enumerate.sty"
 Package: enumerate 1999/03/05 v3.00 enumerate extensions (DPC)
-\@enLab=\toks28
+\@enLab=\toks29
 )
 ("C:\Program Files\Annika Programme\MiKTeX\tex\latex\tools\tabularx.sty"
 Package: tabularx 1999/01/07 v2.07 `tabularx' package (DPC)
-
-("C:\Program Files\Annika Programme\MiKTeX\tex\latex\tools\array.sty"
-Package: array 2008/09/09 v2.4c Tabular extension package (FMi)
-\col@sep=\dimen115
-\extrarowheight=\dimen116
-\NC@list=\toks29
-\extratabsurround=\skip55
-\backup@length=\skip56
-)
 \TX@col@width=\dimen117
 \TX@old@table=\dimen118
 \TX@old@col=\dimen119
 \TX@target=\dimen120
 \TX@delta=\dimen121
-\TX@cols=\count102
+\TX@cols=\count103
 \TX@ftn=\toks30
 )
 ("C:\Program Files\Annika Programme\MiKTeX\tex\latex\ltxmisc\here.sty")
@@ -342,7 +348,7 @@ Package: bibgerm 2000/08/18 v0.1 Support for mixed language bibliographies
 ** Modified for ngerman.sty and babel.sty by H. Harders 21 August 2000 **)
 (C:\Users\as\AppData\Roaming\MiKTeX\2.9\tex\latex\algorithm2e\algorithm2e.sty
 Package: algorithm2e 2013/01/06 v5.00 algorithms environments
-\c@AlgoLine=\count103
+\c@AlgoLine=\count104
 
 ("C:\Program Files\Annika Programme\MiKTeX\tex\latex\base\ifthen.sty"
 Package: ifthen 2001/05/26 v1.1c Standard LaTeX ifthen package (DPC)
@@ -391,9 +397,9 @@ subscribe by emailing sympa@lirmm.fr with 'subscribe <list> <firstname name>'
 \algoheightrule=\skip72
 \algotitleheightruledefault=\skip73
 \algotitleheightrule=\skip74
-\c@algocfline=\count104
-\c@algocfproc=\count105
-\c@algocf=\count106
+\c@algocfline=\count105
+\c@algocfproc=\count106
+\c@algocf=\count107
 \algocf@algoframe=\box35
 \algocf@algobox=\box36
 ) (C:\Users\as\AppData\Roaming\MiKTeX\2.9\tex\latex\algorithmicx\algpseudocode.sty
@@ -403,15 +409,15 @@ Package: algpseudocode
 Package: algorithmicx 2005/04/27 v1.2 Algorithmicx
 
 Document Style algorithmicx 1.2 - a greatly improved `algorithmic' style
-\c@ALG@line=\count107
-\c@ALG@rem=\count108
-\c@ALG@nested=\count109
+\c@ALG@line=\count108
+\c@ALG@rem=\count109
+\c@ALG@nested=\count110
 \ALG@tlm=\skip75
 \ALG@thistlm=\skip76
-\c@ALG@Lnr=\count110
-\c@ALG@blocknr=\count111
-\c@ALG@storecount=\count112
-\c@ALG@tmpcounter=\count113
+\c@ALG@Lnr=\count111
+\c@ALG@blocknr=\count112
+\c@ALG@storecount=\count113
+\c@ALG@tmpcounter=\count114
 \ALG@tmplength=\skip77
 )
 Document Style - pseudocode environments for use with the `algorithmicx' style
@@ -426,179 +432,176 @@ LaTeX Info: Redefining \bm on input line 204.
 (C:\Users\as\AppData\Roaming\MiKTeX\2.9\tex\latex\setspace\setspace.sty
 Package: setspace 2011/12/19 v6.7a set line spacing
 )
-\c@theorem=\count114
+\c@theorem=\count115
 
-("D:\Annika\Uni\10. Semester\Masterarbeit\Proximal Bundle Inexact Information\LaTeX\Explanation Bundle Methods.aux")
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 73.
-LaTeX Font Info:    ... okay on input line 73.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 73.
-LaTeX Font Info:    ... okay on input line 73.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 73.
-LaTeX Font Info:    ... okay on input line 73.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 73.
-LaTeX Font Info:    ... okay on input line 73.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 73.
-LaTeX Font Info:    ... okay on input line 73.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 73.
-LaTeX Font Info:    ... okay on input line 73.
-LaTeX Font Info:    Try loading font information for T1+lmr on input line 73.
-
-("C:\Program Files\Annika Programme\MiKTeX\tex\latex\lm\t1lmr.fd"
+("D:\Annika\Uni\10. Semester\Masterarbeit\Proximal Bundle Inexact Information\Git Hub\Masterarbeit\LaTeX\Explanation Bun
+dle Methods.aux")
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 74.
+LaTeX Font Info:    ... okay on input line 74.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 74.
+LaTeX Font Info:    ... okay on input line 74.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 74.
+LaTeX Font Info:    ... okay on input line 74.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 74.
+LaTeX Font Info:    ... okay on input line 74.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 74.
+LaTeX Font Info:    ... okay on input line 74.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 74.
+LaTeX Font Info:    ... okay on input line 74.
+LaTeX Font Info:    Try loading font information for T1+lmr on input line 74.
+ ("C:\Program Files\Annika Programme\MiKTeX\tex\latex\lm\t1lmr.fd"
 File: t1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 (C:\Users\as\AppData\Roaming\MiKTeX\2.9\tex\context\base\supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count115
+\scratchcounter=\count116
 \scratchdimen=\dimen128
 \scratchbox=\box37
-\nofMPsegments=\count116
-\nofMParguments=\count117
+\nofMPsegments=\count117
+\nofMParguments=\count118
 \everyMPshowfont=\toks31
-\MPscratchCnt=\count118
+\MPscratchCnt=\count119
 \MPscratchDim=\dimen129
-\MPnumerator=\count119
-\makeMPintoPDFobject=\count120
+\MPnumerator=\count120
+\makeMPintoPDFobject=\count121
 \everyMPtoPDFconversion=\toks32
 )
 
 bibgerm.sty: babel.sty detected
 
-LaTeX Font Info:    Try loading font information for T1+lmss on input line 75.
+LaTeX Font Info:    Try loading font information for T1+lmss on input line 76.
 ("C:\Program Files\Annika Programme\MiKTeX\tex\latex\lm\t1lmss.fd"
 File: t1lmss.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-Underfull \hbox (badness 10000) in paragraph at lines 77--78
+Underfull \hbox (badness 10000) in paragraph at lines 78--79
 
  []
 
-LaTeX Font Info:    Try loading font information for OT1+lmr on input line 80.
+LaTeX Font Info:    Try loading font information for OT1+lmr on input line 81.
 ("C:\Program Files\Annika Programme\MiKTeX\tex\latex\lm\ot1lmr.fd"
 File: ot1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-LaTeX Font Info:    Try loading font information for OML+lmm on input line 80.
+LaTeX Font Info:    Try loading font information for OML+lmm on input line 81.
 
 ("C:\Program Files\Annika Programme\MiKTeX\tex\latex\lm\omllmm.fd"
 File: omllmm.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-LaTeX Font Info:    Try loading font information for OMS+lmsy on input line 80.
+LaTeX Font Info:    Try loading font information for OMS+lmsy on input line 81.
 
 ("C:\Program Files\Annika Programme\MiKTeX\tex\latex\lm\omslmsy.fd"
 File: omslmsy.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-LaTeX Font Info:    Try loading font information for OMX+lmex on input line 80.
+LaTeX Font Info:    Try loading font information for OMX+lmex on input line 81.
 
 ("C:\Program Files\Annika Programme\MiKTeX\tex\latex\lm\omxlmex.fd"
 File: omxlmex.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <12> on input line 80.
+(Font)              <12> on input line 81.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <8> on input line 80.
+(Font)              <8> on input line 81.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <6> on input line 80.
-LaTeX Font Info:    Try loading font information for U+msa on input line 80.
+(Font)              <6> on input line 81.
+LaTeX Font Info:    Try loading font information for U+msa on input line 81.
 
 ("C:\Program Files\Annika Programme\MiKTeX\tex\latex\amsfonts\umsa.fd"
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 80.
+LaTeX Font Info:    Try loading font information for U+msb on input line 81.
 
 ("C:\Program Files\Annika Programme\MiKTeX\tex\latex\amsfonts\umsb.fd"
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-Underfull \hbox (badness 10000) in paragraph at lines 85--90
+Underfull \hbox (badness 10000) in paragraph at lines 86--91
 
  []
 
 [1
 
 {C:/Users/as/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}]
-Underfull \hbox (badness 10000) in paragraph at lines 128--132
+Underfull \hbox (badness 10000) in paragraph at lines 129--133
 
  []
 
 [2]
-Underfull \hbox (badness 10000) in paragraph at lines 207--210
+Underfull \hbox (badness 10000) in paragraph at lines 208--211
 
  []
 
 [3]
-Underfull \hbox (badness 10000) in paragraph at lines 227--228
+Underfull \hbox (badness 10000) in paragraph at lines 228--229
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 241--242
+Underfull \hbox (badness 10000) in paragraph at lines 242--243
 
  []
 
 [4]
-Underfull \hbox (badness 10000) in paragraph at lines 321--323
+Underfull \hbox (badness 10000) in paragraph at lines 322--324
 
  []
 
-LaTeX Font Info:    Try loading font information for OT1+lmtt on input line 348.
+LaTeX Font Info:    Try loading font information for OT1+lmtt on input line 349.
 ("C:\Program Files\Annika Programme\MiKTeX\tex\latex\lm\ot1lmtt.fd"
 File: ot1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
 ) [5]
-Underfull \hbox (badness 10000) in paragraph at lines 399--404
+Underfull \hbox (badness 10000) in paragraph at lines 400--405
 
  []
 
 [6]
-Underfull \hbox (badness 10000) in paragraph at lines 416--417
+Underfull \hbox (badness 10000) in paragraph at lines 417--418
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 454--455
+Underfull \hbox (badness 10000) in paragraph at lines 455--456
 
  []
 
 [7]
-Underfull \hbox (badness 10000) in paragraph at lines 462--463
+Underfull \hbox (badness 10000) in paragraph at lines 468--471
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 467--470
+Underfull \hbox (badness 10000) in paragraph at lines 479--480
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 478--479
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 496--497
+Underfull \hbox (badness 10000) in paragraph at lines 497--498
 
  []
 
 [8] [9] [10] [11]
-LaTeX Font Info:    Try loading font information for OMS+lmr on input line 688.
+LaTeX Font Info:    Try loading font information for OMS+lmr on input line 689.
  ("C:\Program Files\Annika Programme\MiKTeX\tex\latex\lm\omslmr.fd"
 File: omslmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    Font shape `OMS/lmr/m/n' in size <12> not available
-(Font)              Font shape `OMS/lmsy/m/n' tried instead on input line 688.
+(Font)              Font shape `OMS/lmsy/m/n' tried instead on input line 689.
  [12]
-Underfull \hbox (badness 10000) in paragraph at lines 738--739
+Underfull \hbox (badness 10000) in paragraph at lines 739--740
 
  []
 
-[13] ("D:\Annika\Uni\10. Semester\Masterarbeit\Proximal Bundle Inexact Information\LaTeX\Explanation Bundle Methods.bbl"
-[14]) [15]
-("D:\Annika\Uni\10. Semester\Masterarbeit\Proximal Bundle Inexact Information\LaTeX\Explanation Bundle Methods.aux") )
+[13] [14] [15]
+("D:\Annika\Uni\10. Semester\Masterarbeit\Proximal Bundle Inexact Information\Git Hub\Masterarbeit\LaTeX\Explanation Bun
+dle Methods.bbl") [16]
+("D:\Annika\Uni\10. Semester\Masterarbeit\Proximal Bundle Inexact Information\Git Hub\Masterarbeit\LaTeX\Explanation Bun
+dle Methods.aux") )
 (\end occurred inside a group at level 1)
 
 ### simple group (level 1) entered at line 1061 ({)
 ### bottom level 
 Here is how much of TeX's memory you used:
- 7006 strings out of 493921
- 103976 string characters out of 3142078
- 240222 words of memory out of 3000000
- 10159 multiletter control sequences out of 15000+200000
+ 7040 strings out of 493921
+ 104788 string characters out of 3142078
+ 240761 words of memory out of 3000000
+ 10190 multiletter control sequences out of 15000+200000
  56027 words of font info for 53 fonts, out of 3000000 for 9000
  841 hyphenation exceptions out of 8191
  40i,17n,48p,468b,2346s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -615,9 +618,9 @@ mme/MiKTeX/fonts/type1/public/lm/lmri12.pfb><C:/Program Files/Annika Programme/M
 ><C:/Program Files/Annika Programme/MiKTeX/fonts/type1/public/lm/lmsy10.pfb><C:/Program Files/Annika Programme/MiKTeX/fo
 nts/type1/public/lm/lmsy8.pfb><C:/Program Files/Annika Programme/MiKTeX/fonts/type1/public/lm/lmtt12.pfb><C:/Program Fil
 es/Annika Programme/MiKTeX/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on "Explanation Bundle Methods.pdf" (15 pages, 262961 bytes).
+Output written on "Explanation Bundle Methods.pdf" (16 pages, 271455 bytes).
 PDF statistics:
- 117 PDF objects out of 1000 (max. 8388607)
+ 120 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 
