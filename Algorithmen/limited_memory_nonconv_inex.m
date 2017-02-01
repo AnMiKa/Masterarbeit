@@ -58,7 +58,7 @@ end
 % tol           tolerance for terminating the algorithm
 % gamma > 0     saveguarding parameter for calculating eta
 
-defaults = {1000, 0.05, 0.1, 1e-6, 2, 10, 0.4, 100};
+defaults = {2000, 0.05, 0.1, 1e-6, 2, 10, 0.4, 100};
 % set optional input arguments if not set by the user
 % Check number of inputs.
 if nargin > 11
@@ -120,6 +120,9 @@ for k = 1 : kmax;
     
 %% 1st step: direction finding
 if k > 1
+    
+    %%%%%%%%%%%%%%%%%%%%%%%%
+    % check in which subfunction exclusive or, find if true of not
     if step
         % subfunction to calculate descent direction via LBFGS-update
         [d,U1,U2,R,CC,UU,phi] = lbfgs(u1,u2,s,U1,U2,R,CC,UU,mmax,phi);
@@ -153,6 +156,9 @@ end
 %% 4th step: iterate update
 theta = min(1, K/norm(d)); % is this really needed??? can it be done by using set D???
 x = x_hat+theta*d;
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% in paper f = f_hat;
+% check if version here is compatible
 f = feval(fun, x);
 g = feval(subgr_fun,x);
 

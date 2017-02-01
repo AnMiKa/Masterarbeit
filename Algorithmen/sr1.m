@@ -61,7 +61,7 @@ if -d'*u - G'*s < 0
     if m < m_max
         R_plus = [[R;zeros(1,m)],Su];
         UU_plus = [[UU; Uu(1:end-1)'], Uu];
-        C_plus = spdiags([spdiags(C),s'*u]',0,m_plus,m_plus);
+        C_plus = spdiags([spdiags(C)',s'*u]',0,m_plus,m_plus);
     else
         R_plus = [[R(2:end,2:end),zeros(1,m-1)],Su];
         UU_plus = [[UU(2:end,2:end);u'*U(:,2:end)],Uu];
@@ -69,8 +69,8 @@ if -d'*u - G'*s < 0
         C_plus = spdiags([C_diag(2:end),s'*u],0,m_plus,m_plus);
     end
     
-    SG_plus = [SG, sG]';
-    UG_plus = [UG, uG]';
+    SG_plus = [SG', sG]';
+    UG_plus = [UG', uG]';
 else
     S_plus = S;
     U_plus = U;

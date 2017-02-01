@@ -81,7 +81,7 @@ else
     UG_plus = UG;
 end
 
-p = (theta_plus*UU_plus-R_plus-R_plus'+C_plus)\(theta_plus*UG_plus-SG_plus)';
+p = (theta_plus*UU_plus-R_plus-R_plus'+C_plus)\(theta_plus*UG_plus-SG_plus);
 d = -theta_plus*G_plus+(theta_plus*U_plus-S_plus)*p;
 if i_up == 1
     b = G_plus'*d;

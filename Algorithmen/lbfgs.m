@@ -51,6 +51,8 @@ end
     p1 = R\Sg;
     p2 = R\(C*p1+theta*UU*p1-theta*Ug);
     d = theta*U*p1-S*p2-theta*g_plus;
+    
+    clearvars -except d S U R C UU theta 
 %% END of the algorithm
 end
 
