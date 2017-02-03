@@ -1,5 +1,5 @@
-function [f_hat, x_hat, delta] = limited_memory_bundle(x0, fun, subgr_fun, ...
-    kmax, tol, epsIL, epsIR, gamma, omega, tmin, tmax, K, rho, mmax)
+function [f_hat, x_hat, delta_w] = limited_memory_bundle(x0, fun, subgr_fun, ...
+    kmax, tol, epsL, epsR, gamma, omega, tmin, tmax, K, rho, mmax, imax)
 
 % variable metric bundle algorihtm that can handle nonsmooth nonconvex functions
 
@@ -58,37 +58,39 @@ end
 % tol           tolerance for terminating the algorithm
 % gamma > 0     saveguarding parameter for calculating eta
 
-defaults = {2000, 1e-6, 0.1, 0.4, 0.5, 2, 0.1, 2, 20};
+defaults = {2000, 1e-6, 0.1, 0.4, 0.5, 2, 0.1, 2, 10, 0.4, 20, 5};
 % set optional input arguments if not set by the user
 % Check number of inputs.
-if nargin > 14
-    error('Too many input arguments: requires at most 11 optional inputs');
+if nargin > 15
+    error('Too many input arguments: requires at most 12 optional inputs');
 end
 
 % Fill in unset optional values.
 switch nargin
     case 3
-        [kmax, tol, epsIL, epsIR, gamma, omega, tmin, tmax, K, rho, mmax] = defaults{:};
+        [kmax, tol, epsL, epsR, gamma, omega, tmin, tmax, K, rho, mmax, imax] = defaults{:};
     case 4
-        [tol, epsIL, epsIR, gamma, omega, tmin, tmax, K, rho, mmax] = defaults{2:11};
+        [tol, epsL, epsR, gamma, omega, tmin, tmax, K, rho, mmax, imax] = defaults{2:12};
     case 5
-        [epsIL, epsIR, gamma, omega, tmin, tmax, K, rho, mmax] = defaults{3:11};
+        [epsL, epsR, gamma, omega, tmin, tmax, K, rho, mmax, imax] = defaults{3:12};
     case 6
-        [epsIR, gamma, omega, tmin, tmax, K, rho, mmax] = defaults{4:11};
+        [epsR, gamma, omega, tmin, tmax, K, rho, mmax, imax] = defaults{4:12};
     case 7
-        [gamma, omega, tmin, tmax, K, rho, mmax] = defaults{5:11};
+        [gamma, omega, tmin, tmax, K, rho, mmax, imax] = defaults{5:12};
     case 8
-        [omega, tmin, tmax, K, rho, mmax] = defaults{6:11};
+        [omega, tmin, tmax, K, rho, mmax, imax] = defaults{6:12};
     case 9
-        [tmin, tmax, K, rho, mmax] = defaults{7:11};
+        [tmin, tmax, K, rho, mmax, imax] = defaults{7:12};
     case 10
-        [tmax, K, rho, mmax] = defaults{8:11};
+        [tmax, K, rho, mmax, imax] = defaults{8:12};
     case 11
-        [K, rho, mmax] = defaults{9:11};
+        [K, rho, mmax, imax] = defaults{9:12};
     case 12
-        [rho, mmax] = defaults{10:11};
+        [rho, mmax, imax] = defaults{10:12};
     case 13
-        mmax = defaults{11}
+        [mmax, imax] = defaults{11:12};
+    case 14
+        imax = defaults{12};
 end
 
 %% BEGINNING of the algorithm
@@ -106,6 +108,7 @@ x_hat = x0;              % initial serious point
 x = x0;
 Beta = 0;                % initial aggregate linearization error 
 f_hat = feval(fun, x0);  % initial inexact function value
+f = f_hat;
 g = feval(subgr_fun, x0);% initial inexact subgradient
 g_hat = g;
 G = g;                   % initial aggregate augmented subgradient
@@ -145,10 +148,10 @@ else
 end
 
 %% 3rd step: stopping test
-delta = -G'*d+2*Beta;
+delta_w = -G'*d+2*Beta;
 delta_q = 1/2*sum(G.^2)+Beta;
 
-if delta < tol && delta_q < tol
+if delta_w < tol && delta_q < tol
     fprintf('Algorithm stopped successfully by meeting the tolerance after %d iterations and %d null-steps. \n', k, i_null);
     break
 end
@@ -157,7 +160,7 @@ end
 theta = min(1, K/norm(d));
 % sophisticated initial stepsize calculation -> Luksan
 tI = tmin;
-[tR,tL] = linesearch(fun,subgr_fun,x,d,theta,epsIL,epsIR,tI,tmin,gamma,omega,...
+[tR,tL] = linesearch(fun,subgr_fun,x,d,theta,epsL,epsR,tI,tmin,gamma,omega,...
     delta_w,imax,i_null_C);
 
 %% 5th step: iterate update
@@ -172,7 +175,7 @@ g = feval(subgr_fun,x);
 s = tR*theta*d;
 u = g-g_hat;
 
-if  (tT == tL) && (tR > 0) && (fx <= f_prev-epsL*tR*delta_w) % serious step
+if  (tR == tL) && (tR > 0) && (fx <= f_prev-epsL*tR*delta_w) % serious step
     beta = 0;
     Beta = 0;
     i_null_C = 0;

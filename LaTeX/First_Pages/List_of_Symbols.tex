@@ -1,0 +1,33 @@
+\section*{List of Symbols}
+
+\thispagestyle{empty}
+
+\begin{tabular}{c@{}c@{} l@{}}
+	\(x^k\) && iterates \\
+	\(\hat{x}^k\) && current stability center \\
+	\(f(x)\) && exact evaluation of \(f\) at point \(x\) \\
+	\(f_k\) && value of \(f\) at point \(x^k\) from the oracle, may be inexact \\
+	\(\hat{f}_k\) && value of \(f\) at stability center \(\hat{x}^k\) from the oracle, may be inexact \\
+	\(g^k\) && a subgradient of \(f\) at \(x^k\) (can be exact or inexact) \\
+	\(s^k\) && a subgradient of the convexified objective at \(x^k\) (can be exact or inexact) \\
+	\(m_k\) && cutting plane model of the objective function \(f\) \\
+	\(M_k\) && cutting plane model of the convexified objective function \\
+	\(e_j^k\) && linearization error \\
+	\(c_j^k\) && linearization error of the convexified objective function \\
+	\(\eta_k\) && convexification parameter \\
+	\(\gamma\) & \(>0\) & safeguarding parameter for \(\eta\)-calculation \\
+  \(\alpha_j^k\) && Lagrange multipliers of the subproblem \\
+	\(d^k\) && minimizer of the subproblem \\
+	\(\xi\) && variable from reformulation of the subproblem \\
+	\(J_k\) && index set at iteration \(k\) \\
+	\(t_k\) &\(>0\)& prox-parameter \\
+	\(\delta_k\) && nominal decrease \\
+	\(m\) &\(\in (0,1) \quad\)& decrease parameter \\
+	\(G^k\) && aggregate subgradient \\
+	\(S^k\) && aggregate subgradient of convexified objective \\
+	\(E^k\) && aggregate error \\
+	\(C^k\)	&& aggregate error of convexified objective \\
+	\(\rho\) & \(\in (0,\frac{1}{2}) \quad \) & correction parameter \\
+	K & \(>0\) & control parameter for length of direction vector \\ 
+	\(\theta_k\) && length control factor
+\end{tabular}

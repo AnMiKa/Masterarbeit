@@ -66,49 +66,49 @@ else
         lambda = -SDS\r;
         if (sum(lambda >= 0) == 2) && ((sum(lambda)-1)<1e-15)
             lambda = [lambda; 1-sum(lambda)];
-    else
-        if norm(s_hatS) > 1e-5
+        else
             l1 = min(1,max(0,(d'*s_hatS+C)/SDS1));
-        elseif C < 0
+            l2 = min(1,max(0,(d'*sS+C-c)/SDS3));
+            d_hat = -Dv(s_hat, U1, U2, R, UU, CC, phi, step, i_C,rho);
+            l2_2 = min(1,max(0,(d_hat'*ss_hat-c)/SDS3));
+        end    
+    else
+        if C < 0
             l1 = 0;
         else
             l1 = 1;
         end
-        if norm(sS) > 1e-5
-            l2 = min(1,max(0,(d'*sS+C-c)/SDS3));
-        elseif C < c
+        if C < c
             l2 = 0;
         else
             l2 = 1;
         end
-        if norm(ss_hat) > 1e-5
-            d_hat = -Dv(s_hat, U1, U2, R, UU, CC, phi, step, i_C,rho);
-            l2_2 = min(1,max(0,(d_hat'*ss_hat-c)/SDS3));
-        elseif c > 0
+        if c > 0
             l2_2 = 0;
         else 
             l2_2 = 1;
-        end
-        lambda1 = [l1, 0, 1-l1]';
-        lambda2 = [0, l2, 1-l2]';
-        lambda3 = [1-l2_2, l2_2, 0]';
-        r = [0 c C]';
-        SS = [s_hat s S];
-        DS = Dv(SS,U1,U2,R,UU,CC,phi,step,i_C,rho);
-        SDS = SS'*DS;
-        phi1 = lambda1'*SDS*lambda1+2*r'*lambda1;
-        phi2 = lambda2'*SDS*lambda2+2*r'*lambda2;
-        phi3 = lambda3'*SDS*lambda3+2*r'*lambda3;
-
-        [~,i] = min([phi1,phi2,phi3]);
-        if i == 1
-            lambda = lambda1;
-        elseif i == 2
-            lambda = lambda2;
-        else
-        lambda = lambda3;
         end 
     end
+    lambda1 = [l1, 0, 1-l1]';
+    lambda2 = [0, l2, 1-l2]';
+    lambda3 = [1-l2_2, l2_2, 0]';
+    r = [0 c C]';
+    SS = [s_hat s S];
+    
+    DS = Dv(SS,U1,U2,R,UU,CC,phi,step,i_C,rho);
+    SDS = SS'*DS;
+    phi1 = lambda1'*SDS*lambda1+2*r'*lambda1;
+    phi2 = lambda2'*SDS*lambda2+2*r'*lambda2;
+    phi3 = lambda3'*SDS*lambda3+2*r'*lambda3;
+
+    [~,i] = min([phi1,phi2,phi3]);
+    if i == 1
+        lambda = lambda1;
+    elseif i == 2
+        lambda = lambda2;
+    else
+    lambda = lambda3;
+    end 
 end
 
 clearvars -except lambda

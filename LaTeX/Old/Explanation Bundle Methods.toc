@@ -1,0 +1,18 @@
+\select@language {ngerman}
+\select@language {ngerman}
+\contentsline {section}{\numberline {1}\leavevmode {\color {red}Preliminaries}}{2}
+\contentsline {section}{\numberline {2}Bundle Methods}{3}
+\contentsline {subsection}{\numberline {2.1}A basic bundle method}{3}
+\contentsline {subsubsection}{\numberline {2.1.1}Derivation of the bundle method}{4}
+\contentsline {subsubsection}{\numberline {2.1.2}Aggregate objects}{6}
+\contentsline {subsection}{\numberline {2.2}Proximal bundle method for nonconvex functions with inexact information}{9}
+\contentsline {subsubsection}{\numberline {2.2.1}New subsubsection?}{9}
+\contentsline {subsection}{\numberline {2.3}Convergence analysis}{13}
+\contentsline {subsubsection}{\numberline {2.3.1}Results for objectives with exact information}{13}
+\contentsline {subsubsection}{\numberline {2.3.2}Nonconvex bundle methods}{14}
+\contentsline {subsubsection}{\numberline {2.3.3}if convex function}{16}
+\contentsline {section}{\numberline {3}How is inexact information dealt with?}{17}
+\contentsline {section}{\numberline {4}Extension with Limited Memory approach}{17}
+\contentsline {subsubsection}{\numberline {4.0.4}Thoughts about line search}{17}
+\contentsline {subsection}{\numberline {4.1}Convergence}{19}
+\contentsline {section}{Bibliography}{19}

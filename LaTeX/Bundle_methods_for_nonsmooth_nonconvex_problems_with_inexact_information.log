@@ -1,9 +1,9 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=pdflatex 2015.5.19)  30 JAN 2017 17:21
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=pdflatex 2015.5.19)  2 FEB 2017 13:45
 entering extended mode
-**Explanation*Bundle*Methods.tex
+**Bundle_methods_for_nonsmooth_nonconvex_problems_with_inexact_information.tex
 
-("D:\Annika\Uni\10. Semester\Masterarbeit\Proximal Bundle Inexact Information\Git Hub\Masterarbeit\LaTeX\Explanation Bun
-dle Methods.tex"
+("D:\Annika\Uni\10. Semester\Masterarbeit\Proximal Bundle Inexact Information\Git Hub\Masterarbeit\LaTeX\Bundle_methods_
+for_nonsmooth_nonconvex_problems_with_inexact_information.tex"
 LaTeX2e <2011/06/27>
 Babel <v3.8m> and hyphenation patterns for english, afrikaans, ancientgreek, arabic, armenian, assamese, basque, bengali
 , bokmal, bulgarian, catalan, coptic, croatian, czech, danish, dutch, esperanto, estonian, farsi, finnish, french, galic
@@ -123,22 +123,22 @@ Package: babel 2008/07/08 v3.8m The Babel package
 ("C:\Program Files\Annika Programme\MiKTeX\tex\latex\00miktex\bblopts.cfg"
 File: bblopts.cfg 2006/07/31 v1.0 MiKTeX 'babel' configuration
 )
-("C:\Program Files\Annika Programme\MiKTeX\tex\generic\babel\english.ldf"
-Language: english 2005/03/30 v3.3o English support from the babel system
+("C:\Program Files\Annika Programme\MiKTeX\tex\generic\babel\ngermanb.ldf"
+Language: ngermanb 2008/07/06 v2.6n new German support from the babel system
 
 ("C:\Program Files\Annika Programme\MiKTeX\tex\generic\babel\babel.def"
 File: babel.def 2008/07/08 v3.8m Babel common definitions
 \babel@savecnt=\count88
 \U@D=\dimen103
 )
+\l@naustrian = a dialect from \language\l@ngerman 
+Package babel Info: Making " an active character on input line 92.
+)
+("C:\Program Files\Annika Programme\MiKTeX\tex\generic\babel\english.ldf"
+Language: english 2005/03/30 v3.3o English support from the babel system
 \l@canadian = a dialect from \language\l@american 
 \l@australian = a dialect from \language\l@british 
 \l@newzealand = a dialect from \language\l@british 
-)
-("C:\Program Files\Annika Programme\MiKTeX\tex\generic\babel\ngermanb.ldf"
-Language: ngermanb 2008/07/06 v2.6n new German support from the babel system
-\l@naustrian = a dialect from \language\l@ngerman 
-Package babel Info: Making " an active character on input line 92.
 ))
 ("C:\Program Files\Annika Programme\MiKTeX\tex\latex\base\fontenc.sty"
 Package: fontenc 2005/09/27 v1.99g Standard LaTeX package
@@ -434,8 +434,12 @@ Package: setspace 2011/12/19 v6.7a set line spacing
 )
 \c@theorem=\count115
 
-("D:\Annika\Uni\10. Semester\Masterarbeit\Proximal Bundle Inexact Information\Git Hub\Masterarbeit\LaTeX\Explanation Bun
-dle Methods.aux")
+("D:\Annika\Uni\10. Semester\Masterarbeit\Proximal Bundle Inexact Information\Git Hub\Masterarbeit\LaTeX\Bundle_methods_
+for_nonsmooth_nonconvex_problems_with_inexact_information.aux"
+("D:\Annika\Uni\10. Semester\Masterarbeit\Proximal Bundle Inexact Information\Git Hub\Masterarbeit\LaTeX\First_Pages/Lis
+t_of_Symbols.aux")
+("D:\Annika\Uni\10. Semester\Masterarbeit\Proximal Bundle Inexact Information\Git Hub\Masterarbeit\LaTeX\Old/Explanation
+_Bundle_Methods.aux"))
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 74.
 LaTeX Font Info:    ... okay on input line 74.
 LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 74.
@@ -469,142 +473,174 @@ File: t1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 
 bibgerm.sty: babel.sty detected
 
-LaTeX Font Info:    Try loading font information for T1+lmss on input line 76.
-("C:\Program Files\Annika Programme\MiKTeX\tex\latex\lm\t1lmss.fd"
+
+("D:\Annika\Uni\10. Semester\Masterarbeit\Proximal Bundle Inexact Information\Git Hub\Masterarbeit\LaTeX\First_Pages/Lis
+t_of_Symbols.tex"
+LaTeX Font Info:    Try loading font information for T1+lmss on input line 1.
+ ("C:\Program Files\Annika Programme\MiKTeX\tex\latex\lm\t1lmss.fd"
 File: t1lmss.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-Underfull \hbox (badness 10000) in paragraph at lines 78--79
+LaTeX Font Info:    Try loading font information for OT1+lmr on input line 5.
 
- []
-
-LaTeX Font Info:    Try loading font information for OT1+lmr on input line 81.
 ("C:\Program Files\Annika Programme\MiKTeX\tex\latex\lm\ot1lmr.fd"
 File: ot1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-LaTeX Font Info:    Try loading font information for OML+lmm on input line 81.
+LaTeX Font Info:    Try loading font information for OML+lmm on input line 5.
 
 ("C:\Program Files\Annika Programme\MiKTeX\tex\latex\lm\omllmm.fd"
 File: omllmm.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-LaTeX Font Info:    Try loading font information for OMS+lmsy on input line 81.
+LaTeX Font Info:    Try loading font information for OMS+lmsy on input line 5.
 
 ("C:\Program Files\Annika Programme\MiKTeX\tex\latex\lm\omslmsy.fd"
 File: omslmsy.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-LaTeX Font Info:    Try loading font information for OMX+lmex on input line 81.
+LaTeX Font Info:    Try loading font information for OMX+lmex on input line 5.
 
 ("C:\Program Files\Annika Programme\MiKTeX\tex\latex\lm\omxlmex.fd"
 File: omxlmex.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <12> on input line 81.
+(Font)              <12> on input line 5.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <8> on input line 81.
+(Font)              <8> on input line 5.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <6> on input line 81.
-LaTeX Font Info:    Try loading font information for U+msa on input line 81.
+(Font)              <6> on input line 5.
+LaTeX Font Info:    Try loading font information for U+msa on input line 5.
 
 ("C:\Program Files\Annika Programme\MiKTeX\tex\latex\amsfonts\umsa.fd"
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 81.
+LaTeX Font Info:    Try loading font information for U+msb on input line 5.
 
 ("C:\Program Files\Annika Programme\MiKTeX\tex\latex\amsfonts\umsb.fd"
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
-)
-Underfull \hbox (badness 10000) in paragraph at lines 86--91
+))
+Overfull \hbox (1.73416pt too wide) in paragraph at lines 5--81
+[] 
+ []
+
+[1
+
+
+{C:/Users/as/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}]
+("D:\Annika\Uni\10. Semester\Masterarbeit\Proximal Bundle Inexact Information\Git Hub\Masterarbeit\LaTeX\Bundle_methods_
+for_nonsmooth_nonconvex_problems_with_inexact_information.toc")
+\tf@toc=\write3
+ [2
+
+]
+("D:\Annika\Uni\10. Semester\Masterarbeit\Proximal Bundle Inexact Information\Git Hub\Masterarbeit\LaTeX\Old/Explanation
+_Bundle_Methods.tex"
+Underfull \hbox (badness 10000) in paragraph at lines 85--86
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 93--98
 
  []
 
 [1
 
-{C:/Users/as/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}]
-Underfull \hbox (badness 10000) in paragraph at lines 129--133
+]
+Underfull \hbox (badness 10000) in paragraph at lines 136--140
 
  []
 
-[2]
-Underfull \hbox (badness 10000) in paragraph at lines 208--211
-
- []
-
-[3]
-Underfull \hbox (badness 10000) in paragraph at lines 228--229
+[2] [3]
+Underfull \hbox (badness 10000) in paragraph at lines 215--218
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 242--243
+Underfull \hbox (badness 10000) in paragraph at lines 235--236
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 249--250
 
  []
 
 [4]
-Underfull \hbox (badness 10000) in paragraph at lines 322--324
+Underfull \hbox (badness 10000) in paragraph at lines 329--331
 
  []
 
-LaTeX Font Info:    Try loading font information for OT1+lmtt on input line 349.
+LaTeX Font Info:    Try loading font information for OT1+lmtt on input line 356.
 ("C:\Program Files\Annika Programme\MiKTeX\tex\latex\lm\ot1lmtt.fd"
 File: ot1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
 ) [5]
-Underfull \hbox (badness 10000) in paragraph at lines 400--405
+Underfull \hbox (badness 10000) in paragraph at lines 407--412
 
  []
 
 [6]
-Underfull \hbox (badness 10000) in paragraph at lines 417--418
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 455--456
+Underfull \hbox (badness 10000) in paragraph at lines 424--425
 
  []
 
 [7]
-Underfull \hbox (badness 10000) in paragraph at lines 468--471
+Underfull \hbox (badness 10000) in paragraph at lines 462--463
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 479--480
+Underfull \hbox (badness 10000) in paragraph at lines 475--478
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 497--498
+Underfull \hbox (badness 10000) in paragraph at lines 486--487
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 504--505
 
  []
 
 [8] [9] [10] [11]
-LaTeX Font Info:    Try loading font information for OMS+lmr on input line 689.
+LaTeX Font Info:    Try loading font information for OMS+lmr on input line 696.
  ("C:\Program Files\Annika Programme\MiKTeX\tex\latex\lm\omslmr.fd"
 File: omslmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    Font shape `OMS/lmr/m/n' in size <12> not available
-(Font)              Font shape `OMS/lmsy/m/n' tried instead on input line 689.
+(Font)              Font shape `OMS/lmsy/m/n' tried instead on input line 696.
  [12]
-Underfull \hbox (badness 10000) in paragraph at lines 739--740
+Underfull \hbox (badness 10000) in paragraph at lines 746--747
 
  []
 
-[13] [14] [15]
-("D:\Annika\Uni\10. Semester\Masterarbeit\Proximal Bundle Inexact Information\Git Hub\Masterarbeit\LaTeX\Explanation Bun
-dle Methods.bbl") [16]
-("D:\Annika\Uni\10. Semester\Masterarbeit\Proximal Bundle Inexact Information\Git Hub\Masterarbeit\LaTeX\Explanation Bun
-dle Methods.aux") )
+
+Underfull \hbox (badness 10000) in paragraph at lines 754--755
+
+ []
+
+[13] [14] [15]) [16]
+("D:\Annika\Uni\10. Semester\Masterarbeit\Proximal Bundle Inexact Information\Git Hub\Masterarbeit\LaTeX\Bundle_methods_
+for_nonsmooth_nonconvex_problems_with_inexact_information.bbl") [17
+
+]
+("D:\Annika\Uni\10. Semester\Masterarbeit\Proximal Bundle Inexact Information\Git Hub\Masterarbeit\LaTeX\Bundle_methods_
+for_nonsmooth_nonconvex_problems_with_inexact_information.aux"
+("D:\Annika\Uni\10. Semester\Masterarbeit\Proximal Bundle Inexact Information\Git Hub\Masterarbeit\LaTeX\First_Pages/Lis
+t_of_Symbols.aux")
+("D:\Annika\Uni\10. Semester\Masterarbeit\Proximal Bundle Inexact Information\Git Hub\Masterarbeit\LaTeX\Old/Explanation
+_Bundle_Methods.aux")) )
 (\end occurred inside a group at level 1)
 
 ### simple group (level 1) entered at line 1061 ({)
 ### bottom level 
 Here is how much of TeX's memory you used:
- 7040 strings out of 493921
- 104788 string characters out of 3142078
- 240761 words of memory out of 3000000
- 10190 multiletter control sequences out of 15000+200000
+ 7080 strings out of 493921
+ 108316 string characters out of 3142078
+ 242700 words of memory out of 3000000
+ 10209 multiletter control sequences out of 15000+200000
  56027 words of font info for 53 fonts, out of 3000000 for 9000
  841 hyphenation exceptions out of 8191
- 40i,17n,48p,468b,2346s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 40i,17n,48p,555b,2321s stack positions out of 5000i,500n,10000p,200000b,50000s
 {C:/Program Files/Annika Programme/MiKTeX/fonts/enc/dvips/lm/lm-rm.enc}{C:/Program Files/Annika Programm
 e/MiKTeX/fonts/enc/dvips/lm/lm-rmtt.enc}{C:/Program Files/Annika Programme/MiKTeX/fonts/enc/dvips/lm/lm-mathex.enc}{C:/P
 rogram Files/Annika Programme/MiKTeX/fonts/enc/dvips/lm/lm-mathit.enc}{C:/Program Files/Annika Programme/MiKTeX/fonts/en
@@ -618,9 +654,10 @@ mme/MiKTeX/fonts/type1/public/lm/lmri12.pfb><C:/Program Files/Annika Programme/M
 ><C:/Program Files/Annika Programme/MiKTeX/fonts/type1/public/lm/lmsy10.pfb><C:/Program Files/Annika Programme/MiKTeX/fo
 nts/type1/public/lm/lmsy8.pfb><C:/Program Files/Annika Programme/MiKTeX/fonts/type1/public/lm/lmtt12.pfb><C:/Program Fil
 es/Annika Programme/MiKTeX/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on "Explanation Bundle Methods.pdf" (16 pages, 271455 bytes).
+Output written on Bundle_methods_for_nonsmooth_nonconvex_problems_with_inexact_information.pdf (19 pages, 276089 bytes).
+
 PDF statistics:
- 120 PDF objects out of 1000 (max. 8388607)
+ 130 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 

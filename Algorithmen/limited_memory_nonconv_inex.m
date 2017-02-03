@@ -58,7 +58,7 @@ end
 % tol           tolerance for terminating the algorithm
 % gamma > 0     saveguarding parameter for calculating eta
 
-defaults = {2000, 0.05, 0.1, 1e-6, 2, 10, 0.4, 100};
+defaults = {2000, 0.05, 0.1, 1e-6, 2, 10, 0.4, 20};
 % set optional input arguments if not set by the user
 % Check number of inputs.
 if nargin > 11

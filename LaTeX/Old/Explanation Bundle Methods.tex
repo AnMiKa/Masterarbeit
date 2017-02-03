@@ -73,6 +73,13 @@
 
 \begin{document}
 
+
+\setcounter{tocdepth}{2} % Im Inhaltsverzeichnis werden nur section und subsection berücksichtigt, keine tieferen Ebenen
+\thispagestyle{empty} %keine seitenzahlen?
+\tableofcontents
+\newpage
+
+
 \section{\textcolor{red}{Preliminaries}}
 
 \textcolor{red}{Check if requirements on functions are stated and defined.}\\
@@ -84,14 +91,14 @@ Throughout this thesis I consider the optimization Problem
 \end{equation}
 
 where \(f\) is a possibly nonsmooth function. %\textcolor{red}{For the biggest part of this thesis and if not otherwise stated \(X = \R^n\).} \\
-%\textcolor{red}{Also write something about inexactness? specify \(X\) more precisely? Convex?} \\
+\textcolor{red}{Also write something about inexactness? specify \(X\) more precisely? Convex?} \\
 When it comes to nonsmooth objective functions the  derivative based framework of nonlinear optimization methods does not work any more. Therefore the most important definitions and results needed when working with nonsmooth functions are stated in this section. \\
 \textcolor{red}{Just definition, lemma, theorem or a bit explanation around it?} \\
 \textbf{\textcolor{red}{See if requirements in definitions and theorems meet what is needed/provided later.}} \\
 
 \begin{definition} % as in \cite{Clarke1990}
-		The function \(f: \R^n \to \R\) is called \emph{Lipschitz near \(x \in \R^n\)} if there exist \(C \in \R\) and \(\varepsilon > 0\) such that 
-	\[ |f(y_2) - f(y_1)| \leq C|y_2 -y_1| \quad \forall y_1, y_2 \in \mathbf{B}_{\varepsilon}(x). \]
+		The function \(f: \R^n \to \R\) is called \emph{Lipschitz near \(x \in \R^n\)} if there exist \(C > 0\) and \(\varepsilon > 0\) such that 
+	\[ |f(y_2) - f(y_1)| \leq C\|y_2 -y_1\| \quad \forall y_1, y_2 \in \mathbf{B}_{\varepsilon}(x). \]
 \end{definition}
 
 \begin{definition} % as in \cite{Mifflin1977}
@@ -106,7 +113,7 @@ When it comes to nonsmooth objective functions the  derivative based framework o
 
 \begin{definition}
 	Let \(f\) convex. The \emph{subdifferential} \(\partial f(x)\) of \(f\) at \(x\) is the nonempty compact convex set
-	\[ \partial f(x) = \{g \in \R^n | \langle g,d\rangle \leq f'(x,d) \forall d \in \R^n \}. \]
+	\[ \partial f(x) = \{g \in \R^n | f'(x,d) \geq \langle g,d\rangle \forall d \in \R^n \}. \]
 \end{definition}
 
 \begin{definition} % as in \cite{Clarke1990}
@@ -119,20 +126,20 @@ When it comes to nonsmooth objective functions the  derivative based framework o
 	\[ \partial f(x) := \{g \in \R^n | f^{\circ}(x,d) \geq \langle g,d\rangle \forall d \in \R^n \}. \]
 \end{definition}
 
-If \(f\) is a convex function it coincides with the subdifferential \(\partial f\) of \(f\) \cite{Clarke1990}.
+If \(f\) is a convex function the generalized gradient coincides with the subdifferential \(\partial f\) of \(f\) \cite{Clarke1990}.
 
 \section{Bundle Methods}
 
 \textcolor{Green3}{introduction}
 
-%\textcolor{red}{\(\rightarrow\) introduction sentences: main focus on algorithm  in paper; therefore at first introduce simplest form of bundle methods.}
-When bundle methods were first introduced in 1975 by Claude Lemaréchal and Philip Wolfe they were developed to minimize a convex (possibly nonsmooth) function \(f\) for which at least one subgradient at a point can be computed \cite{Mifflin2012}. \\
+\textcolor{red}{\(\rightarrow\) introduction sentences: main focus on algorithm  in paper; therefore at first introduce simplest form of bundle methods.}
+When bundle methods were first introduced in 1975 by Claude Lemaréchal and Philip Wolfe they were developed to minimize a convex (possibly nonsmooth) function \(f\) for which at least one subgradient at any point \(x\) can be computed \cite{Mifflin2012}. \\
 To provide an easier understanding of the proximal bundle method in \cite{Hare2016} and stress the most important ideas of how to deal with nonconvexity and inexactness first a basic bundle method is shown here. \\
 Bundle methods can be interpreted in two different ways: From the dual point of view one tries to approximate the \(\varepsilon\)-subdifferential to finally ensure first order optimality conditions. The primal point of view interprets the bundle method as a stabilized form of the cutting plane method where the objective function is modeled by tangent hyperplanes \cite{Hare2010}. I focus here on the primal approach. \\
-%\textcolor{red}{In the next two sections the function \(f\) is assumed to be convex.} \\
+\textcolor{red}{In the next two sections the function \(f\) is assumed to be convex.} \\
 
-%\textcolor{blue}{notation, definitions}\\
-%\textcolor{red}{already done in previous preliminaries chapter?}
+\textcolor{blue}{notation, definitions}\\
+\textcolor{red}{already done in previous preliminaries chapter?}
 
 \subsection{A basic bundle method}
 
@@ -145,7 +152,7 @@ Bundle methods can be interpreted in two different ways: From the dual point of 
 \end{equation}
 with the convex function \(f\) and the closed and convex set \(X \subseteq \R^n\).}
 
-%\textcolor{red}{Define Problem again?? Incorporate ``set-constraint'' by writing \(h(x):= f(x)+\mathbb{I}_X\). \(\rightarrow\) later???}
+\textcolor{red}{Define Problem again?? Incorporate ``set-constraint'' by writing \(h(x):= f(x)+\mathbb{I}_X\). \(\rightarrow\) later???}
 
 \textcolor{blue}{explanation}
 
@@ -186,10 +193,10 @@ To tackle this problem a penalty term is introduced to the subproblem:
 
 This new subproblem is strongly convex and has therefore always a unique solution.\\
 \textcolor{red}{how much explanation here?}
-% \max_{j \in J_k} l_j(\hat{x}^k + d)
+ \(\max_{j \in J_k} l_j(\hat{x}^k + d)\)
 
-%\textcolor{red}{Some nice sentences to explain the term a little bit more and to lead over to the next paragraph.\\ 
-%To understand the deeper motivation of this term see \cite{Hiriart-Urruty1993}. For this introduction it suffices to see that due to the regularization term the subproblem is now strongly convex and therefore always uniquely solvable.} \\
+\textcolor{red}{Some nice sentences to explain the term a little bit more and to lead over to the next paragraph.\\ 
+To understand the deeper motivation of this term see \cite{Hiriart-Urruty1993}. For this introduction it suffices to see that due to the regularization term the subproblem is now strongly convex and therefore always uniquely solvable.} \\
 
 
 The second major step towards the bundle algorithm is the introduction of a so called \emph{stability center} or  \emph{serious point} \(\hat{x}^k\). It is the iterate that yields the ``best'' approximation of the optimal point up to the \(k\)'th iteration (\textcolor{red}{not necessarily the best function value though}).\\
@@ -211,7 +218,7 @@ If this is not the case a \emph{null step} is executed and the serous iterate re
 
 The subproblem can be rewritten as a smooth optimization problem. For convenience rewrite the affine functions \(l_j\) with respect to the stability center \(\hat{x}^k\).
 
-%\textcolor{red}{citation for this???!!!}
+\textcolor{red}{citation for this???!!!}
 
 \begin{align}
 	l_j(x) &= f(x^j) + {g^j}^{\top} (x - x^j) \\
@@ -238,19 +245,19 @@ The subproblem can now be written as
 \end{align}
 
 
-%\textcolor{red}{where the constant term \(f(\hat{x}^k)\) was discarded for the sake of simplicity.} \\
+\textcolor{red}{where the constant term \(f(\hat{x}^k)\) was discarded for the sake of simplicity.} \\
 If \(X\) is a polyhedron this is a quadratic optimization problem that can be solved using standard methods of nonlinear optimization. The pair \((\xi_k, d^k)\) solves (\ref{sub_prob_short}) if and only if \(d^k\) solves the original subproblem (\ref{sub_prob_long}) and \(\xi_k=f(\hat{x}^k)+\max_{j \in J_k}{g^j}^{\top}d^k - e_j^k\). The new iterate is then given by \(x^{k+1} = \hat{x}^k + d^k\). \\
 
-%\begin{remark}
-	%\textcolor{red}{Setting \(\check{f}(x) = f(x)+ \mathbb{I}_{X}(x)\) the above optimization problem is ...\\
-	%The \emph{proximal point mapping} or \emph{prox-operator}
-	%\begin{equation}
-		%prox_{t,f}(x) = \argmin_{y}\left\{\check{f}(y) + \frac{1}{2t}\|x-y\|^2\right\}, \quad t > 0
-	%\label{prox_op}
-	%\end{equation}}
-	%\textcolor{red}{source??? This special form of the subproblems gives the proximal bundle method its name and will occur again later??? }
-%\end{remark}
-%
+\begin{remark}
+	\textcolor{red}{Setting \(\check{f}(x) = f(x)+ \mathbb{I}_{X}(x)\) the above optimization problem is ...\\
+	The \emph{proximal point mapping} or \emph{prox-operator}
+	\begin{equation}
+		prox_{t,f}(x) = \argmin_{y}\left\{\check{f}(y) + \frac{1}{2t}\|x-y\|^2\right\}, \quad t > 0
+	\label{prox_op}
+	\end{equation}}
+	\textcolor{red}{source??? This special form of the subproblems gives the proximal bundle method its name and will occur again later??? }
+\end{remark}
+
 
 
 \subsubsection{Aggregate objects}
@@ -265,9 +272,9 @@ The subproblem then writes as
 \label{sub_prob_fin}
 \end{equation}
 
-%\textcolor{red}{Some introduction how this and the aggregate error expression relate to each other. Why it is in this case easier to write the model in the nonsmooth form...}
+\textcolor{red}{Some introduction how this and the aggregate error expression relate to each other. Why it is in this case easier to write the model in the nonsmooth form...}
 
-%\textcolor{red}{Lemma XI 3.1.1 \(\partial g = \partial f + \partial \mathbb{I}_X\) for \(g = f + \mathbb{I}_X\).}
+\textcolor{red}{Lemma XI 3.1.1 \(\partial g = \partial f + \partial \mathbb{I}_X\) for \(g = f + \mathbb{I}_X\).}
 
 One gets the following results about the step \(d^k\) of the subproblem:
 
@@ -285,7 +292,7 @@ Furthermore
 \label{m_inequ}
 \end{equation}
 
-%\textcolor{red}{inequality because of aggregation technique. Is sharp when cutting plane model is used? source?}
+\textcolor{red}{inequality because of aggregation technique. Is sharp when cutting plane model is used? source?}
 
 where 
 \begin{equation}
@@ -293,7 +300,7 @@ where
 \label{agg_err_1}
 \end{equation}
 
-%\textcolor{red}{Comment on the inequality missing}
+\textcolor{red}{Comment on the inequality missing}
 
 The quantities \(G^k\) and \(E^k\) are the \emph{aggregate subgradient} and the \emph{aggregate error}.
 
@@ -306,7 +313,7 @@ From the Karush-Kuhn-Tucker conditions (KKT-conditions) one can see that in the 
 \label{alphas}
 \end{equation}
 
- %\textcolor{red}{by rewriting and so on... one can see that the above expressions are in fact }
+ \textcolor{red}{by rewriting and so on... one can see that the above expressions are in fact }
 
 From the dual problem one obtains that the aggregate subgradient and error can also be expressed as
 
@@ -315,26 +322,26 @@ From the dual problem one obtains that the aggregate subgradient and error can a
 \label{agg_obj}
 \end{equation}
 
-%\textcolor{red}{Finally use Lemma ??? in \cite{Hiriart-Urruty1993}} 
-%\[ m_k(x^{k+1}) = f(\hat{x}^k) - E_k - t_k\|G^k\|^2 \]
-%to reformulate the nominal decrease \(\delta_k\):
-%\[ \delta_k =  f(\hat{x}^k) - m_k(x^{k+1}) - \frac{1}{2}t_k\|G^k\|^2 = E_k + \frac{1}{2}t_k\|G^k\|^2\]
+\textcolor{red}{Finally use Lemma ??? in \cite{Hiriart-Urruty1993}} 
+\[ m_k(x^{k+1}) = f(\hat{x}^k) - E_k - t_k\|G^k\|^2 \]
+to reformulate the nominal decrease \(\delta_k\):
+\[ \delta_k =  f(\hat{x}^k) - m_k(x^{k+1}) - \frac{1}{2}t_k\|G^k\|^2 = E_k + \frac{1}{2}t_k\|G^k\|^2\]
 The nominal decrease in this case is defined as:\\
-%\textcolor{red}{noch mal anschauen}
+\textcolor{red}{noch mal anschauen}
 \begin{equation}
 	\delta_k := E_k + t_k\|G^k+\nu^k\|^2 = f(\hat{x}^k) - m_k(x^{k+1}) - {\nu^k}^{\top}d^k
 \label{nom_dec_1}
 \end{equation}
 
-%\textcolor{red}{In practice the different definition of the decreases makes no difference because of the weighting with the descent parameter \(m\).}
+\textcolor{red}{In practice the different definition of the decreases makes no difference because of the weighting with the descent parameter \(m\).}
 
 The following basic bundle algorithm can now be stated: 
 
-%\textcolor{red}{Reformluate equations, model function \\
-%introduce aggregate expressions \\
-%say something to \(J\)-update, say something to \(t\)-update \\
-%see if all abbreviations (\(f_j, g^j, ...\)) are introduced \\
-%introduce prox-operator and proximal points}
+\textcolor{red}{Reformluate equations, model function \\
+introduce aggregate expressions \\
+say something to \(J\)-update, say something to \(t\)-update \\
+see if all abbreviations (\(f_j, g^j, ...\)) are introduced \\
+introduce prox-operator and proximal points}
 
 \textcolor{blue}{algorithm}
 
@@ -354,7 +361,7 @@ For \(k = 1,2,3  \dotsc \)
 	\item Calculate
 	\[ d^k = \argmin_{d \in \R^n}{m_k(\hat{x}^k+d) + \mathbb{I}_X +\frac{1}{2t_k}\|d\|^2}  \]
 	and the corresponding Lagrange multiplier \(\alpha_j^k,~ j \in J_k\).
-	%\textcolor{red}{say how model \(m_k\) looks here. include \(\ \mathbb{I}_X\)}
+	\textcolor{red}{say how model \(m_k\) looks here. include \(\ \mathbb{I}_X\)}
 	\item Set
 		\begin{equation*}
 			\begin{split}
@@ -377,22 +384,22 @@ For \(k = 1,2,3  \dotsc \)
 \vspace{1.5em}
 In steps 4 and 5 of the algorithm the updates of the steplength \(t_k\) and the index set \(J_k\) are are only given in a very general form.\\
 The ``suitable'' choice of \(t_k\) will be discussed more closely in the convergence analysis of \textcolor{red}{decide which method; say that \(t_k > 0 \forall k...\)}. \\
-%\textcolor{red}{Comment on \(J_k\) update \(\rightarrow\) depends on what is included in thesis.} \\
+\textcolor{red}{Comment on \(J_k\) update \(\rightarrow\) depends on what is included in thesis.} \\
 For the choice of the new index set \(J_{k+1}\) different aggregation methods to keep the memory size controllable are available. The most easy and intuitive one is to just take those parts of the model function, that are actually active in the current iteration. This is done in this basic version of the method. \\
 \textcolor{red}{Refer to low memory bundling if later in thesis.}
-%Instead of keeping every index in the set \(J_k\) different compression ideas exist.  \textcolor{red}{For now I therefor stick to this update. \\
-%refer to later ``low memory'' thing??}
+Instead of keeping every index in the set \(J_k\) different compression ideas exist.  \textcolor{red}{For now I therefor stick to this update. \\
+refer to later ``low memory'' thing??}
 
-%\textcolor{red}{explanation to \(t_k\) update. \(\rightarrow\) include at which point???} 
-%This simple idea has however some major drawbacks \cite{Hiriart-Urruty1996}:
-%\begin{itemize}
-	%\item Minimization of the cutting plane model of the objective function is not trivial. Indeed unconstrained minimization of the model is never possible in the first step, where it is just a line, unless the starting point is already a minimum.
-	%\extcolor{red}{\item The convergence speed is very slow.}
-%\end{itemize}
-%
-%\textcolor{red}{If convergence speed named here, does it have to be shown (rates)? For all algorithms??? Leave out? Argue about instability?}
-%
-%To address those issues a regularization is added to the cutting plane model. This ensures unique solvability of the minimization of the subproblem. \textcolor{red}{By introducing a stability center and }
+\textcolor{red}{explanation to \(t_k\) update. \(\rightarrow\) include at which point???} 
+This simple idea has however some major drawbacks \cite{Hiriart-Urruty1996}:
+\begin{itemize}
+	\item Minimization of the cutting plane model of the objective function is not trivial. Indeed unconstrained minimization of the model is never possible in the first step, where it is just a line, unless the starting point is already a minimum.
+	\textcolor{red}{\item The convergence speed is very slow.}
+\end{itemize}
+
+\textcolor{red}{If convergence speed named here, does it have to be shown (rates)? For all algorithms??? Leave out? Argue about instability?}
+
+To address those issues a regularization is added to the cutting plane model. This ensures unique solvability of the minimization of the subproblem. \textcolor{red}{By introducing a stability center and }
 \subsection{Proximal bundle method for nonconvex functions with inexact information}
 
 \textcolor{blue}{introduction}
@@ -400,8 +407,8 @@ For the choice of the new index set \(J_{k+1}\) different aggregation methods to
 This section focuses on the proximal bundle method presented in \cite{Hare2016}.\\
 The idea is to extend the basic bundle algorithm for nonconvex functions with both inexact function and subgradient information. \\
 The key idea of the algorithm is the one already developed for \cite{Hare2010}: When dealing with nonconvex functions a very critical difference to the convex case is that the linearization errors are not necessarily nonnegative any more. To tackle this problem the errors are manipulated to enforce nonnegativity. In this case this is done my modeling not the objective function directly but a convexified version of it. \\
- % citation for that??? sources of nonconv-exact?
-%\textcolor{red}{something about primal-dual view???}
+  citation for that??? sources of nonconv-exact?
+\textcolor{red}{something about primal-dual view???}
 \subsubsection{New subsubsection?}
 \textcolor{blue}{``assumptions and notations''}
 
@@ -467,7 +474,7 @@ A point \(x \in \R^n\) that satisfies \(0 \in \partial f(x)\) is called a \emph{
 
 A main issue both nonconvexity and inexactness entail is that the linearization errors \(e_j^k\) are not necessarily nonnegative any more.\\
 So based on the results in \cite{Hare2009} not the objective function but a convexified version of it is modeled as the objective function of the subproblem.\\
-%\textcolor{red}{explain locally convexified more precisely? Is it because no global convexification? different than in [18]??}\\
+\textcolor{red}{explain locally convexified more precisely? Is it because no global convexification? different than in [18]??}\\
 
 When looking at the subproblem formulated as in (\ref{sub_prob_long}) one can see that the new iterate \(x^{k+1}\) is in fact a \emph{proximal point} of the subproblem.\\
 The \emph{proximal point mapping} or \emph{prox-operator} is defined as
@@ -498,8 +505,8 @@ with respect to the parameter \(\mu\). \(\eta\) is therefore called the \emph{co
 
 So the function that will be modeled by the cutting plane approximation is no longer the original objective function \(f\) but the convexified version \(\tilde{f}\). 
 
-%\textcolor{red}{say why/how... this is related to current stability center}
-%\textcolor{red}{Because new function to be approximated, subgradients ``new'':}
+\textcolor{red}{say why/how... this is related to current stability center}
+\textcolor{red}{Because new function to be approximated, subgradients ``new'':}
 The linear functions forming the model have therefore a tilted slope 
 
 \begin{align}
@@ -507,8 +514,8 @@ The linear functions forming the model have therefore a tilted slope
 	\label{aug_subgr}
 \end{align}
 
-%\textcolor{red}{linearization error defined just as to be nonnegative. \(\rightarrow\) any further motivation???\\
-%be careful now slightly different definition of linearization error because of inexact information}
+\textcolor{red}{linearization error defined just as to be nonnegative. \(\rightarrow\) any further motivation???\\
+be careful now slightly different definition of linearization error because of inexact information}
 
 \textcolor{red}{\(\eta\) is defined to be such that the augmented linearization error is nonnegative:
 \begin{equation}
@@ -531,19 +538,19 @@ The linear functions forming the model have therefore a tilted slope
 \label{aug_model}
 \end{equation}}
 
-%\textcolor{red}{check that \(M_k\) and \(m_k\) from basic algorithm above have same form.}\\
+\textcolor{red}{check that \(M_k\) and \(m_k\) from basic algorithm above have same form.}\\
 
-%\textcolor{red}{Explain how the \(D\) comes into the whole thing \\
-%here (also) because already said above (but why?) \\
-%already introduce in basic algorithm!\\
-%maybe later say something to how it is done in ``depth''-Paper???}
-%
-%\textcolor{red}{Some Lemma why this is so}
-%
-%\textcolor{red}{ \begin{equation}
-  %d^k = -t_k(G^k + \nu^k), \quad \text{where} \quad \nu^k \in \partial \mathbb{I}_D(x^{k+1})
-%\label{d^k}
-%\end{equation}}
+\textcolor{red}{Explain how the \(D\) comes into the whole thing \\
+here (also) because already said above (but why?) \\
+already introduce in basic algorithm!\\
+maybe later say something to how it is done in ``depth''-Paper???}
+
+\textcolor{red}{Some Lemma why this is so}
+
+\textcolor{red}{ \begin{equation}
+  d^k = -t_k(G^k + \nu^k), \quad \text{where} \quad \nu^k \in \partial \mathbb{I}_D(x^{k+1})
+\label{d^k}
+\end{equation}}
 
 \textcolor{red}{The definition of the aggregate objects follows straightforward:}
 \begin{align}
@@ -655,32 +662,32 @@ In \cite{Noll2012} Noll et al. follow an approach of approximating a local model
 The so called \emph{first order model} \(\phi(.,x)\) is convex but possibly nonsmooth and can be approximated by cutting planes. The \emph{second order part} is a quadratic but not necessarily convex. The algorithm then proceeds a lot in the lines of a general bundle algorithm. \\
 For a locally Lipschitz objective function with a bounded levelset \(\{x \in \R^n | f(x) \leq f(\hat{x}^1)\}\) convergence to a stationary point is established.
 
-%Other papers reach the same results only needing \textcolor{red}{L-continuity and the boundedness of the level sets (in \cite{Hare2016} established by introducing the set \(D\)). But they use a different concept.} \\
-%\textcolor{red}{Explain ``most common?'' concepts for dealing with nonconvexity??? see \cite{Mifflin1982}.}
+Other papers reach the same results only needing \textcolor{red}{L-continuity and the boundedness of the level sets (in \cite{Hare2016} established by introducing the set \(D\)). But they use a different concept.} \\
+\textcolor{red}{Explain ``most common?'' concepts for dealing with nonconvexity??? see \cite{Mifflin1982}.}
 
-%\begin{itemize}
-	%\item in paper other method for calculating \(\mu = \frac{1}{t_k}\) \\
-	%\textcolor{red}{how is made sure that \(\eta\) big enough???}
-	%\item convergence results for nonconvex functions:?
-	%\begin{itemize}
-		%\item conditions on functions: \\
-		%\emph{exact}: \(f\) lower-\(\mathcal{C}^2\) near the minimizers of the problem \\
-		%\emph{inexact}: proper, regular, locally Lipschitz with full domain; even better: lower-\(\mathcal{C}^1\) (contains lower-\(\mathcal{C}^2\)) \(\rightarrow\) conditions more general than in exact case
-		%\item convergence results: \\
-		%\emph{exact}: the limit of the sequence \(\{x^{k}\}\) (which exists) or every accumulation point of the sequence \(\{\hat{x}^k\}\) is a stationary point of \(f\)\\
-		%\textcolor{red}{Does this mean: \(0 \in \partial f(\bar{x}), ~\bar{x}\) being the respective limit??? incorporate set \(D\)?} \\
-		%\emph{inexact}: \(0 \in \left(\partial f(\bar{x}) + \partial I_D(\bar{x}) \right) + B_{\bar{\theta}}(0)\) \\
-		%if \(f\) lower-\(\mathcal{C}^1\): 
-		%\[ \forall \varepsilon >0 ~\exists \rho >0: \quad f(y) \geq f(\bar{x})-(\bar{\theta}+\varepsilon)\|y-\bar{x}\|-2\bar{\sigma} \quad \forall y \in D \cap B_{\rho}(\bar{x}) \]
-		%\item obvious difference: no error terms in exact case
-	%\end{itemize}
-%\end{itemize}
+\begin{itemize}
+	\item in paper other method for calculating \(\mu = \frac{1}{t_k}\) \\
+	\textcolor{red}{how is made sure that \(\eta\) big enough???}
+	\item convergence results for nonconvex functions:?
+	\begin{itemize}
+		\item conditions on functions: \\
+		\emph{exact}: \(f\) lower-\(\mathcal{C}^2\) near the minimizers of the problem \\
+		\emph{inexact}: proper, regular, locally Lipschitz with full domain; even better: lower-\(\mathcal{C}^1\) (contains lower-\(\mathcal{C}^2\)) \(\rightarrow\) conditions more general than in exact case
+		\item convergence results: \\
+		\emph{exact}: the limit of the sequence \(\{x^{k}\}\) (which exists) or every accumulation point of the sequence \(\{\hat{x}^k\}\) is a stationary point of \(f\)\\
+		\textcolor{red}{Does this mean: \(0 \in \partial f(\bar{x}), ~\bar{x}\) being the respective limit??? incorporate set \(D\)?} \\
+		\emph{inexact}: \(0 \in \left(\partial f(\bar{x}) + \partial I_D(\bar{x}) \right) + B_{\bar{\theta}}(0)\) \\
+		if \(f\) lower-\(\mathcal{C}^1\): 
+		\[ \forall \varepsilon >0 ~\exists \rho >0: \quad f(y) \geq f(\bar{x})-(\bar{\theta}+\varepsilon)\|y-\bar{x}\|-2\bar{\sigma} \quad \forall y \in D \cap B_{\rho}(\bar{x}) \]
+		\item obvious difference: no error terms in exact case
+	\end{itemize}
+\end{itemize}
 
-%\textbf{Results:}
-%\begin{itemize}
-	%%\item first result seen: leave uncertainty away
-	%\item better in comparison to other paper, because wider range of functions (lower-\(\mathcal{C}^1\)).
-%\end{itemize}
+\textbf{Results:}
+\begin{itemize}
+	%\item first result seen: leave uncertainty away
+	\item better in comparison to other paper, because wider range of functions (lower-\(\mathcal{C}^1\)).
+\end{itemize}
 
 \subsubsection{if convex function}
 
@@ -700,7 +707,7 @@ Convergence for inexact convex functions:
 	compare with ``depth'' \(\rightarrow\) \(\phi\)
 	\item \textcolor{Green4}{see if \(\eta_k\) can be bounded in exact case - yes for the class of functions mentioned in the paper}
 	\item \textcolor{orange}{find counterexample, that \(\eta\) can't be bounded in inexact case??? - main argument: have to assure, that convexified objective function is ``convex on all bundle points \(x^j\)'' from a certain \(\eta^k\) on }
-	%\item \textcolor{red}{find out about \(\eta > \rho\)-condition? Or} \textcolor{Green4}{unnecessary}
+	\item \textcolor{red}{find out about \(\eta > \rho\)-condition? Or} \textcolor{Green4}{unnecessary}
 	\item \textcolor{Green4}{compare nonconvex exact \(\leftrightarrow\) inexact convergence results \\
 	only look at exact paper again if better results!}
 	\begin{itemize}

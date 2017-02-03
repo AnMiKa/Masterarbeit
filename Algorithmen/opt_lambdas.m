@@ -99,7 +99,15 @@ else
     phi1 = lambda1'*SDS*lambda1+2*r'*lambda1;
     phi2 = lambda2'*SDS*lambda2+2*r'*lambda2;
     phi3 = lambda3'*SDS*lambda3+2*r'*lambda3;
-
+%     Sl1 = SS*lambda1;
+%     Sl2 = SS*lambda2;
+%     Sl3 = SS*lambda3;
+%     D1 = Dv(Sl1,U1,U2,R,UU,CC,phi,step,i_C,rho);
+%     D2 = Dv(Sl2,U1,U2,R,UU,CC,phi,step,i_C,rho);
+%     D3 = Dv(Sl3,U1,U2,R,UU,CC,phi,step,i_C,rho);
+%     phi1 = Sl1'*D1+2*r'*lambda1;
+%     phi2 = Sl2'*D2+2*r'*lambda2;
+%     phi3 = Sl3'*D3+2*r'*lambda3;
     [~,i] = min([phi1,phi2,phi3]);
     if i == 1
         lambda = lambda1;

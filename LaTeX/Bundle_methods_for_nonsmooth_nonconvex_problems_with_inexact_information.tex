@@ -1,0 +1,102 @@
+\documentclass[12pt, a4paper]{scrartcl}
+\usepackage{fullpage}
+\usepackage[latin1]{inputenc} %Zeichensatzkodierung (auch Sonderzeichen -> ä,ö,ü)
+\usepackage[ngerman, english]{babel} %Sprache -> Silbentrennung, automatisch generierte Texte auf deutsch; ngerman -> NEUE deutsche Rechtschreibung
+\usepackage[T1]{fontenc} %Sonderzeichen allg
+\usepackage{lmodern} %PDF-optimierte Schrift
+
+\usepackage{amsmath, amssymb, amsbsy, amsthm} %Mathepakete ; amsthm: Theorem-Umgebung; muss nach amsmath eingebunden werden
+\usepackage{eqnarray}
+\usepackage[x11names]{xcolor} % muss vor "`mcode"' da dieses bereits intern das color-Paket lädt und es dann einmal mit und einmal ohne Option geladen wird, was nicht geht 
+\usepackage{graphicx} % Grafiken einfügen
+%\usepackage{listings} % zum Einbinden von Code, ist bereits in "`mcode"' enthalten
+\usepackage{enumerate}
+\usepackage{tabularx} % erwiterte Tabelleneigenschaften
+\usepackage{here} % erzwingen der Position von Float-Objekten
+\usepackage{bibgerm} % Für das Literaturverzeichnis
+% \usepackage{extarrows} % Pfeile mit Beschriftung, deren Länge automatisch angepasst wird
+\usepackage{algorithm2e} % Pseudocode
+\usepackage{algpseudocode} % Pseudocode
+\usepackage{bm} % fett schreiben in Matheumgebung
+
+\usepackage{setspace}
+% um Zeilenabstand zu setzen
+
+%\usepackage{bibgerm} % Für das Literaturverzeichnis
+
+
+
+%Definition der gewünschten Theorem-Stile:
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma} %hier [section] nicht noch einmal wiederholen, da durch [satz] die Nummerierung schon genauo wie in "Satz" definiert
+\newtheorem{corollary}[theorem]{Corrolary}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{convention}[theorem]{Convention}
+\newtheorem{example}[theorem]{Example}
+
+\newtheoremstyle{my_remark}
+{}{}{}{}{\itshape}{:}{.5em}{}
+
+\theoremstyle{my_remark}
+\newtheorem*{remark}{Remark}
+
+%\newenvironment{proof}{\begin{proof}[Proof:]}{\end{proof}}
+
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\blangle}{\big\langle}
+\newcommand{\brangle}{\big\rangle}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\newcommand{\erl}{\textcolor{Green3}{ - erledigt}}
+
+\allowdisplaybreaks[0] % Umgebungen wie align dürfen Seitenumbrüche enthalten
+
+%\setlength{\voffset}{-28.4mm}
+%\setlength{\hoffset}{-1in}
+%\setlength{\topmargin}{20mm}
+%\setlength{\oddsidemargin}{25mm}
+%\setlength{\evensidemargin}{25mm}
+%\setlength{\textwidth}{160mm}
+%
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{1ex}
+%
+%\setlength{\textheight}{235mm}
+%\setlength{\footskip}{20mm}
+%\setlength{\headsep}{50pt}
+%\setlength{\headheight}{0pt}
+
+
+
+\begin{document}
+
+%\input{First_Pages/Coverpage}
+%\textcolor{red}{second title page} \\
+%\textcolor{red}{Author and title on back of thesis}
+%\include{First_Pages/Declaration}
+
+\include{First_Pages/List_of_Symbols}
+
+\setcounter{tocdepth}{3} % Im Inhaltsverzeichnis werden nur section und subsection berücksichtigt, keine tieferen Ebenen
+\thispagestyle{empty} % keine Seitenzahl
+\addtocontents{toc}{%
+  \protect\contentsline{section}{List of Symbols}{}}
+\tableofcontents
+\newpage
+
+\pagenumbering{arabic}
+\include{Introduction}
+% \include{Theoretical_Background}
+\include{Old/Explanation_Bundle_Methods}
+
+
+\addtocontents{toc}{%
+  \protect\contentsline{section}{References}{}}
+\bibliography{Bibliography}
+	\bibliographystyle{plain}
+
+
+\end{document}
