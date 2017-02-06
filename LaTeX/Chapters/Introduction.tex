@@ -1,7 +1,13 @@
 \section{Introduction}
 
-\textcolor{red}{Often in practical optimization applications, the derivative bases framework of classical optimization cannot be used, because the objective function is not necessarily differentiable. \(\rightarrow\) examples.} \\
-To tackle this problem the framework of nondifferentiable (or nonsmooth) analysis was developed. \\
+There exists a sound and board theory of classical nonlinear optimization. However, this theory puts strong differentiability requirements on the given problem. Requirements that cannot always be fulfilled in practice.
+Examples for such application reach from problems in physics and mechanical engineering \cite{Clarke1990} over optimal control problems up to data analysis \cite{Bagirov2014} and machine learning \cite{Smola2007}.
+Other possible fields of applications are risk management and financial calculations \cite{Nesterov2016,Teo2010}. 
+Additionally there exist so called stiff problems that are theoretically smooth but numerically nonsmooth due to rapid changes in the gradient \cite{Maekelae1992}. \\
+There exists therefore a need for nonsmooth, that is not necessarily differentiable, optimization algorithms. A lot of the underlying theory and was developed in the 1970's, also driven by the ``First World Conference on Nonsmooth Optimization'' taking place in 1977 \cite{Mifflin2012}.
+Now, there exists a well understood theoretical framework of nonsmooth analysis to create the basis for practical algorithms. \\
+The most popular methods to tackle nonsmooth problems at the moment are bundle methods \cite{Hare2016}. First developed only for convex functions \cite{Hiriart-Urruty1993} the method was soon extended to cope also with nonconvex objective functions \cite{Mifflin1982}.
+
 Additionally the problem of inexact information. 
 The most promising algorithms \textcolor{red}{\(\rightarrow\) citation}  in this field are bundle algorithms. \\
 \textcolor{red}{from PhD-thesis}
@@ -22,3 +28,5 @@ Throughout study of this algorithm including comparison to other approaches to t
 Introduction of variable metric (bundle) algorithm to tackle large-scale applications. ``discussion'' how far this is compatible with inexactness. \\
 Numerical testing \\ 
 discussion \\
+
+

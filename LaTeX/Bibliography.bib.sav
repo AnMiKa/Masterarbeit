@@ -187,4 +187,45 @@
   year   = {2004},
 }
 
+@InBook{Nesterov2016,
+  title     = {Algorithmic Principle of Least Revenue for Finding Market Equilibria},
+  publisher = {Springer International Publishing Switzerland},
+  year      = {2016},
+  author    = {Yurii Nesterov and Vladimir Shikhman},
+  editor    = {Boris Goldengorin},
+  volume    = {115},
+  series    = {Springer Optimization and Its Applications},
+  booktitle = {Optimization and Its Applications in Control and Data Sciences},
+}
+
+@Book{Maekelae1992,
+  title     = {Nonsmooth Optimization: Analysis and Algorithms with Applications to Optimal Control},
+  publisher = {World Scientific Publishing Co. River Edge NJ},
+  year      = {1992},
+  author    = {Marko M. Mäkelä and Pekka Neittaanmäki},
+}
+
+@InProceedings{Smola2007,
+  author    = {A. J. Smola and S.v.n. Vishwanathan and V. Le Quoc},
+  title     = {Bundle Methods for Machine Learning},
+  booktitle = {Advances in Neural Information Processing Systems},
+  year      = {2007},
+  editor    = {J. C. Platt and D. Koller and Y. Singer and S. T. Roweis},
+  number    = {20},
+}
+
+@Article{Teo2010,
+  author = {Choon Hui Teo and A. J. Smola and S.V.N. Vishwanathan and Quoc V. Le},
+  title  = {Bundle Methods for Regulized Risk Minimization},
+  year   = {2010},
+  editor = {J. C. Platt and D. Koller and Y. Singer and S. T. Roweis},
+}
+
+@Book{Bagirov2014,
+  title     = {Introduction to Nonsmooth Optimization: Theory, Practice and Software},
+  publisher = {Springer International Publishing Switzerland},
+  year      = {2014},
+  author    = {Adil Bagirov and Napsu Karmitsa and Marko M. Mäkelä},
+}
+
 @Comment{jabref-meta: databaseType:bibtex;}

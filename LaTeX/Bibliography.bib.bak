@@ -180,4 +180,36 @@
   pages   = {407-430},
 }
 
+@PhdThesis{Haarala2004a,
+  author = {Marjo Haarala},
+  title  = {Large-Scale Nonsmooth Optimization - Variable Metric Bundle Method with Limited Memory},
+  school = {University of Jyväskylä},
+  year   = {2004},
+}
+
+@InBook{Nesterov2016,
+  title     = {Algorithmic Principle of Least Revenue for Finding Market Equilibria},
+  publisher = {Springer International Publishing Switzerland},
+  year      = {2016},
+  author    = {Yurii Nesterov and Vladimir Shikhman},
+  editor    = {Boris Goldengorin},
+  volume    = {115},
+  series    = {Springer Optimization and Its Applications},
+  booktitle = {Optimization and Its Applications in Control and Data Sciences},
+}
+
+@Book{,
+  title  = {Nonsmooth Optimization: Analysis and Algorithms with Applications to Optimal},
+  author = {Marko M. Mäkelä and Pekka Neittaanmäki},
+}
+
+@InProceedings{Smola2007,
+  author    = {A. J. Smola and S.v.n. Vishwanathan and V. Le Quoc},
+  title     = {Bundle Methods for Mashine Learning},
+  booktitle = {Advances in Neural Information Processing Systems},
+  year      = {2007},
+  editor    = {J. C. Platt and D. Koller and Y. Singer and S. T. Roweis},
+  number    = {20},
+}
+
 @Comment{jabref-meta: databaseType:bibtex;}
