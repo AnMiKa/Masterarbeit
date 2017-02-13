@@ -77,8 +77,9 @@
 %\textcolor{red}{second title page} \\
 %\textcolor{red}{Author and title on back of thesis}
 %\include{First_Pages/Declaration}
+%\include{First_Pages/Acknowledgment}
 
-\include{First_Pages/List_of_Symbols}
+%\include{First_Pages/List_of_Symbols}
 
 \setcounter{tocdepth}{3} % Im Inhaltsverzeichnis werden nur section und subsection berücksichtigt, keine tieferen Ebenen
 \thispagestyle{empty} % keine Seitenzahl
@@ -88,9 +89,12 @@
 \newpage
 
 \pagenumbering{arabic}
-\include{Introduction}
-% \include{Theoretical_Background}
+\include{Chapters/Introduction}
+\include{Chapters/Preliminaries}
+\include{Chapters/Bundle_Methods}
+\include{Chapters/Simplifications}
 \include{Old/Explanation_Bundle_Methods}
+\include{Chapters/Variable_Metric}
 
 
 \addtocontents{toc}{%

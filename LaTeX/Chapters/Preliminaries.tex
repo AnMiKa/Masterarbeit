@@ -1,0 +1,78 @@
+\textcolor{red}{\section{Preliminaries}}
+
+\textcolor{red}{Theoretical Background, nonsmooth Analysis ???}
+
+\textcolor{red}{Check if requirements on functions are stated and defined.}\\
+
+\textcolor{red}{\subsection{Notation}}
+
+Throughout this thesis I consider the optimization Problem 
+\begin{equation}
+\min_{x} f(x), \quad x \in X \subseteq \R^n
+\label{min_prob}
+\end{equation}
+
+where \(f\) is a possibly nonsmooth function. %\textcolor{red}{For the biggest part of this thesis and if not otherwise stated \(X = \R^n\).} \\
+\textcolor{red}{Also write something about inexactness? specify \(X\) more precisely? Convex?} \\
+When it comes to nonsmooth objective functions the  derivative based framework of nonlinear optimization methods does not work any more. Therefore the most important definitions and results needed when working with nonsmooth functions are stated in this section. \\
+\textcolor{red}{Just definition, lemma, theorem or a bit explanation around it?\\
+better just in Text without Definition, ...} \\
+\textbf{\textcolor{red}{See if requirements in definitions and theorems meet what is needed/provided later.}} \\
+
+%\begin{definition} % as in 
+		%The function \(f: \R^n \to \R\) is called \emph{Lipschitz near \(x \in \R^n\)}\cite{Clarke1990} if there exist \(C > 0\) and \(\varepsilon > 0\) such that 
+	%\[ |f(y_2) - f(y_1)| \leq C\|y_2 -y_1\| \quad \forall y_1, y_2 \in \mathbf{B}_{\varepsilon}(x). \]
+%\end{definition}
+
+\subsection{Nonsmooth analysis and optimization}
+A necessary assumption on the objective function \(f\) is that it is locally Lipschitz. This assumption assures the well-definedness of the following generalizations of derivatives. \\
+\begin{definition} \cite{Mifflin1977}
+	A function \(f: \R^n \to \R\) is called \emph{locally Lipschitz}  if it is Lipschitz on each bounded subset \(B \subseteq \R^n\)
+	\[ |f(y) - f(x)| \leq C \|y-x\| \quad \forall x,y \in B, \quad C >0. \]
+\end{definition}
+All convex functions are locally Lipschitz \cite{Hiriart-Urruty1996}. \\
+%Throughout this thesis the objective function is assumed to be locally Lipschitz. 
+
+For convex functions one can define so called subgradients as a generalization of the usual derivative. They are defined using the  directional derivative. \\
+\begin{definition} \cite{Hiriart-Urruty1996}
+	The \emph{directional derivative}  of a convex function \(f\) at \(x\) in direction \(d\) is 
+	\[ f'(x,d) := \lim_{\lambda \downarrow 0}\frac{f(x+\lambda d) - f(x)}{\lambda}. \]
+\end{definition}
+
+\begin{definition} \cite{Hiriart-Urruty1996}
+	Let \(f\) convex. The \emph{subdifferential} \(\partial f(x)\) of \(f\) at \(x\) is the nonempty compact convex set
+	\[ \partial f(x) = \{g \in \R^n | f'(x,d) \geq \langle g,d\rangle \forall d \in \R^n \}. \]
+\end{definition}
+The subdifferential is a convex set, that supports the graph of the function \(f\) from below. If \(f\) is differentiable at the point \(x\), the subdifferential reduces to the gradient at that point \cite{Hiriart-Urruty1996}. \\
+
+This concept was generalized by Clarke for nonconvex functions. First a generalization of the directional derivative is given: 
+\begin{definition} \cite{Clarke1990}
+	Let \(f: \R^n \to \R \) locally Lipschitz. The \emph{generalized directional derivative}  of \(f\) at \(x\) in direction \(d\) is given by
+	\[ f^{\circ}(x,d):= \limsup_{\substack{y \to x \\ \lambda \downarrow 0}} \frac{f(y+\lambda d)-f(y)}{\lambda}. \]
+\end{definition}
+
+This allows for the following definition.
+\begin{definition} \cite{Clarke1990}
+	The \emph{generalized gradient} of the locally Lipschitz function \(f\) at \(x\) is a nonempty convex compact set \(\partial f(x)\) given by
+	\[ \partial f(x) := \{g \in \R^n | f^{\circ}(x,d) \geq \langle g,d\rangle \forall d \in \R^n \}. \]
+\end{definition}
+
+\textcolor{red}{!!!other definition --> take definition from rockefellar/Hare directly from Paper!!!}
+
+If \(f\) is a convex function the generalized gradient coincides with the subdifferential \(\partial f\) of \(f\) \cite{Clarke1990}.
+
+\textcolor{red}{Why epsilon Subdifferential?\\
+implementable stopping criterion \\
+dual form of bundle algorithms = same as stopping criterion?}
+
+\begin{definition} \cite{Mifflin1977}
+	The function \(f: \R^n \to \R\)  is \emph{semismooth} at \(x \in \R^n\)  if \(f\) is Lipschitz on a ball \(\mathbb{B}_\varepsilon(x)\)around x and for each \(d \in \R^n\) and for any sequences \(\{t_k\} \subseteq \R_{+}\), \(\{\theta_k\} \subseteq \R^n\) and \(\{g_k\} \subseteq \R^n\) such that
+	\[ \{t_k\} \downarrow 0, \quad \{\theta_k/t_k\} \to 0 \in \R^n \quad \text{and} \quad g_k \in \partial f(x+t_kd+\theta_), \]
+	the sequence  \(\{\langle g_k,d\rangle\}\) has exactly one accumulation point.
+\end{definition}
+
+\textcolor{red}{check if I need \(\infty\)-functions and if something changes then}
+\textcolor{red}{\(\epsilon\)-subdifferential \\
+continuity properties of generalized gradient? \\
+definitions from chapter inexact information \\
+definition of inexactness for nonconvex kind of generalization of \(\epsilon\)-subdifferential for nonconvex case (Noll, inex, nonconv)}

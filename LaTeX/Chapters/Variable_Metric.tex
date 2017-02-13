@@ -1,0 +1,38 @@
+\section{Variable Metric Bundle Methods}
+
+\subsection{Subproblem Variable Metric}
+
+For comparision: Subproblem proximal bundle
+
+\begin{align}
+	&\min_{d \in \R^n, \xi \in \R} \xi + \frac{1}{2t_k}\|d\|^2 = \xi + \frac{1}{2}d^{\top}\left(\frac{1}{t_k}\mathbf{I}\right)d \\
+	&\text{s.t.} \quad f(\hat{x}^k)+{g^j}^{\top}d - e^k_j - \xi \leq 0, \quad j \in J_k
+\end{align}
+
+Subproblem variable metric:
+\begin{align}
+	&\min_{d \in \R^n, \xi in \R} \xi + \frac{1}{2}d^{\top}D_kd \\
+	&\text{s.t.} \quad f(\hat{x}^k)+{g^j}^{\top}d - e^k_j - \xi \leq 0, \quad j \in J_k
+\end{align}
+These are \(\R^{n+1}\) dimensional quadratic optimization problems.\\
+
+\textcolor{red}{Find out if \(D_k\) is diagonal matrix! Think not.} \\
+
+Approaches not so different. Instead of just scaling the identity \(\rightarrow\) induce ``curvature information'' via past subgradients. \\
+
+Dual proximal subproblem:
+\begin{align}
+	&\min_{\alpha \in \R^{|J_k|}} \frac{1}{2} \left(\sum_{j \in J_k}{\alpha_jg^j}\right)^{\top} t_k\mathbf{I} \left(\sum_{j \in J_k}{\alpha_jg^j}\right) + \sum_{j \in J_k}{\alpha_j e_j^k} \\
+		&\text{s.t.} \quad \sum_{j \in J_k}{\alpha_j} = 1 \text{ and } \alpha_j \geq 0 ~ j \in J_k
+\end{align}
+
+
+Dual variable metric subproblem:
+\begin{align}
+	&\min_{\alpha \in \R^{|J_k|}} \frac{1}{2} \left(\sum_{j \in J_k}{\alpha_jg^j}\right)^{\top} D^{-1}_k \left(\sum_{j \in J_k}{\alpha_jg^j}\right) + \sum_{j \in J_k}{\alpha_j e_j^k} \\
+		&\text{s.t.} \quad \sum_{j \in J_k}{\alpha_j} = 1 \text{ and } \alpha_j \geq 0 ~ j \in J_k
+\end{align}
+
+These are \(\R^{|J_k|}\) dimensional quadratic optimization problems. \\
+
+\textcolor{red}{check linear independent \(g^j\)'s.}
