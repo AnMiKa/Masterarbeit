@@ -368,4 +368,34 @@
   url       = {https://doi.org/10.1007%2Fs11228-010-0159-3},
 }
 
+@Article{Kaerkkaeinen2001,
+  author    = {Tommi K{\"{a}}rkk{\"{a}}inen and Kirsi Majava and Marko M. M{\"{a}}kel{\"{a}}},
+  title     = {Comparison of formulations and solution methods for image restauration problems},
+  journal   = {Inverse Problems},
+  year      = {2001},
+  volume    = {17},
+  number    = {6},
+  pages     = {1977--1995},
+  month     = {nov},
+  doi       = {10.1088/0266-5611/17/6/326},
+  publisher = {{IOP} Publishing},
+  url       = {https://doi.org/10.1088%2F0266-5611%2F17%2F6%2F326},
+}
+
+@PhdThesis{Kunapuli2008,
+  author = {Gautam Kunapuli},
+  title  = {A bilevel optimization approach to machine learning},
+  school = {Rensselaer Polytechnic Institute Troy, New York},
+  year   = {2008},
+}
+
+@Book{Outrata1998,
+  title     = {Nonsmooth Approach to Optimization Problems with Equilibrium Constraints},
+  publisher = {Springer {US}},
+  year      = {1998},
+  author    = {Ji{\v{r}}i Outrata and Michal Ko{\v{c}}vara and Jochem Zowe},
+  doi       = {10.1007/978-1-4757-2825-5},
+  url       = {https://doi.org/10.1007%2F978-1-4757-2825-5},
+}
+
 @Comment{jabref-meta: databaseType:bibtex;}
