@@ -1,0 +1,4 @@
+load f_new_25;
+load g_new;
+F_NOISE = f_noise(:,idx);
+G_TRUTH = g_truth(:,idx);

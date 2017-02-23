@@ -1,0 +1,15 @@
+function [ grad_Is ] = grad_Is( u, im_noisy, mu, s )
+%GRAD_IS gradient (or for s = 1 one subgradient) of the function I_s
+
+D1 = spdiags([-ones(rows),ones(rows)],[0, 1],rows,columns);
+D = [D1; D1'];
+Du = DU(u);
+dor 
+t = abs(Du)>1e-15;
+lambda_s(t) = Du(t)./(abs(Du(t)).^(s-2));
+lambda_s(~t) = 0;
+
+grad_Is = grad_phi(u,im_noisy,mu)+g*D'*lambda_s;
+
+end
+
