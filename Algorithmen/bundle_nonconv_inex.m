@@ -108,7 +108,7 @@ D = [zeros(2*n,1), [diag(-ones(n,1)); diag(ones(n,1))]];
 A = [-ones(lJ, 1), s'; D];
 b = [c; x_hat+10;-x_hat+10];
 options_ip = optimoptions(@quadprog, 'Algorithm', 'interior-point-convex',...
-    'MaxIterations', 500, 'ConstraintTolerance', 1.0000e-10, 'OptimalityTolerance', 1.0000e-10);
+    'MaxIterations', 500, 'ConstraintTolerance', 1.0000e-15, 'OptimalityTolerance', 1.0000e-15);
 [xi_d, ~, ~, ~, lambda] = quadprog(H, r, A, b, [], [], [], [], [], options_ip);
 
 alpha = lambda.ineqlin(1:lJ); % lagrange multiplier for inequality constraints
@@ -179,6 +179,7 @@ for j = 1:lJ;
     end
 end
 eta = max(eta_vec) + gamma;
+fprint('eta: %d \n', eta);
 
 b = zeros(lJ, 1);
 for j = 1:lJ
@@ -191,7 +192,7 @@ s = g + eta * bsxfun(@minus, x, x_hat);
 end
 toc;
 if k == kmax
-    fprintf('Algorithm stopped bcause the maximum number %d of iterations was reached \n', k);
+    fprintf('Algorithm stopped because the maximum number %d of iterations was reached \n', k);
     fprintf('%d nullsteps were executed. \n', i_null)
 end
 %% END of the algorithm
