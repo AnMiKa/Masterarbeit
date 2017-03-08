@@ -1,0 +1,16 @@
+Probleme Bilevel-bundle Algorithmus
+
+mit airfoil_self_noise Testset, Startwert [C,eps] = [1,0]
+- quadprog dauert sehr lange
+- erreicht immer die maximalen 500 Iterationen
+- BB-Algorithmus bricht bereits nach einem Schritt ab
+
+mit airfoil-set gekürst auf 100 Datensätze und 3 folds (67 je Fold)
+- quadprog löst in wenigen Sekunden
+- erreicht nicht die 500 Iterationen
+
+Hauptproblem:
+wenn constraints C>0, eps>=0, dann sinnlose Ergebnisse (xi,d zu klein...)
+Wenn diese Constraints nicht da, dann C negativ, dadurch Supproblem nicht konvex
+--> dann hängt alles in Endlosschleife
+auch wenn nicht bound constraints, sondern in inequality constraints drin (sogar schlimmer)

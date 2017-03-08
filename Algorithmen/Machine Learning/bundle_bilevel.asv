@@ -1,4 +1,4 @@
-function [ f_hat, x_hat, delta ] = bundle_bilevel( x0, fun, subgr_fun, kmax, m, t, tol, gamma)
+function [ f_hat, x_hat, delta ] = bundle_bilevel( x0, X, Y, kmax, m, t, tol, gamma)
 
 
 % Input parameters
@@ -14,7 +14,7 @@ function [ f_hat, x_hat, delta ] = bundle_bilevel( x0, fun, subgr_fun, kmax, m, 
 %       gamma       saveguarding value for calculating eta
 
 %   Output parameters
-%       f_hat       optimal function value
+%%%       f_hat       optimal function value
 %       x_hat       argmin of the objective
 %       delta       last delta
 
@@ -64,6 +64,8 @@ end
 %% 0 step: initialization
 tic;
 
+fun = @upper_obj;  % outer objective function
+
 u_1 = 1.000001; % parameter for t update
 u_2 = 0.8;
 t_min = 0.03; % minimal t value to make sure that sequence does not have 0 as accumulation point
@@ -77,12 +79,14 @@ eta = 0;                 % convexification parameter for modelfunction
 c = 0;                   % augmented linearization error (error of convexified model-function)
 J = 1;                   % index set defining bundle information
 lJ = 1;                  % initial lenght of the index set J
-f = feval(fun, x0);      % (inexact) function values at bundle points
-f_hat = f;               % function value at x_hat
+
 % solve lower level optimization problem
-w = solve_lower(fun_low, subgr_fun_lx0);       % solution of lower level problem
-dw = subgr_w();          % find subgradient of w with respect to x
-g = subgr_up();          % subgradient at point bundle point
+W = solve_lower_reg(X,Y,x_hat);       %solution of lower level problem
+dw = subgr_w(W,X,Y,x_hat);              % find subgradient of w with respect to x
+g = subgr_upper(W,X,Y,dw);  % subgradient at point bundle point
+
+f = feval(fun,X,Y,W);   % (inexact) function values at bundle points
+f_hat = f;               % function value at x_hat
 
 s = g;                   % augmented subgradient at bundle points
 %% Global loop
@@ -94,17 +98,19 @@ for k = 1 : kmax;
 % d = argmin{xi + 1/(2 * t) * norm(d)^2} s.t. s_j'*d - c_j - xi <= 0, for all j in J
 % rewrite the problem to use it in quadprog to
 % f = 1/2*x*H*x+r*x, s.t. A*x <= b
-% incorporate set D, here as a box of around -x_hat
+% incorporate the bound constraints of Moore-Paper (<= instead of > used here)
 H = [zeros(n + 1, 1), [zeros(1, n); 1/t * eye(n)]];
 r = [1; zeros(n, 1)];
-D = [zeros(2*n,1), [diag(-ones(n,1)); diag(ones(n,1))]];
-A = [-ones(lJ, 1), s'; D];
-b = [c; x_hat+10;-x_hat+10];
+A = [-ones(lJ, 1), s'; zeros(n,1), e];
+b = c;
+%lb = [0,0]';
 options_ip = optimoptions(@quadprog, 'Algorithm', 'interior-point-convex',...
     'MaxIterations', 500, 'ConstraintTolerance', 1.0000e-15, 'OptimalityTolerance', 1.0000e-15);
 [xi_d, ~, ~, ~, lambda] = quadprog(H, r, A, b, [], [], [], [], [], options_ip);
 
-alpha = lambda.ineqlin(1:lJ); % lagrange multiplier for inequality constraints
+%alpha = zeros(lJ+n+1,1);
+alpha = lambda.ineqlin(:); % lagrange multiplier for inequality constraints
+%alpha(lJ+1:end) = lambda.lower(:);
 
 %% 2nd step: aggregated objects
 xi = xi_d(1);
@@ -128,14 +134,16 @@ if delta <= tol;  % stopping condition like in nonconv, exact
 end
  
 %% 4th step: serious step test
-% evaluate function and subgradient
-f_k_1 =  feval(fun, x_hat + d);  % evaluate function at new iterate
-f = [f, f_k_1];  % add information to bundle
 % solve inner problem and derivative system
-w = solve_lower();   % solution of lower level problem
-dw = subgr_w();      % find subgradient of w with respect to x
-g = subgr_up();      % evaluate subgradient at new iterate and add information to bundle
+W = solve_lower_reg(X, Y, x_hat);   % solution of lower level problem
+dw = subgr_w(W,X,Y,x_hat);          % find subgradient of w with respect to x
+g(:,end+1) = subgr_upper(W,X,Y,dw); % evaluate subgradient at new iterate and add information to bundle
+
+% evaluate function and subgradient
+f_k_1 =  feval(fun, X,Y,W);  % evaluate function at new iterate
+f = [f, f_k_1];  % add information to bundle
 x = [x, x_hat + d];  % add new iterate to bundle
+
 
 %serious step  test
 if f_k_1 - f_hat <= m * (-xi + eta / 2 * norm(d)^2);   % serious step condition
@@ -174,7 +182,7 @@ for j = 1:lJ;
     end
 end
 eta = max(eta_vec) + gamma;
-fprint('eta: %d \n', eta);
+fprintf('eta: %d \n', eta);
 
 b = zeros(lJ, 1);
 for j = 1:lJ
@@ -185,6 +193,7 @@ c = e + b;
 s = g + eta * bsxfun(@minus, x, x_hat);
 
 end
+fprintf(k);
 toc;
 if k == kmax
     fprintf('Algorithm stopped because the maximum number %d of iterations was reached \n', k);
