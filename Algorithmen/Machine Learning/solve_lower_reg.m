@@ -26,8 +26,9 @@ for t = 1:T
 %     Xt = X(:,J*(T-1)*t-J*(T-1)-1:J*(T-1));
 %     Yt = (J*(T-1)*t-J*(T-1)-1:J*(T-1));
 %     
-    H = [eye(feat), zeros(feat,J*(T-1)); zeros(J*(T-1),feat),C*eye(J*(T-1))];
-    A = [[-Xt';Xt'],-[eye(J*(T-1));eye(J*(T-1))]];
+    H = spdiags([ones(feat,1);C*ones(J*(T-1),1)],0,feat+J*(T-1),feat+J*(T-1));
+    spX = sparse([-Xt';Xt']);
+    A = [spX,-[spdiags(ones(J*(T-1),1),0,J*(T-1),J*(T-1));spdiags(ones(J*(T-1),1),0,J*(T-1),J*(T-1))]];
     b = [-Yt; Yt]+eps;
     % should actually be no problem, to solve this problem not so accurate,
     % because inexact bundle algorithm made for this!

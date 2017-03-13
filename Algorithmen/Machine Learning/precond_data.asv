@@ -10,12 +10,12 @@ if import
 end
 [rows, columns] = size(data);
 
+% take only specified part of data set for training
+rows = floor(rows*trainpart);
+
 % do a random permutation of the set:
 i = randperm(rows);
 data = data(i,:);
-
-% take only specified part of data set for training
-rows = floor(rows*trainpart);
 
 % crop the set, so that all partitions have equal size
 J = floor(rows/T);

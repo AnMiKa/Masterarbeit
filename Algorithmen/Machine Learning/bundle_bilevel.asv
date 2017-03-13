@@ -101,34 +101,41 @@ for k = 1 : kmax;
 % incorporate the bound constraints of Moore-Paper (<= instead of > used here)
 H = [zeros(n + 1, 1), [zeros(1, n); 1/t * eye(n)]];
 r = [1; zeros(n, 1)];
-A = [-ones(lJ, 1), s'; zeros(n,1), e];
+A = [-ones(lJ, 1), s'];
 b = c;
-%lb = [0,0]';
+lb = [-Inf,0,0]';
 options_ip = optimoptions(@quadprog, 'Algorithm', 'interior-point-convex',...
     'MaxIterations', 500, 'ConstraintTolerance', 1.0000e-15, 'OptimalityTolerance', 1.0000e-15);
-[xi_d, ~, ~, ~, lambda] = quadprog(H, r, A, b, [], [], [], [], [], options_ip);
-
+[xi_d, ~, ~, ~, lambda] = quadprog(H, r, A, b, [], [], lb, [], [], options_ip);
+%[xi_d,err,lambda] = qpas(H,r,A,b,[],[],lb,[],1);
 %alpha = zeros(lJ+n+1,1);
-alpha = lambda.ineqlin(:); % lagrange multiplier for inequality constraints
+alpha = lambda.ineqlin(1:lJ); % lagrange multiplier for inequality constraints
+%alpha = lambda.inequality(1:lJ);
 %alpha(lJ+1:end) = lambda.lower(:);
 
 %% 2nd step: aggregated objects
 xi = xi_d(1);
 d = xi_d(2 : n + 1);
-%C = alpha' * c;     % augmented aggregate error
-%G = g * alpha;      % aggregate subgradient
+C = alpha' * c;     % augmented aggregate error
+G = g * alpha;      % aggregate subgradient
 %S = s * alpha;      % augmented aggregate subgradient
 
 %% 3rd step: stopping test
 % different stopping tests are implemented after different papers
 delta = - xi + eta/2 * norm(d)^2;
+if delta < 0
+    pause
+end
+if eta > 1e10
+%    pause
+end
 % stopping conditions
-% if norm(1/t * d) <= tol && E <= tol;  % stopping condition like in lecture
-% if norm(G) <= tol && E <= tol;  % stopping condition like in lecture
-% if norm(E + G * x_hat) <= tol and E <= tol;  % stopping condition like in conv, inex
-if delta <= tol;  % stopping condition like in nonconv, exact
-% if   -xi + eta / 2 * norm(d)^2 <= tol; % stopping condition like in nonconv, exact, nor rewritten
-% if norm(E + t * G) <= tol;  % stopping condition like in nonconv, inex
+% if norm(1/t * d) <= tol && C <= tol;              % 1) like in Ulbrich lecture
+ if norm(C + 1/t*d' * x_hat) <= tol && C <= tol;   % 3) like in conv, inex
+% if C+1/t*d'*x_hat <= tol && C <= tol              % 3a) like in conv, inex with phi <= 0
+% if -xi + eta / 2 * norm(d)^2 <= tol;              % 4) like in nonconv, exact
+% if norm(C + d) <= tol;                            % 6) like in nonconv, inex, little reformulated
+% if C+sum(d.^2) <= tol                             % 6a) like in nonconv, inex
     fprintf('Algorithm stopped successfully by meeting tolerance after  %d  iterations and %d null-steps. \n', k, i_null);
     break
 end
@@ -159,7 +166,8 @@ end
 %update bundle
 delete = zeros(1,lJ);
 for j = 1:lJ;  % update the index set J by marking the indexes that are removed
-    if alpha(j) > 1e-9 || norm(x(:,j) - x_hat) == 0; % alpha only gets down to 1e-5
+    if alpha(j) > 1e-15 || norm(x(:,j) - x_hat) == 0; % alpha only gets down to 1e-5
+                            % maybe here norm() < 1e-10 
     else
         delete(j) = 1;
     end
@@ -193,7 +201,6 @@ c = e + b;
 s = g + eta * bsxfun(@minus, x, x_hat);
 
 end
-fprintf(k);
 toc;
 if k == kmax
     fprintf('Algorithm stopped because the maximum number %d of iterations was reached \n', k);

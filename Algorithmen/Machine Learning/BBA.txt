@@ -5,12 +5,52 @@ mit airfoil_self_noise Testset, Startwert [C,eps] = [1,0]
 - erreicht immer die maximalen 500 Iterationen
 - BB-Algorithmus bricht bereits nach einem Schritt ab
 
-mit airfoil-set gekürst auf 100 Datensätze und 3 folds (67 je Fold)
+mit airfoil-set gekürzt auf 100 Datensätze und 3 folds (67 je Fold)
 - quadprog löst in wenigen Sekunden
 - erreicht nicht die 500 Iterationen
 
-Hauptproblem:
+Problem:
 wenn constraints C>0, eps>=0, dann sinnlose Ergebnisse (xi,d zu klein...)
 Wenn diese Constraints nicht da, dann C negativ, dadurch Supproblem nicht konvex
 --> dann hängt alles in Endlosschleife
 auch wenn nicht bound constraints, sondern in inequality constraints drin (sogar schlimmer)
+LÖSUNG: bound constraints waren falsh einprogrammiert, ist jetzt gelöst
+
+Problem: Lower level problem braucht > 500 iterationen
+LÖSUNG: "Constraints" zu eng gewählt -> ungenauere Lösung zulassen, dann wird auch gelöst
+	macht auch Sinn, da inexact Algorithm genau damit umgehen können sollte -> dafür ausgelegt
+        (Unterschied zu Bundle Subproblem, welches laut Theorie sehr exakt gelöst werden muss)
+
+
+Hauptproblem:
+ - Stopping Conditions sehr Unterschiedlich (Verhalten des Algos)
+
+Unterprobleme:
+
+ 1) Algorithmus stoppt entweder sehr schnell oder gar nicht
+Lösungsansätze:
+ - Welche Stopping Conditions bringen gleiches Ergebnis?
+   1,4,5: erfolgreicher Stopp nach 11 Iterationen (8 null steps);
+          x_hat = (42.2113;21.1455); auch hier eta recht groß
+   2,3,6: x_hat = (42.5234;56.8496); k = 310; i_null = 294; 
+          dann  c erstes mal kleiner 0 weil b in einer Komponente falsch
+ - Idee: Stopping Conditions 1 vs. 2 zeigen: 1/t*d ~= G -> klar, da Constraints im Subproblem
+         1/t*d = G+v
+         -> Formulierungen der Stopping Conditions prüfen:
+         äquivalent (auch numerisch):
+LÖSUNG: Stopping conditions waren nicht richtig implementiert G statt G+v (Unterschíed durch
+         constraints im Subproblem --> Reformulierung, Ergebnisse siehe Unterfrage 3)
+
+2) C bzw. c (und delta) irgendwann < 0
+Lösungsansätze:
+ - prüfe, wann das auftritt: für air-datensatz (kurz) nach 310 Iterationen
+   warum? b stimmt nicht
+ ! auffällig: t ist da bei t_min angekommen -> bessere t-Veränderung???
+ ! auffällig: in x enthält lauter gleich Werte -> prüfen, wie das sein kann
+ ! auffällig: eta wird sehr groß; aber kein direkter Zusammenhang zwischen großem eta und 
+              negativem c feststellbar
+              eta springt auch viel zw. 2 und 1e~29 
+- alpha nicht "nah genung" bei 0 für rausnehmen aus bundle?
+
+3) Test der neuen Stopping Conditions
+ - 2) stoppt genau nach 309 iterationen; ZUFALL??? mit x_hat = (42.5234;56.8496) (wie vorher)
