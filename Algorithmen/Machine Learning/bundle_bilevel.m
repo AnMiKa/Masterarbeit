@@ -1,20 +1,20 @@
 function [ f_hat, x_hat, delta ] = bundle_bilevel( x0, X, Y, kmax, m, t, tol, gamma)
 
 
-% Input parameters
+% Input arguments
 %       x0          starting value
 %       fun         function to be minimized (can be nonsmooth, must be convex)
 %       subgr_fun   function that can evaluate a subgradient of fun at every 
 %                   given point x. 
-% optional input parameters
+% optional input arguments
 %       kmax        maximum number of iterations
 %       m           descent parameter
 %       t           prox parameter
 %       tol         tolerance for stopping test
 %       gamma       saveguarding value for calculating eta
 
-%   Output parameters
-%%%       f_hat       optimal function value
+%   Output arguments
+%       f_hat       optimal function value
 %       x_hat       argmin of the objective
 %       delta       last delta
 
@@ -64,7 +64,11 @@ end
 %% 0 step: initialization
 tic;
 
-fun = @upper_obj;  % outer objective function
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% set upper level objective function
+fun = @ul_obj_class_hinge;
+%fun = @ul_obj_reg_moore;
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 u_1 = 1.000001; % parameter for t update
 u_2 = 0.8;
@@ -81,11 +85,22 @@ J = 1;                   % index set defining bundle information
 lJ = 1;                  % initial lenght of the index set J
 
 % solve lower level optimization problem
-W = solve_lower_reg(X,Y,x_hat);       %solution of lower level problem
-dw = subgr_w(W,X,Y,x_hat);              % find subgradient of w with respect to x
-g = subgr_upper(W,X,Y,dw);  % subgradient at point bundle point
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% set solver for lower level problem
+Wb = solve_ll_class_hingequad_qpas(X,Y,x_hat); %solution of lower level problem
+%Wb = solve_ll_class_hingequad_qp(X,Y,x_hat);
+%W = solve_ll_reg_moore_qp(X,Y,x_hat);
+% set subgradient function for lower level problem
+W = Wb(1:end-1,:);
+b = Wb(end,:);
+Dwb = subgr_ll_class_hingequad(W,b,X,Y,x_hat); % find subgradient of w (and b) with respect to x
+%Dw = subgr_ll_reg_moore(W,X,Y,g´x_hat);
+% set subgradient function for upper level problem
+g = subgr_ul_class_hinge(W,b,X,Y,Dwb);  % subgradient at point bundle point
+%g = subgr_ul_reg_moore(W,X,Y,Dw);
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-f = feval(fun,X,Y,W);   % (inexact) function values at bundle points
+f = feval(fun,X,Y,W,b);   % (inexact) function values at bundle points
 f_hat = f;               % function value at x_hat
 
 s = g;                   % augmented subgradient at bundle points
@@ -94,35 +109,24 @@ for k = 1 : kmax;
 
 %% 1st step: subproblem solving
 
-% solve the following augmented quadratic subproblem for d:
-% d = argmin{xi + 1/(2 * t) * norm(d)^2} s.t. s_j'*d - c_j - xi <= 0, for all j in J
-% rewrite the problem to use it in quadprog to
-% f = 1/2*x*H*x+r*x, s.t. A*x <= b
-% incorporate the bound constraints of Moore-Paper (<= instead of > used here)
-H = [zeros(n + 1, 1), [zeros(1, n); 1/t * eye(n)]];
-r = [1; zeros(n, 1)];
-A = [-ones(lJ, 1), s'];
-b = c;
-lb = [-Inf,0,0]';
-options_ip = optimoptions(@quadprog, 'Algorithm', 'interior-point-convex',...
-    'MaxIterations', 500, 'ConstraintTolerance', 1.0000e-15, 'OptimalityTolerance', 1.0000e-15);
-[xi_d, ~, ~, ~, lambda] = quadprog(H, r, A, b, [], [], lb, [], [], options_ip);
-%[xi_d,err,lambda] = qpas(H,r,A,b,[],[],lb,[],1);
-%alpha = zeros(lJ+n+1,1);
-alpha = lambda.ineqlin(1:lJ); % lagrange multiplier for inequality constraints
-%alpha = lambda.inequality(1:lJ);
-%alpha(lJ+1:end) = lambda.lower(:);
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% set solver for upper level problem
+[d,xi,alpha] = solve_ul_class_qpas(x_hat,s,c,t);   % solver using qpas
+%[d,xi,alpha] = solve_ul_class_qp(x_hat,s,c,t);    % solver using MATLAB's quadprog
+%[d,xi,alpha] = solve_ul_reg_qpas(x_hat,s,c,t);
+%[d,xi,alpha] = solve_ul_reg_qp(x_hat,s,c,t);
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %% 2nd step: aggregated objects
-xi = xi_d(1);
-d = xi_d(2 : n + 1);
 C = alpha' * c;     % augmented aggregate error
-G = g * alpha;      % aggregate subgradient
+%G = g * alpha;      % aggregate subgradient
 %S = s * alpha;      % augmented aggregate subgradient
 
 %% 3rd step: stopping test
 % different stopping tests are implemented after different papers
-delta = - xi + eta/2 * norm(d)^2;
+% wo kommt dieses delta her??? ist auch nicht gleich dem unteren delta
+%delta = - xi + eta/2 * norm(d)^2;
+delta = C+1/t*sum(d.^2);
 if delta < 0
     pause
 end
@@ -142,18 +146,31 @@ end
  
 %% 4th step: serious step test
 % solve inner problem and derivative system
-W = solve_lower_reg(X, Y, x_hat);   % solution of lower level problem
-dw = subgr_w(W,X,Y,x_hat);          % find subgradient of w with respect to x
-g(:,end+1) = subgr_upper(W,X,Y,dw); % evaluate subgradient at new iterate and add information to bundle
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% set solver for lower level problem
+Wb = solve_ll_class_hingequad_qpas(X,Y,x_hat); %solution of lower level problem
+%Wb = solve_ll_class_hingequad_qp(X,Y,x_hat);
+%W = solve_ll_reg_moore_qp(X,Y,x_hat);
+% set subgradient function for lower level problem
+W = Wb(1:end-1,:);
+b = Wb(end,:);
+Dwb = subgr_ll_class_hingequad(W,b,X,Y,x_hat); % find subgradient of w (and b) with respect to x
+%Dw = subgr_ll_reg_moore(W,X,Y,g´x_hat);
+% set subgradient function for upper level problem
+g(:,end+1) = subgr_ul_class_hinge(W,b,X,Y,Dwb);  % subgradient at point bundle point
+%g = subgr_ul_reg_moore(W,X,Y,Dw);
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % evaluate function and subgradient
-f_k_1 =  feval(fun, X,Y,W);  % evaluate function at new iterate
-f = [f, f_k_1];  % add information to bundle
-x = [x, x_hat + d];  % add new iterate to bundle
+f_k_1 =  feval(fun,X,Y,W,b);  % evaluate function at new iterate
+f = [f, f_k_1];               % add information to bundle
+x = [x, x_hat + d];           % add new iterate to bundle
 
 
 %serious step  test
-if f_k_1 - f_hat <= m * (-xi + eta / 2 * norm(d)^2);   % serious step condition
+if f_k_1 - f_hat <= -m * delta;   % serious step condition
+    % hier war auch das eigenartige delta von oben
     x_hat = x_hat + d;   % update x_hat
     f_hat =  f_k_1;  % update f_hat
     t = u_1*t; % t_(k+1) > 0

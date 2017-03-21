@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=pdflatex 2015.5.19)  9 FEB 2017 16:12
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=pdflatex 2015.5.19)  20 MAR 2017 14:34
 entering extended mode
 **Bundle_methods_for_nonsmooth_nonconvex_problems_with_inexact_information.tex
 
@@ -636,17 +636,36 @@ Underfull \hbox (badness 10000) in paragraph at lines 2--3
 
 
 ] [14]
-Underfull \hbox (badness 10000) in paragraph at lines 79--80
+
+LaTeX Warning: Citation `Apkarian2008' on page 15 undefined on input line 71.
+
+
+LaTeX Warning: Citation `Lewis2015' on page 15 undefined on input line 71.
+
+
+LaTeX Warning: Citation `Noll2005' on page 15 undefined on input line 71.
+
+
+LaTeX Warning: Citation `Noll2010' on page 15 undefined on input line 71.
+
+
+LaTeX Warning: Citation `Schramm1992' on page 15 undefined on input line 71.
+
+
+LaTeX Warning: Citation `' on page 15 undefined on input line 71.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 83--84
 
  []
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 105--106
+[15]
+Underfull \hbox (badness 10000) in paragraph at lines 110--111
 
  []
 
-[15])
-Underfull \hbox (badness 10000) in paragraph at lines 112--95
+)
+Underfull \hbox (badness 10000) in paragraph at lines 119--95
 
  []
 
@@ -721,10 +740,25 @@ Underfull \hbox (badness 10000) in paragraph at lines 36--37
 
 
 ]
-("D:\Annika\Uni\10. Semester\Masterarbeit\Proximal Bundle Inexact Information\Git Hub\Masterarbeit\LaTeX\Bundle_methods_
-for_nonsmooth_nonconvex_problems_with_inexact_information.bbl" [26
+("D:\Annika\Uni\10. Semester\Masterarbeit\Proximal Bundle Inexact Information\Git Hub\Masterarbeit\LaTeX\Chapters/Bileve
+l_Application.tex"
+
+LaTeX Warning: Citation `Kunapuli2008' on page 26 undefined on input line 14.
+
+
+LaTeX Warning: Citation `Kunapuli2008' on page 26 undefined on input line 31.
+
+
+LaTeX Warning: Citation `Moore2011' on page 26 undefined on input line 31.
+
+[26
+
 
 ]) [27]
+("D:\Annika\Uni\10. Semester\Masterarbeit\Proximal Bundle Inexact Information\Git Hub\Masterarbeit\LaTeX\Bundle_methods_
+for_nonsmooth_nonconvex_problems_with_inexact_information.bbl" [28
+
+]) [29]
 ("D:\Annika\Uni\10. Semester\Masterarbeit\Proximal Bundle Inexact Information\Git Hub\Masterarbeit\LaTeX\Bundle_methods_
 for_nonsmooth_nonconvex_problems_with_inexact_information.aux"
 ("D:\Annika\Uni\10. Semester\Masterarbeit\Proximal Bundle Inexact Information\Git Hub\Masterarbeit\LaTeX\Chapters/Introd
@@ -738,7 +772,12 @@ fications.aux")
 ("D:\Annika\Uni\10. Semester\Masterarbeit\Proximal Bundle Inexact Information\Git Hub\Masterarbeit\LaTeX\Old/Explanation
 _Bundle_Methods.aux")
 ("D:\Annika\Uni\10. Semester\Masterarbeit\Proximal Bundle Inexact Information\Git Hub\Masterarbeit\LaTeX\Chapters/Variab
-le_Metric.aux"))
+le_Metric.aux")
+("D:\Annika\Uni\10. Semester\Masterarbeit\Proximal Bundle Inexact Information\Git Hub\Masterarbeit\LaTeX\Chapters/Bileve
+l_Application.aux"))
+
+LaTeX Warning: There were undefined references.
+
 
 LaTeX Warning: There were multiply-defined labels.
 
@@ -748,10 +787,10 @@ LaTeX Warning: There were multiply-defined labels.
 ### simple group (level 1) entered at line 1061 ({)
 ### bottom level 
 Here is how much of TeX's memory you used:
- 7131 strings out of 493921
- 112047 string characters out of 3142078
+ 7147 strings out of 493921
+ 112809 string characters out of 3142078
  243619 words of memory out of 3000000
- 10232 multiletter control sequences out of 15000+200000
+ 10243 multiletter control sequences out of 15000+200000
  56027 words of font info for 53 fonts, out of 3000000 for 9000
  841 hyphenation exceptions out of 8191
  40i,17n,48p,642b,2372s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -769,10 +808,10 @@ mme/MiKTeX/fonts/type1/public/lm/lmri12.pfb><C:/Program Files/Annika Programme/M
 nts/type1/public/lm/lmsy6.pfb><C:/Program Files/Annika Programme/MiKTeX/fonts/type1/public/lm/lmsy8.pfb><C:/Program File
 s/Annika Programme/MiKTeX/fonts/type1/public/lm/lmtt12.pfb><C:/Program Files/Annika Programme/MiKTeX/fonts/type1/public/
 amsfonts/symbols/msbm10.pfb>
-Output written on Bundle_methods_for_nonsmooth_nonconvex_problems_with_inexact_information.pdf (28 pages, 301883 bytes).
+Output written on Bundle_methods_for_nonsmooth_nonconvex_problems_with_inexact_information.pdf (30 pages, 307842 bytes).
 
 PDF statistics:
- 162 PDF objects out of 1000 (max. 8388607)
+ 168 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 

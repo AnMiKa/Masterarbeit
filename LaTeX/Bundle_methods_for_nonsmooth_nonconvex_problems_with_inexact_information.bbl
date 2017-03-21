@@ -1,5 +1,11 @@
 \begin{thebibliography}{10}
 
+\bibitem{Apkarian2008}
+P.~Apkarian, D.~Noll, and O.~Prot.
+\newblock A trust region spectral bundle method for non-convex eigenvalue
+  optimization.
+\newblock {\em {SIAM} Journal on Optimization}, 19(1):281--306, jan 2008.
+
 \bibitem{Bagirov2014}
 Adil Bagirov, Napsu Karmitsa, and Marko~M. M{\"a}kel{\"a}.
 \newblock {\em Introduction to Nonsmooth Optimization: Theory, Practice and
@@ -54,11 +60,21 @@ Krzysztof~C. Kiwiel.
 \newblock {\em Journal of Computational and Applied Mathematics},
   14(3):391--400, 1986.
 
+\bibitem{Kunapuli2008}
+Gautam Kunapuli.
+\newblock {\em A bilevel optimization approach to machine learning}.
+\newblock PhD thesis, Rensselaer Polytechnic Institute Troy, New York, 2008.
+
 \bibitem{Lemarechal1978}
 Claude Lemar{\'e}chal.
 \newblock Nonsmooth optimization and descent methods.
 \newblock Iiasa research report, International Institute for Applied Systems
   Analysis, 1978.
+
+\bibitem{Lewis2015}
+A.~S. Lewis and S.~J. Wright.
+\newblock A proximal method for composite minimization.
+\newblock {\em Mathematical Programming}, 158(1-2):501--546, aug 2015.
 
 \bibitem{Maekelae1992}
 Marko~M. M{\"a}kel{\"a} and Pekka Neittaanm{\"a}ki.
@@ -84,12 +100,23 @@ Robert Mifflin and Claudia Sagastiz\`{a}bal.
   iiasa.
 \newblock {\em Documenta Mathematica}, Extra Volume ISMP:291--300, 2012.
 
+\bibitem{Moore2011}
+Gregory Moore, Charles Bergeron, and Kristin~P. Bennett.
+\newblock Model selection for primal svm.
+\newblock {\em Machine Learning}, 85(1):175--208, 2011.
+
 \bibitem{Nesterov2016}
 Yurii Nesterov and Vladimir Shikhman.
 \newblock Algorithmic principle of least revenue for finding market equilibria.
 \newblock In Boris Goldengorin, editor, {\em Optimization and Its Applications
   in Control and Data Sciences}, volume 115 of {\em Springer Optimization and
   Its Applications}, pages 381--435. Springer Nature, 2016.
+
+\bibitem{Noll2010}
+Dominikus Noll.
+\newblock Cutting plane oracles to minimize non-smooth non-convex functions.
+\newblock {\em Set-Valued and Variational Analysis}, 18(3-4):531--568, sep
+  2010.
 
 \bibitem{Noll2013}
 Dominikus Noll.
@@ -98,9 +125,15 @@ Dominikus Noll.
 \newblock In {\em Computational and Analytical Mathematics}, pages 555--592.
   Springer Nature, 2013.
 
+\bibitem{Noll2005}
+Dominikus Noll and Pierre Apkarian.
+\newblock Spectral bundle method for non-convex maximum eigenvalue functions:
+  first-order methods.
+\newblock {\em Mathematical Programming}, 104(2-3):701--727, jul 2005.
+
 \bibitem{Noll2012}
 Dominikus Noll, Olivier Prot, and Aude Rondepierre.
-\newblock A proximity control algorithm to minimize nonsmooth and nonconvex
+\newblock A proximity control algorithm to minimize non-smooth and non-convex
   functions.
 \newblock {\em Pacific Journal of Optimization}, 4(3):571--604, 2012.
 
@@ -109,6 +142,12 @@ R.~Tyrrell Rockafellar and Roger J.~B. Wets.
 \newblock {\em Variational Analysis}, volume 317 of {\em Grundlehren der
   mathematischen Wissenschaften}.
 \newblock Springer Berlin Heidelberg, 3rd edition, 2009.
+
+\bibitem{Schramm1992}
+Helga Schramm and Jochem Zowe.
+\newblock A version of the bundle idea for minimizing a nonsmooth function:
+  conceptual idea, convergence analysis, numerical results.
+\newblock {\em {SIAM} Journal on Optimization}, 2(1):121--152, feb 1992.
 
 \bibitem{Smola2007}
 A.~J. Smola, S.v.n. Vishwanathan, and V.~Le Quoc.

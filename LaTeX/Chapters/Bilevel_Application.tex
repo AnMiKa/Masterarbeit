@@ -1,0 +1,45 @@
+\section{Application to Model Selection for Primal SVM}
+
+\subsection{Introduction}
+
+A natural application for the inexact bundle algorithm is an optimization problem where the objective function is again an the result of an optimization. If this objective function is iteratively optimized, the function value i never exact. But by the stopping condition it is (often???) possible to have the needed error bound on the function value (what about the gradient???). (Comment on asymptotical exactness?)
+
+An example for such a setting is bilevel optimization. A general bilevel problem can be formulated as (citation)
+
+\[ bilevel ~ problem. \]
+
+It consists of an \emph{upper} or \emph{outer level} which is the overall function to be optimized. Contrary to usual constrained optimization problems which are constrained by explicitly given equalities and inequalities a  bilevel program is additionally constrained to a second optimization problem, the \emph{lower} or \emph{inner level} problem.
+
+The solution of bilevel problems can be divided roughly in two classes: implicit and explicit solution methods.
+In the explicit methods the lower level problem is usually rewritten by its KKT conditions and the upper and lower level are solved simultaneously. In the setting described here this method is described in detail in \cite{Kunapuli2008}.
+The second approach is the implicit one. Here the lower level problem is solved in every iteration and the solution is plugged into the upper level objective.
+Obviously if the inner level problem is solved numerically, the solution cannot be exact. Additionally the \textcolor{red}{comment on solution map and nonsmoothness --> citation}
+This is why the inexact bundle algorithms seems a natural choice to tackle this problem.
+Comment on Moore-Paper???
+write a little bit more explicit what kind of problem is tackled here (Model selection for support vector machines (machine learning) in a bilevel formulation)?????
+
+\subsection{Explanation SVM}
+Some introductory words on machine learning in general?
+Support vector machines...
+
+
+\subsection{Explanation Bilevel Approach and Inexact Bundle Method}
+Check if regression case also included?????
+The parameter in the objective function of the classification problem has to be set before hand. This step is part of the model selection process (citation)
+goal: set this parameter optimally
+A very intuitive and widely used approach: grid search (description) --> very costly, discrete parameter choice, not practicable in case of many parameter
+A more recent approach is the formulation as a bilevel problem used in \cite{Kunapuli2008, Moore2011}.
+
+
+
+
+\subsection{Numerical Experiments}
+
+First experiment: Classification
+
+Write down bilevel classification problem and (if needed) which specification of the inexact bundle algorithm is used.
+
+Write down the sets were used and how they were prepared.
+
+
+
