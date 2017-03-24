@@ -42,7 +42,7 @@ for t = 1:T
     % prepare the matrices used in the qpas algorithm
     H = spdiags([lambda*ones(feat,1);0;ones(J*(T-1),1)],0,feat+1+J*(T-1),feat+1+J*(T-1));
     XY = sparse(bsxfun(@times,Xt,Yt'));
-    A = [XY' sparse(Yt) spdiags(ones(J*(T-1),1),0,J*(T-1),J*(T-1))];
+    A = [-XY' sparse(Yt) -spdiags(ones(J*(T-1),1),0,J*(T-1),J*(T-1))];
     b = -ones(J*(T-1),1);
     options = optimoptions(@quadprog, 'Algorithm', 'interior-point-convex',...
     'MaxIterations', 100, 'ConstraintTolerance', 1.0000e-10, 'OptimalityTolerance', 1.0000e-10);

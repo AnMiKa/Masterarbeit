@@ -64,6 +64,6 @@ Xtrain = reshape(X',columns-1,J,T);
 Ytrain = reshape(Y,J,T);
 
 % prepare rest as validation set
-Xval = data(JT+1:end,1:columns-1);
+Xval = data(JT+1:end,1:columns-1)';
 Yval = data(JT+1:end,columns);
 end

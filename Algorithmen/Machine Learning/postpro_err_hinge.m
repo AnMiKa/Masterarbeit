@@ -18,9 +18,10 @@ function [ err ] = postpro_err_hinge( w, b, X, Y )
 % output arguments
 % err:      number  --> 1
 
-
+X = X';
 [~,J] = size(X);
-err = 1/J*sum(max(ones(J,1)-Y.*(X'*w-b),0));
+i = max(ones(J,1)-Y.*(X'*w-b),0);
+err = 1/J*sum(i);
 end
 
 

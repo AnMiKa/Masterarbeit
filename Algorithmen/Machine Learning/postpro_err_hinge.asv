@@ -1,11 +1,11 @@
 % Postproseccing
-function [ err ] = postpro_err_misclass( w, b, X, Y )
-%POSTPRO_ERR_MISCLASS calculates the error rate on the hold out set of a
-%classification problem by counting the misclassified points
+function [ err ] = postpro_err_hinge( w, b, X, Y )
+%POSTPRO_ERR_HINGE calculates the error rate on the hold out set of a
+%classification problem for the hinge loss
 %   Calculates the error rate on the hold out set of a classification
-%   problem  by counting the misclassified points for a given parameter
-%   lambda, weights w and bias b from training the classifier.
-%   The loss function is taken as presented in "A Bilevel Optimozation
+%   problem  for the hinge loss given the parameter lambda and the weights
+%   w and bias b from training the classifier.
+%   The hinge loss is taken as presented in "A Bilevel Optimozation
 %   Approach to Machine Learning" by Gautam Kunapuli.
 
 % input arguments
@@ -22,6 +22,7 @@ X = X';
 [~,J] = size(X);
 i = -Y.*(X'*w-b) > 0;
 err = 1/J*sum(i);
+err = 1/J*sum(max(ones(J,1)-Y.*(X'*w-b),0));
 end
 
 

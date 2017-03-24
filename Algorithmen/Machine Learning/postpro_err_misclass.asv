@@ -1,5 +1,5 @@
 % Postproseccing
-function [ err ] = postpro_err_misclass( w, b, X, Y )
+function [ err2 ] = postpro_err_misclass( w, b, X, Y )
 %POSTPRO_ERR_MISCLASS calculates the error rate on the hold out set of a
 %classification problem by counting the misclassified points
 %   Calculates the error rate on the hold out set of a classification
@@ -22,6 +22,11 @@ X = X';
 [~,J] = size(X);
 i = -Y.*(X'*w-b) > 0;
 err = 1/J*sum(i);
+j = (X'*w-b) > 0;
+k = j == Y;
+s = sum(k);
+rl = length(find(j == Y));
+err2 = 1/J*s;
 end
 
 
