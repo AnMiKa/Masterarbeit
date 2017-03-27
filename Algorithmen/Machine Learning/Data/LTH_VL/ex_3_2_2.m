@@ -1,36 +1,46 @@
 %% Exercies 3.2.2
 
-% %% train logistic regression on the first three training sets
-% wl = zeros(3,3);
-% wl(:,1) = logisticreg(train1.X, train1.y);
-% wl(:,2) = logisticreg(train2.X, train2.y);
-% wl(:,3) = logisticreg(train3.X, train3.y);
-% 
-% % train fisher discriminant on the first three training sets
-% wf = zeros(3,3);
-% wf(:,1) = fisherdiscriminant(train1.X, train1.y);
-% wf(:,2) = fisherdiscriminant(train2.X, train2.y);
-% wf(:,3) = fisherdiscriminant(train3.X, train3.y);
-% 
-% % train support vector machine on forst three training sets -> hinge and
-% % hingequad
-% ws = zeros(3,3);
-% wsq = zeros(3,3);
- train1.Y = train1.y;
- train2.Y = train2.y;
- train3.Y = train3.y;
- i = train1.Y == 0;
- train1.Y(i) = -1;
- i = train2.Y == 0;
- train2.Y(i) = -1;
- i = train3.Y == 0;
-% train3.Y(i) = -1;
-% ws(:,1) = postpro_wb_class_hinge_qpas(train1.X,train1.Y,10);
-% wsq(:,1) = postpro_wb_class_hingequad_qpas(train1.X,train1.Y,10);
-% ws(:,2) = postpro_wb_class_hinge_qpas(train2.X,train2.Y,10);
-% wsq(:,2) = postpro_wb_class_hingequad_qpas(train2.X,train2.Y,10);
-% ws(:,3) = postpro_wb_class_hinge_qpas(train3.X,train3.Y,10);
-% wsq(:,3) = postpro_wb_class_hingequad_qpas(train3.X,train3.Y,10);
+%% train logistic regression on the first three training sets
+wl = zeros(3,3);
+wl(:,1) = logisticreg(train1.X, train1.y);
+wl(:,2) = logisticreg(train2.X, train2.y);
+wl(:,3) = logisticreg(train3.X, train3.y);
+
+% train fisher discriminant on the first three training sets
+wf = zeros(3,3);
+wf(:,1) = fisherdiscriminant(train1.X, train1.y);
+wf(:,2) = fisherdiscriminant(train2.X, train2.y);
+wf(:,3) = fisherdiscriminant(train3.X, train3.y);
+
+% train support vector machine on forst three training sets -> hinge and
+% hingequad
+ws = zeros(3,3);
+wsq = zeros(3,3);
+train1.Y = train1.y;
+train1_2.Y = train1_2.y;
+train2.Y = train2.y;
+train3.Y = train3.y;
+i = train1.Y == 0;
+train1.Y(i) = -1;
+i = train1_2.Y == 0;
+train1_2.Y(i) = -1;
+i = train2.Y == 0;
+train2.Y(i) = -1;
+i = train3.Y == 0;
+train3.Y(i) = -1;
+ws(:,1) = postpro_wb_class_hinge_qpas(train1.X,train1.Y,10);
+wsq(:,1) = postpro_wb_class_hingequad_qpas(train1.X,train1.Y,10);
+ws(:,2) = postpro_wb_class_hinge_qpas(train2.X,train2.Y,10);
+wsq(:,2) = postpro_wb_class_hingequad_qpas(train2.X,train2.Y,10);
+ws(:,3) = postpro_wb_class_hinge_qpas(train3.X,train3.Y,10);
+wsq(:,3) = postpro_wb_class_hingequad_qpas(train3.X,train3.Y,10);
+
+% test robustness with respect to outliers (cf. ex_3_2_4
+ws_out = postpro_wb_class_hinge_qpas(train1_2.X,train1_2.Y,10);
+wsq_out = postpro_wb_class_hingequad_qpas(train1_2.X,train1_2.Y,10);
+
+es_out = errorrate(ws_out, test1);
+esq_out = errorrate(wsq_out, test1);
 
 %% test errors for each test set
 el = zeros(1,3);
@@ -49,9 +59,9 @@ es(2) = errorrate(ws(:,2), test2);
 es(3) = errorrate(ws(:,3), test3);
 
 esq = zeros(1,3);
-esq(1) = errorrate(ws(:,1), test1);
-esq(2) = errorrate(ws(:,2), test2);
-esq(3) = errorrate(ws(:,3), test3);
+esq(1) = errorrate(wsq(:,1), test1);
+esq(2) = errorrate(wsq(:,2), test2);
+esq(3) = errorrate(wsq(:,3), test3);
 
 %% my errors for each test set
 
@@ -107,11 +117,11 @@ esqm(3) = postpro_err_misclass(wsq(2:3,3), -wsq(1,3), test3.X, test3.Y);
 
 %% plot data and desision boundaries of logistic regression and Fisher
 % discriminant
-tests = [test1, test2, test3];
-hold on
-for i =  1:3
-    boundary([wl(:,i), wf(:,i), ws(:,i), wsq(:,i)], tests(i));
-    figure
-end
-
-hold off
+% tests = [test1, test2, test3];
+% hold on
+% for i =  1:3
+%     boundary([wl(:,i), wf(:,i), ws(:,i), wsq(:,i)], tests(i));
+%     figure
+% end
+% 
+% hold off

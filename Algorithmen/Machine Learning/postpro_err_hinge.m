@@ -18,7 +18,7 @@ function [ err ] = postpro_err_hinge( w, b, X, Y )
 % output arguments
 % err:      number  --> 1
 
-X = X';
+X = X'; % for LTH-test
 [~,J] = size(X);
 i = max(ones(J,1)-Y.*(X'*w-b),0);
 err = 1/J*sum(i);
