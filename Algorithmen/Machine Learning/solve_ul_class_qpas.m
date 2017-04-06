@@ -27,7 +27,7 @@ function [ d, xi, alpha ] = solve_ul_class_qpas( x_hat, s, c, t )
 % incorporate additional constraints of the upper level problem
 
 fprintf('Solve the bundle subproblem for a trial step and Lagrange multipliers. \n')
-tic
+%tic
 
 [n,lJ] = size(s);
 
@@ -44,15 +44,15 @@ lb = [-Inf,-x_hat+1e-15]';   % bounds for [xi, d=lambda]
 % function
 alpha = lambda.inequality(1:lJ);
 % gives a warnig if sum(alpha) not close enough to 1
-if sum(alpha)-1> 1e-15
-    warning('sum(alpha)-1 > %d \n',abs(norm(alpha)-1))
+if abs(sum(alpha)-1)> 1e-15
+    warning('abs(sum(alpha)-1) = %d \n',abs(sum(alpha)-1))
 end
 
 d = xi_d(2);
-% gives a warning if x(k+1) == 0
+% gives a warning if x(k+1) <= 0
 if d+x_hat <= 0
     warning('lambda <= %d \n',d+x_hat)
 end
 xi = xi_d(1);
-toc
+%toc
 end

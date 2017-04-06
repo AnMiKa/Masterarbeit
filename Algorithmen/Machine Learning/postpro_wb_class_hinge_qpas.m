@@ -18,7 +18,8 @@ function [ Wb ] = postpro_wb_class_hinge_qpas( X, Y, lambda )
 % Wb:       vector --> features+1
 
 tic
-X = X';
+% LTH
+%X = X';
 [feat,J] = size(X);
 H = diag([lambda*ones(feat,1);0;zeros(J,1)]);
 h = [zeros(feat+1,1); ones(J,1)];
@@ -28,8 +29,9 @@ b = [-ones(J,1) ; zeros(J,1)];
 Wbxi = qpas(H,h,A,b,[],[],[],[],0);
 W = Wbxi(1:feat);
 b = Wbxi(feat+1);
+Wb = [W;b];
 % nur für LTH-Test so
-Wb = [-b;W];
+%Wb = [-b;W];
 
 toc
 end

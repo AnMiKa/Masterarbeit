@@ -18,21 +18,28 @@ function [ DLlambda ] = subgr_ul_class_hinge( W, b, X, Y, Dwb )
 % DLlambda: number  --> 1
 
 fprintf('Find a subgradient of the upper level classification problem. \n')
-tic
+%tic
 [~,J,T] = size(X);
 DLlambda = zeros(1,T);
 for t = 1:T
     % select the partition of the validation set corresponding to the t'th
     % fold
-    Xval = X(:,:,t);
-    Yval = Y(:,t);
+    if T > 1
+        Xval = X(:,:,t);
+        Yval = Y(:,t);
+    else
+        Xval = X;
+        Yval = Y;
+    end
     % compute the parts of the subgradient foldwise
     i = ones(J,1)-Yval.*(Xval'*W(:,t)-b(t)) >= 0;
     tmp = [bsxfun(@times,Xval,(-i.*Yval)'); (i.*Yval)'];
     DLlambda(:,t) = 1/J*(sum(tmp,2))'*Dwb(:,:,t)';
+    %DLlambda = 1/J*(sum(tmp,2))'*Dwb(:,:,t)';
 end
 % compute the final subgradient
-DLlambda = 1/T*sum(DLlambda,2); 
-toc
+% scale by 100 like in the objective function
+DLlambda = 100*1/T*sum(DLlambda,2); 
+%toc
 end
 

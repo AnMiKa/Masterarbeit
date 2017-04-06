@@ -1,4 +1,4 @@
-function [ f_hat, x_hat, delta ] = bundle_bilevel( x0, X, Y, kmax, m, t, tol, gamma)
+function [ f_hat, x_hat, delta, time ] = bundle_bilevel( x0, X, Y, kmax, m, t, tol, gamma)
 
 
 % Input arguments
@@ -18,6 +18,7 @@ function [ f_hat, x_hat, delta ] = bundle_bilevel( x0, X, Y, kmax, m, t, tol, ga
 %       x_hat       argmin of the objective
 %       delta       last delta
 
+tic
 %% set x0 as column-vector, regardless of how it is typed in
 [rows, columns] = size(x0);
 if rows == 1;
@@ -39,7 +40,7 @@ end
 % tol           tolerance for terminating the algorithm
 % gamma > 0     saveguarding parameter for calculating eta
 
-defaults = {1000, 0.05, 0.1, 1e-6, 2};
+defaults = {1000, 0.05, 0.1, 1e-10, 2};
 % set optional input arguments if not set by the user
 % Check number of inputs.
 if nargin > 8
@@ -62,19 +63,18 @@ end
 
 %% BEGINNING of the algorithm
 %% 0 step: initialization
-tic;
-
+%tic
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % set upper level objective function
 fun = @ul_obj_class_hinge;
 %fun = @ul_obj_reg_moore;
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-u_1 = 1.000001; % parameter for t update
+u_1 = 1.2; % parameter for t update
 u_2 = 0.8;
 t_min = 0.03; % minimal t value to make sure that sequence does not have 0 as accumulation point
 
-n = length(x0);
+%n = length(x0);
 i_null = 0;              % null-step counter
 
 x = x0;                  % trial point, important for bundle information
@@ -140,7 +140,7 @@ end
 % if -xi + eta / 2 * norm(d)^2 <= tol;              % 4) like in nonconv, exact
 % if norm(C + d) <= tol;                            % 6) like in nonconv, inex, little reformulated
 % if C+sum(d.^2) <= tol                             % 6a) like in nonconv, inex
-    fprintf('Algorithm stopped successfully by meeting tolerance after  %d  iterations and %d null-steps. \n', k, i_null);
+    fprintf('Algorithm stopped successfully by meeting tolerance after  %d  iterations and %d null-steps. \n', k-1, i_null);
     break
 end
  
@@ -149,14 +149,14 @@ end
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % set solver for lower level problem
-Wb = solve_ll_class_hingequad_qpas(X,Y,x_hat); %solution of lower level problem
-%Wb = solve_ll_class_hingequad_qp(X,Y,x_hat);
-%W = solve_ll_reg_moore_qp(X,Y,x_hat);
+Wb = solve_ll_class_hingequad_qpas(X,Y,x_hat+d); %solution of lower level problem
+%Wb = solve_ll_class_hingequad_qp(X,Y,x_hat+d);
+%W = solve_ll_reg_moore_qp(X,Y,x_hat+d);
 % set subgradient function for lower level problem
 W = Wb(1:end-1,:);
 b = Wb(end,:);
-Dwb = subgr_ll_class_hingequad(W,b,X,Y,x_hat); % find subgradient of w (and b) with respect to x
-%Dw = subgr_ll_reg_moore(W,X,Y,g´x_hat);
+Dwb = subgr_ll_class_hingequad(W,b,X,Y,x_hat+d); % find subgradient of w (and b) with respect to x
+%Dw = subgr_ll_reg_moore(W,X,Y,g´x_hat+d);
 % set subgradient function for upper level problem
 g(:,end+1) = subgr_ul_class_hinge(W,b,X,Y,Dwb);  % subgradient at point bundle point
 %g = subgr_ul_reg_moore(W,X,Y,Dw);
@@ -220,9 +220,9 @@ c = e + b;
 s = g + eta * bsxfun(@minus, x, x_hat);
 
 end
-toc;
+time = toc;
 if k == kmax
-    fprintf('Algorithm stopped because the maximum number %d of iterations was reached \n', k);
+    warning('Algorithm stopped because the maximum number %d of iterations was reached \n', k);
     fprintf('%d nullsteps were executed. \n', i_null)
 end
 %% END of the algorithm

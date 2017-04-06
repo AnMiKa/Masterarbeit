@@ -7,6 +7,8 @@ esq = zeros(1,4,20);
 esqh = zeros(1,4,20);
 esqm = zeros(1,4,20);
 
+lambda = 10;
+
 for l = 1:20
 %% prepare the sets:
 [pima_trainX,pima_trainY,pima_holdoutX,pima_holdoutY] =...
@@ -19,7 +21,7 @@ for l = 1:20
         precond_data(heart_standard_pm1,1,1:216,0);
     
 [ionosphere_trainX,ionosphere_trainY,ionosphere_holdoutX,ionosphere_holdoutY] =...
-        precond_data(ionosphere_standard_pm1,1,1:240,0);
+        precond_data(ionosphere_standard_1stcolumn_pm1,1,1:240,0);
     
 i = pima_trainY == -1;
 pima_trainY(i) = 0;
@@ -82,14 +84,14 @@ i = hearttrain.Y == 0;
 hearttrain.Y(i) = -1;
 i = ionospheretrain.Y == 0;
 ionospheretrain.Y(i) = -1;
-wsp = postpro_wb_class_hinge_qpas(pimatrain.X,pimatrain.Y,10);
-wsqp = postpro_wb_class_hingequad_qpas(pimatrain.X,pimatrain.Y,10);
-wsc = postpro_wb_class_hinge_qpas(cancertrain.X,cancertrain.Y,10);
-wsqc = postpro_wb_class_hingequad_qpas(cancertrain.X,cancertrain.Y,10);
-wsh = postpro_wb_class_hinge_qpas(hearttrain.X,hearttrain.Y,10);
-wsqh = postpro_wb_class_hingequad_qpas(hearttrain.X,hearttrain.Y,10);
-wsi = postpro_wb_class_hinge_qpas(ionospheretrain.X,ionospheretrain.Y,10);
-wsqi = postpro_wb_class_hingequad_qpas(ionospheretrain.X,ionospheretrain.Y,10);
+wsp = postpro_wb_class_hinge_qpas(pimatrain.X,pimatrain.Y,lambda);
+wsqp = postpro_wb_class_hingequad_qpas(pimatrain.X,pimatrain.Y,lambda);
+wsc = postpro_wb_class_hinge_qpas(cancertrain.X,cancertrain.Y,lambda);
+wsqc = postpro_wb_class_hingequad_qpas(cancertrain.X,cancertrain.Y,lambda);
+wsh = postpro_wb_class_hinge_qpas(hearttrain.X,hearttrain.Y,lambda);
+wsqh = postpro_wb_class_hingequad_qpas(hearttrain.X,hearttrain.Y,lambda);
+wsi = postpro_wb_class_hinge_qpas(ionospheretrain.X,ionospheretrain.Y,lambda);
+wsqi = postpro_wb_class_hingequad_qpas(ionospheretrain.X,ionospheretrain.Y,lambda);
 
 %% holdout errors for each holdout set
 % el = zeros(1,4,20);

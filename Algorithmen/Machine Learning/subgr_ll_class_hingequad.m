@@ -24,7 +24,7 @@ function [ Dwb ] = subgr_ll_class_hingequad( W, b, X, Y, lambda )
 % Dwb:      array   --> 1 x features+1 x number of folds
 
 fprintf('Find a subgradient of the lower level classification problem. \n')
-tic
+%tic
 [feat,J,T] = size(X);
 Dwb = zeros(1,feat+1,T);
 for t = 1:T
@@ -32,31 +32,31 @@ for t = 1:T
     % fold
     Xt = X;
     Yt = Y;
-    Xt(:,:,t) = [];
-    Yt(:,t) = [];
-    Xt = reshape(Xt,feat,J*(T-1));
-    Yt = reshape(Yt,J*(T-1),1);
+    if T > 1
+        Xt(:,:,t) = [];
+        Yt(:,t) = [];
+        Xt = reshape(Xt,feat,J*(T-1));
+        Yt = reshape(Yt,J*(T-1),1);
+    end
     % select the corresponding weight vector and bias
     Wt = W(:,t);
     bt = b(t);
     
     % prepare the linear system derived from the optimality conditions to
     % calculate the subgradient
-    delta = sign(max(ones(J*(T-1),1)-Yt.*(Xt'*Wt-bt),0)); 
-    XY = zeros(feat);
-    for j = 1:J*(T-1)
-        XY = XY+delta(j)*(Yt(j)*Xt(:,j))*(Yt(j)*Xt(:,j))';
+    delta = sign(max(ones(J*max((T-1),1),1)-Yt.*(Xt'*Wt-bt),0)); 
+    XXY = zeros(feat);
+    for j = 1:J*max((T-1),1)
+        XXY = XXY+delta(j)*(Yt(j)*Xt(:,j))*(Yt(j)*Xt(:,j))';
     end
-    Hw = lambda(1)*eye(feat)+2*XY;
-    Hwb = 2*sum(bsxfun(@times,Xt,(delta.*Yt.^2)'),2);
-    Hb = 2*sum(delta.*Yt);
-    hw = 2*sum(bsxfun(@times,Xt,(delta.*Yt)'),2);
-    hb = Hb;
+    Hw = lambda*eye(feat)+2*XXY;
+    Hwb = -2*sum(bsxfun(@times,Xt,(delta.*Yt.^2)'),2);
+    Hb = 2*sum(delta.*Yt.^2);
     H = [[Hw,Hwb];[Hwb',Hb]];
-    h = [hw;hb];
+    h = [-Wt;0];
     % calculation of the subgradient of the t'th fold
     Dwb(:,:,t) = H\h;
 end
-toc
+%toc
 end
 

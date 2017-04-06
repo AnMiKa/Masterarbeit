@@ -26,7 +26,7 @@ function [ Wb ] = solve_ll_class_hingequad_qpas( X, Y, lambda )
 % Wb:        matrix  --> features+1 x number of folds
 
 fprintf('Solve the lower level classificaion problem for given hyperparameter. \n')
-tic
+%tic
 
 [feat,J,T] = size(X);
 Wb = zeros(feat+1,T);
@@ -35,20 +35,22 @@ for t = 1:T
     % fold
     Xt = X;
     Yt = Y;
-    Xt(:,:,t) = [];
-    Yt(:,t) = [];
-    Xt = reshape(Xt,feat,J*(T-1));
-    Yt = reshape(Yt,J*(T-1),1);
+    if T > 1
+        Xt(:,:,t) = [];
+        Yt(:,t) = [];
+        Xt = reshape(Xt,feat,J*(T-1));
+        Yt = reshape(Yt,J*(T-1),1);
+    end
     
     % prepare the matrices used in the qpas algorithm
-    H = diag([lambda*ones(feat,1);0;ones(J*(T-1),1)]);
-    h = zeros(feat+1+J*(T-1),1);
+    H = diag([lambda*ones(feat,1);0;ones(J*max((T-1),1),1)]);
+    h = zeros(feat+1+J*max((T-1),1),1);
     XY = bsxfun(@times,Xt,Yt');
-    A = [-XY' Yt -eye(J*(T-1))];
-    b = -ones(J*(T-1),1);
+    A = [-XY' Yt -eye(J*max((T-1),1))];
+    b = -ones(J*max((T-1),1),1);
     Wbxi = qpas(H,h,A,b,[],[],[],[],0);
     Wb(:,t) = Wbxi(1:feat+1);
 end
-toc
+%toc
 end
 

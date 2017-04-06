@@ -25,7 +25,7 @@
 \contentsline {subsection}{\numberline {6.1}Subproblem Variable Metric}{25}
 \contentsline {section}{\numberline {7}Application to Model Selection for Primal SVM}{26}
 \contentsline {subsection}{\numberline {7.1}Introduction}{26}
-\contentsline {subsection}{\numberline {7.2}Explanation SVM}{26}
-\contentsline {subsection}{\numberline {7.3}Explanation Bilevel Approach and Inexact Bundle Method}{26}
+\contentsline {subsection}{\numberline {7.2}Introduction to Support Vector Machines}{27}
+\contentsline {subsection}{\numberline {7.3}Explanation Bilevel Approach and Inexact Bundle Method}{27}
 \contentsline {subsection}{\numberline {7.4}Numerical Experiments}{27}
 \contentsline {section}{References}{}

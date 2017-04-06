@@ -18,7 +18,8 @@ function [ err ] = postpro_err_misclass( w, b, X, Y )
 % output arguments
 % err:      number  --> 1
 
- X = X'; % for LTH-test
+% LTH
+%X = X';
 [~,J] = size(X);
 i = -Y.*(X'*w-b) > 0;
 err = 1/J*sum(i);

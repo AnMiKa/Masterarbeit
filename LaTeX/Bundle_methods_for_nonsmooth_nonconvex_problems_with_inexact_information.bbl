@@ -18,6 +18,12 @@ Frank~H. Clarke.
 \newblock Classics in Applied Mathematics. Society for Industrial and Applied
   Mathematics Philadelphia, 1990.
 
+\bibitem{Cristianini2000}
+Nello Cristianini and John Shawe-Taylor.
+\newblock {\em An Introduction to Support Vector Machines and Other
+  Kernel-based Learning Methods}.
+\newblock Cambridge University Press, 2000.
+
 \bibitem{Fuduli2004}
 A.~Fuduli, M.~Gaudioso, and G.~Giallombardo.
 \newblock A dc piecewise affine model and a bundling technique in nonconvex
@@ -100,6 +106,12 @@ Robert Mifflin and Claudia Sagastiz\`{a}bal.
   iiasa.
 \newblock {\em Documenta Mathematica}, Extra Volume ISMP:291--300, 2012.
 
+\bibitem{Moore2010a}
+G.~Moore, C.~Bergeron, and K.~P. Bennett.
+\newblock Gradient-type methods for primal svm model selection.
+\newblock {\em Neural Information Processing Systems Workshop: Optimization for
+  Machine Learning}, 2010.
+
 \bibitem{Moore2011}
 Gregory Moore, Charles Bergeron, and Kristin~P. Bennett.
 \newblock Model selection for primal svm.
@@ -136,6 +148,12 @@ Dominikus Noll, Olivier Prot, and Aude Rondepierre.
 \newblock A proximity control algorithm to minimize non-smooth and non-convex
   functions.
 \newblock {\em Pacific Journal of Optimization}, 4(3):571--604, 2012.
+
+\bibitem{Outrata1998}
+Ji{\v{r}}i Outrata, Michal Ko{\v{c}}vara, and Jochem Zowe.
+\newblock {\em Nonsmooth Approach to Optimization Problems with Equilibrium
+  Constraints}.
+\newblock Springer {US}, 1998.
 
 \bibitem{Rockafellar2009}
 R.~Tyrrell Rockafellar and Roger J.~B. Wets.
