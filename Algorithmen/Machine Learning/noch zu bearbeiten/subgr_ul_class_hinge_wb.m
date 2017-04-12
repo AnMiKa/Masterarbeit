@@ -19,6 +19,6 @@ for t = 1:T
     dfdb = dfdb+1/J*sum(delta.*Yt);
 end
 
-dfdwb = 1/T*[dfdw;dfdb];
+dfdwb = 100/T*[dfdw;dfdb];
 end
 

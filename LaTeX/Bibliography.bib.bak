@@ -428,4 +428,20 @@
   year   = {2010},
 }
 
+@Article{Moore2010a,
+  author  = {G. Moore and C. Bergeron and K. P. Bennett},
+  title   = {Gradient-type methods for primal SVM model selection},
+  journal = {Neural Information Processing Systems Workshop: Optimization for Machine Learning},
+  year    = {2010},
+}
+
+@Article{Vapnik1999,
+  author  = {Vladimir N. Vapnik},
+  title   = {An Overview of Statistical Learning Theory},
+  journal = {IEEE Transactions on Neural Networks},
+  year    = {1999},
+  volume  = {10},
+  number  = {5},
+}
+
 @Comment{jabref-meta: databaseType:bibtex;}

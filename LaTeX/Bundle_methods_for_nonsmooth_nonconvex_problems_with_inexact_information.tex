@@ -19,7 +19,7 @@
 \usepackage{algpseudocode} % Pseudocode
 \usepackage{bm} % fett schreiben in Matheumgebung
 
-\usepackage{setspace}
+\usepackage[onehalfspacing]{setspace}
 % um Zeilenabstand zu setzen
 
 %\usepackage{bibgerm} % Für das Literaturverzeichnis
@@ -53,7 +53,7 @@
 \DeclareMathOperator*{\argmax}{arg\,max}
 \newcommand{\erl}{\textcolor{Green3}{ - erledigt}}
 
-\allowdisplaybreaks[0] % Umgebungen wie align dürfen Seitenumbrüche enthalten
+\allowdisplaybreaks[1] % [1]: Umgebungen wie align dürfen Seitenumbrüche enthalten
 
 %\setlength{\voffset}{-28.4mm}
 %\setlength{\hoffset}{-1in}
@@ -74,6 +74,9 @@
 
 \begin{document}
 
+%TODO
+ %% check command for ,...,
+
 %\input{First_Pages/Coverpage}
 %\textcolor{red}{second title page} \\
 %\textcolor{red}{Author and title on back of thesis}
@@ -90,17 +93,18 @@
 \newpage
 
 \pagenumbering{arabic}
-\include{Chapters/Introduction}
-\include{Chapters/Preliminaries}
-\include{Chapters/Bundle_Methods}
-\include{Chapters/Simplifications}
-\include{Old/Explanation_Bundle_Methods}
-\include{Chapters/Variable_Metric}
+%\include{Chapters/Introduction}
+%\include{Chapters/Preliminaries}
+%\include{Chapters/Bundle_Methods}
+%\include{Chapters/Simplifications}
+%\include{Old/Explanation_Bundle_Methods}
+%\include{Chapters/Variable_Metric}
 \include{Chapters/Bilevel_Application}
 
 
 \addtocontents{toc}{%
   \protect\contentsline{section}{References}{}}
+\singlespacing
 \bibliography{Bibliography}
 	\bibliographystyle{plain}
 
