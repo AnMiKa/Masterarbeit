@@ -338,7 +338,8 @@ Subgradients:
 \(\mathcal{G}_{upp,\lambda}, \mathcal{G}_{upp,w},\mathcal{G}_{upp,b}\) -> subgradients of outer objective \\
 \(g_w, g_b\) -> subgradient of w, b
 
-\[ final subgradient = \left(\mathcal{G}_{upp,w}(w,b,\lambda)\right)^{\top}g_w+\left(\mathcal{G}_{upp,b}(w,b,\lambda)\right)^{\top}g_b+\mathcal{G}_{upp,\lambda}(w,b,\lambda) \]
+\[ final subgradient = \left(\mathcal{G}_{upp,w}(w,b,\lambda)\right)^{\top}g_w+\left(\mathcal{G}_{upp,b}(w,b,\lambda)\right)^{\top}g_b+\mathcal{G}_{upp,\lambda}(w,b,\lambda) 
+\label{subgr_upp}\]
 
 subgradients \(\mathcal{G}_{upp,...}\) easy to find (assumption that locally Lipschitz) -> in this application differentiable
 
@@ -364,6 +365,8 @@ Notation: \(\delta_i := 1-y_i(w^{\top}x^i-b)\)
 	\partial_{w}\mathcal{L}_{upp}&= \frac{1}{T}\sum_{t=1}^T\frac{1}{\mathcal{N}_t}\sum_{i \in \mathcal{N}_t}{\left\{\begin{array}{cl} -y_ix^i & \text{if } \delta_i >0 \\ 0 & \text{if } \delta_i \leq 0 \end{array} \right.} \\
 	\partial_{b}\mathcal{L}_{upp}&= \frac{1}{T}\sum_{t=1}^T\frac{1}{\mathcal{N}_t}\sum_{i \in \mathcal{N}_t}{\left\{\begin{array}{cl} y_i & \text{if } \delta_i >0 \\ 0 & \text{if } \delta_i \leq 0 \end{array} \right.}
 	\end{align}
+	
+	here at the kink subgradient 0 is taken
 
 for hingequad: -> here subgradient \\
 optimality condition:
@@ -395,8 +398,41 @@ similar calculation leads to
 
 \begin{align}
 	\partial_{\lambda}w &= -\frac{w}{\lambda} \\
-	\bartial_{\lambda}b &= 0
+	\partial_{\lambda}b &= 0
 \end{align}
+
+\subsubsection{The Algorithm???}
+
+The inexact bundle algorithm for the support vector classification task in bilevel formulation 
+\vspace{1.5em}
+\hrule  \vspace{0.4ex} \hrule
+\vspace{1ex}
+\textbf{Bilevel Bundle Method}
+\vspace{1ex}
+\hrule
+\vspace{1ex}
+Initiate all parameters, select a starting hyper-parameter \(\lambda_1\) and solve the lower level problem for \(\bm{w}^1\) and \(b_1\). \\
+Calculate arbitrary subgradients of \(\bm{w}^1\) and \(b_1\) with respect to \(\lambda\) via \ref{subgr_wb} and a subgradient of the upper level problem by \ref{subgr_upp}.  
+For \(k = 1,2,3,  \dotsc \)   
+
+\begin{enumerate}
+	\item Calculate the step \(d^k\) by minimizing the model of the convexfied objective
+	\item Compute the aggregate subgradient and error and the stopping tolerance \(\delta\).
+		If \(\delta_k \leq \mathtt{tol} \rightarrow \) STOP.
+	\item Set \( \lambda^{k+1} = \hat{\lambda}^k + d^k \).
+	\item solve again the inner level problem and calculate all subgradients needed to compute a subgradient of the outer level objective \\
+	Calculate function value and a subgradient for the outer level objective function and test if a serious step was done 
+	If yes, set \(\hat{\lambda}^{k+1} = \lambda^{k+10}\) and select \(t_{k+1} > 0\). \\
+	Otherwise \(\rightarrow\) nullstep \\
+	Set \(\hat{\lambda}^{k+1} = \hat{\lambda}^k\) and choose \(0 < t_{k+1} \leq t_k\). 	
+	\item Select new bundle index set \(J_{k+1}\). Calculate convexification parameter \(\eta_k\)
+	and update the model \(M^k\)
+\end{enumerate}
+\vspace{1ex}
+\hrule
+\vspace{1.5em}
+
+Names for algorithms: BBMH -> hinge as inner level, BBMH2 -> hingequad as inner level 
 
 \subsection{Numerical Experiments}
 
@@ -420,10 +456,18 @@ For comparability with the already existing results presented in \cite{Kunapuli2
 \end{table}
 \end{center}
 
-As described in the Phd theseis the data was first standardized to unit mean and zero variance (\emph{not the 0,1 column in ? dataset}). The bilevel problem with cross validation was executed 20 times to get averaged results.
+As described in the PhD thesis the data was first standardized to unit mean and zero variance (\emph{not the 0,1 column in ? dataset}). The bilevel problem with cross validation was executed 20 times to get averaged results.
 The results are compared by cross validation error, test error -> write which error this is and computation time.
 Additionally write \(\bm{w}\), \(b\), \(\lambda\) ???
-The objective function was scaled by 100. -> also test error (to get percentage) 
+The objective function and test error were scaled by 100. -> also test error (to get percentage) 
+
+After every run the calculated \(\lambda\) was taken and the algorithm was trained with \(\frac{T}{T-1} \lambda\) on the whole training set.
+Then the percentage of misclassifications on the test set was calculated via
+
+\begin{equation}
+	E_{test} = \frac{1}{l_{test}}\sum_{i=1}^{l_{test}}{\frac{1}{2}|sign\left(\bm{w}^{\top}x^i-b \right)-y_i|}
+\label{test_err}
+\end{equation}
 
 Table ??? shows the results 
 
@@ -447,7 +491,7 @@ Table ??? shows the results
 \end{table}
 \end{center}
 
-\textcolor{red}{interesting: 0 computing time for ionosphere???}
+%\textcolor{red}{interesting: 0 computing time for ionosphere??? - solved now -> vertippt}
 
 Extra table for \(\bm{w}\), \(b\), \(\lambda\) ?
 
@@ -455,7 +499,7 @@ First experiment: Classification
 
 Write down bilevel classification problem and (if needed) which specification of the inexact bundle algorithm is used.
 
-Write down the sets were used and how they were prepared.
+%Write down the sets were used and how they were prepared.
 
 
 
