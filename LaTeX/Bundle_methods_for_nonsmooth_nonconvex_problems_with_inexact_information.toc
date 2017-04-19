@@ -1,6 +1,27 @@
 \select@language {english}
 \select@language {english}
 \contentsline {section}{List of Symbols}{}
-\contentsline {section}{\numberline {1}???}{1}
-\contentsline {subsection}{\numberline {1.1}Subproblem Variable Metric}{1}
+\contentsline {section}{\numberline {1}Introduction}{1}
+\contentsline {section}{\numberline {2}Preliminaries}{3}
+\contentsline {subsection}{\numberline {2.1}Notation}{3}
+\contentsline {subsection}{\numberline {2.2}Nonsmooth analysis and optimization}{3}
+\contentsline {section}{\numberline {3}Bundle Methods}{6}
+\contentsline {subsection}{\numberline {3.1}A basic bundle method}{6}
+\contentsline {subsubsection}{\numberline {3.1.1}Derivation of the bundle method}{7}
+\contentsline {subsubsection}{\numberline {3.1.2}Aggregate objects}{9}
+\contentsline {subsection}{\numberline {3.2}...}{14}
+\contentsline {subsubsection}{\numberline {3.2.1}Nonconvex Bundle Methods with Exact Information}{14}
+\contentsline {subsubsection}{\numberline {3.2.2}Nonconvex bundle methods}{15}
+\contentsline {subsubsection}{\numberline {3.2.3}Convex Bundle Methods with Inexact Information}{16}
+\contentsline {subsection}{\numberline {3.3}How to deal with inexact information in bundle methods?}{16}
+\contentsline {section}{\numberline {4}Application to Model Selection for Primal SVM}{19}
+\contentsline {subsection}{\numberline {4.1}Introduction}{19}
+\contentsline {subsection}{\numberline {4.2}Introduction to Support Vector Machines}{20}
+\contentsline {subsubsection}{\numberline {4.2.1}Risk minimization}{20}
+\contentsline {subsubsection}{\numberline {4.2.2}Support Vector machines}{22}
+\contentsline {subsection}{\numberline {4.3}Explanation Bilevel Approach and Inexact Bundle Method}{24}
+\contentsline {subsubsection}{\numberline {4.3.1}Reformulation as bilevel problem}{24}
+\contentsline {subsubsection}{\numberline {4.3.2}The Inexact Bundle Method}{27}
+\contentsline {subsubsection}{\numberline {4.3.3}The Algorithm???}{30}
+\contentsline {subsection}{\numberline {4.4}Numerical Experiments}{31}
 \contentsline {section}{References}{}

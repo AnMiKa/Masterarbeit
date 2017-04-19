@@ -90,22 +90,27 @@ tic;
 n = length(x0);
 i_null = 0;              % null-step counter
 
-x_hat = x0;              % initial serious point
-J = zeros(1,3);          % index set defining bundle information
+x = x0;                  % initial bundle point
+x_hat = x;               % initial serious point
+J = 1;                   % index set defining bundle information
 lJ = 1;                  % size of the crrent bundle
-f_hat = feval(fun, x0);  % initial inexact function value
+f = feval(fun, x0);      % initial inexact function value
+f_hat = f;               % initial f_hat
 g = feval(subgr_fun, x0);% initial inexact subgradient
 s = g;                   % initial augmented subgradient
-%S = g;                   % initial aggregate augmented subgradient
 c = 0;                   % initial augmented error
 Q = eye(n);              % initial approximation to metric matrix
 
+% parameters for t-update
+u_1 = 1.2;
+u_2 = 0.8;
+t_min = 0.03; % minimal t value to make sure that sequence does not have 0 as accumulation point
 
 %% Global loop
 for k = 1 : kmax;
     
 %% 1st step: direction finding
-H = [[Q+1/t*eye(n);zeros],zeros(n+1,1)];
+H = [[Q+1/t*eye(n);zeros(1,n)],zeros(n+1,1)];
 h = [zeros(n,1);ones(1)];
 % lJ constraints due to reformulation as smooth problem
 % possibly additional constraints
@@ -115,16 +120,17 @@ b = c;
 
 d = dxi(1:end-1);
 % xi = dxi(end); 
-alpha = lambda;%.inequality(1:lJ);
+alpha = lambda.inequality(1:lJ);
 % gives a warnig if sum(alpha) not close enough to 1
 if abs(sum(alpha)-1)> 1e-15
     warning('abs(sum(alpha)-1) = %d \n',abs(sum(alpha)-1))
-end%% 3rd step: stopping test
+end
 
 % aggregate objects:
 C = alpha' * c;     % augmented aggregate error
 
 %% 2nd step: stopping test
+delta = C + 1/t*sum(d.^2);
 % stopping conditions
 % if norm(1/t * d) <= tol && C <= tol;              % 1) like in Ulbrich lecture
  if norm(C + 1/t*d' * x_hat) <= tol && C <= tol;   % 3) like in conv, inex
@@ -137,11 +143,11 @@ C = alpha' * c;     % augmented aggregate error
 end
 
 %% 4th step: iterate update
-x = x_hat+d;
-f_k_1 = feval(fun, x);
-f = [f, f_k_1];                 % add information to bundle
-x = [x, x_hat + d];             % add new iterate to bundle
-g(end+1,:) = feval(subgr_fun,x);% add information to bundle
+x_k_1 = x_hat+d;
+f_k_1 = feval(fun,x_k_1);
+f = [f,f_k_1];              % add information to bundle
+x = [x, x_k_1];             % add new iterate to bundle
+g(:,end+1) = feval(subgr_fun,x_k_1);% add information to bundle
 
 %% 5th step: serious step test
 %serious step  test
@@ -149,11 +155,29 @@ if f_k_1 - f_hat <= -m * delta;   % serious step condition
     % hier war auch das eigenartige delta von oben
     x_hat = x_hat + d;   % update x_hat
     f_hat =  f_k_1;  % update f_hat
-    Q = BFGS_update(d,g(end-1,:),g(end,:),Q);
+    Q = BFGS_update(d,g(:,end-1),g(:,end),Q);
     t = u_1*t; % t_(k+1) > 0
+    if min(eig(Q+1/t*eye(n))) < 0
+        q = -min(eig(Q)+1/t*eye(n))+0.01;
+        Q = q*Q;
+        if q < 1e-6
+            warning('q is smaller than t_min = %d. \n', 1e-6)
+        end
+    end
 else
     i_null = i_null + 1;
-    t = max(u_2*t, t_min); % 0 < t_(k+1) <= t_k 
+    t = max(u_2*t, t_min); % 0 < t_(k+1) <= t_k
+    if min(eig(Q+1/t*eye(n))) < 0
+        q = -min(eig(Q)+1/t*eye(n))+0.01;
+        Q = Q+q*eye(n);
+        if q < 1e-6
+            warning('q is smaller than t_min = %d. \n', 1e-6)
+        end
+    end
+end
+
+if min(eig(Q+1/t*eye(n))) < 0
+    warning('...')
 end
 
 %% 5th step: Bundle update

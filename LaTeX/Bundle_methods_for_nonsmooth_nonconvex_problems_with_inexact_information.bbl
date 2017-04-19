@@ -1,3 +1,191 @@
-\begin{thebibliography}{}
+\begin{thebibliography}{10}
+
+\bibitem{Apkarian2008}
+P.~Apkarian, D.~Noll, and O.~Prot.
+\newblock A trust region spectral bundle method for non-convex eigenvalue
+  optimization.
+\newblock {\em {SIAM} Journal on Optimization}, 19(1):281--306, jan 2008.
+
+\bibitem{Bagirov2014}
+Adil Bagirov, Napsu Karmitsa, and Marko~M. M{\"a}kel{\"a}.
+\newblock {\em Introduction to Nonsmooth Optimization: Theory, Practice and
+  Software}.
+\newblock Springer International Publishing Switzerland, 2014.
+
+\bibitem{Clarke1990}
+Frank~H. Clarke.
+\newblock {\em Optimization and nonsmooth analysis}.
+\newblock Classics in Applied Mathematics. Society for Industrial and Applied
+  Mathematics Philadelphia, 1990.
+
+\bibitem{Cristianini2000}
+Nello Cristianini and John Shawe-Taylor.
+\newblock {\em An Introduction to Support Vector Machines and Other
+  Kernel-based Learning Methods}.
+\newblock Cambridge University Press, 2000.
+
+\bibitem{Fuduli2004}
+A.~Fuduli, M.~Gaudioso, and G.~Giallombardo.
+\newblock A dc piecewise affine model and a bundling technique in nonconvex
+  nonsmooth minimization.
+\newblock {\em Optimization Methods and Software}, 19(1):89--102, 2004.
+
+\bibitem{Fuduli2004a}
+A.~Fuduli, M.~Gaudioso, and G.~Giallombardo.
+\newblock Minimizing nonconvex nonsmooth functions via cutting planes and
+  proximity control.
+\newblock {\em {SIAM} Journal on Optimization}, 14(3):743--756, 2004.
+
+\bibitem{Haarala2007}
+Napsu Haarala, Kaisa Miettinen, and Marko~M. M{\"a}kel{\"a}.
+\newblock Globally convergent limited memory bundle method for large-scale
+  nonsmooth optimization.
+\newblock {\em Mathematical Programming}, 109(1):181--205, 2007.
+
+\bibitem{Hare2010}
+Warren Hare and Claudia Sagastiz\`{a}bal.
+\newblock A redistributed proximal bundle method for nonconvex optimization.
+\newblock {\em SIAM Journal on Optimization}, 20(5):2442--2473, 2010.
+
+\bibitem{Hiriart-Urruty1993}
+Jean-Baptiste Hiriart-Urruty and Claude Lemar{\'{e}}chal.
+\newblock {\em Convex Analysis and Minimization Algorithms {II}}, volume 306 of
+  {\em Grundlehren der mathematischen Wissenschaften}.
+\newblock Springer Berlin Heidelberg, 1993.
+
+\bibitem{Hiriart-Urruty1996}
+Jean-Baptiste Hiriart-Urruty and Claude Lemar\'{e}chal.
+\newblock {\em Convex Analysis and Minimization Algorithms I}, volume 305 of
+  {\em Grundlehren der mathematischen Wissenschaften}.
+\newblock Springer Berlin Heidelberg, 2 edition, 1996.
+
+\bibitem{Kiwiel1986}
+Krzysztof~C. Kiwiel.
+\newblock An aggregate subgradient method for nonsmooth and nonconvex
+  minimization.
+\newblock {\em Journal of Computational and Applied Mathematics},
+  14(3):391--400, 1986.
+
+\bibitem{Kunapuli2008}
+Gautam Kunapuli.
+\newblock {\em A bilevel optimization approach to machine learning}.
+\newblock PhD thesis, Rensselaer Polytechnic Institute Troy, New York, 2008.
+
+\bibitem{Lemarechal1978}
+Claude Lemar{\'e}chal.
+\newblock Nonsmooth optimization and descent methods.
+\newblock Iiasa research report, International Institute for Applied Systems
+  Analysis, 1978.
+
+\bibitem{Lewis2015}
+A.~S. Lewis and S.~J. Wright.
+\newblock A proximal method for composite minimization.
+\newblock {\em Mathematical Programming}, 158(1-2):501--546, aug 2015.
+
+\bibitem{Maekelae1992}
+Marko~M. M{\"a}kel{\"a} and Pekka Neittaanm{\"a}ki.
+\newblock {\em Nonsmooth Optimization: Analysis and Algorithms with
+  Applications to Optimal Control}.
+\newblock World Scientific Pub Co Pte Lt, 1992.
+
+\bibitem{Mifflin1977}
+Robert Mifflin.
+\newblock Semismooth and semiconvex functions in constrained optimization.
+\newblock {\em SIAM Journal on Control and Optimization}, 15(6):959--972, 1977.
+
+\bibitem{Mifflin1982}
+Robert Mifflin.
+\newblock A modification and an extension of lemar{\'e}chal's algorithm for
+  nonsmooth minimization.
+\newblock In {\em Mathematical Programming Studies}, volume~17, pages 77--90.
+  Springer Nature, 1982.
+
+\bibitem{Mifflin2012}
+Robert Mifflin and Claudia Sagastiz\`{a}bal.
+\newblock A science fiction story in nonsmooth optimization originating at
+  iiasa.
+\newblock {\em Documenta Mathematica}, Extra Volume ISMP:291--300, 2012.
+
+\bibitem{Moore2010a}
+G.~Moore, C.~Bergeron, and K.~P. Bennett.
+\newblock Gradient-type methods for primal svm model selection.
+\newblock {\em Neural Information Processing Systems Workshop: Optimization for
+  Machine Learning}, 2010.
+
+\bibitem{Moore2011}
+Gregory Moore, Charles Bergeron, and Kristin~P. Bennett.
+\newblock Model selection for primal svm.
+\newblock {\em Machine Learning}, 85(1):175--208, 2011.
+
+\bibitem{Nesterov2016}
+Yurii Nesterov and Vladimir Shikhman.
+\newblock Algorithmic principle of least revenue for finding market equilibria.
+\newblock In Boris Goldengorin, editor, {\em Optimization and Its Applications
+  in Control and Data Sciences}, volume 115 of {\em Springer Optimization and
+  Its Applications}, pages 381--435. Springer Nature, 2016.
+
+\bibitem{Noll2010}
+Dominikus Noll.
+\newblock Cutting plane oracles to minimize non-smooth non-convex functions.
+\newblock {\em Set-Valued and Variational Analysis}, 18(3-4):531--568, sep
+  2010.
+
+\bibitem{Noll2013}
+Dominikus Noll.
+\newblock Bundle method for non-convex minimization with inexact subgradients
+  and function values.
+\newblock In {\em Computational and Analytical Mathematics}, pages 555--592.
+  Springer Nature, 2013.
+
+\bibitem{Noll2005}
+Dominikus Noll and Pierre Apkarian.
+\newblock Spectral bundle method for non-convex maximum eigenvalue functions:
+  first-order methods.
+\newblock {\em Mathematical Programming}, 104(2-3):701--727, jul 2005.
+
+\bibitem{Noll2012}
+Dominikus Noll, Olivier Prot, and Aude Rondepierre.
+\newblock A proximity control algorithm to minimize non-smooth and non-convex
+  functions.
+\newblock {\em Pacific Journal of Optimization}, 4(3):571--604, 2012.
+
+\bibitem{Outrata1998}
+Ji{\v{r}}i Outrata, Michal Ko{\v{c}}vara, and Jochem Zowe.
+\newblock {\em Nonsmooth Approach to Optimization Problems with Equilibrium
+  Constraints}.
+\newblock Springer {US}, 1998.
+
+\bibitem{Schramm1992}
+Helga Schramm and Jochem Zowe.
+\newblock A version of the bundle idea for minimizing a nonsmooth function:
+  conceptual idea, convergence analysis, numerical results.
+\newblock {\em {SIAM} Journal on Optimization}, 2(1):121--152, feb 1992.
+
+\bibitem{Smola2007}
+A.~J. Smola, S.v.n. Vishwanathan, and V.~Le Quoc.
+\newblock Bundle methods for machine learning.
+\newblock In J.~C. Platt, D.~Koller, Y.~Singer, and S.~T. Roweis, editors, {\em
+  Advances in Neural Information Processing Systems}, number~20, 2007.
+
+\bibitem{Teo2010}
+Choon~Hui Teo, A.~J. Smola, S.V.N. Vishwanathan, and Quoc~V. Le.
+\newblock Bundle methods for regulized risk minimization.
+\newblock 2010.
+
+\bibitem{Vapnik1998}
+Vladimir~N. Vapnik.
+\newblock {\em Statistical Learning Theory}.
+\newblock JOHN WILEY \& SONS INC, 1998.
+
+\bibitem{Vapnik1999}
+Vladimir~N. Vapnik.
+\newblock An overview of statistical learning theory.
+\newblock {\em IEEE Transactions on Neural Networks}, 10(5), 1999.
+
+\bibitem{Hare2016}
+Mikhail~Solodov Warren~Hare, Claudia~Sagastiz{\`a}bal.
+\newblock A proximal bundle method for nonsmooth nonconvex functions with
+  inexact information.
+\newblock {\em Computational Optimization and Applications}, 63:1--28, 2016.
 
 \end{thebibliography}

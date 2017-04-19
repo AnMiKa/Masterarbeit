@@ -1,4 +1,4 @@
-function [ f_hat, x_hat, delta ] = bundle_nonconv_inex( x0, fun, subgr_fun, kmax, m, t, tol, gamma)
+function [ f_hat, x_hat, time ] = bundle_nonconv_inex( x0, fun, subgr_fun, kmax, m, t, tol, gamma)
 
 % proximal bundle algorihtm that can handle nonsmooth nonconvex functions with
 % inexact information on function value and gradient
@@ -75,7 +75,7 @@ end
 %% 0 step: initialization
 tic;
 
-u_1 = 1.000001; % parameter for t update
+u_1 = 1.2; % parameter for t update
 u_2 = 0.8;
 t_min = 0.03; % minimal t value to make sure that sequence does not have 0 as accumulation point
 
@@ -92,6 +92,7 @@ f = feval(fun, x0);      % (inexact) function values at bundle points
 f_hat = f;               % function value at x_hat
 g = feval(subgr_fun, x0);% subgradient at point bundle points
 s = g;                   % augmented subgradient at bundle points
+
 %% Global loop
 for k = 1 : kmax;
 
@@ -113,11 +114,14 @@ options_ip = optimoptions(@quadprog, 'Algorithm', 'interior-point-convex',...
 
 alpha = lambda.ineqlin(1:lJ); % lagrange multiplier for inequality constraints
 
+if abs(sum(alpha)-1)> 1e-15
+    warning('abs(sum(alpha)-1) = %d \n',abs(sum(alpha)-1))
+end
 
 %% 2nd step: aggregated objects
 xi = xi_d(1);
 d = xi_d(2 : n + 1);
-%C = alpha' * c;     % augmented aggregate error
+C = alpha' * c;     % augmented aggregate error
 %G = g * alpha;      % aggregate subgradient
 %S = s * alpha;      % augmented aggregate subgradient
 
@@ -128,7 +132,8 @@ delta = - xi + eta/2 * norm(d)^2;
 % if norm(1/t * d) <= tol && E <= tol;  % stopping condition like in lecture
 % if norm(G) <= tol && E <= tol;  % stopping condition like in lecture
 % if norm(E + G * x_hat) <= tol and E <= tol;  % stopping condition like in conv, inex
-if delta <= tol;  % stopping condition like in nonconv, exact
+ if norm(C + 1/t*d' * x_hat) <= tol && C <= tol;  % stopping condition like in conv, inex
+% if delta <= tol;  % stopping condition like in nonconv, exact
 % if   -xi + eta / 2 * norm(d)^2 <= tol; % stopping condition like in nonconv, exact, nor rewritten
 % if norm(E + t * G) <= tol;  % stopping condition like in nonconv, inex
     fprintf('Algorithm stopped successfully by meeting tolerance after  %d  iterations and %d null-steps. \n', k, i_null);
@@ -149,7 +154,7 @@ if f_k_1 - f_hat <= m * (-xi + eta / 2 * norm(d)^2);   % serious step condition
     t = u_1*t; % t_(k+1) > 0
 else
     i_null = i_null + 1;
-    t = max(u_2*t, t_min); % 0 < t_(k+1) <= t_k 
+    t = max(u_2*t, t_min); % 0 < t_(k+1) <= t_k
 end
 
 %% 5th step: Bundle update
@@ -179,7 +184,7 @@ for j = 1:lJ;
     end
 end
 eta = max(eta_vec) + gamma;
-fprint('eta: %d \n', eta);
+fprintf('eta: %d \n', eta);
 
 b = zeros(lJ, 1);
 for j = 1:lJ
@@ -190,11 +195,10 @@ c = e + b;
 s = g + eta * bsxfun(@minus, x, x_hat);
 
 end
-toc;
+time = toc;
 if k == kmax
     fprintf('Algorithm stopped because the maximum number %d of iterations was reached \n', k);
     fprintf('%d nullsteps were executed. \n', i_null)
 end
 %% END of the algorithm
 end
-
