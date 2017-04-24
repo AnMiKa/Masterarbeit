@@ -5,8 +5,137 @@
 \subsection{Keywords}
 
 important in Noll for me: optimize model + \(d^{\top}(Q+\frac{1}{t_k}\mathbb{I})d\)
+-> some kind of second order information
 
 important: \(Q+\frac{1}{t_k}\mathbb{I}\) must have all eigenvalues \(\geq 0\).
+
+idea to get \(Q\): BFGS like in Fin-papers; theory
+
+!!! check stopping criterion
+connection between \(d^k\) and \(G^k/S^k\) now:
+Optimality condition: 
+
+\begin{align}
+	& 0 \in \partial M_k(x^{k+1})+\partial\mathtt{i}_{D}(x^{k+1})+\left(Q+\frac{1}{t_k}\mathbb{I}\right)d^k \\
+	\Rightarrow \quad & S^k(+\nu^k) = -\left(Q+\frac{1}{t_k}\mathbb{I}\right)d^k
+\end{align}
+
+From this derivation of \(\delta_k\) \(\to\) nominal (model) decrease:
+\begin{align}
+	\delta_k  &= \hat{f}_k - M_k(x^{k+1}) - (\nu^k)^{\top}d^k\\
+	&= \hat{f}_k - A_k(x^{k+1}) - (\nu^k)^{\top}d^k\\
+	&= C_k - (S^k)^{\top}d^k - (\nu^k)^{\top}d^k \\
+	&= C_k - (S^k+\nu^k)^{\top}d^k \\
+	&= C_k + (d^k)^{\top}\left(Q+\frac{1}{t_k}\mathbb{I}\right)d^k
+\end{align}
+ 
+
+\subsection{Algorithm}
+\vspace{1em}
+
+\hrule  \vspace{0.4ex} \hrule
+\vspace{1ex}
+\textbf{Nonconvex proximal bundle method with inexact information}
+\vspace{1ex}
+\hrule
+\vspace{1ex}
+Select parameters \( m \in (0,1), \gamma > 0 \) and a stopping tolerance \( \mathtt{tol} \geq 0\). \\
+Choose a starting point \(x^1 \in \R^n\) and compute \(f_1\) and \(g^1\). Set the initial metric matrix \(Q = \mathbb{I}\), the initial index set \(J_1:=\{1\}\) and the initial prox-center to \(\hat{x}^1 := x^1\), \(\hat{f}_1 = f_1\) and select \(t_1 > 0\).
+
+For \(k = 1,2,3,  \dotsc \)   
+
+\begin{enumerate}
+	\item Calculate \[d^k = \arg \min_{d \in \R^n} \left\{ M_k(\hat{x}^k+d)+\mathbb{I}_X(\hat{x}^k+d)+\frac{1}{2}d^{\top}\left(Q+\frac{1}{t_k}\mathbb{I}\right)d\right\}.\]
+	\item Set \textcolor{red}{\(\to\) other stopping condition!!!
+		\begin{align*} 
+		  G^k &= \sum_{j \in J_k}{\alpha_j^k s_j^k}, \quad	\nu^k = -\frac{1}{t_k}d^k-G^k???????????\\
+			C_k &= \sum_{j \in J_k}{\alpha_j^k c_j^k} \\
+	    \delta_k &=  C_k + (d^k)^{\top}\left(Q+\frac{1}{t_k}\mathbb{I}\right)d^k
+		\end{align*} }
+		If \(\delta_k \leq \mathtt{tol} \rightarrow \) STOP.
+	\item Set \( x^{k+1} = \hat{x}^k + d^k \).
+	\item Compute \(f^{k+1}, g^{k+1}\) \\
+	If 
+	\[f^{k+1} \leq \hat{f}^k - m\delta_k \quad \rightarrow \text{ serious step} \]
+	Set \(\hat{x}^{k+1} = x^{k+1}, \hat{f}^{k+1} = f^{k+1}\) and select \(t_{k+1} > 0\). \\
+	Otherwise \(\rightarrow\) nullstep \\
+	Set \(\hat{x}^{k+1} = \hat{x}^k, \hat{f}^{k+1}=f^{k+1}\) and choose \(0 < t_{k+1} \leq t_k\). 	
+	\item Select new bundle index set \(J_{k+1}\), keeping all active elements. Calculate 
+	\[ \eta_k \geq \max{\left\{\max_{j \in J_{k+1}, x^j \neq \hat{x}^{k+1}}{\frac{-2e_j^k}{|x^j - \hat{x}^{k+1}|^2}, 0}\right\}}+\gamma  \]
+	and update the model \(M^k\)
+\end{enumerate}
+\vspace{1ex}
+\hrule
+
+\vspace{1.5em}
+
+Lemma 5 in \cite{Hare2016} stays the same; no \(Q\) involved \\
+
+\begin{theorem}
+	Theorem 6 in \cite{Hare2016} \(\to\) take only part with \(\liminf_{k\to\infty}t_k > 0 \) because other one not used in null steps and algorithm this way. \\
+	Let the algorithm generate and infinite number of serious steps. Then \(\delta_k \to 0\) as \(k \to \infty\). \\
+	Let the sequence \(\{\eta_k\}\) be bounded. If \(\liminf_{k \to \infty} t_k > 0\) then as \(k \to \infty\) we have \(C_k \to 0\), and there exist \(\bar{x}\) and \(\bar{S}\) such that \(\hat{x}^k \to \bar{x}\), \(S^k \to \bar{S}\) and \(S^k + \nu^k \to 0\). \\
+	In particular if the cardinality of \({j \in J^k|\alpha_j^k > 0}\) is uniformly bounded in \(k\) then the conclusions of Lemma 5 in \cite{Hare2016} hold.
+\end{theorem}
+
+The proof is very similar to the one stated in \cite{Hare2016} but minor changes have to be made due to the different formulation of the nominal decrease \(\delta_k\).
+
+\begin{proof}
+	At each serious step \(k\) holds
+	
+	\begin{equation}
+		\hat{f}_{k+1} \leq \hat{f}_k - m\delta_k
+	\label{nonincreasing}
+	\end{equation}
+	
+	where \(m, ~\delta_k > 0\). From this follows that the sequence \(\{\hat{f}_k\}\) is nonincreasing.
+	Since \(\{\hat{x}^k\} \subset D\) the sequence is by the fact that \(f\) is ??????? \textcolor{red}{which assumption says \(f\) bounded below???} and \(|\sigma_k| < \bar{\sigma}\) the sequence \(\{f(\hat{x}^k)+\sigma_k\} = \{\hat{f}_k\}\) is bounded below. Together with the fact that \(\{\hat{f}_k\}\) is nonincreasing one can conclude that it converges. \\
+	Using (\ref{nonincreasing}), one obtains
+	
+	\begin{equation}
+		0 \leq m \sum_{k = 1}^l \delta_k \leq \sum_{k = 1}^l \left(\hat{f}_k-\hat{f}_{k+1}\right),
+	\end{equation}
+	
+	so letting \(l \to \infty\), 
+	
+	\begin{equation}
+		0 \leq m\sum_{k=1}^{\infty} \delta_k \leq \hat{f}_1 - \underbrace{\lim_{k \to \infty} \hat{f}_k}_{\neq \pm \infty}.
+	\end{equation}
+	As a result,
+	\begin{equation}
+		\sum_{k = 1}^{\infty} \delta_k = \sum_{k=1}^{\infty}\left(C^k+(d^k)^{\top}\left(Q+\frac{1}{t_k}\mathbb{I}\right)d^k\right) < \infty
+	\end{equation}
+	
+	Hence, \(\delta_k \to 0\) as \(k \to \infty\). As all quantities above are nonnegative due to positive (semi-)definiteness of \(Q+\frac{1}{t_k}\mathbb{I}\), it also holds that
+	
+	\begin{equation}
+		C_k \to 0 \quad \text{and} \quad (d^k)^{\top}\left(Q+\frac{1}{t_k}\mathbb{I}\right)d^k \to 0.
+	\end{equation}
+	
+	As \(\liminf_{k \to \infty} t_k > 0\) need: eigenvalues of \(Q\) bounded!!!
+\end{proof}
+
+\begin{remark}
+If one assumes that the set \(\Omega = \{x \in \R^n |f(x) \leq f(x^1) +2\bar{\sigma}\}\) is bounded, it is not necessary to use the constraint set \(D\). \\
+Because all \(\{\hat{x}^k\} \subset \Omega\) one can deduce the boundedness of the sequence.
+\end{remark}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 %\subsection{Subproblem Variable Metric}

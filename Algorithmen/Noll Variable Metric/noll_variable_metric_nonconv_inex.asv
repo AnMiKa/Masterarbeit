@@ -1,4 +1,4 @@
-function [f_hat, x_hat, time] = noll_variable_metric_nonconv_inex(x0, fun, subgr_fun, ...
+function [f_hat, x_hat, time, tav] = noll_variable_metric_nonconv_inex(x0, fun, subgr_fun, ...
     kmax, m, t, tol, gamma)
 
 % variable metric bundle algorihtm that can handle nonsmooth nonconvex functions with
@@ -122,7 +122,7 @@ d = dxi(1:end-1);
 % xi = dxi(end); 
 alpha = lambda.inequality(1:lJ);
 % gives a warnig if sum(alpha) not close enough to 1
-if abs(sum(alpha)-1)> 1e-15
+if abs(sum(alpha)-1)> 1e-10
     warning('abs(sum(alpha)-1) = %d \n',abs(sum(alpha)-1))
 end
 
@@ -130,14 +130,18 @@ end
 C = alpha' * c;     % augmented aggregate error
 
 %% 2nd step: stopping test
-delta = C + 1/t*sum(d.^2);
+% delta = C + 1/t*sum(d.^2);
+% delta has to be changed according to stopping condition
+delta = C+d'*(Q+1/t*eye(n))*d;
 % stopping conditions
 % if norm(1/t * d) <= tol && C <= tol;              % 1) like in Ulbrich lecture
- if norm(C + 1/t*d' * x_hat) <= tol && C <= tol;   % 3) like in conv, inex
+% if norm(C + 1/t*d' * x_hat) <= tol && C <= tol;   % 3) like in conv, inex
 % if C+1/t*d'*x_hat <= tol && C <= tol              % 3a) like in conv, inex with phi <= 0
 % if -xi + eta / 2 * norm(d)^2 <= tol;              % 4) like in nonconv, exact
 % if norm(C + d) <= tol;                            % 6) like in nonconv, inex, little reformulated
 % if C+sum(d.^2) <= tol                             % 6a) like in nonconv, inex
+% if norm((Q+1/t*eye(n))*d) <= tol && C <= tol      % 7) like in Ulbrich for Q/Noll variation
+if delta < tol                                    % 8) as thought of most sensible -> Herleitung siehe Blatt
     fprintf('Algorithm stopped successfully by meeting tolerance after  %d  iterations and %d null-steps. \n', k-1, i_null);
     break
 end
@@ -158,20 +162,22 @@ if f_k_1 - f_hat <= -m * delta;   % serious step condition
     Q = BFGS_update(d,g(:,end-1),g(:,end),Q);
     t = u_1*t; % t_(k+1) > 0
     if min(eig(Q+1/t*eye(n))) < 0
-        q = -min(eig(Q)+1/t*eye(n))+0.01;
-        Q = q*Q;
-        if q < 1e-6
-            warning('q is smaller than t_min = %d. \n', 1e-6)
+        %q = -min(eig(Q+1/t*eye(n)))+0.01;
+        %Q = Q+q*eye(n);
+        t = -1/(min(eig(Q))-0.01);
+        if t < 1e-6
+            warning('t is smaller than %d. \n', 1e-6)
         end
     end
 else
     i_null = i_null + 1;
     t = max(u_2*t, t_min); % 0 < t_(k+1) <= t_k
     if min(eig(Q+1/t*eye(n))) < 0
-        q = -min(eig(Q)+1/t*eye(n))+0.01;
-        Q = Q+q*eye(n);
-        if q < 1e-6
-            warning('q is smaller than t_min = %d. \n', 1e-6)
+        %q = -min(eig(Q+1/t*eye(n)))+0.01;
+        %Q = Q+q*eye(n);
+        t = -1/(min(eig(Q))-0.01);
+        if t < 1e-6
+            warning('t is smaller than %d. \n', 1e-6)
         end
     end
 end

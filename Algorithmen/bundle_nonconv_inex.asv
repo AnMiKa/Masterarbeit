@@ -93,7 +93,7 @@ f_hat = f;               % function value at x_hat
 g = feval(subgr_fun, x0);% subgradient at point bundle points
 s = g;                   % augmented subgradient at bundle points
 
-tav = 0;
+t
 %% Global loop
 for k = 1 : kmax;
 
@@ -109,13 +109,11 @@ r = [1; zeros(n, 1)];
 D = [zeros(2*n,1), [diag(-ones(n,1)); diag(ones(n,1))]];
 A = [-ones(lJ, 1), s'; D];
 b = [c; x_hat+10;-x_hat+10];
-%options_ip = optimoptions(@quadprog, 'Algorithm', 'interior-point-convex',...
-%    'MaxIterations', 500, 'ConstraintTolerance', 1.0000e-15, 'OptimalityTolerance', 1.0000e-15);
-%[xi_d, ~, ~, ~, lambda] = quadprog(H, r, A, b, [], [], [], [], [], options_ip);
-[xi_d,~,lambda] = qpas(H,r,A,b,[],[],[],[],1);
+options_ip = optimoptions(@quadprog, 'Algorithm', 'interior-point-convex',...
+    'MaxIterations', 500, 'ConstraintTolerance', 1.0000e-15, 'OptimalityTolerance', 1.0000e-15);
+[xi_d, ~, ~, ~, lambda] = quadprog(H, r, A, b, [], [], [], [], [], options_ip);
 
-%alpha = lambda.ineqlin(1:lJ); % lagrange multiplier for inequality constraints
-alpha = lambda.inequality(1:lJ);
+alpha = lambda.ineqlin(1:lJ); % lagrange multiplier for inequality constraints
 
 if abs(sum(alpha)-1)> 1e-15
     warning('abs(sum(alpha)-1) = %d \n',abs(sum(alpha)-1))
@@ -196,13 +194,12 @@ end
 
 c = e + b;
 s = g + eta * bsxfun(@minus, x, x_hat);
-tav = tav+t;
+
 end
 time = toc;
 if k == kmax
     fprintf('Algorithm stopped because the maximum number %d of iterations was reached \n', k);
     fprintf('%d nullsteps were executed. \n', i_null)
 end
-tav = tav/(k-1);
 %% END of the algorithm
 end
