@@ -8,5 +8,6 @@
 \contentsline {section}{\numberline {2}Noll Part}{9}
 \contentsline {subsection}{\numberline {2.1}Introduction}{9}
 \contentsline {subsection}{\numberline {2.2}Keywords}{9}
-\contentsline {subsection}{\numberline {2.3}Algorithm}{9}
+\contentsline {subsection}{\numberline {2.3}important assumptions}{9}
+\contentsline {subsection}{\numberline {2.4}Algorithm}{10}
 \contentsline {section}{References}{}

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=pdflatex 2015.5.19)  24 APR 2017 10:30
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=pdflatex 2015.5.19)  24 APR 2017 17:05
 entering extended mode
 **Bundle_methods_for_nonsmooth_nonconvex_problems_with_inexact_information.tex
 
@@ -566,17 +566,22 @@ LaTeX Font Info:    Font shape `OMS/lmr/m/n' in size <12> not available
 (Font)              Font shape `OMS/lmsy/m/n' tried instead on input line 268.
  [7]) [8]
 ("D:\Annika\Uni\10. Semester\Masterarbeit\Proximal Bundle Inexact Information\Git Hub\Masterarbeit\LaTeX\Chapters/Variab
-le_Metric.tex" [9
-
-
-]
-Underfull \hbox (badness 10000) in paragraph at lines 72--73
+le_Metric.tex"
+Underfull \hbox (badness 10000) in paragraph at lines 33--35
 
  []
 
-[10]) [11]
+[9
+
+
+]
+Underfull \hbox (badness 10000) in paragraph at lines 81--82
+
+ []
+
+[10] [11] [12]) [13]
 ("D:\Annika\Uni\10. Semester\Masterarbeit\Proximal Bundle Inexact Information\Git Hub\Masterarbeit\LaTeX\Bundle_methods_
-for_nonsmooth_nonconvex_problems_with_inexact_information.bbl") [12
+for_nonsmooth_nonconvex_problems_with_inexact_information.bbl") [14
 
 ]
 ("D:\Annika\Uni\10. Semester\Masterarbeit\Proximal Bundle Inexact Information\Git Hub\Masterarbeit\LaTeX\Bundle_methods_
@@ -590,10 +595,10 @@ le_Metric.aux")) )
 ### simple group (level 1) entered at line 1061 ({)
 ### bottom level 
 Here is how much of TeX's memory you used:
- 7054 strings out of 493921
- 107792 string characters out of 3142078
- 240573 words of memory out of 3000000
- 10185 multiletter control sequences out of 15000+200000
+ 7055 strings out of 493921
+ 107803 string characters out of 3142078
+ 241582 words of memory out of 3000000
+ 10186 multiletter control sequences out of 15000+200000
  56027 words of font info for 53 fonts, out of 3000000 for 9000
  841 hyphenation exceptions out of 8191
  40i,17n,48p,559b,2378s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -610,10 +615,10 @@ mme/MiKTeX/fonts/type1/public/lm/lmri12.pfb><C:/Program Files/Annika Programme/M
 ><C:/Program Files/Annika Programme/MiKTeX/fonts/type1/public/lm/lmsy10.pfb><C:/Program Files/Annika Programme/MiKTeX/fo
 nts/type1/public/lm/lmsy8.pfb><C:/Program Files/Annika Programme/MiKTeX/fonts/type1/public/lm/lmtt12.pfb><C:/Program Fil
 es/Annika Programme/MiKTeX/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on Bundle_methods_for_nonsmooth_nonconvex_problems_with_inexact_information.pdf (13 pages, 248568 bytes).
+Output written on Bundle_methods_for_nonsmooth_nonconvex_problems_with_inexact_information.pdf (15 pages, 255552 bytes).
 
 PDF statistics:
- 109 PDF objects out of 1000 (max. 8388607)
+ 115 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 

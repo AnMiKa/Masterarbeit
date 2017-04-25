@@ -28,6 +28,15 @@ From this derivation of \(\delta_k\) \(\to\) nominal (model) decrease:
 	&= C_k - (S^k+\nu^k)^{\top}d^k \\
 	&= C_k + (d^k)^{\top}\left(Q+\frac{1}{t_k}\mathbb{I}\right)d^k
 \end{align}
+
+\subsection{important assumptions}
+eigenvalues of \(Q\) are bounded \\
+\(Q+\frac{1}{t_k}\mathbb{I}\) such that \(\succ \xi \mathbb{I}\) for some fixed \(\xi > 0\). \\
+
+\begin{equation}
+	\min_{\hat{x}+d \in D} M^k(\hat{x}^k+d^k)+d^{\top}\frac{1}{2}\left(Q+\frac{1}{t_k}\mathbb{I}\right)d
+\label{Q_subprob}
+\end{equation}
  
 
 \subsection{Algorithm}
@@ -74,7 +83,7 @@ Lemma 5 in \cite{Hare2016} stays the same; no \(Q\) involved \\
 \begin{theorem}
 	Theorem 6 in \cite{Hare2016} \(\to\) take only part with \(\liminf_{k\to\infty}t_k > 0 \) because other one not used in null steps and algorithm this way. \\
 	Let the algorithm generate and infinite number of serious steps. Then \(\delta_k \to 0\) as \(k \to \infty\). \\
-	Let the sequence \(\{\eta_k\}\) be bounded. If \(\liminf_{k \to \infty} t_k > 0\) then as \(k \to \infty\) we have \(C_k \to 0\), and there exist \(\bar{x}\) and \(\bar{S}\) such that \(\hat{x}^k \to \bar{x}\), \(S^k \to \bar{S}\) and \(S^k + \nu^k \to 0\). \\
+	Let the sequence \(\{\eta_k\}\) be bounded. If \(\liminf_{k \to \infty} t_k > 0\) then as \(k \to \infty\) we have \(C_k \to 0\), and for ever accumulation point \(\bar{x}\) of \(\{\hat{x}^k\}\) there exists \(\bar{S}\) such that \(S^k \to \bar{S}\) and \(S^k + \nu^k \to 0\). \\
 	In particular if the cardinality of \({j \in J^k|\alpha_j^k > 0}\) is uniformly bounded in \(k\) then the conclusions of Lemma 5 in \cite{Hare2016} hold.
 \end{theorem}
 
@@ -112,7 +121,14 @@ The proof is very similar to the one stated in \cite{Hare2016} but minor changes
 		C_k \to 0 \quad \text{and} \quad (d^k)^{\top}\left(Q+\frac{1}{t_k}\mathbb{I}\right)d^k \to 0.
 	\end{equation}
 	
-	As \(\liminf_{k \to \infty} t_k > 0\) need: eigenvalues of \(Q\) bounded!!!
+	For any accumulation point \(\bar{x}\) of the sequence \(\{\hat{x}^k\}\) the corresponding subsequence \(d^k \to 0\) for \(k \in K \subset \{1,2,...\} \). As \(\liminf_{k \to \infty} t_k > 0\) and the eigenvalues of \(Q\) are bounded the whole expression 
+	
+	\begin{equation}
+	 S^k + \nu^k = \left(Q+\frac{1}{t_k}I \right)d^k  \to 0 \quad \text{for} \quad k \in K.
+	\end{equation}
+	
+	And from local Lipschitz continuity of \(f\) follows then that \(S^k \to \bar{S}\) for \(k \in K\).
+	
 \end{proof}
 
 \begin{remark}
@@ -120,6 +136,51 @@ If one assumes that the set \(\Omega = \{x \in \R^n |f(x) \leq f(x^1) +2\bar{\si
 Because all \(\{\hat{x}^k\} \subset \Omega\) one can deduce the boundedness of the sequence.
 \end{remark}
 
+For the case of infinitely many null steps one show:
+
+\begin{theorem} \cite{Hare2016}
+	Let a finite number of serious iterates be followed by infinite null steps. Let the sequence \(\{\eta_k\}\) be bounded and \(\liminf k \to \infty > 0\). \\
+	Then \(\{x^k\} \to \hat{x}\), \(\delta_k \to 0\), \(C_k \to 0\), \(S^k + \nu^k \to 0\) and there exist \(K\subset \{1,2,...\}\) and \(\bar{S}\) such that \(S^k \to \bar{S^k}\) as \(K \ni k \to \infty\). \\
+	In particular if the cardinality of \({j \in J^k|\alpha_j^k > 0}\) is uniformly bounded in \(k\) then the conclusions of Lemma 5 in \cite{Hare2016} hold for \(\bar{x} = \hat{x}\). 
+\end{theorem}
+
+\begin{proof}
+	Let \(k\) be large enough such that \(k \geq \bar{k}\) and \(\hat{x}^k = \hat{x}\) and \(\hat{f}_k=\hat{f}\) are fixed.
+	Define the optimal value of the subproblem (\ref{Q_subprob}) by 
+	
+	\begin{equation}
+		\Psi_k := M_k(x^{k+1})+\left(d^k\right)^{\top}\frac{1}{2}\left(Q+\frac{1}{t_k}\mathbb{I}\right)d^k.
+	\end{equation}
+	
+	It is first shown that the sequence \(\{\Psi_k\}\) is bounded above.
+	\textcolor{red}{Using the aggregate linearization}
+	
+	\begin{equation}
+		A_k(\hat{x}) = M_k(x^{k+1})-\langle S^k,d^k \rangle.
+	\end{equation}
+	
+	Using \(S^k+\nu^k = -\left(Q+\frac{1}{t_k}\mathbb{I}\right)d^k\) and the subgradient inequality for \(\nu^k \in \partial \mathtt{i}_{D}\) one obtains
+	
+	\begin{align*}
+		\Psi^k+\frac{1}{2}\left(d^{k}\right)^{\top}\left(Q+\frac{1}{t_k}\mathbb{I}\right)d^k &= A_k(\hat{x})+\langle S^k,d^k\rangle + \left(d^{k}\right)^{\top}\left(Q+\frac{1}{t_k}\mathbb{I}\right)d^k \\
+		&= A_k(\hat{x})-\langle \nu^k,k \rangle \\
+		&\leq A(\hat{x}) \\
+		&\leq M_k(\hat{x}) \\
+		& = \hat{f}
+	\end{align*}
+	
+	\textcolor{red}{where the equations and inequalities follow from???}\\
+	By boundedness of \(d^k\) and \(Q+\frac{1}{t_k}\mathbb{I}\) this yields that \(\Psi_k \leq \hat{f}\), so the sequence \(\{\Psi_k\}\) is bounded above.
+	In the next step is shown that \(\{\Psi_k\}\) is increasing.
+	
+	\begin{align}
+		\Psi_{k+1} &= M_k(x^{k+2})+\frac{1}{2}\left(d^{k+1})^{\top}\left(Q+\frac{1}{t_k}\mathbb{I} \right)d^{k+1} \\
+		&\geq A_k(x{k+2})+\frac{1}{2}\left(d^{k+1}\right)^{\top}\left(Q+\frac{1}{t_k}\mathbb{I}\right)d^{k+1} \\
+		= M_k(x^{k+1})+\langle S^k,x^{k+2}-x^{k+1} \rangle +\frac{1}{2}\left(d^{k+1}\right)^{\top}\left(Q+\frac{1}{t_k}\mathbb{I}\right)d^{k+1} \\
+		&= \Psi_k - \frac{1}{2}\left(d^{k}\right)^{\top}\left(Q+\frac{1}{t_k}\mathbb{I}\right)d^{k} + \frac{1}{2}\left(d^{k+1}\right)^{\top}\left(Q+\frac{1}{t_k}\mathbb{I}\right)d^{k+1} -
+	\end{align}
+	
+\end{proof}
 
 
 
