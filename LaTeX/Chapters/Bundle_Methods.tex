@@ -1,36 +1,37 @@
 \section{Bundle Methods}
 
-When bundle methods were first introduced in 1975 by Claude Lemaréchal and Philip Wolfe they were developed to minimize a convex (possibly nonsmooth) function \(f\) for which at least one subgradient at any point \(x\) can be computed \cite{Mifflin2012}. \\
-To provide an easier understanding of the proximal bundle method in \cite{Hare2016} and stress the most important ideas of how to deal with nonconvexity and inexactness first a basic bundle method is shown here. \\ \textcolor{red}{link to chapter?}
+When bundle methods were first introduced in 1975 by Claude Lemaréchal and Philip Wolfe they were developed to minimize a convex (possibly nonsmooth) function \(f\) for which at least one subgradient at any point \(x\) can be computed \cite{Mifflin2012}.
+To provide an easier understanding of the proximal bundle method in \cite{Hare2016} and stress the most important ideas of how to deal with nonconvexity and inexactness first a basic bundle method is shown here. 
 
-Bundle methods can be interpreted in two different ways: From the dual point of view one tries to approximate the \(\varepsilon\)-subdifferential to finally ensure first order optimality conditions. The primal point of view interprets the bundle method as a stabilized form of the cutting plane method where the objective function is modeled by tangent hyperplanes \cite{Hare2010}. I focus here on the primal approach. \\
+%\textcolor{red}{link to chapter?}
 
-
-
-\textcolor{red}{In the next two sections the function \(f\) is assumed to be convex.} \\
+Bundle methods can be interpreted in two different ways: From the dual point of view one tries to approximate the \(\varepsilon\)-subdifferential to finally ensure first order optimality conditions. The primal point of view interprets the bundle method as a stabilized form of the cutting plane method where the objective function is modeled by tangent hyperplanes \cite{Hare2010}. We focus here on the primal approach.
 
 \textcolor{blue}{notation, definitions}\\
+
 \textcolor{red}{already done in previous preliminaries chapter?}
 
 \subsection{A basic bundle method}
 
-\textcolor{red}{This section gives a short summery of the derivations and results of chapter XV in \cite{Hiriart-Urruty1993} where a primal bundle method is derived as a stabilized version of the cutting plane method. If not otherwise indicated the results in this section are therefore taken from \cite{Hiriart-Urruty1993}.} 
+%\textcolor{red}{In the next two sections the function \(f\) is assumed to be convex.} \\
 
-\textcolor{red}{The optimization problem considered in this section is 
+This section gives a short summery of the derivations and results of chapter XV in \cite{Hiriart-Urruty1993} where a primal bundle method is derived as a stabilized version of the cutting plane method. If not otherwise indicated the results in this section are therefore taken from \cite{Hiriart-Urruty1993}.
+
+The optimization problem considered in this section is 
 \begin{equation}
   \min_{x} f(x) \quad \text{s.t.} \quad x \in X
 \label{min_prob_basic}
 \end{equation}
-with the convex function \(f\) and the closed and convex set \(X \subseteq \R^n\).}
+where \(f\) is a convex but possibly nondifferentiable function and \(X \subseteq \R^n\) is a  closed and convex set.
 
-\textcolor{red}{Define Problem again?? Incorporate ``set-constraint'' by writing \(h(x):= f(x)+\mathbb{I}_X\). \(\rightarrow\) later???}
+%\textcolor{red}{Define Problem again?? Incorporate ``set-constraint'' by writing \(h(x):= f(x)+\mathbb{I}_X\). \(\rightarrow\) later???}
 
-\textcolor{blue}{explanation}
+%\textcolor{blue}{explanation}
 
 \subsubsection{Derivation of the bundle method}
 
-The geometric idea of the cutting plane method is to build a piecewise linear model of the objective function \(f\) that can be minimized more easily than the original objective function. \\
-This model is built from a \emph{bundle} of information that is gathered in the previous iterations. \\
+The geometric idea of the \emph{cutting plane method} is to build a piecewise linear model of the objective function \(f\) that can be minimized more easily than the original objective function.
+This model is built from a \emph{bundle} of information that is gathered in the previous iterations.
 In the \(k\)'th iteration, the bundle consists of the previous iterates \(x^j\), the respective function values \(f(x^j)\) and a subgradient at each point \(g^j \in \partial f(x^j)\) for all indices \(j\) in the index set \(J_k\). From each of these triples, one can construct a linear function 
 
 \begin{equation}
@@ -39,22 +40,24 @@ In the \(k\)'th iteration, the bundle consists of the previous iterates \(x^j\),
 \end{equation}  
 
 with \(f(x^j) = l_j(x^j)\) and due to convexity \(f(x) \geq l_j(x), ~ x \in X\).\\ % x \in \R^n??
-One can now model the objective function \(f\) by the piecewise linear function
+The objective function \(f\) can now be approximated by the piecewise linear function
 
 \begin{equation}
-	m_k(x) = \max_{j \in J_k} l_j(x)
+	m_k(x) = \max_{j \in J_k} l_j(x).
 \label{cp_model}
 \end{equation}
 
-and find a new iterate \(x^{k+1}\) by solving the subproblem
+A new iterate \(x^{k+1}\) is found by solving the subproblem
 
 \begin{equation}
 	\min_{x} m_k(x) \quad \text{s.t.} \quad x \in X.
 \label{cp_model_fun}
 \end{equation}
 
-This subproblem should of course be easier to solve than the original task. A question that depends a lot on the structure of \(X\). If \(X = \R^n\) or a polyhedron, the problem can be solved easily. Still there are some major drawbacks to the idea. For example if \(X = \R^n\) the solution of the subproblem in the first iteration is always \(-\infty\). \\
-In general one can say that the subproblem does not necessarily have to have a solution. \\
+\textcolor{red}{Picture of function and cutting plane approximation of it}
+
+This subproblem should of course be easier to solve than the original task. A question that depends a lot on the structure of \(X\). If \(X = \R^n\) or a polyhedron, the problem can be solved easily. Still there are some major drawbacks to the idea. For example if \(X = \R^n\) the solution of the subproblem in the first iteration is always \(-\infty\).
+In general we can say that the subproblem does not necessarily have to have a solution.
 To tackle this problem a penalty term is introduced to the subproblem:
 
 \begin{equation}
@@ -62,34 +65,38 @@ To tackle this problem a penalty term is introduced to the subproblem:
 \label{stabil_model_fun}
 \end{equation}
 
-This new subproblem is strongly convex and has therefore always a unique solution.\\
-\textcolor{red}{how much explanation here?}
- \(\max_{j \in J_k} l_j(\hat{x}^k + d)\)
+This new subproblem is strongly convex and has therefore always a unique solution.
+%\textcolor{red}{how much explanation here?}
+% \(\max_{j \in J_k} l_j(\hat{x}^k + d)\)
 
-\textcolor{red}{Some nice sentences to explain the term a little bit more and to lead over to the next paragraph.\\ 
-To understand the deeper motivation of this term see \cite{Hiriart-Urruty1993}. For this introduction it suffices to see that due to the regularization term the subproblem is now strongly convex and therefore always uniquely solvable.} \\
+%\textcolor{red}{Some nice sentences to explain the term a little bit more and to lead over to the next paragraph.\\ 
+%To understand the deeper motivation of this term see \cite{Hiriart-Urruty1993}. For this introduction it suffices to see that due to the regularization term the subproblem is now strongly convex and therefore always uniquely solvable.} \\
 
+This regularization term can be motivated and interpreted in many different ways, c.f. \cite{Hiriart-Urruty1993}. From different possible regularization terms the most popular in bundle methods is the penalty-like regularization used here.
 
-The second major step towards the bundle algorithm is the introduction of a so called \emph{stability center} or  \emph{serious point} \(\hat{x}^k\). It is the iterate that yields the ``best'' approximation of the optimal point up to the \(k\)'th iteration (\textcolor{red}{not necessarily the best function value though}).\\
-The updating technique for \(\hat{x}^k\) is crucial for the convergence of the method: If the next iterate yields a decrease of \(f\) that is ``big enough'', namely bigger than a fraction of the decrease suggested by the model function for this iterate, the stability center is moved to that iterate. If this is not the case, the stability center remains unchanged. \\
-In practice this looks the following: \\
-Define first the \emph{nominal decrease} \(\delta_k\) which is the decrease of the model for the new iterate \(x^{k+1}\) compared to the function value at the current stability center \(\hat{x}^k\).
+The second major step towards the bundle algorithm is the introduction of a so called \emph{stability center} or  \emph{serious point} \(\hat{x}^k\). It is the iterate that yields the ``best'' approximation of the optimal point up to the \(k\)'th iteration (not necessarily the best function value though).
+The updating technique for \(\hat{x}^k\) is crucial for the convergence of the method: If the next iterate yields a decrease of \(f\) that is ``big enough'', namely bigger than a fraction of the decrease suggested by the model function for this iterate, the stability center is moved to that iterate. If this is not the case, the stability center remains unchanged.
+
+In practice this looks the following:
+Define first the \emph{model decrease} \(\delta_k\) which is the decrease of the model for the new iterate \(x^{k+1}\) compared to the function value at the current stability center \(\hat{x}^k\).
 
 \begin{equation}
-	\delta_{k} = f(\hat{x}^k) - \tilde{m}_k(x^{k+1}) +a_k \geq 0
+	\delta_{k} = f(\hat{x}^k) - m_k(x^{k+1}) \geq 0
 \label{nom_dec}
 \end{equation}
 
-\textcolor{red}{The nominal decrease is in fact stated a little differently for different versions of the bundle algorithm, this is why I added the constant \(a_k \in \R\) here for generalization. In practice the difference between the decreases is not influencing the algorithm as \(\delta_k\) is weighted by the constant \(m \in (0,1)\) for the descent test which compensates \(a_k\).} 
+%\textcolor{red}{The nominal decrease is in fact stated a little differently for different versions of the bundle algorithm, this is why I added the constant \(a_k \in \R\) here for generalization. In practice the difference between the decreases is not influencing the algorithm as \(\delta_k\) is weighted by the constant \(m \in (0,1)\) for the descent test which compensates \(a_k\).} 
 
 If the actual decrease of the objective function is bigger than a fraction of the nominal decrease 
 \[ f(\hat{x}^k) - f(x^{k+1}) \geq m \delta_k, \quad m \in (0,1) \]
-set the stability center to \( \hat{x}^{k+1} = x^{k+1}\). This is called a \emph{serious} or \emph{descent step}. \\
-If this is not the case a \emph{null step} is executed and the serious iterate remains the same \(\hat{x}^{k+1} = \hat{x}^k\).\\
+set the stability center to \( \hat{x}^{k+1} = x^{k+1}\). This is called a \emph{serious} or \emph{descent step}.
+If this is not the case a \emph{null step} is executed and the serious iterate remains the same \(\hat{x}^{k+1} = \hat{x}^k\).
 
-The subproblem can be rewritten as a smooth optimization problem. For convenience rewrite the affine functions \(l_j\) with respect to the stability center \(\hat{x}^k\).
+Next to the model decrease other forms of decrease measures and variations of these are possible. Some are used in \cite{Hiriart-Urruty1993, Oliveira2014}.
 
-\textcolor{red}{citation for this???!!!}
+The subproblem to be solved to find the next iterate can be rewritten as a smooth optimization problem. For convenience we first rewrite the affine functions \(l_j\) with respect to the stability center \(\hat{x}^k\).
+
+%\textcolor{red}{citation for this???!!!}
 
 \begin{align}
 	l_j(x) &= f(x^j) + {g^j}^{\top} (x - x^j) \\
@@ -99,11 +106,11 @@ The subproblem can be rewritten as a smooth optimization problem. For convenienc
 
 where
 \begin{equation}
-	e^k_j = f(\hat{x}^k)-f(x^j) + {g^j}^{\top}(x^j-\hat{x}^k) \geq 0 \quad \forall j \in J_k
+	e^k_j := f(\hat{x}^k)-f(x^j) + {g^j}^{\top}(x^j-\hat{x}^k) \geq 0 \quad \forall j \in J_k
 \label{lin_err}
 \end{equation}
 
-is the \emph{linearization error}. The nonnegativity property is essential for the convergence theory and will also be of interest when moving on to the case of nonconvex and inexact objective functions. \\
+is the \emph{linearization error}. Its nonnegativity property is essential for the convergence theory and will also be of interest when moving on to the case of nonconvex and inexact objective functions. \\
 
 
 Subproblem (\ref{stabil_model_fun}) can now be written as
@@ -111,27 +118,15 @@ Subproblem (\ref{stabil_model_fun}) can now be written as
 \begin{align}
 	& \min_{\hat{x}^k+d \in X} \tilde{m}_k(d) = f(\hat{x}^k) + \max_{j \in J_k} \{{g^j}^{\top}d - e^k_j\} + \frac{1}{2t_k}\|d\|^2
 	\label{sub_prob_long}\\
-	\Leftrightarrow \quad &\min_{\hat{x}^k+d \in X, \xi \in \R} \xi + \frac{1}{2t_k}\|d\|^2 \quad \text{s.t.} \quad f(\hat{x}^k)+{g^j}^{\top}d - e^k_j - \xi \leq 0, \quad j \in J_k
+	\Leftrightarrow \quad &\min_{\substack{\hat{x}^k+d \in X, \\ \xi \in \R}} \xi + \frac{1}{2t_k}\|d\|^2 \quad \text{s.t.} \quad f(\hat{x}^k)+{g^j}^{\top}d - e^k_j - \xi \leq 0, \quad j \in J_k
 \label{sub_prob_short}
 \end{align}
 
 
-\textcolor{red}{where the constant term \(f(\hat{x}^k)\) was discarded for the sake of simplicity.} \\
-If \(X\) is a polyhedron this is a quadratic optimization problem that can be solved using standard methods of nonlinear optimization. The pair \((\xi_k, d^k)\) solves (\ref{sub_prob_short}) if and only if \(d^k\) solves the original subproblem (\ref{sub_prob_long}) and \(\xi_k=f(\hat{x}^k)+\max_{j \in J_k}{g^j}^{\top}d^k - e_j^k\). The new iterate is then given by \(x^{k+1} = \hat{x}^k + d^k\). \textcolor{red}{citation!!!}\\
+where the constant term \(f(\hat{x}^k)\) was discarded for the sake of simplicity. \\
+If \(X\) is a polyhedron this is a quadratic optimization problem that can be solved using standard methods of nonlinear optimization. The pair \((\xi_k, d^k)\) solves (\ref{sub_prob_short}) if and only if \(d^k\) solves the original subproblem (\ref{sub_prob_long}) and \(\xi_k=f(\hat{x}^k)+\max_{j \in J_k}{g^j}^{\top}d^k - e_j^k\). The new iterate is then given by \(x^{k+1} = \hat{x}^k + d^k\). %\textcolor{red}{citation!!!}\\
 
-\begin{remark}
-	\textcolor{red}{Setting \(\check{f}(x) = f(x)+ \mathbb{I}_{X}(x)\) the above optimization problem is ...\\
-	The \emph{proximal point mapping} or \emph{prox-operator}
-	\begin{equation}
-		prox_{t,f}(x) = \argmin_{y}\left\{\check{f}(y) + \frac{1}{2t}\|x-y\|^2\right\}, \quad t > 0
-	\label{prox_op}
-	\end{equation}}
-	\textcolor{red}{source??? This special form of the subproblems gives the proximal bundle method its name and will occur again later??? }
-\end{remark}
-
-
-
-\subsubsection{Aggregate objects}
+\subsubsection{The prox-operator}
 
 The constraint \(\hat{x}^k+d \in X\) can also be incorporated directly in the objective function by using the indicator function
 
@@ -143,6 +138,22 @@ Subproblem (\ref{stabil_model_fun}) then writes as
 \label{sub_prob_fin}
 \end{equation}
 \textcolor{red}{check if f also not put into subproblem before}
+
+
+\begin{remark}
+	Setting \(\check{f}(x) = f(x)+ \mathbb{I}_{X}(x)\) the above optimization problem is ...\\
+	The \emph{proximal point mapping} or \emph{prox-operator}
+	\begin{equation}
+		prox_{t,f}(x) = \argmin_{y}\left\{\check{f}(y) + \frac{1}{2t}\|x-y\|^2\right\}, \quad t > 0
+	\label{prox_op}
+	\end{equation}
+	\textcolor{red}{source??? This special form of the subproblems gives the proximal bundle method its name and will occur again later??? }
+\end{remark}
+
+
+
+\subsubsection{Aggregate objects}
+
 
 \textcolor{red}{Some introduction how this and the aggregate error expression relate to each other. Why it is in this case easier to write the model in the nonsmooth form...}
 

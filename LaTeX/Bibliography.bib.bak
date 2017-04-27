@@ -444,4 +444,22 @@
   number  = {5},
 }
 
+@Book{Vapnik1998,
+  title     = {Statistical Learning Theory},
+  publisher = {JOHN WILEY \& SONS INC},
+  year      = {1998},
+  author    = {Vladimir N. Vapnik},
+  date      = {1998-10-12},
+  ean       = {9780471030034},
+  isbn      = {0471030031},
+  pagetotal = {768},
+}
+
+@Book{Polyak1987,
+  title     = {Introduction to Optimization},
+  publisher = {Optimization Software , Inc., Publications Division, New York},
+  year      = {1987},
+  author    = {Boris T. Polyak},
+}
+
 @Comment{jabref-meta: databaseType:bibtex;}

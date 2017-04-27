@@ -30,11 +30,20 @@ From this derivation of \(\delta_k\) \(\to\) nominal (model) decrease:
 \end{align}
 
 \subsection{important assumptions}
-eigenvalues of \(Q\) are bounded \\
+eigenvalues of \(Q\) are bounded \(\to\) possible by manipulating BFGS update
+
+\begin{align}
+	\text{if} &\quad norm\left(\frac{y^k{y^k}^{\top}}{{y^k}^{\top}d^k}\right) > 10^{??} \\
+	&\quad \text{set } \frac{y^k{y^k}^{\top}}{threshold} \\
+	&\quad threshold = norm\left(y^k{y^k}^{\top}\right)/10^{??} \\
+	\text{end} &
+\end{align}
+same procedure for next term; all \(<1/3C\) for some overall threshold \(C\) 
+
 \(Q+\frac{1}{t_k}\mathbb{I}\) such that \(\succ \xi \mathbb{I}\) for some fixed \(\xi > 0\). \\
 
 \begin{equation}
-	\min_{\hat{x}+d \in D} M^k(\hat{x}^k+d^k)+d^{\top}\frac{1}{2}\left(Q+\frac{1}{t_k}\mathbb{I}\right)d
+	\min_{\hat{x}+d \in D} M^k(\hat{x}^k+d^k)+d^{\top}\frac{1}{2}\left(Q+\frac{1}{t_k}\mathbb{I}\right)d	
 \label{Q_subprob}
 \end{equation}
  
@@ -174,12 +183,69 @@ For the case of infinitely many null steps one show:
 	In the next step is shown that \(\{\Psi_k\}\) is increasing.
 	
 	\begin{align}
-		\Psi_{k+1} &= M_k(x^{k+2})+\frac{1}{2}\left(d^{k+1})^{\top}\left(Q+\frac{1}{t_k}\mathbb{I} \right)d^{k+1} \\
-		&\geq A_k(x{k+2})+\frac{1}{2}\left(d^{k+1}\right)^{\top}\left(Q+\frac{1}{t_k}\mathbb{I}\right)d^{k+1} \\
-		= M_k(x^{k+1})+\langle S^k,x^{k+2}-x^{k+1} \rangle +\frac{1}{2}\left(d^{k+1}\right)^{\top}\left(Q+\frac{1}{t_k}\mathbb{I}\right)d^{k+1} \\
-		&= \Psi_k - \frac{1}{2}\left(d^{k}\right)^{\top}\left(Q+\frac{1}{t_k}\mathbb{I}\right)d^{k} + \frac{1}{2}\left(d^{k+1}\right)^{\top}\left(Q+\frac{1}{t_k}\mathbb{I}\right)d^{k+1} -
+		\Psi_{k+1} &= M_k(x^{k+2})+\frac{1}{2}\left(d^{k+1}\right)^{\top}\left(Q+\frac{1}{t_k}\mathbb{I} \right)d^{k+1} \\
+		&\geq A_k(x^{k+2})+\frac{1}{2}\left(d^{k+1}\right)^{\top}\left(Q+\frac{1}{t_k}\mathbb{I}\right)d^{k+1} \\
+		&= M_k(x^{k+1})+\langle S^k,x^{k+2}-x^{k+1} \rangle +\frac{1}{2}\left(d^{k+1}\right)^{\top}\left(Q+\frac{1}{t_k}\mathbb{I}\right)d^{k+1} \\
+		&= \Psi_k - \frac{1}{2}\left(d^{k}\right)^{\top}\left(Q+\frac{1}{t_k}\mathbb{I}\right)d^{k} + \frac{1}{2}\left(d^{k+1}\right)^{\top}\left(Q+\frac{1}{t_k}\mathbb{I}\right)d^{k+1} \\
+		& \qquad -\left(d^{k}\right)^{\top}\left(Q+\frac{1}{t_k}\mathbb{I}\right)\left(d^{k+1} - d^{k}\right) - \langle \nu^k, x^{k+2}-x^{k+1}\rangle\\
+		&\geq \Psi_k + \frac{1}{2}\left(d^{k+1}-d^{k}\right)^{\top}\left(Q+\frac{1}{t_k}\mathbb{I}\right)\left(d^{k+1} - d^{k}\right)
 	\end{align}
 	
+\textcolor{red}{say where (in-)equalities come from} \\
+
+As \(Q\) is fixed in null steps and \(\liminf_{k \to \infty} t_k > 0\) \(\{\Psi_k\}\) is increasing. The sequence is therefore convergent.
+Consequently, taking into account that \(1/t_k \geq 1/t_{\bar{k}}\), it follows
+
+\begin{equation}
+	\|d^{k+1}-d^k\| \to 0, \quad k \to \infty.
+\label{d_to_0}
+\end{equation}
+
+By the \textcolor{red}{definitions and characterizations that have to be specified} one has
+
+\begin{align}
+	\hat{f} &= \delta_k+M_k(\hat{x})-C_k-\left(d^{k}\right)^{\top}\left(Q+\frac{1}{t_k}\mathbb{I}\right)\left(d^{k}\right) \\
+	&= \delta_k + M_k(x^{k+1})-\langle S^k,d^k \rangle-\left(d^{k}\right)^{\top}\left(Q+\frac{1}{t_k}\mathbb{I}\right)\left(d^{k}\right)  \\
+	&= \delta_k
+	&\geq \delta_k+M_k(\hat{x}+d^k)
+\end{align}
+
+Where the last inequality is given by \(\nu^k \in \partial\mathtt{i}_{D}(x^{k+1})\). Therefore 
+
+\begin{equation}
+	\delta^{k+1} \leq \hat{f}-M_{k+1}(\hat{x}+d^{k+1}).
+\end{equation}
+
+By the first inequality in assumption \textcolor{red}{define assumption} on the model, written for \(d=d^{k+1}\),
+
+\begin{equation}
+	-\hat{f}_{k+1}+c^{k+1}_{k+1}-\left\langle s^{k+1}_{k+1},d^{k+1}\right\rangle \geq -M_{k+1}(\hat{x}+d^{k+1}).
+\end{equation}
+As \(\hat{f}_{k+1}=\hat{f}\), adding condition \textcolor{red}{???} to the inequality above, one obtains that
+
+\begin{equation}
+	m\delta_k+\left\langle s^{k+1}_{k+1},d^k-d^{k+1}\right\rangle \geq \hat{f}-M_{k+1}(\hat{x}+d^{k+1}).
+\end{equation}
+
+Combining this relation with \textcolor{red}{???} yields
+
+\begin{equation}
+	0 \leq \delta_{k+1} \leq m\delta_k + \left\langle s^{k+1}_{k+1},d^k-d^{k+1}\right\rangle.
+	\label{delta_ineq}
+\end{equation}
+
+Since \(m \in (0,1)\) and \(\left\langle s^{k+1}_{k+1},d^k-d^{k+1}\right\rangle \to 0\) as \(k \to \infty\) due to (\ref{d_to_0}) and the boundedness of \(\{\eta_k\}\) using \cite[Lemma 3, p.45]{Polyak1987} it follows from  (\ref{delta_ineq}) that 
+
+\begin{equation}
+	\lim_{k \to \infty} \delta_k = 0.
+\end{equation}
+
+From the formulation \(\delta_k = C_k + \left(d^k\right)^{\top}\left(Q+\frac{1}{t_k}\mathbb{I}\right)d^k\) follows that \(C_k \to 0\) as \(k \to \infty\). As \textcolor{red}{\(Q+\frac{1}{t_k}\mathbb{I} \succ \xi\mathbb{I}\)} it follows that 
+
+\begin{equation}
+	\xi \left(d^k\right)^{\top}d^k \leq \left(d^k\right)^{top}\left(Q+\frac{1}{t_k}\mathbb{I}\right)d^k \to 0
+\end{equation}
+
 \end{proof}
 
 
