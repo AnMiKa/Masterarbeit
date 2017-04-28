@@ -1,16 +1,9 @@
 \begin{thebibliography}{10}
 
-\bibitem{Bagirov2014}
-Adil Bagirov, Napsu Karmitsa, and Marko~M. M{\"a}kel{\"a}.
-\newblock {\em Introduction to Nonsmooth Optimization: Theory, Practice and
-  Software}.
-\newblock Springer International Publishing Switzerland, 2014.
-
-\bibitem{Clarke1990}
-Frank~H. Clarke.
-\newblock {\em Optimization and nonsmooth analysis}.
-\newblock Classics in Applied Mathematics. Society for Industrial and Applied
-  Mathematics Philadelphia, 1990.
+\bibitem{Geiger2002}
+Carl Geiger and Christian Kanzow.
+\newblock {\em Theorie und Numerik restringierter Optimierungsaufgaben}.
+\newblock Sp, 2002.
 
 \bibitem{Hare2010}
 Warren Hare and Claudia Sagastiz\`{a}bal.
@@ -29,24 +22,12 @@ Jean-Baptiste Hiriart-Urruty and Claude Lemar\'{e}chal.
   {\em Grundlehren der mathematischen Wissenschaften}.
 \newblock Springer Berlin Heidelberg, 2 edition, 1996.
 
-\bibitem{Lemarechal1978}
-Claude Lemar{\'e}chal.
-\newblock Nonsmooth optimization and descent methods.
-\newblock Iiasa research report, International Institute for Applied Systems
-  Analysis, 1978.
-
-\bibitem{Maekelae1992}
-Marko~M. M{\"a}kel{\"a} and Pekka Neittaanm{\"a}ki.
-\newblock {\em Nonsmooth Optimization: Analysis and Algorithms with
-  Applications to Optimal Control}.
-\newblock World Scientific Pub Co Pte Lt, 1992.
-
-\bibitem{Mifflin1982}
-Robert Mifflin.
-\newblock A modification and an extension of lemar{\'e}chal's algorithm for
-  nonsmooth minimization.
-\newblock In {\em Mathematical Programming Studies}, volume~17, pages 77--90.
-  Springer Nature, 1982.
+\bibitem{Kiwiel1986}
+Krzysztof~C. Kiwiel.
+\newblock An aggregate subgradient method for nonsmooth and nonconvex
+  minimization.
+\newblock {\em Journal of Computational and Applied Mathematics},
+  14(3):391--400, 1986.
 
 \bibitem{Mifflin2012}
 Robert Mifflin and Claudia Sagastiz\`{a}bal.
@@ -54,28 +35,16 @@ Robert Mifflin and Claudia Sagastiz\`{a}bal.
   iiasa.
 \newblock {\em Documenta Mathematica}, Extra Volume ISMP:291--300, 2012.
 
-\bibitem{Nesterov2016}
-Yurii Nesterov and Vladimir Shikhman.
-\newblock Algorithmic principle of least revenue for finding market equilibria.
-\newblock In Boris Goldengorin, editor, {\em Optimization and Its Applications
-  in Control and Data Sciences}, volume 115 of {\em Springer Optimization and
-  Its Applications}, pages 381--435. Springer Nature, 2016.
+\bibitem{Rockafellar1996}
+R.T. Rockafellar.
+\newblock {\em Convex Analysis}.
+\newblock Princeton University Press, 1996.
 
-\bibitem{Polyak1987}
-Boris~T. Polyak.
-\newblock {\em Introduction to Optimization}.
-\newblock Optimization Software , Inc., Publications Division, New York, 1987.
-
-\bibitem{Smola2007}
-A.~J. Smola, S.v.n. Vishwanathan, and V.~Le Quoc.
-\newblock Bundle methods for machine learning.
-\newblock In J.~C. Platt, D.~Koller, Y.~Singer, and S.~T. Roweis, editors, {\em
-  Advances in Neural Information Processing Systems}, number~20, 2007.
-
-\bibitem{Teo2010}
-Choon~Hui Teo, A.~J. Smola, S.V.N. Vishwanathan, and Quoc~V. Le.
-\newblock Bundle methods for regulized risk minimization.
-\newblock 2010.
+\bibitem{Solodov2011}
+Mikhail~V. Solodov.
+\newblock {\em Constraint Qualifications}.
+\newblock Wiley Encyclopedia of Operations Research and Management Science,
+  2011.
 
 \bibitem{Hare2016}
 Mikhail~Solodov Warren~Hare, Claudia~Sagastiz{\`a}bal.
