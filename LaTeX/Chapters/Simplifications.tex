@@ -1,105 +1,27 @@
-\subsection{...}
-\textcolor{red}{possible simplifications of the algorithm} \\
+\section{Variations of The Bundle Method}
 
-\subsubsection{Nonconvex Bundle Methods with Exact Information}
+Bundle method successfull \\
+shortly after (when??) generalization -> nonconvex case and inexact information \\
+first inexact information in convex case
 
-\textbf{Simplification / better results if exact information}
-The main ideas of the algorithm are basicly the ones developed in \cite{Hare2010} for the redistributed proximal bundle method for exact nonconvex problems. \\
-Setting the error bounds \(\bar{\sigma}\) and \(\bar{\theta}\) to zero results therefore in the following convergence theorem. 
+\subsection{Convex Bundle Methods with Inexact Information}
 
-\begin{theorem}
-	Let the sequence \(\{\eta_k\}\) be bounded, \(\liminf_{k \to \infty }\) and the cardinality of the set \(\{j \in J_k | \alpha_j^k > 0\}\) be uniformly bounded in \(k\). \\
-	Then every accumulation point of sequence of serious iterates \(\{\hat{x}^k\}\) is a stationary point of the problem.
-\end{theorem}
-
-\textcolor{red}{think last condition only interesting in inexact case. \\
-try to gain some insight with generalized \(\varepsilon\)-subdifferential from Chinese paper:\\
-\(\varepsilon\)\emph{-limiting subdifferential} \cite{}}
-
-In the exact case boundedness of the sequence \(\{\eta_k\}\) is proven for lower-\(\mathcal{C}^2\) functions in \cite{Hare2010}. This is not possible in the inexact case, even if the objective function \(f\) is convex.
-
-A further simplification of the method for exact information is not necessary as the method is already almost as simple as the basic bundle method for nonconvex exact functions. Additionally no new concepts needed to be introduced when doing the step from nonconvex exact problems, for which the algorithm was originally designed, to problems with inexact information.
-
-\textcolor{red}{\begin{remark}
-	I want to add here, that the simplicity of the algorithm is rather special for methods suitable for nonconvex problems. Often a linesearch algorithm has to be inserted in the nonconvex case, which is not needed here. 
-\end{remark}}
-
-\subsubsection{Nonconvex bundle methods}
-There are different approaches for handling nonconvexity of the objective function in bundle methods.
-As the nonnegativity property of the linearization errors \(e_j^k\) is crucial for the convergence proof of convex bundle methods an early idea was forcing the errors to be so by different downshifting strategies. A very common one is using the \emph{subgradient locality measure} \cite{Kiwiel1986, Mifflin1982}. Here the linearization error is essentially replaced by the nonnegative number
-
-\begin{equation}
-	\tilde{e}_j^k := \max_{j \in J_k} \{|e_j^k|,\gamma \|\hat{x}^k-x^j\|^2\}
-\label{subgr_loc_measure}
-\end{equation}
-
-or a variation of this expression. \\
-\textcolor{red}{Remark on dual view? How subgradient locality measure measures how close subgradient is to subdifferential of \(f\)???} \\
-Methods using this kind of manipulation of the model function are often endowed with a line search to provide sufficient decrease of the objective function. For the linesearch to terminate finitely, semismoothness of the objective function is usually needed. \\
-It can be proven that every accumulation point of the sequence of serious points \(\{\hat{x}^k\}\) is a stationary point of the objective function \(f\) under the additional assumptions that \(f\) is locally Lipschitz and the level set \(\{x \in \R^n | f(x) \leq f(\hat{x}^1)\}\) is bounded \cite{Haarala2007}.
-
-A drawback to the method described above is that it is primarily supported from the dual point of view of the bundle algorithm. Newer concepts focus also on the primal point of view. This invokes for example having different model functions for the subproblem.
-
-In \cite{Fuduli2004, Fuduli2004a} the difference function 
-
-\begin{equation}
-	h(d):= f(x^j +d) -f(x^j) \quad j \in J_k
-\label{diff_fun}
-\end{equation}
-
-is approximated to find descent direction of \(f\). \\
-The negative linearization errors are addressed by having two different bundles. One containing the indices with nonnegative linearization errors and one containing the other ones. From these two bundles two cutting plane approximations can be constructed which provide the bases for the calculation of the new iterate.  \\
-Convergence of the method to a stationary point is proven under the assumption of \(f\) being locally Lipschitz and semismooth.\\
-\textcolor{red}{still line search needed \\
-any bounded (level-)sets needed???} 
-
-In \cite{Noll2012} Noll et al. follow an approach of approximating a local model of the objective function. The model can be seen as a nonsmooth generalization of the Taylor expansion and looks the following:
-
-\begin{equation}
-	\Phi(y,x) = \phi(y,x)+\frac{1}{2}(y-x)^{\top}Q(x)(y-x)
-\label{quad_mod}
-\end{equation}
-
-The so called \emph{first order model} \(\phi(.,x)\) is convex but possibly nonsmooth and can be approximated by cutting planes. The \emph{second order part} is a quadratic but not necessarily convex. The algorithm then proceeds a lot in the lines of a general bundle algorithm.\\
-\textcolor{red}{The method relies on a smart management of the proximity parameter \(\tau_k\) which corresponds to \(1/t_k\) in the notation of this thesis. This is why the method does not need a linesearch subroutine.}
-For a locally Lipschitz objective function with a bounded levelset \(\{x \in \R^n | f(x) \leq f(\hat{x}^1)\}\) convergence to a stationary point is established.
-
-\textcolor{red}{In paper \cite{Noll2012} stated that proximity control = proximal bundle Algorithm with smart \(t_k\)-control very powerful}
-
-\textcolor{red}{Add Luksan in view of Karmitsa Method? Then short introduction of variable metric bundle algorithms necessary; would be managable in this section}
-
-\textcolor{red}{For proximal bundle methods: two strategies: line search or (newer) proximity control: It seems that a successful strategy to deal with nonconvexity is proximity control as used in different manners in \cite{Apkarian2008, Lewis2015, Noll2005, Noll2010, Noll2012, Schramm1992}}
-
-
-\subsubsection{Convex Bundle Methods with Inexact Information}
-
-\begin{itemize}
-	\item stronger convergence results possible because of exploitation of convexity
-	\item changes in the algorithm because if convexity should be exploited: inexactness cannot be treated as nonconvexity
-	\item 
-\end{itemize}
-
-
-\textcolor{red}{in extra section??} \\
-
-\subsection{How to deal with inexact information in bundle methods?}
 
 Partition section in two parts: \\
 1. How is generally dealt with inexact information in the algorithms \\
 2 a) What information is inexact (only subgradients/both...) --> what do you gain from this? \\
 2 b) What kind of assumptions are on the inexactness? (asymptotic, only over- /underestimation?)
 
-\begin{itemize}
-	\item recognized: fundamentally different? approach for convex and nonconvex functions (at least in algorithm) \\
-	convex: ``deal'' with inexactness; extra steps... \\
-	nonconvex: generally no difference in algorithm (but for example line search not possible --> only no change, if algorithm was suitable before)
-	\item nonconvex algorithms: inexactness is seen as some kind of nonconvexity --> for function values clear, for subgradients???
-	\item in convex case: often assumption, that gradient is from \(\varepsilon\)-subdifferential \\
-	is this restrictive? --> 
-\end{itemize}
+\textcolor{red}{Explain ``most common?'' concepts for dealing with nonconvexity??? see \cite{Mifflin1982}.}
 
-\textcolor{blue}{What does ``approximate subgradient'' mean??? \\
-generally seems to be that for convex functions it is the same concept whether one takes the \(\epsilon\)-subdifferential or a ball around the regular subdifferential.} \\
+
+%\begin{itemize}
+	%\item recognized: fundamentally different? approach for convex and nonconvex functions (at least in algorithm) \\
+	%convex: ``deal'' with inexactness; extra steps... \\
+	%nonconvex: generally no difference in algorithm (but for example line search not possible --> only no change, if algorithm was suitable before)
+	%\item nonconvex algorithms: inexactness is seen as some kind of nonconvexity --> for function values clear, for subgradients???
+%\end{itemize}
+
 \textcolor{blue}{seems to be the same:
 \begin{align}
 	& \|g_a-g\| \leq \theta \\
@@ -111,9 +33,83 @@ See also papers from ``Chinese-search''} \\
 
 \textcolor{red}{Different ``degrees'' of inexactness: inexact subgradients; also function values (only subgradients easier???); asymptotically ecact; exactness only for serious steps, not at null steps; accuracy controllable or not --> throughout study in in depth paper.}
 
-One can clearly see, that at the moment there exist two fundamentally different approaches to tackle inexactness in various bundle methods depending on if the method is developed for convex or nonconvex objective functions. \\
-In the nonconvex case inexactness is only considered in the paper by Hare, Sagastiz{\`{a}}bal and Sodolov \cite{Hare2016} presented above and Noll \cite{Noll2013}. In these cases the inexactness can be seen as an ``additional nonconvexity''. In practice this means that the algorithm can be taken from the nonconvex case with no or only minor changes. \\
-In case of convex objective functions changes in the algorithm are more involved. The reason for this is that generally stronger convergence results are possible with inexactness in the convex case than in the nonconvex case. This means however, that the inexactness cannot be incorporated as easily into the algorithm.
+\textcolor{red}{possible simplifications of the algorithm} \\
 
-\textcolor{red}{Remark on nonconvexity line search and inexactness \\
-A possible reason why there are not already more publication on bundle methods with inexact information in the nonconvex case although there exists a broad variety of algorithms that deal with the exact case could be that many of them incorporate a line search. To make sure that this subalgorithm is finite the objective function has to be semi-smooth \textbf{definition of semismoothness, check ...}. This however cannot be the case when the functions values of the objective function are only approximated.} \\
+
+Convergence for inexact convex functions:
+\begin{itemize}
+	\item states in paper \cite{Hare2016} (p. 14) that for convex functions error of \(\bar{\sigma}\) instead of \(2\bar{\sigma}\) possible (and for lower models; see depth paper?)
+\end{itemize}
+
+
+%\section{How is inexact information dealt with?}
+
+\subsection{Nonconvex Bundle Methods with Exact Information}
+
+%\textbf{Simplification / better results if exact information}
+%The main ideas of the algorithm are basicly the ones developed in \cite{Hare2010} for the redistributed proximal bundle method for exact nonconvex problems. \\
+%Setting the error bounds \(\bar{\sigma}\) and \(\bar{\theta}\) to zero results therefore in the following convergence theorem. 
+%
+%\begin{theorem}
+	%Let the sequence \(\{\eta_k\}\) be bounded, \(\liminf_{k \to \infty }\) and the cardinality of the set \(\{j \in J_k | \alpha_j^k > 0\}\) be uniformly bounded in \(k\). \\
+	%Then every accumulation point of sequence of serious iterates \(\{\hat{x}^k\}\) is a stationary point of the problem.
+%\end{theorem}
+%
+%\textcolor{red}{think last condition only interesting in inexact case. \\
+%try to gain some insight with generalized \(\varepsilon\)-subdifferential from Chinese paper:\\
+%\(\varepsilon\)\emph{-limiting subdifferential} \cite{}}
+
+
+There are different approaches for handling nonconvexity of the objective function in bundle methods.
+As the nonnegativity property of the linearization errors \(e_j^k\) is crucial for the convergence proof of convex bundle methods an early idea was forcing the errors to be so by different downshifting strategies. A very common one is using the \emph{subgradient locality measure} \cite{Kiwiel1986, Mifflin1982}. Here the linearization error is essentially replaced by the nonnegative number
+
+\begin{equation}
+	\tilde{e}_j^k := \max_{j \in J_k} \{|e_j^k|,\gamma \|\hat{x}^k-x^j\|^2\}
+\label{subgr_loc_measure}
+\end{equation}
+
+or a variation of this expression.
+
+The expression gradient locality measure comes from the dual point of view, where the aggregate linearization error provides a measure for the 'distance' of the calculated \(\varepsilon\)-subgradient to the objective function.
+
+%\textcolor{red}{Remark on dual view? How subgradient locality measure measures how close subgradient is to subdifferential of \(f\)???} \\
+Methods that use downshifting for building the model function are often endowed with a line search to provide sufficient decrease of the objective function. For the linesearch to terminate finitely, usually semismoothness of the objective function is needed.
+
+Instead of using line search it is also possible to do \emph{proximity control}. This means that the step size parameter \(t_k\) is managed in a smart way to ensure the right amount of decrease in the objective function. This method is very helpful in the case of nonconvex objective functions with inexact information as it is predominantly considered in this thesis.
+
+As inexactness can be seen as a kind of slight nonconvexity one could be tempted to think that nonconvex bundle methods are destined to be extended to the inexact case. Indeed, the two existing algorithms \cite{Hare2016,Noll2013} that deal with both nonconvexity and inexactness are both extensions of a nonsmooth bundle method.
+This is however seldom possible for algorithms that employ a line search because for functions with inexact information convergence of this subroutine cannot be proven.
+
+To this end proximity control seems to be a very promising strategy. It is used in many different variations in \cite{Apkarian2008, Lewis2015, Noll2005, Noll2010, Noll2012, Schramm1992}
+
+In the beginning bundle methods were mostly explored from the  dual point of view. Newer concepts focus also on the primal version of the method. This invokes for example having different model functions for the subproblem.
+
+In \cite{Fuduli2004, Fuduli2004a} the difference function 
+
+\begin{equation}
+	h(d):= f(x^j +d) -f(x^j) \quad j \in J_k
+\label{diff_fun}
+\end{equation}
+
+is approximated to find a descent direction of \(f\).
+The negative linearization errors are addressed by having two different bundles. One containing the indices with nonnegative linearization errors and one containing the other ones. From these two bundles two cutting plane approximations can be constructed which provide the bases for the calculation of new iterates.
+
+In \cite{Noll2012} Noll et al. follow an approach of approximating a local model of the objective function. The model can be seen as a nonsmooth generalization of the Taylor expansion and looks the following:
+
+\begin{equation}
+	\Phi(y,x) = \phi(y,x)+\frac{1}{2}(y-x)^{\top}Q(x)(y-x)
+\label{quad_mod}
+\end{equation}
+
+The so called \emph{first order model} \(\phi(.,x)\) is convex but possibly nonsmooth and can be approximated by cutting planes. The \emph{second order part} is a quadratic but not necessarily convex. The algorithm then proceeds a lot in the lines of a general bundle algorithm.
+Instead of a line search is uses proximity control to ensure convergence.
+
+Generally for all of this methods convergence to a stationary point is established under the assumptions of a locally Lipschitz objective function and bounded level sets \(\{x \in \R^n | f(x) \leq f(\hat{x}^1)\}\).
+If the method uses a line search additionally semismoothness of the objective function is needed.
+
+In \cite{Noll2013} the second order approach of \cite{Noll2012} is extended to functions with inexact information.
+As far a we know this is the only other bundle method that can deal with nonconvexity and inexactness in both the function value and subgradient. It inspires the variable metric variation of the method used by Hare et al. in \cite{Hare2016} that is presented in section \ref{variable_metric} of this thesis.
+
+To conclude this section we can say: At the moment there exist two fundamentally different approaches to tackle inexactness in various bundle methods depending on if the method is developed 	for convex or nonconvex objective functions.
+In the nonconvex case inexactness is only considered in the paper by Hare, Sagastiz{\`{a}}bal and Sodolov \cite{Hare2016} presented above and Noll \cite{Noll2013}. In these cases the inexactness can be seen as an ``additional nonconvexity''. In practice this means that the algorithm can be taken from the nonconvex case with no or only minor changes.
+In case of convex objective functions changes in the algorithm are more involved. The reason for this is that generally stronger convergence results are possible with inexactness in the convex case than in the nonconvex case. This means however, that the inexactness cannot be incorporated as easily into the algorithm.

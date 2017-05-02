@@ -44,7 +44,6 @@
 
 %\newenvironment{proof}{\begin{proof}[Proof:]}{\end{proof}}
 
-
 \newcommand{\R}{\mathbb{R}}
 \newcommand{\N}{\mathbb{N}}
 %\newcommand{\blangle}{\big\langle}
@@ -70,7 +69,7 @@
 %\setlength{\headsep}{50pt}
 %\setlength{\headheight}{0pt}
 
-
+\numberwithin{equation}{section}
 
 \begin{document}
 
@@ -94,12 +93,12 @@
 
 \pagenumbering{arabic}
 %\include{Chapters/Introduction}
-%\include{Chapters/Preliminaries}
-\include{Chapters/Bundle_Methods}
-%\include{Chapters/Simplifications}
-%\include{Old/Explanation_Bundle_Methods}
-\include{Chapters/Variable_Metric}
-%\include{Chapters/Bilevel_Application}
+%\input{Chapters/Preliminaries}
+\input{Chapters/Bundle_Methods}
+\input{Chapters/Simplifications}
+\input{Chapters/Bundle_Method_nonconv_inex}
+\input{Chapters/Variable_Metric}
+%\input{Chapters/Bilevel_Application}
 
 
 \addtocontents{toc}{%

@@ -1,0 +1,292 @@
+\section{Proximal bundle method for nonconvex functions with inexact information}
+
+\textcolor{blue}{introduction}
+
+This section focuses on the proximal bundle method presented by Hare et al. in \cite{Hare2016}.
+The idea is to extend the basic bundle algorithm for nonconvex functions with both inexact function and subgradient information.
+The key idea of the algorithm is the one already developed by Hare and Sagastizábal in \cite{Hare2010}: When dealing with nonconvex functions a very critical difference to the convex case is that the linearization errors are not necessarily nonnegative any more. To tackle this problem the errors are manipulated to enforce nonnegativity. In this case this is done my modeling not the objective function directly but a convexified version of it.
+
+\subsection{Derivation of the Method}
+\textcolor{blue}{``assumptions and notations''}
+
+%\textcolor{red}{introduce exact optimization problem that is used in this section and its properties if not already introduce in ``Preliminaries''.}
+
+Throughout this section we consider now the optimization problem
+
+\begin{equation}
+	\min_{x} f(x) \quad \text{s.t.} \quad x \in X.
+\label{opt_prob_nonconv_inex}
+\end{equation}
+
+The objective function \(f:\R^n \to \R\) is locally Lipschitz and (subdifferentially) regular. \(X \subseteq \R^n\) is assumed to be a convex compact set. 
+
+%\begin{definition} \cite{Rockafellar2009}
+	%A function \(f:\R^n \to \bar{\R} = [-\infty, + \infty]\) is called \emph{proper} if \(f(x) < \infty\) for at least one \(x\in \R^n\) and \(f(x) > \infty ~ \forall x \in \R^n\).
+%\end{definition}
+
+\begin{definition} \cite{Rockafellar2009}
+	\(f: \R^n \to \bar{\R}\) is called \emph{subdifferentially regular} at \(\bar{x}\) if \(f(\bar{x})\) is finite and the epigraph
+	\[epi(f) := \{(x, \alpha) \in \R^n\times \R | \alpha \geq f(x)\}\]
+	is Clarke regular at \(\bar{x},f(\bar{x})\).
+\end{definition}
+
+Both the function value as well as one element of the subdifferential can be provided in an inexact form.
+
+For the function value inexactness is defined straight forwardly: If 
+\begin{equation}
+	\|f - f(x)\| \leq \sigma
+\label{fun_inex}
+\end{equation}
+
+then \(f\) approximates the value \(f(x)\) within \(\sigma\).
+
+For the subgradients we adopt the notation used in \cite{Noll2013} and interpret inexactness in the following way: \(g \in \R^n\) approximates a subgradient  of \( \partial f(x)\) within \(\theta \geq 0\) if
+\begin{equation}
+	g \in \partial f(x) + B_{\theta}(0) := \partial_{[\theta]}f(x)
+\label{subgr_inex}
+\end{equation}
+
+where \(\partial f(x)\) is the \emph{Clarke subdifferential} of \(f\), which is also defined for nonconvex functions. 
+
+Like in the paper it is assumed that the errors are bounded although the bound does not have to be known:
+
+\begin{equation}
+	|\sigma_j| \leq \bar{\sigma} > 0 \quad \text{and} \quad 0 \leq \theta_j \leq \bar{\theta} \quad \forall j \in J^k.
+\label{err_bound}
+\end{equation}
+
+In the context of inexact information it is important to make a distinction between the (unknown) exact function value and its approximation. Throughout this section we therefore write \(f(x)\) for the exact function value whereas the approximation will be written as \(f_j\) or \(\hat{f}_k\) for the approximation at the current stability center.
+
+
+%\textcolor{red}{Closed convex sets are Clarke regular, so in particular the epigraph of \textcolor{red}{lower \(\mathcal{C}^2\)-functions?}.}
+
+%\textcolor{red}{Definition semismooth for later:} \\
+%\begin{definition} % as in \cite{Mifflin1977}
+	%A function \(f: \R^n \to \R\) is called \emph{semismooth} ar \(x\in \R^n\) if \(f\) is Lipschitz near \(x\) and for each \(d \in \R^n\) and for any sequences \(\{t_k\} \subseteq \R_{+}, \{\theta^k\} \subseteq \R^n\) and \(\{g^k\} \subseteq \R^n\) such that 
+	%\[ \{t_k\} \downarrow 0, \quad \{\theta^k/t_k\} \to 0 \in \R^n \quad \text{and} \quad g^k \in \partial f (x+t_kd+\theta^k), \]
+	%the sequence \(\{\langle g^k, d \rangle\}\) has exactly one accumulation point.
+%\end{definition}
+
+%\begin{definition} % as in \cite{Haarala2004a}
+%A point \(x \in \R^n\) that satisfies \(0 \in \partial f(x)\) is called a \emph{stationary point} of \(f\).
+%\end{definition}
+
+\textcolor{blue}{explanation}
+
+A main issue both nonconvexity and inexactness entail is that the linearization errors \(e_j^k\) are not necessarily nonnegative any more.
+So based on the results in \cite{Hare2009} not the objective function but a convexified version of it is modeled as the objective function of the subproblem.
+%\textcolor{red}{explain locally convexified more precisely? Is it because no global convexification? different than in [18]??}\\
+
+%When looking at the subproblem formulated as in (\ref{sub_prob_long}) one can see that the new iterate \(x^{k+1}\) is in fact a \emph{proximal point} of the subproblem.\\
+%The \emph{proximal point mapping} or \emph{prox-operator} is defined as
+%\begin{equation}
+	%prox_{t,f}(x) = \argmin_{y}\left\{\check{f}(y) + \frac{1}{2t}\|x-y\|^2\right\}, \quad t > 0
+%%\label{prox_op}
+%\end{equation}
+
+%For \(\check{f}(x) := m_(x)+\mathbb{I}_X(x)\) and \(\mu:=\frac{1}{t_k}\) this is just subproblem (\ref{sub_prob_long}) with the constraint \(x\in X\) incorporated in the objective function. Because of this special form of the subproblems primal bundle methods are also called proximal bundle methods.\\
+
+As already pointed out in \ref{subsec_prox_op} the bundle subproblem can be formulated by means of the prox-operator (\ref{prox_op}).
+
+%\textcolor{red}{explain in much more detail when read about calculation of proximal points for nonconvex functions. At the moment just main ideas.}
+
+The key idea is now to use the relation
+\begin{equation}
+	prox_{T = \frac{1}{\eta}+t, f}(x) = prox_{t,f+\eta/2|\cdot - x|^2}(x).
+\label{prox_relation}
+\end{equation}
+
+This means, that the proximal point of the function \(f\) for parameter \(T=\frac{1}{\eta}+t\) is the same as calculating the proximal point of the convexified function 
+
+\begin{equation}
+	\tilde{f}(y) = f(y) + \frac{\eta}{2}|y-x|^2
+\label{conv_obj}
+\end{equation}
+
+with respect to the parameter \(t\) \cite{Hare2010}. \(\eta\) is therefore called the \emph{convexification parameter} and \(t\) is the \emph{prox-parameter}.\\
+
+%\textcolor{red}{say why/how... this is related to current stability center}
+%\textcolor{red}{Because new function to be approximated, subgradients ``new'':}
+The main difference of the method in \cite{Hare2016} to the basic bundle method is that the function that is modeled by the cutting plane model s no longer the original objective function \(f\) but the convexified version \(\tilde{f}\). This results in the following changes:
+
+The linear functions forming the model have a tilted slope, here called the \emph{augmented subgradient} at the iterate \(x^j\)
+
+\begin{align}
+	s^k_j &= g^j + \eta_k \left(x^j-\hat{x}^k\right).
+	\label{aug_subgr}
+\end{align}
+
+Additionally they are shifted downwards to keep the linearization error nonnegative.
+The \emph{augmented linearization error} is therefore defined as 
+
+\begin{equation}
+	0 \leq c^k_j := e^k_j + b_j^k, \quad \text{with} \quad \left\{ \begin{array}{l} e_j^k := \hat{f}_k - f_j - \langle g^j, \hat{x}^k-x^j\rangle	 \vspace{1ex} \\
+	b_j^k := \frac{\eta_k}{2}\|x^j-\hat{x}^k\|^2 \end{array}\right.
+\label{aug_lin_err}
+\end{equation}
+
+and 
+
+\begin{equation}
+	\eta_k \geq \max\left\{\max_{j \in J_k, x^j \neq \hat{x}^k}{ \frac{-2e_j^k}{\|x^j-\hat{x}^k\|^2}}, 0 \right\} + \gamma. 
+\label{eta}
+\end{equation}
+
+The parameter \(\gamma \geq 0\) is a safeguarding parameter to keep the calculation numerically stable.
+
+
+The new model function can therefore be written as
+\begin{equation}
+  M_k(\hat{x}^k +d) := \hat{f}_k + \max_{j \in J_k} \left\{{s^k_j}^{\top}d-c^k_j \right\}
+\label{aug_model}
+\end{equation}
+
+The definition of the aggregate objects follows straightforwardly:
+\begin{align}
+	S^k := \sum_{j \in J_k} \alpha_j^k s_j^k \label{aug_agg_subgr}, \\
+	C_k := \sum_{j \in J_k}{\alpha_j^k c_j^k} \label{aug_agg_err} \text{ and }
+	A_k(\hat{x}^k+d) := M_k(x^{k+1})+\left\langle S^k, d-d^k \right\rangle.
+\end{align}
+
+Just as the model decrease
+\begin{equation}
+	\delta^k := C_k + t_k \|S^k + \nu^k\|^2.
+\label{mod_dec2}
+\end{equation}
+
+A bundle algorithm that deals with nonconvexity and inexact function and subgradient information can therefor be stated.
+
+\textcolor{blue}{algorithm}
+
+\vspace{1em}
+
+\hrule  \vspace{0.4ex} \hrule
+\vspace{1ex}
+\textbf{Nonconvex proximal bundle method with inexact information}
+\vspace{1ex}
+\hrule
+\vspace{1ex}
+Select parameters \( m \in (0,1), \gamma > 0 \) and a stopping tolerance \( \mathtt{tol} \geq 0\). \\
+Choose a starting point \(x^1 \in \R^n\) and compute \(f_1\) and \(g^1\). Set the initial index set \(J_1:=\{1\}\) and the initial prox-center to \(\hat{x}^1 := x^1\), \(\hat{f}_1 = f_1\) and select \(t_1 > 0\).
+
+For \(k = 1,2,3,  \dotsc \)   
+
+\begin{enumerate}
+	\item Calculate \[d^k = \arg \min_{d \in \R^n} \left\{ M_k(\hat{x}^k+d)+\mathbb{I}_X(\hat{x}^k+d)+\frac{1}{2t_k}\|d\|^2\right\}.\]
+	\item Set
+		\begin{align*} 
+		  G^k &= \sum_{j \in J_k}{\alpha_j^k s_j^k},
+			C_k &= \sum_{j \in J_k}{\alpha_j^k c_j^k} \\
+	    \delta_k &=  C_k + t_k\|G^k + \nu^k\|^2
+		\end{align*}
+		If \(\delta_k \leq \mathtt{tol} \rightarrow \) STOP.
+	\item Set \( x^{k+1} = \hat{x}^k + d^k \).
+	\item Compute \(f^{k+1}, g^{k+1}\) \\
+	If 
+	\[f^{k+1} \leq \hat{f}^k - m\delta_k \quad \rightarrow \text{ serious step} \]
+	Set \(\hat{x}^{k+1} = x^{k+1}, \hat{f}^{k+1} = f^{k+1}\) and select \(t_{k+1} > 0\). \\
+	Otherwise 
+	\[\rightarrow \text{nullstep} \]
+	Set \(\hat{x}^{k+1} = \hat{x}^k, \hat{f}^{k+1}=f^{k+1}\) and choose \(0 < t_{k+1} \leq t_k\). 	
+	\item Select new bundle index set \(J_{k+1}\), calculate 
+	\[ \eta_k \geq \max{\left\{\max_{j \in J_{k+1}, x^j \neq \hat{x}^{k+1}}{\frac{-2e_j^k}{|x^j - \hat{x}^{k+1}|^2}, 0}\right\}}+\gamma  \]
+	and update the model \(M_k\)
+\end{enumerate}
+\vspace{1ex}
+\hrule
+
+\vspace{1.5em}
+
+The update of \(t_k\) can be done in the same way described for the basic bundle method. Similarly  the methods to update the bundle index set \(J^k\) stay valid.
+The update conditions (\ref{model_update}) for the model are now written with respect to the augemented aggregate linearization and the approximate function value \(\hat{f}_{k+1}\).
+
+\begin{equation}
+\begin{split}
+	M_{k+1}(\hat{x}^k+d) \geq \hat{f}_{k+1}-c^{k+1}_{k+1}+\left\langle s^{k+1},d \right\rangle \\
+	M_{k+1}(\hat{x}^k+d) \geq A_k(\hat{x}^k+d).
+	\label{Model_update}
+\end{split}
+\end{equation}
+
+
+\subsection{On Different Convergence Results}
+
+In terms of usability of the described algorithm it is interesting to see if stronger convergence results are possible if additional assumptions are put on the objective function. This is investigated in the following section.
+
+\subsubsection{The Constraint Set}
+
+The method above can handle nonconvex objective functions. It is not explicitly assumed, that the function taken has a finite minimum. Therefore the constraint set \(X\) has to ensure the boundedness of the sequence \(\{\hat{x}^k\}\).
+This is not necessary if the objective function is assumed to have bounded level sets \(\{x \in \R^n | f(x) \leq f(\hat{x}^1)\}\), an assumption commonly  used when optimizing nonconvex functions.
+As the objective function is assumed to be continuous bounded level sets are compact. Additionally the descent test makes sure that \(f(\hat{x}^{k+1}) \leq f(\hat{x}^k)\) for all \(k\). The proof holds therefore in the same way as with the set \(X\).
+
+\subsubsection{Exact Information}
+
+As the presented algorithm was originally designed for nonconvex objective functions where function values as well as subgradients are available in an exact manner, all convergence results stay the same with the error bounds \(\bar{\sigma} = \bar{\theta} = 0\).
+As already indicated previously this is the case because inexactness can be seen as a kind of nonconvexity and no additional concepts had to be added to the method when generalizing it to the inexact setting.
+
+If we additionally require the objective function to be lower-\(\mathcal{C}^2\) it can be proven that the sequence \(\{\eta_k\}\) is bounded \cite{Hare2010}.
+This is not possible in the inexact case even for convex objective functions.
+
+
+
+\subsubsection{Asymptotically Vanishing Errors}
+
+\begin{itemize}
+	\item asymptotically vanishing error \\
+	\(\to\) calculate what happens \(\to\) think error bounds = 0 possible???
+	\item convex objective function \\
+	\(\to\) generally better convergence properties possible \\
+	but more or less only on error bound???
+	\(\to\) different concept of algorithm for convex inexact functions  to exploit convexity (contrary to nonconvex obj functions)
+	\item assumptions on errors \(\to\) Noll comment in paper
+\end{itemize}
+
+
+%In the exact case boundedness of the sequence \(\{\eta_k\}\) is proven for lower-\(\mathcal{C}^2\) functions in \cite{Hare2010}. This is not possible in the inexact case, even if the objective function \(f\) is convex.
+
+%A further simplification of the method for exact information is not necessary as the method is already almost as simple as the basic bundle method for nonconvex exact functions. Additionally no new concepts needed to be introduced when doing the step from nonconvex exact problems, for which the algorithm was originally designed, to problems with inexact information.
+
+%\textcolor{red}{\begin{remark}
+	%We want to add here, that the simplicity of the algorithm is rather special for methods suitable for nonconvex problems. Often a linesearch algorithm has to be inserted in the nonconvex case, which is not needed here. 
+%\end{remark}}
+
+%\subsection{Convergence analysis}
+%
+%\subsubsection{Results for objectives with exact information}
+%
+%The main ideas of the algorithm are basicly the ones developed in \cite{Hare2010} for the redistributed proximal bundle method for exact nonconvex problems. \\
+%Setting the error bounds \(\bar{\sigma}\) and \(\bar{\theta}\) to zero results therefore in the following convergence theorem. 
+%
+%\begin{theorem}
+	%Let the sequence \(\{\eta_k\}\) be bounded, \(\liminf_{k \to \infty }\) and the cardinality of the set \(\{j \in J_k | \alpha_j^k > 0\}\) be uniformly bounded in \(k\). \\
+	%Then every accumulation point of sequence of serious iterates \(\{\hat{x}^k\}\) is a stationary point of the problem.
+%\end{theorem}
+%
+%\textcolor{red}{think last condition only interesting in inexact case.}
+%
+%In the exact case boundedness of the sequence \(\{\eta_k\}\) is proven for lower-\(\mathcal{C}^2\) functions in \cite{Hare2010}. This is not possible in the inexact case, even if the objective function \(f\) is convex.
+
+
+\begin{itemize}
+	\item stronger convergence results possible because of exploitation of convexity
+	\item changes in the algorithm because if convexity should be exploited: inexactness cannot be treated as nonconvexity
+	\item 
+\end{itemize}
+
+\begin{itemize}
+	%\item in paper other method for calculating \(\mu = \frac{1}{t_k}\) \\
+	%\textcolor{red}{how is made sure that \(\eta\) big enough???}
+	%\item convergence results for nonconvex functions:?
+	%\begin{itemize}
+		%\item conditions on functions: \\
+		%\emph{exact}: \(f\) lower-\(\mathcal{C}^2\) near the minimizers of the problem \\
+		%\emph{inexact}: proper, regular, locally Lipschitz with full domain; even better: lower-\(\mathcal{C}^1\) (contains lower-\(\mathcal{C}^2\)) \(\rightarrow\) conditions more general than in exact case
+		%\item convergence results: \\
+		%\emph{exact}: the limit of the sequence \(\{x^{k}\}\) (which exists) or every accumulation point of the sequence \(\{\hat{x}^k\}\) is a stationary point of \(f\)\\
+		%\textcolor{red}{Does this mean: \(0 \in \partial f(\bar{x}), ~\bar{x}\) being the respective limit??? incorporate set \(D\)?} \\
+		\item \emph{inexact}: \(0 \in \left(\partial f(\bar{x}) + \partial I_D(\bar{x}) \right) + B_{\bar{\theta}}(0)\) \\
+		if \(f\) lower-\(\mathcal{C}^1\): 
+		\[ \forall \varepsilon >0 ~\exists \rho >0: \quad f(y) \geq f(\bar{x})-(\bar{\theta}+\varepsilon)\|y-\bar{x}\|-2\bar{\sigma} \quad \forall y \in D \cap B_{\rho}(\bar{x}) \]
+		\item obvious difference: no error terms in exact case
+\end{itemize}
+
