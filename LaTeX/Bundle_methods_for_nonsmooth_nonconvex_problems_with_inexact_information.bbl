@@ -6,6 +6,17 @@ P.~Apkarian, D.~Noll, and O.~Prot.
   optimization.
 \newblock {\em {SIAM} Journal on Optimization}, 19(1):281--306, jan 2008.
 
+\bibitem{Clarke1990}
+Frank~H. Clarke.
+\newblock {\em Optimization and nonsmooth analysis}.
+\newblock Classics in Applied Mathematics. Society for Industrial and Applied
+  Mathematics Philadelphia, 1990.
+
+\bibitem{Oliveira2014a}
+Welington de~Oliveira and Claudia Sagastiz{\'{a}}bal.
+\newblock Bundle methods in the xxist century: A bird's-eye view.
+\newblock {\em Pesquisa Operacional}, 34(3):647--670, dec 2014.
+
 \bibitem{Fuduli2004}
 A.~Fuduli, M.~Gaudioso, and G.~Giallombardo.
 \newblock A dc piecewise affine model and a bundling technique in nonconvex
@@ -28,6 +39,11 @@ Warren Hare and Claudia Sagastiz\`{a}bal.
 \newblock A redistributed proximal bundle method for nonconvex optimization.
 \newblock {\em SIAM Journal on Optimization}, 20(5):2442--2473, 2010.
 
+\bibitem{Hintermueller2001}
+Michael Hintermüller.
+\newblock A proximal bundle method based on approximate subgradients.
+\newblock {\em Computational Optimization and Applications}, 20:245--266, 2001.
+
 \bibitem{Hiriart-Urruty1993}
 Jean-Baptiste Hiriart-Urruty and Claude Lemar{\'{e}}chal.
 \newblock {\em Convex Analysis and Minimization Algorithms {II}}, volume 306 of
@@ -40,12 +56,22 @@ Jean-Baptiste Hiriart-Urruty and Claude Lemar\'{e}chal.
   {\em Grundlehren der mathematischen Wissenschaften}.
 \newblock Springer Berlin Heidelberg, 2 edition, 1996.
 
+\bibitem{Kiwiel1985}
+Krzysztof~C. Kiwiel.
+\newblock {\em Methods of Descent for Nondifferentiable Optimization}.
+\newblock Springer, 1985.
+
 \bibitem{Kiwiel1986}
 Krzysztof~C. Kiwiel.
 \newblock An aggregate subgradient method for nonsmooth and nonconvex
   minimization.
 \newblock {\em Journal of Computational and Applied Mathematics},
   14(3):391--400, 1986.
+
+\bibitem{Kiwiel2006}
+Krzysztof~C. Kiwiel.
+\newblock A proximal bundle method with approximate subgradient linearizations.
+\newblock {\em {SIAM} Journal on Optimization}, 16(4):1007--1023, jan 2006.
 
 \bibitem{Lewis2015}
 A.~S. Lewis and S.~J. Wright.
@@ -117,6 +143,13 @@ Helga Schramm and Jochem Zowe.
 \newblock A version of the bundle idea for minimizing a nonsmooth function:
   conceptual idea, convergence analysis, numerical results.
 \newblock {\em {SIAM} Journal on Optimization}, 2(1):121--152, feb 1992.
+
+\bibitem{Solodov2003}
+M.~V. Solodov.
+\newblock Aon approximations with finite rprecision in bundle methods for
+  nonsmooth optimization.
+\newblock {\em Journal of Optimization Theory and Applications},
+  119(1):151--165, 2003.
 
 \bibitem{Solodov2011}
 Mikhail~V. Solodov.

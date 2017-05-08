@@ -207,7 +207,7 @@ By the \textcolor{red}{definitions and characterizations that have to be specifi
 \begin{align}
 	\hat{f} &= \delta_k+M_k(\hat{x})-C_k-\left(d^{k}\right)^{\top}\left(Q+\frac{1}{t_k}\mathbb{I}\right)\left(d^{k}\right) \\
 	&= \delta_k + M_k(x^{k+1})-\langle S^k,d^k \rangle-\left(d^{k}\right)^{\top}\left(Q+\frac{1}{t_k}\mathbb{I}\right)\left(d^{k}\right)  \\
-	&= \delta_k
+	&= \delta_k \\
 	&\geq \delta_k+M_k(\hat{x}+d^k)
 \end{align}
 
@@ -244,16 +244,29 @@ Since \(m \in (0,1)\) and \(\left\langle s^{k+1}_{k+1},d^k-d^{k+1}\right\rangle 
 From the formulation \(\delta_k = C_k + \left(d^k\right)^{\top}\left(Q+\frac{1}{t_k}\mathbb{I}\right)d^k\) follows that \(C_k \to 0\) as \(k \to \infty\). As \textcolor{red}{\(Q+\frac{1}{t_k}\mathbb{I} \succ \xi\mathbb{I}\)} it follows that 
 
 \begin{equation}
-	\xi \left(d^k\right)^{\top}d^k \leq \left(d^k\right)^{top}\left(Q+\frac{1}{t_k}\mathbb{I}\right)d^k \to 0
+	\xi \left(d^k\right)^{\top}d^k \leq \left(d^k\right)^{\top}\left(Q+\frac{1}{t_k}\mathbb{I}\right)d^k \to 0
 \end{equation}
 
 \end{proof}
 
-
-
-
-
-
+\begin{remark}
+	To the boundedness of \(Q\) and the resulting inequalities:
+	\[ A \succ B \Leftrightarrow A - B \succ 0\Leftrightarrow A-B \text{ is positive definite}\]
+	Respectively for \(A \prec B\) \\
+  For a real symmetric matrix \(A\) and a vector \(d\in \R^n\) the following result holds: 
+	\[ A \prec \xi \mathbb{I} \Rightarrow Ad < \xi d \]
+	\textbf{Proof:} \(A\) real and symmetric \(\Rightarrow\) it is orthogonally diagonalizeable:
+	\begin{equation}
+	\begin{split}
+		\exists \lambda_i \in \R \text{ eigenvalues} \quad v^i \in \R^n \text{ eignvektors} \\
+		Av^i= \lambda_iv^i \\
+		\text{and} \quad \exists \alpha_i \in \R: \quad d = \sum_{i} {\alpha_i v^i} \\
+		\Rightarrow Ad = A \sum_i{\alpha_i v^i} = \sum_i \alpha_i Av^i = \sum_i \alpha_i \lambda_i v^i\\
+		A \prec \xi \mathbb{I}  \Leftrightarrow \max_i \lambda_i < \xi \\
+		\Rightarrow Ad < \xi \sum_i \alpha_i v^i = \xi d
+  \end{split}
+	\end{equation}
+\end{remark}
 
 
 

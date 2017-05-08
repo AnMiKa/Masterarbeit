@@ -253,6 +253,7 @@ The first condition means, that the newly computed information in always put int
 It holds trivially if no or only inactive information \(j \text{ with }\alpha_j = 0\) is removed.
 
 It is also always satisfied if the aggregate linearization \(a_k\) itself is added to the bundle. In this case active information can be removed without violating the condition. This is the key idea of Kiwiel's aggregation technique and ensures that the set \( \{j \in J^k| \alpha_j >0 \} \) can be bounded.
+It can however impair the speed of convergence if the bundle is kept too small and provides hence less information about the objective function \cite{Oliveira2014a}.
 
 The following basic bundle algorithm can now be stated: 
 

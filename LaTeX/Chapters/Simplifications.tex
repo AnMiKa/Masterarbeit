@@ -1,20 +1,33 @@
 \section{Variations of The Bundle Method}
 
-Bundle method successfull \\
-shortly after (when??) generalization -> nonconvex case and inexact information \\
-first inexact information in convex case
+After their discovery in 1975 bundle methods became very successful. Only a few years after that they were generalized to be used also with nonconvex objective functions. Early works, that contain fundamental ideas still used for these algorithms are \cite{Mifflin1982} and \cite{Kiwiel1985}. It then took over 25 years that bundle methods were again generalized to the use of inexact information. The first works on this subject being \cite{Hintermueller2001,Kiwiel2006} and \cite{Solodov2003}.
+
+This section of the thesis shortly presents the key ideas of those two kinds of generalizations and different types of bundle methods that realize them.
+This is first done for the case of convex objective functions with inexact function value and/or subgradient information and then for nonconvex objective functions. 
+
 
 \subsection{Convex Bundle Methods with Inexact Information}
 
+We focus here on convex bundle methods with inexact information. The reason for this is that there is a fundamental difference in treating inexactness between methods that assume convex and those that assume nonconvex objective functions.
+When dealing with nonconvex objective functions inexactness is treated as some additional nonconvexity. This is not possible when assuming convex objective functions and the convexity property is to be exploited for better convergence results.
+A throughout study on this subject including a synthetic convergence theory is done in \cite{Oliveira2014}. Here the most important aspects \textcolor{red}{in view of the following chapters are reviewed.}
 
-Partition section in two parts: \\
+\subsubsection{Degrees of Inexactness}
+
+2 a) What information is inexact (only subgradients/both...) --> what do you gain from this?
+
+
+2 b) What kind of assumptions are on the inexactness? (asymptotic, only over- /underestimation?)exactness only for serious steps,accuracy controllable or not
+
+\textcolor{red}{Different ``degrees'' of inexactness: inexact subgradients; also function values (only subgradients easier???); asymptotically ecact; , not at null steps;  --> throughout study in in depth paper.}
+
 1. How is generally dealt with inexact information in the algorithms \\
-2 a) What information is inexact (only subgradients/both...) --> what do you gain from this? \\
-2 b) What kind of assumptions are on the inexactness? (asymptotic, only over- /underestimation?)
 
-\textcolor{red}{Explain ``most common?'' concepts for dealing with nonconvexity??? see \cite{Mifflin1982}.}
-
-
+\textcolor{red}{possible simplifications of the algorithm} \\
+Convergence for inexact convex functions:
+\begin{itemize}
+	\item states in paper \cite{Hare2016} (p. 14) that for convex functions error of \(\bar{\sigma}\) instead of \(2\bar{\sigma}\) possible (and for lower models; see depth paper?)
+\end{itemize}
 %\begin{itemize}
 	%\item recognized: fundamentally different? approach for convex and nonconvex functions (at least in algorithm) \\
 	%convex: ``deal'' with inexactness; extra steps... \\
@@ -22,43 +35,16 @@ Partition section in two parts: \\
 	%\item nonconvex algorithms: inexactness is seen as some kind of nonconvexity --> for function values clear, for subgradients???
 %\end{itemize}
 
-\textcolor{blue}{seems to be the same:
-\begin{align}
-	& \|g_a-g\| \leq \theta \\
-	\Leftrightarrow \quad & g_a \in \partial f + B_\theta(0) \\
-	\Leftrightarrow \quad & g_a \in \partial_{\varepsilon}f, \quad \theta \leq \varepsilon^2
-\end{align}
-Last implication only for convex functions because \(\varepsilon\)-subdifferential otherwise not defined.
-See also papers from ``Chinese-search''} \\
-
-\textcolor{red}{Different ``degrees'' of inexactness: inexact subgradients; also function values (only subgradients easier???); asymptotically ecact; exactness only for serious steps, not at null steps; accuracy controllable or not --> throughout study in in depth paper.}
-
-\textcolor{red}{possible simplifications of the algorithm} \\
-
-
-Convergence for inexact convex functions:
-\begin{itemize}
-	\item states in paper \cite{Hare2016} (p. 14) that for convex functions error of \(\bar{\sigma}\) instead of \(2\bar{\sigma}\) possible (and for lower models; see depth paper?)
-\end{itemize}
-
-
-%\section{How is inexact information dealt with?}
+%\textcolor{blue}{seems to be the same:
+%\begin{align}
+	%& \|g_a-g\| \leq \theta \\
+	%\Leftrightarrow \quad & g_a \in \partial f + B_\theta(0) \\
+	%\Leftrightarrow \quad & g_a \in \partial_{\varepsilon}f, \quad \theta \leq \varepsilon^2
+%\end{align}
+%Last implication only for convex functions because \(\varepsilon\)-subdifferential otherwise not defined.
+%See also papers from ``Chinese-search''} \\
 
 \subsection{Nonconvex Bundle Methods with Exact Information}
-
-%\textbf{Simplification / better results if exact information}
-%The main ideas of the algorithm are basicly the ones developed in \cite{Hare2010} for the redistributed proximal bundle method for exact nonconvex problems. \\
-%Setting the error bounds \(\bar{\sigma}\) and \(\bar{\theta}\) to zero results therefore in the following convergence theorem. 
-%
-%\begin{theorem}
-	%Let the sequence \(\{\eta_k\}\) be bounded, \(\liminf_{k \to \infty }\) and the cardinality of the set \(\{j \in J_k | \alpha_j^k > 0\}\) be uniformly bounded in \(k\). \\
-	%Then every accumulation point of sequence of serious iterates \(\{\hat{x}^k\}\) is a stationary point of the problem.
-%\end{theorem}
-%
-%\textcolor{red}{think last condition only interesting in inexact case. \\
-%try to gain some insight with generalized \(\varepsilon\)-subdifferential from Chinese paper:\\
-%\(\varepsilon\)\emph{-limiting subdifferential} \cite{}}
-
 
 There are different approaches for handling nonconvexity of the objective function in bundle methods.
 As the nonnegativity property of the linearization errors \(e_j^k\) is crucial for the convergence proof of convex bundle methods an early idea was forcing the errors to be so by different downshifting strategies. A very common one is using the \emph{subgradient locality measure} \cite{Kiwiel1986, Mifflin1982}. Here the linearization error is essentially replaced by the nonnegative number
@@ -72,7 +58,6 @@ or a variation of this expression.
 
 The expression gradient locality measure comes from the dual point of view, where the aggregate linearization error provides a measure for the 'distance' of the calculated \(\varepsilon\)-subgradient to the objective function.
 
-%\textcolor{red}{Remark on dual view? How subgradient locality measure measures how close subgradient is to subdifferential of \(f\)???} \\
 Methods that use downshifting for building the model function are often endowed with a line search to provide sufficient decrease of the objective function. For the linesearch to terminate finitely, usually semismoothness of the objective function is needed.
 
 Instead of using line search it is also possible to do \emph{proximity control}. This means that the step size parameter \(t_k\) is managed in a smart way to ensure the right amount of decrease in the objective function. This method is very helpful in the case of nonconvex objective functions with inexact information as it is predominantly considered in this thesis.

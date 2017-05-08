@@ -208,6 +208,8 @@ The update conditions (\ref{model_update}) for the model are now written with re
 \end{split}
 \end{equation}
 
+remark on \(\eta_k\)? how does it behave in my applicaions???
+
 
 \subsection{On Different Convergence Results}
 
@@ -219,7 +221,7 @@ The method above can handle nonconvex objective functions. It is not explicitly 
 This is not necessary if the objective function is assumed to have bounded level sets \(\{x \in \R^n | f(x) \leq f(\hat{x}^1)\}\), an assumption commonly  used when optimizing nonconvex functions.
 As the objective function is assumed to be continuous bounded level sets are compact. Additionally the descent test makes sure that \(f(\hat{x}^{k+1}) \leq f(\hat{x}^k)\) for all \(k\). The proof holds therefore in the same way as with the set \(X\).
 
-\subsubsection{Exact Information}
+\subsubsection{Exact Information and Vanishing Errors}
 
 As the presented algorithm was originally designed for nonconvex objective functions where function values as well as subgradients are available in an exact manner, all convergence results stay the same with the error bounds \(\bar{\sigma} = \bar{\theta} = 0\).
 As already indicated previously this is the case because inexactness can be seen as a kind of nonconvexity and no additional concepts had to be added to the method when generalizing it to the inexact setting.
@@ -227,18 +229,32 @@ As already indicated previously this is the case because inexactness can be seen
 If we additionally require the objective function to be lower-\(\mathcal{C}^2\) it can be proven that the sequence \(\{\eta_k\}\) is bounded \cite{Hare2010}.
 This is not possible in the inexact case even for convex objective functions.
 
+For asymptotically vanishing errors, meaning \(\lim_{k \to \infty} \sigma_k = 0 \) and/or \(\lim_{k \to \infty} \theta_k = 0 \) the convergence theory holds equally well with error bounds \(\bar{\sigma} = \bar{\theta} = 0\) in \cite[Lemma 5]{Hare2016}. Still it is difficult if not impossible to show that the sequence \(\{\eta_k\}\) is bounded without further assumptions.
+It can be shown however that under the condition that the error on the function value at the centers is Lipschitz continuous the sequence \(\{\eta_k\}\) is  bounded.
+
+Let
+\begin{equation}
+	\frac{|\sigma_j-\hat{\sigma}_k|}{\|x^j-\hat{x}^k\|} \leq L_{\sigma}.
+	\label{Lip_error}
+\end{equation}
+ Then from (\ref{eta}) follows that 
+\begin{align}
+	\eta_k &= \max \left\{ \max_{j \in J^k , x^j \neq \hat{x}^k} \frac{-2e^k_j}{\|x^j-\hat{x}^k\|},0\right\} +\gamma \\
+	&\leq \max_{\substack{j \in J^k \\ x^j \neq \hat{x}^k}} \frac{2|f(\hat{x}^k)+\hat{\sigma}_k-f(x^j)-\sigma_j-\langle g^j, \hat{x}^k-x^j\rangle|}{\|x^j-\hat{x}^k\|} +\gamma \\
+	&\leq 2 (L_{\sigma} + 2L_{f}+\bar{\theta})+\gamma.
+\end{align}
+Due to the local Lipschitz property of \(f\) and the fact that all iterates \(x^j \in X\). From \cite[Proposition 2.1.2]{Clarke1990} and the decomposition \(g^j = \tilde{g}^j+p^j\), \(\tilde{g}^j \in \partial_f(x^j)\) and \(p \in \mathbb{B}_{\theta_j}(0)\) follows \(\|g^j\| \leq L{f}+\theta_j \leq L_{f}+\bar{\theta}\).
+It is possible to satisfy assumption (\ref{Lip_error}) if it the accuracy with which each \(f\) is calculated is known. For example if \(f\) is the result of an optimization process where the exactness of the output can be controlled by the stopping tolerance.
+
+\subsubsection{Convex Objective Functions}
 
 
-\subsubsection{Asymptotically Vanishing Errors}
 
 \begin{itemize}
-	\item asymptotically vanishing error \\
-	\(\to\) calculate what happens \(\to\) think error bounds = 0 possible???
 	\item convex objective function \\
 	\(\to\) generally better convergence properties possible \\
 	but more or less only on error bound???
 	\(\to\) different concept of algorithm for convex inexact functions  to exploit convexity (contrary to nonconvex obj functions)
-	\item assumptions on errors \(\to\) Noll comment in paper
 \end{itemize}
 
 
@@ -287,6 +303,5 @@ This is not possible in the inexact case even for convex objective functions.
 		\item \emph{inexact}: \(0 \in \left(\partial f(\bar{x}) + \partial I_D(\bar{x}) \right) + B_{\bar{\theta}}(0)\) \\
 		if \(f\) lower-\(\mathcal{C}^1\): 
 		\[ \forall \varepsilon >0 ~\exists \rho >0: \quad f(y) \geq f(\bar{x})-(\bar{\theta}+\varepsilon)\|y-\bar{x}\|-2\bar{\sigma} \quad \forall y \in D \cap B_{\rho}(\bar{x}) \]
-		\item obvious difference: no error terms in exact case
 \end{itemize}
 
