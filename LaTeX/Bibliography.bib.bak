@@ -564,4 +564,57 @@
   pages   = {151-165},
 }
 
+@Book{Kiwiel1985,
+  title     = {Methods of Descent for Nondifferentiable Optimization},
+  publisher = {Springer},
+  year      = {1985},
+  author    = {Krzysztof C. Kiwiel},
+  date      = {1985-06-01},
+  ean       = {9783540156420},
+  isbn      = {3540156429},
+  pagetotal = {372},
+}
+
+@Article{Kruger2003,
+  author  = {A. Ya. Kruger},
+  title   = {On Fréchet Subdifferentials},
+  journal = {Journal of Mathematical Sciences},
+  year    = {2003},
+  volume  = {116},
+  number  = {3},
+}
+
+@Article{,
+  author = {Huynh Van Ngai and Dinh The Luc and Michel Théra},
+  title  = {Extensions of Fréchet $\varepsilon$−Subdifferential Calculus and Applications},
+}
+
+@Article{Jofre1998,
+  author    = {Alejandro Jofr{\'{e}} and Dinh The Luc and Michel Th{\'{e}}ra},
+  title     = {$\varepsilon$-Subdifferential and $\varepsilon$-monotonicity},
+  journal   = {Nonlinear Analysis: Theory, Methods {\&} Applications},
+  year      = {1998},
+  volume    = {33},
+  number    = {1},
+  pages     = {71--90},
+  month     = {jul},
+  doi       = {10.1016/s0362-546x(97)00511-7},
+  publisher = {Elsevier {BV}},
+  url       = {https://doi.org/10.1016%2Fs0362-546x%2897%2900511-7},
+}
+
+@Article{Treiman1986,
+  author    = {Jay S. Treiman},
+  title     = {Clarke's gradients and $\varepsilon$-subgradients in Banach spaces},
+  journal   = {Transactions of the American Mathematical Society},
+  year      = {1986},
+  volume    = {294},
+  number    = {1},
+  pages     = {65--65},
+  month     = {jan},
+  doi       = {10.1090/s0002-9947-1986-0819935-8},
+  publisher = {American Mathematical Society ({AMS})},
+  url       = {https://doi.org/10.1090%2Fs0002-9947-1986-0819935-8},
+}
+
 @Comment{jabref-meta: databaseType:bibtex;}

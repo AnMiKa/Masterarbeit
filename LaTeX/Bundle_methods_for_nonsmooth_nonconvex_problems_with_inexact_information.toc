@@ -11,13 +11,13 @@
 \contentsline {subsection}{\numberline {2.2}Nonconvex Bundle Methods with Exact Information}{10}
 \contentsline {section}{\numberline {3}Proximal bundle method for nonconvex functions with inexact information}{12}
 \contentsline {subsection}{\numberline {3.1}Derivation of the Method}{12}
-\contentsline {subsection}{\numberline {3.2}On Different Convergence Results}{16}
-\contentsline {subsubsection}{\numberline {3.2.1}The Constraint Set}{16}
-\contentsline {subsubsection}{\numberline {3.2.2}Exact Information and Vanishing Errors}{17}
-\contentsline {subsubsection}{\numberline {3.2.3}Convex Objective Functions}{18}
-\contentsline {section}{\numberline {4}Noll Part}{18}
-\contentsline {subsection}{\numberline {4.1}Introduction}{18}
-\contentsline {subsection}{\numberline {4.2}Keywords}{18}
-\contentsline {subsection}{\numberline {4.3}important assumptions}{19}
-\contentsline {subsection}{\numberline {4.4}Algorithm}{19}
+\contentsline {subsection}{\numberline {3.2}On Different Convergence Results}{18}
+\contentsline {subsubsection}{\numberline {3.2.1}The Constraint Set}{18}
+\contentsline {subsubsection}{\numberline {3.2.2}Exact Information and Vanishing Errors}{18}
+\contentsline {subsubsection}{\numberline {3.2.3}Convex Objective Functions}{19}
+\contentsline {section}{\numberline {4}Noll Part}{20}
+\contentsline {subsection}{\numberline {4.1}Introduction}{20}
+\contentsline {subsection}{\numberline {4.2}Keywords}{20}
+\contentsline {subsection}{\numberline {4.3}important assumptions}{20}
+\contentsline {subsection}{\numberline {4.4}Algorithm}{21}
 \contentsline {section}{References}{}

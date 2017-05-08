@@ -56,6 +56,12 @@ Jean-Baptiste Hiriart-Urruty and Claude Lemar\'{e}chal.
   {\em Grundlehren der mathematischen Wissenschaften}.
 \newblock Springer Berlin Heidelberg, 2 edition, 1996.
 
+\bibitem{Jofre1998}
+Alejandro Jofr{\'{e}}, Dinh~The Luc, and Michel Th{\'{e}}ra.
+\newblock $\varepsilon$-subdifferential and $\varepsilon$-monotonicity.
+\newblock {\em Nonlinear Analysis: Theory, Methods {\&} Applications},
+  33(1):71--90, jul 1998.
+
 \bibitem{Kiwiel1985}
 Krzysztof~C. Kiwiel.
 \newblock {\em Methods of Descent for Nondifferentiable Optimization}.
@@ -72,6 +78,11 @@ Krzysztof~C. Kiwiel.
 Krzysztof~C. Kiwiel.
 \newblock A proximal bundle method with approximate subgradient linearizations.
 \newblock {\em {SIAM} Journal on Optimization}, 16(4):1007--1023, jan 2006.
+
+\bibitem{Kruger2003}
+A.~Ya. Kruger.
+\newblock On fréchet subdifferentials.
+\newblock {\em Journal of Mathematical Sciences}, 116(3), 2003.
 
 \bibitem{Lewis2015}
 A.~S. Lewis and S.~J. Wright.
@@ -156,6 +167,12 @@ Mikhail~V. Solodov.
 \newblock {\em Constraint Qualifications}.
 \newblock Wiley Encyclopedia of Operations Research and Management Science,
   2011.
+
+\bibitem{Treiman1986}
+Jay~S. Treiman.
+\newblock Clarke's gradients and $\varepsilon$-subgradients in banach spaces.
+\newblock {\em Transactions of the American Mathematical Society},
+  294(1):65--65, jan 1986.
 
 \bibitem{Hare2009}
 Claudia~Sagastiz\`{a}bal Warren~Hare.

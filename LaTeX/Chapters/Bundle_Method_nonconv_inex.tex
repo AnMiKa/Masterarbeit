@@ -57,6 +57,42 @@ Like in the paper it is assumed that the errors are bounded although the bound d
 
 In the context of inexact information it is important to make a distinction between the (unknown) exact function value and its approximation. Throughout this section we therefore write \(f(x)\) for the exact function value whereas the approximation will be written as \(f_j\) or \(\hat{f}_k\) for the approximation at the current stability center.
 
+\textcolor{red}{remark to subgradient notation\\
+sensible in view of optimality condition \(\to\)
+\[ 0 \in \partial_{[\theta]}f(x)\Leftrightarrow 0 \in \partial(f+\theta\|\cdot-x\|)(x) \] 
+this means that perturbation of \(f\) is critical at \(x\) \\
+for convex functions the two subdifferentials can be related
+\[ \partial_{\theta}f(x) \subset \partial_{[\theta']}f(x) \]
+for convex \(f\) set  \(\partial_{[\theta]} f(x)\) coincides with Fréchet \(\varepsilon\)-subdifferential \\
+subdifferential in Hare-Paper:
+\[ \partial f(\bar{x}) = \left\{g \in \R^n | \lim_{x \to \bar{x}} \inf_{x \neq \bar{x}} \frac{f(x)-f(\bar{x})-\langle g, x - \bar{x}\rangle}{\|x - \bar{x}\|} \geq 0 \right\} \]
+Fréchet-Subdifferential in \cite{Kruger2003}
+\[ \partial f(\bar{x}) = \left\{g \in \R^n | \liminf_{x \to \bar{x}} \frac{f(x)-f(\bar{x})-\langle g, x - \bar{x}\rangle}{\|x - \bar{x}\|} \geq 0 \right\} \]
+said to be the same as \emph{regular subdifferential} in \cite{Rockafellar2009}
+\[ \hat{\partial}f(\bar{x}) = \left\{ v \in \R^n | \liminf_{\substack{x \to \bar{x} \\x \neq \bar{x}}} \frac{f(x)-f(\bar{x})- \langle v, x - \bar{x}\rangle}{\|x-\bar{x}\|} \geq 0\right\} \]
+\(\Rightarrow\) all the same \\
+\cite{Jofre1998} defines Fréchet \(\varepsilon\)-subdifferential for \emph{lower semicontinuous} functions as
+\[ \partial^{F}_{\varepsilon}f(x) = \left\{g \in \R^n | \liminf_{\|h\| \to 0} \frac{f(x+h)-f(x)-\langle g,h \rangle}{\|h\|} \geq -\varepsilon \right\} \]
+also says \(f\) convex \(to\) limiting Fréchet \(\varepsilon\)-subdifferential is exactly \(\varepsilon\)-enlargement of Frenchel subdifferential.\\
+Treiman \cite{Treiman1986}: \(g \in \partial^F_{\varepsilon}f(x) \Leftrightarrow g \in \partial^F(f+\varepsilon\|\cdot-x\|)(x)\)\\
+\(f\) convex \(\to\)
+\[ \partial^{F}_{\varepsilon}f(x) = \left\{g \in \R^n | \frac{f(x+h)-f(x)-\langle g,h \rangle}{\|h\|} \geq -\varepsilon, \forall h \in \R^n\right\}  \]
+``normal'' \(\varepsilon\)-subdifferential (VL Ulbrich, \cite{Hiriart-Urruty1993})
+\[ \partial_{\varepsilon}f(x) = \left\{g \in \R^n | f(y) -f(x) -\langle g, y-x\rangle \geq - \varepsilon, \forall y \in \R^n \right\} \]
+in Rockafellar: \(\bar{\partial}f(x)\) is generalization of Clarke subdifferential.\\
+in case of Lipschitz contiuity: convex hull of limiting proximal subgradients\\
+\[\bar{\partial} f(\bar{x})= \left\{v| (v,-1) \in \bar{N}_{\text{epi }f}(\bar{x},f(\bar{x}))\right\}\]
+\(f\) subdifferentially regular \(\Rightarrow\) \(\bar{\partial}f(\bar{x}) = \partial f(\bar{x})\) \\
+8.30: \(f\) subdifferentially regular: \(\Rightarrow\) \(\partial f(\bar{x}) = \left\{v|\langle v,w \rangle \leq \text{d}f(\bar{x})(w),  \forall w\right\}\)\(\to\) 8.4 same for \(\hat{\partial}f(x)\)\\
+8.9\\
+\(\text{d}f(\bar{x})(\bar{w}) = \liminf_{\substack{\tau \searrow 0 \\ w \to \bar{w}}}\frac{f(\bar{x}+\tau w)-f(\bar{x})}{\tau}\)\\
+8.11: subdifferentially regular functions \(\partial f(x) = \hat{\partial}f(x)\) \\
+\(\partial f(x) \) is a general subgradient (8.3)}
+
+
+
+
+
 
 %\textcolor{red}{Closed convex sets are Clarke regular, so in particular the epigraph of \textcolor{red}{lower \(\mathcal{C}^2\)-functions?}.}
 
@@ -175,7 +211,7 @@ For \(k = 1,2,3,  \dotsc \)
 	\item Calculate \[d^k = \arg \min_{d \in \R^n} \left\{ M_k(\hat{x}^k+d)+\mathbb{I}_X(\hat{x}^k+d)+\frac{1}{2t_k}\|d\|^2\right\}.\]
 	\item Set
 		\begin{align*} 
-		  G^k &= \sum_{j \in J_k}{\alpha_j^k s_j^k},
+		  G^k &= \sum_{j \in J_k}{\alpha_j^k s_j^k}, \\
 			C_k &= \sum_{j \in J_k}{\alpha_j^k c_j^k} \\
 	    \delta_k &=  C_k + t_k\|G^k + \nu^k\|^2
 		\end{align*}
@@ -208,7 +244,7 @@ The update conditions (\ref{model_update}) for the model are now written with re
 \end{split}
 \end{equation}
 
-remark on \(\eta_k\)? how does it behave in my applicaions???
+\textcolor{red}{remark on \(\eta_k\)? how does it behave in my applications???}
 
 
 \subsection{On Different Convergence Results}
@@ -227,7 +263,7 @@ As the presented algorithm was originally designed for nonconvex objective funct
 As already indicated previously this is the case because inexactness can be seen as a kind of nonconvexity and no additional concepts had to be added to the method when generalizing it to the inexact setting.
 
 If we additionally require the objective function to be lower-\(\mathcal{C}^2\) it can be proven that the sequence \(\{\eta_k\}\) is bounded \cite{Hare2010}.
-This is not possible in the inexact case even for convex objective functions.
+This is not possible in the case of inexact function values even for convex objective functions.
 
 For asymptotically vanishing errors, meaning \(\lim_{k \to \infty} \sigma_k = 0 \) and/or \(\lim_{k \to \infty} \theta_k = 0 \) the convergence theory holds equally well with error bounds \(\bar{\sigma} = \bar{\theta} = 0\) in \cite[Lemma 5]{Hare2016}. Still it is difficult if not impossible to show that the sequence \(\{\eta_k\}\) is bounded without further assumptions.
 It can be shown however that under the condition that the error on the function value at the centers is Lipschitz continuous the sequence \(\{\eta_k\}\) is  bounded.
@@ -246,9 +282,13 @@ Let
 Due to the local Lipschitz property of \(f\) and the fact that all iterates \(x^j \in X\). From \cite[Proposition 2.1.2]{Clarke1990} and the decomposition \(g^j = \tilde{g}^j+p^j\), \(\tilde{g}^j \in \partial_f(x^j)\) and \(p \in \mathbb{B}_{\theta_j}(0)\) follows \(\|g^j\| \leq L{f}+\theta_j \leq L_{f}+\bar{\theta}\).
 It is possible to satisfy assumption (\ref{Lip_error}) if it the accuracy with which each \(f\) is calculated is known. For example if \(f\) is the result of an optimization process where the exactness of the output can be controlled by the stopping tolerance.
 
+The above calculations for the boundedness of \(\{\eta_k\}\) still hold in case of exact function values but inexact subgradients by just setting \(\sigma_j=\bar{\sigma}=0\) for all \(j \in J\).
+
+
 \subsubsection{Convex Objective Functions}
 
-
+Let us first recall that \textcolor{red}{as laid down previously} the definition of an approximate subgradient does not coincide with the usual \(\varepsilon\)-subdifferential for convex functions.
+Let us therefore assume that for convex objective functions the approximate subgradient \(g^j\) is taken from the \(\theta_j\)-subdifferential with \(\theta_j < \bar{\theta}\) for all \(j \in J\).
 
 \begin{itemize}
 	\item convex objective function \\
