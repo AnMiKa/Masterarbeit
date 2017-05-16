@@ -266,10 +266,13 @@
 }
 
 @Article{Teo2010,
-  author = {Choon Hui Teo and A. J. Smola and S.V.N. Vishwanathan and Quoc V. Le},
-  title  = {Bundle Methods for Regulized Risk Minimization},
-  year   = {2010},
-  editor = {J. C. Platt and D. Koller and Y. Singer and S. T. Roweis},
+  author  = {Choon Hui Teo and A. J. Smola and S.V.N. Vishwanathan and Quoc V. Le},
+  title   = {Bundle Methods for Regularized Risk Minimization},
+  journal = {Journal of Machine Learning Research},
+  year    = {2010},
+  volume  = {11},
+  pages   = {311-365},
+  editor  = {J. C. Platt and D. Koller and Y. Singer and S. T. Roweis},
 }
 
 @Book{Bagirov2014,
@@ -584,7 +587,7 @@
   number  = {3},
 }
 
-@Article{,
+@TechReport{,
   author = {Huynh Van Ngai and Dinh The Luc and Michel Théra},
   title  = {Extensions of Fréchet $\varepsilon$−Subdifferential Calculus and Applications},
 }
@@ -615,6 +618,28 @@
   doi       = {10.1090/s0002-9947-1986-0819935-8},
   publisher = {American Mathematical Society ({AMS})},
   url       = {https://doi.org/10.1090%2Fs0002-9947-1986-0819935-8},
+}
+
+@Article{Emiel2009,
+  author    = {Gr{\'{e}}gory Emiel and Claudia Sagastiz{\'{a}}bal},
+  title     = {Incremental-like bundle methods with application to~energy planning},
+  journal   = {Computational Optimization and Applications},
+  year      = {2009},
+  volume    = {46},
+  number    = {2},
+  pages     = {305--332},
+  month     = {sep},
+  note      = {corrected and extended version},
+  doi       = {10.1007/s10589-009-9288-8},
+  publisher = {Springer Nature},
+  url       = {https://doi.org/10.1007%2Fs10589-009-9288-8},
+}
+
+@TechReport{Kiwiel2010,
+  author      = {K. C. Kiwiel},
+  title       = {Bundle Methods for Convex Minimization with Partially Inexact Oracles},
+  institution = {Systems Research Institute, Polish Academy of Sciences},
+  year        = {2010},
 }
 
 @Comment{jabref-meta: databaseType:bibtex;}

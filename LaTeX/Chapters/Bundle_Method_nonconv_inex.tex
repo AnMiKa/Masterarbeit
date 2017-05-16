@@ -46,7 +46,20 @@ For the subgradients we adopt the notation used in \cite{Noll2013} and interpret
 \label{subgr_inex}
 \end{equation}
 
-where \(\partial f(x)\) is the \emph{Clarke subdifferential} of \(f\), which is also defined for nonconvex functions. 
+where \(\partial f(x)\) is the \emph{Clarke subdifferential} of \(f\).
+
+The given definition of the inexactness can be motivated by the relation 
+	\[ g \in \partial_{[\theta]}f(x)\Leftrightarrow g \in \partial(f+\theta\|\cdot-x\|)(x) \]
+noticed in \cite{Treiman1986}. It means that the approximation of the subgradient of \(f(x)\) is an exact subgradient of a small perturbation of \(f\) at \(x\).
+\(\partial_{[\varepsilon]}f(x)\) is also known as the Frechét \(\varepsilon\)-subdifferential of \(f(x)\).
+
+\begin{remark}
+For convex objective functions this approximate subdifferential does \emph{not} equal the usual convex \(\varepsilon\)-subdifferential. The two can however be related via
+
+\[ \partial_{\theta}f(x) \subset \partial_{[\theta']}f(x) \]
+ 
+for a suitable \(\theta'\). Generally an explicit relation between \(\theta\) and \(\theta'\) is hard to find \cite{Noll2013}.
+\end{remark}
 
 Like in the paper it is assumed that the errors are bounded although the bound does not have to be known:
 
@@ -57,42 +70,38 @@ Like in the paper it is assumed that the errors are bounded although the bound d
 
 In the context of inexact information it is important to make a distinction between the (unknown) exact function value and its approximation. Throughout this section we therefore write \(f(x)\) for the exact function value whereas the approximation will be written as \(f_j\) or \(\hat{f}_k\) for the approximation at the current stability center.
 
-\textcolor{red}{remark to subgradient notation\\
-sensible in view of optimality condition \(\to\)
-\[ 0 \in \partial_{[\theta]}f(x)\Leftrightarrow 0 \in \partial(f+\theta\|\cdot-x\|)(x) \] 
-this means that perturbation of \(f\) is critical at \(x\) \\
-for convex functions the two subdifferentials can be related
-\[ \partial_{\theta}f(x) \subset \partial_{[\theta']}f(x) \]
-for convex \(f\) set  \(\partial_{[\theta]} f(x)\) coincides with Fréchet \(\varepsilon\)-subdifferential \\
-subdifferential in Hare-Paper:
-\[ \partial f(\bar{x}) = \left\{g \in \R^n | \lim_{x \to \bar{x}} \inf_{x \neq \bar{x}} \frac{f(x)-f(\bar{x})-\langle g, x - \bar{x}\rangle}{\|x - \bar{x}\|} \geq 0 \right\} \]
-Fréchet-Subdifferential in \cite{Kruger2003}
-\[ \partial f(\bar{x}) = \left\{g \in \R^n | \liminf_{x \to \bar{x}} \frac{f(x)-f(\bar{x})-\langle g, x - \bar{x}\rangle}{\|x - \bar{x}\|} \geq 0 \right\} \]
-said to be the same as \emph{regular subdifferential} in \cite{Rockafellar2009}
-\[ \hat{\partial}f(\bar{x}) = \left\{ v \in \R^n | \liminf_{\substack{x \to \bar{x} \\x \neq \bar{x}}} \frac{f(x)-f(\bar{x})- \langle v, x - \bar{x}\rangle}{\|x-\bar{x}\|} \geq 0\right\} \]
-\(\Rightarrow\) all the same \\
-\cite{Jofre1998} defines Fréchet \(\varepsilon\)-subdifferential for \emph{lower semicontinuous} functions as
-\[ \partial^{F}_{\varepsilon}f(x) = \left\{g \in \R^n | \liminf_{\|h\| \to 0} \frac{f(x+h)-f(x)-\langle g,h \rangle}{\|h\|} \geq -\varepsilon \right\} \]
-also says \(f\) convex \(to\) limiting Fréchet \(\varepsilon\)-subdifferential is exactly \(\varepsilon\)-enlargement of Frenchel subdifferential.\\
-Treiman \cite{Treiman1986}: \(g \in \partial^F_{\varepsilon}f(x) \Leftrightarrow g \in \partial^F(f+\varepsilon\|\cdot-x\|)(x)\)\\
-\(f\) convex \(\to\)
-\[ \partial^{F}_{\varepsilon}f(x) = \left\{g \in \R^n | \frac{f(x+h)-f(x)-\langle g,h \rangle}{\|h\|} \geq -\varepsilon, \forall h \in \R^n\right\}  \]
-``normal'' \(\varepsilon\)-subdifferential (VL Ulbrich, \cite{Hiriart-Urruty1993})
-\[ \partial_{\varepsilon}f(x) = \left\{g \in \R^n | f(y) -f(x) -\langle g, y-x\rangle \geq - \varepsilon, \forall y \in \R^n \right\} \]
-in Rockafellar: \(\bar{\partial}f(x)\) is generalization of Clarke subdifferential.\\
-in case of Lipschitz contiuity: convex hull of limiting proximal subgradients\\
-\[\bar{\partial} f(\bar{x})= \left\{v| (v,-1) \in \bar{N}_{\text{epi }f}(\bar{x},f(\bar{x}))\right\}\]
-\(f\) subdifferentially regular \(\Rightarrow\) \(\bar{\partial}f(\bar{x}) = \partial f(\bar{x})\) \\
-8.30: \(f\) subdifferentially regular: \(\Rightarrow\) \(\partial f(\bar{x}) = \left\{v|\langle v,w \rangle \leq \text{d}f(\bar{x})(w),  \forall w\right\}\)\(\to\) 8.4 same for \(\hat{\partial}f(x)\)\\
-8.9\\
-\(\text{d}f(\bar{x})(\bar{w}) = \liminf_{\substack{\tau \searrow 0 \\ w \to \bar{w}}}\frac{f(\bar{x}+\tau w)-f(\bar{x})}{\tau}\)\\
-8.11: subdifferentially regular functions \(\partial f(x) = \hat{\partial}f(x)\) \\
-\(\partial f(x) \) is a general subgradient (8.3)}
 
-
-
-
-
+%\textcolor{red}{remark to subgradient notation\\
+%sensible in view of optimality condition \(\to\)
+%\[  \] 
+%this means that perturbation of \(f\) is critical at \(x\) \\
+%for convex functions the two subdifferentials can be related
+%\[ \partial_{\theta}f(x) \subset \partial_{[\theta']}f(x) \]
+%for convex \(f\) set  \(\partial_{[\theta]} f(x)\) coincides with Fréchet \(\varepsilon\)-subdifferential \\
+%subdifferential in Hare-Paper:
+%\[ \partial f(\bar{x}) = \left\{g \in \R^n | \lim_{x \to \bar{x}} \inf_{x \neq \bar{x}} \frac{f(x)-f(\bar{x})-\langle g, x - \bar{x}\rangle}{\|x - \bar{x}\|} \geq 0 \right\} \]
+%Fréchet-Subdifferential in \cite{Kruger2003}
+%\[ \partial f(\bar{x}) = \left\{g \in \R^n | \liminf_{x \to \bar{x}} \frac{f(x)-f(\bar{x})-\langle g, x - \bar{x}\rangle}{\|x - \bar{x}\|} \geq 0 \right\} \]
+%said to be the same as \emph{regular subdifferential} in \cite{Rockafellar2009}
+%\[ \hat{\partial}f(\bar{x}) = \left\{ v \in \R^n | \liminf_{\substack{x \to \bar{x} \\x \neq \bar{x}}} \frac{f(x)-f(\bar{x})- \langle v, x - \bar{x}\rangle}{\|x-\bar{x}\|} \geq 0\right\} \]
+%\(\Rightarrow\) all the same \\
+%\cite{Jofre1998} defines Fréchet \(\varepsilon\)-subdifferential for \emph{lower semicontinuous} functions as
+%\[ \partial^{F}_{\varepsilon}f(x) = \left\{g \in \R^n | \liminf_{\|h\| \to 0} \frac{f(x+h)-f(x)-\langle g,h \rangle}{\|h\|} \geq -\varepsilon \right\} \]
+%also says \(f\) convex \(to\) limiting Fréchet \(\varepsilon\)-subdifferential is exactly \(\varepsilon\)-enlargement of Frenchel subdifferential.\\
+%Treiman \cite{Treiman1986}: \(g \in \partial^F_{\varepsilon}f(x) \Leftrightarrow g \in \partial^F(f+\varepsilon\|\cdot-x\|)(x)\)\\
+%\(f\) convex \(\to\)
+%\[ \partial^{F}_{\varepsilon}f(x) = \left\{g \in \R^n | \frac{f(x+h)-f(x)-\langle g,h \rangle}{\|h\|} \geq -\varepsilon, \forall h \in \R^n\right\}  \]
+%``normal'' \(\varepsilon\)-subdifferential (VL Ulbrich, \cite{Hiriart-Urruty1993})
+%\[ \partial_{\varepsilon}f(x) = \left\{g \in \R^n | f(y) -f(x) -\langle g, y-x\rangle \geq - \varepsilon, \forall y \in \R^n \right\} \]
+%in Rockafellar: \(\bar{\partial}f(x)\) is generalization of Clarke subdifferential.\\
+%in case of Lipschitz contiuity: convex hull of limiting proximal subgradients\\
+%\[\bar{\partial} f(\bar{x})= \left\{v| (v,-1) \in \bar{N}_{\text{epi }f}(\bar{x},f(\bar{x}))\right\}\]
+%\(f\) subdifferentially regular \(\Rightarrow\) \(\bar{\partial}f(\bar{x}) = \partial f(\bar{x})\) \\
+%8.30: \(f\) subdifferentially regular: \(\Rightarrow\) \(\partial f(\bar{x}) = \left\{v|\langle v,w \rangle \leq \text{d}f(\bar{x})(w),  \forall w\right\}\)\(\to\) 8.4 same for \(\hat{\partial}f(x)\)\\
+%8.9\\
+%\(\text{d}f(\bar{x})(\bar{w}) = \liminf_{\substack{\tau \searrow 0 \\ w \to \bar{w}}}\frac{f(\bar{x}+\tau w)-f(\bar{x})}{\tau}\)\\
+%8.11: subdifferentially regular functions \(\partial f(x) = \hat{\partial}f(x)\) \\
+%\(\partial f(x) \) is a general subgradient (8.3)}
 
 %\textcolor{red}{Closed convex sets are Clarke regular, so in particular the epigraph of \textcolor{red}{lower \(\mathcal{C}^2\)-functions?}.}
 
@@ -263,33 +272,82 @@ As the presented algorithm was originally designed for nonconvex objective funct
 As already indicated previously this is the case because inexactness can be seen as a kind of nonconvexity and no additional concepts had to be added to the method when generalizing it to the inexact setting.
 
 If we additionally require the objective function to be lower-\(\mathcal{C}^2\) it can be proven that the sequence \(\{\eta_k\}\) is bounded \cite{Hare2010}.
-This is not possible in the case of inexact function values even for convex objective functions.
+This is not possible in the case of inexact information even for convex objective functions.
 
 For asymptotically vanishing errors, meaning \(\lim_{k \to \infty} \sigma_k = 0 \) and/or \(\lim_{k \to \infty} \theta_k = 0 \) the convergence theory holds equally well with error bounds \(\bar{\sigma} = \bar{\theta} = 0\) in \cite[Lemma 5]{Hare2016}. Still it is difficult if not impossible to show that the sequence \(\{\eta_k\}\) is bounded without further assumptions.
-It can be shown however that under the condition that the error on the function value at the centers is Lipschitz continuous the sequence \(\{\eta_k\}\) is  bounded.
+\textcolor{red}{Under the assumption that \(f\) is lower-\(\mathcal{C}^2\) and some continuity bounds on the errors
+\[ \frac{|\sigma_j-\hat{\sigma}_k|}{\|x^j-\hat{x}^k\|^2} \leq L_{\sigma}, \qquad \frac{\theta_j}{\|x^j-\hat{x}^k\|} \leq L_{\theta} \quad \forall k \text{ and } \forall j \in J_k\]
+boundedness of the sequence \(\{\eta_k\}\) can be shown. The question remains however if those assumptions are possible to be assured in practice.}
 
-Let
-\begin{equation}
-	\frac{|\sigma_j-\hat{\sigma}_k|}{\|x^j-\hat{x}^k\|} \leq L_{\sigma}.
-	\label{Lip_error}
-\end{equation}
- Then from (\ref{eta}) follows that 
-\begin{align}
-	\eta_k &= \max \left\{ \max_{j \in J^k , x^j \neq \hat{x}^k} \frac{-2e^k_j}{\|x^j-\hat{x}^k\|},0\right\} +\gamma \\
-	&\leq \max_{\substack{j \in J^k \\ x^j \neq \hat{x}^k}} \frac{2|f(\hat{x}^k)+\hat{\sigma}_k-f(x^j)-\sigma_j-\langle g^j, \hat{x}^k-x^j\rangle|}{\|x^j-\hat{x}^k\|} +\gamma \\
-	&\leq 2 (L_{\sigma} + 2L_{f}+\bar{\theta})+\gamma.
-\end{align}
-Due to the local Lipschitz property of \(f\) and the fact that all iterates \(x^j \in X\). From \cite[Proposition 2.1.2]{Clarke1990} and the decomposition \(g^j = \tilde{g}^j+p^j\), \(\tilde{g}^j \in \partial_f(x^j)\) and \(p \in \mathbb{B}_{\theta_j}(0)\) follows \(\|g^j\| \leq L{f}+\theta_j \leq L_{f}+\bar{\theta}\).
-It is possible to satisfy assumption (\ref{Lip_error}) if it the accuracy with which each \(f\) is calculated is known. For example if \(f\) is the result of an optimization process where the exactness of the output can be controlled by the stopping tolerance.
+%It can be shown however that under the condition that the error on the function value at the centers is Lipschitz continuous and the objective function is lower-\(\mathcal{C}^2\) the sequence \(\{\eta_k\}\) is  bounded.
+%
+%Let
+%\begin{equation}
+	%\frac{|\sigma_j-\hat{\sigma}_k|}{\|x^j-\hat{x}^k\|} \leq L_{\sigma}.
+	%\label{Lip_error}
+%\end{equation}
+ %Then from (\ref{eta}) follows that 
+%\begin{align}
+	%\eta_k &= \max \left\{ \max_{\substack{j \in J^k \\ x^j \neq \hat{x}^k}} \frac{-2e^k_j}{\|x^j-\hat{x}^k\|^2},0\right\} +\gamma \\
+	%&\leq \max \left\{ \max_{\substack{j \in J^k \\ x^j \neq \hat{x}^k}} \frac{-2\left(f(\hat{x}^k)+\hat{\sigma}_k-f(x^j)-\sigma_j-\langle \tilde{g}^j,\hat{x}^k-x^j\rangle-\langle p^j,\hat{x}^k-x^j \rangle \right)}{\|x^j-\hat{x}^k\|^2},0\right\} +\gamma \\
+	%&\leq 2 (\frac{L_{\sigma} + 2L_{f}+\bar{\theta}}{\|x^{j^*}-\hat{x}^k\|})+\gamma
+%\end{align}
+%
+%where \(j^* \in J^k\) yields the maximum of the expression for all \(j \in J^k\).
+%Due to the local Lipschitz property of \(f\) and the fact that all iterates \(x^j \in X\). From \cite[Proposition 2.1.2]{Clarke1990} and the decomposition \(g^j = \tilde{g}^j+p^j\), \(\tilde{g}^j \in \partial_f(x^j)\) and \(p \in \mathbb{B}_{\theta_j}(0)\) follows \(\|g^j\| \leq L{f}+\theta_j \leq L_{f}+\bar{\theta}\).
+%It is possible to satisfy assumption (\ref{Lip_error}) if it the accuracy with which each \(f\) is calculated is known. For example if \(f\) is the result of an optimization process where the exactness of the output can be controlled by the stopping tolerance.
+%
+%The above calculations for the boundedness of \(\{\eta_k\}\) still hold in case of exact function values but inexact subgradients by just setting \(\sigma_j=\bar{\sigma}=0\) for all \(j \in J\).
 
-The above calculations for the boundedness of \(\{\eta_k\}\) still hold in case of exact function values but inexact subgradients by just setting \(\sigma_j=\bar{\sigma}=0\) for all \(j \in J\).
-
+%\textcolor{red}{Problem: \(\{\eta_k\}\) seems to stay bounded even if objective is not lower-\(\mathcal{C}^2\) and therefore convexified function never gets convex \(\to\) no! have \(\|...\|^2\) then not bounded.\\
+%for lower-\(\mathcal{C}^2\): \(\exists t_k\) such that \(f(x)+\frac{1}{2t_k}\|x-\hat{x}^k\|^2\) is convex; then ``exact'' part of the linearization error is always positive; \(\to\) then ``quadratic Lipschitz'' bound on \(\sigma\) needed and Lipschitz continuity on \(\theta\)\\
+%makes maybe not so much sense then }
 
 \subsubsection{Convex Objective Functions}
 
-Let us first recall that \textcolor{red}{as laid down previously} the definition of an approximate subgradient does not coincide with the usual \(\varepsilon\)-subdifferential for convex functions.
-Let us therefore assume that for convex objective functions the approximate subgradient \(g^j\) is taken from the \(\theta_j\)-subdifferential with \(\theta_j < \bar{\theta}\) for all \(j \in J\).
+An obvious gain when working with convex objective functions is that the approximate stationarity condition of \cite[Lemma 5 (iii)]{Hare2016} is now an approximate optimality condition.
 
+...as laid down previously the definition of an approximate subgradient does not coincide with the usual \(\varepsilon\)-subdifferential for convex functions.
+\textcolor{red}{both definitions used for interpretation of last statement of Lemma 5.}
+It is therefore assumed that for convex objective functions the approximate subgradient \(g^j\) is taken from the \(\theta_j\)-subdifferential of \(f_j\)with \(\theta_j < \bar{\theta}\) for all \(j \in J\) as defined in (\ref{conv_inexactness}).
+
+If \(f\) is convex and \(D = \R^n\) the last statement of \cite[Lemma 5]{Hare2016} states that if \(\{\hat{x}^k\} \to \bar{x}\) for \(K\ni k \to \infty\), then 
+
+\begin{equation}
+	0 \in \partial_{2\bar{\sigma}}f(\bar{x})+B_{\bar{\theta}}(0)
+\end{equation}
+
+if we stick to the definition of the Fréchet-\(\varepsilon\)-subgradients defined for the nonconvex case.
+
+If one takes the \(\bar{\theta}\)-subgradient definition it results in 
+
+\begin{equation}
+	0 \in \partial_{2\bar{\sigma}+\bar{\theta}}.
+\end{equation}
+
+\textcolor{red}{How can that be?????? Which optimality condition is right???}
+
+\textcolor{red}{Better convergence results? \(\bar{\sigma}\) instead of \(2\bar{\sigma}\)}
+
+\textcolor{red}{
+\begin{itemize}
+	\item (iii) in Lemma 5 für conv eps-subdiff umschreiben
+	\item beweis für \(\bar{\sigma}\)-optimalität
+	\item
+\end{itemize}}
+
+\textcolor{red}{bounded \(t_k\) instead of D? better????}
+%This means we consider now inexactness of the following type
+%
+%\begin{align}
+	%f_j &= f(x^j)-\sigma_j, \sigma_j \leq \bar{\sigma} \\
+	%g^j &\in \R^n \text{ such that } f(\cdot) \geq f^j + \langle g^j, \cdot - x^j \rangle - \theta_j,  ~\forall x^j \in \R^n, \theta_j \leq \bar{\theta}
+%\end{align}
+
+%\textcolor{red}{with the following changes in the proof of Lemma 5(iv?) ... changes ... can be achieved -> for both kinds of subgradients\\
+%important in convex case: when is linearization error negative? -> then for example noise attenuation.\\
+%think different concept needed for better error bounds}
+%
 \begin{itemize}
 	\item convex objective function \\
 	\(\to\) generally better convergence properties possible \\
@@ -322,6 +380,11 @@ Let us therefore assume that for convex objective functions the approximate subg
 %
 %In the exact case boundedness of the sequence \(\{\eta_k\}\) is proven for lower-\(\mathcal{C}^2\) functions in \cite{Hare2010}. This is not possible in the inexact case, even if the objective function \(f\) is convex.
 
+To conclude this section we can say: At the moment there exist two fundamentally different approaches to tackle inexactness in various bundle methods depending on if the method is developed for convex or nonconvex objective functions.
+In the nonconvex case inexactness is only considered in the paper by Hare, Sagastiz{\`{a}}bal and Sodolov \cite{Hare2016} presented above and Noll \cite{Noll2013}. In these cases the inexactness can be seen as an additional nonconvexity. In practice this means that the algorithm can be taken from the nonconvex case with no or only minor changes. This includes that all results of the exact case remain true as soon as function and subgradient are evaluated in an exact way.
+In case of convex objective functions with inexact information stronger convergence results are possible. However to be able to exploit convexity in order to achieve those results the algorithms look quite different from those designed for nonconvex objective functions and are generally not able to deal with such functions. 
+
+%changes in the algorithm are more involved. The reason for this is that generally stronger convergence results are possible with inexactness in the convex case than in the nonconvex case. %This means however, that the inexactness cannot be incorporated as easily into the algorithm
 
 \begin{itemize}
 	\item stronger convergence results possible because of exploitation of convexity

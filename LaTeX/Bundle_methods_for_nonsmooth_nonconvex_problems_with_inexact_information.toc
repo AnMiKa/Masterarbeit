@@ -7,10 +7,12 @@
 \contentsline {subsection}{\numberline {1.3}Aggregate Objects}{5}
 \contentsline {section}{\numberline {2}Variations of The Bundle Method}{9}
 \contentsline {subsection}{\numberline {2.1}Convex Bundle Methods with Inexact Information}{9}
-\contentsline {subsubsection}{\numberline {2.1.1}Degrees of Inexactness}{9}
-\contentsline {subsection}{\numberline {2.2}Nonconvex Bundle Methods with Exact Information}{10}
-\contentsline {section}{\numberline {3}Proximal bundle method for nonconvex functions with inexact information}{12}
-\contentsline {subsection}{\numberline {3.1}Derivation of the Method}{12}
+\contentsline {subsubsection}{\numberline {2.1.1}Different Types of Inexactness}{9}
+\contentsline {subsubsection}{\numberline {2.1.2}Noise Attenuation}{10}
+\contentsline {subsubsection}{\numberline {2.1.3}Convergence Results}{11}
+\contentsline {subsection}{\numberline {2.2}Nonconvex Bundle Methods with Exact Information}{11}
+\contentsline {section}{\numberline {3}Proximal bundle method for nonconvex functions with inexact information}{13}
+\contentsline {subsection}{\numberline {3.1}Derivation of the Method}{13}
 \contentsline {subsection}{\numberline {3.2}On Different Convergence Results}{18}
 \contentsline {subsubsection}{\numberline {3.2.1}The Constraint Set}{18}
 \contentsline {subsubsection}{\numberline {3.2.2}Exact Information and Vanishing Errors}{18}

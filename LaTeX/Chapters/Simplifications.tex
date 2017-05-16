@@ -1,33 +1,100 @@
 \section{Variations of The Bundle Method}
 
-After their discovery in 1975 bundle methods became very successful. Only a few years after that they were generalized to be used also with nonconvex objective functions. Early works, that contain fundamental ideas still used for these algorithms are \cite{Mifflin1982} and \cite{Kiwiel1985}. It then took over 25 years that bundle methods were again generalized to the use of inexact information. The first works on this subject being \cite{Hintermueller2001,Kiwiel2006} and \cite{Solodov2003}.
+After their discovery in 1975 bundle methods soon became very successful. Only a few years later they were generalized to be used also with nonconvex objective functions. Early works, that contain fundamental ideas still used for these algorithms are \cite{Mifflin1982} and \cite{Kiwiel1985}.
+It then took over 25 years that bundle methods were again generalized to the use of inexact information. The first works on this subject being \cite{Hintermueller2001,Kiwiel2006} and \cite{Solodov2003}.
 
 This section of the thesis shortly presents the key ideas of those two kinds of generalizations and different types of bundle methods that realize them.
 This is first done for the case of convex objective functions with inexact function value and/or subgradient information and then for nonconvex objective functions. 
 
-
 \subsection{Convex Bundle Methods with Inexact Information}
 
-We focus here on convex bundle methods with inexact information. The reason for this is that there is a fundamental difference in treating inexactness between methods that assume convex and those that assume nonconvex objective functions.
-When dealing with nonconvex objective functions inexactness is treated as some additional nonconvexity. This is not possible when assuming convex objective functions and the convexity property is to be exploited for better convergence results.
-A throughout study on this subject including a synthetic convergence theory is done in \cite{Oliveira2014}. Here the most important aspects \textcolor{red}{in view of the following chapters are reviewed.}
+We focus here on \emph{convex} bundle methods with inexact information. The reason for this is that there is a fundamental difference in treating inexactness between methods that assume convex and those that assume nonconvex objective functions.
+When dealing with nonconvex objective functions inexactness is treated as some additional nonconvexity. This is not possible if the convexity property is to be exploited for better convergence results.
+A throughout study on this subject including a synthetic convergence theory is done in \cite{Oliveira2014}. Here the most important aspects %\textcolor{red}{in view of the following chapters}
+of this paper are reviewed.
 
-\subsubsection{Degrees of Inexactness}
+\subsubsection{Different Types of Inexactness}
 
-2 a) What information is inexact (only subgradients/both...) --> what do you gain from this?
+At first it is important to notice that there are many different types of inexactness and further assumptions can be put on the noise to reach stronger convergence results.
+
+Generally inexact information for convex objective functions is defined in the following way:
+
+\begin{equation}
+\begin{split}
+	f_x = f(x)-\sigma_x, \quad \sigma_x \leq \bar{\sigma} \\
+	g_x \in \R^n \text{ such that } f(\cdot) \geq f_x + \langle g_x, \cdot - x \rangle - \theta_x, \quad \theta_x \leq \bar{\theta}.
+	\label{conv_inexactness}
+\end{split}
+\end{equation}
+
+From this follows with 
+
+\begin{equation}
+	f(\cdot) \geq f(x)+\langle g_x, \cdot - x \rangle - (\sigma_x+\theta_x)
+\end{equation}
+
+that \(g_x\) is an \(\varepsilon\)-subgradient with \(\varepsilon = \sigma_x+\theta_x \geq 0\) independently of the signs of the errors.
+
+Two very interesting cases of more sophisticated errors are \emph{asymptotically vanishing errors} and oracles that only underestimate the true function, so called \emph{lower oracles}.
+
+The case of asymptotically vanishing errors \(\lim_{k \to \infty} \sigma_k = 0\) and \(\lim_{k \to \infty} \theta_k =  0\) is important because it allows convergence to the exact minimum of the problem even if function values and subgradients are erroneous. In the case of \(\bar{\theta} = 0\) it even suffices to show that the errors are asymptotically exact only for descent steps \cite{Kiwiel2010}.
+This observation was the motivation for the partly inexact bundle methods presented in \cite{Kiwiel2010} and \cite{Oliveira2014}.
+The idea is to calculate a value of the objective function with a demanded accuracy (which is finally going to be exact) only if a certain target descent \(\gamma_x\) is reached. This approach can save a lot of (unnecessary) computational effort while still enabling convergence to the exact minimum c.f. \cite{Oliveira2014}.
+
+Lower oracles provide \(f_x\) and \(g_x\) such that \(f_x \leq f(x) \) and \(f(\cdot) \geq f_x + \langle g_x, \cdot - x\rangle\) . That means the cutting plane model is always minorizing the true function as it is the case in for exact information.
+In this case if the value to approximate the optimal function value is chosen properly, it is not necessary to include any other steps to cope with the inexactness, such as noise attenuation \cite[Corollary 5.2]{Oliveira2014}.
+
+\subsubsection{Noise Attenuation}
+
+In the case of inexact information, especially if the inexact function value can overestimate the real one, it is possible that the aggregate linearization error \(E_k\) becomes very small (or even negative) even though the current iterate is far from the minimum of the objective function.
+To tackle this problem the authors propose a procedure called \emph{noise attenuation} that was developed in \cite{Hintermueller2001} and \cite{Kiwiel2006}.
+The basic idea is to allow bigger step sizes \(t_k\) whenever the algorithm comes in the situation described above. This ensures that either some significant descent towards the real minimum can be done or shows that the point where the algorithm is stuck is actually such a minimum.
+Noise attenuation is triggered when \(E_k\) or respectively the descent \(\delta_k\) that is used for the descent test is negative.
+
+\subsubsection{Convergence Results}
+Depending on the kind of error many slightly different convergence results can be proven for bundle methods that handle convex objective functions with inexact information.
+In case of the general error on the function value and subgradient it can be shown that for bounded sequences \(\hat{x}^k\) every accumulation point \(\bar{x}\) of an infinite series of serious steps or the last serious iterate before an infinite tail of null steps is a \(\bar{sigma}+\bar{\theta}\)-solution of the problem meaning that 
+
+\begin{equation}
+	f(\bar{x}) \leq f^*+\bar{\sigma}+\bar{\theta} 
+\end{equation}
+
+with \(f^*\) being the exact minimum of the objective function.
+Generally for asymptotically vanishing errors it is possible to show that the method converges to the exact minimum of the problem.
+For more detailed results refer to \cite{Oliveira2014}.
+
+%\subsubsection{Ingredients to Cope with Inexactness}
+
+%Bundle methods are quite robust regarding inexact information in the sense that it is often not necessary to introduce a whole new concept to the algorithm to tackle inexactness.
+%Still there are some details that are important to reach good convergence results in case of noisy function values and subgradients.
+
+%In \cite{Oliveira2014} three points are of importance: The boundedness of the oracle, the awareness of different decreases and their impact on the algorithm and the step of noise attenuation.
+%\emph{Different decreases}
+%Although we mentioned earlier that the specific decrease taken to decide if a descent step or a null step is done is of minor importance in case of exact information. It can however make a fundamental difference in case of inexact information
+%\subsubsection{Convergence Results}
+%In \cite{Oliveira2014} the main goal is therefore to find out the best threshold a bundle method can reach given a special type of inexactness.
+
+%important for partly/asymptotically exact oracles: need a rule to decide how exactly the evaluation is done
+ 
+%difference between nonconvexity \(\Leftrightarrow\) inexactness:
+%not so many kinds of nonconvexity, but very different strategies to cope with it \\
+%many different kinds of errors \(\Rightarrow\) more or less same strategy but different degrees of inexactness reachable for the different errors \\
 
 
-2 b) What kind of assumptions are on the inexactness? (asymptotic, only over- /underestimation?)exactness only for serious steps,accuracy controllable or not
+%\begin{enumerate}
+	%\item describe most important ``ingredients'' to tackle inexactness
+	%\item right decrease, noise attenuation, boundedness of the oracle \cite{Oliveira2014, Kiwiel2010}
+	%\item describe different forms of inexactness
+	%\item convergence results from the paper???
+%\end{enumerate}
 
-\textcolor{red}{Different ``degrees'' of inexactness: inexact subgradients; also function values (only subgradients easier???); asymptotically ecact; , not at null steps;  --> throughout study in in depth paper.}
 
-1. How is generally dealt with inexact information in the algorithms \\
 
-\textcolor{red}{possible simplifications of the algorithm} \\
-Convergence for inexact convex functions:
-\begin{itemize}
-	\item states in paper \cite{Hare2016} (p. 14) that for convex functions error of \(\bar{\sigma}\) instead of \(2\bar{\sigma}\) possible (and for lower models; see depth paper?)
-\end{itemize}
+%\textcolor{red}{possible simplifications of the algorithm} \\
+%Convergence for inexact convex functions:
+%\begin{itemize}
+	%\item states in paper \cite{Hare2016} (p. 14) that for convex functions error of \(\bar{\sigma}\) instead of \(2\bar{\sigma}\) possible (and for lower models; see depth paper?)
+%\end{itemize}
 %\begin{itemize}
 	%\item recognized: fundamentally different? approach for convex and nonconvex functions (at least in algorithm) \\
 	%convex: ``deal'' with inexactness; extra steps... \\
@@ -46,7 +113,8 @@ Convergence for inexact convex functions:
 
 \subsection{Nonconvex Bundle Methods with Exact Information}
 
-There are different approaches for handling nonconvexity of the objective function in bundle methods.
+In the case of inexactness in convex bundle methods, where a lot of different assumptions can be put on the errors to reach different convergence results, the strategy to cope with these errors remains very much the same. In contrast to this in case of nonconvex objective functions the case to be studied is rather uniform still there exist very different approaches to tackle the problem.
+%There are different approaches for handling nonconvexity of the objective function in bundle methods.
 As the nonnegativity property of the linearization errors \(e_j^k\) is crucial for the convergence proof of convex bundle methods an early idea was forcing the errors to be so by different downshifting strategies. A very common one is using the \emph{subgradient locality measure} \cite{Kiwiel1986, Mifflin1982}. Here the linearization error is essentially replaced by the nonnegative number
 
 \begin{equation}
@@ -65,7 +133,7 @@ Instead of using line search it is also possible to do \emph{proximity control}.
 As inexactness can be seen as a kind of slight nonconvexity one could be tempted to think that nonconvex bundle methods are destined to be extended to the inexact case. Indeed, the two existing algorithms \cite{Hare2016,Noll2013} that deal with both nonconvexity and inexactness are both extensions of a nonsmooth bundle method.
 This is however seldom possible for algorithms that employ a line search because for functions with inexact information convergence of this subroutine cannot be proven.
 
-To this end proximity control seems to be a very promising strategy. It is used in many different variations in \cite{Apkarian2008, Lewis2015, Noll2005, Noll2010, Noll2012, Schramm1992}
+To this end proximity control seems to be a very promising strategy. It is used in many different variations in \cite{Apkarian2008, Lewis2015, Noll2010, Noll2005, Noll2012} and \cite{Schramm1992}.
 
 In the beginning bundle methods were mostly explored from the  dual point of view. Newer concepts focus also on the primal version of the method. This invokes for example having different model functions for the subproblem.
 
@@ -95,6 +163,6 @@ If the method uses a line search additionally semismoothness of the objective fu
 In \cite{Noll2013} the second order approach of \cite{Noll2012} is extended to functions with inexact information.
 As far a we know this is the only other bundle method that can deal with nonconvexity and inexactness in both the function value and subgradient. It inspires the variable metric variation of the method used by Hare et al. in \cite{Hare2016} that is presented in section \ref{variable_metric} of this thesis.
 
-To conclude this section we can say: At the moment there exist two fundamentally different approaches to tackle inexactness in various bundle methods depending on if the method is developed 	for convex or nonconvex objective functions.
-In the nonconvex case inexactness is only considered in the paper by Hare, Sagastiz{\`{a}}bal and Sodolov \cite{Hare2016} presented above and Noll \cite{Noll2013}. In these cases the inexactness can be seen as an ``additional nonconvexity''. In practice this means that the algorithm can be taken from the nonconvex case with no or only minor changes.
-In case of convex objective functions changes in the algorithm are more involved. The reason for this is that generally stronger convergence results are possible with inexactness in the convex case than in the nonconvex case. This means however, that the inexactness cannot be incorporated as easily into the algorithm.
+%To conclude this section we can say: At the moment there exist two fundamentally different approaches to tackle inexactness in various bundle methods depending on if the method is developed for convex or nonconvex objective functions.
+%In the nonconvex case inexactness is only considered in the paper by Hare, Sagastiz{\`{a}}bal and Sodolov \cite{Hare2016} presented above and Noll \cite{Noll2013}. In these cases the inexactness can be seen as an ``additional nonconvexity''. In practice this means that the algorithm can be taken from the nonconvex case with no or only minor changes.
+%This is not possible when starting with an algorithm for convex objective functions with inexact information. In this case concepts that can cope with stronger nonconvexities have to be introduce into the method and .
