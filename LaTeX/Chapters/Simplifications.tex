@@ -53,12 +53,13 @@ Noise attenuation is triggered when \(E_k\) or respectively the descent \(\delta
 
 \subsubsection{Convergence Results}
 Depending on the kind of error many slightly different convergence results can be proven for bundle methods that handle convex objective functions with inexact information.
-In case of the general error on the function value and subgradient it can be shown that for bounded sequences \(\hat{x}^k\) every accumulation point \(\bar{x}\) of an infinite series of serious steps or the last serious iterate before an infinite tail of null steps is a \(\bar{sigma}+\bar{\theta}\)-solution of the problem meaning that 
+In case of the general error on the function value and subgradient it can be shown that for bounded sequences \(\hat{x}^k\) every accumulation point \(\bar{x}\) of an infinite series of serious steps or the last serious iterate before an infinite tail of null steps is a \(\bar{\sigma}\)-solution of the problem meaning that 
 
 \begin{equation}
-	f(\bar{x}) \leq f^*+\bar{\sigma}+\bar{\theta} 
+	f(\bar{x}) \leq f^*+\bar{\sigma} 
 \end{equation}
 
+\textcolor{red}{citation????? really \(\sigma\) or \(\sigma+\theta\)???}\\
 with \(f^*\) being the exact minimum of the objective function.
 Generally for asymptotically vanishing errors it is possible to show that the method converges to the exact minimum of the problem.
 For more detailed results refer to \cite{Oliveira2014}.
@@ -150,7 +151,7 @@ The negative linearization errors are addressed by having two different bundles.
 In \cite{Noll2012} Noll et al. follow an approach of approximating a local model of the objective function. The model can be seen as a nonsmooth generalization of the Taylor expansion and looks the following:
 
 \begin{equation}
-	\Phi(y,x) = \phi(y,x)+\frac{1}{2}(y-x)^{\top}Q(x)(y-x)
+	\Phi(y,x) = \phi(y,x)+\frac{1}{2}(y-x)^{\top}Q(x)(y-x).
 \label{quad_mod}
 \end{equation}
 

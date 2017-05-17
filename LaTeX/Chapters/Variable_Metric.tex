@@ -1,34 +1,105 @@
-\section{Noll Part}
+\section{Variable Metric Bundle Algorithm}
 \label{variable_metric}
 
-\subsection{Introduction}
+...
+We are now interested to include also curvature information into the method as soon as the objective function provides it.... \\
 
-\subsection{Keywords}
+The proximal stabilization term mimics a curvature term pretty roughly; idea of variable metric bundle methods: allow not only Euclidean norm but a general norm \(\|x\cdot\|^2_{A} = \langle x,Ax\rangle\) with a symmetric and positive definite matrix \(A\).
 
-important in Noll for me: optimize model + \(d^{\top}(Q+\frac{1}{t_k}\mathbb{I})d\)
--> some kind of second order information
+This is also used by Noll et al. in \cite{Noll2012} and Noll in \cite{Noll2013} for nonconvex functions with exact and inexact information respectively.
+In the original papers the motivation is to approximate the original objective function by a quadratic model
 
-important: \(Q+\frac{1}{t_k}\mathbb{I}\) must have all eigenvalues \(\geq 0\).
+\begin{equation}
+	\Phi(x,\hat{x}) = \phi(x,\hat{x})+\frac{1}{2}\langle x-\hat{x},Q(\hat{x})(x-\hat{x})\rangle
+\end{equation}
 
-idea to get \(Q\): BFGS like in Fin-papers; theory
+with the convex and possibly nonsmooth first order model \(\phi(\cdot,\hat{x})\) and the quadratic but not necessarily convex second order part \(\frac{1}{2}\langle \cdot-\hat{x},Q(\hat{x})(\cdot-\hat{x})\rangle\).
+This model is then again approximated to solve the bundle subproblem.
 
-!!! check stopping criterion
-connection between \(d^k\) and \(G^k/S^k\) now:
-Optimality condition: 
+Here we take the same idea but interpret it more in the sense of a stabilization. The objective function is still first convexified and then this convexification approximated by a cutting plane model. The matrix \(Q(\hat{x})\) is added into the stabilization so that the \(k\)'th bundle subproblem is
+
+\begin{equation}
+	\min_{\hat{x}^k+d \in X} M_k(\hat{x}^k+d) + \frac{1}{2}\langle d,\left(Q+\frac{1}{t_k}\mathbb{I} \right) d \rangle
+\end{equation}
+
+...???
+
+
+In \cite{Noll2012} and \cite{Noll2013} it is not specified how the matrix \(Q(\hat{x}\) is to be chosen.
+For convergence it is necessary that the eigenvalues of \(Q(\hat{x}\) are bounded. We adopt here the notation in \cite{Noll2013} and say
+
+\begin{equation}
+	\exists q > 0 \text{ such that } -q\mathbb{I} \prec Q(\hat{x}) \prec q\mathbb{I}.
+\end{equation}
+
+Here \(A \prec B \) means that the matrix \(B-A\) is positive definite.
+
+Additionally the matrix \(Q(\hat{x}+\frac{1}{t_k}\mathbb{I}\) has to be positive definite.
+
+There are no other conditions put on \(Q(\hat{x}\).
+
+It is not stated explicitly how to form such a matrix \(Q(\hat{x})\). Here we take an idea developed by Vl\v{c}ek  and Luk\v{s}an for a variable metric bundle method in \cite{Vlcek2001}.
+
+The matrix \(Q(\hat{x}\) is formed by a BFGS-Update from the \textcolor{red}{last known - which? how many? all from bundle??} subgradients.
+
+
+
+\begin{itemize}
+	\item \(Q\) only updated in serious steps - why?
+	\item 
+\end{itemize}
+
+
+\textcolor{red}{possible to do also SR1-update in null steps???}
+
+\subsubsection{how to get Q and ensure all conditions}
+
+\subsubsection{the new stopping criterion}
+
+There are some minor changes that have to be made compared to the algorithm proposed by Hare et al. the biggest being the stopping condition.
+
+In the same way as for (???) from the optimality condition
 
 \begin{align}
 	& 0 \in \partial M_k(x^{k+1})+\partial\mathtt{i}_{D}(x^{k+1})+\left(Q+\frac{1}{t_k}\mathbb{I}\right)d^k \\
-	\Rightarrow \quad & S^k(+\nu^k) = -\left(Q+\frac{1}{t_k}\mathbb{I}\right)d^k
+	\label{Noll_opt_cond}
 \end{align}
 
-From this derivation of \(\delta_k\) \(\to\) nominal (model) decrease:
+follows that 
+\begin{equation}
+	S^k+\nu^k = -\left(Q+\frac{1}{t_k}\mathbb{I}\right)d^k.
+\end{equation}
+
+From this the model decrease (???) can be recovered using (???), (??) and (\ref{Noll_opt_cond}):
+
 \begin{align}
 	\delta_k  &= \hat{f}_k - M_k(x^{k+1}) - (\nu^k)^{\top}d^k\\
 	&= \hat{f}_k - A_k(x^{k+1}) - (\nu^k)^{\top}d^k\\
-	&= C_k - (S^k)^{\top}d^k - (\nu^k)^{\top}d^k \\
+	%&= C_k - (S^k)^{\top}d^k - (\nu^k)^{\top}d^k \\
 	&= C_k - (S^k+\nu^k)^{\top}d^k \\
 	&= C_k + (d^k)^{\top}\left(Q+\frac{1}{t_k}\mathbb{I}\right)d^k
+	\label{Noll_delta}
 \end{align}
+
+
+
+
+
+
+
+\subsection{Keywords}
+
+%important in Noll for me: optimize model + \(d^{\top}(Q+\frac{1}{t_k}\mathbb{I})d\)
+%-> some kind of second order information
+
+%important: \(Q+\frac{1}{t_k}\mathbb{I}\) must have all eigenvalues \(\geq 0\).
+
+%idea to get \(Q\): BFGS like in Fin-papers; theory
+
+%!!! check stopping criterion
+%connection between \(d^k\) and \(G^k/S^k\) now:
+%Optimality condition: 
+
 
 \subsection{important assumptions}
 eigenvalues of \(Q\) are bounded \(\to\) possible by manipulating BFGS update
@@ -54,7 +125,7 @@ same procedure for next term; all \(<1/3C\) for some overall threshold \(C\)
 
 \hrule  \vspace{0.4ex} \hrule
 \vspace{1ex}
-\textbf{Nonconvex proximal bundle method with inexact information}
+\textbf{Nonconvex variable metric bundle method with inexact information}
 \vspace{1ex}
 \hrule
 \vspace{1ex}
@@ -65,12 +136,12 @@ For \(k = 1,2,3,  \dotsc \)
 
 \begin{enumerate}
 	\item Calculate \[d^k = \arg \min_{d \in \R^n} \left\{ M_k(\hat{x}^k+d)+\mathbb{I}_X(\hat{x}^k+d)+\frac{1}{2}d^{\top}\left(Q+\frac{1}{t_k}\mathbb{I}\right)d\right\}.\]
-	\item Set \textcolor{red}{\(\to\) other stopping condition!!!
+	\item Set %\textcolor{red}{\(\to\) other stopping condition!!!
 		\begin{align*} 
-		  G^k &= \sum_{j \in J_k}{\alpha_j^k s_j^k}, \quad	\nu^k = -\frac{1}{t_k}d^k-G^k???????????\\
+		  G^k &= \sum_{j \in J_k}{\alpha_j^k s_j^k} \\ %, \quad	\nu^k = -\frac{1}{t_k}d^k-G^k???????????\\
 			C_k &= \sum_{j \in J_k}{\alpha_j^k c_j^k} \\
 	    \delta_k &=  C_k + (d^k)^{\top}\left(Q+\frac{1}{t_k}\mathbb{I}\right)d^k
-		\end{align*} }
+		\end{align*}
 		If \(\delta_k \leq \mathtt{tol} \rightarrow \) STOP.
 	\item Set \( x^{k+1} = \hat{x}^k + d^k \).
 	\item Compute \(f^{k+1}, g^{k+1}\) \\
@@ -90,8 +161,8 @@ For \(k = 1,2,3,  \dotsc \)
 
 Lemma 5 in \cite{Hare2016} stays the same; no \(Q\) involved \\
 
-\begin{theorem}
-	Theorem 6 in \cite{Hare2016} \(\to\) take only part with \(\liminf_{k\to\infty}t_k > 0 \) because other one not used in null steps and algorithm this way. \\
+\begin{theorem}(c.f.\cite[Theorem 6]{Hare2016}\\
+	\(\to\) take only part with \(\liminf_{k\to\infty}t_k > 0 \) because other one not used in null steps and algorithm this way. \\
 	Let the algorithm generate and infinite number of serious steps. Then \(\delta_k \to 0\) as \(k \to \infty\). \\
 	Let the sequence \(\{\eta_k\}\) be bounded. If \(\liminf_{k \to \infty} t_k > 0\) then as \(k \to \infty\) we have \(C_k \to 0\), and for ever accumulation point \(\bar{x}\) of \(\{\hat{x}^k\}\) there exists \(\bar{S}\) such that \(S^k \to \bar{S}\) and \(S^k + \nu^k \to 0\). \\
 	In particular if the cardinality of \({j \in J^k|\alpha_j^k > 0}\) is uniformly bounded in \(k\) then the conclusions of Lemma 5 in \cite{Hare2016} hold.
@@ -161,10 +232,16 @@ For the case of infinitely many null steps one show:
 	
 	\begin{equation}
 		\Psi_k := M_k(x^{k+1})+\left(d^k\right)^{\top}\frac{1}{2}\left(Q+\frac{1}{t_k}\mathbb{I}\right)d^k.
+		\label{Psi}
 	\end{equation}
 	
 	It is first shown that the sequence \(\{\Psi_k\}\) is bounded above.
-	\textcolor{red}{Using the aggregate linearization}
+	From the definition
+
+\begin{equation}	
+	A_k(\hat{x}+d) := M_k(x^{k+1})+\langle S^k,d-d^k\rangle
+	\label{Noll_agg_lin}
+	of the aggregate linearization follows
 	
 	\begin{equation}
 		A_k(\hat{x}) = M_k(x^{k+1})-\langle S^k,d^k \rangle.
