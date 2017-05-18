@@ -1,4 +1,4 @@
-\section{Proximal bundle method for nonconvex functions with inexact information}
+\section{Proximal bundle method for nonconvex functions with inexact information} \label{sec_nonconv_inex}
 
 %\textcolor{blue}{introduction}
 
@@ -207,7 +207,7 @@ The definition of the \emph{augmented aggregate subgradient} \(S^k\),  \emph{err
 \begin{align}
 	&S^k := \sum_{j \in J_k} \alpha_j^k s_j^k \label{aug_agg_subgr}, \\
 	&C_k := \sum_{j \in J_k}{\alpha_j^k c_j^k} \\%\label{aug_agg_err} \text{ and }
-	& A_k(\hat{x}^k+d) := M_k(x^{k+1})+\left\langle S^k, d-d^k \right\rangle.
+	& A_k(\hat{x}^k+d) := M_k(x^{k+1})+\left\langle S^k, d-d^k \right\rangle \label{aug_agg_lin}.
 \end{align}
 
 Just as the model decrease
@@ -215,6 +215,22 @@ Just as the model decrease
 	\delta^k := C_k + t_k \|S^k + \nu^k\|^2.
 \label{mod_dec2}
 \end{equation*}
+
+As the model function is convex even for nonconvex objective functions it is still minorized by the aggregate linearization. It holds 
+
+\begin{equation}
+	A_K(\hat{x}^k+d) \leq M_k(\hat{x}^k+d).
+\label{A_leq_M}
+\end{equation}
+
+The update of \(t_k\) can be done in the same way described in (\ref{t_plus}) and (\ref{t_minus}) for the basic bundle method. Similarly  the methods to update the bundle index set \(J^k\) stay valid.
+The update conditions (\ref{model_update_1}) and (\ref{model_update_2}) for the model are now written with respect to the augmented aggregate linearization and the approximate function value \(\hat{f}_{k+1}\).
+
+\begin{align}
+	&M_{k+1}(\hat{x}^k+d) \geq \hat{f}_{k+1}-c^{k+1}_{k+1}+\left\langle s^{k+1},d \right\rangle \label{Model_update_1}\\
+	&M_{k+1}(\hat{x}^k+d) \geq A_k(\hat{x}^k+d).
+	\label{Model_update_2}
+\end{align}
 
 A bundle algorithm that deals with nonconvexity and inexact function and subgradient information can now be stated.
 
@@ -261,17 +277,7 @@ For \(k = 1,2,3,  \dotsc \)
 
 \vspace{1.5em}
 
-The update of \(t_k\) can be done in the same way described in (\ref{t_plus}) and (\ref{t_minus}) for the basic bundle method. Similarly  the methods to update the bundle index set \(J^k\) stay valid.
-The update conditions (\ref{model_update_1}) and (\ref{model_update_2}) for the model are now written with respect to the augmented aggregate linearization and the approximate function value \(\hat{f}_{k+1}\).
-
-\begin{align*}
-	&M_{k+1}(\hat{x}^k+d) \geq \hat{f}_{k+1}-c^{k+1}_{k+1}+\left\langle s^{k+1},d \right\rangle \\
-	&M_{k+1}(\hat{x}^k+d) \geq A_k(\hat{x}^k+d).
-	%\label{Model_update}
-\end{align*}
-
-
-\subsection{On Different Convergence Results}
+\subsection{On Different Convergence Results} \label{On_diff_conv_res}
 
 In terms of usability of the described algorithm it is interesting to see if stronger convergence results are possible if additional assumptions are put on the objective function. This is investigated in the following section.
 
@@ -418,13 +424,13 @@ In case of convex objective functions with inexact information stronger converge
 
 %changes in the algorithm are more involved. The reason for this is that generally stronger convergence results are possible with inexactness in the convex case than in the nonconvex case. %This means however, that the inexactness cannot be incorporated as easily into the algorithm
 
-\begin{itemize}
-	\item stronger convergence results possible because of exploitation of convexity
-	\item changes in the algorithm because if convexity should be exploited: inexactness cannot be treated as nonconvexity
-	\item 
-\end{itemize}
+%\begin{itemize}
+	%\item stronger convergence results possible because of exploitation of convexity
+	%\item changes in the algorithm because if convexity should be exploited: inexactness cannot be treated as nonconvexity
+	%\item 
+%\end{itemize}
 
-\begin{itemize}
+%\begin{itemize}
 	%\item in paper other method for calculating \(\mu = \frac{1}{t_k}\) \\
 	%\textcolor{red}{how is made sure that \(\eta\) big enough???}
 	%\item convergence results for nonconvex functions:?
@@ -435,8 +441,8 @@ In case of convex objective functions with inexact information stronger converge
 		%\item convergence results: \\
 		%\emph{exact}: the limit of the sequence \(\{x^{k}\}\) (which exists) or every accumulation point of the sequence \(\{\hat{x}^k\}\) is a stationary point of \(f\)\\
 		%\textcolor{red}{Does this mean: \(0 \in \partial f(\bar{x}), ~\bar{x}\) being the respective limit??? incorporate set \(D\)?} \\
-		\item \emph{inexact}: \(0 \in \left(\partial f(\bar{x}) + \partial I_D(\bar{x}) \right) + B_{\bar{\theta}}(0)\) \\
-		if \(f\) lower-\(\mathcal{C}^1\): 
-		\[ \forall \varepsilon >0 ~\exists \rho >0: \quad f(y) \geq f(\bar{x})-(\bar{\theta}+\varepsilon)\|y-\bar{x}\|-2\bar{\sigma} \quad \forall y \in D \cap B_{\rho}(\bar{x}) \]
-\end{itemize}
+		%\item \emph{inexact}: \(0 \in \left(\partial f(\bar{x}) + \partial I_D(\bar{x}) \right) + B_{\bar{\theta}}(0)\) \\
+		%if \(f\) lower-\(\mathcal{C}^1\): 
+		%\[ \forall \varepsilon >0 ~\exists \rho >0: \quad f(y) \geq f(\bar{x})-(\bar{\theta}+\varepsilon)\|y-\bar{x}\|-2\bar{\sigma} \quad \forall y \in D \cap B_{\rho}(\bar{x}) \]
+%\end{itemize}
 

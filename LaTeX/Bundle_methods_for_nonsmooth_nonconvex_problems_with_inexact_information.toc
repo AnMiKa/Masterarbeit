@@ -24,10 +24,13 @@
 \contentsline {subsubsection}{\numberline {3.2.1}The Constraint Set}{19}
 \contentsline {subsubsection}{\numberline {3.2.2}Exact Information and Vanishing Errors}{20}
 \contentsline {subsubsection}{\numberline {3.2.3}Convex Objective Functions}{20}
-\contentsline {section}{\numberline {4}Variable Metric Bundle Algorithm}{22}
-\contentsline {subsubsection}{\numberline {4.0.4}how to get Q and ensure all conditions}{23}
-\contentsline {subsubsection}{\numberline {4.0.5}the new stopping criterion}{23}
-\contentsline {subsection}{\numberline {4.1}Keywords}{24}
-\contentsline {subsection}{\numberline {4.2}important assumptions}{24}
-\contentsline {subsection}{\numberline {4.3}Algorithm}{24}
+\contentsline {section}{\numberline {4}Variable Metric Bundle Method}{21}
+\contentsline {subsection}{\numberline {4.1}The Main Ingredients to the Method}{22}
+\contentsline {subsubsection}{\numberline {4.1.1}Variable Metric Bundle Methods}{22}
+\contentsline {subsubsection}{\numberline {4.1.2}Second Order Model}{23}
+\contentsline {subsubsection}{\numberline {4.1.3}how to get Q and ensure all conditions}{24}
+\contentsline {subsubsection}{\numberline {4.1.4}the new stopping criterion}{24}
+\contentsline {subsection}{\numberline {4.2}Keywords}{24}
+\contentsline {subsection}{\numberline {4.3}Algorithm}{25}
+\contentsline {subsection}{\numberline {4.4}Convergence Analysis}{26}
 \contentsline {section}{References}{}

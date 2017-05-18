@@ -28,6 +28,12 @@ Carl Geiger and Christian Kanzow.
 \newblock {\em Theorie und Numerik restringierter Optimierungsaufgaben}.
 \newblock Sp, 2002.
 
+\bibitem{Haarala2007}
+Napsu Haarala, Kaisa Miettinen, and Marko~M. M{\"a}kel{\"a}.
+\newblock Globally convergent limited memory bundle method for large-scale
+  nonsmooth optimization.
+\newblock {\em Mathematical Programming}, 109(1):181--205, 2007.
+
 \bibitem{Hare2010}
 Warren Hare and Claudia Sagastiz\`{a}bal.
 \newblock A redistributed proximal bundle method for nonconvex optimization.
@@ -85,6 +91,17 @@ Krzysztof~C. Kiwiel.
 Krzysztof~C. Kiwiel.
 \newblock A proximal bundle method with approximate subgradient linearizations.
 \newblock {\em {SIAM} Journal on Optimization}, 16(4):1007--1023, jan 2006.
+
+\bibitem{Lemarechal1994}
+Claude Lemar{\'e}chal and Claudia Sagastiz{\'a}bal.
+\newblock {\em An approach to variable metric bundle methods}, pages 144--162.
+\newblock Springer Berlin Heidelberg, Berlin, Heidelberg, 1994.
+
+\bibitem{Lemarechal1997}
+Claude Lemar{\'e}chal and Claudia Sagastiz{\'a}bal.
+\newblock Variable metric bundle methods: From conceptual to implementable
+  forms.
+\newblock {\em Mathematical Programming}, 76(3):393--410, 1997.
 
 \bibitem{Lewis2015}
 A.~S. Lewis and S.~J. Wright.

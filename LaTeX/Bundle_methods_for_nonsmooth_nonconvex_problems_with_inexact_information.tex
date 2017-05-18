@@ -27,9 +27,25 @@
 
 
 %Definition der gewünschten Theorem-Stile:
+%\newtheorem{theorem}{Theorem}[section]
+%\newtheorem{lemma}[theorem]{Lemma} %hier [section] nicht noch einmal wiederholen, da durch [theorem] die Nummerierung schon genauo wie in "Theorem" definiert
+%\newtheorem{corollary}[theorem]{Corrolary}
+
+\newtheoremstyle{my_theorem}
+{}% space above
+{}% space below
+{\itshape}% body font
+{}% indent amout
+{\bfseries}% Theorem head font
+{}% punctuation after theorem head
+{.5em}% space after theorem head
+{}% theorem head spec
+\theoremstyle{my_theorem}
 \newtheorem{theorem}{Theorem}[section]
+%\theoremstyle{theorem}
 \newtheorem{lemma}[theorem]{Lemma} %hier [section] nicht noch einmal wiederholen, da durch [satz] die Nummerierung schon genauo wie in "Satz" definiert
 \newtheorem{corollary}[theorem]{Corrolary}
+
 
 \theoremstyle{definition}
 \newtheorem{definition}[theorem]{Definition}
@@ -42,7 +58,20 @@
 \theoremstyle{my_remark}
 \newtheorem*{remark}{Remark}
 
-%\newenvironment{proof}{\begin{proof}[Proof:]}{\end{proof}}
+%\newenvironment{proof}{\begin{proof}[Proof:]}{\end{proof}} %does not work
+%to have Proof: with ':'
+\makeatletter 
+\renewenvironment{proof}[1][\proofname]{\par
+	\pushQED{\qed}%
+	\normalfont \topsep6\p@\@plus6\p@\relax
+	\trivlist
+	\item\relax
+				{\itshape
+	#1\@addpunct{:}}\hspace\labelsep\ignorespaces
+}{%
+	\popQED\endtrivlist\@endpefalse
+}
+\makeatother
 
 \newcommand{\R}{\mathbb{R}}
 \newcommand{\N}{\mathbb{N}}

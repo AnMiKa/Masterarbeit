@@ -1,10 +1,48 @@
-\section{Variable Metric Bundle Algorithm}
+\section{Variable Metric Bundle Method}
 \label{variable_metric}
 
-...
-We are now interested to include also curvature information into the method as soon as the objective function provides it.... \\
+\textcolor{blue}{introduction}
 
-The proximal stabilization term mimics a curvature term pretty roughly; idea of variable metric bundle methods: allow not only Euclidean norm but a general norm \(\|x\cdot\|^2_{A} = \langle x,Ax\rangle\) with a symmetric and positive definite matrix \(A\).
+A way to extend the proximal bundle method is to use an arbitrary metric \(\frac{1}{2}\Langle d,W_kd \Rangle\) with a symmetric and positive definite matrix \(W_k\) instead of the Euclidean metric for the stabilization term \(\frac{1}{2t_k}\|d\|^2\). Methods doing so are called \emph{variable metric bundle methods}.
+This section combines the method of Hare et al. presented in section \ref{sec_nonconv_inex} with the second order model function used by Noll in \cite{Noll2013} to a metric bundle method suitable for nonconvex functions with noise.
+
+This section therefore starts by explaining the ideas from \cite{Noll2013} used to extend the method presented above. It then gives an explicit strategy how to update the metric during the steps of the algorithm and concludes with a convergence proof for the developed method.
+
+Names and definitions of the objects are the ones used in section \ref{sec_nonconv_inex}.
+
+\subsection{The Main Ingredients to the Method}
+\textcolor{blue}{explanation}
+
+As already mentioned in section \ref{sec_conv_ex} the stabilization term can be interpreted in many different ways. In the context of this section we can understand it as a pretty rough approximation of the curvature of the objective function.
+Of course bundle methods are designed to work with non differentiable objectives so it cannot be expected that the function provides any kind of curvature. However, if it does, incorporating it into the method could speed up convergence.
+
+\subsubsection{Variable Metric Bundle Methods}
+
+Variable metric bundle methods use an approach that can be motivated by the thoughts stated above.
+Instead of using the Euclidean norm for the stabilization term \(\frac{1}{2}\|d\|^2 \) the metric is derived from as symmetric and positive definite matrix \(W_k\). As the name of the method suggests, this matrix can vary over the iterations of the algorithm. The subproblem in the \(k\)'th iteration therefore reads 
+
+\begin{equation*}
+	\min_{\hat{x}^k+d} M_k(\hat{x}^k+d)+\frac{1}{2}\Langle d,W_kd \Rangle.
+\end{equation*}
+
+\textcolor{red}{some more explanation}
+
+stabilization term mimics curvature \(\to\) more sophisticated in variable metric bundle methods \(\to\) explain those; examples \(\to\) Noll also kind of variable metric bundle method \(\to\) explain noll again (ref to chapter 2) and relate to variable metric
+
+Paper that use variable metric bundle methods: \cite{Lemarechal1994,Lemarechal1997,Haarala2007,Vlcek2001}
+
+\subsubsection{Second Order Model}
+
+
+Describe what is needed from Noll \(\to\) describe how to really ensure desired properties (Vlcek) \(\to\) explain other changes like \(\delta_k\) \(\to\) say what is not changed
+
+
+
+
+
+
+%Inspired by the work of Noll in \cite{Noll2013} which is, to our best knowledge, the only other paper dealing with bundle methods for nonconvex functions with inexactness, we are interested to include some kind of curvature information into the bundle method from section \ref{sec_nonconv_inex}.
+
 
 This is also used by Noll et al. in \cite{Noll2012} and Noll in \cite{Noll2013} for nonconvex functions with exact and inexact information respectively.
 In the original papers the motivation is to approximate the original objective function by a quadratic model
@@ -68,26 +106,29 @@ In the same way as for (???) from the optimality condition
 follows that 
 \begin{equation}
 	S^k+\nu^k = -\left(Q+\frac{1}{t_k}\mathbb{I}\right)d^k.
+	\label{subgr_Q}
 \end{equation}
 
 From this the model decrease (???) can be recovered using (???), (??) and (\ref{Noll_opt_cond}):
 
-\begin{align}
+\begin{equation}
+\begin{split}
 	\delta_k  &= \hat{f}_k - M_k(x^{k+1}) - (\nu^k)^{\top}d^k\\
 	&= \hat{f}_k - A_k(x^{k+1}) - (\nu^k)^{\top}d^k\\
 	%&= C_k - (S^k)^{\top}d^k - (\nu^k)^{\top}d^k \\
 	&= C_k - (S^k+\nu^k)^{\top}d^k \\
 	&= C_k + (d^k)^{\top}\left(Q+\frac{1}{t_k}\mathbb{I}\right)d^k
 	\label{Noll_delta}
-\end{align}
+\end{split}
+\end{equation}
+
+
+As the changes in the algorithm concern only the stabilization and the model decrease \(d_k\) all relations that were obtained for the different prats of the model \(M_k\) in section \ref{sec_nonconv_inex} are still valid.
 
 
 
 
-
-
-
-\subsection{Keywords}
+%\subsection{Keywords}
 
 %important in Noll for me: optimize model + \(d^{\top}(Q+\frac{1}{t_k}\mathbb{I})d\)
 %-> some kind of second order information
@@ -101,13 +142,13 @@ From this the model decrease (???) can be recovered using (???), (??) and (\ref{
 %Optimality condition: 
 
 
-\subsection{important assumptions}
+\subsection{Keywords}
 eigenvalues of \(Q\) are bounded \(\to\) possible by manipulating BFGS update
 
 \begin{align}
-	\text{if} &\quad norm\left(\frac{y^k{y^k}^{\top}}{{y^k}^{\top}d^k}\right) > 10^{??} \\
-	&\quad \text{set } \frac{y^k{y^k}^{\top}}{threshold} \\
-	&\quad threshold = norm\left(y^k{y^k}^{\top}\right)/10^{??} \\
+	\text{if} &\quad \text{norm}\left(\frac{y^k{y^k}^{\top}}{{y^k}^{\top}d^k}\right) > 1/3C \\
+	&\quad \text{set } \frac{y^k{y^k}^{\top}}{\zeta} \\
+	&\quad \zeta = \frac{\text{norm}\left(y^k{y^k}^{\top}\right)}{1/3C} \\
 	\text{end} &
 \end{align}
 same procedure for next term; all \(<1/3C\) for some overall threshold \(C\) 
@@ -121,11 +162,14 @@ same procedure for next term; all \(<1/3C\) for some overall threshold \(C\)
  
 
 \subsection{Algorithm}
+
+\textcolor{red}{same form as Hare algorithm (nullstep)\\
+add \(Q\) calculation}
 \vspace{1em}
 
 \hrule  \vspace{0.4ex} \hrule
 \vspace{1ex}
-\textbf{Nonconvex variable metric bundle method with inexact information}
+\textbf{Nonconvex Variable Metric Bundle Method with Inexact Information}
 \vspace{1ex}
 \hrule
 \vspace{1ex}
@@ -138,40 +182,111 @@ For \(k = 1,2,3,  \dotsc \)
 	\item Calculate \[d^k = \arg \min_{d \in \R^n} \left\{ M_k(\hat{x}^k+d)+\mathbb{I}_X(\hat{x}^k+d)+\frac{1}{2}d^{\top}\left(Q+\frac{1}{t_k}\mathbb{I}\right)d\right\}.\]
 	\item Set %\textcolor{red}{\(\to\) other stopping condition!!!
 		\begin{align*} 
-		  G^k &= \sum_{j \in J_k}{\alpha_j^k s_j^k} \\ %, \quad	\nu^k = -\frac{1}{t_k}d^k-G^k???????????\\
-			C_k &= \sum_{j \in J_k}{\alpha_j^k c_j^k} \\
-	    \delta_k &=  C_k + (d^k)^{\top}\left(Q+\frac{1}{t_k}\mathbb{I}\right)d^k
+		  G^k &= \sum_{j \in J_k}{\alpha_j^k s_j^k}, \\ %, \quad	\nu^k = -\frac{1}{t_k}d^k-G^k???????????\\
+			C_k &= \sum_{j \in J_k}{\alpha_j^k c_j^k}, \\
+	    \delta_k &=  C_k + (d^k)^{\top}\left(Q+\frac{1}{t_k}\mathbb{I}\right)d^k.
 		\end{align*}
 		If \(\delta_k \leq \mathtt{tol} \rightarrow \) STOP.
 	\item Set \( x^{k+1} = \hat{x}^k + d^k \).
-	\item Compute \(f^{k+1}, g^{k+1}\) \\
+	\item Compute \(f^{k+1}, g^{k+1}\). \\
 	If 
 	\[f^{k+1} \leq \hat{f}^k - m\delta_k \quad \rightarrow \text{ serious step} \]
 	Set \(\hat{x}^{k+1} = x^{k+1}, \hat{f}^{k+1} = f^{k+1}\) and select \(t_{k+1} > 0\). \\
+	Calculate \(Q(\hat{x}^k)\) ...
 	Otherwise \(\rightarrow\) nullstep \\
 	Set \(\hat{x}^{k+1} = \hat{x}^k, \hat{f}^{k+1}=f^{k+1}\) and choose \(0 < t_{k+1} \leq t_k\). 	
 	\item Select new bundle index set \(J_{k+1}\), keeping all active elements. Calculate 
 	\[ \eta_k \geq \max{\left\{\max_{j \in J_{k+1}, x^j \neq \hat{x}^{k+1}}{\frac{-2e_j^k}{|x^j - \hat{x}^{k+1}|^2}, 0}\right\}}+\gamma  \]
-	and update the model \(M^k\)
+	and update the model \(M^k\).
 \end{enumerate}
 \vspace{1ex}
 \hrule
 
 \vspace{1.5em}
 
-Lemma 5 in \cite{Hare2016} stays the same; no \(Q\) involved \\
 
-\begin{theorem}(c.f.\cite[Theorem 6]{Hare2016}\\
-	\(\to\) take only part with \(\liminf_{k\to\infty}t_k > 0 \) because other one not used in null steps and algorithm this way. \\
+\subsection{Convergence Analysis}
+
+In this section the convergence properties of the new method are analyzed. We do this the same way it is done by Hare et al. in \cite{Hare2016}.
+
+In the paper all convergence properties are first stated in \cite[Lemma 5]{Hare2016}. It is then shown that all sequences generated by the method meet the requirements of this lemma which we repeat here for convenience.
+
+\begin{lemma}[{\cite[Lemma 5]{Hare2016}}]\label{Lemma5}
+	Suppose that the cardinality of the set \(\{j \in J^k| \alpha_j^k > 0\}\) is uniformly bounded in \(k\).
+	
+	(i) If \(C^k \to 0\) as \(k \to \infty\), then 
+	\[ \sum_{j \in J^k}\alpha_j^k\|x^j-\hat{x}^k\| \to 0 \text{ as } k \to \infty. \]
+	
+	(ii) If additionally for some subset \(K \subset \{1,2,\dots\}\),
+	\[\hat{x}^k \to \bar{x}, S^k \to \bar{S} \text{ as } K \ni k \to \infty, \text{ with } \{\eta_k|k \in K\} \text{ bounded,} \]
+	
+	then we also have 
+	\[\bar{S} \in \partial f(\bar{x})+B_{\bar{\theta}}(0).\]
+	
+	(iii) If in addition \(S^k + \nu^k \to 0\) as \(K \in k \to \infty\), then \(\bar{x}\) satisfies the approximate stationarity condition 
+	\begin{equation}
+		0 \in \left(\partial f(\bar{x}) + \partial \mathtt{i}_X(\bar{x}) \right) + B_{\bar{\theta}}(0).
+	\end{equation}
+	
+	(iv) Finally if \(f\) is also lower-\(\mathcal{C}^1\), then for each \(\varepsilon > 0\) there exists \(\rho > 0\) such that
+	\begin{equation}
+		f(y) \geq f(\bar{x})-(\bar{\theta}+\varepsilon)\|y-\bar{x}\|-2\bar{\sigma}, \quad \text{ for all } y \in X\cup B_{\rho}(\bar{x}).
+	\end{equation}
+\end{lemma}
+
+As the neither the stabilization nor the descent test is involved in the proof of Lemma \ref{Lemma5} it is the same as in \cite{Hare2016}.
+
+We prove now that also the variable metric version of the algorithm fulfills all requirements of Lemma \ref{Lemma5}.
+The proof is divided into two parts. The first case covers the case of infinitely many serious steps, the second one considers infinitely many null steps.
+
+For both proofs the following lemma is needed:
+
+\begin{lemma}
+	For a symmetric matrix \(A \in \R^{n\times n}\) and a vector \(d\in \R^n\) the following result holds: 
+	\[ A \prec \xi \mathbb{I} \Rightarrow Ad < \xi d \]
+\end{lemma}
+
+\begin{proof}
+	As the matrix \(A\) is real and symmetric it is orthogonally diagonalizeable.
+	There exist eigenvalues \(\lambda_i \in \R, i = \{1,...,n\}\) and corresponding eigenvectors \(v^i \in \R^n, i = \{1,...,n\}\) that satisfy the equations
+	
+	\begin{equation*}
+		Av^i= \lambda_iv^i \quad i = \{1,...,n\}.
+		\label{A_d_rel}
+	\end{equation*}
+	
+	The eigenvectors \(v^i\) generate a basis for \(\R^n\) so any vector \(d \in \R^n\) can be written as
+	
+	\[ d = \sum_{i} {\alpha_i v^i} \]
+	
+	for \(\alpha_i \in \R^n, i = \{1,...,n\}\).
+	
+	This yields
+	
+	\begin{equation}
+		Ad = A \sum_i{\alpha_i v^i} = \sum_i \alpha_i \lambda_i v^i.
+		\label{Ad}
+	\end{equation}
+	
+	Plugging the assumption \(A \prec \xi \mathbb{I}\) which is equivalent to \(\max_i \lambda_i < \xi\) into (\ref{Ad})
+	we get relation (\ref{A_d_rel}) by
+		\[Ad < \xi \sum_i \alpha_i v^i = \xi d. \]
+
+	%\[ A \succ B \Leftrightarrow A - B \succ 0\Leftrightarrow A-B \text{ is positive definite}\]
+	%Respectively for \(A \prec B\) \\
+\end{proof}
+
+\begin{theorem}[c.f.{\cite[Theorem 6]{Hare2016}}]
+	%\(\to\) take only part with \(\liminf_{k\to\infty}t_k > 0 \) because other one not used in null steps and algorithm this way. \\
 	Let the algorithm generate and infinite number of serious steps. Then \(\delta_k \to 0\) as \(k \to \infty\). \\
-	Let the sequence \(\{\eta_k\}\) be bounded. If \(\liminf_{k \to \infty} t_k > 0\) then as \(k \to \infty\) we have \(C_k \to 0\), and for ever accumulation point \(\bar{x}\) of \(\{\hat{x}^k\}\) there exists \(\bar{S}\) such that \(S^k \to \bar{S}\) and \(S^k + \nu^k \to 0\). \\
-	In particular if the cardinality of \({j \in J^k|\alpha_j^k > 0}\) is uniformly bounded in \(k\) then the conclusions of Lemma 5 in \cite{Hare2016} hold.
+	Let the sequence \(\{\eta_k\}\) be bounded. If \(\liminf_{k \to \infty} t_k > 0\) then as \(k \to \infty\) we have \(C_k \to 0\), and for every accumulation point \(\bar{x}\) of \(\{\hat{x}^k\}\) there exists \(\bar{S}\) such that \(S^k \to \bar{S}\) and \(S^k + \nu^k \to 0\). \\
+	In particular if the cardinality of \(\{j \in J^k|\alpha_j^k > 0\}\) is uniformly bounded in \(k\) then the conclusions of Lemma \ref{Lemma5} hold.
 \end{theorem}
 
 The proof is very similar to the one stated in \cite{Hare2016} but minor changes have to be made due to the different formulation of the nominal decrease \(\delta_k\).
 
 \begin{proof}
-	At each serious step \(k\) holds
+	At each serious step we have
 	
 	\begin{equation}
 		\hat{f}_{k+1} \leq \hat{f}_k - m\delta_k
@@ -179,51 +294,61 @@ The proof is very similar to the one stated in \cite{Hare2016} but minor changes
 	\end{equation}
 	
 	where \(m, ~\delta_k > 0\). From this follows that the sequence \(\{\hat{f}_k\}\) is nonincreasing.
-	Since \(\{\hat{x}^k\} \subset D\) the sequence is by the fact that \(f\) is finite %\textcolor{red}{which assumption says \(f\) bounded below??? \(\to\) \(f\) subdifferentially regular \(\Rightarrow\) \(f\) finite}
-	and \(|\sigma_k| < \bar{\sigma}\) the sequence \(\{f(\hat{x}^k)+\sigma_k\} = \{\hat{f}_k\}\) is bounded below. Together with the fact that \(\{\hat{f}_k\}\) is nonincreasing one can conclude that it converges. \\
+	Since \(\{\hat{x}^k\} \subset X\) and \(f\) is continuous the sequence \(f(\hat{x}^k)\) is bounded. %\textcolor{red}{which assumption says \(f\) bounded below??? \(\to\) \(f\) subdifferentially regular \(\Rightarrow\) \(f\) finite}
+	With \(|\sigma_k| < \bar{\sigma}\) the sequence \(\{f(\hat{x}^k)+\sigma_k\} = \{\hat{f}_k\}\) is bounded below. Together with the fact that \(\{\hat{f}_k\}\) is nonincreasing one can conclude that it converges. \\
 	Using (\ref{nonincreasing}), one obtains
 	
-	\begin{equation}
+	\begin{equation*}
 		0 \leq m \sum_{k = 1}^l \delta_k \leq \sum_{k = 1}^l \left(\hat{f}_k-\hat{f}_{k+1}\right),
-	\end{equation}
+	\end{equation*}
 	
 	so letting \(l \to \infty\), 
 	
-	\begin{equation}
+	\begin{equation*}
 		0 \leq m\sum_{k=1}^{\infty} \delta_k \leq \hat{f}_1 - \underbrace{\lim_{k \to \infty} \hat{f}_k}_{\neq \pm \infty}.
-	\end{equation}
-	As a result,
-	\begin{equation}
+	\end{equation*}
+	
+	This yields
+	\begin{equation*}
 		\sum_{k = 1}^{\infty} \delta_k = \sum_{k=1}^{\infty}\left(C^k+(d^k)^{\top}\left(Q+\frac{1}{t_k}\mathbb{I}\right)d^k\right) < \infty
-	\end{equation}
+	\end{equation*}
 	
-	Hence, \(\delta_k \to 0\) as \(k \to \infty\). As all quantities above are nonnegative due to positive (semi-)definiteness of \(Q+\frac{1}{t_k}\mathbb{I}\), it also holds that
+	Hence, \(\delta_k \to 0\) as \(k \to \infty\). All quantities above are nonnegative due to positive definiteness of \(Q+\frac{1}{t_k}\mathbb{I}\), so it also holds that
 	
-	\begin{equation}
+	\begin{equation*}
 		C_k \to 0 \quad \text{and} \quad (d^k)^{\top}\left(Q+\frac{1}{t_k}\mathbb{I}\right)d^k \to 0.
-	\end{equation}
+	\end{equation*}
 	
 	For any accumulation point \(\bar{x}\) of the sequence \(\{\hat{x}^k\}\) the corresponding subsequence \(d^k \to 0\) for \(k \in K \subset \{1,2,...\} \). As \(\liminf_{k \to \infty} t_k > 0\) and the eigenvalues of \(Q\) are bounded the whole expression 
 	
-	\begin{equation}
+	\begin{equation*}
 	 S^k + \nu^k = \left(Q+\frac{1}{t_k}I \right)d^k  \to 0 \quad \text{for} \quad k \in K.
-	\end{equation}
+	\end{equation*}
 	
 	And from local Lipschitz continuity of \(f\) follows then that \(S^k \to \bar{S}\) for \(k \in K\).
 	
 \end{proof}
 
-\begin{remark}
-If one assumes that the set \(\Omega = \{x \in \R^n |f(x) \leq f(x^1) +2\bar{\sigma}\}\) is bounded, it is not necessary to use the constraint set \(D\). \\
-Because all \(\{\hat{x}^k\} \subset \Omega\) one can deduce the boundedness of the sequence.
-\end{remark}
+%\begin{remark}
+%If one assumes that the set \(\Omega = \{x \in \R^n |f(x) \leq f(x^1) +2\bar{\sigma}\}\) is bounded, it is not necessary to use the constraint set \(X\). \\
+%Because \(\{\hat{x}^k\} \subset \Omega\) one can deduce the boundedness of the sequence.
+%\end{remark}
 
-For the case of infinitely many null steps one show:
+For the case of infinitely many null steps we need result (31) from \cite{Hare2016}. It only depends on the definitions of the augmented linearization error and subgradient.
 
-\begin{theorem} \cite{Hare2016}
+Whenever \(x^{k+1}\) is as declared a null step, the relation 
+
+\begin{equation}
+	-c^{k+1}_{k+1} + \Langle s^{k+1}_{k+1}, x^{k+1}-\hat{x}^k\Rangle \geq -m\delta_k
+\label{no_ls}
+\end{equation}
+
+holds.
+
+\begin{theorem} [c.f. {\cite[Theorem 7]{Hare2016}}]
 	Let a finite number of serious iterates be followed by infinite null steps. Let the sequence \(\{\eta_k\}\) be bounded and \(\liminf k \to \infty > 0\). \\
 	Then \(\{x^k\} \to \hat{x}\), \(\delta_k \to 0\), \(C_k \to 0\), \(S^k + \nu^k \to 0\) and there exist \(K\subset \{1,2,...\}\) and \(\bar{S}\) such that \(S^k \to \bar{S^k}\) as \(K \ni k \to \infty\). \\
-	In particular if the cardinality of \({j \in J^k|\alpha_j^k > 0}\) is uniformly bounded in \(k\) then the conclusions of Lemma 5 in \cite{Hare2016} hold for \(\bar{x} = \hat{x}\). 
+	In particular if the cardinality of \(\{j \in J^k|\alpha_j^k > 0 \}\) is uniformly bounded in \(k\) then the conclusions of Lemma \ref{Lemma5} hold for \(\bar{x} = \hat{x}\). 
 \end{theorem}
 
 \begin{proof}
@@ -236,119 +361,110 @@ For the case of infinitely many null steps one show:
 	\end{equation}
 	
 	It is first shown that the sequence \(\{\Psi_k\}\) is bounded above.
-	From the definition
+	From definition (\ref{aug_agg_lin}) follows
 
-\begin{equation}	
-	A_k(\hat{x}+d) := M_k(x^{k+1})+\langle S^k,d-d^k\rangle
-	\label{Noll_agg_lin}
-\end{equation}
-	of the aggregate linearization follows
+%\begin{equation*}	
+	%A_k(\hat{x}+d) := M_k(x^{k+1})+\langle S^k,d-d^k\rangle
+	%\label{Noll_agg_lin}
+%\end{equation*}
+	%of the aggregate linearization follows
 	
-	\begin{equation}
+	\begin{equation*}
 		A_k(\hat{x}) = M_k(x^{k+1})-\langle S^k,d^k \rangle.
-	\end{equation}
+	\end{equation*}
 	
-	Using \(S^k+\nu^k = -\left(Q+\frac{1}{t_k}\mathbb{I}\right)d^k\) and the subgradient inequality for \(\nu^k \in \partial \mathtt{i}_{D}\) one obtains
+Using (\ref{subgr_Q}) for the second equality, the subgradient inequality for \(\nu^k \in \partial \mathtt{i}_{D}\) in the first inequality and (\ref{A_leq_M}) for the second inequality  one obtains
 	
 	\begin{align*}
 		\Psi^k+\frac{1}{2}\left(d^{k}\right)^{\top}\left(Q+\frac{1}{t_k}\mathbb{I}\right)d^k &= A_k(\hat{x})+\langle S^k,d^k\rangle + \left(d^{k}\right)^{\top}\left(Q+\frac{1}{t_k}\mathbb{I}\right)d^k \\
 		&= A_k(\hat{x})-\langle \nu^k,k \rangle \\
 		&\leq A(\hat{x}) \\
 		&\leq M_k(\hat{x}) \\
-		& = \hat{f}
+		& = \hat{f}.
 	\end{align*}
 	
-	\textcolor{red}{where the equations and inequalities follow from???}\\
-	By boundedness of \(d^k\) and \(Q+\frac{1}{t_k}\mathbb{I}\) this yields that \(\Psi_k \leq \hat{f}\), so the sequence \(\{\Psi_k\}\) is bounded above.
-	In the next step is shown that \(\{\Psi_k\}\) is increasing.
+By boundedness of \(d^k\) and \(Q+\frac{1}{t_k}\mathbb{I}\) this yields that \(\Psi_k \leq \hat{f}\), so the sequence \(\{\Psi_k\}\) is bounded above.
+	In the next step is shown that \(\{\Psi_k\}\) is increasing. For this we obtain
 	
-	\begin{align}
+	\begin{align*}
 		\Psi_{k+1} &= M_k(x^{k+2})+\frac{1}{2}\left(d^{k+1}\right)^{\top}\left(Q+\frac{1}{t_k}\mathbb{I} \right)d^{k+1} \\
 		&\geq A_k(x^{k+2})+\frac{1}{2}\left(d^{k+1}\right)^{\top}\left(Q+\frac{1}{t_k}\mathbb{I}\right)d^{k+1} \\
 		&= M_k(x^{k+1})+\langle S^k,x^{k+2}-x^{k+1} \rangle +\frac{1}{2}\left(d^{k+1}\right)^{\top}\left(Q+\frac{1}{t_k}\mathbb{I}\right)d^{k+1} \\
 		&= \Psi_k - \frac{1}{2}\left(d^{k}\right)^{\top}\left(Q+\frac{1}{t_k}\mathbb{I}\right)d^{k} + \frac{1}{2}\left(d^{k+1}\right)^{\top}\left(Q+\frac{1}{t_k}\mathbb{I}\right)d^{k+1} \\
 		& \qquad -\left(d^{k}\right)^{\top}\left(Q+\frac{1}{t_k}\mathbb{I}\right)\left(d^{k+1} - d^{k}\right) - \langle \nu^k, x^{k+2}-x^{k+1}\rangle\\
-		&\geq \Psi_k + \frac{1}{2}\left(d^{k+1}-d^{k}\right)^{\top}\left(Q+\frac{1}{t_k}\mathbb{I}\right)\left(d^{k+1} - d^{k}\right)
-	\end{align}
+		&\geq \Psi_k + \frac{1}{2}\left(d^{k+1}-d^{k}\right)^{\top}\left(Q+\frac{1}{t_k}\mathbb{I}\right)\left(d^{k+1} - d^{k}\right),
+	\end{align*}
 	
-\textcolor{red}{say where (in-)equalities come from} \\
+where the first inequality comes from (\ref{A_leq_M}) and the fact that \(t_{k+1} \leq t_{k}\) for null steps.The second equality follows from (\ref{aug_agg_lin}), the third equation by (\ref{subgr_Q}) and (\ref{Psi}) and the last inequality holds y \(\nu^k \in \partial \mathtt{i}_X(x^{k+1})\).
 
 As \(Q\) is fixed in null steps and \(\liminf_{k \to \infty} t_k > 0\) \(\{\Psi_k\}\) is increasing. The sequence is therefore convergent.
-Consequently, taking into account that \(1/t_k \geq 1/t_{\bar{k}}\), it follows
+Taking into account that \(1/t_k \geq 1/t_{\bar{k}}\), it therefore follows that
 
 \begin{equation}
 	\|d^{k+1}-d^k\| \to 0, \quad k \to \infty.
 \label{d_to_0}
 \end{equation}
 
-By the \textcolor{red}{definitions and characterizations that have to be specified} one has
+By definition (\ref{Noll_delta}) and the fact that the augmented aggregate error can be expressed as
 
-\begin{align}
+\begin{equation*}
+	C_k = \hat{f}-M_k(x^{k+1})+\Langle S^k,d^k \Rangle 
+\end{equation*}
+
+by the KKT conditions follows
+
+\begin{align*}
 	\hat{f} &= \delta_k+M_k(\hat{x})-C_k-\left(d^{k}\right)^{\top}\left(Q+\frac{1}{t_k}\mathbb{I}\right)\left(d^{k}\right) \\
 	&= \delta_k + M_k(x^{k+1})-\langle S^k,d^k \rangle-\left(d^{k}\right)^{\top}\left(Q+\frac{1}{t_k}\mathbb{I}\right)\left(d^{k}\right)  \\
-	&= \delta_k \\
+	&= \delta_k + M_k(\hat{x}+d^k)+\Langle \nu^k, d^k \Rangle\\
 	&\geq \delta_k+M_k(\hat{x}+d^k)
-\end{align}
+\end{align*}
 
-Where the last inequality is given by \(\nu^k \in \partial\mathtt{i}_{D}(x^{k+1})\). Therefore 
+Where the last inequality is given by \(\nu^k \in \partial\mathtt{i}_{X}(x^{k+1})\). Therefore 
 
 \begin{equation}
 	\delta^{k+1} \leq \hat{f}-M_{k+1}(\hat{x}+d^{k+1}).
+	\label{dfM}
 \end{equation}
 
-By the first inequality in assumption \textcolor{red}{define assumption} on the model, written for \(d=d^{k+1}\),
+By assumption (\ref{Model_update_1}) on the model, written for \(d=d^{k+1}\),
 
-\begin{equation}
+\begin{equation*}
 	-\hat{f}_{k+1}+c^{k+1}_{k+1}-\left\langle s^{k+1}_{k+1},d^{k+1}\right\rangle \geq -M_{k+1}(\hat{x}+d^{k+1}).
-\end{equation}
-As \(\hat{f}_{k+1}=\hat{f}\), adding condition \textcolor{red}{???} to the inequality above, one obtains that
+\end{equation*}
 
-\begin{equation}
+In the nullstep case \(\hat{f}_{k+1}=\hat{f}\) so adding condition (\ref{no_ls}) to the inequality above, one obtains that
+
+\begin{equation*}
 	m\delta_k+\left\langle s^{k+1}_{k+1},d^k-d^{k+1}\right\rangle \geq \hat{f}-M_{k+1}(\hat{x}+d^{k+1}).
-\end{equation}
+\end{equation*}
 
-Combining this relation with \textcolor{red}{???} yields
+Combining this relation with (\ref{dfM}) yields
 
-\begin{equation}
+\begin{equation*}
 	0 \leq \delta_{k+1} \leq m\delta_k + \left\langle s^{k+1}_{k+1},d^k-d^{k+1}\right\rangle.
 	\label{delta_ineq}
-\end{equation}
+\end{equation*}
 
-Since \(m \in (0,1)\) and \(\left\langle s^{k+1}_{k+1},d^k-d^{k+1}\right\rangle \to 0\) as \(k \to \infty\) due to (\ref{d_to_0}) and the boundedness of \(\{\eta_k\}\) using \cite[Lemma 3, p.45]{Polyak1987} it follows from  (\ref{delta_ineq}) that 
+Because \(m \in (0,1)\) and \(\left\langle s^{k+1}_{k+1},d^k-d^{k+1}\right\rangle \to 0\) as \(k \to \infty\) due to (\ref{d_to_0}) and the boundedness of \(\{\eta_k\}\) using \cite[Lemma 3, p.45]{Polyak1987} it follows from  (\ref{delta_ineq}) that 
 
-\begin{equation}
+\begin{equation*}
 	\lim_{k \to \infty} \delta_k = 0.
-\end{equation}
+\end{equation*}
 
-From the formulation \(\delta_k = C_k + \left(d^k\right)^{\top}\left(Q+\frac{1}{t_k}\mathbb{I}\right)d^k\) follows that \(C_k \to 0\) as \(k \to \infty\). As \textcolor{red}{\(Q+\frac{1}{t_k}\mathbb{I} \succ \xi\mathbb{I}\)} it follows that 
+From  formulation (\ref{Noll_delta}) of the model decrease follows that \(C_k \to 0\) as \(k \to \infty\). Since {\(Q+\frac{1}{t_k}\mathbb{I} \succ \xi\mathbb{I}\)} due to \(\liminf_{k \to \infty} > 0\) and the bounded eigenvalues of \(Q\) we have 
 
-\begin{equation}
+\begin{equation*}
 	\xi \left(d^k\right)^{\top}d^k \leq \left(d^k\right)^{\top}\left(Q+\frac{1}{t_k}\mathbb{I}\right)d^k \to 0
-\end{equation}
+\end{equation*}
+
+This means that \(d^k \to 0\) for \(k \to \infty\) and therefore \(\lim_{k \to \infty}x^k = \hat{x}\). It also follows that \(\|S^k+\\vu^k\| \to 0\) as \(k \to \infty\). Passing to some subsequence if necessary we can conclude that \(S^k\) converges to some \(\bar{S}\) and as \(\hat{x}^k = \bar{x}\) for all \(k\) all requirements of Lemma \ref{Lemma5} are fulfilled.
 
 \end{proof}
 
 \begin{remark}
-	To the boundedness of \(Q\) and the resulting inequalities:
-	\[ A \succ B \Leftrightarrow A - B \succ 0\Leftrightarrow A-B \text{ is positive definite}\]
-	Respectively for \(A \prec B\) \\
-  For a real symmetric matrix \(A\) and a vector \(d\in \R^n\) the following result holds: 
-	\[ A \prec \xi \mathbb{I} \Rightarrow Ad < \xi d \]
-	\textbf{Proof:} \(A\) real and symmetric \(\Rightarrow\) it is orthogonally diagonalizeable:
-	\begin{equation}
-	\begin{split}
-		\exists \lambda_i \in \R \text{ eigenvalues} \quad v^i \in \R^n \text{ eignvektors} \\
-		Av^i= \lambda_iv^i \\
-		\text{and} \quad \exists \alpha_i \in \R: \quad d = \sum_{i} {\alpha_i v^i} \\
-		\Rightarrow Ad = A \sum_i{\alpha_i v^i} = \sum_i \alpha_i Av^i = \sum_i \alpha_i \lambda_i v^i\\
-		A \prec \xi \mathbb{I}  \Leftrightarrow \max_i \lambda_i < \xi \\
-		\Rightarrow Ad < \xi \sum_i \alpha_i v^i = \xi d
-  \end{split}
-	\end{equation}
+	All results deduced in section \ref{On_diff_conv_res} are still valid for this algorithm.
 \end{remark}
-
-
-
 
 
 
