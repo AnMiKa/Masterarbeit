@@ -33,6 +33,12 @@ Warren Hare and Claudia Sagastiz\`{a}bal.
 \newblock A redistributed proximal bundle method for nonconvex optimization.
 \newblock {\em SIAM Journal on Optimization}, 20(5):2442--2473, 2010.
 
+\bibitem{Hare2016}
+Warren Hare, Claudia Sagastiz{\`a}bal, and Mikhail Solodov.
+\newblock A proximal bundle method for nonsmooth nonconvex functions with
+  inexact information.
+\newblock {\em Computational Optimization and Applications}, 63:1--28, 2016.
+
 \bibitem{Hintermueller2001}
 Michael Hintermüller.
 \newblock A proximal bundle method based on approximate subgradients.
@@ -49,6 +55,12 @@ Jean-Baptiste Hiriart-Urruty and Claude Lemar\'{e}chal.
 \newblock {\em Convex Analysis and Minimization Algorithms I}, volume 305 of
   {\em Grundlehren der mathematischen Wissenschaften}.
 \newblock Springer Berlin Heidelberg, 2 edition, 1996.
+
+\bibitem{Jofre1998}
+Alejandro Jofr{\'{e}}, Dinh~The Luc, and Michel Th{\'{e}}ra.
+\newblock $\varepsilon$-subdifferential and $\varepsilon$-monotonicity.
+\newblock {\em Nonlinear Analysis: Theory, Methods {\&} Applications},
+  33(1):71--90, jul 1998.
 
 \bibitem{Kiwiel2010}
 K.~C. Kiwiel.
@@ -175,12 +187,6 @@ J.~Vl\v{c}ek and L.~Lu\v{k}san.
 Claudia~Sagastiz\`{a}bal Warren~Hare.
 \newblock Computing proximal points of nonconvex functions.
 \newblock {\em Mathematical Programming}, 116:221--258, 2009.
-
-\bibitem{Hare2016}
-Mikhail~Solodov Warren~Hare, Claudia~Sagastiz{\`a}bal.
-\newblock A proximal bundle method for nonsmooth nonconvex functions with
-  inexact information.
-\newblock {\em Computational Optimization and Applications}, 63:1--28, 2016.
 
 \bibitem{Oliveira2014}
 Claude~Lemar\'{e}chal Welington~de Oliveira, Claudia~Sagastiz\`{a}bal.

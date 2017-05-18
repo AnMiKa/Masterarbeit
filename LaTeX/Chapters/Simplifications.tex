@@ -1,7 +1,7 @@
 \section{Variations of The Bundle Method}
 
 After their discovery in 1975 bundle methods soon became very successful. Only a few years later they were generalized to be used also with nonconvex objective functions. Early works, that contain fundamental ideas still used for these algorithms are \cite{Mifflin1982} and \cite{Kiwiel1985}.
-It then took over 25 years that bundle methods were again generalized to the use of inexact information. The first works on this subject being \cite{Hintermueller2001,Kiwiel2006} and \cite{Solodov2003}.
+It then took over 25 years that bundle methods were again generalized to the use of inexact information, first works on this subject being \cite{Hintermueller2001,Kiwiel2006} and \cite{Solodov2003}.
 
 This section of the thesis shortly presents the key ideas of those two kinds of generalizations and different types of bundle methods that realize them.
 This is first done for the case of convex objective functions with inexact function value and/or subgradient information and then for nonconvex objective functions. 
@@ -9,59 +9,67 @@ This is first done for the case of convex objective functions with inexact funct
 \subsection{Convex Bundle Methods with Inexact Information}
 
 We focus here on \emph{convex} bundle methods with inexact information. The reason for this is that there is a fundamental difference in treating inexactness between methods that assume convex and those that assume nonconvex objective functions.
-When dealing with nonconvex objective functions inexactness is treated as some additional nonconvexity. This is not possible if the convexity property is to be exploited for better convergence results.
+When dealing with nonconvex objective functions inexactness is treated as some additional nonconvexity therefore no additional strategies are used to cope with the noise. This is not possible if the convexity property is to be exploited for better convergence results.
 A throughout study on this subject including a synthetic convergence theory is done in \cite{Oliveira2014}. Here the most important aspects %\textcolor{red}{in view of the following chapters}
-of this paper are reviewed.
+of that paper are reviewed.
 
 \subsubsection{Different Types of Inexactness}
 
-At first it is important to notice that there are many different types of inexactness and further assumptions can be put on the noise to reach stronger convergence results.
-
-Generally inexact information for convex objective functions is defined in the following way:
+Throughout this section we consider the optimization problem
 
 \begin{equation}
-\begin{split}
-	f_x = f(x)-\sigma_x, \quad \sigma_x \leq \bar{\sigma} \\
-	g_x \in \R^n \text{ such that } f(\cdot) \geq f_x + \langle g_x, \cdot - x \rangle - \theta_x, \quad \theta_x \leq \bar{\theta}.
-	\label{conv_inexactness}
-\end{split}
+	\min_{x \in \R^n} f(x)
+\label{opt_prob_conv}
 \end{equation}
 
-From this follows with 
+where the function \(f:\R^n \to \R\) is a finite convex function. The function values and one subgradient at each point \(x\) are given by an inexact oracle.
+It is reasonable to define very different kinds of inexactness and further assumptions can be put on the noise to reach stronger convergence results. However, generally inexact information for convex objective functions is defined in the following way:
+
+\begin{align}
+	&f_x = f(x)-\sigma_x, \quad \sigma_x \leq \bar{\sigma} \label{conv_inexactness_1}\\
+	&g_x \in \R^n \text{ such that } f(\cdot) \geq f_x + \langle g_x, \cdot - x \rangle - \theta_x, \quad \theta_x \leq \bar{\theta}.
+	\label{conv_inexactness_2}
+\end{align}
+
+From this follows because of
 
 \begin{equation}
 	f(\cdot) \geq f(x)+\langle g_x, \cdot - x \rangle - (\sigma_x+\theta_x)
+	\label{sig_p_thet_subgr}
 \end{equation}
 
-that \(g_x\) is an \(\varepsilon\)-subgradient with \(\varepsilon = \sigma_x+\theta_x \geq 0\) independently of the signs of the errors.
+that \(g_x\) is an \(\varepsilon\)-subgradient of \(f(x)\) with \(\varepsilon = \sigma_x+\theta_x \geq 0\) independently of the signs of the errors.
 
-Two very interesting cases of more sophisticated errors are \emph{asymptotically vanishing errors} and oracles that only underestimate the true function, so called \emph{lower oracles}.
+Different convergence results for the applied bundle methods are possible depending on if the bounds \(\bar{\sigma}\) and \(\bar{\theta}\) are unknown, known or even controllable.
 
-The case of asymptotically vanishing errors \(\lim_{k \to \infty} \sigma_k = 0\) and \(\lim_{k \to \infty} \theta_k =  0\) is important because it allows convergence to the exact minimum of the problem even if function values and subgradients are erroneous. In the case of \(\bar{\theta} = 0\) it even suffices to show that the errors are asymptotically exact only for descent steps \cite{Kiwiel2010}.
+In case of controllability of \(\bar{\sigma}\) and \(\bar{\theta}\) it may be possible to drive them to zero  as the iterations increase \(\lim_{k \to \infty} \sigma_k = 0\) and \(\lim_{k \to \infty} \theta_k =  0\). We talk then of \emph{asymptotically vanishing errors}. 
+This case is important because it allows convergence to the exact minimum of the problem even if function values and subgradients are erroneous. In the case of \(\bar{\theta} = 0\) it even suffices to show that the errors are only asymptotically exact for descent steps \cite{Kiwiel2010}.
 This observation was the motivation for the partly inexact bundle methods presented in \cite{Kiwiel2010} and \cite{Oliveira2014}.
 The idea is to calculate a value of the objective function with a demanded accuracy (which is finally going to be exact) only if a certain target descent \(\gamma_x\) is reached. This approach can save a lot of (unnecessary) computational effort while still enabling convergence to the exact minimum c.f. \cite{Oliveira2014}.
 
+In view of good convergence properties oracle that only underestimate the true function, so called \emph{lower oracles}, are also very interesting.
 Lower oracles provide \(f_x\) and \(g_x\) such that \(f_x \leq f(x) \) and \(f(\cdot) \geq f_x + \langle g_x, \cdot - x\rangle\) . That means the cutting plane model is always minorizing the true function as it is the case in for exact information.
-In this case if the value to approximate the optimal function value is chosen properly, it is not necessary to include any other steps to cope with the inexactness, such as noise attenuation \cite[Corollary 5.2]{Oliveira2014}.
+In this case if the value to approximate the optimal function value is chosen properly, it is not necessary to include any new steps into the method to cope with the inexactness, such as noise attenuation \cite[Corollary 5.2]{Oliveira2014}.
 
 \subsubsection{Noise Attenuation}
 
 In the case of inexact information, especially if the inexact function value can overestimate the real one, it is possible that the aggregate linearization error \(E_k\) becomes very small (or even negative) even though the current iterate is far from the minimum of the objective function.
 To tackle this problem the authors propose a procedure called \emph{noise attenuation} that was developed in \cite{Hintermueller2001} and \cite{Kiwiel2006}.
 The basic idea is to allow bigger step sizes \(t_k\) whenever the algorithm comes in the situation described above. This ensures that either some significant descent towards the real minimum can be done or shows that the point where the algorithm is stuck is actually such a minimum.
-Noise attenuation is triggered when \(E_k\) or respectively the descent \(\delta_k\) that is used for the descent test is negative.
+Noise attenuation is triggered when \(E_k\) or respectively the descent \(\delta_k\) that is used for the descent test is negative. A more detailed description is given in \cite{Oliveira2014}.
 
 \subsubsection{Convergence Results}
 Depending on the kind of error many slightly different convergence results can be proven for bundle methods that handle convex objective functions with inexact information.
-In case of the general error on the function value and subgradient it can be shown that for bounded sequences \(\hat{x}^k\) every accumulation point \(\bar{x}\) of an infinite series of serious steps or the last serious iterate before an infinite tail of null steps is a \(\bar{\sigma}\)-solution of the problem meaning that 
+In case of the general error defined in (\ref{conv_inexactness_1})  and (\ref{conv_inexactness_2})it can be shown that for bounded sequences \(\{\hat{x}^k\}\) every accumulation point \(\bar{x}\) of an infinite series of serious steps or the last serious iterate before an infinite tail of null steps is a \(\bar{\sigma}\)-solution of the problem meaning that 
 
-\begin{equation}
+\begin{equation*}
 	f(\bar{x}) \leq f^*+\bar{\sigma} 
-\end{equation}
+\end{equation*}
 
-\textcolor{red}{citation????? really \(\sigma\) or \(\sigma+\theta\)???}\\
-with \(f^*\) being the exact minimum of the objective function.
-Generally for asymptotically vanishing errors it is possible to show that the method converges to the exact minimum of the problem.
+%\textcolor{red}{citation????? really \(\sigma\) or \(\sigma+\theta\)???}\\
+with \(f^*\) being an exact solution of problem (\ref{opt_prob_conv}).
+
+Generally for asymptotically vanishing errors it is possible to construct bundle methods very similar to the basic bundle method that converge to the exact minimum of the problem.
 For more detailed results refer to \cite{Oliveira2014}.
 
 %\subsubsection{Ingredients to Cope with Inexactness}
@@ -114,20 +122,31 @@ For more detailed results refer to \cite{Oliveira2014}.
 
 \subsection{Nonconvex Bundle Methods with Exact Information}
 
-In the case of inexactness in convex bundle methods, where a lot of different assumptions can be put on the errors to reach different convergence results, the strategy to cope with these errors remains very much the same. In contrast to this in case of nonconvex objective functions the case to be studied is rather uniform still there exist very different approaches to tackle the problem.
+In the nonconvex case the optimization problem is the following:
+
+\begin{equation}
+	\min_{x \in \R^n} f(x).
+\label{opt_prob_nonconv}
+\end{equation}
+
+This time \(f:\R^n \to \R\) is a finite, locally Lipschitz  function. It is neither expected to be convex nor differentiable.
+
+In the case of inexactness in convex bundle methods, where a lot of different assumptions can be put on the errors to reach different convergence results, the strategy to cope with these errors remains very much the same. In contrast to this in case of nonconvex objective functions the set of functions to be studied is rather uniform still there exist very different approaches to tackle the problem.
 %There are different approaches for handling nonconvexity of the objective function in bundle methods.
 As the nonnegativity property of the linearization errors \(e_j^k\) is crucial for the convergence proof of convex bundle methods an early idea was forcing the errors to be so by different downshifting strategies. A very common one is using the \emph{subgradient locality measure} \cite{Kiwiel1986, Mifflin1982}. Here the linearization error is essentially replaced by the nonnegative number
 
-\begin{equation}
+\begin{equation*}
 	\tilde{e}_j^k := \max_{j \in J_k} \{|e_j^k|,\gamma \|\hat{x}^k-x^j\|^2\}
 \label{subgr_loc_measure}
-\end{equation}
+\end{equation*}
 
 or a variation of this expression.
 
-The expression gradient locality measure comes from the dual point of view, where the aggregate linearization error provides a measure for the 'distance' of the calculated \(\varepsilon\)-subgradient to the objective function.
+The expression gradient locality measure comes from the dual point of view, where the aggregate linearization error provides a measure for the distance of the calculated \(\varepsilon\)-subgradient to the objective function.
 
 Methods that use downshifting for building the model function are often endowed with a line search to provide sufficient decrease of the objective function. For the linesearch to terminate finitely, usually semismoothness of the objective function is needed.
+
+\subsubsection{Proximity Control}
 
 Instead of using line search it is also possible to do \emph{proximity control}. This means that the step size parameter \(t_k\) is managed in a smart way to ensure the right amount of decrease in the objective function. This method is very helpful in the case of nonconvex objective functions with inexact information as it is predominantly considered in this thesis.
 
@@ -136,24 +155,26 @@ This is however seldom possible for algorithms that employ a line search because
 
 To this end proximity control seems to be a very promising strategy. It is used in many different variations in \cite{Apkarian2008, Lewis2015, Noll2010, Noll2005, Noll2012} and \cite{Schramm1992}.
 
+\subsubsection{Other Concepts}
+
 In the beginning bundle methods were mostly explored from the  dual point of view. Newer concepts focus also on the primal version of the method. This invokes for example having different model functions for the subproblem.
 
 In \cite{Fuduli2004, Fuduli2004a} the difference function 
 
-\begin{equation}
+\begin{equation*}
 	h(d):= f(x^j +d) -f(x^j) \quad j \in J_k
 \label{diff_fun}
-\end{equation}
+\end{equation*}
 
 is approximated to find a descent direction of \(f\).
-The negative linearization errors are addressed by having two different bundles. One containing the indices with nonnegative linearization errors and one containing the other ones. From these two bundles two cutting plane approximations can be constructed which provide the bases for the calculation of new iterates.
+The negative linearization errors are addressed by using two different bundles. One containing the indices with nonnegative linearization errors and one containing the other ones. From these two bundles two cutting plane approximations can be constructed which provide the bases for the calculation of new iterates.
 
 In \cite{Noll2012} Noll et al. follow an approach of approximating a local model of the objective function. The model can be seen as a nonsmooth generalization of the Taylor expansion and looks the following:
 
-\begin{equation}
+\begin{equation*}
 	\Phi(y,x) = \phi(y,x)+\frac{1}{2}(y-x)^{\top}Q(x)(y-x).
 \label{quad_mod}
-\end{equation}
+\end{equation*}
 
 The so called \emph{first order model} \(\phi(.,x)\) is convex but possibly nonsmooth and can be approximated by cutting planes. The \emph{second order part} is a quadratic but not necessarily convex. The algorithm then proceeds a lot in the lines of a general bundle algorithm.
 Instead of a line search is uses proximity control to ensure convergence.

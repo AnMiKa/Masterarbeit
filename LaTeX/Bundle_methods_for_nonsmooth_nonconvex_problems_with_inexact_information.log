@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=pdflatex 2015.5.19)  16 MAY 2017 18:16
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=pdflatex 2015.5.19)  17 MAY 2017 17:11
 entering extended mode
 **Bundle_methods_for_nonsmooth_nonconvex_problems_with_inexact_information.tex
 
@@ -517,151 +517,74 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 
 {C:/Users/as/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}]
 ("D:\Annika\Uni\10. Semester\Masterarbeit\Proximal Bundle Inexact Information\Git Hub\Masterarbeit\LaTeX\Chapters/Bundle
-_Methods.tex"
-Underfull \hbox (badness 10000) in paragraph at lines 10--11
-
- []
-
-[1] [2]
-Underfull \hbox (badness 10000) in paragraph at lines 113--114
+_Methods.tex" [1] [2]
+Underfull \hbox (badness 10000) in paragraph at lines 117--118
 
  []
 
 [3]
-LaTeX Font Info:    Try loading font information for OT1+lmtt on input line 141.
+LaTeX Font Info:    Try loading font information for OT1+lmtt on input line 145.
  ("C:\Program Files\Annika Programme\MiKTeX\tex\latex\lm\ot1lmtt.fd"
 File: ot1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
-) [4] [5] [6] [7])
+) [4] [5] [6] [7] [8])
 ("D:\Annika\Uni\10. Semester\Masterarbeit\Proximal Bundle Inexact Information\Git Hub\Masterarbeit\LaTeX\Chapters/Simpli
-fications.tex" [8] [9] [10] [11] [12])
+fications.tex" [9] [10] [11] [12] [13])
 ("D:\Annika\Uni\10. Semester\Masterarbeit\Proximal Bundle Inexact Information\Git Hub\Masterarbeit\LaTeX\Chapters/Bundle
-_Method_nonconv_inex.tex" [13] [14]
-Underfull \hbox (badness 10000) in paragraph at lines 151--152
+_Method_nonconv_inex.tex" [14] [15]
+Underfull \hbox (badness 10000) in paragraph at lines 162--163
 
  []
 
-[15] [16] [17] [18]
-LaTeX Font Info:    Try loading font information for OMS+lmr on input line 337.
+[16] [17] [18] [19] [20]
+LaTeX Font Info:    Try loading font information for OMS+lmr on input line 369.
  ("C:\Program Files\Annika Programme\MiKTeX\tex\latex\lm\omslmr.fd"
 File: omslmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    Font shape `OMS/lmr/m/n' in size <12> not available
-(Font)              Font shape `OMS/lmsy/m/n' tried instead on input line 337.
- [19])
+(Font)              Font shape `OMS/lmsy/m/n' tried instead on input line 369.
+)
 ("D:\Annika\Uni\10. Semester\Masterarbeit\Proximal Bundle Inexact Information\Git Hub\Masterarbeit\LaTeX\Chapters/Variab
 le_Metric.tex"
 Underfull \hbox (badness 10000) in paragraph at lines 4--6
 
  []
 
-[20] [21] [22]
+[21] [22] [23]
 Underfull \hbox (badness 10000) in paragraph at lines 115--116
 
  []
 
-[23]
+[24]
 Underfull \hbox (badness 10000) in paragraph at lines 162--163
 
  []
 
-[24] [25]
-! Missing $ inserted.
-<inserted text> 
-                $
-l.245 
-      
-I've inserted a begin-math/end-math symbol since I think
-you left one out. Proceed, with fingers crossed.
-
-! Missing } inserted.
-<inserted text> 
-                }
-l.245 
-      
-I've inserted something that you may have forgotten.
-(See the <inserted text> above.)
-With luck, this will get me unwedged. But if you
-really didn't forget anything, try typing `2' now; then
-my insertion and my current dilemma will both disappear.
-
-! Display math should end with $$.
-<to be read again> 
-                   \@@par 
-l.245 
-      
-The `$' that I just saw supposedly matches a previous `$$'.
-So I shall assume that you typed `$$' both times.
-
-! Extra }, or forgotten \endgroup.
-\par ...m \@noitemerr {\@@par }\fi \else {\@@par }
-                                                  \fi 
-l.245 
-      
-I've deleted a group-closing symbol because it seems to be
-spurious, as in `$x}$'. But perhaps the } is legitimate and
-you forgot something else, as in `\hbox{$x}'. In such cases
-the way to recover is to insert both the forgotten and the
-deleted material, e.g., by typing `I$}'.
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 273--274
+[25] [26] [27]
+Underfull \hbox (badness 10000) in paragraph at lines 274--275
 
  []
 
-[26] [27]
-
-! LaTeX Error: \begin{equation} on input line 241 ended by \end{proof}.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.328 \end{proof}
-                 
-Your command was ignored.
-Type  I <command> <return>  to replace it with another command,
-or  <return>  to continue without it.
-
-) [28]
+[28] [29]) [30]
 ("D:\Annika\Uni\10. Semester\Masterarbeit\Proximal Bundle Inexact Information\Git Hub\Masterarbeit\LaTeX\Bundle_methods_
-for_nonsmooth_nonconvex_problems_with_inexact_information.bbl" [29] [30])
-
-! LaTeX Error: \begin{proof} on input line 229 ended by \end{document}.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.112 \end{document}
-                    
-Your command was ignored.
-Type  I <command> <return>  to replace it with another command,
-or  <return>  to continue without it.
-
-[31]
+for_nonsmooth_nonconvex_problems_with_inexact_information.bbl" [31] [32]) [33]
 ("D:\Annika\Uni\10. Semester\Masterarbeit\Proximal Bundle Inexact Information\Git Hub\Masterarbeit\LaTeX\Bundle_methods_
-for_nonsmooth_nonconvex_problems_with_inexact_information.aux")
+for_nonsmooth_nonconvex_problems_with_inexact_information.aux") )
+(\end occurred inside a group at level 1)
 
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
- )
-(\end occurred inside a group at level 2)
-
-### semi simple group (level 2) entered at line 229 (\begingroup)
 ### simple group (level 1) entered at line 1061 ({)
 ### bottom level 
 Here is how much of TeX's memory you used:
- 7115 strings out of 493921
- 108210 string characters out of 3142078
- 242179 words of memory out of 3000000
- 10248 multiletter control sequences out of 15000+200000
+ 7123 strings out of 493921
+ 108311 string characters out of 3142078
+ 242286 words of memory out of 3000000
+ 10256 multiletter control sequences out of 15000+200000
  56027 words of font info for 53 fonts, out of 3000000 for 9000
  841 hyphenation exceptions out of 8191
- 40i,17n,48p,609b,2412s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 40i,17n,48p,609b,2378s stack positions out of 5000i,500n,10000p,200000b,50000s
 {C:/Program Files/Annika Programme/MiKTeX/fonts/enc/dvips/lm/lm-rm.enc}{C:/Program Files/Annika Programm
 e/MiKTeX/fonts/enc/dvips/lm/lm-mathsy.enc}{C:/Program Files/Annika Programme/MiKTeX/fonts/enc/dvips/lm/lm-ec.enc}{C:/Pro
-gram Files/Annika Programme/MiKTeX/fonts/enc/dvips/lm/lm-mathex.enc}{C:/Program Files/Annika Programme/MiKTeX/fonts/enc/
-dvips/lm/lm-rmtt.enc}{C:/Program Files/Annika Programme/MiKTeX/fonts/enc/dvips/lm/lm-mathit.enc}<C:/Program Files/Annika
+gram Files/Annika Programme/MiKTeX/fonts/enc/dvips/lm/lm-rmtt.enc}{C:/Program Files/Annika Programme/MiKTeX/fonts/enc/dv
+ips/lm/lm-mathit.enc}{C:/Program Files/Annika Programme/MiKTeX/fonts/enc/dvips/lm/lm-mathex.enc}<C:/Program Files/Annika
  Programme/MiKTeX/fonts/type1/public/lm/lmbx12.pfb><C:/Program Files/Annika Programme/MiKTeX/fonts/type1/public/lm/lmex1
 0.pfb><C:/Program Files/Annika Programme/MiKTeX/fonts/type1/public/lm/lmmi12.pfb><C:/Program Files/Annika Programme/MiKT
 eX/fonts/type1/public/lm/lmmi6.pfb><C:/Program Files/Annika Programme/MiKTeX/fonts/type1/public/lm/lmmi8.pfb><C:/Program
@@ -672,10 +595,10 @@ mme/MiKTeX/fonts/type1/public/lm/lmri12.pfb><C:/Program Files/Annika Programme/M
 nts/type1/public/lm/lmsy6.pfb><C:/Program Files/Annika Programme/MiKTeX/fonts/type1/public/lm/lmsy8.pfb><C:/Program File
 s/Annika Programme/MiKTeX/fonts/type1/public/lm/lmtt12.pfb><C:/Program Files/Annika Programme/MiKTeX/fonts/type1/public/
 amsfonts/symbols/msbm10.pfb>
-Output written on Bundle_methods_for_nonsmooth_nonconvex_problems_with_inexact_information.pdf (32 pages, 325227 bytes).
+Output written on Bundle_methods_for_nonsmooth_nonconvex_problems_with_inexact_information.pdf (34 pages, 332044 bytes).
 
 PDF statistics:
- 173 PDF objects out of 1000 (max. 8388607)
+ 179 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 

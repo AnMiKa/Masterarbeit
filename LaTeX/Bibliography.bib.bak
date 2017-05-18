@@ -587,9 +587,11 @@
   number  = {3},
 }
 
-@TechReport{,
-  author = {Huynh Van Ngai and Dinh The Luc and Michel Théra},
-  title  = {Extensions of Fréchet $\varepsilon$−Subdifferential Calculus and Applications},
+@TechReport{Ngai2000,
+  author      = {Huynh Van Ngai and Dinh The Luc and Michel Théra},
+  title       = {Extensions of Fréchet $\varepsilon$−Subdifferential Calculus and Applications},
+  institution = {Laboratoire d'Arithmétique, de Calcul formel et d'Optimisation, Université de Limoges},
+  year        = {2000},
 }
 
 @Article{Jofre1998,

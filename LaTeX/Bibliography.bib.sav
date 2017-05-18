@@ -12,7 +12,7 @@
 }
 
 @Article{Hare2016,
-  author    = {Warren Hare, Claudia Sagastiz{\`a}bal, Mikhail Solodov},
+  author    = {Warren Hare and Claudia Sagastiz{\`a}bal and Mikhail Solodov},
   title     = {A proximal bundle method for nonsmooth nonconvex functions with inexact information},
   journal   = {Computational Optimization and Applications},
   year      = {2016},
