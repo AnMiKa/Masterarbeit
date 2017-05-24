@@ -48,17 +48,18 @@ As the 'normal' \(\varepsilon\)-subdifferential is not defined for nonconvex fun
 \label{subgr_inex}
 \end{equation*}
 
-where \(\partial f(x)\) is the Clarke subdifferential \textcolor{red}{defined in Preliminaries section} of \(f\).
+where \(\partial f(x)\) is the Clarke subdifferential %\textcolor{red}{defined in Preliminaries section}
+of \(f\).
 
 The given definition of the inexactness can be motivated by the relation 
 	\[ g \in \partial_{[\theta]}f(x)\Leftrightarrow g \in \partial(f+\theta\|\cdot-x\|)(x) \]
 noticed in \cite{Treiman1986}. It means that the approximation of the subgradient of \(f(x)\) is an exact subgradient of a small perturbation of \(f\) at \(x\).
-\(\partial_{[\varepsilon]}f(x)\) is also known as the \emph{Fréchet \(\varepsilon\)-subdifferential} of \(f(x)\)
+\(\partial_{[\varepsilon]}f(x)\) is also known as the Fréchet \(\varepsilon\)-subdifferential of \(f(x)\).
 
-\begin{definition}\cite{Jofre1998}
-	Let \(f:\R^n \to \R\), \(\varepsilon\) > 0. The \emph{Fréchet \(\varepsilon\)-subdifferential} of \(f\) at \(x\) is defined by 
-	\[ \partial_{[\varepsilon]}f(x) := \left\{g \in \R^n | \liminf_{\|h\| \to 0} \frac{f(x+h)-f(x)-\langle g, h\rangle}{\|h\|} \geq -\varepsilon \right\}. \]
-\end{definition}
+%\begin{definition}\cite{Jofre1998}
+	%Let \(f:\R^n \to \R\), \(\varepsilon\) > 0. The \emph{Fréchet \(\varepsilon\)-subdifferential} of \(f\) at \(x\) is defined by 
+	%\[ \partial_{[\varepsilon]}f(x) := \left\{g \in \R^n | \liminf_{\|h\| \to 0} \frac{f(x+h)-f(x)-\langle g, h\rangle}{\|h\|} \geq -\varepsilon \right\}. \]
+%\end{definition}
 
 
 \begin{remark}
@@ -211,10 +212,24 @@ The definition of the \emph{augmented aggregate subgradient} \(S^k\),  \emph{err
 \end{align}
 
 Just as the model decrease
-\begin{equation*}
-	\delta^k := C_k + t_k \|S^k + \nu^k\|^2.
+\begin{equation}
+	\delta^k := C_k + t_k \|S^k + \nu^k\|^2,
 \label{mod_dec2}
-\end{equation*}
+\end{equation}
+
+which contains the normal vector 
+\begin{equation}
+	\nu^k \in \partial\mathtt{i}_X(x^{k+1})
+	\label{nu}
+\end{equation}
+of the constraint set \(X\).
+
+By the same argumentation as for (\ref{agg_err}) the KKT conditions also reveal another useful characterization of the augmented aggregate linearization error:
+
+\begin{equation}
+	C_k = \hat{f}_k - M_k(x^{k+1})+\Langle S^k, d^k \Rangle
+\label{aug_agg_err2}
+\end{equation}
 
 As the model function is convex even for nonconvex objective functions it is still minorized by the aggregate linearization. It holds 
 
@@ -236,7 +251,9 @@ A bundle algorithm that deals with nonconvexity and inexact function and subgrad
 
 %\textcolor{blue}{algorithm}
 
+
 \begin{minipage}{\linewidth}
+Algorithm \ref{sec_nonconv_inex}.1:
 \vspace{1em}
 
 \hrule  \vspace{0.4ex} \hrule

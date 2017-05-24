@@ -1,8 +1,10 @@
 \section{Application to Model Selection for Primal SVM}
 
+\textcolor{red}{Skalarprodukt anpassen, Vektoren nicht fett oder neue definition, notation, \(\lambda \in \Lambda\) einfugen}
+
 \subsection{Introduction}
 
-In this chapter the nonconvex inexact bundle algorithm is applied to the problem of model selection for support vector machines (SVM) solving classification tasks.
+In this chapter the nonconvex inexact bundle algorithm is applied to the problem of model selection for \emph{support vector machines} (SVM) solving classification tasks.
 It relies on a bilevel formulation proposed by Kunapuli \cite{Kunapuli2008} and Moore et al. \cite{Moore2011}.
 
 A natural application for the inexact bundle algorithm is an optimization problem where the objective function value can only be computed iteratively. This is for example the case in bilevel optimization.
@@ -62,7 +64,7 @@ As the response function is not known only the expected value of the loss can be
 \label{risk_func}
 \end{equation}
 
-Where \(\mathcal{L}: \R^2 \to \R\) is the loss function, \(f_{\lambda}: \R^{n}\cap\mathcal{F} \to \R, ~ \lambda \in \Lambda\) the response function found by the learning machine and \(P(x,y)\) the joint distribution the training data is drawn from. The goal is now to find a function \(f_{\lambda^*}(x)\) in the chosen function space \(\mathcal{F}\) that minimizes this risk functional \cite{Vapnik1999}.
+Where \(\mathcal{L}: \R^2 \to \R\) is the loss function, \(f_{\lambda}: \R^{n}\cap\mathcal{F} \to \R, ~ \lambda \in \Lambda\) the response function found by the learning machine and \(P(x,y)\) the joint distribution the training data is drawn from. The goal is now to find a function \(f_{\bar{\lambda}}(x)\) in the chosen function space \(\mathcal{F}\) that minimizes this risk functional \cite{Vapnik1999}.
 
 As the only given information is given by the training set inductive principles are used to work with the empirical risk, rather than with the risk functional.
 The empirical risk only depends on the finite training set  and is given by 
@@ -79,15 +81,15 @@ The empirical risk only depends on the finite training set  and is given by
 where \(l\) is the number of data points.
 %L: Loss function 
 %Goal: approximate \(Q(z,\lambda_0)\) by \(Q(z,\lambda_l)\) that minimizes the empirical risk. --> is called ERM (empirical risk minimization induction principle)
-The law of large numbers ensures that the empirical risk converges to the risk functional as the number of data points grows to infinity. This however does not guarantee that the function \(f_{\lambda,emp}\) that minimizes the empirical rist also converges towards the function \(f_{\lambda^*}\) that minimizes the risk functional.
+The law of large numbers ensures that the empirical risk converges to the risk functional as the number of data points grows to infinity. This however does not guarantee that the function \(f_{\lambda,emp}\) that minimizes the empirical rist also converges towards the function \(f_{\bar{\lambda}}\) that minimizes the risk functional.
 The theory of consistency provides necessary and sufficient conditions that solve this issue \cite{Vapnik1999}.
 
-Vapnik introduced therefore the structural risk minimization induction principle (SRM). It ensures that the used set of functions has a structure that makes it strongly consistent \cite{Vapnik1999}. Additionally it takes the complexity of the function that is used to approximate the target function into account. ``The SRM principle actually suggests a tradeoff between the quality of the approximation and the complexity of the approximating function'' \cite{Vapnik1999}.
+Vapnik introduced therefore the structural risk minimization induction principle (SRM). It ensures that the used set of functions has a structure that makes it strongly consistent \cite{Vapnik1999}. Additionally it takes the complexity of the function that is used to approximate the target function into account. ``The SRM principle actually suggests a tradeoff between the quality of the approximation and the complexity of the approximating function'' \cite[p. 994]{Vapnik1999}.
 This reduces the risk of \emph{overfitting}, meaning to overly fit the function to the training data with the result of poor generalization \cite{Cristianini2000}.
 
 %Therefore: structural risk Minimization induction Principle (SRM) --> is strongly consistent --> idea: minimize the empirical risk by considering the complexity of the model (given by CV-dimension)
 
-Support Vector machines fulfill all conditions of the SRM principle. Due to the kernel trick that allows for nonlinear classification tasks it is also very powerful. For more detailed information on this see \cite{Kunapuli2008, Vapnik1998} and references therein.
+Support vector machines fulfill all conditions of the SRM principle. Due to the kernel trick that allows for nonlinear classification tasks it is also very powerful. For more detailed information on this see \cite{Kunapuli2008, Vapnik1998} and references therein.
 
 \subsubsection{Support Vector machines}
 
@@ -98,7 +100,7 @@ Let the data be linearly separable. The function deciding how the data is classi
 
 Support vector machines aim at finding such a hyperplane that separates also unseen data optimally.
 
-???Picture of hyperplane
+\textcolor{red}{???Picture of hyperplane}
 
 One problem of this intuitive approach is that the representation of a hyperplane is not unique. If the plane described by \((\bm{w},b)\) separates the data there exist infinitely many hyperplanes \((t\bm{w},b), ~ t>0\) that separate the data in the same way. \\
 To have a unique description of a separation hyperplane the \emph{canonical hyperplane for given data} \(x \in X\) is defined by 
@@ -119,7 +121,7 @@ A bigger margin means a lower complexity of the function \cite{Cristianini2000}.
 A \emph{maximal margin hyperplane} is the hyperplane that realizes the maximal possible margin for a given data set.
 
 %Theorem 6.1
-\begin{theorem} \cite{Cristianini2000}
+\begin{theorem}[{\cite[Theorem 6.1]{Cristianini2000}}]
 Given a linearly separable training sample \(\Omega = ((x^i,y_i),...,(x^l,y_l))\) the hyperplane \((\bm{w},b)\) that solves the optimization problem
 
 \[\|\bm{w}\|^2 \quad \text{subject to} \quad y_i(\bm{w}^{\top}x-b)\geq 1 \quad i = 1,...,l \]
@@ -168,7 +170,7 @@ and
 \end{align}
 
 
-The parameter \(C > 0\) gives a trade-off between the richness of the chosen set of functions \(f_alpha\) to reduce the error on the training data and the danger of overfitting to have good generalization. It has to be chosen a priori \cite{Kunapuli2008}.
+The parameter \(C > 0\) gives a trade-off between the richness of the chosen set of functions \(f_{\alpha}\) to reduce the error on the training data and the danger of overfitting to have good generalization. It has to be chosen a priori \cite{Kunapuli2008}.
 
 
 \subsection{Explanation Bilevel Approach and Inexact Bundle Method}
@@ -176,7 +178,7 @@ The parameter \(C > 0\) gives a trade-off between the richness of the chosen set
 
 The hyper-parameter \(C\) in the objective function of the classification problem has to be set before hand. This step is part of the model selection process.
 To set this parameter optimally different methods can be used.
-A very intuitive and widely used approach is doing  and cross validation (CV) with a grid search implementation.
+A very intuitive and widely used approach is doing  and \emph{cross validation} (CV) with a grid search implementation.
 %very costly, discrete parameter choice, not practicable in case of many parameter
 
 To prevent overfitting and get a good parameter selection, especially in case of little data, commonly \(T\)-fold cross validation is used. \\
@@ -280,24 +282,80 @@ and
 
 \subsubsection{The Inexact Bundle Method}
 
+\textcolor{red}{ab hier: Theorie fehlt\\
+!!! notation - oder in prelininaries einfugen}
 %ingredients for bundle method
 
-To solve the given bilevel problem with the above presented nonconvex inexact bundle algorithm the algorithm jumps between the two levels. Once the inner level problems are solved for a given \(\lambda\) - this is possible with any QP-solver as the problems are convex - the bundle algorithm takes the outcoming \(w\) and \(b\) to optimizes the hyper-parameter again.
+To solve the given bilevel problem with the above presented nonconvex inexact bundle algorithm the algorithm jumps between the two levels. Once the inner level problems are solved for a given \(\lambda\) - this is possible with any QP-solver as the problems are convex - the bundle algorithm takes the outcome \(w\) and \(b\) and optimizes the hyper-parameter again.
 
 The difficulty with this approach is that the bundle algorithm needs one subgradient of the outer level objective function with respect to the parameter \(\lambda\). However to compute this subgradient also one subgradient of \(w\) and \(b\) with respect to \(\lambda\) has to be known.
 
--> theory partial derivatives for subgradients?????????
+\textcolor{red}{example in differentiable case}\\
+Let us first assume that the outer and inner objective functions are sufficiently often continuously differentiable to demonstrate the procedure of calculating the needed (sub-)gradients.
 
-??? Formula \(??? \in \partial L_{upp}{\partial \lambda}\)
+Let \(\mathcal{L}_{upp}(w,\lambda)\) be the objective function of the outer level problem, where the variable \(b\) was left out for the sake of simplicity.
+To find an optimal hyper parameter \(\lambda\) given the input \(w\) the gradient \(g^{upp}_{\lambda}\) of \(\mathcal{L}_{upp}\) with respect to \(\lambda\) is needed in every iteration of the solving algorithm.
+In order to calculate this gradient the chain rule is used yielding
 
+\begin{equation*}
+	g^{upp}_{\lambda} = \left(\frac{\partial}{\partial w}\mathcal{L}_{upp}(w,\lambda) \right)^{\top}\frac{\partial w(\lambda)}{\lambda}+\frac{\partial}{\partial \lambda}\mathcal{L}_{upp}(w,\lambda).
+\end{equation*}
+
+The challenge is here to find the term \(\frac{\partial w(\lambda)}{\lambda}\) because 
+
+\[ \frac{\partial w}{\partial \lambda} \in \frac{\partial }{\partial \lambda} \argmin_{w,b} \mathcal{L}_{low}(w,\lambda). \]
+
+Assuming \(\mathcal{L}_{low}\) is twice continuously differentiable in \(w\) the optimality condition 
+\begin{equation*}
+	0 \in \frac{\partial}{\partial w}\mathcal{L}_{low}(w,\lambda)
+\label{opt_con}
+\end{equation*}
+
+can be used to calculate the needed gradient in an indirect manner.
+
+For these calculations to be possible the inner level loss function must yield a linear optimality condition in \(w\). This is for example the case for SVM loss functions with a squared one- or two-norm.
+The optimality condition can then be written as the linear system
+
+\begin{equation*}
+	H(\lambda)w = h(\lambda).
+\end{equation*}
+
+By taking the partial derivative with respect to \(\lambda\) on both sides of the system one gets
+
+\begin{equation*}
+	\left( \frac{\partial H(\lambda)}{\partial \lambda}\right)^{\top}w+H(\lambda)\frac{\partial w}{\partial \lambda} = \frac{\partial h(\lambda)}{\partial  \lambda}.
+\end{equation*}
+
+If \(H(\lambda)\) is invertible for all \(\lambda \in \Lambda\) then 
+
+\textcolor{red}{why H invertable???}
+
+
+
+
+
+To calculate a subgradient 
+Chain rule for subdifferential
+\begin{theorem}[c.f. {\cite[Theorem 7.1]{Rockafellar1985}}]
+	Let \(p(x) = f(F(x))\), where \(F:\R^n \to \R^d\) is locally Lipschitz and \(f:\R^d \to \R\) is lower semicontinuous. 
+	Assume \[\nexists y \in \partial^{\infty}f(F(\bar{x})), y \neq 0 \quad \text{with} \quad 0 \in y \partial F(\bar{x}). \]
+	Then for the sets 
+	\[ M(\bar{x}):= \partial f(F(\bar{x}))\partial F(\bar{x}), \quad M^{\infty}(\bar{x}):= \partial^{\infty}f(F(\bar{x}))F(\bar{x}), \]
+	one has \(\hat{\partial}p(\bar{x}) \subset M(\bar{x})\) and \(\hat{\partial}^{\infty} p(\bar{x}) \subset M^{\infty}(\bar{x})\).
+\end{theorem}
+
+
+
+For me: \(f\) locally Lipschitz??? then partial derivatives are the same! Else: check definition of derivatives!
+
+\textcolor{red}{-> theory partial derivatives for subgradients????????? \\
+??? Formula \(??? \in \partial L_{upp}{\partial \lambda}\) \\
 ???one has to assume that the inner level problem is locally Lipschitz (or more general: its nonconvex subdifferential is well defined at every point). \\
-Subdifferential has to have again a subdifferential!!! -> w.r.t. \(\lambda\) \\
+Subdifferential has to have again a subdifferential!!! -> w.r.t. \(\lambda\)}
+
+
 The main idea is to replace the inner level problem by its optimality condition
 
-\begin{equation}
-	0 \in \partial(w,b)\mathcal{L}_{low}(\lambda,w,b).
-\label{opt_con}
-\end{equation}
 
 \(\partial(w,b)\) means in this case that the subdifferential is taken with respect to the variables \(w\) and \(b\). \\
 -> theory for subdifferentials in more than one variable!!! \\
@@ -317,7 +375,7 @@ The reformulated bilevel problem becomes:
 \label{SVM_opt_cond}
 \end{align}
 
-where \(\mathcal{L}_low\) can be the objective function of either of the two presented lower level problems.
+where \(\mathcal{L}_{low}\) can be the objective function of either of the two presented lower level problems.
 
 
 

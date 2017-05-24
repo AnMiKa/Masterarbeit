@@ -46,8 +46,16 @@
 \newtheorem{lemma}[theorem]{Lemma} %hier [section] nicht noch einmal wiederholen, da durch [satz] die Nummerierung schon genauo wie in "Satz" definiert
 \newtheorem{corollary}[theorem]{Corrolary}
 
-
-\theoremstyle{definition}
+\newtheoremstyle{my_definition}
+{}% space above
+{}% space below
+{}% body font
+{}% indent amout
+{\bfseries}% Theorem head font
+{}% punctuation after theorem head
+{.5em}% space after theorem head
+{}% theorem head spec
+\theoremstyle{my_definition}
 \newtheorem{definition}[theorem]{Definition}
 \newtheorem{convention}[theorem]{Convention}
 \newtheorem{example}[theorem]{Example}
@@ -113,21 +121,24 @@
 
 %\include{First_Pages/List_of_Symbols}
 
+%{\singlespacing
 \setcounter{tocdepth}{3} % Im Inhaltsverzeichnis werden nur section und subsection berücksichtigt, keine tieferen Ebenen
-\thispagestyle{empty} % keine Seitenzahl
+%\thispagestyle{empty} % keine Seitenzahl
+\pagestyle{empty} %keine Seitenzahlen
 \addtocontents{toc}{%
   \protect\contentsline{section}{List of Symbols}{}}
-\tableofcontents
+\tableofcontents%}
 \newpage
 
+\pagestyle{plain}
 \pagenumbering{arabic}
 %\include{Chapters/Introduction}
 %\input{Chapters/Preliminaries}
-\input{Chapters/Bundle_Methods}
-\input{Chapters/Simplifications}
-\input{Chapters/Bundle_Method_nonconv_inex}
-\input{Chapters/Variable_Metric}
-%\input{Chapters/Bilevel_Application}
+%\input{Chapters/Bundle_Methods}
+%\input{Chapters/Simplifications}
+%\input{Chapters/Bundle_Method_nonconv_inex}
+%\input{Chapters/Variable_Metric}
+\input{Chapters/Bilevel_Application}
 
 
 \addtocontents{toc}{%

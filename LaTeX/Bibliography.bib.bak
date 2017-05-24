@@ -217,7 +217,7 @@
 }
 
 @Article{Vlcek2001,
-  author  = {J. Vl\v{c}ek and L. Lu\v{k}san},
+  author  = {J. Vl\v{c}ek and L. Luk\v{s}an},
   title   = {Globally convergent variable metric bundle method for nonconvex nondifferentiable unconstrained minimization},
   journal = {Journal of Optimization Theory and Applications},
   year    = {2001},
@@ -642,6 +642,54 @@
   title       = {Bundle Methods for Convex Minimization with Partially Inexact Oracles},
   institution = {Systems Research Institute, Polish Academy of Sciences},
   year        = {2010},
+}
+
+@InBook{Lemarechal1994,
+  pages     = {144--162},
+  title     = {An approach to variable metric bundle methods},
+  publisher = {Springer Berlin Heidelberg},
+  year      = {1994},
+  author    = {Lemar{\'e}chal, Claude and Sagastiz{\'a}bal, Claudia},
+  address   = {Berlin, Heidelberg},
+  booktitle = {System Modelling and Optimization: Proceedings of the 16th IFIP-TC7 Conference, Compi{\`e}gne, France --- July 5--9, 1993},
+  doi       = {10.1007/BFb0035464},
+  isbn      = {978-3-540-39337-5},
+  url       = {http://dx.doi.org/10.1007/BFb0035464},
+}
+
+@Article{Lemarechal1997,
+  author   = {Lemar{\'e}chal, Claude and Sagastiz{\'a}bal, Claudia},
+  title    = {Variable metric bundle methods: From conceptual to implementable forms},
+  journal  = {Mathematical Programming},
+  year     = {1997},
+  volume   = {76},
+  number   = {3},
+  pages    = {393--410},
+  abstract = {To minimize a convex function, we combine Moreau-Yosida regularizations, quasi-Newton matrices and bundling mechanisms. First we develop conceptual forms using ``reversal'' quasi-Newton formulae and we state their global and local convergence. Then, to produce implementable versions, we incorporate a bundle strategy together with a ``curve-search''. No convergence results are given for the implementable versions; however some numerical illustrations show their good behaviour even for large-scale problems.},
+  doi      = {10.1007/BF02614390},
+  issn     = {1436-4646},
+  url      = {http://dx.doi.org/10.1007/BF02614390},
+}
+
+@Article{Luksan1999,
+  author    = {L. Luk{\v{s}}an and J. Vl{\v{c}}ek},
+  title     = {Globally Convergent Variable Metric Method for Convex Nonsmooth Unconstrained Minimization1},
+  journal   = {Journal of Optimization Theory and Applications},
+  year      = {1999},
+  volume    = {102},
+  number    = {3},
+  pages     = {593--613},
+  month     = {sep},
+  doi       = {10.1023/a:1022650107080},
+  publisher = {Springer Nature},
+  url       = {https://doi.org/10.1023%2Fa%3A1022650107080},
+}
+
+@Book{Rockafellar1970,
+  title     = {Convex Analysis},
+  publisher = {Princeton University Press, Princeton, New Jersey},
+  year      = {1970},
+  author    = {R. T. Rockafellar},
 }
 
 @Comment{jabref-meta: databaseType:bibtex;}

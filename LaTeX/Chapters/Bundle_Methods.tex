@@ -1,7 +1,7 @@
 \section{A Basic Bundle Method}
 \label{sec_conv_ex}
 
-When bundle methods were first introduced in 1975 by Claude Lemaréchal and Philip Wolfe they were developed to minimize a convex (possibly nonsmooth) function \(f\) for which at least one subgradient at any point \(x\) can be computed \cite{Mifflin2012}.
+When bundle methods were first introduced in 1975 by Lemaréchal and Wolfe they were developed to minimize a convex (possibly nonsmooth) function \(f\) for which at least one subgradient at any point \(x\) can be computed \cite{Mifflin2012}.
 To provide an easier understanding of the proximal bundle method in \cite{Hare2016} and stress the most important ideas of how to deal with nonconvexity and inexactness first a basic bundle method is shown here. 
 
 %\textcolor{red}{link to chapter?}
@@ -44,10 +44,10 @@ In the \(k\)'th iteration, the bundle consists of the previous iterates \(x^j\),
 where \(f(x^j) = l_j(x^j)\) and due to convexity \(f(x) \geq l_j(x), ~ x \in X\).\\ % x \in \R^n??
 The objective function \(f\) can then be approximated by the piecewise linear function
 
-\begin{equation*}
+\begin{equation}
 	m_k(x) = \max_{j \in J_k} l_j(x).
 \label{cp_model}
-\end{equation*}
+\end{equation}
 
 A new iterate \(x^{k+1}\) is found by solving the subproblem
 
@@ -148,10 +148,10 @@ The constraint \(\hat{x}^k+d \in X\) can also be incorporated directly in the ob
 This function is convex if and only if the set \(X\) is convex \cite{Rockafellar1996}.
 
 Subproblem (\ref{stabil_model_fun}) then reads 
-\begin{equation*}
+\begin{equation}
 	\min_{x \in \R^n} m_k(x) + \mathtt{i}_X(x) + \frac{1}{2t_k}\|x-\hat{x}^k\|^2 % \quad \text{s.t.} \quad {g^j}^{\top}d - e^k_j - \xi \leq 0, \quad j \in J_k
 \label{sub_prob_fin}
-\end{equation*}
+\end{equation}
 
 with respect to the serious point \(\hat{x}^k\).
 %\textcolor{red}{check if f also not put into subproblem before}
@@ -191,7 +191,7 @@ There exist a subgradient \(\nu^k \in \partial \mathtt{i}_{X}(x^{k+1})\) and Lag
 From condition (\ref{KKT_1}) follows that
 
 \begin{equation}
-	d^k = t_k\left(G^k+\nu^k\right)
+	d^k = -t_k\left(G^k+\nu^k\right)
 	\label{agg_subgr_dk}
 \end{equation}
 
@@ -205,7 +205,7 @@ with the \emph{aggregate subgradient}
 Rewriting condition (\ref{KKT_5}) yields the \emph{aggregate error} 
 
 \begin{equation}
-	E_k := \sum_{j \in J^k} \alpha_j e^k_j = (G^k)^{\top}d^k+f(\hat{x}^k)-m_k(x^{k+1}).
+	E_k := \sum_{j \in J^k} \alpha_j e^k_j = \Langle G^k,d^k \Rangle+f(\hat{x}^k)-m_k(x^{k+1}).
 \label{agg_err}
 \end{equation}
 
@@ -270,7 +270,7 @@ We have now all the ingredients so that the following basic bundle algorithm can
 %\textcolor{blue}{algorithm}
 
 \begin{minipage}\linewidth
-
+Algorithm \ref{sec_conv_ex}.1:
 \vspace{1em}
 
 \hrule  \vspace{0.4ex} \hrule

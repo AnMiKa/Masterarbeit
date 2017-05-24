@@ -217,7 +217,7 @@
 }
 
 @Article{Vlcek2001,
-  author  = {J. Vl\v{c}ek and L. Lu\v{k}san},
+  author  = {J. Vl\v{c}ek and L. Luk\v{s}an},
   title   = {Globally convergent variable metric bundle method for nonconvex nondifferentiable unconstrained minimization},
   journal = {Journal of Optimization Theory and Applications},
   year    = {2001},
@@ -650,7 +650,6 @@
   publisher = {Springer Berlin Heidelberg},
   year      = {1994},
   author    = {Lemar{\'e}chal, Claude and Sagastiz{\'a}bal, Claudia},
-  editor    = {Henry, Jacques and Yvon, Jean-Pierre},
   address   = {Berlin, Heidelberg},
   booktitle = {System Modelling and Optimization: Proceedings of the 16th IFIP-TC7 Conference, Compi{\`e}gne, France --- July 5--9, 1993},
   doi       = {10.1007/BFb0035464},
@@ -670,6 +669,41 @@
   doi      = {10.1007/BF02614390},
   issn     = {1436-4646},
   url      = {http://dx.doi.org/10.1007/BF02614390},
+}
+
+@Article{Luksan1999,
+  author    = {L. Luk{\v{s}}an and J. Vl{\v{c}}ek},
+  title     = {Globally Convergent Variable Metric Method for Convex Nonsmooth Unconstrained Minimization},
+  journal   = {Journal of Optimization Theory and Applications},
+  year      = {1999},
+  volume    = {102},
+  number    = {3},
+  pages     = {593--613},
+  month     = {sep},
+  doi       = {10.1023/a:1022650107080},
+  publisher = {Springer Nature},
+  url       = {https://doi.org/10.1023%2Fa%3A1022650107080},
+}
+
+@Book{Rockafellar1970,
+  title     = {Convex Analysis},
+  publisher = {Princeton University Press, Princeton, New Jersey},
+  year      = {1970},
+  author    = {R. T. Rockafellar},
+}
+
+@Article{Rockafellar1985,
+  author    = {R.T. Rockafellar},
+  title     = {Extensions of subgradient calculus with applications to optimization},
+  journal   = {Nonlinear Analysis: Theory, Methods {\&} Applications},
+  year      = {1985},
+  volume    = {9},
+  number    = {7},
+  pages     = {665--698},
+  month     = {jul},
+  doi       = {10.1016/0362-546x(85)90012-4},
+  publisher = {Elsevier {BV}},
+  url       = {https://doi.org/10.1016%2F0362-546x%2885%2990012-4},
 }
 
 @Comment{jabref-meta: databaseType:bibtex;}

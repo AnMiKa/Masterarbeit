@@ -1,17 +1,18 @@
 \section{Variable Metric Bundle Method}
-\label{variable_metric}
+\label{sec_variable_metric}
 
-\textcolor{blue}{introduction}
+\textcolor{red}{can I call this variable metric method or does this imply variable metric updates and not solving the bundle subproblem?}
+%\textcolor{blue}{introduction}
 
 A way to extend the proximal bundle method is to use an arbitrary metric \(\frac{1}{2}\Langle d,W_kd \Rangle\) with a symmetric and positive definite matrix \(W_k\) instead of the Euclidean metric for the stabilization term \(\frac{1}{2t_k}\|d\|^2\). Methods doing so are called \emph{variable metric bundle methods}.
 This section combines the method of Hare et al. presented in section \ref{sec_nonconv_inex} with the second order model function used by Noll in \cite{Noll2013} to a metric bundle method suitable for nonconvex functions with noise.
 
-This section therefore starts by explaining the ideas from \cite{Noll2013} used to extend the method presented above. It then gives an explicit strategy how to update the metric during the steps of the algorithm and concludes with a convergence proof for the developed method.
+The section starts by explaining the ideas from \cite{Noll2013} used to extend the method presented above. It then gives an explicit strategy how to update the metric during the steps of the algorithm and concludes with a convergence proof for the developed method.
 
-Names and definitions of the objects are the ones used in section \ref{sec_nonconv_inex}.
+Throughout this section we still consider the optimization problem (\ref{opt_prob_nonconv_inex}). We also keep the names and definitions of the objects used in section \ref{sec_nonconv_inex}.
 
 \subsection{The Main Ingredients to the Method}
-\textcolor{blue}{explanation}
+%\textcolor{blue}{explanation}
 
 As already mentioned in section \ref{sec_conv_ex} the stabilization term can be interpreted in many different ways. In the context of this section we can understand it as a pretty rough approximation of the curvature of the objective function.
 Of course bundle methods are designed to work with non differentiable objectives so it cannot be expected that the function provides any kind of curvature. However, if it does, incorporating it into the method could speed up convergence.
@@ -19,89 +20,126 @@ Of course bundle methods are designed to work with non differentiable objectives
 \subsubsection{Variable Metric Bundle Methods}
 
 Variable metric bundle methods use an approach that can be motivated by the thoughts stated above.
-Instead of using the Euclidean norm for the stabilization term \(\frac{1}{2}\|d\|^2 \) the metric is derived from as symmetric and positive definite matrix \(W_k\). As the name of the method suggests, this matrix can vary over the iterations of the algorithm. The subproblem in the \(k\)'th iteration therefore reads 
+Instead of using the Euclidean norm for the stabilization term \(\frac{1}{2}\|d\|^2 \) the metric is derived from a symmetric and positive definite matrix \(W_k\). As the name of the method suggests, this matrix can vary over the iterations of the algorithm. The subproblem in the \(k\)'th iteration therefore reads 
 
 \begin{equation*}
-	\min_{\hat{x}^k+d} M_k(\hat{x}^k+d)+\frac{1}{2}\Langle d,W_kd \Rangle.
+	\min_{\hat{x}^k+d \in \R^n} M_k(\hat{x}^k+d)+\mathtt{i}_{X}(\hat{x}^k+d)+\frac{1}{2}\Langle d,W_kd \Rangle.
 \end{equation*}
 
-\textcolor{red}{some more explanation}
+As explained in \cite{Lemarechal1994} like (\ref{sub_prob_fin}) this is a Moreau-Yosida regularization of the objective function (on the constraint set), so this subproblem is still strictly convex and has a unique solution. It is however harder to solve especially if the matrices \(W_k\) are no diagonal matrices \cite{Luksan1999}.
+In the unconstrained case or for a very simple constraint set the subproblem can be solved by calculating a quasi Newton step. Such a method is presented by Lemar\'{e}chal and Sagastiz\'{a}bal in \cite{Lemarechal1997} for convex functions. Luk\v{s}an and {Vl\v{c}ek} use an algorithm in those lines in \cite{Vlcek2001} which is adapted to a limited memory setting by Haarala et al. in \cite{Haarala2007}.
 
-stabilization term mimics curvature \(\to\) more sophisticated in variable metric bundle methods \(\to\) explain those; examples \(\to\) Noll also kind of variable metric bundle method \(\to\) explain noll again (ref to chapter 2) and relate to variable metric
+A challenging question is how to update the matrices \(W_k\). It is important that the updating strategy preserves positive definiteness of the matrices and that the matrices stay bounded. The updates that are used most often are the symmetric rank 1 formula (SR1 update) and the BFGS (Broyden-Fletcher-Goldfarb-Shanno) update. These updates make it possible to assure the required conditions with only little extra effort even in the nonconvex case. Concrete instances of the updates are given in \cite{Vlcek2001} and \cite{Lemarechal1994}.
 
-Paper that use variable metric bundle methods: \cite{Lemarechal1994,Lemarechal1997,Haarala2007,Vlcek2001}
+%stabilization term mimics curvature \(\to\) more sophisticated in variable metric bundle methods \(\to\) explain those; examples \(\to\) Noll also kind of variable metric bundle method 
 
-\subsubsection{Second Order Model}
+\subsubsection{Noll's Second Order Model}
 
-
-Describe what is needed from Noll \(\to\) describe how to really ensure desired properties (Vlcek) \(\to\) explain other changes like \(\delta_k\) \(\to\) say what is not changed
-
-
-
-
-
-
-%Inspired by the work of Noll in \cite{Noll2013} which is, to our best knowledge, the only other paper dealing with bundle methods for nonconvex functions with inexactness, we are interested to include some kind of curvature information into the bundle method from section \ref{sec_nonconv_inex}.
-
-
-This is also used by Noll et al. in \cite{Noll2012} and Noll in \cite{Noll2013} for nonconvex functions with exact and inexact information respectively.
-In the original papers the motivation is to approximate the original objective function by a quadratic model
+In \cite{Noll2012} Noll et al. present a proximal bundle method for nonconvex objective functions. An important ingredient to the method is that not the objective function itself is approximated in the subproblem but a quadratic model of it:
 
 \begin{equation}
 	\Phi(x,\hat{x}) = \phi(x,\hat{x})+\frac{1}{2}\langle x-\hat{x},Q(\hat{x})(x-\hat{x})\rangle
 \end{equation}
 
-with the convex and possibly nonsmooth first order model \(\phi(\cdot,\hat{x})\) and the quadratic but not necessarily convex second order part \(\frac{1}{2}\langle \cdot-\hat{x},Q(\hat{x})(\cdot-\hat{x})\rangle\).
-This model is then again approximated to solve the bundle subproblem.
+The first order model \(\phi(\cdot,\hat{x})\) is convex and possibly nonsmooth. The second order part \(\frac{1}{2}\langle \cdot-\hat{x},Q(\hat{x})(\cdot-\hat{x})\rangle\) is quadratic but not necessarily convex.
 
-Here we take the same idea but interpret it more in the sense of a stabilization. The objective function is still first convexified and then this convexification approximated by a cutting plane model. The matrix \(Q(\hat{x})\) is added into the stabilization so that the \(k\)'th bundle subproblem is
+As the first order part of this model is convex it can be approximated by a cutting plane model just like the objective function in usual convex bundle methods. The subproblem emerging from this approach is
+
+\begin{equation*}
+	\min_{\hat{x}^k+d} m(\hat{x}^k+d)+\frac{1}{2}\Langle d,Q(\hat{x}^k)d \Rangle + \frac{1}{2t_k}\|d\|^2
+\label{sub_prob_Noll}
+\end{equation*} 
+
+where \(m_k\) is the cutting plane model (\ref{cp_model}) for the nonsmooth function \(\phi\).
+
+The matrix \(Q(\hat{x})\) itself does not have to be positive definite. In fact the only conditions put on this matrix are that it is symmetric and that all eigenvalues are bounded.
+We adopt the notation in \cite{Noll2013} and write
+
+\begin{equation*}
+		Q(\hat{x}^k):=Q_k = Q_k^{\top} \quad \text{and} \quad -q\mathbb{I} \prec Q_k \prec q\mathbb{I} \text{ for } q > 0.
+\end{equation*}
+
+The notation \( A \prec B\) with \(A, B \in \R^{n\times n}\) means that the matrix \((B-A)\) is positive definite.
+
+As the matrix \(Q_k\) is symmetric it can also be pulled into the stabilization term. The \(k\)'th bundle subproblem then is
 
 \begin{equation}
-	\min_{\hat{x}^k+d \in X} M_k(\hat{x}^k+d) + \frac{1}{2}\langle d,\left(Q+\frac{1}{t_k}\mathbb{I} \right) d \rangle
+	\min_{\hat{x}^k+d \in X} M_k(\hat{x}^k+d) + \frac{1}{2}\langle d,\left(Q_k+\frac{1}{t_k}\mathbb{I} \right) d \rangle.
+	\label{Q_subprob}
 \end{equation}
 
-...???
+If \(W_k = Q_k+\frac{1}{t_k}\mathbb{I}\) is positive definite, this is a variable metric subproblem.
 
+The decomposition of the stabilization term into a curvature approximation and a proximal term makes is easier to reach two goals at the same time:
 
-In \cite{Noll2012} and \cite{Noll2013} it is not specified how the matrix \(Q(\hat{x}\) is to be chosen.
-For convergence it is necessary that the eigenvalues of \(Q(\hat{x}\) are bounded. We adopt here the notation in \cite{Noll2013} and say
+One the one hand, curvature of the objective can be approximated only under the conditions of the boundedness and symmetry of \(Q_k\). No positive definiteness hast to be ensured for convergence.
+On the other hand the proximal term can be used in the trust region inspired way to make a line search obsolete. As already mentioned in section \ref{sec_simplifications} this is an advantage especially when working with inexact functions where a line search is not useable.
 
-\begin{equation}
-	\exists q > 0 \text{ such that } -q\mathbb{I} \prec Q(\hat{x}) \prec q\mathbb{I}.
-\end{equation}
+\textcolor{red}{comment on line search and curve search in \cite{Lemarechal1994,Lemarechal1997,Vlcek2001}?}
 
-Here \(A \prec B \) means that the matrix \(B-A\) is positive definite.
+\subsection{???}
 
-Additionally the matrix \(Q(\hat{x}+\frac{1}{t_k}\mathbb{I}\) has to be positive definite.
+In this section a concrete update rules for \(Q_k\) are described as well as the minor changes that have to be done to the proximal bundle algorithm from section \ref{sec_nonconv_inex} to adapt it to the variable metric approach.
 
-There are no other conditions put on \(Q(\hat{x}\).
+\subsubsection{???}
 
-It is not stated explicitly how to form such a matrix \(Q(\hat{x})\). Here we take an idea developed by Vl\v{c}ek  and Luk\v{s}an for a variable metric bundle method in \cite{Vlcek2001}.
+In \cite{Noll2012} and \cite{Noll2013} it is not specified how the matrix \(Q_k\) is to be chosen.
+For convergence it is necessary that the eigenvalues of \(Q_k\) are bounded. Additionally the matrix \(Q_k+\frac{1}{t_k}\mathbb{I}\) has to be positive definite.
 
-The matrix \(Q(\hat{x}\) is formed by a BFGS-Update from the \textcolor{red}{last known - which? how many? all from bundle??} subgradients.
+To assure these conditions we adapt a the usual BFGS update rule.
 
+\begin{equation*}
+	Q_{k+1} = Q_k + \frac{y^k{y^k}^{\top}}{\langle y^k,d^k\rangle}-\frac{Q_kd^k(Q_kd^k)^{\top}}{\langle d^k,Q_kd^k \rangle}.
+\end{equation*}
+
+Where for \(y^k\) instead of the difference of gradients of \(f\) the difference \(y^k := g^{k+1}-g^k\) of subgradients of \(f\) is taken.
+The starting matrix \(Q_1 = \mathbb{I}\).
+%used by Vl\v{c}ek  and Luk\v{s}an in \cite{Vlcek2001}. There the metric matrix is updated by the 
+
+%The matrix \(Q(\hat{x}\) is formed by a BFGS-Update from the \textcolor{red}{last known - which? how many? all from bundle??} subgradients.
+
+Of course the BFGS update is symmetric. To assure boundedness of the matrix \(Q_{k+1}\) the updates 
+\textcolor{red}{are manipulated in the following way:}
+
+%\textcolor{red}{%If \(y^k = 0\) set the second term in the update formula to zero.
+%If \(\langle y^k,d^k \rangle <\zeta \) for some \(\zeta > 0\) set the second term to \(\frac{y^k{y^k}^{\top}}{\zeta}\). The same can be done for the last term of the update formula if \{}
+
+%\textcolor{red}{Algorithmus anpassen}
+ 
+%\begin{align*}
+	%\text{if} &\quad \left(\frac{y^k{y^k}^{\top}}{{y^k}^{\top}d^k}\right) > 1/3C \\
+	%&\quad \text{set } \frac{y^k{y^k}^{\top}}{\zeta} \\
+	%&\quad \zeta = \frac{\text{norm}\left(y^k{y^k}^{\top}\right)}{1/3C} \\
+	%\text{end} &
+%\end{align*}
+%same procedure for next term; all \(<1/3C\) for some overall threshold \(C\) 
+
+A different procedure is used in \cite{Vlcek2001}. There the update is just skipped whenever \(\langle y^k, d^k \rangle < \zeta\).
 
 
 \begin{itemize}
 	\item \(Q\) only updated in serious steps - why?
-	\item 
+	\item comment in SR1 update? Null steps?
+	\item write down exact update from Vlcek
+	\item find out how the different properties are assured
 \end{itemize}
 
+%eigenvalues of \(Q\) are bounded \(\to\) possible by manipulating BFGS update
 
-\textcolor{red}{possible to do also SR1-update in null steps???}
 
-\subsubsection{how to get Q and ensure all conditions}
+%\(Q+\frac{1}{t_k}\mathbb{I}\) such that \(\succ \xi \mathbb{I}\) for some fixed \(\xi > 0\). \\
 
-\subsubsection{the new stopping criterion}
 
-There are some minor changes that have to be made compared to the algorithm proposed by Hare et al. the biggest being the stopping condition.
+\subsubsection{The Descent Measure}
 
-In the same way as for (???) from the optimality condition
+There are some minor changes that have to be made compared to the algorithm proposed by Hare et al. the biggest being the descent measure \(\delta_k\).
 
-\begin{align}
-	& 0 \in \partial M_k(x^{k+1})+\partial\mathtt{i}_{D}(x^{k+1})+\left(Q+\frac{1}{t_k}\mathbb{I}\right)d^k \\
+In the same way as for (\ref{agg_subgr_dk}) from the optimality condition
+
+\begin{align*}
+	& 0 \in \partial M_k(x^{k+1})+\partial\mathtt{i}_{D}(x^{k+1})+\left(Q+\frac{1}{t_k}\mathbb{I}\right)d^k
 	\label{Noll_opt_cond}
-\end{align}
+\end{align*}
 
 follows that 
 \begin{equation}
@@ -109,24 +147,47 @@ follows that
 	\label{subgr_Q}
 \end{equation}
 
-From this the model decrease (???) can be recovered using (???), (??) and (\ref{Noll_opt_cond}):
+\(S^k\) and \(\nu^k\) being the augmented aggregate subgradient and outer normal defined in (\ref{aug_agg_subgr}) and (\ref{nu}) respectively.
 
-\begin{equation}
+From this the model decrease (\ref{mod_dec2}) can be recovered using (\ref{aug_agg_lin}), (\ref{aug_agg_err2}) and (\ref{subgr_Q}):
+
+\begin{equation*}
 \begin{split}
-	\delta_k  &= \hat{f}_k - M_k(x^{k+1}) - (\nu^k)^{\top}d^k\\
-	&= \hat{f}_k - A_k(x^{k+1}) - (\nu^k)^{\top}d^k\\
+	\delta_k  &= \hat{f}_k - M_k(x^{k+1}) - \Langle\nu^k,d^k\Rangle\\
+	&= \hat{f}_k - A_k(x^{k+1}) - \Langle\nu^k,d^k\Rangle\\
 	%&= C_k - (S^k)^{\top}d^k - (\nu^k)^{\top}d^k \\
-	&= C_k - (S^k+\nu^k)^{\top}d^k \\
-	&= C_k + (d^k)^{\top}\left(Q+\frac{1}{t_k}\mathbb{I}\right)d^k
+	&= C_k - \Langle S^k+\nu^k,d^k\Rangle \\
+	&= C_k + \Langle d^k,\left(Q+\frac{1}{t_k}\mathbb{I}\right)d^k\Rangle.
 	\label{Noll_delta}
 \end{split}
-\end{equation}
+\end{equation*}
+
+The new \(\delta_k\) is used in the same way as in algorithm \ref{sec_nonconv_inex}.1 for the descent test and stopping conditions.
+
+Because the changes in the algorithm concern only the stabilization and the decrease measure \(\delta_k\) all other relations that were obtained for the different parts of the model \(M_k\) in section \ref{sec_nonconv_inex} are still valid.
 
 
-As the changes in the algorithm concern only the stabilization and the model decrease \(d_k\) all relations that were obtained for the different prats of the model \(M_k\) in section \ref{sec_nonconv_inex} are still valid.
+
+%\(\to\) explain noll again (ref to chapter 2) and relate to variable metric
+%Describe what is needed from Noll \(\to\) describe how to really ensure desired properties (Vlcek) 
+
+%extra subsection???
+%\(\to\) explain other changes like \(\delta_k\) \(\to\) say what is not changed
+
+%Inspired by the work of Noll in \cite{Noll2013} which is, to our best knowledge, the only other paper dealing with bundle methods for nonconvex functions with inexactness, we are interested to include some kind of curvature information into the bundle method from section \ref{sec_nonconv_inex}.
+
+
+%This is also used by Noll et al. in \cite{Noll2012} and Noll in \cite{Noll2013} for nonconvex functions with exact and inexact information respectively.
+%In the original papers the motivation is to approximate the original objective function by a quadratic model
+
+
+%This model is then again approximated to solve the bundle subproblem.
+
+%Here we take the same idea but interpret it more in the sense of a stabilization. The objective function is still first convexified and then this convexification approximated by a cutting plane model. The matrix \(Q(\hat{x})\) is added into the stabilization so that the
 
 
 
+%Here \(A \prec B \) means that the matrix \((B-A)\) is positive definite.
 
 %\subsection{Keywords}
 
@@ -142,31 +203,16 @@ As the changes in the algorithm concern only the stabilization and the model dec
 %Optimality condition: 
 
 
-\subsection{Keywords}
-eigenvalues of \(Q\) are bounded \(\to\) possible by manipulating BFGS update
-
-\begin{align}
-	\text{if} &\quad \text{norm}\left(\frac{y^k{y^k}^{\top}}{{y^k}^{\top}d^k}\right) > 1/3C \\
-	&\quad \text{set } \frac{y^k{y^k}^{\top}}{\zeta} \\
-	&\quad \zeta = \frac{\text{norm}\left(y^k{y^k}^{\top}\right)}{1/3C} \\
-	\text{end} &
-\end{align}
-same procedure for next term; all \(<1/3C\) for some overall threshold \(C\) 
-
-\(Q+\frac{1}{t_k}\mathbb{I}\) such that \(\succ \xi \mathbb{I}\) for some fixed \(\xi > 0\). \\
-
-\begin{equation}
-	\min_{\hat{x}+d \in D} M^k(\hat{x}^k+d^k)+d^{\top}\frac{1}{2}\left(Q+\frac{1}{t_k}\mathbb{I}\right)d	
-\label{Q_subprob}
-\end{equation}
  
 
 \subsection{Algorithm}
 
 \textcolor{red}{same form as Hare algorithm (nullstep)\\
 add \(Q\) calculation}
-\vspace{1em}
 
+\begin{minipage}\linewidth
+Algorithm \ref{sec_variable_metric}.1:
+\vspace{1em}
 \hrule  \vspace{0.4ex} \hrule
 \vspace{1ex}
 \textbf{Nonconvex Variable Metric Bundle Method with Inexact Information}
@@ -175,7 +221,7 @@ add \(Q\) calculation}
 \vspace{1ex}
 Select parameters \( m \in (0,1), \gamma > 0 \) and a stopping tolerance \( \mathtt{tol} \geq 0\). \\
 Choose a starting point \(x^1 \in \R^n\) and compute \(f_1\) and \(g^1\). Set the initial metric matrix \(Q = \mathbb{I}\), the initial index set \(J_1:=\{1\}\) and the initial prox-center to \(\hat{x}^1 := x^1\), \(\hat{f}_1 = f_1\) and select \(t_1 > 0\).
-
+\end{minipage}
 For \(k = 1,2,3,  \dotsc \)   
 
 \begin{enumerate}
@@ -242,7 +288,7 @@ The proof is divided into two parts. The first case covers the case of infinitel
 For both proofs the following lemma is needed:
 
 \begin{lemma}
-	For a symmetric matrix \(A \in \R^{n\times n}\) and a vector \(d\in \R^n\) the following result holds: 
+	For a symmetric matrix \(A \in \R^{n\times n}\), a vector \(d\in \R^n\) and \(\xi > 0\) the following result holds: 
 	\[ A \prec \xi \mathbb{I} \Rightarrow Ad < \xi d \]
 \end{lemma}
 
@@ -463,8 +509,17 @@ This means that \(d^k \to 0\) for \(k \to \infty\) and therefore \(\lim_{k \to \
 \end{proof}
 
 \begin{remark}
-	All results deduced in section \ref{On_diff_conv_res} are still valid for this algorithm.
+	All results deduced in section \ref{On_diff_conv_res} are still valid for this algorithm as they do not depend on the kind of stabilization used.
 \end{remark}
+
+\textcolor{red}{\subsection{Numerical Testing}}
+
+\textcolor{red}{
+\begin{itemize}
+	\item Vergleich mit Hare Version
+	\item Genauigkeit
+	\item Geschwindigkeit
+\end{itemize}}
 
 
 
