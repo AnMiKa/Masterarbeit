@@ -99,7 +99,18 @@ The starting matrix \(Q_1 = \mathbb{I}\).
 %The matrix \(Q(\hat{x}\) is formed by a BFGS-Update from the \textcolor{red}{last known - which? how many? all from bundle??} subgradients.
 
 Of course the BFGS update is symmetric. To assure boundedness of the matrix \(Q_{k+1}\) the updates 
-\textcolor{red}{are manipulated in the following way:}
+\textcolor{red}{are manipulated in the following way:\\
+3 possibilities: \\
+scaled BFGS-update\\
+scaled SR1-update\\
+LBFGS-update - Nocedal Paper from email}
+
+\textcolor{red}{BFGS/Verfahren\\
+seems to need less steps with ok optimality if updates are skipped and not matrix scaling is used (used y'd < ...)\\
+try norm(d)/norm(y) -> not good; use the one above}
+
+\textcolor{red}{SR1-Update\\
+auch ok, braucht anderen bound um zu konvergieren}
 
 %\textcolor{red}{%If \(y^k = 0\) set the second term in the update formula to zero.
 %If \(\langle y^k,d^k \rangle <\zeta \) for some \(\zeta > 0\) set the second term to \(\frac{y^k{y^k}^{\top}}{\zeta}\). The same can be done for the last term of the update formula if \{}

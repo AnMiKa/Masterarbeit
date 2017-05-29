@@ -1,5 +1,5 @@
-function [f_hat, x_hat, time, tav] = noll_variable_metric_nonconv_inex(x0, fun, subgr_fun, ...
-    Q_type, noise, kmax, tol, m, t, gamma)
+function [f_hat, x_hat, time, tav] = noll_variable_metric_nonconv_inex_sr1(x0, fun, subgr_fun, ...
+    kmax, m, t, tol, gamma)
 
 % variable metric bundle algorihtm that can handle nonsmooth nonconvex functions with
 % inexact information on function value and gradient
@@ -55,31 +55,32 @@ end
 % t > 0         prox / convexification parameter of the subproblem
 % tol           tolerance for terminating the algorithm
 % gamma > 0     saveguarding parameter for calculating eta
-% Q_type        1: BFGS, 2: SR1, 3: LBFGS
 
-defaults = {1, 0, 2000, 1e-6, 0.05, 0.1, 2};
+defaults = {1000, 0.05, 0.1, 1e-6, 2, 10, 0.4, 20};
 % set optional input arguments if not set by the user
 % Check number of inputs.
-if nargin > 10
-    error('Too many input arguments: requires at most 7 optional inputs');
+if nargin > 11
+    error('Too many input arguments: requires at most 8 optional inputs');
 end
 
 % Fill in unset optional values.
 switch nargin
     case 3
-        [Q_type, noise, kmax, tol, m, t, gamma] = defaults{:};
+        [kmax, m, t, tol, gamma, K, rho, mmax] = defaults{:};
     case 4
-        [noise, kmax, tol, m, t, gamma] = defaults{2:7};
+        [m, t, tol, gamma, K, rho, mmax] = defaults{2:8};
     case 5
-        [kmax, tol, m, t, gamma] = defaults{3:7};
+        [t, tol, gamma, K, rho, mmax] = defaults{3:8};
     case 6
-        [tol, m, t, gamma] = defaults{4:7};
+        [tol, gamma, K, rho, mmax] = defaults{4:8};
     case 7
-        [m, t, gamma] = defaults{5:7};
+        [gamma, K, rho, mmax] = defaults{5:8};
     case 8
-        [t, gamma] = defaults{6:7};
+        [K, rho, mmax] = defaults{6:8};
     case 9
-        gamma = defaults{7};
+        [rho, mmax] = defaults{7:8};
+    case 10
+        mmax = defaults{8};
 end
 
 %% BEGINNING of the algorithm
@@ -93,9 +94,9 @@ x = x0;                  % initial bundle point
 x_hat = x;               % initial serious point
 J = 1;                   % index set defining bundle information
 lJ = 1;                  % size of the crrent bundle
-f = feval(fun, x0, noise);      % initial inexact function value
+f = feval(fun, x0);      % initial inexact function value
 f_hat = f;               % initial f_hat
-g = feval(subgr_fun, x0, noise);% initial inexact subgradient
+g = feval(subgr_fun, x0);% initial inexact subgradient
 s = g;                   % initial augmented subgradient
 c = 0;                   % initial augmented error
 Q = eye(n);              % initial approximation to metric matrix
@@ -116,7 +117,7 @@ h = [zeros(n,1);ones(1)];
 % possibly additional constraints
 A = [s',-ones(lJ, 1)];
 b = c;
-[dxi,~,lambda] = qpas(H,h,A,b,[],[],[],[],1);
+[dxi,~,lambda] = qpas(H,h,A,b,[],[],[],[],0);
 
 d = dxi(1:end-1);
 % xi = dxi(end); 
@@ -141,19 +142,17 @@ delta = C+d'*(Q+1/t*eye(n))*d;
 % if norm(C + d) <= tol;                            % 6) like in nonconv, inex, little reformulated
 % if C+sum(d.^2) <= tol                             % 6a) like in nonconv, inex
 % if norm((Q+1/t*eye(n))*d) <= tol && C <= tol      % 7) like in Ulbrich for Q/Noll variation
-% if delta < tol                                    % 8) as thought of most sensible -> Herleitung siehe Blatt
-% if delta < tol*(1+f_hat)                            % 8) as thought of most sensible -> Herleitung siehe Blatt   
-if abs(f) < tol
+if delta < tol                                    % 8) as thought of most sensible -> Herleitung siehe Blatt
     fprintf('Algorithm stopped successfully by meeting tolerance after  %d  iterations and %d null-steps. \n', k-1, i_null);
     break
 end
 
 %% 4th step: iterate update
 x_k_1 = x_hat+d;
-f_k_1 = feval(fun,x_k_1, noise);
+f_k_1 = feval(fun,x_k_1);
 f = [f,f_k_1];              % add information to bundle
 x = [x, x_k_1];             % add new iterate to bundle
-g(:,end+1) = feval(subgr_fun,x_k_1,noise);% add information to bundle
+g(:,end+1) = feval(subgr_fun,x_k_1);% add information to bundle
 
 %% 5th step: serious step test
 %serious step  test
@@ -161,16 +160,11 @@ if f_k_1 - f_hat <= -m * delta;   % serious step condition
     % hier war auch das eigenartige delta von oben
     x_hat = x_hat + d;   % update x_hat
     f_hat =  f_k_1;  % update f_hat
+    %Q = BFGS_update(d,g(:,end-1),g(:,end),Q);
     if length(J) == 1
+        Q = Q;
     else
-        switch Q_type
-            case 1
-                Q = BFGS_update(d,g(:,end-1),g(:,end),Q);
-            case 2
-                Q = SR1_update(d,g(:,end-1),g(:,end),Q);
-            case 3
-                Q = LBFGS_update(d,g(:,end-1),g(:,end),Q);
-        end
+        Q = BFGS_update(d,s(:,end-1),s(:,end),Q);
     end
     t = u_1*t; % t_(k+1) > 0
     if min(eig(Q+1/t*eye(n))) < 0
@@ -195,7 +189,7 @@ else
 end
 
 if min(eig(Q+1/t*eye(n))) < 0
-    warning('Matrix Q+1/t*I has negative eigenvalue.')
+    warning('...')
 end
 
 %% 5th step: Bundle update

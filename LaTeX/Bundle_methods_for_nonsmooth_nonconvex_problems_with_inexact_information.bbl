@@ -1,4 +1,4 @@
-\begin{thebibliography}{1}
+\begin{thebibliography}{10}
 
 \bibitem{Cristianini2000}
 Nello Cristianini and John Shawe-Taylor.
@@ -12,10 +12,45 @@ A.~Fuduli, M.~Gaudioso, and G.~Giallombardo.
   proximity control.
 \newblock {\em {SIAM} Journal on Optimization}, 14(3):743--756, 2004.
 
+\bibitem{Haarala2007}
+Napsu Haarala, Kaisa Miettinen, and Marko~M. M{\"a}kel{\"a}.
+\newblock Globally convergent limited memory bundle method for large-scale
+  nonsmooth optimization.
+\newblock {\em Mathematical Programming}, 109(1):181--205, 2007.
+
+\bibitem{Hare2010}
+Warren Hare and Claudia Sagastiz\`{a}bal.
+\newblock A redistributed proximal bundle method for nonconvex optimization.
+\newblock {\em SIAM Journal on Optimization}, 20(5):2442--2473, 2010.
+
+\bibitem{Hare2016}
+Warren Hare, Claudia Sagastiz{\`a}bal, and Mikhail Solodov.
+\newblock A proximal bundle method for nonsmooth nonconvex functions with
+  inexact information.
+\newblock {\em Computational Optimization and Applications}, 63:1--28, 2016.
+
 \bibitem{Kunapuli2008}
 Gautam Kunapuli.
 \newblock {\em A bilevel optimization approach to machine learning}.
 \newblock PhD thesis, Rensselaer Polytechnic Institute Troy, New York, 2008.
+
+\bibitem{Lemarechal1994}
+Claude Lemar{\'e}chal and Claudia Sagastiz{\'a}bal.
+\newblock {\em An approach to variable metric bundle methods}, pages 144--162.
+\newblock Springer Berlin Heidelberg, Berlin, Heidelberg, 1994.
+
+\bibitem{Lemarechal1997}
+Claude Lemar{\'e}chal and Claudia Sagastiz{\'a}bal.
+\newblock Variable metric bundle methods: From conceptual to implementable
+  forms.
+\newblock {\em Mathematical Programming}, 76(3):393--410, 1997.
+
+\bibitem{Luksan1999}
+L.~Luk{\v{s}}an and J.~Vl{\v{c}}ek.
+\newblock Globally convergent variable metric method for convex nonsmooth
+  unconstrained minimization.
+\newblock {\em Journal of Optimization Theory and Applications},
+  102(3):593--613, sep 1999.
 
 \bibitem{Moore2010a}
 G.~Moore, C.~Bergeron, and K.~P. Bennett.
@@ -28,17 +63,47 @@ Gregory Moore, Charles Bergeron, and Kristin~P. Bennett.
 \newblock Model selection for primal svm.
 \newblock {\em Machine Learning}, 85(1):175--208, 2011.
 
+\bibitem{Noll2013}
+Dominikus Noll.
+\newblock Bundle method for non-convex minimization with inexact subgradients
+  and function values.
+\newblock In {\em Computational and Analytical Mathematics}, pages 555--592.
+  Springer Nature, 2013.
+
+\bibitem{Noll2012}
+Dominikus Noll, Olivier Prot, and Aude Rondepierre.
+\newblock A proximity control algorithm to minimize non-smooth and non-convex
+  functions.
+\newblock {\em Pacific Journal of Optimization}, 4(3):571--604, 2012.
+
 \bibitem{Outrata1998}
 Ji{\v{r}}i Outrata, Michal Ko{\v{c}}vara, and Jochem Zowe.
 \newblock {\em Nonsmooth Approach to Optimization Problems with Equilibrium
   Constraints}.
 \newblock Springer {US}, 1998.
 
+\bibitem{Polyak1987}
+Boris~T. Polyak.
+\newblock {\em Introduction to Optimization}.
+\newblock Optimization Software , Inc., Publications Division, New York, 1987.
+
+\bibitem{Rockafellar2009}
+R.~Tyrrell Rockafellar and Roger J.~B. Wets.
+\newblock {\em Variational Analysis}, volume 317 of {\em Grundlehren der
+  mathematischen Wissenschaften}.
+\newblock Springer Berlin Heidelberg, 3rd edition, 2009.
+
 \bibitem{Rockafellar1985}
 R.T. Rockafellar.
 \newblock Extensions of subgradient calculus with applications to optimization.
 \newblock {\em Nonlinear Analysis: Theory, Methods {\&} Applications},
   9(7):665--698, jul 1985.
+
+\bibitem{Treiman1986}
+Jay~S. Treiman.
+\newblock Clarke's gradients and $\varepsilon$-subgradients in banach spaces.
+\newblock {\em Transactions of the American Mathematical Society},
+  294(1):65--65, jan 1986.
 
 \bibitem{Vapnik1998}
 Vladimir~N. Vapnik.
@@ -49,5 +114,23 @@ Vladimir~N. Vapnik.
 Vladimir~N. Vapnik.
 \newblock An overview of statistical learning theory.
 \newblock {\em IEEE Transactions on Neural Networks}, 10(5), 1999.
+
+\bibitem{Vlcek2001}
+J.~Vl\v{c}ek and L.~Luk\v{s}an.
+\newblock Globally convergent variable metric bundle method for nonconvex
+  nondifferentiable unconstrained minimization.
+\newblock {\em Journal of Optimization Theory and Applications},
+  111(2):407--430, 2001.
+
+\bibitem{Hare2009}
+Claudia~Sagastiz\`{a}bal Warren~Hare.
+\newblock Computing proximal points of nonconvex functions.
+\newblock {\em Mathematical Programming}, 116:221--258, 2009.
+
+\bibitem{Oliveira2014}
+Claude~Lemar\'{e}chal Welington~de Oliveira, Claudia~Sagastiz\`{a}bal.
+\newblock Convex proximal bundle methods in depth: a unified analysis for
+  inexact oracles.
+\newblock {\em Mathematical Programming}, 148:241--277, 2014.
 
 \end{thebibliography}

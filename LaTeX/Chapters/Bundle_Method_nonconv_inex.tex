@@ -213,7 +213,8 @@ The definition of the \emph{augmented aggregate subgradient} \(S^k\),  \emph{err
 
 Just as the model decrease
 \begin{equation}
-	\delta^k := C_k + t_k \|S^k + \nu^k\|^2,
+	\delta^k := C_k + t_k \|S^k + \nu^k\|^2 = C_k+\frac{1}{t_k}\|
+	d^k\|^2,
 \label{mod_dec2}
 \end{equation}
 
@@ -223,6 +224,8 @@ which contains the normal vector
 	\label{nu}
 \end{equation}
 of the constraint set \(X\).
+
+The second formulation in (\ref{mod_dec2}) follows from the relation \(d^k = -t_k(S^k+\nu^k)\).
 
 By the same argumentation as for (\ref{agg_err}) the KKT conditions also reveal another useful characterization of the augmented aggregate linearization error:
 
@@ -272,9 +275,9 @@ For \(k = 1,2,3,  \dotsc \)
 	\item Calculate \[d^k = \arg \min_{d \in \R^n} \left\{ M_k(\hat{x}^k+d)+\mathbb{I}_X(\hat{x}^k+d)+\frac{1}{2t_k}\|d\|^2\right\}.\]
 	\item Set
 		\begin{align*} 
-		  G^k &= \sum_{j \in J_k}{\alpha_j^k s_j^k}, \quad \nu^k \in \partial \mathtt{i}_{X}(x^{k+1}) \\
+		  G^k &= \sum_{j \in J_k}{\alpha_j^k s_j^k} \\%, \quad \nu^k \in \partial \mathtt{i}_{X}(x^{k+1}) \\
 			C_k &= \sum_{j \in J_k}{\alpha_j^k c_j^k}, \\
-	    \delta_k &=  C_k + t_k\|G^k + \nu^k\|^2.
+	    \delta_k &=  C_k + \frac{1}{t_k}\|d^k\|^2.
 		\end{align*}
 		If \(\delta_k \leq \mathtt{tol} \rightarrow \) STOP.
 	\item Set \( x^{k+1} = \hat{x}^k + d^k \).

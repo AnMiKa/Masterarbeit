@@ -1,4 +1,4 @@
-function [ f_hat, x_hat, time, tav ] = bundle_nonconv_inex( x0, fun, subgr_fun, kmax, m, t, tol, gamma)
+function [ f_hat, x_hat, time, tav ] = bundle_nonconv_inex( x0, fun, subgr_fun, noise, kmax, tol, m, t, gamma)
 
 % proximal bundle algorihtm that can handle nonsmooth nonconvex functions with
 % inexact information on function value and gradient
@@ -50,25 +50,27 @@ end
 % tol           tolerance for terminating the algorithm
 % gamma > 0     saveguarding parameter for calculating eta
 
-defaults = {1000, 0.05, 0.1, 1e-6, 2};
+defaults = {0, 1000, 1e-6, 0.05, 0.1, 2};
 % set optional input arguments if not set by the user
 % Check number of inputs.
-if nargin > 8
-    error('Too many input arguments: requires at most 5 optional inputs');
+if nargin > 9
+    error('Too many input arguments: requires at most 6 optional inputs');
 end
 
 % Fill in unset optional values.
 switch nargin
     case 3
-        [kmax, m, t, tol, gamma] = defaults{:};
+        [noise, kmax, tol, m, t, gamma] = defaults{:};
     case 4
-        [m, t, tol, gamma] = defaults{2:5};
+        [kmax, tol, m, t, gamma] = defaults{2:6};
     case 5
-        [t, tol, gamma] = defaults{3:5};
+        [ tol, m, t, gamma] = defaults{3:6};
     case 6
-        [tol, gamma] = defaults{4:5};
+        [m, t, gamma] = defaults{4:6};
     case 7
-        gamma = defaults{5};
+        [t, gamma] = defaults{5:6};
+    case 8
+        gamma = defaults{6};
 end
 
 %% BEGINNING of the algorithm
@@ -88,9 +90,9 @@ eta = 0;                 % convexification parameter for modelfunction
 c = 0;                   % augmented linearization error (error of convexified model-function)
 J = 1;                   % index set defining bundle information
 lJ = 1;                  % initial lenght of the index set J
-f = feval(fun, x0);      % (inexact) function values at bundle points
+f = feval(fun, x0,noise);      % (inexact) function values at bundle points
 f_hat = f;               % function value at x_hat
-g = feval(subgr_fun, x0);% subgradient at point bundle points
+g = feval(subgr_fun, x0,noise);% subgradient at point bundle points
 s = g;                   % augmented subgradient at bundle points
 
 tav = 0;
@@ -130,24 +132,26 @@ C = alpha' * c;     % augmented aggregate error
 
 %% 3rd step: stopping test
 % different stopping tests are implemented after different papers
-delta = - xi + eta/2 * norm(d)^2;
+%delta = - xi + eta/2 * norm(d)^2;
 % stopping conditions
- if norm(1/t * d) <= tol && C <= tol;  % stopping condition like in lecture
+% if norm(1/t * d) <= tol && C <= tol;  % stopping condition like in lecture
 % if norm(G) <= tol && E <= tol;  % stopping condition like in lecture
 % if norm(E + G * x_hat) <= tol and E <= tol;  % stopping condition like in conv, inex
 % if norm(C + 1/t*d' * x_hat) <= tol && C <= tol;  % stopping condition like in conv, inex
 % if delta <= tol;  % stopping condition like in nonconv, exact
 % if   -xi + eta / 2 * norm(d)^2 <= tol; % stopping condition like in nonconv, exact, nor rewritten
 % if norm(E + t * G) <= tol;  % stopping condition like in nonconv, inex
+% if C+1/t*sum(d.^2) < tol
+if C+1/t*sum(d.^2) < tol*(1+f_hat)
     fprintf('Algorithm stopped successfully by meeting tolerance after  %d  iterations and %d null-steps. \n', k, i_null);
     break
 end
  
 %% 4th step: serious step test
 % evaluate function and subgradient
-f_k_1 =  feval(fun, x_hat + d);  % evaluate function at new iterate
+f_k_1 =  feval(fun, x_hat + d, noise);  % evaluate function at new iterate
 f = [f, f_k_1];  % add information to bundle
-g = [g, feval(subgr_fun, x_hat + d)];  % evaluate subgradient at new iterate and add information to bundle
+g = [g, feval(subgr_fun, x_hat + d,noise)];  % evaluate subgradient at new iterate and add information to bundle
 x = [x, x_hat + d];  % add new iterate to bundle
 
 %serious step  test
@@ -164,7 +168,7 @@ end
 %update bundle
 delete = zeros(1,lJ);
 for j = 1:lJ;  % update the index set J by marking the indexes that are removed
-    if alpha(j) > 1e-9 || norm(x(:,j) - x_hat) == 0; % alpha only gets down to 1e-5
+    if alpha(j) > 1e-15 || norm(x(:,j) - x_hat) == 0; % alpha only gets down to 1e-5
     else
         delete(j) = 1;
     end

@@ -1,14 +1,15 @@
 % Noll BFGS
-function [ Q ] = BFGS_update(d,gm,gp,Q)
+function [ Q ] = SR1_update(d,gm,gp,Q)
 
 % bound for Q
-bound = 1e8;
+bound = 1e7;
 
 y = gp-gm;
-if norm(d'*y) < 1/bound
+u = y-Q*d;
+if norm(d'*u) < 1/bound
+    Q=Q;
 else
-    Qd = Q*d;
-    Q = Q + (y*y')/(y'*d)-(Qd*Qd')/(d'*Qd);
+    Q = Q + (u*u')/(u'*d);
 end
 
 % correction to keep Q bounded

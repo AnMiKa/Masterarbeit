@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=pdflatex 2015.5.19)  23 MAY 2017 17:53
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=pdflatex 2015.5.19)  24 MAY 2017 16:35
 entering extended mode
 **Bundle_methods_for_nonsmooth_nonconvex_problems_with_inexact_information.tex
 
@@ -516,50 +516,126 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
  [1
 
 {C:/Users/as/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}]
+("D:\Annika\Uni\10. Semester\Masterarbeit\Proximal Bundle Inexact Information\Git Hub\Masterarbeit\LaTeX\Chapters/Bundle
+_Method_nonconv_inex.tex"
+
+LaTeX Warning: Reference `conv_inexactness_1' on page 1 undefined on input line 43.
+
+
+LaTeX Warning: Reference `sig_p_thet_subgr' on page 1 undefined on input line 43.
+
+[1] [2]
+
+LaTeX Warning: Reference `subsec_prox_op' on page 3 undefined on input line 146.
+
+
+LaTeX Warning: Reference `prox_op' on page 3 undefined on input line 146.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 163--164
+
+ []
+
+[3]
+LaTeX Font Info:    Try loading font information for OT1+lmtt on input line 223.
+ ("C:\Program Files\Annika Programme\MiKTeX\tex\latex\lm\ot1lmtt.fd"
+File: ot1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
+)
+
+LaTeX Warning: Reference `agg_err' on page 4 undefined on input line 230.
+
+[4]
+
+LaTeX Warning: Reference `t_plus' on page 5 undefined on input line 244.
+
+
+LaTeX Warning: Reference `t_minus' on page 5 undefined on input line 244.
+
+
+LaTeX Warning: Reference `model_update_1' on page 5 undefined on input line 245.
+
+
+LaTeX Warning: Reference `model_update_2' on page 5 undefined on input line 245.
+
+[5] [6]
+
+LaTeX Warning: Reference `conv_inexactness_1' on page 7 undefined on input line 357.
+
+
+LaTeX Warning: Reference `conv_inexactness_2' on page 7 undefined on input line 357.
+
+[7]
+LaTeX Font Info:    Try loading font information for OMS+lmr on input line 395.
+ ("C:\Program Files\Annika Programme\MiKTeX\tex\latex\lm\omslmr.fd"
+File: omslmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
+)
+LaTeX Font Info:    Font shape `OMS/lmr/m/n' in size <12> not available
+(Font)              Font shape `OMS/lmsy/m/n' tried instead on input line 395.
+)
+("D:\Annika\Uni\10. Semester\Masterarbeit\Proximal Bundle Inexact Information\Git Hub\Masterarbeit\LaTeX\Chapters/Variab
+le_Metric.tex" [8]
+
+LaTeX Warning: Reference `sec_conv_ex' on page 9 undefined on input line 17.
+
+
+LaTeX Warning: Reference `sub_prob_fin' on page 9 undefined on input line 29.
+
+[9]
+
+LaTeX Warning: Reference `cp_model' on page 10 undefined on input line 53.
+
+[10]
+
+LaTeX Warning: Reference `sec_simplifications' on page 11 undefined on input line 76.
+
+[11]
+
+LaTeX Warning: Reference `agg_subgr_dk' on page 12 undefined on input line 147.
+
+[12] [13] [14] [15] [16] [17] [18] [19])
 ("D:\Annika\Uni\10. Semester\Masterarbeit\Proximal Bundle Inexact Information\Git Hub\Masterarbeit\LaTeX\Chapters/Bileve
-l_Application.tex" [1] [2] [3]
+l_Application.tex" [20] [21] [22] [23]
 Overfull \hbox (52.7907pt too wide) in paragraph at lines 125--126
-[]\T1/lmr/bx/n/12 Theorem 1.1 \T1/lmr/m/n/12 ([[], The-o-rem 6.1]) []\T1/lmr/m/it/12 Given a lin-early sep-a-ra-ble trai
+[]\T1/lmr/bx/n/12 Theorem 3.1 \T1/lmr/m/n/12 ([[], The-o-rem 6.1]) []\T1/lmr/m/it/12 Given a lin-early sep-a-ra-ble trai
 n-ing sam-ple $\OT1/lmr/m/n/12 
  = ((\OML/lmm/m/it/12 x[]; y[]\OT1/lmr/m/n/12 )\OML/lmm/m/it/12 ; :::; \OT1/lmr/m/n/12 (\OML/lmm/m/it/12 x[]; y[]\OT1/lm
 r/m/n/12 ))$
  []
 
-[4] [5] [6] [7] [8] [9]
-Underfull \hbox (badness 10000) in paragraph at lines 358--360
+[24] [25] [26] [27] [28] [29]
+Underfull \hbox (badness 10000) in paragraph at lines 360--362
 
  []
 
-[10] [11] [12]
-LaTeX Font Info:    Try loading font information for OT1+lmtt on input line 477.
- ("C:\Program Files\Annika Programme\MiKTeX\tex\latex\lm\ot1lmtt.fd"
-File: ot1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
-) [13] [14]
-LaTeX Font Info:    Try loading font information for T1+lmtt on input line 536.
-
-("C:\Program Files\Annika Programme\MiKTeX\tex\latex\lm\t1lmtt.fd"
+[30] [31] [32] [33]
+LaTeX Font Info:    Try loading font information for T1+lmtt on input line 538.
+ ("C:\Program Files\Annika Programme\MiKTeX\tex\latex\lm\t1lmtt.fd"
 File: t1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
-)) [15]
+) [34]) [35]
 ("D:\Annika\Uni\10. Semester\Masterarbeit\Proximal Bundle Inexact Information\Git Hub\Masterarbeit\LaTeX\Bundle_methods_
-for_nonsmooth_nonconvex_problems_with_inexact_information.bbl") [16]
+for_nonsmooth_nonconvex_problems_with_inexact_information.bbl" [36]) [37]
 ("D:\Annika\Uni\10. Semester\Masterarbeit\Proximal Bundle Inexact Information\Git Hub\Masterarbeit\LaTeX\Bundle_methods_
-for_nonsmooth_nonconvex_problems_with_inexact_information.aux") )
+for_nonsmooth_nonconvex_problems_with_inexact_information.aux")
+
+LaTeX Warning: There were undefined references.
+
+ )
 (\end occurred inside a group at level 1)
 
 ### simple group (level 1) entered at line 1061 ({)
 ### bottom level 
 Here is how much of TeX's memory you used:
- 7066 strings out of 493921
- 106676 string characters out of 3142078
- 242942 words of memory out of 3000000
- 10205 multiletter control sequences out of 15000+200000
+ 7160 strings out of 493921
+ 108613 string characters out of 3142078
+ 244385 words of memory out of 3000000
+ 10290 multiletter control sequences out of 15000+200000
  64877 words of font info for 56 fonts, out of 3000000 for 9000
  841 hyphenation exceptions out of 8191
- 40i,18n,48p,610b,2394s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 40i,18n,48p,670b,2394s stack positions out of 5000i,500n,10000p,200000b,50000s
 {C:/Program Files/Annika Programme/MiKTeX/fonts/enc/dvips/lm/lm-ec.enc}{C:/Program Files/Annika Programm
-e/MiKTeX/fonts/enc/dvips/lm/lm-rmtt.enc}{C:/Program Files/Annika Programme/MiKTeX/fonts/enc/dvips/lm/lm-rm.enc}{C:/Progr
-am Files/Annika Programme/MiKTeX/fonts/enc/dvips/lm/lm-mathit.enc}{C:/Program Files/Annika Programme/MiKTeX/fonts/enc/dv
-ips/lm/lm-mathex.enc}{C:/Program Files/Annika Programme/MiKTeX/fonts/enc/dvips/lm/lm-mathsy.enc}<C:/Program Files/Annika
+e/MiKTeX/fonts/enc/dvips/lm/lm-mathit.enc}{C:/Program Files/Annika Programme/MiKTeX/fonts/enc/dvips/lm/lm-rmtt.enc}{C:/P
+rogram Files/Annika Programme/MiKTeX/fonts/enc/dvips/lm/lm-mathex.enc}{C:/Program Files/Annika Programme/MiKTeX/fonts/en
+c/dvips/lm/lm-rm.enc}{C:/Program Files/Annika Programme/MiKTeX/fonts/enc/dvips/lm/lm-mathsy.enc}<C:/Program Files/Annika
  Programme/MiKTeX/fonts/type1/public/lm/lmbx12.pfb><C:/Program Files/Annika Programme/MiKTeX/fonts/type1/public/lm/lmex1
 0.pfb><C:/Program Files/Annika Programme/MiKTeX/fonts/type1/public/lm/lmmi12.pfb><C:/Program Files/Annika Programme/MiKT
 eX/fonts/type1/public/lm/lmmi6.pfb><C:/Program Files/Annika Programme/MiKTeX/fonts/type1/public/lm/lmmi8.pfb><C:/Program
@@ -567,13 +643,13 @@ eX/fonts/type1/public/lm/lmmi6.pfb><C:/Program Files/Annika Programme/MiKTeX/fon
 ublic/lm/lmr12.pfb><C:/Program Files/Annika Programme/MiKTeX/fonts/type1/public/lm/lmr6.pfb><C:/Program Files/Annika Pro
 gramme/MiKTeX/fonts/type1/public/lm/lmr8.pfb><C:/Program Files/Annika Programme/MiKTeX/fonts/type1/public/lm/lmri12.pfb>
 <C:/Program Files/Annika Programme/MiKTeX/fonts/type1/public/lm/lmssbx10.pfb><C:/Program Files/Annika Programme/MiKTeX/f
-onts/type1/public/lm/lmsy10.pfb><C:/Program Files/Annika Programme/MiKTeX/fonts/type1/public/lm/lmsy8.pfb><C:/Program Fi
-les/Annika Programme/MiKTeX/fonts/type1/public/lm/lmtt12.pfb><C:/Program Files/Annika Programme/MiKTeX/fonts/type1/publi
-c/amsfonts/symbols/msbm10.pfb>
-Output written on Bundle_methods_for_nonsmooth_nonconvex_problems_with_inexact_information.pdf (17 pages, 272847 bytes).
+onts/type1/public/lm/lmsy10.pfb><C:/Program Files/Annika Programme/MiKTeX/fonts/type1/public/lm/lmsy6.pfb><C:/Program Fi
+les/Annika Programme/MiKTeX/fonts/type1/public/lm/lmsy8.pfb><C:/Program Files/Annika Programme/MiKTeX/fonts/type1/public
+/lm/lmtt12.pfb><C:/Program Files/Annika Programme/MiKTeX/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
+Output written on Bundle_methods_for_nonsmooth_nonconvex_problems_with_inexact_information.pdf (38 pages, 360184 bytes).
 
 PDF statistics:
- 127 PDF objects out of 1000 (max. 8388607)
+ 200 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  1 words of extra memory for PDF output out of 10000 (max. 10000000)
 
