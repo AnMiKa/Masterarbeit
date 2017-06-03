@@ -1,5 +1,11 @@
 \begin{thebibliography}{10}
 
+\bibitem{Clarke1990}
+Frank~H. Clarke.
+\newblock {\em Optimization and nonsmooth analysis}.
+\newblock Classics in Applied Mathematics. Society for Industrial and Applied
+  Mathematics Philadelphia, 1990.
+
 \bibitem{Cristianini2000}
 Nello Cristianini and John Shawe-Taylor.
 \newblock {\em An Introduction to Support Vector Machines and Other
@@ -18,16 +24,29 @@ Napsu Haarala, Kaisa Miettinen, and Marko~M. M{\"a}kel{\"a}.
   nonsmooth optimization.
 \newblock {\em Mathematical Programming}, 109(1):181--205, 2007.
 
-\bibitem{Hare2010}
-Warren Hare and Claudia Sagastiz\`{a}bal.
-\newblock A redistributed proximal bundle method for nonconvex optimization.
-\newblock {\em SIAM Journal on Optimization}, 20(5):2442--2473, 2010.
-
 \bibitem{Hare2016}
 Warren Hare, Claudia Sagastiz{\`a}bal, and Mikhail Solodov.
 \newblock A proximal bundle method for nonsmooth nonconvex functions with
   inexact information.
 \newblock {\em Computational Optimization and Applications}, 63:1--28, 2016.
+
+\bibitem{Heinonen2004}
+Juha Heinonen.
+\newblock Lectures on lipschitz analysis.
+\newblock Lectures at the 14th Jyv{\"a}skyl{\"a} Summer School in August 2004,
+  2004.
+
+\bibitem{Hiriart-Urruty1996}
+Jean-Baptiste Hiriart-Urruty and Claude Lemar\'{e}chal.
+\newblock {\em Convex Analysis and Minimization Algorithms I}, volume 305 of
+  {\em Grundlehren der mathematischen Wissenschaften}.
+\newblock Springer Berlin Heidelberg, 2 edition, 1996.
+
+\bibitem{Jofre1998}
+Alejandro Jofr{\'{e}}, Dinh~The Luc, and Michel Th{\'{e}}ra.
+\newblock $\varepsilon$-subdifferential and $\varepsilon$-monotonicity.
+\newblock {\em Nonlinear Analysis: Theory, Methods {\&} Applications},
+  33(1):71--90, jul 1998.
 
 \bibitem{Kunapuli2008}
 Gautam Kunapuli.
@@ -87,23 +106,16 @@ Boris~T. Polyak.
 \newblock {\em Introduction to Optimization}.
 \newblock Optimization Software , Inc., Publications Division, New York, 1987.
 
-\bibitem{Rockafellar2009}
-R.~Tyrrell Rockafellar and Roger J.~B. Wets.
-\newblock {\em Variational Analysis}, volume 317 of {\em Grundlehren der
-  mathematischen Wissenschaften}.
-\newblock Springer Berlin Heidelberg, 3rd edition, 2009.
+\bibitem{Rockafellar1970}
+R.~T. Rockafellar.
+\newblock {\em Convex Analysis}.
+\newblock Princeton University Press, Princeton, New Jersey, 1970.
 
 \bibitem{Rockafellar1985}
 R.T. Rockafellar.
 \newblock Extensions of subgradient calculus with applications to optimization.
 \newblock {\em Nonlinear Analysis: Theory, Methods {\&} Applications},
   9(7):665--698, jul 1985.
-
-\bibitem{Treiman1986}
-Jay~S. Treiman.
-\newblock Clarke's gradients and $\varepsilon$-subgradients in banach spaces.
-\newblock {\em Transactions of the American Mathematical Society},
-  294(1):65--65, jan 1986.
 
 \bibitem{Vapnik1998}
 Vladimir~N. Vapnik.
@@ -121,16 +133,5 @@ J.~Vl\v{c}ek and L.~Luk\v{s}an.
   nondifferentiable unconstrained minimization.
 \newblock {\em Journal of Optimization Theory and Applications},
   111(2):407--430, 2001.
-
-\bibitem{Hare2009}
-Claudia~Sagastiz\`{a}bal Warren~Hare.
-\newblock Computing proximal points of nonconvex functions.
-\newblock {\em Mathematical Programming}, 116:221--258, 2009.
-
-\bibitem{Oliveira2014}
-Claude~Lemar\'{e}chal Welington~de Oliveira, Claudia~Sagastiz\`{a}bal.
-\newblock Convex proximal bundle methods in depth: a unified analysis for
-  inexact oracles.
-\newblock {\em Mathematical Programming}, 148:241--277, 2014.
 
 \end{thebibliography}

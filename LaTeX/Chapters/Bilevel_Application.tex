@@ -291,7 +291,7 @@ To solve the given bilevel problem with the above presented nonconvex inexact bu
 The difficulty with this approach is that the bundle algorithm needs one subgradient of the outer level objective function with respect to the parameter \(\lambda\). However to compute this subgradient also one subgradient of \(w\) and \(b\) with respect to \(\lambda\) has to be known.
 
 \textcolor{red}{example in differentiable case}\\
-Let us first assume that the outer and inner objective functions are sufficiently often continuously differentiable to demonstrate the procedure of calculating the needed (sub-)gradients.
+Let us first assume that the outer and inner objective functions and \(w(\lambda)= \argmin \mathcal{L}_{low}(w,\lambda)\) are sufficiently often continuously differentiable to demonstrate the procedure of calculating the needed {(sub-)gradients}.
 
 Let \(\mathcal{L}_{upp}(w,\lambda)\) be the objective function of the outer level problem, where the variable \(b\) was left out for the sake of simplicity.
 To find an optimal hyper parameter \(\lambda\) given the input \(w\) the gradient \(g^{upp}_{\lambda}\) of \(\mathcal{L}_{upp}\) with respect to \(\lambda\) is needed in every iteration of the solving algorithm.
@@ -303,13 +303,15 @@ In order to calculate this gradient the chain rule is used yielding
 
 The challenge is here to find the term \(\frac{\partial w(\lambda)}{\lambda}\) because 
 
-\[ \frac{\partial w}{\partial \lambda} \in \frac{\partial }{\partial \lambda} \argmin_{w,b} \mathcal{L}_{low}(w,\lambda). \]
+\[ \frac{\partial w}{\partial \lambda} \in \frac{\partial }{\partial \lambda} \argmin_{w} \mathcal{L}_{low}(w,\lambda). \]
 
-Assuming \(\mathcal{L}_{low}\) is twice continuously differentiable in \(w\) the optimality condition 
+Assuming \(\mathcal{L}_{low}\) is twice continuously differentiable in the optimality condition 
 \begin{equation*}
-	0 \in \frac{\partial}{\partial w}\mathcal{L}_{low}(w,\lambda)
+	0 = \frac{\partial}{\partial w}\mathcal{L}_{low}(w^*,\lambda)
 \label{opt_con}
 \end{equation*}
+
+opt point w^*
 
 can be used to calculate the needed gradient in an indirect manner.
 
@@ -323,24 +325,68 @@ The optimality condition can then be written as the linear system
 By taking the partial derivative with respect to \(\lambda\) on both sides of the system one gets
 
 \begin{equation*}
-	\left( \frac{\partial H(\lambda)}{\partial \lambda}\right)^{\top}w+H(\lambda)\frac{\partial w}{\partial \lambda} = \frac{\partial h(\lambda)}{\partial  \lambda}.
+	\left( \frac{\partial H(\lambda)}{\partial \lambda}\right)w+H(\lambda)\frac{\partial w}{\partial \lambda} = \frac{\partial h(\lambda)}{\partial  \lambda}.
 \end{equation*}
 
-If \(H(\lambda)\) is invertible for all \(\lambda \in \Lambda\) then 
+If \(H(\lambda)\) is invertible for all \(\lambda \in \Lambda\) then the needed gradient is given by 
 
-\textcolor{red}{why H invertable???}
+\begin{equation*}
+	\frac{\partial w}{\partial \lambda} = H^{-1}(\lambda)\left(\frac{\partial h(\lambda)}{\partial \lambda}-\left(\frac{\partial H(\lambda)}{\partial \lambda}\right)w\right).
+\end{equation*}
+
+\textcolor{red}{why H invertible??? - because we assume existence of \(w\)???}\\
+
+\textcolor{red}{now for subgradients} \\
+
+In practice we cannot expect \(\mathcal{L}_{low}\) to satisfy such strong differentiability properties.
+
+\textcolor{red}{what kind of differentiability do I assume??? -> if I use normal Hinge then only locally Lipschitz $L_in$}
+
+\begin{itemize}
+	\item notation
+	\item definition of subgradient-''matrix''
+	\item chain rule
+	\item optimality condition
+\end{itemize}
+
+\begin{itemize}
+	\item welche art von inexaktheit -> Funktionswerte \(w,b\) inexakt\\
+	-> gradient im Endeffekt exakt, da von exakter optimalit'tsbedingung ausgegangen wird
+\end{itemize}
+
+An important result about Lipschitz functions is Rademacher's theorem which states that these functions are differentiable almost everywhere but on a set of Lebesgue measure zero\cite[Theorem 3.1]{Heinonen2004}. 
+Clarke deduces from this that the subdifferential at each of the nondifferentiable points is the convex hull of the limits of the sequence gradients a these points \cite[see Theorem 2.5.1]{Clarke1990}.
+
+In practice this means that it is possible to choose a subgradient by using the (one sided) gradients at nondifferentiable points.
+We keep this in mind when analyzing the procedure of finding a subgradient \( g^{\lambda} \in \partial^{\lambda} w(\lambda)\) in the nondifferentiable case.
+
+\textcolor{red}{Notation}\\
+
+To facilitate readability we use the following notation for the derivation of the nondifferentiable results.
+
+The 'partial' subdifferential of a function \(f(a^*,\bar{b},\bar{c},...)\) at the point \(a^*\) with respect to one variable \(a\) when all other variables are fixed is denoted by 
+\begin{equation*}
+	\partial^{a} f(a^*,\bar{b},\bar{c},...).
+\end{equation*}
+
+A subgradient of this subdifferential is written \(g^{a} \in \partial^{a} f(a^*,\bar{b},\bar{c},...)\).
+
+\textcolor{red}{what else???}
+
+\textcolor{red}{explanation}
 
 
 
 
 
-To calculate a subgradient 
-Chain rule for subdifferential
+To calculate a subgradient \\
+Chain rule for subdifferential \\
+before: definition of subgradient in \(\R^m\)
 \begin{theorem}[c.f. {\cite[Theorem 7.1]{Rockafellar1985}}]
 	Let \(p(x) = f(F(x))\), where \(F:\R^n \to \R^d\) is locally Lipschitz and \(f:\R^d \to \R\) is lower semicontinuous. 
 	Assume \[\nexists y \in \partial^{\infty}f(F(\bar{x})), y \neq 0 \quad \text{with} \quad 0 \in y \partial F(\bar{x}). \]
 	Then for the sets 
-	\[ M(\bar{x}):= \partial f(F(\bar{x}))\partial F(\bar{x}), \quad M^{\infty}(\bar{x}):= \partial^{\infty}f(F(\bar{x}))F(\bar{x}), \]
+	\[ M(\bar{x}):= \partial f(F(\bar{x}))\partial F(\bar{x}), \quad M^{\infty}(\bar{x}):= \partial^{\infty}f(F(\bar{x}))\partial F(\bar{x}), \]
 	one has \(\hat{\partial}p(\bar{x}) \subset M(\bar{x})\) and \(\hat{\partial}^{\infty} p(\bar{x}) \subset M^{\infty}(\bar{x})\).
 \end{theorem}
 

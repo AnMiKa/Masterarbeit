@@ -1,33 +1,27 @@
 \select@language {english}
 \select@language {english}
 \contentsline {section}{List of Symbols}{}
-\contentsline {section}{\numberline {1}Proximal bundle method for nonconvex functions with inexact information}{1}
-\contentsline {subsection}{\numberline {1.1}Derivation of the Method}{1}
-\contentsline {subsubsection}{\numberline {1.1.1}Inexactness}{1}
-\contentsline {subsubsection}{\numberline {1.1.2}Nonconvexity}{3}
-\contentsline {subsubsection}{\numberline {1.1.3}Aggregate Objects}{4}
-\contentsline {subsection}{\numberline {1.2}On Different Convergence Results}{6}
-\contentsline {subsubsection}{\numberline {1.2.1}The Constraint Set}{6}
-\contentsline {subsubsection}{\numberline {1.2.2}Exact Information and Vanishing Errors}{7}
-\contentsline {subsubsection}{\numberline {1.2.3}Convex Objective Functions}{7}
-\contentsline {section}{\numberline {2}Variable Metric Bundle Method}{8}
-\contentsline {subsection}{\numberline {2.1}The Main Ingredients to the Method}{9}
-\contentsline {subsubsection}{\numberline {2.1.1}Variable Metric Bundle Methods}{9}
-\contentsline {subsubsection}{\numberline {2.1.2}Noll's Second Order Model}{10}
-\contentsline {subsection}{\numberline {2.2}???}{11}
-\contentsline {subsubsection}{\numberline {2.2.1}???}{11}
-\contentsline {subsubsection}{\numberline {2.2.2}The Descent Measure}{12}
-\contentsline {subsection}{\numberline {2.3}Algorithm}{13}
-\contentsline {subsection}{\numberline {2.4}Convergence Analysis}{14}
-\contentsline {subsection}{\numberline {2.5}Numerical Testing}{20}
-\contentsline {section}{\numberline {3}Application to Model Selection for Primal SVM}{20}
-\contentsline {subsection}{\numberline {3.1}Introduction}{20}
-\contentsline {subsection}{\numberline {3.2}Introduction to Support Vector Machines}{22}
-\contentsline {subsubsection}{\numberline {3.2.1}Risk minimization}{22}
-\contentsline {subsubsection}{\numberline {3.2.2}Support Vector machines}{23}
-\contentsline {subsection}{\numberline {3.3}Explanation Bilevel Approach and Inexact Bundle Method}{25}
-\contentsline {subsubsection}{\numberline {3.3.1}Reformulation as bilevel problem}{26}
-\contentsline {subsubsection}{\numberline {3.3.2}The Inexact Bundle Method}{28}
-\contentsline {subsubsection}{\numberline {3.3.3}The Algorithm???}{33}
-\contentsline {subsection}{\numberline {3.4}Numerical Experiments}{34}
+\contentsline {section}{\numberline {1}Preliminaries}{1}
+\contentsline {subsection}{\numberline {1.1}Notation}{1}
+\contentsline {subsection}{\numberline {1.2}Definitions}{1}
+\contentsline {section}{\numberline {2}Variable Metric Bundle Method}{3}
+\contentsline {subsection}{\numberline {2.1}The Main Ingredients to the Method}{4}
+\contentsline {subsubsection}{\numberline {2.1.1}Variable Metric Bundle Methods}{4}
+\contentsline {subsubsection}{\numberline {2.1.2}Noll's Second Order Model}{5}
+\contentsline {subsection}{\numberline {2.2}???}{6}
+\contentsline {subsubsection}{\numberline {2.2.1}???}{6}
+\contentsline {subsubsection}{\numberline {2.2.2}The Descent Measure}{7}
+\contentsline {subsection}{\numberline {2.3}Algorithm}{8}
+\contentsline {subsection}{\numberline {2.4}Convergence Analysis}{9}
+\contentsline {subsection}{\numberline {2.5}Numerical Testing}{15}
+\contentsline {section}{\numberline {3}Application to Model Selection for Primal SVM}{15}
+\contentsline {subsection}{\numberline {3.1}Introduction}{15}
+\contentsline {subsection}{\numberline {3.2}Introduction to Support Vector Machines}{17}
+\contentsline {subsubsection}{\numberline {3.2.1}Risk minimization}{17}
+\contentsline {subsubsection}{\numberline {3.2.2}Support Vector machines}{18}
+\contentsline {subsection}{\numberline {3.3}Explanation Bilevel Approach and Inexact Bundle Method}{20}
+\contentsline {subsubsection}{\numberline {3.3.1}Reformulation as bilevel problem}{21}
+\contentsline {subsubsection}{\numberline {3.3.2}The Inexact Bundle Method}{23}
+\contentsline {subsubsection}{\numberline {3.3.3}The Algorithm???}{29}
+\contentsline {subsection}{\numberline {3.4}Numerical Experiments}{30}
 \contentsline {section}{References}{}

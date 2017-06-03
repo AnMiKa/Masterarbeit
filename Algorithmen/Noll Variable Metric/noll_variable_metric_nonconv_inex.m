@@ -142,8 +142,9 @@ delta = C+d'*(Q+1/t*eye(n))*d;
 % if C+sum(d.^2) <= tol                             % 6a) like in nonconv, inex
 % if norm((Q+1/t*eye(n))*d) <= tol && C <= tol      % 7) like in Ulbrich for Q/Noll variation
 % if delta < tol                                    % 8) as thought of most sensible -> Herleitung siehe Blatt
-% if delta < tol*(1+f_hat)                            % 8) as thought of most sensible -> Herleitung siehe Blatt   
-if abs(f) < tol
+if delta < tol*(1+f_hat)                            % 8) as thought of most sensible -> Herleitung siehe Blatt   
+% if abs(f) < tol
+% if C+d'*(1/k*Q+1/t*eye(n))*d < tol
     fprintf('Algorithm stopped successfully by meeting tolerance after  %d  iterations and %d null-steps. \n', k-1, i_null);
     break
 end
@@ -172,6 +173,7 @@ if f_k_1 - f_hat <= -m * delta;   % serious step condition
                 Q = LBFGS_update(d,g(:,end-1),g(:,end),Q);
         end
     end
+    %Q = 1/k*Q;
     t = u_1*t; % t_(k+1) > 0
     if min(eig(Q+1/t*eye(n))) < 0
         %q = -min(eig(Q+1/t*eye(n)))+0.01;

@@ -673,7 +673,7 @@
 
 @Article{Luksan1999,
   author    = {L. Luk{\v{s}}an and J. Vl{\v{c}}ek},
-  title     = {Globally Convergent Variable Metric Method for Convex Nonsmooth Unconstrained Minimization1},
+  title     = {Globally Convergent Variable Metric Method for Convex Nonsmooth Unconstrained Minimization},
   journal   = {Journal of Optimization Theory and Applications},
   year      = {1999},
   volume    = {102},
@@ -690,6 +690,20 @@
   publisher = {Princeton University Press, Princeton, New Jersey},
   year      = {1970},
   author    = {R. T. Rockafellar},
+}
+
+@Article{Rockafellar1985,
+  author    = {R.T. Rockafellar},
+  title     = {Extensions of subgradient calculus with applications to optimization},
+  journal   = {Nonlinear Analysis: Theory, Methods {\&} Applications},
+  year      = {1985},
+  volume    = {9},
+  number    = {7},
+  pages     = {665--698},
+  month     = {jul},
+  doi       = {10.1016/0362-546x(85)90012-4},
+  publisher = {Elsevier {BV}},
+  url       = {https://doi.org/10.1016%2F0362-546x%2885%2990012-4},
 }
 
 @Comment{jabref-meta: databaseType:bibtex;}
