@@ -4,7 +4,8 @@ Algorithmen/Machine Learning/Data/Andre
 Algorithmen/Machine Learning/Data/Lukas
 **/Lukas
 **/Andre
-
+Andre/
+Lukas/
 
 # Created by https://www.gitignore.io/api/latex,matlab
 
