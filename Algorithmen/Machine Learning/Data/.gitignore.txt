@@ -1,0 +1,4 @@
+# ignore Lukas and Andre folder
+
+Lukas/
+Andre/
