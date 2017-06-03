@@ -1,7 +1,7 @@
 ## selbst hinzugefügt:
 
-Algorithmen/Machine Learning/Data/Andre
-Algorithmen/Machine Learning/Data/Lukas
+Algorithmen/Machine_Learning/Data/Andre
+Algorithmen/Machine_Learning/Data/Lukas
 **/Lukas
 **/Andre
 Andre/
