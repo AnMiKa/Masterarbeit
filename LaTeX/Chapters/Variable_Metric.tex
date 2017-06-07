@@ -253,7 +253,7 @@ For \(k = 1,2,3,  \dotsc \)
 	Otherwise \(\rightarrow\) nullstep \\
 	Set \(\hat{x}^{k+1} = \hat{x}^k, \hat{f}^{k+1}=f^{k+1}\) and choose \(0 < t_{k+1} \leq t_k\). 	
 	\item Select new bundle index set \(J_{k+1}\), keeping all active elements. Calculate 
-	\[ \eta_k \geq \max{\left\{\max_{j \in J_{k+1}, x^j \neq \hat{x}^{k+1}}{\frac{-2e_j^k}{|x^j - \hat{x}^{k+1}|^2}, 0}\right\}}+\gamma  \]
+	\[ \eta_k = \max{\left\{\max_{j \in J_{k+1}, x^j \neq \hat{x}^{k+1}}{\frac{-2e_j^k}{|x^j - \hat{x}^{k+1}|^2}, 0}\right\}}+\gamma  \]
 	and update the model \(M^k\).
 \end{enumerate}
 \vspace{1ex}
@@ -533,14 +533,91 @@ This means that \(d^k \to 0\) for \(k \to \infty\) and therefore \(\lim_{k \to \
 \end{itemize}}
 
 recht gute Ergebnisse mit \(\frac{1}{k}Q\)\\
-ohne \(\frac{1}{k}\) eta extrem gross; mit keine Info
+ohne \(\frac{1}{k}\) eta extrem gross; mit: eta wird auch gross: 1e10
+
+In this section the above variant of an inexact bundle algorithm is compared with the nonconvex inexact bundle algorithm by Hare et al. in \cite{Hare2016}.
+
+For reasons of comparability the setting was chosen as in \cite{Hare2016}.
+
+The parameter set was chosen as follows: \(m = 0.05\), \(\gamma = 2\), \(t_1 = 0.1\) and the scaling parameters for the choice of \(t_k\) are \(\kappa_{+}=1.2\) and \(\kappa_{-}=0.8\) with the minimum possible \(t\) being \(t_{min}=0.03\).
+For the choice of the new bundle the information of the current prox-center and all elements with \(\alpha > 10^{-15}\) were kept in the bundle.
+As stopping condition  
+\[ \delta < \mathtt{tol}(1+f_{hat}) \]
+was used.
+If this did not apply within \(\max(300,205n)\) steps the algorithm also stopped.
+
+As test problems the Ferrier polynomials were chosen. These nonsmooth and nonconvex functions have already been used in \cite{Hare2010} and \cite{Hare2016}. The polynomials are constructed in the following way:
+
+For \(i = 1,...,n\) we define 
+
+\begin{align*}
+	h_i: \R^n \to \R, \quad h(x) = (ix_i^2-2x_i)+\sum_{j=1}^n x_j.
+\end{align*}
+
+These functions are used to define
+
+\begin{align*}
+	f_1(x) := \sum_{i=1}^n |h_i(x)|, \\
+	f_2(x) := \sum_{i=1}^n (h_i(x))^2, \\
+	f_3(x) := \max{i \in [1,...,n]}|h_i(x)|, \\
+	f_4(x) := \sum_{i=1}^n |h_i(x)|+\frac{1}{2}|x|^2, \\
+	f_5(x) := \sum_{i=1}^n |h_i(x)|+\frac{1}{2}|x|.
+\end{align*}
+
+\textcolor{red}{plots of graphs???}
+
+Ferrier polynomials are nonconvex, except for \(f_2\), nonsmooth and lower-\(\mathcal{C}^2\). They all have \(0\) as a global minimizer \cite{Hare2010}. The compact constraint set is \(X=\{d \in \R^n|d_i+\hat{x}^k_i \leq 10, i = 1,...,n \}\).
+
+The five test functions \(f_1,...f_5\) were optimized for the dimensions \(n=1,2,...,15,20,25,30\).
+The starting value for each test problem being \(x^1=[1,\frac{1}{4},\frac{1}{9},...,\frac{1}{n^2}]^{\top}\).
+
+To test the performance for inexact function and subgradient values different types of noise were introduced. This was done by adding randomly generated elements with norm less or equal to \(\sigma_k\) and \(\theta^k\) to the exact values \(f(x^{k+1})\) and \(g(x^{k+1})\) respectively.
+
+Five different forms of noise were tested:
+
+\begin{enumerate}[--]
+	\item No noise: \(\bar{\sigma}=\sigma_k=0\) and \(\bar{\theta}=\theta^k=0\) for all \(k\).
+	\item Constant noise: \(\bar{\sigma}=\sigma_k=0.01\) and \(\bar{\theta}=\theta^k=0.01\) for all \(k\).
+	\item Vanishing noise: \(\bar{\sigma}=0.01, \sigma_k = \min\{0.01,\|x^k\|/100\}\) and \(\bar{\theta}=0.01, \theta_k=\min\{0.01,\|x^k\|/100\}\) for all \(k\).
+	\item Constant subgradient noise: \(\bar{\sigma}=\sigma_k=0\) and \(\bar{\theta}=\theta_k=0.01\) for all \(k\).
+	\item Vanishing subgradient noise: \(\bar{\sigma}=\sigma_k=0\) and \(\bar{\theta}=0.01, \theta_k=\min\{0.01,\|x^k\|/100\}\) for all \(k\).
+\end{enumerate}
+
+The exact case is used for comparison. The constant noise forms represent cases where the inexactness is outside of the optimizer's control. The vanishing noise forms represent cases where the noise can be controlled  but the mechanism is considered expensive, so it is only used when approaching the minimum.
+The two forms of subgradient noise represent the case where the subgradient is approximated numerically.
+
+To address the random values of the noise the tests for the last four noise forms were executed ten times and the results averaged.
+
+To compare the performance of the different methods the accuracy is measured by
+
+\[ \text{accuracy} = |\log_{10}(\hat{f}_{k^*})|. \]
+
+\(\hat{f}_{k^*}\) being the current \(\hat{f}_k\) when the algorithm stopped.
+
+Two different stopping tolerances \(\mathtt{tol}=10^{-3}\) and \(\mathtt{tol}=10^{-6}\) were used.
+Additionally the computation times for the different algorithms and tests are plotted. \textcolor{red}{say on what machine that was done???}
+
+%\begin{figure}
+%\begin{minipage}[h]{0.49\textwidth}
+		%\includegraphics{Pictures/Plots/}
+		%\subcaption{}
+		%\vspace{}
+		%\includegraphics[width=9cm]{}
+		%\subcaption{}
+%\end{minipage}
+%\hspace{1cm}
+%\begin{minipage}[h]{0.49\textwidth}
+	%\begin{center}
+		%\includegraphics[width=3cm]{}
+		%\subcaption{}
+	%\end{center}
+%\end{minipage}
+%\caption{}
+%\label{}
+%\end{figure}
 
 
-
-
-
-
-
+\textcolor{red}{saz where plots left and right...}
 %\subsection{Subproblem Variable Metric}
 %
 %For comparision: Subproblem proximal bundle

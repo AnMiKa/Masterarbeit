@@ -37,11 +37,11 @@ function [f_hat, x_hat, time, tav] = noll_variable_metric_nonconv_inex(x0, fun, 
 
 %% set x0 as column-vector, regardless of how it is typed in
 [rows, columns] = size(x0);
-if rows == 1;
+if rows == 1
     x0 = x0';
 end
 % check that x0 is a vector
-if rows ~= 1 && columns ~=1;
+if rows ~= 1 && columns ~=1
        error('Wrong starting point x0. x0 must be a vector.');
 end
 
@@ -107,18 +107,19 @@ t_min = 0.03; % minimal t value to make sure that sequence does not have 0 as ac
 
 tav = 0;
 %% Global loop
-for k = 1 : kmax;
+for k = 1 : kmax
     
 %% 1st step: direction finding
-H = [[Q+1/t*eye(n);zeros(1,n)],zeros(n+1,1)];
-h = [zeros(n,1);ones(1)];
+H = [zeros(n + 1, 1), [zeros(1, n); Q+1/t * eye(n)]];
+r = [1; zeros(n, 1)];
+D = [zeros(2*n,1), [diag(-ones(n,1)); diag(ones(n,1))]];
+A = [-ones(lJ, 1), s'; D];
+b = [c; x_hat+10;-x_hat+10];
 % lJ constraints due to reformulation as smooth problem
 % possibly additional constraints
-A = [s',-ones(lJ, 1)];
-b = c;
-[dxi,~,lambda] = qpas(H,h,A,b,[],[],[],[],1);
+[xi_d,~,lambda] = qpas(H,r,A,b,[],[],[],[],1);
 
-d = dxi(1:end-1);
+d = xi_d(2:end);
 % xi = dxi(end); 
 alpha = lambda.inequality(1:lJ);
 % gives a warnig if sum(alpha) not close enough to 1
@@ -158,7 +159,7 @@ g(:,end+1) = feval(subgr_fun,x_k_1,noise);% add information to bundle
 
 %% 5th step: serious step test
 %serious step  test
-if f_k_1 - f_hat <= -m * delta;   % serious step condition
+if f_k_1 - f_hat <= -m * delta   % serious step condition
     % hier war auch das eigenartige delta von oben
     x_hat = x_hat + d;   % update x_hat
     f_hat =  f_k_1;  % update f_hat
@@ -173,7 +174,7 @@ if f_k_1 - f_hat <= -m * delta;   % serious step condition
                 Q = LBFGS_update(d,g(:,end-1),g(:,end),Q);
         end
     end
-    %Q = 1/k*Q;
+    Q = 1/k*Q;
     t = u_1*t; % t_(k+1) > 0
     if min(eig(Q+1/t*eye(n))) < 0
         %q = -min(eig(Q+1/t*eye(n)))+0.01;
@@ -203,8 +204,8 @@ end
 %% 5th step: Bundle update
 %update bundle
 delete = zeros(1,lJ);
-for j = 1:lJ;  % update the index set J by marking the indexes that are removed
-    if alpha(j) > 1e-15 || norm(x(:,j) - x_hat) == 0; % alpha only gets down to 1e-5
+for j = 1:lJ  % update the index set J by marking the indexes that are removed
+    if alpha(j) > 1e-15 || norm(x(:,j) - x_hat) == 0 % alpha only gets down to 1e-5
                             % maybe here norm() < 1e-10 to avoid numerical
                             % issues when x is changing to little comparerd
                             % to x_hat ?
@@ -222,11 +223,12 @@ J = [J, k+1];
 lJ = length(J);  % length of the index set J, e.g. for size of constraints in subproblem
 e = zeros(lJ, 1);
 eta_vec = zeros(lJ, 1);
-for j = 1:lJ;
+for j = 1:lJ
     e(j) = f_hat - f(j) - g(:, j)' * (x_hat - x(:, j));  % update linearization error e
     if norm(x(:,j) - x_hat) ~= 0
         eta_vec(j) = -2 * e(j) / norm(x(:,j) - x_hat)^2;
-    else eta_vec(j) = 0;
+    else
+        eta_vec(j) = 0;
     end
 end
 eta = max(eta_vec) + gamma;

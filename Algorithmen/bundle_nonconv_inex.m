@@ -1,4 +1,4 @@
-function [ f_hat, x_hat, time, tav ] = bundle_nonconv_inex( x0, fun, subgr_fun, noise, kmax, tol, m, t, gamma)
+function [ f_hat, x_hat, time, k ] = bundle_nonconv_inex( x0, fun, subgr_fun, noise, kmax, tol, m, t, gamma)
 
 % proximal bundle algorihtm that can handle nonsmooth nonconvex functions with
 % inexact information on function value and gradient
@@ -31,11 +31,11 @@ function [ f_hat, x_hat, time, tav ] = bundle_nonconv_inex( x0, fun, subgr_fun, 
 
 %% set x0 as column-vector, regardless of how it is typed in
 [rows, columns] = size(x0);
-if rows == 1;
+if rows == 1
     x0 = x0';
 end
 % check that x0 is a vector
-if rows ~= 1 && columns ~=1;
+if rows ~= 1 && columns ~=1
        error('Wrong starting point x0. x0 must be a vector.');
 end
 
@@ -95,9 +95,8 @@ f_hat = f;               % function value at x_hat
 g = feval(subgr_fun, x0,noise);% subgradient at point bundle points
 s = g;                   % augmented subgradient at bundle points
 
-tav = 0;
 %% Global loop
-for k = 1 : kmax;
+for k = 1 : kmax
 
 %% 1st step: subproblem solving
 
@@ -136,7 +135,7 @@ C = alpha' * c;     % augmented aggregate error
 % stopping conditions
 % if norm(1/t * d) <= tol && C <= tol;  % stopping condition like in lecture
 % if norm(G) <= tol && E <= tol;  % stopping condition like in lecture
-% if norm(E + G * x_hat) <= tol and E <= tol;  % stopping condition like in conv, inex
+% if norm(E + G * x_hat) <= tol and E <= tol;  %+ stopping condition like in conv, inex
 % if norm(C + 1/t*d' * x_hat) <= tol && C <= tol;  % stopping condition like in conv, inex
 % if delta <= tol;  % stopping condition like in nonconv, exact
 % if   -xi + eta / 2 * norm(d)^2 <= tol; % stopping condition like in nonconv, exact, nor rewritten
@@ -155,7 +154,7 @@ g = [g, feval(subgr_fun, x_hat + d,noise)];  % evaluate subgradient at new itera
 x = [x, x_hat + d];  % add new iterate to bundle
 
 %serious step  test
-if f_k_1 - f_hat <= m * (-xi + eta / 2 * norm(d)^2);   % serious step condition
+if f_k_1 - f_hat <= m * (-xi + eta / 2 * norm(d)^2)   % serious step condition
     x_hat = x_hat + d;   % update x_hat
     f_hat =  f_k_1;  % update f_hat
     t = u_1*t; % t_(k+1) > 0
@@ -167,7 +166,7 @@ end
 %% 5th step: Bundle update
 %update bundle
 delete = zeros(1,lJ);
-for j = 1:lJ;  % update the index set J by marking the indexes that are removed
+for j = 1:lJ  % update the index set J by marking the indexes that are removed
     if alpha(j) > 1e-15 || norm(x(:,j) - x_hat) == 0; % alpha only gets down to 1e-5
     else
         delete(j) = 1;
@@ -183,11 +182,12 @@ J = [J, k+1];
 lJ = length(J);  % length of the index set J, e.g. for size of constraints in subproblem
 e = zeros(lJ, 1);
 eta_vec = zeros(lJ, 1);
-for j = 1:lJ;
+for j = 1:lJ
     e(j) = f_hat - f(j) - g(:, j)' * (x_hat - x(:, j));  % update linearization error e
     if norm(x(:,j) - x_hat) ~= 0
         eta_vec(j) = -2 * e(j) / norm(x(:,j) - x_hat)^2;
-    else eta_vec(j) = 0;
+    else
+        eta_vec(j) = 0;
     end
 end
 eta = max(eta_vec) + gamma;
@@ -200,13 +200,11 @@ end
 
 c = e + b;
 s = g + eta * bsxfun(@minus, x, x_hat);
-tav = tav+t;
 end
 time = toc;
 if k == kmax
     fprintf('Algorithm stopped because the maximum number %d of iterations was reached \n', k);
     fprintf('%d nullsteps were executed. \n', i_null)
 end
-tav = tav/(k-1);
 %% END of the algorithm
 end

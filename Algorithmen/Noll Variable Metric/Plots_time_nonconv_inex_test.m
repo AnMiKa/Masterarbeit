@@ -5,6 +5,7 @@
 % Create a stem plot using the stem function
 figure
 hold on
+box on
 x = 1:15;
 for i = 1:5
     stem(x+(i-1)*.15,t_h30_s(:,i), 'LineStyle',':','Color','b','Marker','+','LineWidth',0.9)
@@ -17,9 +18,8 @@ legend('Nonconv Iinex Bundle', 'Variable Metric BFGS', ...
 title('tol: 1e-3, no noise')
 xlabel('n')
 ylabel('computation time (sek)')
-axis(limits);
-axis([0.85, 16, 0, max(limits(4)+1,15)])
-%xticks(1:15)
+axis([0.85, 16, 0, min(max(max(t_h30_s)),15)])
+xticks(1:15)
 set(gca,'ygrid','on')
 savefig('1e-3_0s.fig')
 hold off
@@ -27,6 +27,7 @@ hold off
 % tol: 1e-3, bigger dimension
 figure
 hold on
+box on
 x = 1:3;
 for i = 1:5
     stem(x+(i-1)*.15,t_h30_b(:,i), 'LineStyle',':','Color','b','Marker','+','LineWidth',0.9)
@@ -39,10 +40,9 @@ legend('Nonconv Iinex Bundle', 'Variable Metric BFGS', ...
 title('tol: 1e-3, no noise')
 xlabel('n')
 ylabel('computation time (sek)')
-axis(limits);
-axis([0.85, 4, 0, max(limits(4)+1,15)])
-%xticks(1:3)
-%xticklabels({'20','25','30'})
+axis([0.85, 4, 0, min(max(max(t_h30_b)),15)])
+xticks(1:3)
+xticklabels({'20','25','30'})
 set(gca,'ygrid','on')
 savefig('1e-3_0b.fig')
 hold off
@@ -51,6 +51,7 @@ hold off
 % Create a stem plot using the stem function
 figure
 hold on
+box on
 x = 1:15;
 for i = 1:5
     stem(x+(i-1)*.15,t_h60_s(:,i), 'LineStyle',':','Color','b','Marker','+','LineWidth',0.9)
@@ -63,15 +64,15 @@ legend('Nonconv Iinex Bundle', 'Variable Metric BFGS', ...
 title('tol: 1e-6, no noise')
 xlabel('n')
 ylabel('computation time (sek)')
-axis(limits);
-axis([0.85, 16, 0, max(limits(4)+1,15)])
-%xticks(1:15)
+axis([0.85, 16, 0, min(max(max(t_h60_s)),15)])
+xticks(1:15)
 set(gca,'ygrid','on')
 savefig('1e-6_0s.fig')
 hold off
 
 % tol: 1e-6, bigger dimension
 figure
+box on
 hold on
 x = 1:3;
 for i = 1:5
@@ -85,9 +86,9 @@ legend('Nonconv Iinex Bundle', 'Variable Metric BFGS', ...
 title('tol: 1e-6, no noise')
 xlabel('n')
 ylabel('computation time (sek)')
-axis([0.85, 4, 0, max(limits(4)+1,15)])
-%xticks(1:3)
-%xticklabels({'20','25','30'})
+axis([0.85, 4, 0, min(max(max(t_h60_b)),15)])
+xticks(1:3)
+xticklabels({'20','25','30'})
 set(gca,'ygrid','on')
 savefig('1e-6_0b.fig')
 hold off
@@ -98,6 +99,7 @@ hold off
 % Create a stem plot using the stem function
 figure
 hold on
+box on
 x = 1:15;
 for i = 1:5
     stem(x+(i-1)*.15,t_h31_s(:,i), 'LineStyle',':','Color','b','Marker','+','LineWidth',0.9)
@@ -110,8 +112,8 @@ legend('Nonconv Iinex Bundle', 'Variable Metric BFGS', ...
 title('tol: 1e-3, constant noise')
 xlabel('n')
 ylabel('computation time (sek)')
-axis([0.85, 16, 0, max(limits(4)+1,15)])
-%xticks(1:15)
+axis([0.85, 16, 0, min(max(max(t_h31_s)),15)])
+xticks(1:15)
 set(gca,'ygrid','on')
 savefig('1e-3_1s.fig')
 hold off
@@ -119,6 +121,7 @@ hold off
 % tol: 1e-3, bigger dimension
 figure
 hold on
+box on
 x = 1:3;
 for i = 1:5
     stem(x+(i-1)*.15,t_h31_b(:,i), 'LineStyle',':','Color','b','Marker','+','LineWidth',0.9)
@@ -131,9 +134,9 @@ legend('Nonconv Iinex Bundle', 'Variable Metric BFGS', ...
 title('tol: 1e-3, constant noise')
 xlabel('n')
 ylabel('computation time (sek)')
-axis([0.85, 4, 0, max(limits(4)+1,15)])
-%xticks(1:3)
-%xticklabels({'20','25','30'})
+axis([0.85, 4, 0, min(max(max(t_h31_b)),15)])
+xticks(1:3)
+xticklabels({'20','25','30'})
 set(gca,'ygrid','on')
 savefig('1e-3_1b.fig')
 hold off
@@ -142,6 +145,7 @@ hold off
 % Create a stem plot using the stem function
 figure
 hold on
+box on
 x = 1:15;
 for i = 1:5
     stem(x+(i-1)*.15,t_h61_s(:,i), 'LineStyle',':','Color','b','Marker','+','LineWidth',0.9)
@@ -154,8 +158,8 @@ legend('Nonconv Iinex Bundle', 'Variable Metric BFGS', ...
 title('tol: 1e-6, constant noise')
 xlabel('n')
 ylabel('computation time (sek)')
-axis([0.85, 16, 0, max(limits(4)+1,15)])
-%xticks(1:15)
+axis([0.85, 16, 0, min(max(max(t_h61_s)),15)])
+xticks(1:15)
 set(gca,'ygrid','on')
 savefig('1e-6_1s.fig')
 hold off
@@ -163,6 +167,7 @@ hold off
 % tol: 1e-6, bigger dimension
 figure
 hold on
+box on
 x = 1:3;
 for i = 1:5
     stem(x+(i-1)*.15,t_h61_b(:,i), 'LineStyle',':','Color','b','Marker','+','LineWidth',0.9)
@@ -175,9 +180,9 @@ legend('Nonconv Iinex Bundle', 'Variable Metric BFGS', ...
 title('tol: 1e-6, constant noise')
 xlabel('n')
 ylabel('computation time (sek)')
-axis([0.85, 4, 0, max(limits(4)+1,15)])
-%xticks(1:3)
-%xticklabels({'20','25','30'})
+axis([0.85, 4, 0, min(max(max(t_h61_b)),15)])
+xticks(1:3)
+xticklabels({'20','25','30'})
 set(gca,'ygrid','on')
 savefig('1e-6_1b.fig')
 hold off
@@ -188,6 +193,7 @@ hold off
 % Create a stem plot using the stem function
 figure
 hold on
+box on
 x = 1:15;
 for i = 1:5
     stem(x+(i-1)*.15,t_h32_s(:,i), 'LineStyle',':','Color','b','Marker','+','LineWidth',0.9)
@@ -200,8 +206,8 @@ legend('Nonconv Iinex Bundle', 'Variable Metric BFGS', ...
 title('tol: 1e-3, vanishing noise')
 xlabel('n')
 ylabel('computation time (sek)')
-axis([0.85, 16, 0, max(limits(4)+1,15)])
-%xticks(1:15)
+axis([0.85, 16, 0, min(max(max(t_h32_s)),15)])
+xticks(1:15)
 set(gca,'ygrid','on')
 savefig('1e-3_2s.fig')
 hold off
@@ -209,6 +215,7 @@ hold off
 % tol: 1e-3, bigger dimension
 figure
 hold on
+box on
 x = 1:3;
 for i = 1:5
     stem(x+(i-1)*.15,t_h32_b(:,i), 'LineStyle',':','Color','b','Marker','+','LineWidth',0.9)
@@ -221,9 +228,9 @@ legend('Nonconv Iinex Bundle', 'Variable Metric BFGS', ...
 title('tol: 1e-3, vanishing noise')
 xlabel('n')
 ylabel('computation time (sek)')
-axis([0.85, 4, 0, max(limits(4)+1,15)])
-%xticks(1:3)
-%xticklabels({'20','25','30'})
+axis([0.85, 4, 0, min(max(max(t_h32_b)),15)])
+xticks(1:3)
+xticklabels({'20','25','30'})
 set(gca,'ygrid','on')
 savefig('1e-3_2b.fig')
 hold off
@@ -232,6 +239,7 @@ hold off
 % Create a stem plot using the stem function
 figure
 hold on
+box on
 x = 1:15;
 for i = 1:5
     stem(x+(i-1)*.15,t_h62_s(:,i), 'LineStyle',':','Color','b','Marker','+','LineWidth',0.9)
@@ -244,8 +252,8 @@ legend('Nonconv Iinex Bundle', 'Variable Metric BFGS', ...
 title('tol: 1e-6, vanishing noise')
 xlabel('n')
 ylabel('computation time (sek)')
-axis([0.85, 16, 0, max(limits(4)+1,15)])
-%xticks(1:15)
+axis([0.85, 16, 0, min(max(max(t_h62_s)),15)])
+xticks(1:15)
 set(gca,'ygrid','on')
 savefig('1e-6_2s.fig')
 hold off
@@ -253,6 +261,7 @@ hold off
 % tol: 1e-6, bigger dimension
 figure
 hold on
+box on
 x = 1:3;
 for i = 1:5
     stem(x+(i-1)*.15,t_h62_b(:,i), 'LineStyle',':','Color','b','Marker','+','LineWidth',0.9)
@@ -265,9 +274,9 @@ legend('Nonconv Iinex Bundle', 'Variable Metric BFGS', ...
 title('tol: 1e-6, vanishing noise')
 xlabel('n')
 ylabel('computation time (sek)')
-axis([0.85, 4, 0, max(limits(4)+1,15)])
-%xticks(1:3)
-%xticklabels({'20','25','30'})
+axis([0.85, 4, 0, min(max(max(t_h62_b)),15)])
+xticks(1:3)
+xticklabels({'20','25','30'})
 set(gca,'ygrid','on')
 savefig('1e-6_2b.fig')
 hold off
@@ -277,6 +286,7 @@ hold off
 % tol: 1e-3, smaller dimension
 % Create a stem plot using the stem function
 figure
+box on
 hold on
 x = 1:15;
 for i = 1:5
@@ -290,8 +300,8 @@ legend('Nonconv Iinex Bundle', 'Variable Metric BFGS', ...
 title('tol: 1e-3, constant gradient noise')
 xlabel('n')
 ylabel('computation time (sek)')
-axis([0.85, 16, 0, max(limits(4)+1,15)])
-%xticks(1:15)
+axis([0.85, 16, 0, min(max(max(t_h33_s)),15)])
+xticks(1:15)
 set(gca,'ygrid','on')
 savefig('1e-3_3s.fig')
 hold off
@@ -299,6 +309,7 @@ hold off
 % tol: 1e-3, bigger dimension
 figure
 hold on
+box on
 x = 1:3;
 for i = 1:5
     stem(x+(i-1)*.15,t_h33_b(:,i), 'LineStyle',':','Color','b','Marker','+','LineWidth',0.9)
@@ -311,9 +322,9 @@ legend('Nonconv Iinex Bundle', 'Variable Metric BFGS', ...
 title('tol: 1e-3, constant gradient noise')
 xlabel('n')
 ylabel('computation time (sek)')
-axis([0.85, 4, 0, max(limits(4)+1,15)])
-%xticks(1:3)
-%xticklabels({'20','25','30'})
+axis([0.85, 4, 0, min(max(max(t_h33_b)),15)])
+xticks(1:3)
+xticklabels({'20','25','30'})
 set(gca,'ygrid','on')
 savefig('1e-3_3b.fig')
 hold off
@@ -322,6 +333,7 @@ hold off
 % Create a stem plot using the stem function
 figure
 hold on
+box on
 x = 1:15;
 for i = 1:5
     stem(x+(i-1)*.15,t_h63_s(:,i), 'LineStyle',':','Color','b','Marker','+','LineWidth',0.9)
@@ -334,14 +346,15 @@ legend('Nonconv Iinex Bundle', 'Variable Metric BFGS', ...
 title('tol: 1e-6, constant gradient noise')
 xlabel('n')
 ylabel('computation time (sek)')
-axis([0.85, 16, 0, max(limits(4)+1,15)])
-%xticks(1:15)
+axis([0.85, 16, 0, min(max(max(t_h63_s)),15)])
+xticks(1:15)
 set(gca,'ygrid','on')
 savefig('1e-6_3s.fig')
 hold off
 
 % tol: 1e-6, bigger dimension
 figure
+box on
 hold on
 x = 1:3;
 for i = 1:5
@@ -355,9 +368,9 @@ legend('Nonconv Iinex Bundle', 'Variable Metric BFGS', ...
 title('tol: 1e-6, constant gradient noise')
 xlabel('n')
 ylabel('computation time (sek)')
-axis([0.85, 4, 0, max(limits(4)+1,15)])
-%xticks(1:3)
-%xticklabels({'20','25','30'})
+axis([0.85, 4, 0, min(max(max(t_h63_b)),15)])
+xticks(1:3)
+xticklabels({'20','25','30'})
 set(gca,'ygrid','on')
 savefig('1e-6_3b.fig')
 hold off
@@ -368,6 +381,7 @@ hold off
 % Create a stem plot using the stem function
 figure
 hold on
+box on
 x = 1:15;
 for i = 1:5
     stem(x+(i-1)*.15,t_h34_s(:,i), 'LineStyle',':','Color','b','Marker','+','LineWidth',0.9)
@@ -380,8 +394,8 @@ legend('Nonconv Iinex Bundle', 'Variable Metric BFGS', ...
 title('tol: 1e-3, vanishing gradient noise')
 xlabel('n')
 ylabel('computation time (sek)')
-axis([0.85, 16, 0, max(limits(4)+1,15)])
-%xticks(1:15)
+axis([0.85, 16, 0, min(max(max(t_h34_s)),15)])
+xticks(1:15)
 set(gca,'ygrid','on')
 savefig('1e-3_4s.fig')
 hold off
@@ -389,6 +403,7 @@ hold off
 % tol: 1e-3, bigger dimension
 figure
 hold on
+box on
 x = 1:3;
 for i = 1:5
     stem(x+(i-1)*.15,t_h34_b(:,i), 'LineStyle',':','Color','b','Marker','+','LineWidth',0.9)
@@ -401,9 +416,9 @@ legend('Nonconv Iinex Bundle', 'Variable Metric BFGS', ...
 title('tol: 1e-3, vanishing noise')
 xlabel('n')
 ylabel('computation time (sek)')
-axis([0.85, 4, 0, max(limits(4)+1,15)])
-%xticks(1:3)
-%xticklabels({'20','25','30'})
+axis([0.85, 4, 0, min(max(max(t_h34_b)),15)])
+xticks(1:3)
+xticklabels({'20','25','30'})
 set(gca,'ygrid','on')
 savefig('1e-3_4b.fig')
 hold off
@@ -412,6 +427,7 @@ hold off
 % Create a stem plot using the stem function
 figure
 hold on
+box on
 x = 1:15;
 for i = 1:5
     stem(x+(i-1)*.15,t_h64_s(:,i), 'LineStyle',':','Color','b','Marker','+','LineWidth',0.9)
@@ -424,8 +440,8 @@ legend('Nonconv Iinex Bundle', 'Variable Metric BFGS', ...
 title('tol: 1e-6, vanishing noise')
 xlabel('n')
 ylabel('computation time (sek)')
-axis([0.85, 16, 0, max(limits(4)+1,15)])
-%xticks(1:15)
+axis([0.85, 16, 0, min(max(max(t_h64_s)),15)])
+xticks(1:15)
 set(gca,'ygrid','on')
 savefig('1e-6_4s.fig')
 hold off
@@ -433,6 +449,7 @@ hold off
 % tol: 1e-6, bigger dimension
 figure
 hold on
+box on
 x = 1:3;
 for i = 1:5
     stem(x+(i-1)*.15,t_h64_b(:,i), 'LineStyle',':','Color','b','Marker','+','LineWidth',0.9)
@@ -445,9 +462,9 @@ legend('Nonconv Iinex Bundle', 'Variable Metric BFGS', ...
 title('tol: 1e-6, vanishing gradient noise')
 xlabel('n')
 ylabel('computation time (sek)')
-axis([0.85, 4, 0, max(limits(4)+1,15)])
-%xticks(1:3)
-%xticklabels({'20','25','30'})
+axis([0.85, 4, 0, min(max(max(t_h64_s)),15)])
+xticks(1:3)
+xticklabels({'20','25','30'})
 set(gca,'ygrid','on')
 savefig('1e-6_4b.fig')
 hold off

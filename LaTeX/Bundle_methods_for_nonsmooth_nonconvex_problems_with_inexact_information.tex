@@ -10,7 +10,7 @@
 \usepackage[x11names]{xcolor} % muss vor "`mcode"' da dieses bereits intern das color-Paket lädt und es dann einmal mit und einmal ohne Option geladen wird, was nicht geht 
 \usepackage{graphicx} % Grafiken einfügen
 %\usepackage{listings} % zum Einbinden von Code, ist bereits in "`mcode"' enthalten
-\usepackage{enumerate}
+\usepackage{enumerate} % mehr Optionen (z.B. fur Symbole) bei emumerate
 \usepackage{tabularx} % erwiterte Tabelleneigenschaften
 \usepackage{here} % erzwingen der Position von Float-Objekten
 \usepackage{bibgerm} % Für das Literaturverzeichnis
@@ -134,9 +134,9 @@
 \pagenumbering{arabic}
 %\include{Chapters/Introduction}
 \input{Chapters/Preliminaries}
-%\input{Chapters/Bundle_Methods}
+\input{Chapters/Bundle_Methods}
 %\input{Chapters/Simplifications}
-%\input{Chapters/Bundle_Method_nonconv_inex}
+\input{Chapters/Bundle_Method_nonconv_inex}
 \textcolor{red}{Auffallig: Noll Algo scheint viel schneller durchyulaufen, warum???}
 \input{Chapters/Variable_Metric}
 \input{Chapters/Bilevel_Application}
