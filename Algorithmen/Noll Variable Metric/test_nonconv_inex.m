@@ -14,7 +14,7 @@ k_h = zeros(30,10,5,10);
 
 for i = 1:15 % x-dimension
     for j = 1:2 % tolerance (1e-3, 1e-6)
-        for n = 0:4 % form of noise
+        for n = 0:2 % form of noise
             if n > 0
                 for t = 1:10 % if noise -> do 10 times
                     [f_h(i,1+(j-1)*5,n+1,t),~,t_h(i,1+(j-1)*5,n+1,t),k_h(i,1+(j-1)*5,n+1,t)] = bundle_nonconv_inex(x0(1:i),@f1_testfunction,@subgr_f1_testfunction,n,250*i,tol(j));
@@ -36,7 +36,7 @@ end
 
 for i = [20,25,30] % x-dimension
     for j = 1:2 % tolerance (1e-3, 1e-6)
-        for n = 0:4 % form of noise
+        for n = 0:2 % form of noise
             if n > 0
                 for t = 1:10 % if noise -> do 10 times
                     [f_h(i,1+(j-1)*5,n+1,t),~,t_h(i,1+(j-1)*5,n+1),k_h(i,1+(j-1)*5,n+1)] = bundle_nonconv_inex(x0(1:i),@f1_testfunction,@subgr_f1_testfunction,n,250*i,tol(j));
@@ -112,19 +112,19 @@ k_h32_b = sum(k_h([20,25,30],1:5,3,:),4)/10;
 k_h62_s = sum(k_h(1:15,6:10,3,:),4)/10;
 k_h62_b = sum(k_h([20,25,30],6:10,3,:),4)/10;
 
-% constant gradient noise
-k_h33_s = sum(k_h(1:15,1:5,4,:),4)/10;
-k_h33_b = sum(k_h([20,25,30],1:5,4,:),4)/10;
-
-k_h63_s = sum(k_h(1:15,6:10,4,:),4)/10;
-k_h63_b = sum(k_h([20,25,30],6:10,4,:),4)/10;
-
-% vanishing gradient noise
-k_h34_s = sum(k_h(1:15,1:5,5,:),4)/10;
-k_h34_b = sum(k_h([20,25,30],1:5,5,:),4)/10;
-
-k_h64_s = sum(k_h(1:15,6:10,5,:),4)/10;
-k_h64_b = sum(k_h([20,25,30],6:10,5,:),4)/10;
+% % constant gradient noise
+% k_h33_s = sum(k_h(1:15,1:5,4,:),4)/10;
+% k_h33_b = sum(k_h([20,25,30],1:5,4,:),4)/10;
+% 
+% k_h63_s = sum(k_h(1:15,6:10,4,:),4)/10;
+% k_h63_b = sum(k_h([20,25,30],6:10,4,:),4)/10;
+% 
+% % vanishing gradient noise
+% k_h34_s = sum(k_h(1:15,1:5,5,:),4)/10;
+% k_h34_b = sum(k_h([20,25,30],1:5,5,:),4)/10;
+% 
+% k_h64_s = sum(k_h(1:15,6:10,5,:),4)/10;
+% k_h64_b = sum(k_h([20,25,30],6:10,5,:),4)/10;
 
 
 %% noll algorithm
@@ -135,7 +135,7 @@ k_n = zeros(30,10,2,5,10);
 for i = 1:15 % x-dimension
     for j = 1:2 % tolerance (1e-3, 1e-6)
         for q = 1:2 % form o fQ
-            for n = 0:4 % form of noise
+            for n = 0:2 % form of noise
                 if n > 0 
                     for t = 1:10 % if noise -> do 10 times
                         [f_n(i,1+(j-1)*5,q,n+1,t),~,t_n(i,1+(j-1)*5,q,n+1,t),k_n(i,1+(j-1)*5,q,n+1,t)] = noll_variable_metric_nonconv_inex(x0(1:i),@f1_testfunction,@subgr_f1_testfunction,q,n,250*i,tol(j));
@@ -159,7 +159,7 @@ end
 for i = [20,25,30] % x-dimension
     for j = 1:2 % tolerance (1e-3, 1e-6)
         for q = 1:2 % form o fQ
-            for n = 0:4 % form of noise
+            for n = 0:2 % form of noise
                 if n > 0 
                     for t = 1:10 % if noise -> do 10 times
                         [f_n(i,1+(j-1)*5,q,n+1,t),~,t_n(i,1+(j-1)*5,q,n+1,t),k_n(i,1+(j-1)*5,q,n+1,t)] = noll_variable_metric_nonconv_inex(x0(1:i),@f1_testfunction,@subgr_f1_testfunction,q,n,250*i,tol(j));
@@ -202,19 +202,19 @@ kQk_nb32_b = sum(k_n([20,25,30],1:5,1,3,:),5)/10;
 kQk_nb62_s = sum(k_n(1:15,6:10,1,3,:),5)/10;
 kQk_nb62_b = sum(k_n([20,25,30],6:10,1,3,:),5)/10;
 
-% constant gradient noise
-kQk_nb33_s = sum(k_n(1:15,1:5,1,4,:),5)/10;
-kQk_nb33_b = sum(k_n([20,25,30],1:5,1,4,:),5)/10;
-
-kQk_nb63_s = sum(k_n(1:15,6:10,1,4,:),5)/10;
-kQk_nb63_b = sum(k_n([20,25,30],6:10,1,4,:),5)/10;
-
-% vanishing gradient noise
-kQk_nb34_s = sum(k_n(1:15,1:5,1,5,:),5)/10;
-kQk_nb34_b = sum(k_n([20,25,30],1:5,1,5,:),5)/10;
-
-kQk_nb64_s = sum(k_n(1:15,6:10,1,5,:),5)/10;
-kQk_nb64_b = sum(k_n([20,25,30],6:10,1,5,:),5)/10;
+% % constant gradient noise
+% kQk_nb33_s = sum(k_n(1:15,1:5,1,4,:),5)/10;
+% kQk_nb33_b = sum(k_n([20,25,30],1:5,1,4,:),5)/10;
+% 
+% kQk_nb63_s = sum(k_n(1:15,6:10,1,4,:),5)/10;
+% kQk_nb63_b = sum(k_n([20,25,30],6:10,1,4,:),5)/10;
+% 
+% % vanishing gradient noise
+% kQk_nb34_s = sum(k_n(1:15,1:5,1,5,:),5)/10;
+% kQk_nb34_b = sum(k_n([20,25,30],1:5,1,5,:),5)/10;
+% 
+% kQk_nb64_s = sum(k_n(1:15,6:10,1,5,:),5)/10;
+% kQk_nb64_b = sum(k_n([20,25,30],6:10,1,5,:),5)/10;
 
 % no noise
 kQk_ns30_s = k_n(1:15,1:5,2,1,1);
@@ -237,19 +237,19 @@ kQk_ns32_b = sum(k_n([20,25,30],1:5,2,3,:),5)/10;
 kQk_ns62_s = sum(k_n(1:15,6:10,2,3,:),5)/10;
 kQk_ns62_b = sum(k_n([20,25,30],6:10,2,3,:),5)/10;
 
-% constant gradient noise
-kQk_ns33_s = sum(k_n(1:15,1:5,2,4,:),5)/10;
-kQk_ns33_b = sum(k_n([20,25,30],1:5,2,4,:),5)/10;
-
-kQk_ns63_s = sum(k_n(1:15,6:10,2,4,:),5)/10;
-kQk_ns63_b = sum(k_n([20,25,30],6:10,2,4,:),5)/10;
-
-% vanishing gradient noise
-kQk_ns34_s = sum(k_n(1:15,1:5,2,5,:),5)/10;
-kQk_ns34_b = sum(k_n([20,25,30],1:5,2,5,:),5)/10;
-
-kQk_ns64_s = sum(k_n(1:15,6:10,2,5,:),5)/10;
-kQk_ns64_b = sum(k_n([20,25,30],6:10,2,5,:),5)/10;
+% % constant gradient noise
+% kQk_ns33_s = sum(k_n(1:15,1:5,2,4,:),5)/10;
+% kQk_ns33_b = sum(k_n([20,25,30],1:5,2,4,:),5)/10;
+% 
+% kQk_ns63_s = sum(k_n(1:15,6:10,2,4,:),5)/10;
+% kQk_ns63_b = sum(k_n([20,25,30],6:10,2,4,:),5)/10;
+% 
+% % vanishing gradient noise
+% kQk_ns34_s = sum(k_n(1:15,1:5,2,5,:),5)/10;
+% kQk_ns34_b = sum(k_n([20,25,30],1:5,2,5,:),5)/10;
+% 
+% kQk_ns64_s = sum(k_n(1:15,6:10,2,5,:),5)/10;
+% kQk_ns64_b = sum(k_n([20,25,30],6:10,2,5,:),5)/10;
 
 
     
