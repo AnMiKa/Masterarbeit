@@ -50,7 +50,7 @@ end
 % tol           tolerance for terminating the algorithm
 % gamma > 0     saveguarding parameter for calculating eta
 
-defaults = {0, 1000, 1e-6, 0.05, 0.1, 2};
+defaults = {0, 5000, 1e-6, 0.05, 0.1, 2};
 % set optional input arguments if not set by the user
 % Check number of inputs.
 if nargin > 9
@@ -141,7 +141,7 @@ C = alpha' * c;     % augmented aggregate error
 % if   -xi + eta / 2 * norm(d)^2 <= tol; % stopping condition like in nonconv, exact, nor rewritten
 % if norm(E + t * G) <= tol;  % stopping condition like in nonconv, inex
 % if C+1/t*sum(d.^2) < tol
-if C+1/t*sum(d.^2) < tol*(1+f_hat)
+if C+1/t*sum(d.^2) < tol%*(1+f_hat)
     fprintf('Algorithm stopped successfully by meeting tolerance after  %d  iterations and %d null-steps. \n', k, i_null);
     break
 end
@@ -167,7 +167,7 @@ end
 %update bundle
 delete = zeros(1,lJ);
 for j = 1:lJ  % update the index set J by marking the indexes that are removed
-    if alpha(j) > 1e-15 || norm(x(:,j) - x_hat) == 0; % alpha only gets down to 1e-5
+    if alpha(j) > 1e-15 || norm(x(:,j) - x_hat) == 0 % alpha only gets down to 1e-5
     else
         delete(j) = 1;
     end
@@ -191,7 +191,7 @@ for j = 1:lJ
     end
 end
 eta = max(eta_vec) + gamma;
-fprintf('eta: %d \n', eta);
+%fprintf('eta: %d \n', eta);
 
 b = zeros(lJ, 1);
 for j = 1:lJ
@@ -200,6 +200,8 @@ end
 
 c = e + b;
 s = g + eta * bsxfun(@minus, x, x_hat);
+% t
+% f(end)
 end
 time = toc;
 if k == kmax
