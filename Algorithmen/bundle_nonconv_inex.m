@@ -113,7 +113,7 @@ b = [c; x_hat+10;-x_hat+10];
 %options_ip = optimoptions(@quadprog, 'Algorithm', 'interior-point-convex',...
 %    'MaxIterations', 500, 'ConstraintTolerance', 1.0000e-15, 'OptimalityTolerance', 1.0000e-15);
 %[xi_d, ~, ~, ~, lambda] = quadprog(H, r, A, b, [], [], [], [], [], options_ip);
-[xi_d,~,lambda] = qpas(H,r,A,b,[],[],[],[],1);
+[xi_d,~,lambda] = qpas(H,r,A,b,[],[],[],[],0);
 
 %alpha = lambda.ineqlin(1:lJ); % lagrange multiplier for inequality constraints
 alpha = lambda.inequality(1:lJ);

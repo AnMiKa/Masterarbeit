@@ -117,7 +117,7 @@ A = [-ones(lJ, 1), s'; D];
 b = [c; x_hat+10;-x_hat+10];
 % lJ constraints due to reformulation as smooth problem
 % possibly additional constraints
-[xi_d,~,lambda] = qpas(H,r,A,b,[],[],[],[],1);
+[xi_d,~,lambda] = qpas(H,r,A,b,[],[],[],[],0);
 
 d = xi_d(2:end);
 % xi = dxi(end); 
