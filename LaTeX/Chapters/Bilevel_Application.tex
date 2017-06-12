@@ -620,14 +620,47 @@ Write down bilevel classification problem and (if needed) which specification of
 
 
 \textcolor{red}{\textbf{Covtype tests}\\
-\par
-Datensatz zerteilt: 1000, 5000, 10000, 50000 Datensätze\\
+Datensatz zerteilt: 1000, 5000, 10000, 50000 Datens\"atze\\
 Ergebnisse mit Matlab App (linear SVM, 3 folds, parallel used):\\
-\begin{tabular}{r|c|c}
+\begin{tabular}{c|c|c}
 Datensatz & Zeit & Fehler \\
 \hline
-1000 & 16.22 sek & 34.2\% \\
-5000 & 10.524 sek & 18.3\% \\
-10000 & 14.689 sek & 16.5\% \\
-50000 &  643.57 sek & 16.9\% \\
+1,000 & 16.22 sek & 34.2\% \\
+5,000 & 10.524 sek & 18.3\% \\
+10,000 & 14.689 sek & 16.5\% \\
+50,000 &  643.57 sek & 16.9\% \\
+50,000 (Rechnerhalle, 4 parallel) & 326.83 & 16.9\% \\
+100,000 --''-- & 2492 sek = 41.5333 min & 21.3\%
 \end{tabular}}
+
+\textcolor{red}{scheint bei 50000 tats\"achlich so lange zu dauern, da ziemlich genau doppelt so schnell bei parallel-Rechnung mit 4 anstatt 2 ``Rechnern'' --> kein Arbeitsspeicher Problem}
+
+\textcolor{red}{Test mit bundle bilevel-Algorithmus:\\
+for covtype, ``Hare''-stopping condition\\
+\begin{tabular}{c|c|c|c|c|c|c}
+trainigs set & starting value & lambda & time & k & inull & Fehler\\
+\hline
+1,000 & 1 & 86.3493 & 62.8280 sek & 29 & 0 & \\
+1,000 & 86 & 86.3488 & 130.1105 sek & 61 & 8 & 19\% \\
+1,000 (quadprog) & 86 & 86.3488 & 6.5572 sek & 61 & 8 & \\
+5,000 qp & 1 & 46.4142 & 16.2338 sek & 27 & 0 & \\
+5,000 qp & 47 & 46.4142 & 34.9573 sek & 60 & 0 & 14.74\% \\
+10,000 qp & 1 & 49.8146 & 59.7462 sek & 49 & 0 & \\
+10,000 qp & 50 & 49.8146 & 85.0816 sek & 69 & 0 & 15.32\% \\
+50,000 qp & 58.6842 & 588.2828 sek & 45 & 0 & \\
+50,000 qp & 60 & 58.6842 & 897.8123 sek & 69 & 0 & 14.86\% \\
+100,000 qp & 1 & 73.3711 & 1358.7 sek = 22.6455 min & 37 & 0 & 39.41
+\end{tabular}
+\\
+Fehler berechnet f\"ur Daten 1001 bis 2000 von komplettem Datensatz\\
+Versuch mit Daten 1001-5000: scheint Problem bei matrizenaufbau zu haben \\
+Analyse Timer: 100\% der Zeit in postpro_wb_class_hinge_qpas dabei 100\% der Zeit für qpas\\
+Ergebnis viel!!! schneller, wenn quadprog und sparse-matrizen, gibt EXAKT! gleiches Ergebnis für fehler\\
+geht dann auch mit mehr datensätzen (4000) -> Fehler nur 7.75\%??? \\
+f\"ur Datensatz 5000 \(\to\) Testdaten 5001 bis 10000 \\
+exemplarisch getestet: wie groß ist der Unterschied bei ergebnisse bei verschiedenen Starwerten? - bei 10000: 1e-15 , bei 50000: exact\\
+f\"ur Datensatz 10000: Testdaten 10001 bis 15000 \\
+50000: deutlicher Anstieg der Rechenzeit merkbar irgendwo zwischen 10000 und 50000 muss eine Schwelle liegen - Speicher? - ab dieser Matrix Gr\"osse gibt matlab fehler wenn nicht sparse matrizen explizit erstellt werden sollen (zu viel Speicher) unwahrscheinlich - siehe erkl\"arung App \\
+komish: warum dauert es bei näherem Startwert so viel länger??? }
+
+

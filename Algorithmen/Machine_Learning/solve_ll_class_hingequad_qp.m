@@ -25,7 +25,7 @@ function [ Wb ] = solve_ll_class_hingequad_qp( X, Y, lambda )
 % Wb:        matrix  --> features+1 x number of folds
 
 fprintf('Solve the lower level classificaion problem for given hyperparameter. \n')
-tic
+%tic
 
 [feat,J,T] = size(X);
 Wb = zeros(feat+1,T);
@@ -49,6 +49,6 @@ for t = 1:T
     Wbxi = quadprog(H,[],A,b,[],[],[],[],[],options);
     Wb(:,t) = Wbxi(1:feat+1);
 end
-toc
+%toc
 end
 

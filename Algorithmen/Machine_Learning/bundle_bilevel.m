@@ -21,11 +21,11 @@ function [ f_hat, x_hat, delta, time ] = bundle_bilevel( x0, X, Y, kmax, m, t, t
 tic
 %% set x0 as column-vector, regardless of how it is typed in
 [rows, columns] = size(x0);
-if rows == 1;
+if rows == 1
     x0 = x0';
 end
 % check that x0 is a vector
-if rows ~= 1 && columns ~=1;
+if rows ~= 1 && columns ~=1
        error('Wrong starting point x0. x0 must be a vector.');
 end
 
@@ -87,14 +87,14 @@ lJ = 1;                  % initial lenght of the index set J
 % solve lower level optimization problem
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % set solver for lower level problem
-Wb = solve_ll_class_hingequad_qpas(X,Y,x_hat); %solution of lower level problem
-%Wb = solve_ll_class_hingequad_qp(X,Y,x_hat);
+%Wb = solve_ll_class_hingequad_qpas(X,Y,x_hat); %solution of lower level problem
+Wb = solve_ll_class_hingequad_qp(X,Y,x_hat);
 %W = solve_ll_reg_moore_qp(X,Y,x_hat);
 % set subgradient function for lower level problem
 W = Wb(1:end-1,:);
 b = Wb(end,:);
 Dwb = subgr_ll_class_hingequad(W,b,X,Y,x_hat); % find subgradient of w (and b) with respect to x
-%Dw = subgr_ll_reg_moore(W,X,Y,g´x_hat);
+%Dw = subgr_ll_reg_moore(W,X,Y,gï¿½x_hat);
 % set subgradient function for upper level problem
 g = subgr_ul_class_hinge(W,b,X,Y,Dwb);  % subgradient at point bundle point
 %g = subgr_ul_reg_moore(W,X,Y,Dw);
@@ -105,14 +105,14 @@ f_hat = f;               % function value at x_hat
 
 s = g;                   % augmented subgradient at bundle points
 %% Global loop
-for k = 1 : kmax;
+for k = 1 : kmax
 
 %% 1st step: subproblem solving
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % set solver for upper level problem
-[d,xi,alpha] = solve_ul_class_qpas(x_hat,s,c,t);   % solver using qpas
-%[d,xi,alpha] = solve_ul_class_qp(x_hat,s,c,t);    % solver using MATLAB's quadprog
+%[d,~,alpha] = solve_ul_class_qpas(x_hat,s,c,t);   % solver using qpas
+[d,~,alpha] = solve_ul_class_qp(x_hat,s,c,t);    % solver using MATLAB's quadprog
 %[d,xi,alpha] = solve_ul_reg_qpas(x_hat,s,c,t);
 %[d,xi,alpha] = solve_ul_reg_qp(x_hat,s,c,t);
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -135,11 +135,11 @@ if eta > 1e10
 end
 % stopping conditions
 % if norm(1/t * d) <= tol && C <= tol;              % 1) like in Ulbrich lecture
- if norm(C + 1/t*d' * x_hat) <= tol && C <= tol;   % 3) like in conv, inex
+% if norm(C + 1/t*d' * x_hat) <= tol && C <= tol   % 3) like in conv, inex
 % if C+1/t*d'*x_hat <= tol && C <= tol              % 3a) like in conv, inex with phi <= 0
 % if -xi + eta / 2 * norm(d)^2 <= tol;              % 4) like in nonconv, exact
 % if norm(C + d) <= tol;                            % 6) like in nonconv, inex, little reformulated
-% if C+sum(d.^2) <= tol                             % 6a) like in nonconv, inex
+if C+1/t*sum(d.^2) <= tol                             % 6a) like in nonconv, inex
     fprintf('Algorithm stopped successfully by meeting tolerance after  %d  iterations and %d null-steps. \n', k-1, i_null);
     break
 end
@@ -149,14 +149,14 @@ end
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % set solver for lower level problem
-Wb = solve_ll_class_hingequad_qpas(X,Y,x_hat+d); %solution of lower level problem
-%Wb = solve_ll_class_hingequad_qp(X,Y,x_hat+d);
+%Wb = solve_ll_class_hingequad_qpas(X,Y,x_hat+d); %solution of lower level problem
+Wb = solve_ll_class_hingequad_qp(X,Y,x_hat+d);
 %W = solve_ll_reg_moore_qp(X,Y,x_hat+d);
 % set subgradient function for lower level problem
 W = Wb(1:end-1,:);
 b = Wb(end,:);
 Dwb = subgr_ll_class_hingequad(W,b,X,Y,x_hat+d); % find subgradient of w (and b) with respect to x
-%Dw = subgr_ll_reg_moore(W,X,Y,g´x_hat+d);
+%Dw = subgr_ll_reg_moore(W,X,Y,gï¿½x_hat+d);
 % set subgradient function for upper level problem
 g(:,end+1) = subgr_ul_class_hinge(W,b,X,Y,Dwb);  % subgradient at point bundle point
 %g = subgr_ul_reg_moore(W,X,Y,Dw);

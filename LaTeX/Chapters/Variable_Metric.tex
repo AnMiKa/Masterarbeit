@@ -523,7 +523,7 @@ This means that \(d^k \to 0\) for \(k \to \infty\) and therefore \(\lim_{k \to \
 	All results deduced in section \ref{On_diff_conv_res} are still valid for this algorithm as they do not depend on the kind of stabilization used.
 \end{remark}
 
-\subsection{\tectcolor{red}{Some Remarks on the Choice of Q}}
+\subsection{\textcolor{red}{Some Remarks on the Choice of Q}}
 
 \begin{itemize}
 	\item \(Q\) is there to model curvature, if there is no curvature there, 
@@ -539,10 +539,9 @@ The following quotient can then be stated:
 the sign depending on if \(a > b\) or vice versa. \\
 In more dimensions this works the same for the components of the Hessian corresponding to the direction where the kink occurs.}
 
-\textcolor{red}{On the other hand due to the local Lipschitz property the slope of the function is always finite on closed sets. This means that there exists always a neighborhood \(B_{\varepsilon}(x_{\text{kink}} where the function \(f\) behaves almost like the modulus ~(|\cdot|\) in the direction perpendicular to the kink. Therefor in this neighborhood almost no curvature is present.}
+\textcolor{red}{On the other hand due to the local Lipschitz property the slope of the function is always finite on closed sets. This means that there exists always a neighborhood \(B_{\varepsilon}(x_{\text{kink}})\) where the function \(f\) behaves almost like the modulus \(|\cdot|\) in the direction perpendicular to the kink. Therefor in this neighborhood almost no curvature is present.}
 
-\textcolor{red}{Summarized this means that on the one hand, the matrix \(Q\) should be close to zero in the components representing the directions perpendicular to the kink as soon as the iterates approach \(x_{\text{kink}}. But contrary to that methods that construct \(Q\) from secants to the (sub-)gradient can give very high values for those components.\\
-}
+\textcolor{red}{Summarized this means that on the one hand, the matrix \(Q\) should be close to zero in the components representing the directions perpendicular to the kink as soon as the iterates approach \(x_{\text{kink}}\). But contrary to that methods that construct \(Q\) from secants to the (sub-)gradient can give very high values for those components.}
 
 \textcolor{red}{What can be done about it?\\
 To tackle the described problem, the following strategies were tested: 

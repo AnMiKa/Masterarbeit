@@ -1,42 +1,52 @@
 \select@language {english}
 \select@language {english}
 \contentsline {section}{List of Symbols}{}
-\contentsline {section}{\numberline {1}Preliminaries}{1}
-\contentsline {subsection}{\numberline {1.1}Notation}{1}
-\contentsline {subsection}{\numberline {1.2}Definitions}{1}
-\contentsline {section}{\numberline {2}A Basic Bundle Method}{3}
-\contentsline {subsection}{\numberline {2.1}Derivation of the Bundle Method}{4}
-\contentsline {subsubsection}{\numberline {2.1.1}A Stabilized Cutting Plane Method}{4}
-\contentsline {subsubsection}{\numberline {2.1.2}Subproblem Formulations}{6}
-\contentsline {subsection}{\numberline {2.2}The Prox-Operator}{7}
-\contentsline {subsection}{\numberline {2.3}Aggregate Objects}{7}
-\contentsline {section}{\numberline {3}Proximal bundle method for nonconvex functions with inexact information}{12}
-\contentsline {subsection}{\numberline {3.1}Derivation of the Method}{12}
-\contentsline {subsubsection}{\numberline {3.1.1}Inexactness}{12}
-\contentsline {subsubsection}{\numberline {3.1.2}Nonconvexity}{14}
-\contentsline {subsubsection}{\numberline {3.1.3}Aggregate Objects}{15}
-\contentsline {subsection}{\numberline {3.2}On Different Convergence Results}{17}
-\contentsline {subsubsection}{\numberline {3.2.1}The Constraint Set}{17}
-\contentsline {subsubsection}{\numberline {3.2.2}Exact Information and Vanishing Errors}{18}
-\contentsline {subsubsection}{\numberline {3.2.3}Convex Objective Functions}{18}
-\contentsline {section}{\numberline {4}Variable Metric Bundle Method}{19}
-\contentsline {subsection}{\numberline {4.1}The Main Ingredients to the Method}{20}
-\contentsline {subsubsection}{\numberline {4.1.1}Variable Metric Bundle Methods}{20}
-\contentsline {subsubsection}{\numberline {4.1.2}Noll's Second Order Model}{21}
-\contentsline {subsection}{\numberline {4.2}???}{22}
-\contentsline {subsubsection}{\numberline {4.2.1}???}{22}
-\contentsline {subsubsection}{\numberline {4.2.2}The Descent Measure}{23}
-\contentsline {subsection}{\numberline {4.3}Algorithm}{24}
-\contentsline {subsection}{\numberline {4.4}Convergence Analysis}{25}
-\contentsline {subsection}{\numberline {4.5}Numerical Testing}{31}
-\contentsline {section}{\numberline {5}Application to Model Selection for Primal SVM}{33}
-\contentsline {subsection}{\numberline {5.1}Introduction}{33}
-\contentsline {subsection}{\numberline {5.2}Introduction to Support Vector Machines}{35}
-\contentsline {subsubsection}{\numberline {5.2.1}Risk minimization}{35}
-\contentsline {subsubsection}{\numberline {5.2.2}Support Vector machines}{36}
-\contentsline {subsection}{\numberline {5.3}Explanation Bilevel Approach and Inexact Bundle Method}{38}
-\contentsline {subsubsection}{\numberline {5.3.1}Reformulation as bilevel problem}{39}
-\contentsline {subsubsection}{\numberline {5.3.2}The Inexact Bundle Method}{41}
-\contentsline {subsubsection}{\numberline {5.3.3}The Algorithm???}{47}
-\contentsline {subsection}{\numberline {5.4}Numerical Experiments}{48}
+\contentsline {section}{\numberline {1}Introduction}{1}
+\contentsline {section}{\numberline {2}Preliminaries}{3}
+\contentsline {subsection}{\numberline {2.1}Notation}{3}
+\contentsline {subsection}{\numberline {2.2}Definitions}{3}
+\contentsline {section}{\numberline {3}A Basic Bundle Method}{5}
+\contentsline {subsection}{\numberline {3.1}Derivation of the Bundle Method}{6}
+\contentsline {subsubsection}{\numberline {3.1.1}A Stabilized Cutting Plane Method}{6}
+\contentsline {subsubsection}{\numberline {3.1.2}Subproblem Formulations}{8}
+\contentsline {subsection}{\numberline {3.2}The Prox-Operator}{9}
+\contentsline {subsection}{\numberline {3.3}Aggregate Objects}{9}
+\contentsline {section}{\numberline {4}Variations of The Bundle Method}{14}
+\contentsline {subsection}{\numberline {4.1}Convex Bundle Methods with Inexact Information}{14}
+\contentsline {subsubsection}{\numberline {4.1.1}Different Types of Inexactness}{14}
+\contentsline {subsubsection}{\numberline {4.1.2}Noise Attenuation}{15}
+\contentsline {subsubsection}{\numberline {4.1.3}Convergence Results}{16}
+\contentsline {subsection}{\numberline {4.2}Nonconvex Bundle Methods with Exact Information}{16}
+\contentsline {subsubsection}{\numberline {4.2.1}Proximity Control}{17}
+\contentsline {subsubsection}{\numberline {4.2.2}Other Concepts}{18}
+\contentsline {section}{\numberline {5}Proximal bundle method for nonconvex functions with inexact information}{19}
+\contentsline {subsection}{\numberline {5.1}Derivation of the Method}{19}
+\contentsline {subsubsection}{\numberline {5.1.1}Inexactness}{19}
+\contentsline {subsubsection}{\numberline {5.1.2}Nonconvexity}{21}
+\contentsline {subsubsection}{\numberline {5.1.3}Aggregate Objects}{22}
+\contentsline {subsection}{\numberline {5.2}On Different Convergence Results}{24}
+\contentsline {subsubsection}{\numberline {5.2.1}The Constraint Set}{24}
+\contentsline {subsubsection}{\numberline {5.2.2}Exact Information and Vanishing Errors}{25}
+\contentsline {subsubsection}{\numberline {5.2.3}Convex Objective Functions}{25}
+\contentsline {section}{\numberline {6}Variable Metric Bundle Method}{26}
+\contentsline {subsection}{\numberline {6.1}The Main Ingredients to the Method}{27}
+\contentsline {subsubsection}{\numberline {6.1.1}Variable Metric Bundle Methods}{27}
+\contentsline {subsubsection}{\numberline {6.1.2}Noll's Second Order Model}{28}
+\contentsline {subsection}{\numberline {6.2}???}{29}
+\contentsline {subsubsection}{\numberline {6.2.1}???}{29}
+\contentsline {subsubsection}{\numberline {6.2.2}The Descent Measure}{30}
+\contentsline {subsection}{\numberline {6.3}Algorithm}{31}
+\contentsline {subsection}{\numberline {6.4}Convergence Analysis}{32}
+\contentsline {subsection}{\numberline {6.5}\leavevmode {\color {red}Some Remarks on the Choice of Q}}{38}
+\contentsline {subsection}{\numberline {6.6}\leavevmode {\color {red}Numerical Testing}}{39}
+\contentsline {section}{\numberline {7}Application to Model Selection for Primal SVM}{41}
+\contentsline {subsection}{\numberline {7.1}Introduction}{41}
+\contentsline {subsection}{\numberline {7.2}Introduction to Support Vector Machines}{43}
+\contentsline {subsubsection}{\numberline {7.2.1}Risk minimization}{43}
+\contentsline {subsubsection}{\numberline {7.2.2}Support Vector machines}{44}
+\contentsline {subsection}{\numberline {7.3}Explanation Bilevel Approach and Inexact Bundle Method}{46}
+\contentsline {subsubsection}{\numberline {7.3.1}Reformulation as bilevel problem}{47}
+\contentsline {subsubsection}{\numberline {7.3.2}The Inexact Bundle Method}{49}
+\contentsline {subsubsection}{\numberline {7.3.3}The Algorithm???}{55}
+\contentsline {subsection}{\numberline {7.4}Numerical Experiments}{56}
 \contentsline {section}{References}{}
