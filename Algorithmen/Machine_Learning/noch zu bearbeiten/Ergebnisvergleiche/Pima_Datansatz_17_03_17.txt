@@ -1,0 +1,10 @@
+Vergleich der f-Werte und optimalen x_hat bei Pima-Datensatz
+
+Startwerte: 1,10,100
+
+Abbruchdaten: k = 4
+              i_null = 3
+
+..._pm1: Classifier Werte von 0,1 auf -1,1 geändert --> entsprechende Ergebnisse
+
+benutzte Datenpartitionen sind ebenfalls gespeichert

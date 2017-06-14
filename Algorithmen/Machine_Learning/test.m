@@ -1,1 +1,1 @@
-err = final_class_error(f,covtype_stand(100001:end,1:10)',covtype_stand(100001:end,11))
+err = final_class_error(100,covtype_stand(1001:2000,1:10)',covtype_stand(1001:2000,11))

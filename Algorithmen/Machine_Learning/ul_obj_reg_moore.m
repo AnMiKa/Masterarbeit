@@ -21,10 +21,15 @@ f = 0;
 for t =  1:T
     % select the partition of the validation set corresponding to the t'th
     % fold
-    Xval = X(:,:,t);
-    Yval = Y(:,t);
+    if T > 1
+        Xt = X(:,:,t);
+        Yt = Y(:,t);
+    else
+        Xt = X;
+        Yt = Y;
+    end
     % compute value for each fold
-    f = f + 1/(2*J)*sum((Xval'*W(:,t)-Yval).^2,1);
+    f = f + 1/(2*J)*sum((Xt'*W(:,t)-Yt).^2,1);
 end
 % compute final function value
 f = 1/T*f;
