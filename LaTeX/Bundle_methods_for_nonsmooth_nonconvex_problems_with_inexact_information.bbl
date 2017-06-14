@@ -180,6 +180,12 @@ Gregory Moore, Charles Bergeron, and Kristin~P. Bennett.
 \newblock Model selection for primal svm.
 \newblock {\em Machine Learning}, 85(1):175--208, 2011.
 
+\bibitem{Musicant2004}
+D.~R. Musicant and A.~Feinberg.
+\newblock Active set support vector regression.
+\newblock {\em IEEE Transactions on Neural Networks}, 15(2):268--275, March
+  2004.
+
 \bibitem{Nesterov2016}
 Yurii Nesterov and Vladimir Shikhman.
 \newblock Algorithmic principle of least revenue for finding market equilibria.

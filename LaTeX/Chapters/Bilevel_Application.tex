@@ -615,7 +615,7 @@ Write down bilevel classification problem and (if needed) which specification of
 
 
 
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 
@@ -654,13 +654,42 @@ trainigs set & starting value & lambda & time & k & inull & Fehler\\
 \\
 Fehler berechnet f\"ur Daten 1001 bis 2000 von komplettem Datensatz\\
 Versuch mit Daten 1001-5000: scheint Problem bei matrizenaufbau zu haben \\
-Analyse Timer: 100\% der Zeit in postpro_wb_class_hinge_qpas dabei 100\% der Zeit für qpas\\
+Analyse Timer: \(100\%\) der Zeit in postpro-wb-class-hinge-qpas dabei \(100\%\) der Zeit für qpas\\
 Ergebnis viel!!! schneller, wenn quadprog und sparse-matrizen, gibt EXAKT! gleiches Ergebnis für fehler\\
-geht dann auch mit mehr datensätzen (4000) -> Fehler nur 7.75\%??? \\
-f\"ur Datensatz 5000 \(\to\) Testdaten 5001 bis 10000 \\
-exemplarisch getestet: wie groß ist der Unterschied bei ergebnisse bei verschiedenen Starwerten? - bei 10000: 1e-15 , bei 50000: exact\\
+geht dann auch mit mehr datens\"atzen (4000) -> Fehler nur 7.75\%??? \\
+f\"ur Datensatz \( 5000 \to\) Testdaten 5001 bis 10000 \\
+exemplarisch getestet: wie gross ist der Unterschied bei ergebnisse bei verschiedenen Starwerten? - bei 10000: \(1e-15\) , bei 50000: exact\\
 f\"ur Datensatz 10000: Testdaten 10001 bis 15000 \\
 50000: deutlicher Anstieg der Rechenzeit merkbar irgendwo zwischen 10000 und 50000 muss eine Schwelle liegen - Speicher? - ab dieser Matrix Gr\"osse gibt matlab fehler wenn nicht sparse matrizen explizit erstellt werden sollen (zu viel Speicher) unwahrscheinlich - siehe erkl\"arung App \\
-komish: warum dauert es bei näherem Startwert so viel länger??? }
+komish: warum dauert es bei n\"aherem Startwert so viel l\"anger??? \\
+unconstrained tested for 1000: much faster; no difference in steps for \(x_0 = 1\), 70, 6 for \(x_0=86\), 7.2 sek}
+
+\textcolor{red}{\textbf{0815-Funktion f\"ur bilevel optimierung:}\\
+für covtype1000: in sehr wenig Zeit: lambda = 100 -> selbes ergebnis im Fehler: 19\%\\
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\textcolor{orange}{\textbf{Infos on Data sets} \\
+\begin{tabular}{c|c|c|c|c|c|c}
+Data Set & instances, attributes & 1/C (SVC) & C, \(\varepsilon\) (SVR) & Test Error & Source & Comment \\
+\hline
+Adult & ~300 000, 10+1 & & 0.017, 0.19 & 24.99\% & \cite{Musicant2004} & think linear, 25\% occurred more often \cite{Musicant2000} \\
+Boston Housing & 506, 12+1 & & 0.25, 0.015 & 19.44\% & \cite{Musicant2004} & think linear\\
+Adult & Tset: 11221 & 1/0.05 & & & \cite{Platt1999} & linear
+Adult & & \(>10^8\) & & 14.1 & \cite{Kao2004} & accuracy and C do not belong together directly\\
+\end{tabular}\\
+If more values found: take best}
+
+
+
+
+
+
+
+
+
+
+
 
 

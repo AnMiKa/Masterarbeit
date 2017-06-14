@@ -602,13 +602,13 @@ To test the performance for inexact function and subgradient values different ty
 
 Five different forms of noise were tested:
 
-\begin{enumerate}[--]
+\begin{itemize}[label={--}]
 	\item No noise: \(\bar{\sigma}=\sigma_k=0\) and \(\bar{\theta}=\theta^k=0\) for all \(k\).
 	\item Constant noise: \(\bar{\sigma}=\sigma_k=0.01\) and \(\bar{\theta}=\theta^k=0.01\) for all \(k\).
 	\item Vanishing noise: \(\bar{\sigma}=0.01, \sigma_k = \min\{0.01,\|x^k\|/100\}\) and \(\bar{\theta}=0.01, \theta_k=\min\{0.01,\|x^k\|/100\}\) for all \(k\).
 	\item Constant subgradient noise: \(\bar{\sigma}=\sigma_k=0\) and \(\bar{\theta}=\theta_k=0.01\) for all \(k\).
 	\item Vanishing subgradient noise: \(\bar{\sigma}=\sigma_k=0\) and \(\bar{\theta}=0.01, \theta_k=\min\{0.01,\|x^k\|/100\}\) for all \(k\).
-\end{enumerate}
+\end{itemize}
 
 The exact case is used for comparison. The constant noise forms represent cases where the inexactness is outside of the optimizer's control. The vanishing noise forms represent cases where the noise can be controlled  but the mechanism is considered expensive, so it is only used when approaching the minimum.
 The two forms of subgradient noise represent the case where the subgradient is approximated numerically.

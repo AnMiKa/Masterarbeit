@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=pdflatex 2015.5.19)  12 JUN 2017 16:57
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=pdflatex 2015.5.19)  13 JUN 2017 11:20
 entering extended mode
 **Bundle_methods_for_nonsmooth_nonconvex_problems_with_inexact_information.tex
 
@@ -328,15 +328,23 @@ Package graphics Info: Driver file: pdftex.def on input line 91.
 Package: enumerate 1999/03/05 v3.00 enumerate extensions (DPC)
 \@enLab=\toks29
 )
+(C:\Users\as\AppData\Roaming\MiKTeX\2.9\tex\latex\enumitem\enumitem.sty
+Package: enumitem 2011/09/28 v3.5.2 Customized lists
+\labelindent=\skip57
+\enit@outerparindent=\dimen117
+\enit@toks=\toks30
+\enit@inbox=\box29
+\enitdp@description=\count103
+)
 ("C:\Program Files\Annika Programme\MiKTeX\tex\latex\tools\tabularx.sty"
 Package: tabularx 1999/01/07 v2.07 `tabularx' package (DPC)
-\TX@col@width=\dimen117
-\TX@old@table=\dimen118
-\TX@old@col=\dimen119
-\TX@target=\dimen120
-\TX@delta=\dimen121
-\TX@cols=\count103
-\TX@ftn=\toks30
+\TX@col@width=\dimen118
+\TX@old@table=\dimen119
+\TX@old@col=\dimen120
+\TX@target=\dimen121
+\TX@delta=\dimen122
+\TX@cols=\count104
+\TX@ftn=\toks31
 )
 ("C:\Program Files\Annika Programme\MiKTeX\tex\latex\ltxmisc\here.sty")
 (C:\Users\as\AppData\Roaming\MiKTeX\2.9\tex\latex\germbib\bibgerm.sty
@@ -348,12 +356,12 @@ Package: bibgerm 2000/08/18 v0.1 Support for mixed language bibliographies
 ** Modified for ngerman.sty and babel.sty by H. Harders 21 August 2000 **)
 (C:\Users\as\AppData\Roaming\MiKTeX\2.9\tex\latex\algorithm2e\algorithm2e.sty
 Package: algorithm2e 2013/01/06 v5.00 algorithms environments
-\c@AlgoLine=\count104
+\c@AlgoLine=\count105
 
 ("C:\Program Files\Annika Programme\MiKTeX\tex\latex\base\ifthen.sty"
 Package: ifthen 2001/05/26 v1.1c Standard LaTeX ifthen package (DPC)
 )
-\algocf@hangindent=\skip57
+\algocf@hangindent=\skip58
 
 ("C:\Program Files\Annika Programme\MiKTeX\tex\latex\tools\xspace.sty"
 Package: xspace 2009/10/20 v1.13 Space after command names (DPC,MH)
@@ -368,40 +376,40 @@ Package `algorithm2e' Release 5.1 -- october 19 2015 --
 subscribe by emailing sympa@lirmm.fr with 'subscribe <list> <firstname name>'
 - Author: Christophe Fiorio (christophe.fiorio@umontpellier.fr)
 ********************************************************
-\skiptotal=\skip58
-\skiplinenumber=\skip59
-\skiprule=\skip60
-\skiphlne=\skip61
-\skiptext=\skip62
-\skiplength=\skip63
-\algomargin=\skip64
-\skipalgocfslide=\skip65
-\algowidth=\dimen122
-\inoutsize=\dimen123
-\inoutindent=\dimen124
-\interspacetitleruled=\dimen125
-\interspacealgoruled=\dimen126
-\interspacetitleboxruled=\dimen127
-\algocf@ruledwidth=\skip66
-\algocf@inoutbox=\box29
-\algocf@inputbox=\box30
-\AlCapSkip=\skip67
-\AlCapHSkip=\skip68
-\algoskipindent=\skip69
-\algocf@nlbox=\box31
-\algocf@hangingbox=\box32
-\algocf@untilbox=\box33
-\algocf@skipuntil=\skip70
-\algocf@capbox=\box34
-\algoheightruledefault=\skip71
-\algoheightrule=\skip72
-\algotitleheightruledefault=\skip73
-\algotitleheightrule=\skip74
-\c@algocfline=\count105
-\c@algocfproc=\count106
-\c@algocf=\count107
-\algocf@algoframe=\box35
-\algocf@algobox=\box36
+\skiptotal=\skip59
+\skiplinenumber=\skip60
+\skiprule=\skip61
+\skiphlne=\skip62
+\skiptext=\skip63
+\skiplength=\skip64
+\algomargin=\skip65
+\skipalgocfslide=\skip66
+\algowidth=\dimen123
+\inoutsize=\dimen124
+\inoutindent=\dimen125
+\interspacetitleruled=\dimen126
+\interspacealgoruled=\dimen127
+\interspacetitleboxruled=\dimen128
+\algocf@ruledwidth=\skip67
+\algocf@inoutbox=\box30
+\algocf@inputbox=\box31
+\AlCapSkip=\skip68
+\AlCapHSkip=\skip69
+\algoskipindent=\skip70
+\algocf@nlbox=\box32
+\algocf@hangingbox=\box33
+\algocf@untilbox=\box34
+\algocf@skipuntil=\skip71
+\algocf@capbox=\box35
+\algoheightruledefault=\skip72
+\algoheightrule=\skip73
+\algotitleheightruledefault=\skip74
+\algotitleheightrule=\skip75
+\c@algocfline=\count106
+\c@algocfproc=\count107
+\c@algocf=\count108
+\algocf@algoframe=\box36
+\algocf@algobox=\box37
 ) (C:\Users\as\AppData\Roaming\MiKTeX\2.9\tex\latex\algorithmicx\algpseudocode.sty
 Package: algpseudocode 
 
@@ -409,16 +417,16 @@ Package: algpseudocode
 Package: algorithmicx 2005/04/27 v1.2 Algorithmicx
 
 Document Style algorithmicx 1.2 - a greatly improved `algorithmic' style
-\c@ALG@line=\count108
-\c@ALG@rem=\count109
-\c@ALG@nested=\count110
-\ALG@tlm=\skip75
-\ALG@thistlm=\skip76
-\c@ALG@Lnr=\count111
-\c@ALG@blocknr=\count112
-\c@ALG@storecount=\count113
-\c@ALG@tmpcounter=\count114
-\ALG@tmplength=\skip77
+\c@ALG@line=\count109
+\c@ALG@rem=\count110
+\c@ALG@nested=\count111
+\ALG@tlm=\skip76
+\ALG@thistlm=\skip77
+\c@ALG@Lnr=\count112
+\c@ALG@blocknr=\count113
+\c@ALG@storecount=\count114
+\c@ALG@tmpcounter=\count115
+\ALG@tmplength=\skip78
 )
 Document Style - pseudocode environments for use with the `algorithmicx' style
 ) ("C:\Program Files\Annika Programme\MiKTeX\tex\latex\tools\bm.sty"
@@ -432,46 +440,46 @@ LaTeX Info: Redefining \bm on input line 204.
 (C:\Users\as\AppData\Roaming\MiKTeX\2.9\tex\latex\setspace\setspace.sty
 Package: setspace 2011/12/19 v6.7a set line spacing
 )
-\c@theorem=\count115
+\c@theorem=\count116
 
 ("D:\Annika\Uni\10. Semester\Masterarbeit\Proximal Bundle Inexact Information\Git Hub\Masterarbeit\LaTeX\Bundle_methods_
 for_nonsmooth_nonconvex_problems_with_inexact_information.aux"
 ("D:\Annika\Uni\10. Semester\Masterarbeit\Proximal Bundle Inexact Information\Git Hub\Masterarbeit\LaTeX\Chapters/Introd
 uction.aux"))
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 111.
-LaTeX Font Info:    ... okay on input line 111.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 111.
-LaTeX Font Info:    ... okay on input line 111.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 111.
-LaTeX Font Info:    ... okay on input line 111.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 111.
-LaTeX Font Info:    ... okay on input line 111.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 111.
-LaTeX Font Info:    ... okay on input line 111.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 111.
-LaTeX Font Info:    ... okay on input line 111.
-LaTeX Font Info:    Try loading font information for T1+lmr on input line 111.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 112.
+LaTeX Font Info:    ... okay on input line 112.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 112.
+LaTeX Font Info:    ... okay on input line 112.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 112.
+LaTeX Font Info:    ... okay on input line 112.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 112.
+LaTeX Font Info:    ... okay on input line 112.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 112.
+LaTeX Font Info:    ... okay on input line 112.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 112.
+LaTeX Font Info:    ... okay on input line 112.
+LaTeX Font Info:    Try loading font information for T1+lmr on input line 112.
  ("C:\Program Files\Annika Programme\MiKTeX\tex\latex\lm\t1lmr.fd"
 File: t1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 (C:\Users\as\AppData\Roaming\MiKTeX\2.9\tex\context\base\supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count116
-\scratchdimen=\dimen128
-\scratchbox=\box37
-\nofMPsegments=\count117
-\nofMParguments=\count118
-\everyMPshowfont=\toks31
-\MPscratchCnt=\count119
-\MPscratchDim=\dimen129
-\MPnumerator=\count120
-\makeMPintoPDFobject=\count121
-\everyMPtoPDFconversion=\toks32
+\scratchcounter=\count117
+\scratchdimen=\dimen129
+\scratchbox=\box38
+\nofMPsegments=\count118
+\nofMParguments=\count119
+\everyMPshowfont=\toks32
+\MPscratchCnt=\count120
+\MPscratchDim=\dimen130
+\MPnumerator=\count121
+\makeMPintoPDFobject=\count122
+\everyMPtoPDFconversion=\toks33
 )
 
 bibgerm.sty: babel.sty detected
 
-LaTeX Font Info:    Try loading font information for T1+lmss on input line 130.
+LaTeX Font Info:    Try loading font information for T1+lmss on input line 131.
 ("C:\Program Files\Annika Programme\MiKTeX\tex\latex\lm\t1lmss.fd"
 File: t1lmss.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
@@ -573,12 +581,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 163--164
 [21] [22] [23] [24] [25])
 ("D:\Annika\Uni\10. Semester\Masterarbeit\Proximal Bundle Inexact Information\Git Hub\Masterarbeit\LaTeX\Chapters/Variab
 le_Metric.tex" [26] [27] [28] [29] [30] [31] [32] [33] [34] [35] [36] [37] [38] [39]
-
-LaTeX Warning: The counter will not be printed.
-             The label is: -- on input line 605.
-
-
-Overfull \hbox (30.31874pt too wide) in paragraph at lines 608--609
+Overfull \hbox (47.94351pt too wide) in paragraph at lines 608--609
 []\T1/lmr/m/n/12 Vanishing noise: $[] \OT1/lmr/m/n/12 = 0\OML/lmm/m/it/12 :\OT1/lmr/m/n/12 01\OML/lmm/m/it/12 ; [] \OT1
 /lmr/m/n/12 = []\OMS/lmsy/m/n/12 f\OT1/lmr/m/n/12 0\OML/lmm/m/it/12 :\OT1/lmr/m/n/12 01\OML/lmm/m/it/12 ; \OMS/lmsy/m/n/
 12 k\OML/lmm/m/it/12 x[]\OMS/lmsy/m/n/12 k\OML/lmm/m/it/12 =\OT1/lmr/m/n/12 100\OMS/lmsy/m/n/12 g$ \T1/lmr/m/n/12 and $[
@@ -629,113 +632,16 @@ LaTeX Font Info:    Try loading font information for T1+lmtt on input line 584.
  ("C:\Program Files\Annika Programme\MiKTeX\tex\latex\lm\t1lmtt.fd"
 File: t1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-! Missing $ inserted.
-<inserted text> 
-                $
-l.664 ...i näherem Startwert so viel länger??? }
-                                                  
-I've inserted a begin-math/end-math symbol since I think
-you left one out. Proceed, with fingers crossed.
-
-
-LaTeX Warning: Command \~ invalid in math mode on input line 664.
-
-
-LaTeX Warning: Command \textonequarter invalid in math mode on input line 664.
-
-
-LaTeX Warning: Command \~ invalid in math mode on input line 664.
-
-
-LaTeX Warning: Command \textonequarter invalid in math mode on input line 664.
-
-
-LaTeX Warning: Command \~ invalid in math mode on input line 664.
-
-
-LaTeX Warning: Command \textcurrency invalid in math mode on input line 664.
-
-
-! LaTeX Error: Command \textcurrency unavailable in encoding T1.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.664 ...i näherem Startwert so viel länger??? }
-                                                  
-Your command was ignored.
-Type  I <command> <return>  to replace it with another command,
-or  <return>  to continue without it.
-
-
-LaTeX Warning: Command \" invalid in math mode on input line 664.
-
-
-! LaTeX Error: Bad math environment delimiter.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.664 ...i näherem Startwert so viel länger??? }
-                                                  
-Your command was ignored.
-Type  I <command> <return>  to replace it with another command,
-or  <return>  to continue without it.
-
-
-! Package inputenc Error: Keyboard character used is undefined
-(inputenc)                in inputencoding `latin1'.
-
-See the inputenc package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.664 ...i näherem Startwert so viel länger??? }
-                                                  
-You need to provide a definition with \DeclareInputText 
-or \DeclareInputMath before using this key.
-
-
-! LaTeX Error: Command \textcurrency unavailable in encoding T1.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.664 ...i näherem Startwert so viel länger??? }
-                                                  
-Your command was ignored.
-Type  I <command> <return>  to replace it with another command,
-or  <return>  to continue without it.
-
-
-! LaTeX Error: Command \textcurrency unavailable in encoding T1.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.664 ...i näherem Startwert so viel länger??? }
-                                                  
-Your command was ignored.
-Type  I <command> <return>  to replace it with another command,
-or  <return>  to continue without it.
-
-
 Overfull \hbox (58.26138pt too wide) in paragraph at lines 664--665
 [] 
  []
 
-
-Overfull \hbox (93.91953pt too wide) in paragraph at lines 664--665
-\OML/lmm/m/it/12 Ergebnisviel\OT1/lmr/m/n/12 !!!\OML/lmm/m/it/12 schneller; wennquadprogundsparse \OMS/lmsy/m/n/12   \OM
-L/lmm/m/it/12 matrizen; gibtEXAKT\OT1/lmr/m/n/12 !\OML/lmm/m/it/12 gleichesErgebnisf\OT1/lmr/m/n/12 �[]\OML/lmm/m/it/12 
-rfehler[] 
+[57])
+Overfull \hbox (35.24765pt too wide) in paragraph at lines 674--144
+[] 
  []
 
-[57]) [58]
+[58]
 ("D:\Annika\Uni\10. Semester\Masterarbeit\Proximal Bundle Inexact Information\Git Hub\Masterarbeit\LaTeX\Bundle_methods_
 for_nonsmooth_nonconvex_problems_with_inexact_information.bbl" [59] [60] [61]) [62]
 ("D:\Annika\Uni\10. Semester\Masterarbeit\Proximal Bundle Inexact Information\Git Hub\Masterarbeit\LaTeX\Bundle_methods_
@@ -747,10 +653,10 @@ uction.aux")) )
 ### simple group (level 1) entered at line 1061 ({)
 ### bottom level 
 Here is how much of TeX's memory you used:
- 7247 strings out of 493921
- 111348 string characters out of 3142078
- 247454 words of memory out of 3000000
- 10361 multiletter control sequences out of 15000+200000
+ 7535 strings out of 493921
+ 116262 string characters out of 3142078
+ 252578 words of memory out of 3000000
+ 10645 multiletter control sequences out of 15000+200000
  64877 words of font info for 56 fonts, out of 3000000 for 9000
  841 hyphenation exceptions out of 8191
  40i,18n,48p,670b,2404s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -768,7 +674,7 @@ gramme/MiKTeX/fonts/type1/public/lm/lmr8.pfb><C:/Program Files/Annika Programme/
 onts/type1/public/lm/lmsy10.pfb><C:/Program Files/Annika Programme/MiKTeX/fonts/type1/public/lm/lmsy6.pfb><C:/Program Fi
 les/Annika Programme/MiKTeX/fonts/type1/public/lm/lmsy8.pfb><C:/Program Files/Annika Programme/MiKTeX/fonts/type1/public
 /lm/lmtt12.pfb><C:/Program Files/Annika Programme/MiKTeX/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on Bundle_methods_for_nonsmooth_nonconvex_problems_with_inexact_information.pdf (64 pages, 442987 bytes).
+Output written on Bundle_methods_for_nonsmooth_nonconvex_problems_with_inexact_information.pdf (64 pages, 441682 bytes).
 
 PDF statistics:
  284 PDF objects out of 1000 (max. 8388607)
