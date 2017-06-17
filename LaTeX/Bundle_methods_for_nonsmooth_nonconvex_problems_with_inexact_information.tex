@@ -10,6 +10,8 @@
 \usepackage[x11names]{xcolor} % muss vor "`mcode"' da dieses bereits intern das color-Paket lädt und es dann einmal mit und einmal ohne Option geladen wird, was nicht geht 
 \usepackage{graphicx} % Grafiken einfügen
 %\usepackage{listings} % zum Einbinden von Code, ist bereits in "`mcode"' enthalten
+\usepackage[format=plain, font=small, labelfont=bf, textfont=it]{caption} % Stil von Bildunterschriften anpassen
+\usepackage[format=hang, font=footnotesize]{subcaption} % muss NACH caption geladen werden
 \usepackage{enumerate} % mehr Optionen (z.B. fur Symbole) bei emumerate
 \usepackage{enumitem} % mehr Optionen für Itemize
 \usepackage{tabularx} % erwiterte Tabelleneigenschaften
@@ -138,7 +140,7 @@
 \input{Chapters/Bundle_Methods}
 \input{Chapters/Simplifications}
 \input{Chapters/Bundle_Method_nonconv_inex}
-\textcolor{red}{Auffallig: Noll Algo scheint viel schneller durchyulaufen, warum???}
+\textcolor{red}{Auffallig: Noll Algo scheint viel schneller durchzulaufen, warum???}
 \input{Chapters/Variable_Metric}
 \input{Chapters/Bilevel_Application}
 

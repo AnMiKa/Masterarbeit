@@ -39,14 +39,14 @@
 \contentsline {subsection}{\numberline {6.4}Convergence Analysis}{32}
 \contentsline {subsection}{\numberline {6.5}\leavevmode {\color {red}Some Remarks on the Choice of Q}}{38}
 \contentsline {subsection}{\numberline {6.6}\leavevmode {\color {red}Numerical Testing}}{39}
-\contentsline {section}{\numberline {7}Application to Model Selection for Primal SVM}{41}
-\contentsline {subsection}{\numberline {7.1}Introduction}{41}
-\contentsline {subsection}{\numberline {7.2}Introduction to Support Vector Machines}{43}
-\contentsline {subsubsection}{\numberline {7.2.1}Risk minimization}{43}
-\contentsline {subsubsection}{\numberline {7.2.2}Support Vector machines}{44}
-\contentsline {subsection}{\numberline {7.3}Explanation Bilevel Approach and Inexact Bundle Method}{46}
-\contentsline {subsubsection}{\numberline {7.3.1}Reformulation as bilevel problem}{47}
-\contentsline {subsubsection}{\numberline {7.3.2}The Inexact Bundle Method}{49}
-\contentsline {subsubsection}{\numberline {7.3.3}The Algorithm???}{55}
-\contentsline {subsection}{\numberline {7.4}Numerical Experiments}{56}
+\contentsline {section}{\numberline {7}Application to Model Selection for Primal SVM}{43}
+\contentsline {subsection}{\numberline {7.1}Introduction}{43}
+\contentsline {subsection}{\numberline {7.2}Introduction to Support Vector Machines}{45}
+\contentsline {subsubsection}{\numberline {7.2.1}Risk minimization}{45}
+\contentsline {subsubsection}{\numberline {7.2.2}Support Vector machines}{46}
+\contentsline {subsection}{\numberline {7.3}Explanation Bilevel Approach and Inexact Bundle Method}{48}
+\contentsline {subsubsection}{\numberline {7.3.1}Reformulation as bilevel problem}{49}
+\contentsline {subsubsection}{\numberline {7.3.2}The Inexact Bundle Method}{51}
+\contentsline {subsubsection}{\numberline {7.3.3}The Algorithm???}{57}
+\contentsline {subsection}{\numberline {7.4}Numerical Experiments}{58}
 \contentsline {section}{References}{}

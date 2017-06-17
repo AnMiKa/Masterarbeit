@@ -1,4 +1,4 @@
-function [f_hat, x_hat, time, x_hats] = noll_variable_metric_nonconv_inex(x0, fun, subgr_fun, ...
+function [f_hat, x_hat, time, k, x_hats] = noll_variable_metric_nonconv_inex(x0, fun, subgr_fun, ...
     Q_type, noise, kmax, tol, m, t, gamma)
 
 % variable metric bundle algorihtm that can handle nonsmooth nonconvex functions with
@@ -91,7 +91,7 @@ i_null = 0;              % null-step counter
 
 x = x0;                  % initial bundle point
 x_hat = x;               % initial serious point
-x_hats = x0;
+%x_hats = x0;
 J = 1;                   % index set defining bundle information
 lJ = 1;                  % size of the crrent bundle
 f = feval(fun, x0, noise);      % initial inexact function value
@@ -103,11 +103,11 @@ c = 0;                   % initial augmented error
 Q = eye(n);              % initial approximation to metric matrix
 
 % parameters for t-update
-u_1 = 1.2;
+u_1 = 2;
 u_2 = 0.8;
 t_min = 0.03; % minimal t value to make sure that sequence does not have 0 as accumulation point
 
-tav = 0;
+%tav = 0;
 %% Global loop
 for k = 1 : kmax
     
@@ -127,9 +127,9 @@ d = xi_d(2:end);
 alpha = lambda.inequality(1:lJ);
 %alpha = lambda.ineql(1:lJ);
 % gives a warnig if sum(alpha) not close enough to 1
-if abs(sum(alpha)-1)> 1e-10
-    warning('abs(sum(alpha)-1) = %d \n',abs(sum(alpha)-1))
-end
+%if abs(sum(alpha)-1)> 1e-10
+%    warning('abs(sum(alpha)-1) = %d \n',abs(sum(alpha)-1))
+%end
 
 % aggregate objects:
 C = alpha' * c;     % augmented aggregate error
@@ -147,10 +147,10 @@ delta = C+d'*(Q+1/t*eye(n))*d;
 % if C+sum(d.^2) <= tol                             % 6a) like in nonconv, inex
 % if norm((Q+1/t*eye(n))*d) <= tol && C <= tol      % 7) like in Ulbrich for Q/Noll variation
 % if delta < tol                                    % 8) as thought of most sensible -> Herleitung siehe Blatt
-if delta < tol%*(1+f_hat)                            % 8) as thought of most sensible -> Herleitung siehe Blatt   
+if delta < tol*(1+f_hat)                            % 8) as thought of most sensible -> Herleitung siehe Blatt   
 % if abs(f) < tol
 % if C+d'*(1/k*Q+1/t*eye(n))*d < tol
-    fprintf('Algorithm stopped successfully by meeting tolerance after  %d  iterations and %d null-steps. \n', k-1, i_null);
+    %fprintf('Algorithm stopped successfully by meeting tolerance after  %d  iterations and %d null-steps. \n', k-1, i_null);
     break
 end
 
@@ -166,7 +166,7 @@ g(:,end+1) = feval(subgr_fun,x_k_1,noise);% add information to bundle
 if f_k_1 - f_hat <= -m * delta   % serious step condition
     % hier war auch das eigenartige delta von oben
     x_hat = x_hat + d;   % update x_hat
-    x_hats = [x_hats, x_hat];
+    %x_hats = [x_hats, x_hat];
     f_hat =  f_k_1;  % update f_hat
     g_hat_old = g_hat;
     g_hat = g(:,end);
@@ -175,9 +175,13 @@ if f_k_1 - f_hat <= -m * delta   % serious step condition
         switch Q_type
             case 1
                 Q = BFGS_update(d,g_hat_old,g_hat,Q);
-                %Q = BFGS_update_Variation(d,g_hat_old,g_hat,Q);
             case 2
-                %Q = SR1_update(d,g_hat_old,g_hat,Q);
+                Q = SR1_update(d,g_hat_old,g_hat,Q);
+            case 3
+                Q = BFGS_update_Variation(d,g_hat_old,g_hat,Q);
+            case 4
+                Q = BFGS_update_Variation2(d,g_hat_old,g_hat,Q);
+            case 5
                 Q = SR1_update_Variation(d,g_hat_old,g_hat,Q);
         end
     end
@@ -187,9 +191,9 @@ if f_k_1 - f_hat <= -m * delta   % serious step condition
         %q = -min(eig(Q+1/t*eye(n)))+0.01;
         %Q = Q+q*eye(n);
         t = -1/(min(eig(Q))-0.01);
-        if t < 1e-6
-            warning('t is smaller than %d. \n', 1e-6)
-        end
+        %if t < 1e-6
+        %    warning('t is smaller than %d. \n', 1e-6)
+        %end
     end
 else
 i_null = i_null + 1;
@@ -198,15 +202,15 @@ i_null = i_null + 1;
         %q = -min(eig(Q+1/t*eye(n)))+0.01;
         %Q = Q+q*eye(n);
         t = -1/(min(eig(Q))-0.01);
-        if t < 1e-6
-            warning('t is smaller than %d. \n', 1e-6)
-        end
+        %if t < 1e-6
+        %    warning('t is smaller than %d. \n', 1e-6)
+        %end
     end
 end
 
-if min(eig(Q+1/t*eye(n))) < 0
-    warning('Matrix Q+1/t*I has negative eigenvalue.')
-end
+%if min(eig(Q+1/t*eye(n))) < 0
+%    warning('Matrix Q+1/t*I has negative eigenvalue.')
+%end
 
 %% 5th step: Bundle update
 %update bundle
@@ -249,17 +253,17 @@ end
 c = e + b;
 s = g + eta * bsxfun(@minus, x, x_hat);
 
-tav = tav+t;
+%tav = tav+t;
 % n1=norm(Q)
 % n2 =norm(inv(Q+1/t*eye(n)))
 % t
 % fe =f(end)
 end
 time = toc;
-if k == kmax
-    warning('Algorithm stopped because the maximum number %d of iterations was reached \n', k);
-    fprintf('%d nullsteps were executed. \n', i_null)
-end 
-tav = tav/(k-1);
+%if k == kmax
+%    warning('Algorithm stopped because the maximum number %d of iterations was reached \n', k);
+%    fprintf('%d nullsteps were executed. \n', i_null)
+%end 
+%tav = tav/(k-1);
 %% END of the algorithm    
 end

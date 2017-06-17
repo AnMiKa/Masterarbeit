@@ -92,6 +92,11 @@ Alejandro Jofr{\'{e}}, Dinh~The Luc, and Michel Th{\'{e}}ra.
 \newblock {\em Nonlinear Analysis: Theory, Methods {\&} Applications},
   33(1):71--90, jul 1998.
 
+\bibitem{Kao2004}
+W.~C. Kao, K.~M. Chung, C.~L. Sun, and C.~J. Lin.
+\newblock Decomposition methods for linear support vector machines.
+\newblock {\em Neural Computation}, 16(8):1689--1704, Aug 2004.
+
 \bibitem{Kiwiel2010}
 K.~C. Kiwiel.
 \newblock Bundle methods for convex minimization with partially inexact
@@ -156,6 +161,11 @@ Marko~M. M{\"a}kel{\"a} and Pekka Neittaanm{\"a}ki.
   Applications to Optimal Control}.
 \newblock World Scientific Pub Co Pte Lt, 1992.
 
+\bibitem{Ulbrich2012}
+Stefan~Ulbrich Michael~Ulbrich.
+\newblock {\em Nichtlineare Optimierung}.
+\newblock Springer Basel AG, 2012.
+
 \bibitem{Mifflin1982}
 Robert Mifflin.
 \newblock A modification and an extension of lemar{\'e}chal's algorithm for
@@ -185,6 +195,11 @@ D.~R. Musicant and A.~Feinberg.
 \newblock Active set support vector regression.
 \newblock {\em IEEE Transactions on Neural Networks}, 15(2):268--275, March
   2004.
+
+\bibitem{Musicant2000}
+David~R. Musicant.
+\newblock {\em Data Mining via Mathematical Programming and Machine Learning}.
+\newblock PhD thesis, University of Wisconsin, Madison, 2000.
 
 \bibitem{Nesterov2016}
 Yurii Nesterov and Vladimir Shikhman.
@@ -223,6 +238,14 @@ Ji{\v{r}}i Outrata, Michal Ko{\v{c}}vara, and Jochem Zowe.
 \newblock {\em Nonsmooth Approach to Optimization Problems with Equilibrium
   Constraints}.
 \newblock Springer {US}, 1998.
+
+\bibitem{Platt1999}
+John~C. Platt.
+\newblock Using analytic qp and sparseness to speed training of support vector
+  machines.
+\newblock In M.~J. Kearns, S.~A. Solla, and D.~A. Cohn, editors, {\em Advances
+  in Neural Information Processing Systems 11}, pages 557--563. MIT Press,
+  1999.
 
 \bibitem{Polyak1987}
 Boris~T. Polyak.

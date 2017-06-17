@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=pdflatex 2015.5.19)  13 JUN 2017 11:20
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=latex 2017.6.11)  17 JUN 2017 13:25
 entering extended mode
 **Bundle_methods_for_nonsmooth_nonconvex_problems_with_inexact_information.tex
 
@@ -281,21 +281,12 @@ Package: xcolor 2007/01/21 v2.11 LaTeX color extensions (UK)
 ("C:\Program Files\Annika Programme\MiKTeX\tex\latex\00miktex\color.cfg"
 File: color.cfg 2007/01/18 v1.5 color configuration of teTeX/TeXLive
 )
-Package xcolor Info: Driver file: pdftex.def on input line 225.
+Package xcolor Info: Driver file: dvips.def on input line 225.
 
-("C:\Program Files\Annika Programme\MiKTeX\tex\latex\pdftex-def\pdftex.def"
-File: pdftex.def 2011/05/27 v0.06d Graphics/color for pdfTeX
-
-("C:\Program Files\Annika Programme\MiKTeX\tex\generic\oberdiek\infwarerr.sty"
-Package: infwarerr 2010/04/08 v1.3 Providing info/warning/error messages (HO)
-)
-("C:\Program Files\Annika Programme\MiKTeX\tex\generic\oberdiek\ltxcmds.sty"
-Package: ltxcmds 2011/11/09 v1.22 LaTeX kernel commands for general use (HO)
-)
-\Gread@gobject=\count102
+("C:\Program Files\Annika Programme\MiKTeX\tex\latex\graphics\dvips.def"
+File: dvips.def 1999/02/16 v3.0i Driver-dependant file (DPC,SPQR)
 )
 Package xcolor Info: Model `cmy' substituted by `cmy0' on input line 1337.
-Package xcolor Info: Model `hsb' substituted by `rgb' on input line 1341.
 Package xcolor Info: Model `RGB' extended on input line 1353.
 Package xcolor Info: Model `HTML' substituted by `rgb' on input line 1355.
 Package xcolor Info: Model `Hsb' substituted by `hsb' on input line 1356.
@@ -319,10 +310,32 @@ Package: trig 1999/03/16 v1.09 sin cos tan (DPC)
 ("C:\Program Files\Annika Programme\MiKTeX\tex\latex\00miktex\graphics.cfg"
 File: graphics.cfg 2007/01/18 v1.5 graphics configuration of teTeX/TeXLive
 )
-Package graphics Info: Driver file: pdftex.def on input line 91.
+Package graphics Info: Driver file: dvips.def on input line 91.
 )
 \Gin@req@height=\dimen115
 \Gin@req@width=\dimen116
+)
+(C:\Users\as\AppData\Roaming\MiKTeX\2.9\tex\latex\caption\caption.sty
+Package: caption 2016/02/21 v3.3-144 Customizing captions (AR)
+
+(C:\Users\as\AppData\Roaming\MiKTeX\2.9\tex\latex\caption\caption3.sty
+Package: caption3 2016/05/22 v1.7-166 caption3 kernel (AR)
+Package caption3 Info: TeX engine: e-TeX on input line 67.
+\captionmargin=\dimen117
+\captionmargin@=\dimen118
+\captionwidth=\dimen119
+\caption@tempdima=\dimen120
+\caption@indent=\dimen121
+\caption@parindent=\dimen122
+\caption@hangindent=\dimen123
+)
+Package caption Info: KOMA-Script document class.
+\c@ContinuedFloat=\count102
+)
+(C:\Users\as\AppData\Roaming\MiKTeX\2.9\tex\latex\caption\subcaption.sty
+Package: subcaption 2016/05/22 v1.1-161 Sub-captions (AR)
+\c@subfigure=\count103
+\c@subtable=\count104
 )
 ("C:\Program Files\Annika Programme\MiKTeX\tex\latex\tools\enumerate.sty"
 Package: enumerate 1999/03/05 v3.00 enumerate extensions (DPC)
@@ -331,19 +344,19 @@ Package: enumerate 1999/03/05 v3.00 enumerate extensions (DPC)
 (C:\Users\as\AppData\Roaming\MiKTeX\2.9\tex\latex\enumitem\enumitem.sty
 Package: enumitem 2011/09/28 v3.5.2 Customized lists
 \labelindent=\skip57
-\enit@outerparindent=\dimen117
+\enit@outerparindent=\dimen124
 \enit@toks=\toks30
 \enit@inbox=\box29
-\enitdp@description=\count103
+\enitdp@description=\count105
 )
 ("C:\Program Files\Annika Programme\MiKTeX\tex\latex\tools\tabularx.sty"
 Package: tabularx 1999/01/07 v2.07 `tabularx' package (DPC)
-\TX@col@width=\dimen118
-\TX@old@table=\dimen119
-\TX@old@col=\dimen120
-\TX@target=\dimen121
-\TX@delta=\dimen122
-\TX@cols=\count104
+\TX@col@width=\dimen125
+\TX@old@table=\dimen126
+\TX@old@col=\dimen127
+\TX@target=\dimen128
+\TX@delta=\dimen129
+\TX@cols=\count106
 \TX@ftn=\toks31
 )
 ("C:\Program Files\Annika Programme\MiKTeX\tex\latex\ltxmisc\here.sty")
@@ -356,7 +369,7 @@ Package: bibgerm 2000/08/18 v0.1 Support for mixed language bibliographies
 ** Modified for ngerman.sty and babel.sty by H. Harders 21 August 2000 **)
 (C:\Users\as\AppData\Roaming\MiKTeX\2.9\tex\latex\algorithm2e\algorithm2e.sty
 Package: algorithm2e 2013/01/06 v5.00 algorithms environments
-\c@AlgoLine=\count105
+\c@AlgoLine=\count107
 
 ("C:\Program Files\Annika Programme\MiKTeX\tex\latex\base\ifthen.sty"
 Package: ifthen 2001/05/26 v1.1c Standard LaTeX ifthen package (DPC)
@@ -384,12 +397,12 @@ subscribe by emailing sympa@lirmm.fr with 'subscribe <list> <firstname name>'
 \skiplength=\skip64
 \algomargin=\skip65
 \skipalgocfslide=\skip66
-\algowidth=\dimen123
-\inoutsize=\dimen124
-\inoutindent=\dimen125
-\interspacetitleruled=\dimen126
-\interspacealgoruled=\dimen127
-\interspacetitleboxruled=\dimen128
+\algowidth=\dimen130
+\inoutsize=\dimen131
+\inoutindent=\dimen132
+\interspacetitleruled=\dimen133
+\interspacealgoruled=\dimen134
+\interspacetitleboxruled=\dimen135
 \algocf@ruledwidth=\skip67
 \algocf@inoutbox=\box30
 \algocf@inputbox=\box31
@@ -405,9 +418,9 @@ subscribe by emailing sympa@lirmm.fr with 'subscribe <list> <firstname name>'
 \algoheightrule=\skip73
 \algotitleheightruledefault=\skip74
 \algotitleheightrule=\skip75
-\c@algocfline=\count106
-\c@algocfproc=\count107
-\c@algocf=\count108
+\c@algocfline=\count108
+\c@algocfproc=\count109
+\c@algocf=\count110
 \algocf@algoframe=\box36
 \algocf@algobox=\box37
 ) (C:\Users\as\AppData\Roaming\MiKTeX\2.9\tex\latex\algorithmicx\algpseudocode.sty
@@ -417,15 +430,15 @@ Package: algpseudocode
 Package: algorithmicx 2005/04/27 v1.2 Algorithmicx
 
 Document Style algorithmicx 1.2 - a greatly improved `algorithmic' style
-\c@ALG@line=\count109
-\c@ALG@rem=\count110
-\c@ALG@nested=\count111
+\c@ALG@line=\count111
+\c@ALG@rem=\count112
+\c@ALG@nested=\count113
 \ALG@tlm=\skip76
 \ALG@thistlm=\skip77
-\c@ALG@Lnr=\count112
-\c@ALG@blocknr=\count113
-\c@ALG@storecount=\count114
-\c@ALG@tmpcounter=\count115
+\c@ALG@Lnr=\count114
+\c@ALG@blocknr=\count115
+\c@ALG@storecount=\count116
+\c@ALG@tmpcounter=\count117
 \ALG@tmplength=\skip78
 )
 Document Style - pseudocode environments for use with the `algorithmicx' style
@@ -440,46 +453,35 @@ LaTeX Info: Redefining \bm on input line 204.
 (C:\Users\as\AppData\Roaming\MiKTeX\2.9\tex\latex\setspace\setspace.sty
 Package: setspace 2011/12/19 v6.7a set line spacing
 )
-\c@theorem=\count116
+\c@theorem=\count118
 
 ("D:\Annika\Uni\10. Semester\Masterarbeit\Proximal Bundle Inexact Information\Git Hub\Masterarbeit\LaTeX\Bundle_methods_
 for_nonsmooth_nonconvex_problems_with_inexact_information.aux"
 ("D:\Annika\Uni\10. Semester\Masterarbeit\Proximal Bundle Inexact Information\Git Hub\Masterarbeit\LaTeX\Chapters/Introd
 uction.aux"))
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 112.
-LaTeX Font Info:    ... okay on input line 112.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 112.
-LaTeX Font Info:    ... okay on input line 112.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 112.
-LaTeX Font Info:    ... okay on input line 112.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 112.
-LaTeX Font Info:    ... okay on input line 112.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 112.
-LaTeX Font Info:    ... okay on input line 112.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 112.
-LaTeX Font Info:    ... okay on input line 112.
-LaTeX Font Info:    Try loading font information for T1+lmr on input line 112.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 114.
+LaTeX Font Info:    ... okay on input line 114.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 114.
+LaTeX Font Info:    ... okay on input line 114.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 114.
+LaTeX Font Info:    ... okay on input line 114.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 114.
+LaTeX Font Info:    ... okay on input line 114.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 114.
+LaTeX Font Info:    ... okay on input line 114.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 114.
+LaTeX Font Info:    ... okay on input line 114.
+LaTeX Font Info:    Try loading font information for T1+lmr on input line 114.
  ("C:\Program Files\Annika Programme\MiKTeX\tex\latex\lm\t1lmr.fd"
 File: t1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-(C:\Users\as\AppData\Roaming\MiKTeX\2.9\tex\context\base\supp-pdf.mkii
-[Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count117
-\scratchdimen=\dimen129
-\scratchbox=\box38
-\nofMPsegments=\count118
-\nofMParguments=\count119
-\everyMPshowfont=\toks32
-\MPscratchCnt=\count120
-\MPscratchDim=\dimen130
-\MPnumerator=\count121
-\makeMPintoPDFobject=\count122
-\everyMPtoPDFconversion=\toks33
-)
+Package caption Info: Begin \AtBeginDocument code.
+Package caption Info: End \AtBeginDocument code.
+
 
 bibgerm.sty: babel.sty detected
 
-LaTeX Font Info:    Try loading font information for T1+lmss on input line 131.
+LaTeX Font Info:    Try loading font information for T1+lmss on input line 133.
 ("C:\Program Files\Annika Programme\MiKTeX\tex\latex\lm\t1lmss.fd"
 File: t1lmss.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
@@ -522,7 +524,7 @@ LaTeX Font Info:    Try loading font information for U+msb on input line 6.
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ) [1
 
-{C:/Users/as/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}])
+])
 \tf@toc=\write3
  [2]
 ("D:\Annika\Uni\10. Semester\Masterarbeit\Proximal Bundle Inexact Information\Git Hub\Masterarbeit\LaTeX\Chapters/Introd
@@ -581,7 +583,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 163--164
 [21] [22] [23] [24] [25])
 ("D:\Annika\Uni\10. Semester\Masterarbeit\Proximal Bundle Inexact Information\Git Hub\Masterarbeit\LaTeX\Chapters/Variab
 le_Metric.tex" [26] [27] [28] [29] [30] [31] [32] [33] [34] [35] [36] [37] [38] [39]
-Overfull \hbox (47.94351pt too wide) in paragraph at lines 608--609
+Overfull \hbox (47.94351pt too wide) in paragraph at lines 611--612
 []\T1/lmr/m/n/12 Vanishing noise: $[] \OT1/lmr/m/n/12 = 0\OML/lmm/m/it/12 :\OT1/lmr/m/n/12 01\OML/lmm/m/it/12 ; [] \OT1
 /lmr/m/n/12 = []\OMS/lmsy/m/n/12 f\OT1/lmr/m/n/12 0\OML/lmm/m/it/12 :\OT1/lmr/m/n/12 01\OML/lmm/m/it/12 ; \OMS/lmsy/m/n/
 12 k\OML/lmm/m/it/12 x[]\OMS/lmsy/m/n/12 k\OML/lmm/m/it/12 =\OT1/lmr/m/n/12 100\OMS/lmsy/m/n/12 g$ \T1/lmr/m/n/12 and $[
@@ -590,9 +592,29 @@ T1/lmr/m/n/12 0\OML/lmm/m/it/12 :\OT1/lmr/m/n/12 01\OML/lmm/m/it/12 ; \OMS/lmsy/
 n/12 k\OML/lmm/m/it/12 =\OT1/lmr/m/n/12 100\OMS/lmsy/m/n/12 g$
  []
 
-[40])
+[40] [41]
+File: Pictures/Plots/final_parab.eps Graphic file (type eps)
+ <Pictures/Plots/final_parab.eps>
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <10> on input line 663.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <7> on input line 663.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <5> on input line 663.
+File: Pictures/Plots/final_parab_detail.eps Graphic file (type eps)
+ <Pictures/Plots/final_parab_detail.eps>
+File: Pictures/Plots/final_nonsm_parab.eps Graphic file (type eps)
+
+<Pictures/Plots/final_nonsm_parab.eps>
+File: Pictures/Plots/final_nonsm_parab_detail.eps Graphic file (type eps)
+ <Pictures/Plots/final_nonsm_parab_detail.eps>
+Underfull \hbox (badness 10000) in paragraph at lines 701--701
+
+ []
+
+[42])
 ("D:\Annika\Uni\10. Semester\Masterarbeit\Proximal Bundle Inexact Information\Git Hub\Masterarbeit\LaTeX\Chapters/Bileve
-l_Application.tex" [41] [42] [43] [44]
+l_Application.tex" [43] [44] [45] [46]
 Overfull \hbox (52.7907pt too wide) in paragraph at lines 125--126
 []\T1/lmr/bx/n/12 Theorem 7.1 \T1/lmr/m/n/12 ([[], The-o-rem 6.1]) []\T1/lmr/m/it/12 Given a lin-early sep-a-ra-ble trai
 n-ing sam-ple $\OT1/lmr/m/n/12 
@@ -600,14 +622,14 @@ n-ing sam-ple $\OT1/lmr/m/n/12
 r/m/n/12 ))$
  []
 
-[45] [46] [47] [48]
+[47] [48] [49] [50]
 Overfull \hbox (17.12895pt too wide) in paragraph at lines 293--295
 \T1/lmr/m/n/12 Let us first as-sume that the outer and in-ner ob-jec-tive func-tions and $\OML/lmm/m/it/12 w\OT1/lmr/m/n
 /12 (\OML/lmm/m/it/12 \OT1/lmr/m/n/12 ) = [] \OMS/lmsy/m/n/12 L[]\OT1/lmr/m/n/12 (\OML/lmm/m/it/12 w; \OT1/lmr/m/n/12 
 )$
  []
 
-[49]
+[51]
 Underfull \hbox (badness 10000) in paragraph at lines 337--338
 
  []
@@ -617,33 +639,33 @@ Underfull \hbox (badness 10000) in paragraph at lines 339--340
 
  []
 
-[50]
+[52]
 Underfull \hbox (badness 10000) in paragraph at lines 363--364
 
  []
 
-[51]
+[53]
 Underfull \hbox (badness 10000) in paragraph at lines 406--408
 
  []
 
-[52] [53] [54] [55] [56]
+[54] [55] [56] [57] [58]
 LaTeX Font Info:    Try loading font information for T1+lmtt on input line 584.
  ("C:\Program Files\Annika Programme\MiKTeX\tex\latex\lm\t1lmtt.fd"
 File: t1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-Overfull \hbox (58.26138pt too wide) in paragraph at lines 664--665
+Overfull \hbox (58.26138pt too wide) in paragraph at lines 665--666
 [] 
  []
 
-[57])
-Overfull \hbox (35.24765pt too wide) in paragraph at lines 674--144
+[59]
+Overfull \hbox (264.82431pt too wide) in paragraph at lines 682--683
 [] 
  []
 
-[58]
+[60]) [61]
 ("D:\Annika\Uni\10. Semester\Masterarbeit\Proximal Bundle Inexact Information\Git Hub\Masterarbeit\LaTeX\Bundle_methods_
-for_nonsmooth_nonconvex_problems_with_inexact_information.bbl" [59] [60] [61]) [62]
+for_nonsmooth_nonconvex_problems_with_inexact_information.bbl" [62] [63] [64]) [65]
 ("D:\Annika\Uni\10. Semester\Masterarbeit\Proximal Bundle Inexact Information\Git Hub\Masterarbeit\LaTeX\Bundle_methods_
 for_nonsmooth_nonconvex_problems_with_inexact_information.aux"
 ("D:\Annika\Uni\10. Semester\Masterarbeit\Proximal Bundle Inexact Information\Git Hub\Masterarbeit\LaTeX\Chapters/Introd
@@ -653,31 +675,13 @@ uction.aux")) )
 ### simple group (level 1) entered at line 1061 ({)
 ### bottom level 
 Here is how much of TeX's memory you used:
- 7535 strings out of 493921
- 116262 string characters out of 3142078
- 252578 words of memory out of 3000000
- 10645 multiletter control sequences out of 15000+200000
- 64877 words of font info for 56 fonts, out of 3000000 for 9000
+ 8100 strings out of 493922
+ 128737 string characters out of 3142101
+ 258497 words of memory out of 3000000
+ 11191 multiletter control sequences out of 15000+200000
+ 109130 words of font info for 89 fonts, out of 3000000 for 9000
  841 hyphenation exceptions out of 8191
- 40i,18n,48p,670b,2404s stack positions out of 5000i,500n,10000p,200000b,50000s
-{C:/Program Files/Annika Programme/MiKTeX/fonts/enc/dvips/lm/lm-ec.enc}{C:/Program Files/Annika Programm
-e/MiKTeX/fonts/enc/dvips/lm/lm-mathit.enc}{C:/Program Files/Annika Programme/MiKTeX/fonts/enc/dvips/lm/lm-rm.enc}{C:/Pro
-gram Files/Annika Programme/MiKTeX/fonts/enc/dvips/lm/lm-mathsy.enc}{C:/Program Files/Annika Programme/MiKTeX/fonts/enc/
-dvips/lm/lm-rmtt.enc}{C:/Program Files/Annika Programme/MiKTeX/fonts/enc/dvips/lm/lm-mathex.enc}<C:/Program Files/Annika
- Programme/MiKTeX/fonts/type1/public/lm/lmbx12.pfb><C:/Program Files/Annika Programme/MiKTeX/fonts/type1/public/lm/lmex1
-0.pfb><C:/Program Files/Annika Programme/MiKTeX/fonts/type1/public/lm/lmmi12.pfb><C:/Program Files/Annika Programme/MiKT
-eX/fonts/type1/public/lm/lmmi6.pfb><C:/Program Files/Annika Programme/MiKTeX/fonts/type1/public/lm/lmmi8.pfb><C:/Program
- Files/Annika Programme/MiKTeX/fonts/type1/public/lm/lmmib10.pfb><C:/Program Files/Annika Programme/MiKTeX/fonts/type1/p
-ublic/lm/lmr12.pfb><C:/Program Files/Annika Programme/MiKTeX/fonts/type1/public/lm/lmr6.pfb><C:/Program Files/Annika Pro
-gramme/MiKTeX/fonts/type1/public/lm/lmr8.pfb><C:/Program Files/Annika Programme/MiKTeX/fonts/type1/public/lm/lmri12.pfb>
-<C:/Program Files/Annika Programme/MiKTeX/fonts/type1/public/lm/lmssbx10.pfb><C:/Program Files/Annika Programme/MiKTeX/f
-onts/type1/public/lm/lmsy10.pfb><C:/Program Files/Annika Programme/MiKTeX/fonts/type1/public/lm/lmsy6.pfb><C:/Program Fi
-les/Annika Programme/MiKTeX/fonts/type1/public/lm/lmsy8.pfb><C:/Program Files/Annika Programme/MiKTeX/fonts/type1/public
-/lm/lmtt12.pfb><C:/Program Files/Annika Programme/MiKTeX/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on Bundle_methods_for_nonsmooth_nonconvex_problems_with_inexact_information.pdf (64 pages, 441682 bytes).
+ 40i,18n,48p,812b,2428s stack positions out of 5000i,500n,10000p,200000b,50000s
 
-PDF statistics:
- 284 PDF objects out of 1000 (max. 8388607)
- 0 named destinations out of 1000 (max. 500000)
- 1 words of extra memory for PDF output out of 10000 (max. 10000000)
+Output written on Bundle_methods_for_nonsmooth_nonconvex_problems_with_inexact_information.dvi (67 pages, 220136 bytes).
 

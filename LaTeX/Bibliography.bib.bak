@@ -741,8 +741,21 @@
 @PhdThesis{Musicant2000,
   author = {David R. Musicant},
   title  = {Data Mining via Mathematical Programming and Machine Learning},
-  school = {University of Wisconsin},
+  school = {University of Wisconsin, Madison},
   year   = {2000},
+}
+
+@Article{Kao2004,
+  author  = {W. C. Kao and K. M. Chung and C. L. Sun and C. J. Lin},
+  title   = {Decomposition Methods for Linear Support Vector Machines},
+  journal = {Neural Computation},
+  year    = {2004},
+  volume  = {16},
+  number  = {8},
+  pages   = {1689-1704},
+  month   = {Aug},
+  doi     = {10.1162/089976604774201640},
+  issn    = {0899-7667},
 }
 
 @Comment{jabref-meta: databaseType:bibtex;}

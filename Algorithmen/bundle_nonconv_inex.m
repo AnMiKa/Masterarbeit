@@ -1,4 +1,4 @@
-function [ f_hat, x_hat, time, k ] = bundle_nonconv_inex( x0, fun, subgr_fun, noise, kmax, tol, m, t, gamma)
+function [ f_hat, x_hat, time, k, x_hats ] = bundle_nonconv_inex( x0, fun, subgr_fun, noise, kmax, tol, m, t, gamma)
 
 % proximal bundle algorihtm that can handle nonsmooth nonconvex functions with
 % inexact information on function value and gradient
@@ -77,7 +77,7 @@ end
 %% 0 step: initialization
 tic;
 
-u_1 = 1.2; % parameter for t update
+u_1 = 2; % parameter for t update
 u_2 = 0.8;
 t_min = 0.03; % minimal t value to make sure that sequence does not have 0 as accumulation point
 
@@ -86,6 +86,7 @@ i_null = 0;              % null-step counter
 
 x = x0;                  % trial point, important for bundle information
 x_hat = x0;              % serious point
+%x_hats = x0;
 eta = 0;                 % convexification parameter for modelfunction
 c = 0;                   % augmented linearization error (error of convexified model-function)
 J = 1;                   % index set defining bundle information
@@ -118,9 +119,9 @@ b = [c; x_hat+10;-x_hat+10];
 %alpha = lambda.ineqlin(1:lJ); % lagrange multiplier for inequality constraints
 alpha = lambda.inequality(1:lJ);
 
-if abs(sum(alpha)-1)> 1e-15
-    warning('abs(sum(alpha)-1) = %d \n',abs(sum(alpha)-1))
-end
+%if abs(sum(alpha)-1)> 1e-15
+%    warning('abs(sum(alpha)-1) = %d \n',abs(sum(alpha)-1))
+%end
 
 %% 2nd step: aggregated objects
 xi = xi_d(1);
@@ -141,8 +142,8 @@ C = alpha' * c;     % augmented aggregate error
 % if   -xi + eta / 2 * norm(d)^2 <= tol; % stopping condition like in nonconv, exact, nor rewritten
 % if norm(E + t * G) <= tol;  % stopping condition like in nonconv, inex
 % if C+1/t*sum(d.^2) < tol
-if C+1/t*sum(d.^2) < tol%*(1+f_hat)
-    fprintf('Algorithm stopped successfully by meeting tolerance after  %d  iterations and %d null-steps. \n', k, i_null);
+if C+1/t*sum(d.^2) < tol*(1+f_hat)
+    %fprintf('Algorithm stopped successfully by meeting tolerance after  %d  iterations and %d null-steps. \n', k, i_null);
     break
 end
  
@@ -156,6 +157,7 @@ x = [x, x_hat + d];  % add new iterate to bundle
 %serious step  test
 if f_k_1 - f_hat <= m * (-xi + eta / 2 * norm(d)^2)   % serious step condition
     x_hat = x_hat + d;   % update x_hat
+    %x_hats = [x_hats, x_hat];
     f_hat =  f_k_1;  % update f_hat
     t = u_1*t; % t_(k+1) > 0
 else
@@ -204,9 +206,9 @@ s = g + eta * bsxfun(@minus, x, x_hat);
 % f(end)
 end
 time = toc;
-if k == kmax
-    fprintf('Algorithm stopped because the maximum number %d of iterations was reached \n', k);
-    fprintf('%d nullsteps were executed. \n', i_null)
-end
+%if k == kmax
+%    fprintf('Algorithm stopped because the maximum number %d of iterations was reached \n', k);
+%    fprintf('%d nullsteps were executed. \n', i_null)
+%end
 %% END of the algorithm
 end

@@ -5,7 +5,9 @@ function [ Q ] = BFGS_update(d,gm,gp,Q)
 bound = 1e8;
 
 y = gp-gm;
-if norm(d'*y) < 1/bound
+if Q == 0
+    Q = (y*y')/(y'*d);
+elseif norm(d'*y) < 1/bound || abs(d'*Q*d) < 1/bound
 else
     Qd = Q*d;
     Q = Q + (y*y')/(y'*d)-(Qd*Qd')/(d'*Qd);
