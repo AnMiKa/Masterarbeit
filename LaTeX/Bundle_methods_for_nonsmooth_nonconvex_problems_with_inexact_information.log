@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=latex 2017.6.11)  17 JUN 2017 13:25
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=latex 2017.6.11)  18 JUN 2017 15:54
 entering extended mode
 **Bundle_methods_for_nonsmooth_nonconvex_problems_with_inexact_information.tex
 
@@ -458,7 +458,11 @@ Package: setspace 2011/12/19 v6.7a set line spacing
 ("D:\Annika\Uni\10. Semester\Masterarbeit\Proximal Bundle Inexact Information\Git Hub\Masterarbeit\LaTeX\Bundle_methods_
 for_nonsmooth_nonconvex_problems_with_inexact_information.aux"
 ("D:\Annika\Uni\10. Semester\Masterarbeit\Proximal Bundle Inexact Information\Git Hub\Masterarbeit\LaTeX\Chapters/Introd
-uction.aux"))
+uction.aux")
+
+LaTeX Warning: Label `Im_Nonsm_Parab' multiply defined.
+
+)
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 114.
 LaTeX Font Info:    ... okay on input line 114.
 LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 114.
@@ -608,11 +612,16 @@ File: Pictures/Plots/final_nonsm_parab.eps Graphic file (type eps)
 <Pictures/Plots/final_nonsm_parab.eps>
 File: Pictures/Plots/final_nonsm_parab_detail.eps Graphic file (type eps)
  <Pictures/Plots/final_nonsm_parab_detail.eps>
-Underfull \hbox (badness 10000) in paragraph at lines 701--701
+File: Pictures/Plots/steps_bar.eps Graphic file (type eps)
+ <Pictures/Plots/steps_bar.eps>
+File: Pictures/Plots/final_nonsm_parab_detail.eps Graphic file (type eps)
+
+<Pictures/Plots/final_nonsm_parab_detail.eps> [42]
+Underfull \hbox (badness 10000) in paragraph at lines 715--715
 
  []
 
-[42])
+)
 ("D:\Annika\Uni\10. Semester\Masterarbeit\Proximal Bundle Inexact Information\Git Hub\Masterarbeit\LaTeX\Chapters/Bileve
 l_Application.tex" [43] [44] [45] [46]
 Overfull \hbox (52.7907pt too wide) in paragraph at lines 125--126
@@ -622,14 +631,14 @@ n-ing sam-ple $\OT1/lmr/m/n/12
 r/m/n/12 ))$
  []
 
-[47] [48] [49] [50]
+[47] [48] [49] [50] [51]
 Overfull \hbox (17.12895pt too wide) in paragraph at lines 293--295
 \T1/lmr/m/n/12 Let us first as-sume that the outer and in-ner ob-jec-tive func-tions and $\OML/lmm/m/it/12 w\OT1/lmr/m/n
 /12 (\OML/lmm/m/it/12 \OT1/lmr/m/n/12 ) = [] \OMS/lmsy/m/n/12 L[]\OT1/lmr/m/n/12 (\OML/lmm/m/it/12 w; \OT1/lmr/m/n/12 
 )$
  []
 
-[51]
+[52]
 Underfull \hbox (badness 10000) in paragraph at lines 337--338
 
  []
@@ -639,49 +648,53 @@ Underfull \hbox (badness 10000) in paragraph at lines 339--340
 
  []
 
-[52]
+[53]
 Underfull \hbox (badness 10000) in paragraph at lines 363--364
 
  []
 
-[53]
+[54]
 Underfull \hbox (badness 10000) in paragraph at lines 406--408
 
  []
 
-[54] [55] [56] [57] [58]
+[55] [56] [57] [58]
 LaTeX Font Info:    Try loading font information for T1+lmtt on input line 584.
  ("C:\Program Files\Annika Programme\MiKTeX\tex\latex\lm\t1lmtt.fd"
 File: t1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
-)
+) [59]
 Overfull \hbox (58.26138pt too wide) in paragraph at lines 665--666
 [] 
  []
 
-[59]
+[60]
 Overfull \hbox (264.82431pt too wide) in paragraph at lines 682--683
 [] 
  []
 
-[60]) [61]
+) [61]
 ("D:\Annika\Uni\10. Semester\Masterarbeit\Proximal Bundle Inexact Information\Git Hub\Masterarbeit\LaTeX\Bundle_methods_
 for_nonsmooth_nonconvex_problems_with_inexact_information.bbl" [62] [63] [64]) [65]
 ("D:\Annika\Uni\10. Semester\Masterarbeit\Proximal Bundle Inexact Information\Git Hub\Masterarbeit\LaTeX\Bundle_methods_
 for_nonsmooth_nonconvex_problems_with_inexact_information.aux"
 ("D:\Annika\Uni\10. Semester\Masterarbeit\Proximal Bundle Inexact Information\Git Hub\Masterarbeit\LaTeX\Chapters/Introd
-uction.aux")) )
+uction.aux"))
+
+LaTeX Warning: There were multiply-defined labels.
+
+ )
 (\end occurred inside a group at level 1)
 
 ### simple group (level 1) entered at line 1061 ({)
 ### bottom level 
 Here is how much of TeX's memory you used:
- 8100 strings out of 493922
- 128737 string characters out of 3142101
- 258497 words of memory out of 3000000
- 11191 multiletter control sequences out of 15000+200000
+ 8102 strings out of 493922
+ 128778 string characters out of 3142101
+ 255536 words of memory out of 3000000
+ 11192 multiletter control sequences out of 15000+200000
  109130 words of font info for 89 fonts, out of 3000000 for 9000
  841 hyphenation exceptions out of 8191
  40i,18n,48p,812b,2428s stack positions out of 5000i,500n,10000p,200000b,50000s
 
-Output written on Bundle_methods_for_nonsmooth_nonconvex_problems_with_inexact_information.dvi (67 pages, 220136 bytes).
+Output written on Bundle_methods_for_nonsmooth_nonconvex_problems_with_inexact_information.dvi (67 pages, 220860 bytes).
 

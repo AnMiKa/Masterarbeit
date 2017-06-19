@@ -1,24 +1,24 @@
 %plots the 5 test functions for different x-dimensions and forms of noise
 
 %% no noise
-% % tol: 1e-3, smaller dimension
-% % Create a stem plot using the stem function
-% figure
-% hold on
-% box on
-% x = 1:15;
-% for i = 1:5
-%     stem(x+(i-1)*.15,log_f_h30_s(:,i), 'LineStyle',':','Color','b','Marker','+','LineWidth',0.9)
-%     stem(x+(i-1)*.15,log_f_nb30_s(:,i), 'p:c','filled')
-%     stem(x+(i-1)*.15,log_f_ns30_s(:,i), 'x:m','filled')
-% end
-% % Add a legend
-% legend('Nonconv Inex Bundle', 'Variable Metric BFGS', ...
-%     'Varible Metric SR1')
-% title('tol: 1e-3, no noise')
-% xlabel('n')
-% ylabel('abs log distance from 0')
-% axis([0.85, 16, 0, 9.5])
+% tol: 1e-3, smaller dimension
+% Create a stem plot using the stem function
+figure
+hold on
+box on
+x = 1:15;
+for i = 1:5
+    stem(x+(i-1)*.15,log_f_h30_s(:,i), 'LineStyle',':','Color','b','Marker','+','LineWidth',0.9)
+    stem(x+(i-1)*.15,log_f_nb30_s(:,i), 'p:c','filled')
+    stem(x+(i-1)*.15,log_f_ns30_s(:,i), 'x:m','filled')
+end
+% Add a legend
+legend('Nonconv Inex Bundle', 'Variable Metric BFGS', ...
+    'Varible Metric SR1')
+title('\texttt{tol}: $10-3$, no noise','Interpreter','latex')
+xlabel('$n$','Interpreter','latex')
+ylabel('abs log distance from 0','Interpreter','latex')
+axis([0.85, 16, 0, 9.5])
 % xticks(1:15)
 % set(gca,'ygrid','on')
 % savefig('1e-3_0s.fig')

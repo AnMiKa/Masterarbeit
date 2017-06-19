@@ -91,7 +91,7 @@ i_null = 0;              % null-step counter
 
 x = x0;                  % initial bundle point
 x_hat = x;               % initial serious point
-%x_hats = x0;
+x_hats = x0;
 J = 1;                   % index set defining bundle information
 lJ = 1;                  % size of the crrent bundle
 f = feval(fun, x0, noise);      % initial inexact function value
@@ -147,7 +147,7 @@ delta = C+d'*(Q+1/t*eye(n))*d;
 % if C+sum(d.^2) <= tol                             % 6a) like in nonconv, inex
 % if norm((Q+1/t*eye(n))*d) <= tol && C <= tol      % 7) like in Ulbrich for Q/Noll variation
 % if delta < tol                                    % 8) as thought of most sensible -> Herleitung siehe Blatt
-if delta < tol*(1+f_hat)                            % 8) as thought of most sensible -> Herleitung siehe Blatt   
+if delta < tol%*(1+f_hat)                            % 8) as thought of most sensible -> Herleitung siehe Blatt   
 % if abs(f) < tol
 % if C+d'*(1/k*Q+1/t*eye(n))*d < tol
     %fprintf('Algorithm stopped successfully by meeting tolerance after  %d  iterations and %d null-steps. \n', k-1, i_null);
@@ -166,7 +166,7 @@ g(:,end+1) = feval(subgr_fun,x_k_1,noise);% add information to bundle
 if f_k_1 - f_hat <= -m * delta   % serious step condition
     % hier war auch das eigenartige delta von oben
     x_hat = x_hat + d;   % update x_hat
-    %x_hats = [x_hats, x_hat];
+    x_hats = [x_hats, x_hat];
     f_hat =  f_k_1;  % update f_hat
     g_hat_old = g_hat;
     g_hat = g(:,end);

@@ -86,7 +86,7 @@ i_null = 0;              % null-step counter
 
 x = x0;                  % trial point, important for bundle information
 x_hat = x0;              % serious point
-%x_hats = x0;
+x_hats = x0;
 eta = 0;                 % convexification parameter for modelfunction
 c = 0;                   % augmented linearization error (error of convexified model-function)
 J = 1;                   % index set defining bundle information
@@ -142,7 +142,7 @@ C = alpha' * c;     % augmented aggregate error
 % if   -xi + eta / 2 * norm(d)^2 <= tol; % stopping condition like in nonconv, exact, nor rewritten
 % if norm(E + t * G) <= tol;  % stopping condition like in nonconv, inex
 % if C+1/t*sum(d.^2) < tol
-if C+1/t*sum(d.^2) < tol*(1+f_hat)
+if C+1/t*sum(d.^2) < tol%*(1+f_hat)
     %fprintf('Algorithm stopped successfully by meeting tolerance after  %d  iterations and %d null-steps. \n', k, i_null);
     break
 end
@@ -157,7 +157,7 @@ x = [x, x_hat + d];  % add new iterate to bundle
 %serious step  test
 if f_k_1 - f_hat <= m * (-xi + eta / 2 * norm(d)^2)   % serious step condition
     x_hat = x_hat + d;   % update x_hat
-    %x_hats = [x_hats, x_hat];
+    x_hats = [x_hats, x_hat];
     f_hat =  f_k_1;  % update f_hat
     t = u_1*t; % t_(k+1) > 0
 else
