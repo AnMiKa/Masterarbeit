@@ -577,23 +577,32 @@ Table ??? shows the results
 
 \begin{center}
 \begin{table}[H]%
-	\begin{tabular}{lllll}
+	\begin{tabular}{llclll}
 		\hline
-		Data set & Method & CV Error & Test Error & Time (sec.) \\
+		Data set & Method & \(T/(T-1)\lambda\) & CV Error & Test Error & Time (sec.) \\
 		\hline
-		\texttt{pima} & hingequad & \(60.72 \pm 9.56\) & \(24.11\pm 2.71\) & \(2.15 \pm 0.52\)\\
+		\texttt{pima} & hingequad & \(10^{-15}\) & \(60.72 \pm 9.56\) & \(24.11\pm 2.71\) & \(2.15 \pm 0.52\)\\
 		 &              hinge loss & & & \\
-		\texttt{cancer} &  hingequad & \(10.75\pm 7.52\) & \(3.41 \pm 1.16\) & \(3.43 \pm 28.84\) \\
+		\texttt{cancer} &  hingequad & \(0.6<\lambda<10.3\) & \(10.75\pm 7.52\) & \(3.41 \pm 1.16\) & \(3.43 \pm 28.84\) \\
 		 &              hinge loss & & & \\
-		\texttt{heart} &  hingequad & \(48.73 \pm 5.53\) & \(15.56 \pm 4.44\) & \(3.43 \pm 43.39\)\\
+		\texttt{heart} &  hingequad & \(10^{-16}\) & \(48.73 \pm 5.53\) & \(15.56 \pm 4.44\) & \(3.43 \pm 43.39\)\\
 		 &              hinge loss & & & \\
-		\texttt{ionosphere} &  hingequad & \(39.30 \pm 5.32\) & \(12.21 \pm 4.10\) & \(14.17 \pm 51.27\)\\
+		\texttt{ionosphere} &  hingequad & \(3<\lambda<7.5\) & \(39.30 \pm 5.32\) & \(12.21 \pm 4.10\) & \(14.17 \pm 51.27\)\\
 		 &              hinge loss & & & \\
 	\end{tabular}
 	\caption{}
 	\label{res_table}
 \end{table}
 \end{center}
+
+\textcolor{red}{Results for\(\lambda\) only if it stayed there after second run with second starting value\\
+change in \(\lambda\) has very little effect; only after comma for ``percent-writing''\\
+errors like in table for all but ionosphere -> has only 5\% error?; ???-> error the smaller, the smaller \(\lambda\)???\\
+pima simply not depending on \(\lambda\)\\
+cancer not really depending in \(\lambda\), only if it gets really big \(>1000\) (for \(>10\) minor change)\\
+heart: changes a lot for the different \(\lambda\), but best: \(\lambda=0\)\\
+seems that results come because of scaling of objective -> consistent with the plots I made\\
+also consider: loss function of optimizer is not the one that calculates the test error } 
 
 %\textcolor{red}{interesting: 0 computing time for ionosphere??? - solved now -> vertippt}
 
@@ -640,18 +649,19 @@ for covtype, ``Hare''-stopping condition\\
 \begin{tabular}{c|c|c|c|c|c|c}
 trainigs set & starting value & lambda & time & k & inull & Fehler\\
 \hline
-1,000 & 1 & 86.3493 & 62.8280 sek & 29 & 0 & \\
-1,000 & 86 & 86.3488 & 130.1105 sek & 61 & 8 & 19\% \\
-1,000 (quadprog) & 86 & 86.3488 & 6.5572 sek & 61 & 8 & \\
-5,000 qp & 1 & 46.4142 & 16.2338 sek & 27 & 0 & \\
-5,000 qp & 47 & 46.4142 & 34.9573 sek & 60 & 0 & 14.74\% \\
-10,000 qp & 1 & 49.8146 & 59.7462 sek & 49 & 0 & \\
-10,000 qp & 50 & 49.8146 & 85.0816 sek & 69 & 0 & 15.32\% \\
-50,000 qp & 58.6842 & 588.2828 sek & 45 & 0 & \\
-50,000 qp & 60 & 58.6842 & 897.8123 sek & 69 & 0 & 14.86\% \\
-100,000 qp & 1 & 73.3711 & 1358.7 sek = 22.6455 min & 37 & 0 & 39.41
+1,000 & 1 &  & 62.8280 sek & 29 & 0 & \\
+1,000 & 86 &  & 130.1105 sek & 61 & 8 & 19\% \\
+1,000 (quadprog) & 86 & & 6.5572 sek & 61 & 8 & \\
+5,000 qp & 1 &  & 16.2338 sek & 27 & 0 & \\
+5,000 qp & 47 &  & 34.9573 sek & 60 & 0 & 14.74\% \\
+10,000 qp & 1 &  & 59.7462 sek & 49 & 0 & \\
+10,000 qp & 50 &  & 85.0816 sek & 69 & 0 & 15.32\% \\
+50,000 qp &  & 588.2828 sek & 45 & 0 & \\
+50,000 qp & 60 &  & 897.8123 sek & 69 & 0 & 14.86\% \\
+100,000 qp & 1 &  & 1358.7 sek = 22.6455 min & 37 & 0 & 39.41
 \end{tabular}
 \\
+!!!!!!!!!!!did not take \(\lambda\) but the error value!!!!!!!!!!!!!!!\\
 Fehler berechnet f\"ur Daten 1001 bis 2000 von komplettem Datensatz\\
 Versuch mit Daten 1001-5000: scheint Problem bei matrizenaufbau zu haben \\
 Analyse Timer: \(100\%\) der Zeit in postpro-wb-class-hinge-qpas dabei \(100\%\) der Zeit für qpas\\

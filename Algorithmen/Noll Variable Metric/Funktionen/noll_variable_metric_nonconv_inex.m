@@ -103,7 +103,7 @@ c = 0;                   % initial augmented error
 Q = eye(n);              % initial approximation to metric matrix
 
 % parameters for t-update
-u_1 = 2;
+u_1 = 1.2;
 u_2 = 0.8;
 t_min = 0.03; % minimal t value to make sure that sequence does not have 0 as accumulation point
 

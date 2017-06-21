@@ -2,6 +2,7 @@
 % outer problem unconstrained
 tic
 %function_name = @(lambda) overall_obj(lambda);
-[x,fval,exitflag] = fminsearch(@overall_obj,86);
+%[x,fval,exitflag] = fminsearch(@overall_obj,1);
+%[x,fval,exitflag] = fminbd(@overall_obj,0.1);
 time1 = toc;
-fprintf('lambda = %d;     time = %d \n', fval, time1)
+fprintf('lambda = %d;     time = %d \n', x, time1)

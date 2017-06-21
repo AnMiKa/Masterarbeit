@@ -550,17 +550,116 @@ To tackle the described problem, the following strategies were tested:
 	\item manipulation only at the kinks
 \end{itemize}}
 
-\subsection{\textcolor{red}{Numerical Testing}}
+\subsection{Numerical Testing}
 
-\textcolor{red}{tested in two ways; compared to Hare-Algortihm\\
-first plots with.. functions like in paper, then invetigated in more detail for which functions \(Q\) is of advantage\\}
+To compare the proximal bundle algorithm \ref{sec_nonconv_inex}.1 with its variable metric variant Algorithm  \ref{sec_variable_metric}.1 it is tested on some academic test functions and on a set of lower-\(\mathcal{C}^2\) functions in different dimensions.
+The tests were done with the following parameters given in \cite{Hare2016}: \(m = 0.05\), \(\gamma = 2\) and \(t_0 = 0.1\). The chosen stopping tolerance was \(\mathtt{tol} = 10^{-6}\). If the algorithms did not meet the stopping condition after \(250n\) steps for \(x \in \R^n\), they were terminated. Contrary to \cite{Hare2016} the stopping test was taken as given in the algorithm and the tolerance was not multiplied by \(1+\hat{f}_k\).
+The proximity control parameters \(\kappa_-\) and \(\kappa_+\) from (\ref{t_minus}) and (\ref{t_plus}) respectively were chosen as \(\kappa_-= 0.8\) and \(\kappa_+=2\).  
 
-\textcolor{red}{
-\begin{itemize}
-	\item Vergleich mit Hare Version
-	\item Genauigkeit
-	\item Geschwindigkeit
-\end{itemize}}
+\subsubsection{Academic Test Examples}
+
+To explore the benefit of the matrix \(Q\) the algorithms \ref{sec_nonconv_inex}.1 and \ref{sec_variable_metric}.1 were tested on a smooth and a nonsmooth version of a badly conditioned parabola.
+The smooth test function was 
+
+\[p(x): \R^2 \to \R, \quad x \mapsto \Langle x, Ax \Rangle,\]
+
+where the matrix was chosen as \(A = \begin{pmatrix} 1&0 \\ 0&50\end{pmatrix}\). The condition number of this matrix is \(\kappa_A = \frac{\lambda_{max}}{\lambda{min}} = 50\), where \(\lambda_{min}, \lambda_{max}\) are the smallest and biggest eigenvalue of \(A\) respectively. From smooth optimization it is known that gradient descent methods have a rather poor convergence rate for such badly conditioned matrices (c.f. Chapter 7.4 in \cite{Ulbrich2012}).
+Figure \ref{fig_contour_parab} shows the sequences of serious iterates resulting from the two algorithms on the contour lines of the parabola. On the left the complete sequence is depicted. The plot on the right shows a detail of the left figure near the minimum of the objective
+As the descent direction taken in algorithm \ref{sec_nonconv_inex}.1 is an aggregate subgradient and second order information is only provided by the stabilization term \(\frac{1}{t_k}\|d\|^2\) we can see a zig-zagging behavior of the sequence for the parabola.
+Contrary to that the sequence of serous iterates provided by algorithm \ref{sec_variable_metric}.1 can take advantage of the second order information provided by \(Q\).
+It walks into the minimum almost in a straight line. The difference in behavior of the two algorithms is especially visible on the detail plot that shows the situation near the minimum: The proximal bundle algorithm needs a lot of steps circling around the minimum whereas the variable metric algorithm approaches the minimum directly. The resulting advantage of this behavior is the smaller number of steps needed by the variable metric algorithm. 
+
+
+%this means: no zigzagging, less overall steps and less null steps, Hare Algorithm much more steps near the minimum, also many null steps there\\
+%\textcolor{red}{plot, evtl: plot von Minimum}
+
+\begin{figure}[H]
+	\begin{subfigure}[t]{0.49\textwidth}
+		\includegraphics[width=\textwidth]{Pictures/Plots/final_parab.eps}
+		%\subcaption{}
+		%Parabola, \(kappa = 2\), sequwnces of \(x_{hats}\); Noll:\(10|1\), Hare: \(28|12\)
+	\end{subfigure}
+	\begin{subfigure}[t]{0.49\textwidth}
+		\begin{center}
+			\includegraphics[width=\textwidth]{Pictures/Plots/final_parab_detail.eps}
+			%\subcaption{detail, many steps of Hare in the end}
+		\end{center}
+	\end{subfigure}
+	\caption{Sequences of serious steps constructed by the proximal bundle algorithm and the variable metric algorithm respectively on the level lines of parabola \(p\). The right image is a detail of the plot on the left.}
+	\label{fig_contour_parab}
+\end{figure}
+
+The second test function is a nonsmooth version of the above parabola. The function is given by 
+\[ p_n(x): \R^2 \to \R, \quad x \mapsto \Langle \frac{1}{2}x, Ax \Rangle + \frac{1}{2}|x_1|+25|x_2|. \]
+
+Due to the kink along the \(x_1\)-axis the curvature information supplied by \(Q\) is less reliable than for the smooth parabola. Still the sequence provided by the variable metric algorithm does less zig-zagging than the one constructed by the proximal bundle algorithm.  
+
+\begin{figure}[H]
+	\begin{subfigure}[t]{0.49\textwidth}
+		\includegraphics[width=\textwidth]{Pictures/Plots/final_nonsm_parab.eps}
+		%\subcaption{Parabola, \(kappa = 2\), sequwnces of \(x_{hats}\); Noll:\(21|9\), same for adapted, Hare: \(28|12\)}
+	\end{subfigure}
+	\begin{subfigure}[t]{0.49\textwidth}
+		\begin{center}
+			\includegraphics[width=\textwidth]{Pictures/Plots/final_nonsm_parab_detail.eps}
+			%\subcaption{detail}
+		\end{center}
+	\end{subfigure}
+	\caption{}
+	\label{Im_Nonsm_Parab}
+\end{figure}
+
+\begin{figure}[H]
+	\begin{subfigure}[t]{0.49\textwidth}
+		\includegraphics[width=\textwidth]{Pictures/Plots/accuracy_bar_parab.eps}
+		\subcaption{Parabola, \(kappa = 2\)}
+	\end{subfigure}
+	\begin{subfigure}[t]{0.49\textwidth}
+		\begin{center}
+			\includegraphics[width=\textwidth]{Pictures/Plots/steps_bar_parab.eps}
+			\subcaption{}
+		\end{center}
+	\end{subfigure}
+	\caption{}
+	\label{...}
+\end{figure}
+
+\begin{figure}[H]
+	\begin{subfigure}[t]{0.49\textwidth}
+		\includegraphics[width=\textwidth]{Pictures/Plots/accuracy_bar_nonsm_parab.eps}
+		\subcaption{Parabola, \(kappa = 2\)}
+	\end{subfigure}
+	\begin{subfigure}[t]{0.49\textwidth}
+		\begin{center}
+			\includegraphics[width=\textwidth]{Pictures/Plots/steps_bar_nonsm_parab.eps}
+			\subcaption{}
+		\end{center}
+	\end{subfigure}
+	\caption{}
+	\label{...}
+\end{figure}
+
+\textcolor{red}{second example: nonsmooth version of the parabola
+	\[ p: \R^2 \to \R, \quad x \mapsto \Langle x, \frac{1}{2}Ax\Rangle + 0.5 |x_1|+25|x_2|\]
+	kink makes problem with second order information; different possibilities\\
+	\begin{enumerate}
+		\item change nothing, just make sure \(Q\) bounded
+		\item scale \(Q\) if it becomes too big \\
+		advantage: not so much wrong information due to ``krummungs-Paradoxon''\\
+		drawback: everxthing scaled -> direction wrong if kink only in one direction; have to decide when \(Q\) too big, because exiist functions with high curvature
+		\item change only eigenvalue that got too high; check Change relative to last \(Q\) and stepsize
+		\item bigger stepsizes?
+	\end{enumerate}
+	first and third variants make sense in example}
+%\textcolor{red}{tested in two ways; compared to Hare-Algortihm\\
+%first plots with.. functions like in paper, then invetigated in more detail for which functions \(Q\) is of advantage\\}
+
+%\textcolor{red}{
+%\begin{itemize}
+%	\item Vergleich mit Hare Version
+%	\item Genauigkeit
+%	\item Geschwindigkeit
+%\end{itemize}}
 
 recht gute Ergebnisse mit \(\frac{1}{k}Q\)\\
 ohne \(\frac{1}{k}\) eta extrem gross; mit: eta wird auch gross: 1e10
@@ -649,70 +748,7 @@ Additionally the computation times for the different algorithms and tests are pl
 
 \textcolor{red}{say where plots left and right...}
 
-\textcolor{red}{\textbf{Test on three academic example functions}\\
-first on parabula
-\[p(x): \R^2 \to \R, \quad x \mapsto \Langle x, Ax \Rangle\]
-The matrix was chosen as \(A = \begin{pmatrix} 1&0 \\ 0&50\end{pmatrix}\). This matrix has a rather bad conditional number \(\kappa_p = \frac{\lambda_{max}}{\lambda{min}}\), where \(\lambda_{min}, \lambda_{max}\) are the smallest and biggest eigenvalue of \(A\) respectively. From smooth optimization we know that gradient descent methods have a rather poor convergence rate for such badly conditioned matrices (c.f. Chapter 7.4 in \cite{Ulbrich2012}). As descent direction taken in \emph{verweis auf methode} is an aggregate subgradient and second order information is only provided by the stabilization term \(\frac{1}{t_k}\|d\|^2\) we can see a similar zigzagging behavior in for this parabola.\\
-Contrary to that the sequence on serous iterates provided by \emph{variable met?..} can take advantage of the second order information provided in Q.\\
-this means: no zigzagging, less overall steps and less null steps, Hare Algorithm much more steps near the minimum, also many null steps there}\\
-\textcolor{red}{plot, evtl: plot von Minimum}
 
-\begin{figure}[H]
-\begin{subfigure}[t]{0.49\textwidth}
-		\includegraphics[width=\textwidth]{Pictures/Plots/final_parab.eps}
-		\subcaption{Parabola, \(kappa = 2\), sequwnces of \(x_{hats}\); Noll:\(10|1\), Hare: \(28|12\)}
-\end{subfigure}
-\begin{subfigure}[t]{0.49\textwidth}
-	\begin{center}
-		\includegraphics[width=\textwidth]{Pictures/Plots/final_parab_detail.eps}
-		\subcaption{detail, many steps of Hare in the end}
-	\end{center}
-\end{subfigure}
-\caption{}
-\label{Im_Parab}
-\end{figure}
-
-\begin{figure}[H]
-\begin{subfigure}[t]{0.49\textwidth}
-		\includegraphics[width=\textwidth]{Pictures/Plots/final_nonsm_parab.eps}
-		\subcaption{Parabola, \(kappa = 2\), sequwnces of \(x_{hats}\); Noll:\(21|9\), same for adapted, Hare: \(28|12\)}
-\end{subfigure}
-\begin{subfigure}[t]{0.49\textwidth}
-	\begin{center}
-		\includegraphics[width=\textwidth]{Pictures/Plots/final_nonsm_parab_detail.eps}
-		\subcaption{detail}
-	\end{center}
-\end{subfigure}
-\caption{}
-\label{Im_Nonsm_Parab}
-\end{figure}
-
-\begin{figure}[H]
-\begin{subfigure}[t]{0.49\textwidth}
-		\includegraphics[width=\textwidth]{Pictures/Plots/steps_bar.eps}
-		\subcaption{Parabola, \(kappa = 2\), sequwnces of \(x_{hats}\); Noll:\(21|9\), same for adapted, Hare: \(28|12\)}
-\end{subfigure}
-\begin{subfigure}[t]{0.49\textwidth}
-	\begin{center}
-		\includegraphics[width=\textwidth]{Pictures/Plots/final_nonsm_parab_detail.eps}
-		\subcaption{detail}
-	\end{center}
-\end{subfigure}
-\caption{}
-\label{Im_Nonsm_Parab}
-\end{figure}
-\textcolor{red}{second example: nonsmooth version of the parabola
-\[ p: \R^2 \to \R, \quad x \mapsto \Langle x, \frac{1}{2}Ax\Rangle + 0.5 |x_1|+25|x_2|\]
-kink makes problem with second order information; different possibilities\\
-\begin{enumerate}
-	\item change nothing, just make sure \(Q\) bounded
-	\item scale \(Q\) if it becomes too big \\
-	advantage: not so much wrong information due to ``krummungs-Paradoxon''\\
-	drawback: everxthing scaled -> direction wrong if kink only in one direction; have to decide when \(Q\) too big, because exiist functions with high curvature
-	\item change only eigenvalue that got too high; check Change relative to last \(Q\) and stepsize
-	\item bigger stepsizes?
-\end{enumerate}
-first and third variants make sense in example}
 
 
 

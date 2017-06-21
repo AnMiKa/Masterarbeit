@@ -1,471 +1,306 @@
-%plots the 5 test functions for different x-dimensions and forms of noise
-
-%% no noise
-% tol: 1e-3, smaller dimension
+% plots the 5 test functions for different x-dimensions and forms of noise
+% 
+% % no noise
 % Create a stem plot using the stem function
-figure
+% figure('position',[0 0 400 300])
+% hold on
+% box on
+% x = 1:5;
+% for i = 1:5
+%     stem(x+(i-1)*.15,log_f_h0(1:5,i), 'LineStyle',':','Color','b','Marker','+','LineWidth',0.9)
+%     stem(x+(i-1)*.15,log_f_n10(1:5,i), 'p:c','filled')
+%     stem(x+(i-1)*.15,log_f_n40(1:5,i), 'x:m','filled')
+% end
+% Add a legend
+% legend('Nonconv Inex Bundle', 'Variable Metric BFGS', ...
+%     'Variable Metric BFGS Adaptive')
+% title('no noise','Interpreter','latex')
+% xlabel('$n$','Interpreter','latex')
+% ylabel('abs log distance from 0','Interpreter','latex')
+% axis([0.85, 6, 0, 9.5])
+% xticks(1:6)
+% xticklabels([20,25,30,40,50])
+% set(gca,'ygrid','on')
+% pbaspect([1 2/3 1])
+% ax = gca;
+% outerpos = ax.OuterPosition;
+% ti = ax.TightInset; 
+% left = outerpos(1) + ti(1);
+% bottom = outerpos(2) + ti(2);
+% ax_width = outerpos(3) - ti(1) - ti(3);
+% ax_height = outerpos(4) - ti(2) - ti(4);
+% ax.Position = [left bottom ax_width ax_height];
+% 
+% Create a stem plot using the stem function
+% figure('position',[0 0 400 300])
+% hold on
+% box on
+% for i = 1:5
+%     stem(x+(i-1)*.15,k_h0(1:5,i), 'LineStyle',':','Color','b','Marker','+','LineWidth',0.9)
+%     stem(x+(i-1)*.15,k_n10(1:5,i), 'p:c','filled')
+%     stem(x+(i-1)*.15,k_n40(1:5,i), 'x:m','filled')
+% end
+% legend('Nonconv Inex Bundle', 'Variable Metric BFGS', ...
+%     'Variable Metric BFGS Adaptive','Location','northwest')
+% title('no noise','Interpreter','latex')
+% xlabel('$n$','Interpreter','latex')
+% ylabel('number of steps','Interpreter','latex')
+% axis([0.85, 6, 0, 6000])
+% xticks(1:6)
+% xticklabels([20,25,30,40,50])
+% yticks(0:50:60000)
+% set(gca,'ygrid','on')
+% pbaspect([1 2/3 1])
+% 
+% ax = gca;
+% outerpos = ax.OuterPosition;
+% ti = ax.TightInset; 
+% left = outerpos(1) + ti(1);
+% bottom = outerpos(2) + ti(2);
+% ax_width = outerpos(3) - ti(1) - ti(3);
+% ax_height = outerpos(4) - ti(2) - ti(4);
+% ax.Position = [left bottom ax_width ax_height];
+% 
+% % constant noise
+% Create a stem plot using the stem function
+% figure('position',[0 0 400 300])
+% hold on
+% box on
+% x = 1:5;
+% for i = 1:5
+%     stem(x+(i-1)*.15,log_f_h1(1:5,i), 'LineStyle',':','Color','b','Marker','+','LineWidth',0.9)
+%     stem(x+(i-1)*.15,log_f_n11(1:5,i), 'p:c','filled')
+%     stem(x+(i-1)*.15,log_f_n41(1:5,i), 'x:m','filled')
+% end
+% Add a legend
+% legend('Nonconv Inex Bundle', 'Variable Metric BFGS', ...
+%     'Variable Metric BFGS Adaptive')
+% title('constant noise','Interpreter','latex')
+% xlabel('$n$','Interpreter','latex')
+% ylabel('abs log distance from 0','Interpreter','latex')
+% axis([0.85, 6, 0, 9.5])
+% xticks(1:6)
+% xticklabels([20,25,30,40,50])
+% set(gca,'ygrid','on')
+% pbaspect([1 2/3 1])
+% ax = gca;
+% outerpos = ax.OuterPosition;
+% ti = ax.TightInset; 
+% left = outerpos(1) + ti(1);
+% bottom = outerpos(2) + ti(2);
+% ax_width = outerpos(3) - ti(1) - ti(3);
+% ax_height = outerpos(4) - ti(2) - ti(4);
+% ax.Position = [left bottom ax_width ax_height];
+% 
+% Create a stem plot using the stem function
+% figure('position',[0 0 400 300])
+% hold on
+% box on
+% x = 1:5;
+% for i = 1:5
+%     stem(x+(i-1)*.15,k_h1(1:5,i), 'LineStyle',':','Color','b','Marker','+','LineWidth',0.9)
+%     stem(x+(i-1)*.15,k_n11(1:5,i), 'p:c','filled')
+%     stem(x+(i-1)*.15,k_n41(1:5,i), 'x:m','filled')
+% end
+% Add a legend
+% legend('Nonconv Inex Bundle', 'Variable Metric BFGS', ...
+%     'Variable Metric BFGS Adaptive','Location','northwest')
+% title('constant noise','Interpreter','latex')
+% xlabel('$n$','Interpreter','latex')
+% ylabel('number of steps','Interpreter','latex')
+% axis([0.85, 6, 0, 15000])
+% xticks(1:6)
+% xticklabels([20,25,30,40,50])
+% set(gca,'ygrid','on')
+% pbaspect([1 2/3 1])
+% ax = gca;
+% outerpos = ax.OuterPosition;
+% ti = ax.TightInset; 
+% left = outerpos(1) + ti(1);
+% bottom = outerpos(2) + ti(2);
+% ax_width = outerpos(3) - ti(1) - ti(3);
+% ax_height = outerpos(4) - ti(2) - ti(4);
+% ax.Position = [left bottom ax_width ax_height];
+% 
+% % vanishing noise
+% Create a stem plot using the stem function
+% figure('position',[0 0 400 300])
+% hold on
+% box on
+% x = 1:5;
+% for i = 1:5
+%     stem(x+(i-1)*.15,log_f_h2(1:5,i), 'LineStyle',':','Color','b','Marker','+','LineWidth',0.9)
+%     stem(x+(i-1)*.15,log_f_n12(1:5,i), 'p:c','filled')
+%     stem(x+(i-1)*.15,log_f_n42(1:5,i), 'x:m','filled')
+% end
+% Add a legend
+% legend('Nonconv Inex Bundle', 'Variable Metric BFGS', ...
+%     'Variable Metric BFGS Adaptive')
+% title('vanishing noise','Interpreter','latex')
+% xlabel('$n$','Interpreter','latex')
+% ylabel('abs log distance from 0','Interpreter','latex')
+% axis([0.85, 6, 0, 9.5])
+% xticks(1:6)
+% xticklabels([20,25,30,40,50])
+% set(gca,'ygrid','on')
+% pbaspect([1 2/3 1])
+% ax = gca;
+% outerpos = ax.OuterPosition;
+% ti = ax.TightInset; 
+% left = outerpos(1) + ti(1);
+% bottom = outerpos(2) + ti(2);
+% ax_width = outerpos(3) - ti(1) - ti(3);
+% ax_height = outerpos(4) - ti(2) - ti(4);
+% ax.Position = [left bottom ax_width ax_height];
+% 
+% Create a stem plot using the stem function
+% figure('position',[0 0 400 300])
+% hold on
+% box on
+% x = 1:5;
+% for i = 1:5
+%     stem(x+(i-1)*.15,k_h2(1:5,i), 'LineStyle',':','Color','b','Marker','+','LineWidth',0.9)
+%     stem(x+(i-1)*.15,k_n12(1:5,i), 'p:c','filled')
+%     stem(x+(i-1)*.15,k_n42(1:5,i), 'x:m','filled')
+% end
+% Add a legend
+% legend('Nonconv Inex Bundle', 'Variable Metric BFGS', ...
+%     'Variable Metric BFGS Adaptive','Location','northwest')
+% title('vanishing noise','Interpreter','latex')
+% xlabel('$n$','Interpreter','latex')
+% ylabel('number of steps','Interpreter','latex')
+% axis([0.85, 6, 0, 15000])
+% xticks(1:6)
+% xticklabels([20,25,30,40,50])
+% set(gca,'ygrid','on')
+% pbaspect([1 2/3 1])
+% ax = gca;
+% outerpos = ax.OuterPosition;
+% ti = ax.TightInset; 
+% left = outerpos(1) + ti(1);
+% bottom = outerpos(2) + ti(2);
+% ax_width = outerpos(3) - ti(1) - ti(3);
+% ax_height = outerpos(4) - ti(2) - ti(4);
+% ax.Position = [left bottom ax_width ax_height];
+% 
+%% constant gradient noise
+% Create a stem plot using the stem function
+figure('position',[0 0 400 300])
 hold on
 box on
-x = 1:15;
+x = 1:5;
 for i = 1:5
-    stem(x+(i-1)*.15,log_f_h30_s(:,i), 'LineStyle',':','Color','b','Marker','+','LineWidth',0.9)
-    stem(x+(i-1)*.15,log_f_nb30_s(:,i), 'p:c','filled')
-    stem(x+(i-1)*.15,log_f_ns30_s(:,i), 'x:m','filled')
+    stem(x+(i-1)*.15,log_f_h3(1:5,i), 'LineStyle',':','Color','b','Marker','+','LineWidth',0.9)
+    stem(x+(i-1)*.15,log_f_n13(1:5,i), 'p:c','filled')
+    stem(x+(i-1)*.15,log_f_n43(1:5,i), 'x:m','filled')
 end
 % Add a legend
 legend('Nonconv Inex Bundle', 'Variable Metric BFGS', ...
-    'Varible Metric SR1')
-title('\texttt{tol}: $10-3$, no noise','Interpreter','latex')
+    'Variable Metric BFGS Adaptive')
+title('constant gradient noise','Interpreter','latex')
 xlabel('$n$','Interpreter','latex')
 ylabel('abs log distance from 0','Interpreter','latex')
-axis([0.85, 16, 0, 9.5])
-% xticks(1:15)
-% set(gca,'ygrid','on')
-% savefig('1e-3_0s.fig')
-% hold off
+axis([0.85, 6, 0, 9.5])
+xticks(1:6)
+xticklabels([20,25,30,40,50])
+set(gca,'ygrid','on')
+pbaspect([1 2/3 1])
+ax = gca;
+outerpos = ax.OuterPosition;
+ti = ax.TightInset; 
+left = outerpos(1) + ti(1);
+bottom = outerpos(2) + ti(2);
+ax_width = outerpos(3) - ti(1) - ti(3);
+ax_height = outerpos(4) - ti(2) - ti(4);
+ax.Position = [left bottom ax_width ax_height];
 
-% % tol: 1e-3, bigger dimension
-% figure
+% % Create a stem plot using the stem function
+% figure('position',[0 0 400 300])
 % hold on
 % box on
-% x = 1:3;
+% x = 1:5;
 % for i = 1:5
-%     stem(x+(i-1)*.15,log_f_h30_b(:,i), 'LineStyle',':','Color','b','Marker','+','LineWidth',0.9)
-%     stem(x+(i-1)*.15,log_f_nb30_b(:,i), 'p:c','filled')
-%     stem(x+(i-1)*.15,log_f_ns30_b(:,i), 'x:m','filled')
+%     stem(x+(i-1)*.15,k_h3(1:5,i), 'LineStyle',':','Color','b','Marker','+','LineWidth',0.9)
+%     stem(x+(i-1)*.15,k_n13(1:5,i), 'p:c','filled')
+%     stem(x+(i-1)*.15,k_n43(1:5,i), 'x:m','filled')
 % end
 % % Add a legend
 % legend('Nonconv Inex Bundle', 'Variable Metric BFGS', ...
-%     'Varible Metric SR1')
-% title('tol: 1e-3, no noise')
-% xlabel('n')
-% ylabel('abs log distance from 0')
-% axis([0.85, 4, 0, 9.5])
-% xticks(1:3)
-% xticklabels({'20','25','30'})
+%     'Variable Metric BFGS Adaptive','Location','northwest')
+% title('constant gradient noise','Interpreter','latex')
+% xlabel('$n$','Interpreter','latex')
+% ylabel('number of steps','Interpreter','latex')
+% %axis([0.85, 6, 0, 9.5])
+% xticks(1:6)
+% xticklabels([20,25,30,40,50])
 % set(gca,'ygrid','on')
-% savefig('1e-3_0b.fig')
-% hold off
-
-% tol: 1e-6, smaller dimension
-% Create a stem plot using the stem function
-figure
-hold on
-box on
-set(gca,'LooseInset',get(gca,'TightInset'));
-x = 1:15;
-for i = 1:5
-    stem(x+(i-1)*.15,log_f_h60_s(:,i), 'LineStyle',':','Color','b','Marker','+','LineWidth',0.9)
-    stem(x+(i-1)*.15,log_f_nb60_s(:,i), 'p:c','filled')
-    stem(x+(i-1)*.15,log_f_ns60_s(:,i), 'x:m','filled')
-end
-% Add a legend
-legend('Nonconv Inex Bundle', 'Variable Metric BFGS', ...
-    'Varible Metric SR1')
-title('tol: 1e-6, no noise')
-xlabel('n')
-ylabel('abs log distance from 0')
-axis([0.85, 16, 0, 9.5])
-xticks(1:15)
-set(gca,'ygrid','on')
-savefig('1e-6_0s.fig')
-hold off
-
-% tol: 1e-6, bigger dimension
-figure
-hold on
-box on
-x = 1:3;
-for i = 1:5
-    stem(x+(i-1)*.15,log_f_h60_b(:,i), 'LineStyle',':','Color','b','Marker','+','LineWidth',0.9)
-    stem(x+(i-1)*.15,log_f_nb60_b(:,i), 'p:c','filled')
-    stem(x+(i-1)*.15,log_f_ns60_b(:,i), 'x:m','filled')
-end
-% Add a legend
-legend('Nonconv Inex Bundle', 'Variable Metric BFGS', ...
-    'Varible Metric SR1')
-title('tol: 1e-6, no noise')
-xlabel('n')
-ylabel('abs log distance from 0')
-axis([0.85, 4, 0, 9.5])
-xticks(1:3)
-xticklabels({'20','25','30'})
-set(gca,'ygrid','on')
-savefig('1e-6_0b.fig')
-hold off
-
-
-%% constant noise
-% % tol: 1e-3, smaller dimension
+% pbaspect([1 2/3 1])
+% ax = gca;
+% outerpos = ax.OuterPosition;
+% ti = ax.TightInset; 
+% left = outerpos(1) + ti(1);
+% bottom = outerpos(2) + ti(2);
+% ax_width = outerpos(3) - ti(1) - ti(3);
+% ax_height = outerpos(4) - ti(2) - ti(4);
+% ax.Position = [left bottom ax_width ax_height];
+% 
+% %% vanishing gradient noise
 % % Create a stem plot using the stem function
-% figure
+% figure('position',[0 0 400 300])
 % hold on
 % box on
-% x = 1:15;
+% x = 1:5;
 % for i = 1:5
-%     stem(x+(i-1)*.15,log_f_h30_s(:,i), 'LineStyle',':','Color','b','Marker','+','LineWidth',0.9)
-%     stem(x+(i-1)*.15,log_f_h31_s(:,i), 'x:m','filled')
-%     stem(x+(i-1)*.15,log_f_nb31_s(:,i), 'p:c','filled')
-%     %stem(x+(i-1)*.15,log_f_ns31_s(:,i), 'x:m','filled')
+%     stem(x+(i-1)*.15,log_f_h4(1:5,i), 'LineStyle',':','Color','b','Marker','+','LineWidth',0.9)
+%     stem(x+(i-1)*.15,log_f_n14(1:5,i), 'p:c','filled')
+%     stem(x+(i-1)*.15,log_f_n44(1:5,i), 'x:m','filled')
 % end
 % % Add a legend
-% legend('Nonconv Inex Bundle, exact','Nonconv Inex Bundle', 'Variable Metric BFGS')
-% title('tol: 1e-3, constant noise')
-% xlabel('n')
-% ylabel('abs log distance from 0')
-% axis([0.85, 16, 0, 9.5])
-% xticks(1:15)
+% legend('Nonconv Inex Bundle', 'Variable Metric BFGS', ...
+%     'Variable Metric BFGS Adaptive')
+% title('vanishing gradient noise','Interpreter','latex')
+% xlabel('$n$','Interpreter','latex')
+% ylabel('abs log distance from 0','Interpreter','latex')
+% axis([0.85, 6, 0, 9.5])
+% xticks(1:6)
+% xticklabels([20,25,30,40,50])
 % set(gca,'ygrid','on')
-% savefig('1e-3_1s.fig')
-% hold off
-
-% % tol: 1e-3, bigger dimension
-% figure
-% hold on
-% box on
-% x = 1:3;
-% for i = 1:5
-%     stem(x+(i-1)*.15,log_f_h30_b(:,i), 'LineStyle',':','Color','b','Marker','+','LineWidth',0.9)
-%     stem(x+(i-1)*.15,log_f_h31_b(:,i), 'x:m')
-%     stem(x+(i-1)*.15,log_f_nb31_b(:,i), 'p:c','filled')
-%     %stem(x+(i-1)*.15,log_f_ns31_b(:,i), 'x:m','filled')
-% end
-% % Add a legend
-% legend('Nonconv Inex Bundle, exact','Nonconv Inex Bundle', 'Variable Metric BFGS')
-% title('tol: 1e-3, constant noise')
-% xlabel('n')
-% ylabel('abs log distance from 0')
-% axis([0.85, 4, 0, 9.5])
-% xticks(1:3)
-% xticklabels({'20','25','30'})
-% set(gca,'ygrid','on')
-% savefig('1e-3_1b.fig')
-% hold off
-
-% tol: 1e-6, smaller dimension
-% Create a stem plot using the stem function
-figure
-hold on
-box on
-x = 1:15;
-for i = 1:5
-    stem(x+(i-1)*.15,log_f_h60_s(:,i), 'LineStyle',':','Color','b','Marker','+','LineWidth',0.9)
-    stem(x+(i-1)*.15,log_f_h61_s(:,i), 'x:m')
-    stem(x+(i-1)*.15,log_f_nb61_s(:,i), 'p:c','filled')
-    %stem(x+(i-1)*.15,log_f_ns61_s(:,i), 'x:m','filled')
-end
-% Add a legend
-legend('Nonconv Inex Bundle, exact','Nonconv Inex Bundle', 'Variable Metric BFGS')
-title('tol: 1e-6, constant noise')
-xlabel('n')
-ylabel('abs log distance from 0')
-axis([0.85, 16, 0, 9.5])
-%xticks(1:15)
-set(gca,'ygrid','on')
-savefig('1e-6_1s.fig')
-hold off
-
-% tol: 1e-6, bigger dimension
-figure
-hold on
-box on
-x = 1:3;
-for i = 1:5
-    stem(x+(i-1)*.15,log_f_h60_b(:,i), 'LineStyle',':','Color','b','Marker','+','LineWidth',0.9)
-    stem(x+(i-1)*.15,log_f_h61_b(:,i), 'x:m')
-    stem(x+(i-1)*.15,log_f_nb61_b(:,i), 'p:c','filled')
-    %stem(x+(i-1)*.15,log_f_ns61_b(:,i), 'x:m','filled')
-end
-% Add a legend
-legend('Nonconv Inex Bundle, exact','Nonconv Inex Bundle', 'Variable Metric BFGS')
-title('tol: 1e-6, constant noise')
-xlabel('n')
-ylabel('abs log distance from 0')
-axis([0.85, 4, 0, 9.5])
-xticks(1:3)
-xticklabels({'20','25','30'})
-set(gca,'ygrid','on')
-savefig('1e-6_1b.fig')
-hold off
-
-
-%% vanishing noise
-% % tol: 1e-3, smaller dimension
+% pbaspect([1 2/3 1])
+% ax = gca;
+% outerpos = ax.OuterPosition;
+% ti = ax.TightInset; 
+% left = outerpos(1) + ti(1);
+% bottom = outerpos(2) + ti(2);
+% ax_width = outerpos(3) - ti(1) - ti(3);
+% ax_height = outerpos(4) - ti(2) - ti(4);
+% ax.Position = [left bottom ax_width ax_height];
+% 
 % % Create a stem plot using the stem function
-% figure
+% figure('position',[0 0 400 300])
 % hold on
 % box on
-% x = 1:15;
+% x = 1:5;
 % for i = 1:5
-%     stem(x+(i-1)*.15,log_f_h30_s(:,i), 'LineStyle',':','Color','b','Marker','+','LineWidth',0.9)
-%     stem(x+(i-1)*.15,log_f_h32_s(:,i), 'x:m')
-%     stem(x+(i-1)*.15,log_f_nb32_s(:,i), 'p:c','filled')
-%     %stem(x+(i-1)*.15,log_f_ns32_s(:,i), 'x:m','filled')
+%     stem(x+(i-1)*.15,k_h4(1:5,i), 'LineStyle',':','Color','b','Marker','+','LineWidth',0.9)
+%     stem(x+(i-1)*.15,k_n14(1:5,i), 'p:c','filled')
+%     stem(x+(i-1)*.15,k_n44(1:5,i), 'x:m','filled')
 % end
 % % Add a legend
-% legend('Nonconv Inex Bundle, exact','Nonconv Inex Bundle', 'Variable Metric BFGS')
-% title('tol: 1e-3, vanishing noise')
-% xlabel('n')
-% ylabel('abs log distance from 0')
-% axis([0.85, 16, 0, 9.5])
-% xticks(1:15)
+% legend('Nonconv Inex Bundle', 'Variable Metric BFGS', ...
+%     'Variable Metric BFGS Adaptive','Location','northwest')
+% title('vanishing gradient noise','Interpreter','latex')
+% xlabel('$n$','Interpreter','latex')
+% ylabel('number of steps','Interpreter','latex')
+% axis([0.85, 6, 0, 6000])
+% xticks(1:6)
+% xticklabels([20,25,30,40,50])
 % set(gca,'ygrid','on')
-% savefig('1e-3_2s.fig')
-% hold off
-
-% % tol: 1e-3, bigger dimension
-% figure
-% hold on
-% box on
-% x = 1:3;
-% for i = 1:5
-%     stem(x+(i-1)*.15,log_f_h30_b(:,i), 'LineStyle',':','Color','b','Marker','+','LineWidth',0.9)
-%     stem(x+(i-1)*.15,log_f_h32_b(:,i), 'x:m')
-%     stem(x+(i-1)*.15,log_f_nb32_b(:,i), 'p:c','filled')
-%     %stem(x+(i-1)*.15,log_f_ns32_b(:,i), 'x:m','filled')
-% end
-% % Add a legend
-% legend('Nonconv Inex Bundle, exact','Nonconv Inex Bundle', 'Variable Metric BFGS')
-% title('tol: 1e-3, vanishing noise')
-% xlabel('n')
-% ylabel('abs log distance from 0')
-% axis([0.85, 4, 0, 9.5])
-% xticks(1:3)
-% xticklabels({'20','25','30'})
-% set(gca,'ygrid','on')
-% savefig('1e-3_2b.fig')
-% hold off
-
-% tol: 1e-6, smaller dimension
-% Create a stem plot using the stem function
-figure
-hold on
-box on
-x = 1:15;
-for i = 1:5
-    stem(x+(i-1)*.15,log_f_h60_s(:,i), 'LineStyle',':','Color','b','Marker','+','LineWidth',0.9)
-    stem(x+(i-1)*.15,log_f_h62_s(:,i), 'x:m')
-    stem(x+(i-1)*.15,log_f_nb62_s(:,i), 'p:c','filled')
-    %stem(x+(i-1)*.15,log_f_ns62_s(:,i), 'x:m','filled')
-end
-% Add a legend
-legend('Nonconv Inex Bundle,exact','Nonconv Inex Bundle', 'Variable Metric BFGS')
-title('tol: 1e-6, vanishing noise')
-xlabel('n')
-ylabel('abs log distance from 0')
-axis([0.85, 16, 0, 9.5])
-xticks(1:15)
-set(gca,'ygrid','on')
-savefig('1e-6_2s.fig')
-hold off
-
-% tol: 1e-6, bigger dimension
-figure
-hold on
-box on
-x = 1:3;
-for i = 1:5
-    stem(x+(i-1)*.15,log_f_h60_b(:,i), 'LineStyle',':','Color','b','Marker','+','LineWidth',0.9)
-    stem(x+(i-1)*.15,log_f_h62_b(:,i), 'x:m')
-    stem(x+(i-1)*.15,log_f_nb62_b(:,i), 'p:c','filled')
-    %stem(x+(i-1)*.15,log_f_ns62_b(:,i), 'x:m','filled')
-end
-% Add a legend
-legend('Nonconv Inex Bundle, exact','Nonconv Inex Bundle', 'Variable Metric BFGS')
-title('tol: 1e-6, vanishing noise')
-xlabel('n')
-ylabel('abs log distance from 0')
-axis([0.85, 4, 0, 9.5])
-xticks(1:3)
-xticklabels({'20','25','30'})
-set(gca,'ygrid','on')
-savefig('1e-6_2b.fig')
-hold off
-
-
-%% constant gradient noise
-% % tol: 1e-3, smaller dimension
-% % Create a stem plot using the stem function
-% figure
-% hold on
-% box on
-% x = 1:15;
-% for i = 1:5
-%     stem(x+(i-1)*.15,log_f_h30_s(:,i), 'LineStyle',':','Color','b','Marker','+','LineWidth',0.9)
-%     stem(x+(i-1)*.15,log_f_h33_s(:,i), 'x:m')
-%     stem(x+(i-1)*.15,log_f_nb33_s(:,i), 'p:c','filled')
-%     %stem(x+(i-1)*.15,log_f_ns33_s(:,i), 'x:m','filled')
-% end
-% % Add a legend
-% legend('Nonconv Inex Bundle, exact','Nonconv Inex Bundle', 'Variable Metric BFGS')
-% title('tol: 1e-3, constant gradient noise')
-% xlabel('n')
-% ylabel('abs log distance from 0')
-% axis([0.85, 16, 0, 9.5])
-% xticks(1:15)
-% set(gca,'ygrid','on')
-% savefig('1e-3_3s.fig')
-% hold off
-
-% % tol: 1e-3, bigger dimension
-% figure
-% hold on
-% box on
-% x = 1:3;
-% for i = 1:5
-%     stem(x+(i-1)*.15,log_f_h30_b(:,i), 'LineStyle',':','Color','b','Marker','+','LineWidth',0.9)
-%     stem(x+(i-1)*.15,log_f_h33_b(:,i), 'x:m')
-%     stem(x+(i-1)*.15,log_f_nb33_b(:,i), 'p:c','filled')
-%     %stem(x+(i-1)*.15,log_f_ns33_b(:,i), 'x:m','filled')
-% end
-% % Add a legend
-% legend('Noncnonv Inex Bundle, exact','Nonconv Inex Bundle', 'Variable Metric BFGS')
-% title('tol: 1e-3, constant gradient noise')
-% xlabel('n')
-% ylabel('abs log distance from 0')
-% axis([0.85, 4, 0, 9.5])
-% xticks(1:3)
-% xticklabels({'20','25','30'})
-% set(gca,'ygrid','on')
-% savefig('1e-3_3b.fig')
-% hold off
-
-% tol: 1e-6, smaller dimension
-% Create a stem plot using the stem function
-figure
-hold on
-box on
-x = 1:15;
-for i = 1:5
-    stem(x+(i-1)*.15,log_f_h60_s(:,i), 'LineStyle',':','Color','b','Marker','+','LineWidth',0.9)
-    stem(x+(i-1)*.15,log_f_h63_s(:,i), 'x:m')
-    stem(x+(i-1)*.15,log_f_nb63_s(:,i), 'p:c','filled')
-    %stem(x+(i-1)*.15,log_f_ns63_s(:,i), 'x:m','filled')
-end
-% Add a legend
-legend('Nonconv Inex Bundle, exact','Nonconv Inex Bundle', 'Variable Metric BFGS')
-title('tol: 1e-6, constant gradient noise')
-xlabel('n')
-ylabel('abs log distance from 0')
-axis([0.85, 16, 0, 9.5])
-xticks(1:15)
-set(gca,'ygrid','on')
-savefig('1e-6_3s.fig')
-hold off
-
-% tol: 1e-6, bigger dimension
-figure
-hold on
-box on
-x = 1:3;
-for i = 1:5
-    stem(x+(i-1)*.15,log_f_h60_b(:,i), 'LineStyle',':','Color','b','Marker','+','LineWidth',0.9)
-    stem(x+(i-1)*.15,log_f_h63_b(:,i), 'x:m')
-    stem(x+(i-1)*.15,log_f_nb63_b(:,i), 'p:c','filled')
-    %stem(x+(i-1)*.15,log_f_ns63_b(:,i), 'x:m','filled')
-end
-% Add a legend
-legend('Nonconv Inex Bundle, exact','Nonconv Inex Bundle', 'Variable Metric BFGS')
-title('tol: 1e-6, constant gradient noise')
-xlabel('n')
-ylabel('abs log distance from 0')
-axis([0.85, 4, 0, 9.5])
-xticks(1:3)
-xticklabels({'20','25','30'})
-set(gca,'ygrid','on')
-savefig('1e-6_3b.fig')
-hold off
-
-
-%% vanishing gradient noise
-% % tol: 1e-3, smaller dimension
-% % Create a stem plot using the stem function
-% figure
-% hold on
-% box on
-% x = 1:15;
-% for i = 1:5
-%     stem(x+(i-1)*.15,log_f_h30_s(:,i), 'LineStyle',':','Color','b','Marker','+','LineWidth',0.9)
-%     stem(x+(i-1)*.15,log_f_h34_s(:,i), 'x:m')
-%     stem(x+(i-1)*.15,log_f_nb34_s(:,i), 'p:c','filled')
-%     %stem(x+(i-1)*.15,log_f_ns34_s(:,i), 'x:m','filled')
-% end
-% % Add a legend
-% legend('Nonconv Inex Bundle','Nonconv Inex Bundle', 'Variable Metric BFGS')
-% title('tol: 1e-3, vanishing gradient noise')
-% xlabel('n')
-% ylabel('abs log distance from 0')
-% axis([0.85, 16, 0, 9.5])
-% xticks(1:15)
-% set(gca,'ygrid','on')
-% savefig('1e-3_4s.fig')
-% hold off
-
-% % tol: 1e-3, bigger dimension
-% figure
-% hold on
-% box on
-% x = 1:3;
-% for i = 1:5
-%     stem(x+(i-1)*.15,log_f_h30_b(:,i), 'LineStyle',':','Color','b','Marker','+','LineWidth',0.9)
-%     stem(x+(i-1)*.15,log_f_h34_b(:,i), 'x:m')
-%     stem(x+(i-1)*.15,log_f_nb34_b(:,i), 'p:c','filled')
-%     %stem(x+(i-1)*.15,log_f_ns34_b(:,i), 'x:m','filled')
-% end
-% % Add a legend
-% legend('Nonconv Inex Bundle, exact', 'Nonconv Inex Bundle', 'Variable Metric BFGS')
-% title('tol: 1e-3, vanishing noise')
-% xlabel('n')
-% ylabel('abs log distance from 0')
-% axis([0.85, 4, 0, 9.5])
-% xticks(1:3)
-% xticklabels({'20','25','30'})
-% set(gca,'ygrid','on')
-% savefig('1e-3_4b.fig')
-% hold off
-
-% tol: 1e-6, smaller dimension
-% Create a stem plot using the stem function
-figure
-hold on
-box on
-x = 1:15;
-for i = 1:5
-    stem(x+(i-1)*.15,log_f_h60_s(:,i), 'LineStyle',':','Color','b','Marker','+','LineWidth',0.9)
-    stem(x+(i-1)*.15,log_f_h64_s(:,i), 'x:m')
-    stem(x+(i-1)*.15,log_f_nb64_s(:,i), 'p:c','filled')
-    %stem(x+(i-1)*.15,log_f_ns64_s(:,i), 'x:m','filled')
-end
-% Add a legend
-legend('Nonconv Inex Bundle, exact','Nonconv Inex Bundle', 'Variable Metric BFGS')
-title('tol: 1e-6, vanishing noise')
-xlabel('n')
-ylabel('abs log distance from 0')
-axis([0.85, 16, 0, 9.5])
-xticks(1:15)
-set(gca,'ygrid','on')
-savefig('1e-6_4s.fig')
-hold off
-
-% tol: 1e-6, bigger dimension
-figure
-hold on
-box on
-x = 1:3;
-for i = 1:5
-    stem(x+(i-1)*.15,log_f_h60_b(:,i), 'LineStyle',':','Color','b','Marker','+','LineWidth',0.9)
-    stem(x+(i-1)*.15,log_f_h64_b(:,i), 'x:m')
-    stem(x+(i-1)*.15,log_f_nb64_b(:,i), 'p:c','filled')
-    %stem(x+(i-1)*.15,log_f_ns64_b(:,i), 'x:m','filled')
-end
-% Add a legend
-legend('Nonconv Inex Bundle, exact','Nonconv Inex Bundle', 'Variable Metric BFGS')
-title('tol: 1e-6, vanishing gradient noise')
-xlabel('n')
-ylabel('abs log distance from 0')
-axis([0.85, 4, 0, 9.5])
-xticks(1:3)
-xticklabels({'20','25','30'})
-set(gca,'ygrid','on')
-savefig('1e-6_4b.fig')
-hold off
+% pbaspect([1 2/3 1])
+% ax = gca;
+% outerpos = ax.OuterPosition;
+% ti = ax.TightInset; 
+% left = outerpos(1) + ti(1);
+% bottom = outerpos(2) + ti(2);
+% ax_width = outerpos(3) - ti(1) - ti(3);
+% ax_height = outerpos(4) - ti(2) - ti(4);
+% ax.Position = [left bottom ax_width ax_height];

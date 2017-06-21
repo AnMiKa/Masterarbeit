@@ -77,7 +77,7 @@ end
 %% 0 step: initialization
 tic;
 
-u_1 = 2; % parameter for t update
+u_1 = 1.2; % parameter for t update
 u_2 = 0.8;
 t_min = 0.03; % minimal t value to make sure that sequence does not have 0 as accumulation point
 

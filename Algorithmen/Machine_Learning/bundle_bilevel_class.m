@@ -201,11 +201,12 @@ J = [J, k+1];
 lJ = length(J);  % length of the index set J, e.g. for size of constraints in subproblem
 e = zeros(lJ, 1);
 eta_vec = zeros(lJ, 1);
-for j = 1:lJ;
+for j = 1:lJ
     e(j) = f_hat - f(j) - g(:, j)' * (x_hat - x(:, j));  % update linearization error e
     if norm(x(:,j) - x_hat) ~= 0
         eta_vec(j) = -2 * e(j) / norm(x(:,j) - x_hat)^2;
-    else eta_vec(j) = 0;
+    else
+        eta_vec(j) = 0;
     end
 end
 eta = max(eta_vec) + gamma;
