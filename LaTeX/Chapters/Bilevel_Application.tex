@@ -595,6 +595,30 @@ Table ??? shows the results
 \end{table}
 \end{center}
 
+\textcolor{red}{\(\lambda\) values in table not right, don`t know with which algorithms they were reached}
+
+23.06.2017\\
+found out: for real results, have to do it with the functions I take in the algorithm -> this is hingequad for inner level and either hingeloss or hingequad for outer level\\
+from plots it seems that hingequad is closer to the misclassification loss\\
+generally: from plots it looks as if all \(\lambdas\) are best =0\\
+with bundle bilevel and hingeloss (outer): \(\lambda\) very much depending on starting value -> why??? graphs seem to be monotonously decreasing into 0  \\
+
+
+\textcolor{red}{plots such as objective function (upper hingeloss and lower hingequad) in bilevel bundle algorithm: No minimum visible (also for ionosphere and cancer???...)\\
+\textbf{analysis of every plot:}\\
+pima: looks the same as ``old'' plot, minimum is 0\\
+wine quality red and red 56: minimum is 0 \\
+covtype: same\\
+cancer: doesn't really look similar to ``old'' plot, slope different, minimum different; minimum at 0 and not at about 10\\
+ionosphere: slope, ect. look similar to ``old'' plot; but minimum at 0 \\
+heart: like ``old'' plot \\
+maybe cancer and ionosphere plots just ``incidents'' -> because of special choice of validation set????\\
+-> no, can also be that I averaged over 20 times...}
+
+\textcolor{red}{\textbf{misclassification loss as upper level objective}\\
+pima: average seems to fo to 0 as min \\
+generally: misclassification loss seems as if no optimization of \(\lambda\) possible because choice of validation set seems to have much more influence}
+
 \textcolor{red}{Results for\(\lambda\) only if it stayed there after second run with second starting value\\
 change in \(\lambda\) has very little effect; only after comma for ``percent-writing''\\
 errors like in table for all but ionosphere -> has only 5\% error?; ???-> error the smaller, the smaller \(\lambda\)???\\

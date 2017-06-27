@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=latex 2017.6.11)  20 JUN 2017 15:16
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=latex 2017.6.11)  22 JUN 2017 12:04
 entering extended mode
 **Bundle_methods_for_nonsmooth_nonconvex_problems_with_inexact_information.tex
 
@@ -458,11 +458,7 @@ Package: setspace 2011/12/19 v6.7a set line spacing
 ("D:\Annika\Uni\10. Semester\Masterarbeit\Proximal Bundle Inexact Information\Git Hub\Masterarbeit\LaTeX\Bundle_methods_
 for_nonsmooth_nonconvex_problems_with_inexact_information.aux"
 ("D:\Annika\Uni\10. Semester\Masterarbeit\Proximal Bundle Inexact Information\Git Hub\Masterarbeit\LaTeX\Chapters/Introd
-uction.aux")
-
-LaTeX Warning: Label `...' multiply defined.
-
-)
+uction.aux"))
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 114.
 LaTeX Font Info:    ... okay on input line 114.
 LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 114.
@@ -586,52 +582,52 @@ Underfull \hbox (badness 10000) in paragraph at lines 163--164
 
 [21] [22] [23] [24] [25])
 ("D:\Annika\Uni\10. Semester\Masterarbeit\Proximal Bundle Inexact Information\Git Hub\Masterarbeit\LaTeX\Chapters/Variab
-le_Metric.tex" [26] [27] [28] [29] [30] [31] [32] [33] [34] [35] [36] [37] [38] [39]
+le_Metric.tex" [26] [27] [28] [29] [30] [31] [32] [33] [34] [35] [36] [37] [38]
+Overfull \hbox (4.89206pt too wide) in paragraph at lines 572--573
+[]$[][]$\T1/lmr/m/n/12 : Van-ish-ing sub-gra-di-ent noise, $[] \OT1/lmr/m/n/12 = \OML/lmm/m/it/12 [] \OT1/lmr/m/n/12 = 
+0$ \T1/lmr/m/n/12 and $[] \OT1/lmr/m/n/12 = 0\OML/lmm/m/it/12 :\OT1/lmr/m/n/12 01\OML/lmm/m/it/12 ; [] \OT1/lmr/m/n/12 
+= []\OMS/lmsy/m/n/12 f\OT1/lmr/m/n/12 0\OML/lmm/m/it/12 :\OT1/lmr/m/n/12 01\OML/lmm/m/it/12 ; \OMS/lmsy/m/n/12 k\OML/lmm
+/m/it/12 x[]\OMS/lmsy/m/n/12 k\OML/lmm/m/it/12 =\OT1/lmr/m/n/12 100\OMS/lmsy/m/n/12 g$
+ []
+
+[39] [40]
 File: Pictures/Plots/final_parab.eps Graphic file (type eps)
  <Pictures/Plots/final_parab.eps>
 File: Pictures/Plots/final_parab_detail.eps Graphic file (type eps)
-
-<Pictures/Plots/final_parab_detail.eps>
+ <Pictures/Plots/final_parab_detail.eps>
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10.95> on input line 588.
+(Font)              <10.95> on input line 614.
+
+
+LaTeX Warning: Reference `fig_contour_nonsm_parab' on page 41 undefined on input line 622.
+
 File: Pictures/Plots/final_nonsm_parab.eps Graphic file (type eps)
- <Pictures/Plots/final_nonsm_parab.eps>
+<Pictures/Plots/final_nonsm_parab.eps>
 File: Pictures/Plots/final_nonsm_parab_detail.eps Graphic file (type eps)
-
-<Pictures/Plots/final_nonsm_parab_detail.eps> [40]
+ <Pictures/Plots/final_nonsm_parab_detail.eps>
 File: Pictures/Plots/accuracy_bar_parab.eps Graphic file (type eps)
- <Pictures/Plots/accuracy_bar_parab.eps>
+
+<Pictures/Plots/accuracy_bar_parab.eps>
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10> on input line 615.
+(Font)              <10> on input line 645.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <7> on input line 615.
+(Font)              <7> on input line 645.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <5> on input line 615.
+(Font)              <5> on input line 645.
 File: Pictures/Plots/steps_bar_parab.eps Graphic file (type eps)
-
-<Pictures/Plots/steps_bar_parab.eps>
+ <Pictures/Plots/steps_bar_parab.eps> [41]
 File: Pictures/Plots/accuracy_bar_nonsm_parab.eps Graphic file (type eps)
- <Pictures/Plots/accuracy_bar_nonsm_parab.eps>
+
+<Pictures/Plots/accuracy_bar_nonsm_parab.eps>
 File: Pictures/Plots/steps_bar_nonsm_parab.eps Graphic file (type eps)
-
-<Pictures/Plots/steps_bar_nonsm_parab.eps> [41]
-Underfull \hbox (badness 10000) in paragraph at lines 653--653
+ <Pictures/Plots/steps_bar_nonsm_parab.eps> [42]
+Underfull \hbox (badness 10000) in paragraph at lines 683--683
 
  []
 
-[42] [43]
-Overfull \hbox (47.94351pt too wide) in paragraph at lines 710--711
-[]\T1/lmr/m/n/12 Vanishing noise: $[] \OT1/lmr/m/n/12 = 0\OML/lmm/m/it/12 :\OT1/lmr/m/n/12 01\OML/lmm/m/it/12 ; [] \OT1
-/lmr/m/n/12 = []\OMS/lmsy/m/n/12 f\OT1/lmr/m/n/12 0\OML/lmm/m/it/12 :\OT1/lmr/m/n/12 01\OML/lmm/m/it/12 ; \OMS/lmsy/m/n/
-12 k\OML/lmm/m/it/12 x[]\OMS/lmsy/m/n/12 k\OML/lmm/m/it/12 =\OT1/lmr/m/n/12 100\OMS/lmsy/m/n/12 g$ \T1/lmr/m/n/12 and $[
-] \OT1/lmr/m/n/12 = 0\OML/lmm/m/it/12 :\OT1/lmr/m/n/12 01\OML/lmm/m/it/12 ; [] \OT1/lmr/m/n/12 = []\OMS/lmsy/m/n/12 f\O
-T1/lmr/m/n/12 0\OML/lmm/m/it/12 :\OT1/lmr/m/n/12 01\OML/lmm/m/it/12 ; \OMS/lmsy/m/n/12 k\OML/lmm/m/it/12 x[]\OMS/lmsy/m/
-n/12 k\OML/lmm/m/it/12 =\OT1/lmr/m/n/12 100\OMS/lmsy/m/n/12 g$
- []
-
-)
+[43] [44])
 ("D:\Annika\Uni\10. Semester\Masterarbeit\Proximal Bundle Inexact Information\Git Hub\Masterarbeit\LaTeX\Chapters/Bileve
-l_Application.tex" [44] [45] [46] [47]
+l_Application.tex" [45] [46] [47] [48]
 Overfull \hbox (52.7907pt too wide) in paragraph at lines 125--126
 []\T1/lmr/bx/n/12 Theorem 7.1 \T1/lmr/m/n/12 ([[], The-o-rem 6.1]) []\T1/lmr/m/it/12 Given a lin-early sep-a-ra-ble trai
 n-ing sam-ple $\OT1/lmr/m/n/12 
@@ -639,7 +635,7 @@ n-ing sam-ple $\OT1/lmr/m/n/12
 r/m/n/12 ))$
  []
 
-[48] [49] [50] [51] [52]
+[49] [50] [51] [52]
 Overfull \hbox (17.12895pt too wide) in paragraph at lines 293--295
 \T1/lmr/m/n/12 Let us first as-sume that the outer and in-ner ob-jec-tive func-tions and $\OML/lmm/m/it/12 w\OT1/lmr/m/n
 /12 (\OML/lmm/m/it/12 \OT1/lmr/m/n/12 ) = [] \OMS/lmsy/m/n/12 L[]\OT1/lmr/m/n/12 (\OML/lmm/m/it/12 w; \OT1/lmr/m/n/12 
@@ -675,25 +671,25 @@ Overfull \hbox (0.53162pt too wide) in paragraph at lines 580--593
  [] 
  []
 
-[60]
-Overfull \hbox (58.26138pt too wide) in paragraph at lines 675--676
+[60] [61]
+Overfull \hbox (58.26138pt too wide) in paragraph at lines 690--691
 [] 
  []
 
-[61]
-Overfull \hbox (264.82431pt too wide) in paragraph at lines 692--693
+[62]
+Overfull \hbox (264.82431pt too wide) in paragraph at lines 707--708
 [] 
  []
 
-) [62]
+) [63]
 ("D:\Annika\Uni\10. Semester\Masterarbeit\Proximal Bundle Inexact Information\Git Hub\Masterarbeit\LaTeX\Bundle_methods_
-for_nonsmooth_nonconvex_problems_with_inexact_information.bbl" [63] [64] [65]) [66]
+for_nonsmooth_nonconvex_problems_with_inexact_information.bbl" [64] [65] [66]) [67]
 ("D:\Annika\Uni\10. Semester\Masterarbeit\Proximal Bundle Inexact Information\Git Hub\Masterarbeit\LaTeX\Bundle_methods_
 for_nonsmooth_nonconvex_problems_with_inexact_information.aux"
 ("D:\Annika\Uni\10. Semester\Masterarbeit\Proximal Bundle Inexact Information\Git Hub\Masterarbeit\LaTeX\Chapters/Introd
 uction.aux"))
 
-LaTeX Warning: There were multiply-defined labels.
+LaTeX Warning: There were undefined references.
 
  )
 (\end occurred inside a group at level 1)
@@ -701,13 +697,13 @@ LaTeX Warning: There were multiply-defined labels.
 ### simple group (level 1) entered at line 1061 ({)
 ### bottom level 
 Here is how much of TeX's memory you used:
- 8119 strings out of 493922
- 129172 string characters out of 3142101
- 255545 words of memory out of 3000000
- 11206 multiletter control sequences out of 15000+200000
+ 8121 strings out of 493922
+ 129229 string characters out of 3142101
+ 257515 words of memory out of 3000000
+ 11208 multiletter control sequences out of 15000+200000
  117059 words of font info for 98 fonts, out of 3000000 for 9000
  841 hyphenation exceptions out of 8191
- 40i,18n,48p,695b,2430s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 40i,18n,48p,721b,2431s stack positions out of 5000i,500n,10000p,200000b,50000s
 
-Output written on Bundle_methods_for_nonsmooth_nonconvex_problems_with_inexact_information.dvi (68 pages, 224316 bytes).
+Output written on Bundle_methods_for_nonsmooth_nonconvex_problems_with_inexact_information.dvi (69 pages, 226968 bytes).
 

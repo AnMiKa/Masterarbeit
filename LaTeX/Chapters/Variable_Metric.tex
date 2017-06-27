@@ -556,6 +556,32 @@ To compare the proximal bundle algorithm \ref{sec_nonconv_inex}.1 with its varia
 The tests were done with the following parameters given in \cite{Hare2016}: \(m = 0.05\), \(\gamma = 2\) and \(t_0 = 0.1\). The chosen stopping tolerance was \(\mathtt{tol} = 10^{-6}\). If the algorithms did not meet the stopping condition after \(250n\) steps for \(x \in \R^n\), they were terminated. Contrary to \cite{Hare2016} the stopping test was taken as given in the algorithm and the tolerance was not multiplied by \(1+\hat{f}_k\).
 The proximity control parameters \(\kappa_-\) and \(\kappa_+\) from (\ref{t_minus}) and (\ref{t_plus}) respectively were chosen as \(\kappa_-= 0.8\) and \(\kappa_+=2\).  
 
+\textcolor{red}{check what is missing of introduchtion \\
+introduction of noise forms}
+
+To test the performance for inexact function and subgradient values different types of noise were introduced. This was done by adding randomly generated elements with norm less or equal to \(\sigma_k\) and \(\theta^k\) to the exact values \(f(x^{k+1})\) and \(g(x^{k+1})\) respectively.
+
+Five different forms of noise were tested:
+
+
+\begin{itemize}[label={--}]
+	\item \(\text{N}_0\): No noise, \(\bar{\sigma}=\sigma_k=0\) and \(\bar{\theta}=\theta^k=0\) for all \(k\).
+	\item \(\text{N}_{\text{c}}^{\text{f,g}}\): Constant noise, \(\bar{\sigma}=\sigma_k=0.01\) and \(\bar{\theta}=\theta^k=0.01\) for all \(k\).
+	\item \(\text{N}_{\text{v}}^{\text{f,g}}\): Vanishing noise, \(\bar{\sigma}=0.01, \sigma_k = \min\{0.01,\|x^k\|/100\}\) and \(\bar{\theta}=0.01, \theta_k=\min\{0.01,\|x^k\|/100\}\) for all \(k\).
+	\item \(\text{N}_{\text{c}}^{\text{g}}\): Constant subgradient noise, \(\bar{\sigma}=\sigma_k=0\) and \(\bar{\theta}=\theta_k=0.01\) for all \(k\).
+	\item \(\text{N}_{\text{v}}^{\text{g}}\): Vanishing subgradient noise, \(\bar{\sigma}=\sigma_k=0\) and \(\bar{\theta}=0.01, \theta_k=\min\{0.01,\|x^k\|/100\}\) for all \(k\).
+\end{itemize}
+The exact case is used for comparison. The constant noise forms represent cases where the inexactness is outside of the optimizer's control. The vanishing noise forms represent cases where the noise can be controlled  but the mechanism is considered expensive, so it is only used when approaching the minimum.
+The two forms of subgradient noise represent the case where the subgradient is approximated numerically.
+
+To address the random values of the noise the tests for the last four noise forms were executed \textcolor{red}{how many???} times and the results averaged.
+
+To compare the performance of the different methods the accuracy is measured by
+
+\[ \text{accuracy} = |\log_{10}(\hat{f}_{k^*})|. \]
+
+\(\hat{f}_{k^*}\) being the current \(\hat{f}_k\) when the algorithm stopped.
+
 \subsubsection{Academic Test Examples}
 
 To explore the benefit of the matrix \(Q\) the algorithms \ref{sec_nonconv_inex}.1 and \ref{sec_variable_metric}.1 were tested on a smooth and a nonsmooth version of a badly conditioned parabola.
@@ -565,15 +591,15 @@ The smooth test function was
 
 where the matrix was chosen as \(A = \begin{pmatrix} 1&0 \\ 0&50\end{pmatrix}\). The condition number of this matrix is \(\kappa_A = \frac{\lambda_{max}}{\lambda{min}} = 50\), where \(\lambda_{min}, \lambda_{max}\) are the smallest and biggest eigenvalue of \(A\) respectively. From smooth optimization it is known that gradient descent methods have a rather poor convergence rate for such badly conditioned matrices (c.f. Chapter 7.4 in \cite{Ulbrich2012}).
 Figure \ref{fig_contour_parab} shows the sequences of serious iterates resulting from the two algorithms on the contour lines of the parabola. On the left the complete sequence is depicted. The plot on the right shows a detail of the left figure near the minimum of the objective
-As the descent direction taken in algorithm \ref{sec_nonconv_inex}.1 is an aggregate subgradient and second order information is only provided by the stabilization term \(\frac{1}{t_k}\|d\|^2\) we can see a zig-zagging behavior of the sequence for the parabola.
+As the descent direction taken in algorithm \ref{sec_nonconv_inex}.1 is an aggregate subgradient and second order information is only provided by the stabilization term \(\frac{1}{t_k}\|d\|^2\) we can see a zig-zagging behavior of the sequence for the parabola in figure \ref{fig_contour_parab}.
 Contrary to that the sequence of serous iterates provided by algorithm \ref{sec_variable_metric}.1 can take advantage of the second order information provided by \(Q\).
-It walks into the minimum almost in a straight line. The difference in behavior of the two algorithms is especially visible on the detail plot that shows the situation near the minimum: The proximal bundle algorithm needs a lot of steps circling around the minimum whereas the variable metric algorithm approaches the minimum directly. The resulting advantage of this behavior is the smaller number of steps needed by the variable metric algorithm. 
+It walks into the minimum almost in a straight line. The difference in behavior of the two algorithms is especially visible on the detail plot of \ref{fig_contour_parab} that shows the situation near the minimum: The proximal bundle algorithm needs a lot of steps circling around the minimum whereas the variable metric algorithm approaches the minimum directly. The resulting advantage of this behavior is the smaller number of steps needed by the variable metric algorithm. 
 
 
 %this means: no zigzagging, less overall steps and less null steps, Hare Algorithm much more steps near the minimum, also many null steps there\\
 %\textcolor{red}{plot, evtl: plot von Minimum}
 
-\begin{figure}[H]
+\begin{figure}[ht]
 	\begin{subfigure}[t]{0.49\textwidth}
 		\includegraphics[width=\textwidth]{Pictures/Plots/final_parab.eps}
 		%\subcaption{}
@@ -592,9 +618,11 @@ It walks into the minimum almost in a straight line. The difference in behavior 
 The second test function is a nonsmooth version of the above parabola. The function is given by 
 \[ p_n(x): \R^2 \to \R, \quad x \mapsto \Langle \frac{1}{2}x, Ax \Rangle + \frac{1}{2}|x_1|+25|x_2|. \]
 
-Due to the kink along the \(x_1\)-axis the curvature information supplied by \(Q\) is less reliable than for the smooth parabola. Still the sequence provided by the variable metric algorithm does less zig-zagging than the one constructed by the proximal bundle algorithm.  
+Due to the kink along the \(x_1\)-axis the curvature information supplied by \(Q\) is less reliable than for the smooth parabola.
+Figure \ref{fig_contour_nonsm_parab} shows the sequences constructed by the two algorithms. Still the sequence provided by the variable metric algorithm does less zig-zagging than the one coming from the proximal bundle algorithm.
+It is interesting to note, that the sequence provided by the proximal bundle algorithm is the same for both functions. This is not the case for the sequence generated by the metric bundle algorithm, because the second order information of the two objective functions is different.
 
-\begin{figure}[H]
+\begin{figure}[ht]
 	\begin{subfigure}[t]{0.49\textwidth}
 		\includegraphics[width=\textwidth]{Pictures/Plots/final_nonsm_parab.eps}
 		%\subcaption{Parabola, \(kappa = 2\), sequwnces of \(x_{hats}\); Noll:\(21|9\), same for adapted, Hare: \(28|12\)}
@@ -605,23 +633,32 @@ Due to the kink along the \(x_1\)-axis the curvature information supplied by \(Q
 			%\subcaption{detail}
 		\end{center}
 	\end{subfigure}
-	\caption{}
-	\label{Im_Nonsm_Parab}
+	\caption{Sequences of serious steps constructed by the proximal bundle algorithm and the variable metric algorithm respectively on the level lines of the nonsmooth quadratic function \(p_n\). The right image is a detail of the plot on the left.}
+	\label{fig_Nonsm_Parab}
 \end{figure}
 
-\begin{figure}[H]
+The bar plots in figures \ref{fig_bar_parab} and \ref{fig_bar_nonsm_parab} compare accuracy of the solution and the step sizes that are needed by the different algorithms for the various noise forms.
+\textcolor{red}{adaptive Q has to be explained before, reference}\\
+\textcolor{red}{Noise form \(\text{N}_{\text{v}}^{\text{g}}\) is the one that is most similar to no noise; one can see: gradient noise has not as much impact as inexact function value (makes sense because only calculating with subgradients) -> in those cases variable metric algorithm more exact, but all over desired tolerance
+in terms of exactness proximal bundle algorithm slightly better, but not much; the two variants of the variable metric algorithm are more or less the same.\\
+for step sizes> proximal bundle algorithm needs a lot more steps than variable metric especially in the case of constant function value and gradient noise}
+
+\textcolor{red}{Figure \ref{fig_bar_nonsm_parab}:  in nonsmooth case accuracy of proximal bundle algorithm overall slightly better; need generally more steps, numbers of steps more equal apart from constant noise part where for a minor gain of accuracy a really high numer of steps is done (plot is cropped, really: over 250 steps)\\
+bigger difference if changing \(\kappa_+\) -> add plot for that and comment???}
+
+\begin{figure}[ht]
 	\begin{subfigure}[t]{0.49\textwidth}
 		\includegraphics[width=\textwidth]{Pictures/Plots/accuracy_bar_parab.eps}
-		\subcaption{Parabola, \(kappa = 2\)}
+		%\subcaption{Parabola, \(kappa = 2\)}
 	\end{subfigure}
 	\begin{subfigure}[t]{0.49\textwidth}
 		\begin{center}
 			\includegraphics[width=\textwidth]{Pictures/Plots/steps_bar_parab.eps}
-			\subcaption{}
+	%		\subcaption{}
 		\end{center}
 	\end{subfigure}
-	\caption{}
-	\label{...}
+	\caption{Comparison of the accuracy of the solu}
+	\label{fig_bar_parab}
 \end{figure}
 
 \begin{figure}[H]
@@ -636,7 +673,7 @@ Due to the kink along the \(x_1\)-axis the curvature information supplied by \(Q
 		\end{center}
 	\end{subfigure}
 	\caption{}
-	\label{...}
+	\label{fig_bar_nonsm_parab}
 \end{figure}
 
 \textcolor{red}{second example: nonsmooth version of the parabola
@@ -700,28 +737,8 @@ Ferrier polynomials are nonconvex, except for \(f_2\), nonsmooth and lower-\(\ma
 The five test functions \(f_1,...f_5\) were optimized for the dimensions \(n=1,2,...,15,20,25,30\).
 The starting value for each test problem being \(x^1=[1,\frac{1}{4},\frac{1}{9},...,\frac{1}{n^2}]^{\top}\).
 
-To test the performance for inexact function and subgradient values different types of noise were introduced. This was done by adding randomly generated elements with norm less or equal to \(\sigma_k\) and \(\theta^k\) to the exact values \(f(x^{k+1})\) and \(g(x^{k+1})\) respectively.
 
-Five different forms of noise were tested:
 
-\begin{itemize}[label={--}]
-	\item No noise: \(\bar{\sigma}=\sigma_k=0\) and \(\bar{\theta}=\theta^k=0\) for all \(k\).
-	\item Constant noise: \(\bar{\sigma}=\sigma_k=0.01\) and \(\bar{\theta}=\theta^k=0.01\) for all \(k\).
-	\item Vanishing noise: \(\bar{\sigma}=0.01, \sigma_k = \min\{0.01,\|x^k\|/100\}\) and \(\bar{\theta}=0.01, \theta_k=\min\{0.01,\|x^k\|/100\}\) for all \(k\).
-	\item Constant subgradient noise: \(\bar{\sigma}=\sigma_k=0\) and \(\bar{\theta}=\theta_k=0.01\) for all \(k\).
-	\item Vanishing subgradient noise: \(\bar{\sigma}=\sigma_k=0\) and \(\bar{\theta}=0.01, \theta_k=\min\{0.01,\|x^k\|/100\}\) for all \(k\).
-\end{itemize}
-
-The exact case is used for comparison. The constant noise forms represent cases where the inexactness is outside of the optimizer's control. The vanishing noise forms represent cases where the noise can be controlled  but the mechanism is considered expensive, so it is only used when approaching the minimum.
-The two forms of subgradient noise represent the case where the subgradient is approximated numerically.
-
-To address the random values of the noise the tests for the last four noise forms were executed ten times and the results averaged.
-
-To compare the performance of the different methods the accuracy is measured by
-
-\[ \text{accuracy} = |\log_{10}(\hat{f}_{k^*})|. \]
-
-\(\hat{f}_{k^*}\) being the current \(\hat{f}_k\) when the algorithm stopped.
 
 Two different stopping tolerances \(\mathtt{tol}=10^{-3}\) and \(\mathtt{tol}=10^{-6}\) were used.
 Additionally the computation times for the different algorithms and tests are plotted. \textcolor{red}{say on what machine that was done???}
