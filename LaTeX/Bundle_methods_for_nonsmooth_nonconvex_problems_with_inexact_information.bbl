@@ -6,12 +6,6 @@ P.~Apkarian, D.~Noll, and O.~Prot.
   optimization.
 \newblock {\em {SIAM} Journal on Optimization}, 19(1):281--306, jan 2008.
 
-\bibitem{Bagirov2014}
-Adil Bagirov, Napsu Karmitsa, and Marko~M. M{\"a}kel{\"a}.
-\newblock {\em Introduction to Nonsmooth Optimization: Theory, Practice and
-  Software}.
-\newblock Springer International Publishing Switzerland, 2014.
-
 \bibitem{Clarke1990}
 Frank~H. Clarke.
 \newblock {\em Optimization and nonsmooth analysis}.
@@ -121,16 +115,15 @@ Krzysztof~C. Kiwiel.
 \newblock A proximal bundle method with approximate subgradient linearizations.
 \newblock {\em {SIAM} Journal on Optimization}, 16(4):1007--1023, jan 2006.
 
+\bibitem{Koenigsberger2002}
+Konrad Königsberger.
+\newblock {\em Analysis 2}.
+\newblock Springer Berlin Heidelberg, 2002.
+
 \bibitem{Kunapuli2008}
 Gautam Kunapuli.
 \newblock {\em A bilevel optimization approach to machine learning}.
 \newblock PhD thesis, Rensselaer Polytechnic Institute Troy, New York, 2008.
-
-\bibitem{Lemarechal1978}
-Claude Lemar{\'e}chal.
-\newblock Nonsmooth optimization and descent methods.
-\newblock Iiasa research report, International Institute for Applied Systems
-  Analysis, 1978.
 
 \bibitem{Lemarechal1994}
 Claude Lemar{\'e}chal and Claudia Sagastiz{\'a}bal.
@@ -154,12 +147,6 @@ L.~Luk{\v{s}}an and J.~Vl{\v{c}}ek.
   unconstrained minimization.
 \newblock {\em Journal of Optimization Theory and Applications},
   102(3):593--613, sep 1999.
-
-\bibitem{Maekelae1992}
-Marko~M. M{\"a}kel{\"a} and Pekka Neittaanm{\"a}ki.
-\newblock {\em Nonsmooth Optimization: Analysis and Algorithms with
-  Applications to Optimal Control}.
-\newblock World Scientific Pub Co Pte Lt, 1992.
 
 \bibitem{Ulbrich2012}
 Stefan~Ulbrich Michael~Ulbrich.
@@ -200,13 +187,6 @@ D.~R. Musicant and A.~Feinberg.
 David~R. Musicant.
 \newblock {\em Data Mining via Mathematical Programming and Machine Learning}.
 \newblock PhD thesis, University of Wisconsin, Madison, 2000.
-
-\bibitem{Nesterov2016}
-Yurii Nesterov and Vladimir Shikhman.
-\newblock Algorithmic principle of least revenue for finding market equilibria.
-\newblock In Boris Goldengorin, editor, {\em Optimization and Its Applications
-  in Control and Data Sciences}, volume 115 of {\em Springer Optimization and
-  Its Applications}, pages 381--435. Springer Nature, 2016.
 
 \bibitem{Noll2010}
 Dominikus Noll.
@@ -286,12 +266,6 @@ Helga Schramm and Jochem Zowe.
   conceptual idea, convergence analysis, numerical results.
 \newblock {\em {SIAM} Journal on Optimization}, 2(1):121--152, feb 1992.
 
-\bibitem{Smola2007}
-A.~J. Smola, S.v.n. Vishwanathan, and V.~Le Quoc.
-\newblock Bundle methods for machine learning.
-\newblock In J.~C. Platt, D.~Koller, Y.~Singer, and S.~T. Roweis, editors, {\em
-  Advances in Neural Information Processing Systems}, number~20, 2007.
-
 \bibitem{Solodov2003}
 M.~V. Solodov.
 \newblock Aon approximations with finite rprecision in bundle methods for
@@ -304,11 +278,6 @@ Mikhail~V. Solodov.
 \newblock {\em Constraint Qualifications}.
 \newblock Wiley Encyclopedia of Operations Research and Management Science,
   2011.
-
-\bibitem{Teo2010}
-Choon~Hui Teo, A.~J. Smola, S.V.N. Vishwanathan, and Quoc~V. Le.
-\newblock Bundle methods for regularized risk minimization.
-\newblock {\em Journal of Machine Learning Research}, 11:311--365, 2010.
 
 \bibitem{Treiman1986}
 Jay~S. Treiman.

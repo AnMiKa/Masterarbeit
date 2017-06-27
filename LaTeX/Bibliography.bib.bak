@@ -758,4 +758,14 @@
   issn    = {0899-7667},
 }
 
+@Book{Ulbrich2012,
+  title     = {Nichtlineare Optimierung},
+  publisher = {Springer Basel AG},
+  year      = {2012},
+  author    = {Michael Ulbrich, Stefan Ulbrich},
+  date      = {2012-06-13},
+  ean       = {9783034601429},
+  isbn      = {3034601425},
+}
+
 @Comment{jabref-meta: databaseType:bibtex;}

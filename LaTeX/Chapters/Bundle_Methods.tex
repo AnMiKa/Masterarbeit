@@ -76,29 +76,29 @@ This new subproblem is strongly convex and therefore always has  a unique soluti
 
 The regularization term can be motivated and interpreted in many different ways, c.f. \cite{Hiriart-Urruty1993}. From different possible regularization terms the most popular in bundle methods is the penalty-like regularization used here.
 
-The second major step towards the bundle algorithm is the introduction of a so called \emph{stability center} or  \emph{serious point} \(\hat{x}^k\). It is the iterate that yields the ``best'' approximation of the optimal point up to the \(k\)'th iteration (not necessarily the best function value though).
-The updating technique for \(\hat{x}^k\) is crucial for the convergence of the method: If the next iterate yields a decrease of \(f\) that is ``big enough'', namely bigger than a fraction of the decrease suggested by the model function for this iterate, the stability center is moved to that iterate. If this is not the case, the stability center remains unchanged.
+The second major step towards the bundle algorithm is the introduction of a so called \emph{stability center} or  \emph{serious point} \(\hat{x}^k\). It is the iterate that yields the ``best'' approximation of the optimal point up to the \(k\)'th iteration (not necessarily the lowest function value though).
+The updating technique for \(\hat{x}^k\) is crucial for the convergence of the method: If the next iterate yields a decrease of \(f\) that is ``large enough'', namely larger than a fraction of the decrease suggested by the model function for this iterate, the stability center is moved to that iterate. If this is not the case, the stability center remains unchanged.
 
-In practice this looks the following:
-Define first the \emph{model decrease} \(\delta^M_k\) which is the decrease of the model for the new iterate \(x^{k+1}\) compared to the function value at the current stability center \(\hat{x}^k\)
+In practice this is implemented as follows:
+First define the \emph{model decrease} \(\delta^M_k\) which is the decrease of the model for the new iterate \(x^{k+1}\) compared to the function value at the current stability center \(\hat{x}^k\)
 
 \begin{equation}
-	\delta^M_{k} = f(\hat{x}^k) - m_k(x^{k+1}) \geq 0.
+	\delta^M_{k} := f(\hat{x}^k) - m_k(x^{k+1}) \geq 0.
 \label{mod_dec}
 \end{equation}
 
 %\textcolor{red}{The nominal decrease is in fact stated a little differently for different versions of the bundle algorithm, this is why I added the constant \(a_k \in \R\) here for generalization. In practice the difference between the decreases is not influencing the algorithm as \(\delta_k\) is weighted by the constant \(m \in (0,1)\) for the descent test which compensates \(a_k\).} 
 
-If the actual decrease of the objective function is bigger than a fraction of the model decrease 
+If the actual decrease of the objective function is larger than a fraction of the model decrease 
 
-\[ f(\hat{x}^k) - f(x^{k+1}) \geq m \delta^M_k, \quad m \in (0,1) \]
+\[ f(\hat{x}^k) - f(x^{k+1}) \geq \theta \delta^M_k, \quad \theta \in (0,1) \]
 
 set the stability center to \( \hat{x}^{k+1} = x^{k+1}\). This is called a \emph{serious} or \emph{descent step}.
 If this is not the case a \emph{null step} is executed and the serious iterate \(\hat{x}^{k+1} = \hat{x}^k\) remains the same .
 
 Besides the model decrease other forms of decrease measures and variations of these are possible. Some are presented in \cite{Hiriart-Urruty1993} and \cite{Oliveira2014}.
 
-\subsubsection{Subproblem Formulations}
+\subsubsection{Subproblem Reformulations}
 The subproblem to be solved to find the next iterate can be rewritten as a smooth optimization problem. For convenience we first rewrite the affine functions \(l_j\) with respect to the stability center \(\hat{x}^k\).
 
 %\textcolor{red}{citation for this???!!!}
@@ -115,7 +115,7 @@ where
 \label{lin_err}
 \end{equation*}
 
-is the \emph{linearization error}. Its nonnegativity property is essential for the convergence theory and will also be of interest when moving on to the case of nonconvex and inexact objective functions. \\
+is the \emph{linearization error}. Due to convexity of \(f\) it is nonnegative. This property is essential for the convergence theory and will also be of interest when moving on to the case of nonconvex and inexact objective functions. \\
 
 
 Subproblem (\ref{stabil_model_fun}) can now be written as
@@ -129,7 +129,9 @@ Subproblem (\ref{stabil_model_fun}) can now be written as
 
 
 where \(d:= x-\hat{x}^k\) and the constant term \(f(\hat{x}^k)\) was discarded for the sake of simplicity. \\
-If \(X\) is a polyhedron this is a quadratic optimization problem that can be solved using standard methods of nonlinear optimization. The pair \((\xi_k, d^k)\) solves (\ref{sub_prob_short}) if and only if
+If \(X\) is a polyhedron this is a quadratic optimization problem that can be solved using standard methods of nonlinear optimization. It should however be observed that the matrix of the quadratic part is only positive semidefinite because it does not have full rank.
+
+The pair \((\xi_k, d^k)\) solves (\ref{sub_prob_short}) if and only if
 
 \begin{align}
 	d^k &\text{ solves the original subproblem (\ref{sub_prob_long})  and } \nonumber \\
@@ -147,16 +149,16 @@ The constraint \(\hat{x}^k+d \in X\) can also be incorporated directly in the ob
 
 This function is convex if and only if the set \(X\) is convex \cite{Rockafellar1996}.
 
-Subproblem (\ref{stabil_model_fun}) then reads 
+Subproblem (\ref{stabil_model_fun}) then reads with respect to the serious point \(\hat{x}^k\)
+
 \begin{equation}
-	\min_{x \in \R^n} m_k(x) + \mathtt{i}_X(x) + \frac{1}{2t_k}\|x-\hat{x}^k\|^2 % \quad \text{s.t.} \quad {g^j}^{\top}d - e^k_j - \xi \leq 0, \quad j \in J_k
+	\min_{x \in \R^n} m_k(x) + \mathtt{i}_X(x) + \frac{1}{2t_k}\|x-\hat{x}^k\|^2. % \quad \text{s.t.} \quad {g^j}^{\top}d - e^k_j - \xi \leq 0, \quad j \in J_k
 \label{sub_prob_fin}
 \end{equation}
 
-with respect to the serious point \(\hat{x}^k\).
 %\textcolor{red}{check if f also not put into subproblem before}
 
-The subproblem is now written as the \emph{Moreau-Yosida regularization} of \(\check{f}:= m_k(x) + \mathtt{i}_X(x)\). The emerging mapping is also known as \emph{proximal point mapping} \cite{Hare2010} or \emph{prox-operator}
+The subproblem is now written as the \emph{Moreau-Yosida regularization} of \(\check{f}(x):= m_k(x) + \mathtt{i}_X(x)\). The emerging mapping is also known as \emph{proximal point mapping} \cite{Hare2010} or \emph{prox-operator}
 
 	\begin{equation}
 		prox_{t,\check{f}}(x) = \argmin_{y \in \R^n}\left\{\check{f}(y) + \frac{1}{2t}\|x-y\|^2\right\}, \quad t > 0.
@@ -166,7 +168,8 @@ The subproblem is now written as the \emph{Moreau-Yosida regularization} of \(\c
 This special form of the subproblems gives the primal bundle method its name, \emph{proximal bundle method}. The mapping also plays a key role when the method is generalized to nonconvex objective functions and inexact information.
 
 
-\subsection{Aggregate Objects}
+\subsection{???}
+not aggregate Objects
 
 We look again at a slightly different formulation of the bundle subproblem 
 
@@ -254,7 +257,7 @@ The first condition means, that the newly computed information is always put int
 It holds trivially if no or only inactive information \(j \text{ with }\alpha_j = 0\) is removed \cite{Hare2016}.
 It is also always satisfied if the aggregate linearization \(a_k\) itself is added to the bundle. In this case active information can be removed without violating the condition. This is the key idea of Kiwiel's aggregation technique and ensures that the set \( \{j \in J^k| \alpha_j >0 \} \) can be bounded.
 
-An issue of bundle methods is that in spite of the possibility to delete inactive information the bundle can still become very big. Kiwiel therefore proposed a totally different use of the aggregate objects in \cite{Kiwiel1986}. The aggregate subgradient can be used to build the \emph{aggregate linearization}
+An issue of bundle methods is that in spite of the possibility to delete inactive information the bundle can still become very large. Kiwiel therefore proposed a totally different use of the aggregate objects in \cite{Kiwiel1986}. The aggregate subgradient can be used to build the \emph{aggregate linearization}
 
 \begin{equation*}
 	a_k(\hat{x}^k+d):=m_k(x^{k+1})+\langle G^k,d-d^k \rangle.
@@ -328,7 +331,7 @@ at every serious step and
 \end{equation}
 
 at every null step.
-The idea behind this management of \(t_k\) is taken from the trust region method: If the computed iterate was good, the model is assumed to be reliable in a bigger area around this serious iterate so bigger step sizes are allowed. If a null step was taken, the model seems to be too inaccurate far from the current serious point. Then smaller step sizes are used.
+The idea behind this management of \(t_k\) is taken from the trust region method: If the computed iterate was good, the model is assumed to be reliable in a larger area around this serious iterate so bigger step sizes are allowed. If a null step was taken, the model seems to be too inaccurate far from the current serious point. Then smaller step sizes are used.
 A more sophisticated version of this kind of step size management is also used by Noll et al. in \cite{Noll2012} and \cite{Noll2013}. The trust region idea was very much exploited by Schramm and Zowe in \cite{Schramm1992a}.
 In the case \(X = R^n\) the sequence \(\{\hat{x}^k\}\) can be unbounded. In this case bounding \(t_k < \infty ~ \forall k\) preserves the convergence proof \cite[Theorem 3.2.2]{Hiriart-Urruty1993}.
 

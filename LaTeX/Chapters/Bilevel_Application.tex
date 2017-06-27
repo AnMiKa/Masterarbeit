@@ -146,7 +146,8 @@ One can also say that \(\|\xi\|\) measures the amount by which training set ``fa
 For support vector machines the target margin is set to \(\gamma = 1\).
 
 %Book uses \(\xi^2\) -> then \(\xi>0\) not needed any more; only \(\xi\) also used -> 1-norm
-This results finally in the following slightly different optimization problems for finding an optimal separating hyperplane \((\bm{w},b)\): 
+This results finally in the following slightly different
+optimization problems for finding an optimal separating hyperplane \((\bm{w},b)\): 
 
 \begin{align}
 \begin{split}
@@ -169,14 +170,15 @@ and
 \label{SVM_2}
 \end{align}
 
-
+The first part of the respective objective functions are the regularizations, the second part are the actual loss functions. 
 The parameter \(C > 0\) gives a trade-off between the richness of the chosen set of functions \(f_{\alpha}\) to reduce the error on the training data and the danger of overfitting to have good generalization. It has to be chosen a priori \cite{Kunapuli2008}.
-
+The two optimization problems only differ in the norm chosen for the loss function. In (\ref{SVM_1}) the one-norm is chosen, in (\ref{SVM_2}) the squared two-norm is used.
+Problem (\ref{SVM_2}) is the one that will finally be used in the bilevel approach where smoothness of the objective function of the inner level problem is needed to calculate all needed subgradients.
 
 \subsection{Explanation Bilevel Approach and Inexact Bundle Method}
 %Check if regression case also included?????
 
-The hyper-parameter \(C\) in the objective function of the classification problem has to be set before hand. This step is part of the model selection process.
+The hyper-parameter \(C\) in the objective function of the classification problem has to be set beforehand. This step is part of the model selection process.
 To set this parameter optimally different methods can be used.
 A very intuitive and widely used approach is doing  and \emph{cross validation} (CV) with a grid search implementation.
 %very costly, discrete parameter choice, not practicable in case of many parameter
@@ -213,17 +215,18 @@ For a general machine learning problem with upper and lower loss function \(\mat
 	\end{array}
 \end{equation}
 
-In the case of support vector classification the \(T\) inner problems are one of the classical SVM formulations (\ref{SVM_1}) or (\ref{SVM_2}) (but all \(T\) problems have the same formulation).
-The problem can also be rewritten into a unconstrained form. This form will be helpful when using the inexact bundle algorithm for solving the bilevel problem.
+In the case of support vector classification the \(T\) inner problems hve the classical SVM formulation %(\ref{SVM_1}) or 
+(\ref{SVM_2}). % (but all \(T\) problems have the same formulation).
+The problem can also be rewritten into a unconstrained form. This form is helpful when using the inexact bundle algorithm for solving the bilevel problem.
 For the \(t\)'th fold the resulting hyperplane is identified with the pair \((\bm{w}^t,b_t) \in \R^{n+1}\).
 The inner level problem for the \(t\)'th fold can therefore be stated as
 
-\begin{equation}
-	(\bm{w}^t,b_t) \in \argmin_{\bm{w},b}\left\{ \frac{\lambda}{2} \|\bm{w}\|^2_2+\sum_{i\in \bar{\mathcal{N}}_t}{\max\left(1-y_i(\bm{w}^{\top}x^i-b),0\right)}\right\}
-\label{lower_t_1}
-\end{equation}
+%\begin{equation}
+	%(\bm{w}^t,b_t) \in \argmin_{\bm{w},b}\left\{ \frac{\lambda}{2} \|\bm{w}\|^2_2+\sum_{i\in \bar{\mathcal{N}}_t}{\max\left(1-y_i(\bm{w}^{\top}x^i-b),0\right)}\right\}
+%\label{lower_t_1}
+%\end{equation}
 
-or
+%or
 
 \begin{equation}
 	(\bm{w}^t,b_t) \in \argmin_{\bm{w},b} \left\{\frac{\lambda}{2} \|\bm{w}\|^2_2+\sum_{i\in \bar{\mathcal{N}}_t}{\left(\max\left(1-y_i(\bm{w}^{\top}x^i-b),0\right)\right)^2}\right\}
@@ -255,23 +258,36 @@ The drawback of this simple loss function is, that it is not continuous and as s
 \label{hinge_loss}
 \end{equation}
 
-Hence the two final resulting bilevel formulations for model selection in support vector are 
+It is also possible to square the max term. This results in the loss function
+
+\begin{equation}
+		\mathcal{L}_{hinge} = \frac{1}{T}\sum_{t=1}^T\frac{1}{|\mathcal{N}_t|}\sum_{i \in \mathcal{N}_t}{\max\left(1-y_i((\bm{w}^t)^{\top}x-b_t),0\right)^2}.
+\label{hingequad_loss}
+\end{equation}
+
+In figure (\ref{??}) it can be seen that its minimum and overall progress is more similar to the misclassification loss than the one of the hinge loss. For this reason we progress taking the squared form of the hinge loss, abbreviating with \emph{hingequad loss} for convenience.
+
+%\textcolor{red}{also possible to square the max term\\
+%formula \\
+%from plots: seems to match the misclassification loss a bit better -> used it instead/also}
+
+Hence the final resulting bilevel formulation for model selection in support vector classification is 
+
+%\begin{align}
+%\begin{split}
+	%\min_{\bm{W},\bm{b}} \quad &  \mathcal{L}_{hinge}(\bm{W},\bm{b}) = \frac{1}{T}\sum_{t=1}^T\frac{1}{|\mathcal{N}_t|}\sum_{i \in \mathcal{N}_t}{\max\left(1-y_i((\bm{w}^t)^{\top}x-b_t),0\right)}\\
+	%\text{subject to} \quad &  \lambda > 0 \\
+	%& \text{for } t = 1,...,T \\
+	%& (\bm{w}^t,b_t) \in \argmin_{\bm{w},b}\left\{ \frac{\lambda}{2} \|\bm{w}\|^2_2+\sum_{i\in \bar{\mathcal{N}}_t}{\max\left(1-y_i(\bm{w}^{\top}x^i-b),0\right)}\right\} \\
+%\end{split}
+%\label{model_1}
+%\end{align}
+%
+%and 
 
 \begin{align}
 \begin{split}
-	\min_{\bm{W},\bm{b}} \quad &  \mathcal{L}_{hinge}(\bm{W},\bm{b}) = \frac{1}{T}\sum_{t=1}^T\frac{1}{|\mathcal{N}_t|}\sum_{i \in \mathcal{N}_t}{\max\left(1-y_i((\bm{w}^t)^{\top}x-b_t),0\right)}\\
-	\text{subject to} \quad &  \lambda > 0 \\
-	& \text{for } t = 1,...,T \\
-	& (\bm{w}^t,b_t) \in \argmin_{\bm{w},b}\left\{ \frac{\lambda}{2} \|\bm{w}\|^2_2+\sum_{i\in \bar{\mathcal{N}}_t}{\max\left(1-y_i(\bm{w}^{\top}x^i-b),0\right)}\right\} \\
-\end{split}
-\label{model_1}
-\end{align}
-
-and 
-
-\begin{align}
-\begin{split}
-	\min_{\bm{W},\bm{b}} \quad &  \mathcal{L}_{hinge}(\bm{W},\bm{b}) = \frac{1}{T}\sum_{t=1}^T\frac{1}{|\mathcal{N}_t|}\sum_{i \in \mathcal{N}_t}{\max\left(1-y_i((\bm{w}^t)^{\top}x-b_t),0\right)}\\
+	\min_{\bm{W},\bm{b}} \quad &  \mathcal{L}_{hinge}(\bm{W},\bm{b}) = \frac{1}{T}\sum_{t=1}^T\frac{1}{|\mathcal{N}_t|}\sum_{i \in \mathcal{N}_t}{\max\left(1-y_i((\bm{w}^t)^{\top}x-b_t),0\right)^2}\\
 	\text{subject to} \quad & \lambda > 0 \\
 	& \text{for } t = 1,...,T \\
 	& (\bm{w}^t,b_t) \in \argmin_{\bm{w},b}\left\{ \frac{\lambda}{2} \|\bm{w}\|^2_2+\sum_{i\in \bar{\mathcal{N}}_t}{\left(\max\left(1-y_i(\bm{w}^{\top}x^i-b),0\right)\right)^2}\right\}. \\
@@ -298,24 +314,37 @@ To find an optimal hyper parameter \(\lambda\) given the input \(w\) the gradien
 In order to calculate this gradient the chain rule is used yielding
 
 \begin{equation*}
-	g^{upp}_{\lambda} = \left(\frac{\partial}{\partial w}\mathcal{L}_{upp}(w,\lambda) \right)^{\top}\frac{\partial w(\lambda)}{\lambda}+\frac{\partial}{\partial \lambda}\mathcal{L}_{upp}(w,\lambda).
+	g^{upp}_{\lambda} = \left(\frac{\partial}{\partial w}\mathcal{L}_{upp}(w,\lambda) \right)^{\top}\frac{\partial w(\lambda)}{\partial\lambda}+\frac{\partial}{\partial \lambda}\mathcal{L}_{upp}(w,\lambda).
 \end{equation*}
 
-The challenge is here to find the term \(\frac{\partial w(\lambda)}{\lambda}\) because 
+The challenge is here to find the term \(\frac{\partial w(\lambda)}{\partial\lambda}\) because 
 
 \[ \frac{\partial w}{\partial \lambda} \in \frac{\partial }{\partial \lambda} \argmin_{w} \mathcal{L}_{low}(w,\lambda). \]
 
-Assuming \(\mathcal{L}_{low}\) is twice continuously differentiable in the optimality condition 
+Assuming \(\mathcal{L}_{low}\) is twice continuously differentiable at the  optimal solution \(w^*\) of the lower level problem the optimality condition for any parameter \(\lambda_0 > 0\)
+
 \begin{equation*}
-	0 = \frac{\partial}{\partial w}\mathcal{L}_{low}(w^*,\lambda)
+	0 = \frac{\partial}{\partial w}\mathcal{L}_{low}(w^*,\lambda_0)
 \label{opt_con}
 \end{equation*}
 
-opt point \(w^*\)
 
 can be used to calculate the needed gradient in an indirect manner.
 
-For these calculations to be possible the inner level loss function must yield a linear optimality condition in \(w\). This is for example the case for SVM loss functions with a squared one- or two-norm.
+In the differentiable case the theoretical framework for the following calculations is given by the implicit function theorem.
+
+\begin{theorem}[{c.f. \cite[chapter 3.4]{Koenigsberger2002}}]
+	Let \(F: U \times V \to Z \) be a \(\mathcal{C}^1\) mapping, \((x_0,y_0) \in U\times V\)  and \(F(x_0,y_0) = 0\). If the matrix \(\frac{\partial}{\partial y}F(x_0,y_0)\) is invertible, there exist neighborhoods \(U_0\subset U\) of \(x_0\) and \(V_0\subset V\) of \(y_0\) and a continuously differentiable mapping \(f:U_0 \to V_0\) with 
+	\begin{equation*}
+	F(x,y) = 0, (x,y)\in U_0\times V_0  \quad \Leftrightarrow \quad y = f(x), x\in U_0.
+	%\label{imp_fun_theo}
+	\end{equation*}
+\end{theorem}
+
+Identifying \(x \estimates \lambda\), \(y \estimates w\) and  \(F(x_0,y_0) \estimates \frac{\partial}{\partial w} \mathcal{L}_{low}(w^*,\lambda_0)\) and assuming \(\frac{\partial^2 }{\partial  w^2}\mathcal{L}_{low}(w^*,\lambda_0)\) is invertible this theorem provides the existence of the continuously differentiable function \(w(\lambda)\) whose gradient is needed. 
+
+In special cases the gradient can be calculated explicitly.
+For these calculations to be possible the inner level loss function must yield a linear optimality condition in \(w\). This is for example the case for SVM loss functions with a squared one- or two-norm as given in problem (\ref{SVM_2}).
 The optimality condition can then be written as the linear system
 
 \begin{equation*}
@@ -325,27 +354,64 @@ The optimality condition can then be written as the linear system
 By taking the partial derivative with respect to \(\lambda\) on both sides of the system one gets
 
 \begin{equation*}
-	\left( \frac{\partial H(\lambda)}{\partial \lambda}\right)w+H(\lambda)\frac{\partial w}{\partial \lambda} = \frac{\partial h(\lambda)}{\partial  \lambda}.
+	\frac{\partial H(\lambda)}{\partial \lambda}w+H(\lambda)\frac{\partial w}{\partial \lambda} = \frac{\partial h(\lambda)}{\partial  \lambda}.
 \end{equation*}
 
 If \(H(\lambda)\) is invertible for all \(\lambda \in \Lambda\) then the needed gradient is given by 
 
 \begin{equation*}
-	\frac{\partial w}{\partial \lambda} = H^{-1}(\lambda)\left(\frac{\partial h(\lambda)}{\partial \lambda}-\left(\frac{\partial H(\lambda)}{\partial \lambda}\right)w\right).
+	\frac{\partial w}{\partial \lambda} = H^{-1}(\lambda)\left(\frac{\partial h(\lambda)}{\partial \lambda}-\frac{\partial H(\lambda)}{\partial \lambda}w\right).
 \end{equation*}
 
-\textcolor{red}{why H invertible??? - because we assume existence of \(w\)???}\\
+%\textcolor{red}{why H invertible??? - because we assume existence of \(w\)???}\\
 
 \textcolor{red}{now for subgradients} \\
 
 In practice we cannot expect \(\mathcal{L}_{low}\) to satisfy such strong differentiability properties.
+It is therefore assumed that \(\mathcal{L}_{low}\) is once continuously differentiable in \(w\). Contrary to the exemplary calculations from above in practice the second derivative \(\frac{\partial^2}{\partial w \partial \lambda} \mathcal{L}_{low}(w(\lambda),\lambda)\) is not existent in this form, but a set of subgradients.
 
-\textcolor{red}{what kind of differentiability do I assume??? -> if I use normal Hinge then only locally Lipschitz $L_in$}
+\textcolor{red}{Notation}\\
+\textcolor{red}{An important result about Lipschitz functions is Rademacher's theorem which states that these functions are differentiable almost everywhere but on a set of Lebesgue measure zero\cite[Theorem 3.1]{Heinonen2004}. 
+Clarke deduces from this that the subdifferential at each of the nondifferentiable points is the convex hull of the limits of the sequence gradients a these points \cite[see Theorem 2.5.1]{Clarke1990}.}
+
+This motivates the multidimensional definition of Clake's generalized gradient 
+
+\textcolor{red}{
+\begin{definition}[{\cite[Definition 2.6.1]{Clarke1990}}]
+	\emph{generalized Jacobian}: \(F:\R^n \to \R^m\), with locally Lipschitz component functions \(F(x) = (f_1(x),...,f_m(x))\).\\
+	Denote generalized Jacobian by \(\partial F(x) = conv\left(\lim JF(x_i)|x_i\to x, x_i \notin \Omega_F \right) \) where \(\Omega_F\) is the set of nondifferentiable points of \(F\)
+\end{definition}
+after that comes proposition with properties of \(\partial F\)}
+
+
+To facilitate readability we use the following notation for the derivation of the nondifferentiable results.
+
+The \emph{'partial' subdifferential} of a function \(f(a^*,\bar{b},\bar{c},...)\) at the point \(a^*\) with respect to one variable \(a\) when all other variables are fixed is denoted by 
+\begin{equation*}
+	\partial^{a} f(a^*,\bar{b},\bar{c},...).
+\end{equation*}
+
+A subgradient of this subdifferential is written \(g^{a} \in \partial^{a} f(a^*,\bar{b},\bar{c},...)\).
+
+
+Chain rule for subdifferential \\
+\begin{theorem}[c.f. {\cite[Theorem 7.1]{Rockafellar1985}}]
+	Let \(p(x) = f(F(x))\), where \(F:\R^n \to \R^d\) is locally Lipschitz and \(f:\R^d \to \R\) is lower semicontinuous. 
+	Assume \[\nexists y \in \partial^{\infty}f(F(\bar{x})), y \neq 0 \quad \text{with} \quad 0 \in y \partial F(\bar{x}). \]
+	Then for the sets 
+	\[ M(\bar{x}):= \partial f(F(\bar{x}))\partial F(\bar{x}), \quad M^{\infty}(\bar{x}):= \partial^{\infty}f(F(\bar{x}))\partial F(\bar{x}), \]
+	one has \(\hat{\partial}p(\bar{x}) \subset M(\bar{x})\) and \(\hat{\partial}^{\infty} p(\bar{x}) \subset M^{\infty}(\bar{x})\).
+\end{theorem}
+
+Clarke \\
+\begin{theorem}[{\cite[Theorem 2.6.6]{Clarke1990}}]
+	\(f = g(F)\), \(F:\R^n \to \R^m\)
+\end{theorem}
 
 \begin{itemize}
-	\item notation
-	\item definition of subgradient-''matrix''
-	\item chain rule
+	\item notation - check
+	\item definition of subgradient-''matrix'' - check
+	\item chain rule 
 	\item optimality condition
 \end{itemize}
 
@@ -354,22 +420,9 @@ In practice we cannot expect \(\mathcal{L}_{low}\) to satisfy such strong differ
 	-> gradient im Endeffekt exakt, da von exakter optimalit'tsbedingung ausgegangen wird
 \end{itemize}
 
-An important result about Lipschitz functions is Rademacher's theorem which states that these functions are differentiable almost everywhere but on a set of Lebesgue measure zero\cite[Theorem 3.1]{Heinonen2004}. 
-Clarke deduces from this that the subdifferential at each of the nondifferentiable points is the convex hull of the limits of the sequence gradients a these points \cite[see Theorem 2.5.1]{Clarke1990}.
 
-In practice this means that it is possible to choose a subgradient by using the (one sided) gradients at nondifferentiable points.
-We keep this in mind when analyzing the procedure of finding a subgradient \( g^{\lambda} \in \partial^{\lambda} w(\lambda)\) in the nondifferentiable case.
-
-\textcolor{red}{Notation}\\
-
-To facilitate readability we use the following notation for the derivation of the nondifferentiable results.
-
-The 'partial' subdifferential of a function \(f(a^*,\bar{b},\bar{c},...)\) at the point \(a^*\) with respect to one variable \(a\) when all other variables are fixed is denoted by 
-\begin{equation*}
-	\partial^{a} f(a^*,\bar{b},\bar{c},...).
-\end{equation*}
-
-A subgradient of this subdifferential is written \(g^{a} \in \partial^{a} f(a^*,\bar{b},\bar{c},...)\).
+\textcolor{red}{In practice this (Rademacher) means that it is possible to choose a subgradient by using the (one sided) gradients at nondifferentiable points.
+We keep this in mind when analyzing the procedure of finding a subgradient \( g^{\lambda} \in \partial^{\lambda} w(\lambda)\) in the nondifferentiable case.}
 
 \textcolor{red}{what else???}
 
@@ -379,16 +432,6 @@ A subgradient of this subdifferential is written \(g^{a} \in \partial^{a} f(a^*,
 
 
 
-To calculate a subgradient \\
-Chain rule for subdifferential \\
-before: definition of subgradient in \(\R^m\)
-\begin{theorem}[c.f. {\cite[Theorem 7.1]{Rockafellar1985}}]
-	Let \(p(x) = f(F(x))\), where \(F:\R^n \to \R^d\) is locally Lipschitz and \(f:\R^d \to \R\) is lower semicontinuous. 
-	Assume \[\nexists y \in \partial^{\infty}f(F(\bar{x})), y \neq 0 \quad \text{with} \quad 0 \in y \partial F(\bar{x}). \]
-	Then for the sets 
-	\[ M(\bar{x}):= \partial f(F(\bar{x}))\partial F(\bar{x}), \quad M^{\infty}(\bar{x}):= \partial^{\infty}f(F(\bar{x}))\partial F(\bar{x}), \]
-	one has \(\hat{\partial}p(\bar{x}) \subset M(\bar{x})\) and \(\hat{\partial}^{\infty} p(\bar{x}) \subset M^{\infty}(\bar{x})\).
-\end{theorem}
 
 
 
@@ -600,7 +643,7 @@ Table ??? shows the results
 23.06.2017\\
 found out: for real results, have to do it with the functions I take in the algorithm -> this is hingequad for inner level and either hingeloss or hingequad for outer level\\
 from plots it seems that hingequad is closer to the misclassification loss\\
-generally: from plots it looks as if all \(\lambdas\) are best =0\\
+generally: from plots it looks as if all \(\lambda\)s are best =0\\
 with bundle bilevel and hingeloss (outer): \(\lambda\) very much depending on starting value -> why??? graphs seem to be monotonously decreasing into 0  \\
 
 
