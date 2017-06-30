@@ -1,7 +1,7 @@
 \section{Variable Metric Bundle Method}
 \label{sec_variable_metric}
 
-\textcolor{red}{can I call this variable metric method or does this imply variable metric updates and not solving the bundle subproblem?}
+%\textcolor{red}{can I call this variable metric method or does this imply variable metric updates and not solving the bundle subproblem?}
 %\textcolor{blue}{introduction}
 
 A way to extend the proximal bundle method is to use an arbitrary metric \(\frac{1}{2}\Langle d,W_kd \Rangle\) with a symmetric and positive definite matrix \(W_k\) instead of the Euclidean metric for the stabilization term \(\frac{1}{2t_k}\|d\|^2\). Methods doing so are called \emph{variable metric bundle methods}.
@@ -15,7 +15,7 @@ Throughout this section we still consider the optimization problem (\ref{opt_pro
 %\textcolor{blue}{explanation}
 
 As already mentioned in section \ref{sec_conv_ex} the stabilization term can be interpreted in many different ways. In the context of this section we can understand it as a pretty rough approximation of the curvature of the objective function.
-Of course bundle methods are designed to work with non differentiable objectives so it cannot be expected that the function provides any kind of curvature. However, if it does, incorporating it into the method could speed up convergence.
+Of course bundle methods are designed to work with non differentiable objectives so it cannot be expected that the function provides any kind of curvature. However, if it has regions where there is curvature, this information can be used to speed up convergence.
 
 \subsubsection{Variable Metric Bundle Methods}
 
@@ -64,7 +64,7 @@ The notation \( A \prec B\) with \(A, B \in \R^{n\times n}\) means that the matr
 As the matrix \(Q_k\) is symmetric it can also be pulled into the stabilization term. The \(k\)'th bundle subproblem then is
 
 \begin{equation}
-	\min_{\hat{x}^k+d \in X} M_k(\hat{x}^k+d) + \frac{1}{2}\langle d,\left(Q_k+\frac{1}{t_k}\mathbb{I} \right) d \rangle.
+	\min_{\hat{x}^k+d \in X} M_k(\hat{x}^k+d) + \frac{1}{2}\Langle d,\left(Q_k+\frac{1}{t_k}\mathbb{I} \right) d \Rangle.
 	\label{Q_subprob}
 \end{equation}
 
@@ -72,7 +72,7 @@ If \(W_k = Q_k+\frac{1}{t_k}\mathbb{I}\) is positive definite, this is a variabl
 
 The decomposition of the stabilization term into a curvature approximation and a proximal term makes is easier to reach two goals at the same time:
 
-One the one hand, curvature of the objective can be approximated only under the conditions of the boundedness and symmetry of \(Q_k\). No positive definiteness hast to be ensured for convergence.
+One the one hand, curvature of the objective can be approximated only under the conditions of the boundedness and symmetry of \(Q_k\). No positive definiteness has to be ensured for convergence.
 On the other hand the proximal term can be used in the trust region inspired way to make a line search obsolete. As already mentioned in section \ref{sec_simplifications} this is an advantage especially when working with inexact functions where a line search is not useable.
 
 \textcolor{red}{comment on line search and curve search in \cite{Lemarechal1994,Lemarechal1997,Vlcek2001}?}
@@ -81,36 +81,68 @@ On the other hand the proximal term can be used in the trust region inspired way
 
 In this section a concrete update rules for \(Q_k\) are described as well as the minor changes that have to be done to the proximal bundle algorithm from section \ref{sec_nonconv_inex} to adapt it to the variable metric approach.
 
-\subsubsection{???}
+\subsubsection{Update Rules for the Metric}
 
 In \cite{Noll2012} and \cite{Noll2013} it is not specified how the matrix \(Q_k\) is to be chosen.
 For convergence it is necessary that the eigenvalues of \(Q_k\) are bounded. Additionally the matrix \(Q_k+\frac{1}{t_k}\mathbb{I}\) has to be positive definite.
+Here we present two possible versions to update the metric matrix \(Q_k\) that fulfill both conditions.
 
-To assure these conditions we adapt a the usual BFGS update rule.
+Both updates are based on the usual BFGS-update formula (named after Broyden, Goldfarb, Fletcher and Shanno)
 
 \begin{equation*}
 	Q_{k+1} = Q_k + \frac{y^k{y^k}^{\top}}{\langle y^k,d^k\rangle}-\frac{Q_kd^k(Q_kd^k)^{\top}}{\langle d^k,Q_kd^k \rangle}.
 \end{equation*}
 
-Where for \(y^k\) instead of the difference of gradients of \(f\) the difference \(y^k := g^{k+1}-g^k\) of subgradients of \(f\) is taken.
+Usually \(y^k\) is defined as the difference of the last two gradients of \(f\). To adapt the formula to the nondifferentiable case the difference \(y^k := g^{k+1}-g^k\) of two subgradients of \(f\) is taken instead as proposed in \cite{Haarala2007}.
 The starting matrix \(Q_1 = \mathbb{I}\).
 %used by Vl\v{c}ek  and Luk\v{s}an in \cite{Vlcek2001}. There the metric matrix is updated by the 
 
 %The matrix \(Q(\hat{x}\) is formed by a BFGS-Update from the \textcolor{red}{last known - which? how many? all from bundle??} subgradients.
 
-Of course the BFGS update is symmetric. To assure boundedness of the matrix \(Q_{k+1}\) the updates 
-\textcolor{red}{are manipulated in the following way:\\
-3 possibilities: \\
-scaled BFGS-update\\
-scaled SR1-update\\
-LBFGS-update - Nocedal Paper from email}
+By definition the BFGS update is symmetric. To assure boundedness of the matrix \(Q_{k+1}\) the updates are manipulated in the two following ways:
 
-\textcolor{red}{BFGS/Verfahren\\
-seems to need less steps with ok optimality if updates are skipped and not matrix scaling is used (used y'd < ...)\\
-try norm(d)/norm(y) -> not good; use the one above}
+\paragraph{Scaling of the whole matrix:}
 
-\textcolor{red}{SR1-Update\\
-auch ok, braucht anderen bound um zu konvergieren}
+A simple way to keep the absolute value all eigenvalues of the constructed matrix \(Q_k\) below some threshold \(0 < q < \infty\) is to scale the whole matrix down as soon as the absolute value of one eigenvalue is larger than this number.
+To do this define \(\lambda_{max} := \max\{|\lambda_i|\mid \lambda_i \text{ is eigenvalue of } Q_k|\}\). Now \(\text{if } \lambda_{max} > q \text{ set } Q_k = \frac{q}{\lambda_{max}}Q_k\). This way the absolute value of all eigenvalues is always smaller or equal to \(q\).
+An advantage of this method is besides its simplicity that by scaling the whole matrix the ratio of the eigenvalues of \(Q_k\) is presumed. Scaling of \(Q_k\) corresponds to shrinking the quadratic function and in this way also the 'ratio of curvature' at different points of the graph stays the same. 
+
+\paragraph{Adaptive scaling of single eigenvalues:}
+
+This second method is motivated by the following observation: The variable metric bundle algorithm is to be used for nonsmooth functions. This means that the objective function has some kinks. 
+For locally Lipschitz functions the number of kinks is finite and in between the kinks the function is smooth.
+This means, that there is indeed curvature information present in the smooth parts of the functions. At the kinks however the curvature is not defined. Taking a look at the one-sided differential quotient for \(x \in \R\) shows that it diverges at such points:
+Let a kink be at \(x_{\text{kink}}\) and the left sided limiting value of the derivative is \(f'(x_{\text{kink}}) = a\) the right-sided one is \(f'(x_{\text{kink}}) = b \neq a\). Because \(f\) was assumed to be locally Lipschitz both limits exist and are finite.
+The following quotient can then be stated:
+\[ \lim_{h \searrow 0} \frac{f'(x_{\text{kink}}+h)-f'(x_{\text{kink}})}{h} = \pm \infty, \]
+the sign depending on if \(a > b\) or vice versa. \\
+In more dimensions this works the same for the components of the Hessian corresponding to the direction where the kink occurs. This corresponds also to the intuitive thought that at a kink the slope changes 'infinitly fast'.
+Numerically the BFGS-update stated above results very large values for the entries of \(Q_k\) corresponding to points near the kink.
+ 
+On the other hand due to the local Lipschitz property the slope of the objective function is always finite on closed sets. This means that there exists a neighborhood \(B_{\varepsilon}(x_{\text{kink}})\) where the function \(f\) behaves similar to the scaled modulus \(a|\cdot|\), \(a \in \R\), in the direction perpendicular to the kink. Therefore in this neighborhood almost no curvature is present.
+
+Summarized this means that on the one hand, the matrix \(Q_k\) should be close to zero in the components representing the directions perpendicular to the kink as soon as the iterates approach \(x_{\text{kink}}\). But contrary to that the method that constructs \(Q_k\) can give very high values for those components.
+
+The idea is now to scale only those eigenvalues of \(Q_k\) that are especially large. To lower the probability that eigenvalues are chosen which represent a really existing large curvature of \(Q_k\) at the observed point, the change of the eigenvalues is viewed in relation to the step size \(d^k\).
+As the eigenvalues of a matrix \(A \in \R^n\) depend continuously on the entries of the matrix (see for example \cite[Theorem 1.2]{Werner1992}) the change in the eigenvalues is calculated by ordering them by size and then calculating \(\text{diff}_{\lambda_i}=|\lambda_i^{k-1}-\lambda_i^{k}|, i = 1,...,n\), where \(\lambda^{k-1}\) and \(\lambda^{k} \in \R^n\) are vectors with the sorted eigenvalues of \(Q_{k-1}\) and \(Q_{k}\) respectively.
+If \(\frac{\text{diff}_{\lambda_i}}{\|d^k\|} > q\) for any \(i = 1,...,n\) and a threshold \(q < \infty\), indicating that the \(i\)'th eigenvalue changes much while only a small step is done, the \(i\)'th eigenvalue is set \(\lambda_i^{k}=\frac{1}{2}\lambda_1^{k-1}\) (remember that we stated before that near a kink there is often a very small curvature, hence halving the eigenvalue of the  matrix of the step before).
+
+\textcolor{red}{remark that convergence can depend a lot on the threshold and how the matrix/eigenvalue is scaled in the two methods}
+
+
+
+%\textcolor{red}{are manipulated in the following way:\\
+%3 possibilities: \\
+%scaled BFGS-update\\
+%scaled SR1-update\\
+%LBFGS-update - Nocedal Paper from email}
+
+%\textcolor{red}{BFGS/Verfahren\\
+%seems to need less steps with ok optimality if updates are skipped and not matrix scaling is used (used y'd < ...)\\
+%try norm(d)/norm(y) -> not good; use the one above}
+
+%\textcolor{red}{SR1-Update\\
+%auch ok, braucht anderen bound um zu konvergieren}
 
 %\textcolor{red}{%If \(y^k = 0\) set the second term in the update formula to zero.
 %If \(\langle y^k,d^k \rangle <\zeta \) for some \(\zeta > 0\) set the second term to \(\frac{y^k{y^k}^{\top}}{\zeta}\). The same can be done for the last term of the update formula if \{}
@@ -125,14 +157,14 @@ auch ok, braucht anderen bound um zu konvergieren}
 %\end{align*}
 %same procedure for next term; all \(<1/3C\) for some overall threshold \(C\) 
 
-A different procedure is used in \cite{Vlcek2001}. There the update is just skipped whenever \(\langle y^k, d^k \rangle < \zeta\).
+%A different procedure is used in \cite{Vlcek2001}. There the update is just skipped whenever \(\langle y^k, d^k \rangle < \zeta\).
 
 
 \begin{itemize}
 	\item \(Q\) only updated in serious steps - why?
-	\item comment in SR1 update? Null steps?
-	\item write down exact update from Vlcek
-	\item find out how the different properties are assured
+	%\item comment in SR1 update? Null steps?
+	%\item write down exact update from Vlcek
+	%\item find out how the different properties are assured
 \end{itemize}
 
 %eigenvalues of \(Q\) are bounded \(\to\) possible by manipulating BFGS update
@@ -529,19 +561,9 @@ This means that \(d^k \to 0\) for \(k \to \infty\) and therefore \(\lim_{k \to \
 	\item \(Q\) is there to model curvature, if there is no curvature there, 
 \end{itemize}
 
-\textcolor{red}{The variable metric bundle algorithm is to be used for nonsmooth functions. Simply put, this means that the objective function has some kinks. \\
-For locally Lipschitz functions the number of kinks is finite and in between the kinks the function is smooth. \\
-The kinks are important when it comes to the actual strategy of finding \(Q\). \\
-\(Q\) is meant to model the curvature of the objective function. At the kinks however, the curvature is not defined. Taking a look at the one-sided differential quotient for \(x \in \R\) shows that it diverges. \\
-Let a kink be at \(x_{\text{kink}}\) and the left sided limiting value of the derivative is \(f'(x_{\text{kink}}) = a\) the right-sided one is \(f'(x_{\text{kink}}) = b \neq a\). Because \(f\) was assumed to be locally Lipschitz both limits exist and are finite.
-The following quotient can then be stated:
-\[ \lim_{h \searrow 0} \frac{f'(x_{\text{kink}}+h)-f'(x_{\text{kink}})}{h} = \pm \infty, \]
-the sign depending on if \(a > b\) or vice versa. \\
-In more dimensions this works the same for the components of the Hessian corresponding to the direction where the kink occurs.}
 
-\textcolor{red}{On the other hand due to the local Lipschitz property the slope of the function is always finite on closed sets. This means that there exists always a neighborhood \(B_{\varepsilon}(x_{\text{kink}})\) where the function \(f\) behaves almost like the modulus \(|\cdot|\) in the direction perpendicular to the kink. Therefor in this neighborhood almost no curvature is present.}
 
-\textcolor{red}{Summarized this means that on the one hand, the matrix \(Q\) should be close to zero in the components representing the directions perpendicular to the kink as soon as the iterates approach \(x_{\text{kink}}\). But contrary to that methods that construct \(Q\) from secants to the (sub-)gradient can give very high values for those components.}
+
 
 \textcolor{red}{What can be done about it?\\
 To tackle the described problem, the following strategies were tested: 

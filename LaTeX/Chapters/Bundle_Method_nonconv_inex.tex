@@ -1,10 +1,10 @@
-\section{Proximal bundle method for nonconvex functions with inexact information} \label{sec_nonconv_inex}
+\section{Proximal Bundle Method for Nonconvex Functions with Inexact Information} \label{sec_nonconv_inex}
 
 %\textcolor{blue}{introduction}
 
 This section focuses on the proximal bundle method presented by Hare et al. in \cite{Hare2016}.
 The idea is to extend the basic bundle algorithm for nonconvex functions with both inexact function and subgradient information.
-The key idea of the algorithm is the one already developed by Hare and Sagastizábal in \cite{Hare2010}: When dealing with nonconvex functions a very critical difference to the convex case is that the linearization errors are not necessarily nonnegative any more. To tackle this problem the errors are manipulated to enforce nonnegativity. In this case this is done my modeling not the objective function directly but a convexified version of it.
+The key idea of the algorithm is the one already developed by Hare and Sagastizábal in \cite{Hare2010}: When dealing with nonconvex functions a very critiicalcal difference to the convex case is that the linearization errors are not necessarily nonnegative any more. To tackle this problem the errors are manipulated to enforce nonnegativity. In this case this is done my modeling not the objective function directly but a convexified version of it.
 
 \subsection{Derivation of the Method}
 %\textcolor{blue}{``assumptions and notations''}
@@ -32,15 +32,14 @@ The objective function \(f:\R^n \to \R\) is locally Lipschitz  and (subdifferent
 
 \subsubsection{Inexactness}
 
-Both the function value as well as one element of the subdifferential can be provided in an inexact form.
-
+It is assumed that both the function value as well as one element of the subdifferential can be provided in an inexact form.
 For the function value inexactness is defined straight forwardly: If 
 \begin{equation*}
 	\|f_x - f(x)\| \leq \sigma_x
 \label{fun_inex}
 \end{equation*}
 
-then \(f\) approximates the value \(f(x)\) within \(\sigma_x\). This is a little bit different from the definition in (\ref{conv_inexactness_1}). In the convex case it follows from (\ref{sig_p_thet_subgr}) that \( \bar{\sigma} \geq \sigma_x \geq -\theta_x \geq - \bar{\theta}\) and therefore \(f_x \in [f(x)-\bar{\theta},f(x)+\bar{\sigma}]\).
+then \(f_x\) approximates the value \(f(x)\) within \(\sigma_x\). This is slightly different from the definition in (\ref{conv_inexactness_1}). In the convex case it follows from (\ref{sig_p_thet_subgr}) that \( \bar{\sigma} \geq \sigma_x \geq -\theta_x \geq - \bar{\theta}\) and therefore \(f_x \in [f(x)-\bar{\theta},f(x)+\bar{\sigma}]\).
 
 As the 'normal' \(\varepsilon\)-subdifferential is not defined for nonconvex functions we adopt the notation used in \cite{Noll2013} and interpret inexactness in the following way: \(g \in \R^n\) approximates a subgradient  of \( \partial f(x)\) within \(\theta \geq 0\) if
 \begin{equation*}
@@ -73,7 +72,7 @@ for a suitable \(\theta'\). Generally an explicit relation between \(\theta\) an
 Like in the paper it is assumed that the errors are bounded although the bound does not have to be known:
 
 \begin{equation*}
-	|\sigma_j| \leq \bar{\sigma} > 0 \quad \text{and} \quad 0 \leq \theta_j \leq \bar{\theta} \quad \forall j \in J^k.
+	|\sigma_j| \leq \bar{\sigma}, \bar{\sigma} > 0 \quad \text{and} \quad 0 \leq \theta_j \leq \bar{\theta} \quad \forall j \in J^k.
 \label{err_bound}
 \end{equation*}
 
@@ -149,14 +148,14 @@ As already pointed out in \ref{subsec_prox_op} the bundle subproblem can be form
 
 The key idea is to use the relation
 \begin{equation*}
-	prox_{T = \frac{1}{\eta}+t, f}(x) = prox_{t,f+\eta/2|\cdot - x|^2}(x).
+	prox_{T = \frac{1}{\eta}+t, f}(x) = prox_{t,f+\eta/2\|\cdot - x\|^2}(x).
 \label{prox_relation}
 \end{equation*}
 
-This means, that the proximal point of the function \(f\) for parameter \(T=\frac{1}{\eta}+t\) is the same as the one of the convexified function 
+This means, that the proximal point of the function \(f\) for parameter \(T=\frac{1}{\eta}+t\), \(\eta, t > 0\) is the same as the one of the convexified function 
 
 \begin{equation}
-	\tilde{f}(y) = f(y) + \frac{\eta}{2}|y-x|^2
+	\tilde{f}(y) = f(y) + \frac{\eta}{2}\|y-x\|^2
 \label{conv_obj}
 \end{equation}
 
@@ -234,10 +233,10 @@ By the same argumentation as for (\ref{agg_err}) the KKT conditions also reveal 
 \label{aug_agg_err2}
 \end{equation}
 
-As the model function is convex even for nonconvex objective functions it is still minorized by the aggregate linearization. It holds 
+As the model function \(M_k\) is convex even for nonconvex objective functions it is still minorized by the aggregate linearization. It holds 
 
 \begin{equation}
-	A_K(\hat{x}^k+d) \leq M_k(\hat{x}^k+d).
+	A_K(\hat{x}^k+d) \leq M_k(\hat{x}^k+d) \quad \forall d \in \R^n.
 \label{A_leq_M}
 \end{equation}
 
@@ -245,8 +244,8 @@ The update of \(t_k\) can be done in the same way described in (\ref{t_plus}) an
 The update conditions (\ref{model_update_1}) and (\ref{model_update_2}) for the model are now written with respect to the augmented aggregate linearization and the approximate function value \(\hat{f}_{k+1}\).
 
 \begin{align}
-	&M_{k+1}(\hat{x}^k+d) \geq \hat{f}_{k+1}-c^{k+1}_{k+1}+\left\langle s^{k+1},d \right\rangle \label{Model_update_1}\\
-	&M_{k+1}(\hat{x}^k+d) \geq A_k(\hat{x}^k+d).
+	&M_{k+1}(\hat{x}^k+d) \geq \hat{f}_{k+1}-c^{k+1}_{k+1}+\left\langle s^{k+1},d \right\rangle \quad \forall d \in \R^n \label{Model_update_1}\\
+	&M_{k+1}(\hat{x}^k+d) \geq A_k(\hat{x}^k+d) \quad \forall d \in \R^n.
 	\label{Model_update_2}
 \end{align}
 
@@ -256,12 +255,12 @@ A bundle algorithm that deals with nonconvexity and inexact function and subgrad
 
 
 \begin{minipage}{\linewidth}
-Algorithm \ref{sec_nonconv_inex}.1:
+
 \vspace{1em}
 
 \hrule  \vspace{0.4ex} \hrule
 \vspace{1ex}
-\textbf{Nonconvex Proximal Bundle Method with Inexact Information}
+\textbf{Algorithm \ref{sec_nonconv_inex}.1: Nonconvex Proximal Bundle Method with Inexact Information}
 \vspace{1ex}
 \hrule
 \vspace{1ex}
@@ -285,8 +284,7 @@ For \(k = 1,2,3,  \dotsc \)
 	If 
 	\[f^{k+1} \leq \hat{f}^k - m\delta_k \quad \rightarrow \text{ serious step} \]
 	Set \(\hat{x}^{k+1} = x^{k+1}, \hat{f}^{k+1} = f^{k+1}\) and select \(t_{k+1} > 0\). \\
-	Otherwise 
-	\[\rightarrow \text{nullstep} \]
+	Otherwise \(\rightarrow \text{nullstep} \) \\
 	Set \(\hat{x}^{k+1} = \hat{x}^k, \hat{f}^{k+1}=f^{k+1}\) and choose \(0 < t_{k+1} \leq t_k\). 	
 	\item Select new bundle index set \(J_{k+1}\), calculate 
 	\[ \eta_k = \max{\left\{\max_{j \in J_{k+1}, x^j \neq \hat{x}^{k+1}}{\frac{-2e_j^k}{|x^j - \hat{x}^{k+1}|^2}, 0}\right\}}+\gamma  \]
@@ -306,11 +304,11 @@ In terms of usability of the described algorithm it is interesting to see if str
 %The method above can handle nonconvex objective functions. It is not explicitly assumed, that the function taken has a finite minimum. Therefore
 The constraint set \(X\) ensures the boundedness of the sequence \(\{\hat{x}^k\}\).
 This is not necessary if the objective function is assumed to have bounded level sets \(\{x \in \R^n | f(x) \leq f(\hat{x}^1)\}\), an assumption commonly  used when optimizing nonconvex functions.
-As the objective function is assumed to be continuous bounded level sets are compact. Additionally the descent test makes sure that \(f(\hat{x}^{k+1}) \leq f(\hat{x}^k)\) for all \(k\). The proof holds therefore in the same way as with the set \(X\).
+As the objective function is assumed to be continuous bounded level sets are compact. Additionally the descent test ensures that \(f(\hat{x}^{k+1}) \leq f(\hat{x}^k)\) for all \(k\). The proof holds therefore in the same way as with the set \(X\).
 
-\textcolor{red}{Another possibility is to bound the step sizes \(t_k\) also from above. Then the sequence \(\{\hat{x}^k\}\) also stay bounded and the proof still holds.
-In \cite{Oliveira2014} another stopping criterion is psoposed that ensures convergence even for unbounded sequences \(\{\hat{x}^k\}\).
-Is this also possible in my case or only for convex???}
+Another possibility is to bound the step sizes \(t_k\) also from above. Then the sequence \(\{\hat{x}^k\}\) stays bounded and the proof still holds.
+In \cite{Oliveira2014} another stopping criterion is supposed that ensures convergence even for unbounded sequences \(\{\hat{x}^k\}\).
+\textcolor{red}{Is this also possible in my case or only for convex???}
 
 \subsubsection{Exact Information and Vanishing Errors}
 
@@ -321,9 +319,10 @@ If we additionally require the objective function to be lower-\(\mathcal{C}^2\) 
 This is not possible in the case of inexact information even for convex objective functions.
 
 For asymptotically vanishing errors, meaning \(\lim_{k \to \infty} \sigma_k = 0 \) and \(\lim_{k \to \infty} \theta_k = 0 \) the convergence theory holds equally well with error bounds \(\bar{\sigma} = \bar{\theta} = 0\) in \cite[Lemma 5]{Hare2016}. Still it is difficult if not impossible to show that the sequence \(\{\eta_k\}\) is bounded without further assumptions.
-\textcolor{red}{Under the assumption that \(f\) is lower-\(\mathcal{C}^2\) and some continuity bounds on the errors
+Under the assumption that \(f\) is lower-\(\mathcal{C}^2\) and some continuity bounds on the errors
 \[ \frac{|\sigma_j-\hat{\sigma}_k|}{\|x^j-\hat{x}^k\|^2} \leq L_{\sigma}, \qquad \frac{\theta_j}{\|x^j-\hat{x}^k\|} \leq L_{\theta} \quad \forall k \text{ and } \forall j \in J_k\]
-boundedness of the sequence \(\{\eta_k\}\) can be shown. The question remains however if those assumptions are possible to be assured in practice.} \\
+boundedness of the sequence \(\{\eta_k\}\) can be shown. The question remains however if those assumptions are possible to be assured in practice.
+
 \textcolor{red}{remark on \(\eta_k\)? how does it behave in my applications???}
 
 
@@ -387,12 +386,7 @@ This follows from the definition of \(S^k\) in (\ref{aug_agg_subgr}) and local L
 
 %\textcolor{red}{Better convergence results? \(\bar{\sigma}\) instead of \(2\bar{\sigma}\)}
 
-\textcolor{red}{
-\begin{itemize}
-	\item (iii) in Lemma 5 für conv eps-subdiff umschreiben
-	\item beweis für \(\bar{\sigma}\)-optimalität
-	\item
-\end{itemize}}
+\textcolor{red}{beweis für \(\bar{\sigma}\)-optimalität}
 
 \textcolor{red}{bounded \(t_k\) instead of D? better????}
 %This means we consider now inexactness of the following type
@@ -406,12 +400,12 @@ This follows from the definition of \(S^k\) in (\ref{aug_agg_subgr}) and local L
 %important in convex case: when is linearization error negative? -> then for example noise attenuation.\\
 %think different concept needed for better error bounds}
 %
-\begin{itemize}
-	\item convex objective function \\
-	\(\to\) generally better convergence properties possible \\
-	but more or less only on error bound???
-	\(\to\) different concept of algorithm for convex inexact functions  to exploit convexity (contrary to nonconvex obj functions)
-\end{itemize}
+%\begin{itemize}
+%	\item convex objective function \\
+%	\(\to\) generally better convergence properties possible \\
+%	but more or less only on error bound???
+%	\(\to\) different concept of algorithm for convex inexact functions  to exploit convexity (contrary to nonconvex obj functions)
+%\end{itemize}
 
 
 %In the exact case boundedness of the sequence \(\{\eta_k\}\) is proven for lower-\(\mathcal{C}^2\) functions in \cite{Hare2010}. This is not possible in the inexact case, even if the objective function \(f\) is convex.

@@ -91,7 +91,7 @@ First define the \emph{model decrease} \(\delta^M_k\) which is the decrease of t
 
 If the actual decrease of the objective function is larger than a fraction of the model decrease 
 
-\[ f(\hat{x}^k) - f(x^{k+1}) \geq \theta \delta^M_k, \quad \theta \in (0,1) \]
+\[ f(\hat{x}^k) - f(x^{k+1}) \geq m \delta^M_k, \quad m \in (0,1) \]
 
 set the stability center to \( \hat{x}^{k+1} = x^{k+1}\). This is called a \emph{serious} or \emph{descent step}.
 If this is not the case a \emph{null step} is executed and the serious iterate \(\hat{x}^{k+1} = \hat{x}^k\) remains the same .
@@ -129,7 +129,7 @@ Subproblem (\ref{stabil_model_fun}) can now be written as
 
 
 where \(d:= x-\hat{x}^k\) and the constant term \(f(\hat{x}^k)\) was discarded for the sake of simplicity. \\
-If \(X\) is a polyhedron this is a quadratic optimization problem that can be solved using standard methods of nonlinear optimization. It should however be observed that the matrix of the quadratic part is only positive semidefinite because it does not have full rank.
+If \(X\) is a polyhedron this is a convex quadratic optimization problem that can be solved using standard methods of nonlinear optimization. It should however be observed that the matrix of the quadratic part is only positive semidefinite because it does not have full rank.
 
 The pair \((\xi_k, d^k)\) solves (\ref{sub_prob_short}) if and only if
 
@@ -165,23 +165,23 @@ The subproblem is now written as the \emph{Moreau-Yosida regularization} of \(\c
 	\label{prox_op}
 	\end{equation}
 
-This special form of the subproblems gives the primal bundle method its name, \emph{proximal bundle method}. The mapping also plays a key role when the method is generalized to nonconvex objective functions and inexact information.
+This special form of the subproblems gives the primal bundle method its name, \emph{proximal bundle method}. The above mapping also plays a key role when the method is generalized to nonconvex objective functions and inexact information.
 
 
 \subsection{???}
-not aggregate Objects
+\textcolor{red}{not aggregate Objects}
 
 We look again at a slightly different formulation of the bundle subproblem 
 
 \begin{align*}
-	\min_{\substack{d \in \R^n, \\ \xi \in \R}} & \quad \xi + \mathtt{i}_X+\frac{1}{2t_k}\|d\|^2 \\
+	\min_{\substack{d \in \R^n, \\ \xi \in \R}} & \quad \xi + \mathtt{i}_X(\hat{x}^k+d)+\frac{1}{2t_k}\|d\|^2 \\
 	\text{s.t.} & \quad \Langle g^j,d\Rangle - e^k_j - \xi \leq 0, \quad j \in J_k. 
 %\label{sub_prob_smooth_iX}
 \end{align*}
 
 As the objective function is still convex (\(X\) is a convex set) the following Karush-Kuhn-Tucker (KKT) conditions have to be valid for the minimizer \(\left(\xi_k,d^k\right)\) of the above subproblem \cite{Hiriart-Urruty1996} assuming a constraint qualification holds if the constraint set \(X\) makes it necessary \cite{Solodov2011}.
 
-There exist a subgradient \(\nu^k \in \partial \mathtt{i}_{X}(x^{k+1})\) and Lagrangian multipliers \(\alpha_j, ~j \in J^k\) such that
+There exist a subgradient \(\nu^k \in \partial \mathtt{i}_{X}(\hat{x}^{k}+d^k)\) and Lagrangian multipliers \(\alpha_j, ~j \in J^k\) such that
 
 \begin{align}
 	& 0 = \nu^k + \frac{1}{t_k}d^k + \sum_{j \in J^k}\alpha_j g^j \label{KKT_1}\\
@@ -205,6 +205,14 @@ with the \emph{aggregate subgradient}
 \label{agg_subgr}
 \end{equation}
 
+The fact that \(G^k\) belongs to the subdifferential of the \(k\)'th model \(m_k\) at the point \(\hat{x}^k+d^k\) follows from noting that 
+
+\begin{equation*}
+	0 \in \partial m_k(\hat{x}^k+d^k)+\partial \mathtt{i}_X(\hat{x}^k+d^k)+\frac{1}{2t_k}d^k
+\end{equation*}
+
+is the optimality condition derived from formulation (\ref{sub_prob_fin}) by the sum rule for subdifferentials and comparing the different components with the ones derived in (\ref{KKT_1}).
+
 Rewriting condition (\ref{KKT_5}) yields the \emph{aggregate error} 
 
 \begin{equation}
@@ -226,15 +234,17 @@ is a subset of the \(\varepsilon\)-subdifferential of \(f(\hat{x}^k)\)
 
 \end{lemma}
 
-This means that in the unconstrained case \(G^k \in \partial_{E_k} f(\hat{x}^k)\). So driving \(\|G^k\|\) and \(E_k\) close to zero results in some approximate \(\varepsilon\)-optimality of the objective function.
+This means that in the unconstrained case \(G^k \in \partial_{E_k} f(\hat{x}^k)\). So driving \(\|G^k\|\) and \(E_k\) to zero results in some approximate \(\varepsilon\)-optimality of the objective function.
 In the constrained case the stopping condition is written as
 
 \begin{equation*}
-	\delta_k = E^k+t_k\|G^k+\nu^k\|^2 \leq \mathtt{tol}.
+	\delta_k = E^k+t_k\|G^k+\nu^k\|^2 \leq \mathtt{tol}
 \label{stop_cond}
 \end{equation*}
 
-\(\delta_k\) is the same measure that is also taken for the decrease test.
+for a fixed tolerance \(\mathtt{tol} > 0\).
+
+The decrease measure \(\delta_k\) is also taken for the decrease test.
 The relation
 
 \begin{align*}
@@ -243,17 +253,17 @@ The relation
 	&= f(\hat{x}^k)-m_k(x^{k+1}) - \Langle \nu^k,d^k \Rangle \\  
 \end{align*}
 
-where (\ref{agg_subgr}) and (\ref{agg_err}) were used, shows that the new \(\delta_k\) is only a little variation of the model decrease \(\delta^M_k\).
-If the iterate \(x^{k+1}\) does not lie on the boundary of the constraint set \(X\), the vector \(\nu^k = 0\) and the expression simplifies to the one stated in (\ref{mod_dec}).
+where (\ref{agg_subgr}) and (\ref{agg_err}) were used, shows that the new \(\delta_k\) is only a small variation of the model decrease \(\delta^M_k\).
+If the iterate \(x^{k+1}\) does not lie on the boundary of the constraint set \(X\), the vector \(\nu^k\) is equal to zero and the expression simplifies to the one stated in (\ref{mod_dec}).
 
 For the model update the following two conditions are assumed to be fulfilled in consecutive null steps:
 \begin{align}
-	&m_{k+1}(\hat{x}^k+d) \geq f(\hat{x}^{k+1})-e^{k+1}_{k+1}+\left\langle g^{k+1},d \right\rangle \label{model_update_1} \\
-	&m_{k+1}(\hat{x}^k+d) \geq a_k(\hat{x}^k+d) 
+	&m_{k+1}(\hat{x}^k+d) \geq f(\hat{x}^{k+1})-e^{k+1}_{k+1}+\left\langle g^{k+1},d \right\rangle \quad \forall d \in \R^n \label{model_update_1} \\
+	&m_{k+1}(\hat{x}^k+d) \geq a_k(\hat{x}^k+d) \quad \forall d \in \R^n 
 	\label{model_update_2}
 \end{align}
 
-The first condition means, that the newly computed information is always put into the bundle. The second one is important when updating the bundle index set \(J^k\).
+The first condition means that the newly computed information is always put into the bundle. The second one is important when updating the bundle index set \(J^k\).
 It holds trivially if no or only inactive information \(j \text{ with }\alpha_j = 0\) is removed \cite{Hare2016}.
 It is also always satisfied if the aggregate linearization \(a_k\) itself is added to the bundle. In this case active information can be removed without violating the condition. This is the key idea of Kiwiel's aggregation technique and ensures that the set \( \{j \in J^k| \alpha_j >0 \} \) can be bounded.
 
@@ -273,12 +283,12 @@ We have now all the ingredients so that the following basic bundle algorithm can
 %\textcolor{blue}{algorithm}
 
 \begin{minipage}\linewidth
-Algorithm \ref{sec_conv_ex}.1:
+
 \vspace{1em}
 
 \hrule  \vspace{0.4ex} \hrule
 \vspace{1ex}
-\textbf{Basic Bundle Method}
+\textbf{Algorithm \ref{sec_conv_ex}.1: Basic Bundle Method}
 \vspace{1ex}
 \hrule
 \vspace{1ex}
@@ -294,7 +304,7 @@ For \(k = 1,2,3  \dotsc \)
 	\item Set
 		\begin{equation*}
 			\begin{split}
-				G^k = \sum_{j \in J_k}{\alpha^k_j g^k_j}, \quad E_k = \sum_{j \in J_k}{\alpha^k_j e^k_j}, \quad \text{and} \quad  \delta_k =  E_k + t_k\|G^k+\nu^k\|^2
+				G^k = \sum_{j \in J_k}{\alpha^k_j g^k_j}, \quad E_k = \sum_{j \in J_k}{\alpha^k_j e^k_j}, \quad \text{and} \quad  \delta_k =  E_k + \frac{1}{t_k} d_k^2
 			\end{split}
 		\end{equation*}
 		If \(\delta_k \leq \mathtt{tol} \rightarrow \) STOP.
@@ -303,8 +313,7 @@ For \(k = 1,2,3  \dotsc \)
 	If 
 	\[f(x^{k+1}) \leq f(\hat{x}^k) - m\delta_k \quad \rightarrow  \text{serious step}. \]
 	Set \(\hat{x}^{k+1} = x^{k+1}, ~f(\hat{x}^{k+1}) = f(x^{k+1})\) and select a suitable \(t_{k+1} > 0\). \\
-	Otherwise
-	\[\rightarrow\text{ nullstep.} \] \\
+	Otherwise \(\rightarrow\text{ nullstep.}\) \\
 	Set \(\hat{x}^{k+1} = \hat{x}^k, ~f(\hat{x}^{k+1})=f(x^{k+1})\) and choose \(t_{k+1} > 0\) in a suitable way.
 	\item Select the new bundle index set \(J_{k+1}\), calculate \(e_j^{k+1}\) for \(j \in J_{k+1}\)	and update the model \(m_k\).
 \end{enumerate}
@@ -333,7 +342,7 @@ at every serious step and
 at every null step.
 The idea behind this management of \(t_k\) is taken from the trust region method: If the computed iterate was good, the model is assumed to be reliable in a larger area around this serious iterate so bigger step sizes are allowed. If a null step was taken, the model seems to be too inaccurate far from the current serious point. Then smaller step sizes are used.
 A more sophisticated version of this kind of step size management is also used by Noll et al. in \cite{Noll2012} and \cite{Noll2013}. The trust region idea was very much exploited by Schramm and Zowe in \cite{Schramm1992a}.
-In the case \(X = R^n\) the sequence \(\{\hat{x}^k\}\) can be unbounded. In this case bounding \(t_k < \infty ~ \forall k\) preserves the convergence proof \cite[Theorem 3.2.2]{Hiriart-Urruty1993}.
+In the case \(X = R^n\) the sequence \(\{\hat{x}^k\}\) can be unbounded. In this case bounding \(t_k \leq t_{max} < \infty\) for all  \(k\) preserves the convergence proof \cite[Theorem 3.2.2]{Hiriart-Urruty1993}.
 
 In general it can be shown that if \(f\) posses global minima and the basic bundle algorithm generates the sequence \(\{\hat{x}^k\}\) this sequence converges to a minimizer of problem (\ref{min_prob_basic}) (c.f \cite{Hiriart-Urruty1993}).
 

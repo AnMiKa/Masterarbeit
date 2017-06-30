@@ -175,7 +175,7 @@ The parameter \(C > 0\) gives a trade-off between the richness of the chosen set
 The two optimization problems only differ in the norm chosen for the loss function. In (\ref{SVM_1}) the one-norm is chosen, in (\ref{SVM_2}) the squared two-norm is used.
 Problem (\ref{SVM_2}) is the one that will finally be used in the bilevel approach where smoothness of the objective function of the inner level problem is needed to calculate all needed subgradients.
 
-\subsection{Explanation Bilevel Approach and Inexact Bundle Method}
+\subsection{Bilevel Approach and Inexact Bundle Method}
 %Check if regression case also included?????
 
 The hyper-parameter \(C\) in the objective function of the classification problem has to be set beforehand. This step is part of the model selection process.
@@ -296,7 +296,7 @@ Hence the final resulting bilevel formulation for model selection in support vec
 \end{align}
 
 
-\subsubsection{The Inexact Bundle Method}
+\subsubsection{Solution of the Bilevel Program}
 
 \textcolor{red}{ab hier: Theorie fehlt\\
 !!! notation - oder in prelininaries einfugen}
@@ -306,6 +306,7 @@ To solve the given bilevel problem with the above presented nonconvex inexact bu
 
 The difficulty with this approach is that the bundle algorithm needs one subgradient of the outer level objective function with respect to the parameter \(\lambda\). However to compute this subgradient also one subgradient of \(w\) and \(b\) with respect to \(\lambda\) has to be known.
 
+\textbf{The Differentiable Case}
 \textcolor{red}{example in differentiable case}\\
 Let us first assume that the outer and inner objective functions and \(w(\lambda)= \argmin \mathcal{L}_{low}(w,\lambda)\) are sufficiently often continuously differentiable to demonstrate the procedure of calculating the needed {(sub-)gradients}.
 
@@ -323,10 +324,10 @@ The challenge is here to find the term \(\frac{\partial w(\lambda)}{\partial\lam
 
 Assuming \(\mathcal{L}_{low}\) is twice continuously differentiable at the  optimal solution \(w^*\) of the lower level problem the optimality condition for any parameter \(\lambda_0 > 0\)
 
-\begin{equation*}
+\begin{equation}
 	0 = \frac{\partial}{\partial w}\mathcal{L}_{low}(w^*,\lambda_0)
 \label{opt_con}
-\end{equation*}
+\end{equation}
 
 
 can be used to calculate the needed gradient in an indirect manner.
@@ -334,17 +335,17 @@ can be used to calculate the needed gradient in an indirect manner.
 In the differentiable case the theoretical framework for the following calculations is given by the implicit function theorem.
 
 \begin{theorem}[{c.f. \cite[chapter 3.4]{Koenigsberger2002}}]
-	Let \(F: U \times V \to Z \) be a \(\mathcal{C}^1\) mapping, \((x_0,y_0) \in U\times V\)  and \(F(x_0,y_0) = 0\). If the matrix \(\frac{\partial}{\partial y}F(x_0,y_0)\) is invertible, there exist neighborhoods \(U_0\subset U\) of \(x_0\) and \(V_0\subset V\) of \(y_0\) and a continuously differentiable mapping \(f:U_0 \to V_0\) with 
+	Let \(F: U \times V \to Z \), \(U\in\R^m, V,Z\in \R^n \), be a \(\mathcal{C}^1\) mapping, \((x_0,y_0) \in U\times V\)  and \(F(x_0,y_0) = 0\). If the matrix \(\frac{\partial}{\partial y}F(x_0,y_0)\) is invertible, there exist neighborhoods \(U_0\subset U\) of \(x_0\) and \(V_0\subset V\) of \(y_0\) and a continuously differentiable mapping \(f:U_0 \to V_0\) with 
 	\begin{equation*}
 	F(x,y) = 0, (x,y)\in U_0\times V_0  \quad \Leftrightarrow \quad y = f(x), x\in U_0.
 	%\label{imp_fun_theo}
 	\end{equation*}
 \end{theorem}
 
-Identifying \(x \estimates \lambda\), \(y \estimates w\) and  \(F(x_0,y_0) \estimates \frac{\partial}{\partial w} \mathcal{L}_{low}(w^*,\lambda_0)\) and assuming \(\frac{\partial^2 }{\partial  w^2}\mathcal{L}_{low}(w^*,\lambda_0)\) is invertible this theorem provides the existence of the continuously differentiable function \(w(\lambda)\) whose gradient is needed. 
+Identifying \(x \estimates \lambda\), \(y \estimates w\) and  \(F(x_0,y_0) \estimates \frac{\partial}{\partial w} \mathcal{L}_{low}(w^*,\lambda_0)\) and assuming \(\frac{\partial^2 }{\partial  w^2}\mathcal{L}_{low}(w^*,\lambda_0)\) is invertible this theorem provides the existence of the continuously differentiable function \(w(\lambda)\) whose gradient is needed. \\
+\textcolor{red}{what about the neighborhoods?}
 
-In special cases the gradient can be calculated explicitly.
-For these calculations to be possible the inner level loss function must yield a linear optimality condition in \(w\). This is for example the case for SVM loss functions with a squared one- or two-norm as given in problem (\ref{SVM_2}).
+If the inner level loss function yields a linear optimality condition in \(w\) it is possible to calculate the gradient explicitly. This is for example the case for SVM loss functions with a squared one- or two-norm as given in problem (\ref{SVM_2}).
 The optimality condition can then be written as the linear system
 
 \begin{equation*}
@@ -365,12 +366,21 @@ If \(H(\lambda)\) is invertible for all \(\lambda \in \Lambda\) then the needed 
 
 %\textcolor{red}{why H invertible??? - because we assume existence of \(w\)???}\\
 
-\textcolor{red}{now for subgradients} \\
+\textbf{The Nondifferentiable Case}
+\textcolor{red}{now for subgradients}
 
 In practice we cannot expect \(\mathcal{L}_{low}\) to satisfy such strong differentiability properties.
-It is therefore assumed that \(\mathcal{L}_{low}\) is once continuously differentiable in \(w\). Contrary to the exemplary calculations from above in practice the second derivative \(\frac{\partial^2}{\partial w \partial \lambda} \mathcal{L}_{low}(w(\lambda),\lambda)\) is not existent in this form, but a set of subgradients.
+It is therefore only assumed that \(\mathcal{L}_{low}\) is once continuously differentiable in \(w\). This assures that the optimality condition of the lower level problem is an equality like in (\ref{opt_con}).
+%If \(\mathcal{L}_{low}\) was only locally Lipschitz the optimality condition states that zero is part of the subgradient set  \(\partial \mathcal{L}_{low}(w^*,\lambda_0)\).  
+Contrary to the exemplary calculations from above in practice the second derivative \(\frac{\partial^2}{\partial w \partial \lambda} \mathcal{L}_{low}(w(\lambda),\lambda)\) however is not existent in this form, but a set of subgradients.
 
-\textcolor{red}{Notation}\\
+
+
+\textcolor{red}{\textbf{Notation}}\\
+First the theoretical framework given to derive the results from above in the nondifferentiable case
+
+
+
 \textcolor{red}{An important result about Lipschitz functions is Rademacher's theorem which states that these functions are differentiable almost everywhere but on a set of Lebesgue measure zero\cite[Theorem 3.1]{Heinonen2004}. 
 Clarke deduces from this that the subdifferential at each of the nondifferentiable points is the convex hull of the limits of the sequence gradients a these points \cite[see Theorem 2.5.1]{Clarke1990}.}
 
@@ -381,20 +391,31 @@ This motivates the multidimensional definition of Clake's generalized gradient
 	\emph{generalized Jacobian}: \(F:\R^n \to \R^m\), with locally Lipschitz component functions \(F(x) = (f_1(x),...,f_m(x))\).\\
 	Denote generalized Jacobian by \(\partial F(x) = conv\left(\lim JF(x_i)|x_i\to x, x_i \notin \Omega_F \right) \) where \(\Omega_F\) is the set of nondifferentiable points of \(F\)
 \end{definition}
-after that comes proposition with properties of \(\partial F\)}
+(after that comes proposition with properties of \(\partial F\))}
 
 
-To facilitate readability we use the following notation for the derivation of the nondifferentiable results.
+\textcolor{red}{To facilitate readability we use the following notation for the derivation of the nondifferentiable results.}
 
-The \emph{'partial' subdifferential} of a function \(f(a^*,\bar{b},\bar{c},...)\) at the point \(a^*\) with respect to one variable \(a\) when all other variables are fixed is denoted by 
+The \emph{'partial' subdifferential} of a function \(f(a^*,b_0,c_0,...)\) at the point \(a^*\) with respect to one variable \(a\) when all other variables are fixed is denoted by 
 \begin{equation*}
-	\partial^{a} f(a^*,\bar{b},\bar{c},...).
+	\partial^{a} f(a^*,b_0,c_0,...).
 \end{equation*}
 
-A subgradient of this subdifferential is written \(g^{a} \in \partial^{a} f(a^*,\bar{b},\bar{c},...)\).
+A subgradient of this subdifferential is written \(g^{a} \in \partial^{a} f(a^*,b_0,c_0,...)\).
 
+Next step: show that chain rule is still valid in the nonsmooth case
+Chain rules for subdifferential \\
 
-Chain rule for subdifferential \\
+\begin{theorem}[{\cite[Theorem 2.6.6]{Clarke1990}}]
+	Let \(f(x)=\phi(F(x))\), with the locally Lipschitz functions \(F: \R^n \to \R^m\) and \(\phi:\R^m \to \R\). Then \(f\) is locally Lipschitz and it holds
+	\begin{equation*}
+		\partial f \subset \text{conv}\left\{\partial \phi(F(x))\partial F(x)\right\}.
+	\end{equation*}
+	If in addition \(\phi\) is strictly differentiable at \(F(x)\), then equality holds.
+\end{theorem}
+
+\textcolor{red}{strictly differentiable: c.f. \cite[Theorem 9.17 and 9.18]{Rockafellar2009} locally Lipschitz continuous and at most one subgradient at the point in question (see also comment to Definition 91 in \cite{Rockafellar2009})}
+
 \begin{theorem}[c.f. {\cite[Theorem 7.1]{Rockafellar1985}}]
 	Let \(p(x) = f(F(x))\), where \(F:\R^n \to \R^d\) is locally Lipschitz and \(f:\R^d \to \R\) is lower semicontinuous. 
 	Assume \[\nexists y \in \partial^{\infty}f(F(\bar{x})), y \neq 0 \quad \text{with} \quad 0 \in y \partial F(\bar{x}). \]
@@ -403,16 +424,19 @@ Chain rule for subdifferential \\
 	one has \(\hat{\partial}p(\bar{x}) \subset M(\bar{x})\) and \(\hat{\partial}^{\infty} p(\bar{x}) \subset M^{\infty}(\bar{x})\).
 \end{theorem}
 
-Clarke \\
-\begin{theorem}[{\cite[Theorem 2.6.6]{Clarke1990}}]
-	\(f = g(F)\), \(F:\R^n \to \R^m\)
+\textcolor{red}{show that functions fulfill assumptions}\\
+
+Implicit function theorem>\\
+\begin{theorem}[{\cite[Theorem 5.2]{Outrata1998}}]
+	(a) Assume there exists a single valued  Lipschitz function \(F\)
 \end{theorem}
+in original theorem around 0< can always be done by 
 
 \begin{itemize}
 	\item notation - check
 	\item definition of subgradient-''matrix'' - check
-	\item chain rule 
-	\item optimality condition
+	\item chain rule - check
+	\item optimality condition /check
 \end{itemize}
 
 \begin{itemize}

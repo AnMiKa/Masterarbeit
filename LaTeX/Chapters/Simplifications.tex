@@ -1,4 +1,4 @@
-\section{Variations of The Bundle Method}
+\section{Variations of the Bundle Method}
 \label{sec_simplifications}
 
 After their discovery in 1975 bundle methods soon became very successful. Only a few years later they were generalized to be used also with nonconvex objective functions. Early works, that contain fundamental ideas still used for these algorithms are \cite{Mifflin1982} and \cite{Kiwiel1985}.
@@ -57,11 +57,11 @@ In this case if the value to approximate the optimal function value is chosen pr
 In the case of inexact information, especially if the inexact function value can overestimate the real one, it is possible that the aggregate linearization error \(E_k\) becomes very small (or even negative) even though the current iterate is far from the minimum of the objective function.
 To tackle this problem the authors propose a procedure called \emph{noise attenuation} that was developed in \cite{Hintermueller2001} and \cite{Kiwiel2006}.
 The basic idea is to allow bigger step sizes \(t_k\) whenever the algorithm comes in the situation described above. This ensures that either some significant descent towards the real minimum can be done or shows that the point where the algorithm is stuck is actually such a minimum.
-Noise attenuation is triggered when \(E_k\) or respectively the descent \(\delta_k\) that is used for the descent test is negative. A more detailed description is given in \cite{Oliveira2014}.
+Noise attenuation is triggered when \(E_k\) or respectively the descent measure \(\delta_k\) that is used for the descent test is negative. A more detailed description is given in \cite{Oliveira2014}.
 
 \subsubsection{Convergence Results}
 Depending on the kind of error many slightly different convergence results can be proven for bundle methods that handle convex objective functions with inexact information.
-In case of the general error defined in (\ref{conv_inexactness_1})  and (\ref{conv_inexactness_2})it can be shown that for bounded sequences \(\{\hat{x}^k\}\) every accumulation point \(\bar{x}\) of an infinite series of serious steps or the last serious iterate before an infinite tail of null steps is a \(\bar{\sigma}\)-solution of the problem meaning that 
+In case of the general error defined in (\ref{conv_inexactness_1})  and (\ref{conv_inexactness_2}) it can be shown that for bounded sequences \(\{\hat{x}^k\}\) every accumulation point \(\bar{x}\) of an infinite series of serious steps or the last serious iterate before an infinite tail of null steps is a \(\bar{\sigma}\)-solution of the problem meaning that 
 
 \begin{equation*}
 	f(\bar{x}) \leq f^*+\bar{\sigma} 
@@ -177,14 +177,17 @@ In \cite{Noll2012} Noll et al. follow an approach of approximating a local model
 \label{quad_mod}
 \end{equation*}
 
-The so called \emph{first order model} \(\phi(.,x)\) is convex but possibly nonsmooth and can be approximated by cutting planes. The \emph{second order part} is a quadratic but not necessarily convex. The algorithm then proceeds a lot in the lines of a general bundle algorithm.
-Instead of a line search is uses proximity control to ensure convergence.
+The so called \emph{first order model} \(\phi(.,x)\) is convex but possibly nonsmooth and can be approximated by cutting planes. The \emph{second order part} is a quadratic but not necessarily convex. The algorithm then proceeds a similarly to a general bundle algorithm.
+Instead of a line search it uses proximity control to ensure convergence.
 
 Generally for all of this methods convergence to a stationary point is established under the assumptions of a locally Lipschitz objective function and bounded level sets \(\{x \in \R^n | f(x) \leq f(\hat{x}^1)\}\).
 If the method uses a line search additionally semismoothness of the objective function is needed.
 
 In \cite{Noll2013} the second order approach of \cite{Noll2012} is extended to functions with inexact information.
-As far a we know this is the only other bundle method that can deal with nonconvexity and inexactness in both the function value and subgradient. It inspires the variable metric variation of the method used by Hare et al. in \cite{Hare2016} that is presented in section \ref{sec_variable_metric} of this thesis.
+As far a we know this is the only other bundle method that can deal with nonconvexity and inexactness in both the function value and subgradient. In this method a lower-\(\mathcal{C}^1\) objective function and some assumptions on the inexactness are needed to prove convergence.
+
+Noll's algorithm inspires the variable metric variation of the method used by Hare et al. in \cite{Hare2016} that is presented in section \ref{sec_variable_metric} of this thesis.
+
 
 %To conclude this section we can say: At the moment there exist two fundamentally different approaches to tackle inexactness in various bundle methods depending on if the method is developed for convex or nonconvex objective functions.
 %In the nonconvex case inexactness is only considered in the paper by Hare, Sagastiz{\`{a}}bal and Sodolov \cite{Hare2016} presented above and Noll \cite{Noll2013}. In these cases the inexactness can be seen as an ``additional nonconvexity''. In practice this means that the algorithm can be taken from the nonconvex case with no or only minor changes.
