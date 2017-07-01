@@ -141,6 +141,11 @@ A.~S. Lewis and S.~J. Wright.
 \newblock A proximal method for composite minimization.
 \newblock {\em Mathematical Programming}, 158(1-2):501--546, aug 2015.
 
+\bibitem{Lewis2009}
+Adrian~S Lewis and Michael~L Overton.
+\newblock Nonsmooth optimization via bfgs.
+\newblock {\em submitted to SIAM Journal on Optimization}, pages 1--35, 2009.
+
 \bibitem{Luksan1999}
 L.~Luk{\v{s}}an and J.~Vl{\v{c}}ek.
 \newblock Globally convergent variable metric method for convex nonsmooth
@@ -187,6 +192,11 @@ D.~R. Musicant and A.~Feinberg.
 David~R. Musicant.
 \newblock {\em Data Mining via Mathematical Programming and Machine Learning}.
 \newblock PhD thesis, University of Wisconsin, Madison, 2000.
+
+\bibitem{Nocedal1980}
+Jorge Nocedal.
+\newblock Updating quasi-newton matrices with limited storage.
+\newblock {\em Mathematics of Computation}, 35(151):773--782, 1980.
 
 \bibitem{Noll2010}
 Dominikus Noll.
@@ -312,5 +322,10 @@ Claude~Lemar\'{e}chal Welington~de Oliveira, Claudia~Sagastiz\`{a}bal.
 \newblock Convex proximal bundle methods in depth: a unified analysis for
   inexact oracles.
 \newblock {\em Mathematical Programming}, 148:241--277, 2014.
+
+\bibitem{Werner1992}
+Jochen Werner.
+\newblock {\em Numerische Mathematik 2}.
+\newblock Vieweg, Wiesbaden, 1992.
 
 \end{thebibliography}

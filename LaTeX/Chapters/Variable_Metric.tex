@@ -11,7 +11,7 @@ The section starts by explaining the ideas from \cite{Noll2013} used to extend t
 
 Throughout this section we still consider the optimization problem (\ref{opt_prob_nonconv_inex}). We also keep the names and definitions of the objects used in section \ref{sec_nonconv_inex}.
 
-\subsection{The Main Ingredients to the Method}
+\subsection{Main Ingredients to the Method}
 %\textcolor{blue}{explanation}
 
 As already mentioned in section \ref{sec_conv_ex} the stabilization term can be interpreted in many different ways. In the context of this section we can understand it as a pretty rough approximation of the curvature of the objective function.
@@ -77,106 +77,10 @@ On the other hand the proximal term can be used in the trust region inspired way
 
 \textcolor{red}{comment on line search and curve search in \cite{Lemarechal1994,Lemarechal1997,Vlcek2001}?}
 
-\subsection{???}
-
-In this section a concrete update rules for \(Q_k\) are described as well as the minor changes that have to be done to the proximal bundle algorithm from section \ref{sec_nonconv_inex} to adapt it to the variable metric approach.
-
-\subsubsection{Update Rules for the Metric}
-
-In \cite{Noll2012} and \cite{Noll2013} it is not specified how the matrix \(Q_k\) is to be chosen.
-For convergence it is necessary that the eigenvalues of \(Q_k\) are bounded. Additionally the matrix \(Q_k+\frac{1}{t_k}\mathbb{I}\) has to be positive definite.
-Here we present two possible versions to update the metric matrix \(Q_k\) that fulfill both conditions.
-
-Both updates are based on the usual BFGS-update formula (named after Broyden, Goldfarb, Fletcher and Shanno)
-
-\begin{equation*}
-	Q_{k+1} = Q_k + \frac{y^k{y^k}^{\top}}{\langle y^k,d^k\rangle}-\frac{Q_kd^k(Q_kd^k)^{\top}}{\langle d^k,Q_kd^k \rangle}.
-\end{equation*}
-
-Usually \(y^k\) is defined as the difference of the last two gradients of \(f\). To adapt the formula to the nondifferentiable case the difference \(y^k := g^{k+1}-g^k\) of two subgradients of \(f\) is taken instead as proposed in \cite{Haarala2007}.
-The starting matrix \(Q_1 = \mathbb{I}\).
-%used by Vl\v{c}ek  and Luk\v{s}an in \cite{Vlcek2001}. There the metric matrix is updated by the 
-
-%The matrix \(Q(\hat{x}\) is formed by a BFGS-Update from the \textcolor{red}{last known - which? how many? all from bundle??} subgradients.
-
-By definition the BFGS update is symmetric. To assure boundedness of the matrix \(Q_{k+1}\) the updates are manipulated in the two following ways:
-
-\paragraph{Scaling of the whole matrix:}
-
-A simple way to keep the absolute value all eigenvalues of the constructed matrix \(Q_k\) below some threshold \(0 < q < \infty\) is to scale the whole matrix down as soon as the absolute value of one eigenvalue is larger than this number.
-To do this define \(\lambda_{max} := \max\{|\lambda_i|\mid \lambda_i \text{ is eigenvalue of } Q_k|\}\). Now \(\text{if } \lambda_{max} > q \text{ set } Q_k = \frac{q}{\lambda_{max}}Q_k\). This way the absolute value of all eigenvalues is always smaller or equal to \(q\).
-An advantage of this method is besides its simplicity that by scaling the whole matrix the ratio of the eigenvalues of \(Q_k\) is presumed. Scaling of \(Q_k\) corresponds to shrinking the quadratic function and in this way also the 'ratio of curvature' at different points of the graph stays the same. 
-
-\paragraph{Adaptive scaling of single eigenvalues:}
-
-This second method is motivated by the following observation: The variable metric bundle algorithm is to be used for nonsmooth functions. This means that the objective function has some kinks. 
-For locally Lipschitz functions the number of kinks is finite and in between the kinks the function is smooth.
-This means, that there is indeed curvature information present in the smooth parts of the functions. At the kinks however the curvature is not defined. Taking a look at the one-sided differential quotient for \(x \in \R\) shows that it diverges at such points:
-Let a kink be at \(x_{\text{kink}}\) and the left sided limiting value of the derivative is \(f'(x_{\text{kink}}) = a\) the right-sided one is \(f'(x_{\text{kink}}) = b \neq a\). Because \(f\) was assumed to be locally Lipschitz both limits exist and are finite.
-The following quotient can then be stated:
-\[ \lim_{h \searrow 0} \frac{f'(x_{\text{kink}}+h)-f'(x_{\text{kink}})}{h} = \pm \infty, \]
-the sign depending on if \(a > b\) or vice versa. \\
-In more dimensions this works the same for the components of the Hessian corresponding to the direction where the kink occurs. This corresponds also to the intuitive thought that at a kink the slope changes 'infinitly fast'.
-Numerically the BFGS-update stated above results very large values for the entries of \(Q_k\) corresponding to points near the kink.
- 
-On the other hand due to the local Lipschitz property the slope of the objective function is always finite on closed sets. This means that there exists a neighborhood \(B_{\varepsilon}(x_{\text{kink}})\) where the function \(f\) behaves similar to the scaled modulus \(a|\cdot|\), \(a \in \R\), in the direction perpendicular to the kink. Therefore in this neighborhood almost no curvature is present.
-
-Summarized this means that on the one hand, the matrix \(Q_k\) should be close to zero in the components representing the directions perpendicular to the kink as soon as the iterates approach \(x_{\text{kink}}\). But contrary to that the method that constructs \(Q_k\) can give very high values for those components.
-
-The idea is now to scale only those eigenvalues of \(Q_k\) that are especially large. To lower the probability that eigenvalues are chosen which represent a really existing large curvature of \(Q_k\) at the observed point, the change of the eigenvalues is viewed in relation to the step size \(d^k\).
-As the eigenvalues of a matrix \(A \in \R^n\) depend continuously on the entries of the matrix (see for example \cite[Theorem 1.2]{Werner1992}) the change in the eigenvalues is calculated by ordering them by size and then calculating \(\text{diff}_{\lambda_i}=|\lambda_i^{k-1}-\lambda_i^{k}|, i = 1,...,n\), where \(\lambda^{k-1}\) and \(\lambda^{k} \in \R^n\) are vectors with the sorted eigenvalues of \(Q_{k-1}\) and \(Q_{k}\) respectively.
-If \(\frac{\text{diff}_{\lambda_i}}{\|d^k\|} > q\) for any \(i = 1,...,n\) and a threshold \(q < \infty\), indicating that the \(i\)'th eigenvalue changes much while only a small step is done, the \(i\)'th eigenvalue is set \(\lambda_i^{k}=\frac{1}{2}\lambda_1^{k-1}\) (remember that we stated before that near a kink there is often a very small curvature, hence halving the eigenvalue of the  matrix of the step before).
-
-\textcolor{red}{remark that convergence can depend a lot on the threshold and how the matrix/eigenvalue is scaled in the two methods}
-
-
-
-%\textcolor{red}{are manipulated in the following way:\\
-%3 possibilities: \\
-%scaled BFGS-update\\
-%scaled SR1-update\\
-%LBFGS-update - Nocedal Paper from email}
-
-%\textcolor{red}{BFGS/Verfahren\\
-%seems to need less steps with ok optimality if updates are skipped and not matrix scaling is used (used y'd < ...)\\
-%try norm(d)/norm(y) -> not good; use the one above}
-
-%\textcolor{red}{SR1-Update\\
-%auch ok, braucht anderen bound um zu konvergieren}
-
-%\textcolor{red}{%If \(y^k = 0\) set the second term in the update formula to zero.
-%If \(\langle y^k,d^k \rangle <\zeta \) for some \(\zeta > 0\) set the second term to \(\frac{y^k{y^k}^{\top}}{\zeta}\). The same can be done for the last term of the update formula if \{}
-
-%\textcolor{red}{Algorithmus anpassen}
- 
-%\begin{align*}
-	%\text{if} &\quad \left(\frac{y^k{y^k}^{\top}}{{y^k}^{\top}d^k}\right) > 1/3C \\
-	%&\quad \text{set } \frac{y^k{y^k}^{\top}}{\zeta} \\
-	%&\quad \zeta = \frac{\text{norm}\left(y^k{y^k}^{\top}\right)}{1/3C} \\
-	%\text{end} &
-%\end{align*}
-%same procedure for next term; all \(<1/3C\) for some overall threshold \(C\) 
-
-%A different procedure is used in \cite{Vlcek2001}. There the update is just skipped whenever \(\langle y^k, d^k \rangle < \zeta\).
-
-
-\begin{itemize}
-	\item \(Q\) only updated in serious steps - why?
-	%\item comment in SR1 update? Null steps?
-	%\item write down exact update from Vlcek
-	%\item find out how the different properties are assured
-\end{itemize}
-
-%eigenvalues of \(Q\) are bounded \(\to\) possible by manipulating BFGS update
-
-
-%\(Q+\frac{1}{t_k}\mathbb{I}\) such that \(\succ \xi \mathbb{I}\) for some fixed \(\xi > 0\). \\
-
-
 \subsubsection{The Descent Measure}
 
-There are some minor changes that have to be made compared to the algorithm proposed by Hare et al. the biggest being the descent measure \(\delta_k\).
-
+%There are some minor changes that have to be made compared to the algorithm proposed by Hare et al. the biggest being the descent measure \(\delta_k\).
+Due to the different formulation of the subproblem (\ref{Q_subprob}) the descent measure \(\delta_k\) has to be adapted in the varible metric bundle method.
 In the same way as for (\ref{agg_subgr_dk}) from the optimality condition
 
 \begin{align*}
@@ -194,7 +98,7 @@ follows that
 
 From this the model decrease (\ref{mod_dec2}) can be recovered using (\ref{aug_agg_lin}), (\ref{aug_agg_err2}) and (\ref{subgr_Q}):
 
-\begin{equation*}
+\begin{equation}
 \begin{split}
 	\delta_k  &= \hat{f}_k - M_k(x^{k+1}) - \Langle\nu^k,d^k\Rangle\\
 	&= \hat{f}_k - A_k(x^{k+1}) - \Langle\nu^k,d^k\Rangle\\
@@ -203,62 +107,24 @@ From this the model decrease (\ref{mod_dec2}) can be recovered using (\ref{aug_a
 	&= C_k + \Langle d^k,\left(Q+\frac{1}{t_k}\mathbb{I}\right)d^k\Rangle.
 	\label{Noll_delta}
 \end{split}
-\end{equation*}
+\end{equation}
 
 The new \(\delta_k\) is used in the same way as in algorithm \ref{sec_nonconv_inex}.1 for the descent test and stopping conditions.
 
 Because the changes in the algorithm concern only the stabilization and the decrease measure \(\delta_k\) all other relations that were obtained for the different parts of the model \(M_k\) in section \ref{sec_nonconv_inex} are still valid.
 
+\subsection{The Variable Metric Bundle Algorithm}
 
-
-%\(\to\) explain noll again (ref to chapter 2) and relate to variable metric
-%Describe what is needed from Noll \(\to\) describe how to really ensure desired properties (Vlcek) 
-
-%extra subsection???
-%\(\to\) explain other changes like \(\delta_k\) \(\to\) say what is not changed
-
-%Inspired by the work of Noll in \cite{Noll2013} which is, to our best knowledge, the only other paper dealing with bundle methods for nonconvex functions with inexactness, we are interested to include some kind of curvature information into the bundle method from section \ref{sec_nonconv_inex}.
-
-
-%This is also used by Noll et al. in \cite{Noll2012} and Noll in \cite{Noll2013} for nonconvex functions with exact and inexact information respectively.
-%In the original papers the motivation is to approximate the original objective function by a quadratic model
-
-
-%This model is then again approximated to solve the bundle subproblem.
-
-%Here we take the same idea but interpret it more in the sense of a stabilization. The objective function is still first convexified and then this convexification approximated by a cutting plane model. The matrix \(Q(\hat{x})\) is added into the stabilization so that the
-
-
-
-%Here \(A \prec B \) means that the matrix \((B-A)\) is positive definite.
-
-%\subsection{Keywords}
-
-%important in Noll for me: optimize model + \(d^{\top}(Q+\frac{1}{t_k}\mathbb{I})d\)
-%-> some kind of second order information
-
-%important: \(Q+\frac{1}{t_k}\mathbb{I}\) must have all eigenvalues \(\geq 0\).
-
-%idea to get \(Q\): BFGS like in Fin-papers; theory
-
-%!!! check stopping criterion
-%connection between \(d^k\) and \(G^k/S^k\) now:
-%Optimality condition: 
-
-
- 
-
-\subsection{Algorithm}
+The variable b=metric bundle algorithm can now be stated as a varaiation of algorithm \ref{sec_nonconv_inex}.1.
 
 \textcolor{red}{same form as Hare algorithm (nullstep)\\
 add \(Q\) calculation}
 
 \begin{minipage}\linewidth
-Algorithm \ref{sec_variable_metric}.1:
 \vspace{1em}
 \hrule  \vspace{0.4ex} \hrule
 \vspace{1ex}
-\textbf{Nonconvex Variable Metric Bundle Method with Inexact Information}
+\textbf{Algorithm \ref{sec_variable_metric}.1: Nonconvex Variable Metric Bundle Method with Inexact Information}
 \vspace{1ex}
 \hrule
 \vspace{1ex}
@@ -293,8 +159,9 @@ For \(k = 1,2,3,  \dotsc \)
 
 \vspace{1.5em}
 
-
 \subsection{Convergence Analysis}
+
+\textcolor{red}{ausfuhrungen im Beweis genauer}
 
 In this section the convergence properties of the new method are analyzed. We do this the same way it is done by Hare et al. in \cite{Hare2016}.
 
@@ -323,7 +190,7 @@ In the paper all convergence properties are first stated in \cite[Lemma 5]{Hare2
 	\end{equation}
 \end{lemma}
 
-As the neither the stabilization nor the descent test is involved in the proof of Lemma \ref{Lemma5} it is the same as in \cite{Hare2016}.
+As neither the stabilization nor the descent test is involved in the proof of Lemma \ref{Lemma5} it is the same as in \cite{Hare2016}.
 
 We prove now that also the variable metric version of the algorithm fulfills all requirements of Lemma \ref{Lemma5}.
 The proof is divided into two parts. The first case covers the case of infinitely many serious steps, the second one considers infinitely many null steps.
@@ -332,7 +199,9 @@ For both proofs the following lemma is needed:
 
 \begin{lemma}
 	For a symmetric matrix \(A \in \R^{n\times n}\), a vector \(d\in \R^n\) and \(\xi > 0\) the following result holds: 
-	\[ A \prec \xi \mathbb{I} \Rightarrow Ad < \xi d \]
+	\[ A \prec \xi \mathbb{I} \Rightarrow Ad < \xi d. \]
+	
+	The second inequality is considered componentwise.
 \end{lemma}
 
 \begin{proof}
@@ -399,7 +268,7 @@ The proof is very similar to the one stated in \cite{Hare2016} but minor changes
 	
 	This yields
 	\begin{equation*}
-		\sum_{k = 1}^{\infty} \delta_k = \sum_{k=1}^{\infty}\left(C^k+(d^k)^{\top}\left(Q+\frac{1}{t_k}\mathbb{I}\right)d^k\right) < \infty
+		\sum_{k = 1}^{\infty} \delta_k = \sum_{k=1}^{\infty}\left(C^k+(d^k)^{\top}\left(Q+\frac{1}{t_k}\mathbb{I}\right)d^k\right) < \infty.
 	\end{equation*}
 	
 	Hence, \(\delta_k \to 0\) as \(k \to \infty\). All quantities above are nonnegative due to positive definiteness of \(Q+\frac{1}{t_k}\mathbb{I}\), so it also holds that
@@ -435,17 +304,17 @@ Whenever \(x^{k+1}\) is as declared a null step, the relation
 holds.
 
 \begin{theorem} [c.f. {\cite[Theorem 7]{Hare2016}}]
-	Let a finite number of serious iterates be followed by infinite null steps. Let the sequence \(\{\eta_k\}\) be bounded and \(\liminf k \to \infty > 0\). \\
+	Let a finite number of serious iterates be followed by infinite null steps. Let the sequence \(\{\eta_k\}\) be bounded and \(\liminf_{k \to \infty} t_k > 0\). \\
 	Then \(\{x^k\} \to \hat{x}\), \(\delta_k \to 0\), \(C_k \to 0\), \(S^k + \nu^k \to 0\) and there exist \(K\subset \{1,2,...\}\) and \(\bar{S}\) such that \(S^k \to \bar{S^k}\) as \(K \ni k \to \infty\). \\
 	In particular if the cardinality of \(\{j \in J^k|\alpha_j^k > 0 \}\) is uniformly bounded in \(k\) then the conclusions of Lemma \ref{Lemma5} hold for \(\bar{x} = \hat{x}\). 
 \end{theorem}
 
 \begin{proof}
-	Let \(k\) be large enough such that \(k \geq \bar{k}\) and \(\hat{x}^k = \hat{x}\) and \(\hat{f}_k=\hat{f}\) are fixed.
+	Let \(k\) be large enough such that \(k \geq \bar{k}\), where \(\bar{k}\) is the iterate of the last serious step. Let \(\hat{x}^k = \hat{x}\) and \(\hat{f}_k=\hat{f}\) be fixed.
 	Define the optimal value of the subproblem (\ref{Q_subprob}) by 
 	
 	\begin{equation}
-		\Psi_k := M_k(x^{k+1})+\left(d^k\right)^{\top}\frac{1}{2}\left(Q+\frac{1}{t_k}\mathbb{I}\right)d^k.
+		\Psi_k := M_k(x^{k+1})+\frac{1}{2}\left(d^k\right)^{\top}\left(Q+\frac{1}{t_k}\mathbb{I}\right)d^k.
 		\label{Psi}
 	\end{equation}
 	
@@ -481,12 +350,13 @@ By boundedness of \(d^k\) and \(Q+\frac{1}{t_k}\mathbb{I}\) this yields that \(\
 		&= M_k(x^{k+1})+\langle S^k,x^{k+2}-x^{k+1} \rangle +\frac{1}{2}\left(d^{k+1}\right)^{\top}\left(Q+\frac{1}{t_k}\mathbb{I}\right)d^{k+1} \\
 		&= \Psi_k - \frac{1}{2}\left(d^{k}\right)^{\top}\left(Q+\frac{1}{t_k}\mathbb{I}\right)d^{k} + \frac{1}{2}\left(d^{k+1}\right)^{\top}\left(Q+\frac{1}{t_k}\mathbb{I}\right)d^{k+1} \\
 		& \qquad -\left(d^{k}\right)^{\top}\left(Q+\frac{1}{t_k}\mathbb{I}\right)\left(d^{k+1} - d^{k}\right) - \langle \nu^k, x^{k+2}-x^{k+1}\rangle\\
-		&\geq \Psi_k + \frac{1}{2}\left(d^{k+1}-d^{k}\right)^{\top}\left(Q+\frac{1}{t_k}\mathbb{I}\right)\left(d^{k+1} - d^{k}\right),
+		&\geq \Psi_k + \frac{1}{2}\left(d^{k+1}-d^{k}\right)^{\top}\left(Q+\frac{1}{t_k}\mathbb{I}\right)\left(d^{k+1} - d^{k}\right) \\
+		& =\Psi_k + \frac{1}{2}\underbrace{\|d^{k+1}-d^k\|_{Q+\frac{ 1}{t_k}\mathbb{I}}}_{\geq 0},
 	\end{align*}
 	
-where the first inequality comes from (\ref{A_leq_M}) and the fact that \(t_{k+1} \leq t_{k}\) for null steps.The second equality follows from (\ref{aug_agg_lin}), the third equation by (\ref{subgr_Q}) and (\ref{Psi}) and the last inequality holds y \(\nu^k \in \partial \mathtt{i}_X(x^{k+1})\).
+where the first inequality comes from (\ref{A_leq_M}) and the fact that \(t_{k+1} \leq t_{k}\) for null steps. The second equality follows from (\ref{aug_agg_lin}), the third equation by (\ref{subgr_Q}) and (\ref{Psi}) and the last inequality holds by \(\nu^k \in \partial \mathtt{i}_X(x^{k+1})\).
 
-As \(Q\) is fixed in null steps and \(\liminf_{k \to \infty} t_k > 0\) \(\{\Psi_k\}\) is increasing. The sequence is therefore convergent.
+As \(Q\) is fixed in null steps and  \(\liminf_{k \to \infty} t_k > 0\) the sequence\(\{\Psi_k\}_{k \in \N}\) is increasing and bounded from above. The sequence is therefore convergent.
 Taking into account that \(1/t_k \geq 1/t_{\bar{k}}\), it therefore follows that
 
 \begin{equation}
@@ -494,7 +364,7 @@ Taking into account that \(1/t_k \geq 1/t_{\bar{k}}\), it therefore follows that
 \label{d_to_0}
 \end{equation}
 
-By definition (\ref{Noll_delta}) and the fact that the augmented aggregate error can be expressed as
+By the first line in (\ref{Noll_delta}) and the fact that the augmented aggregate error can be expressed as
 
 \begin{equation*}
 	C_k = \hat{f}-M_k(x^{k+1})+\Langle S^k,d^k \Rangle 
@@ -522,7 +392,7 @@ By assumption (\ref{Model_update_1}) on the model, written for \(d=d^{k+1}\),
 	-\hat{f}_{k+1}+c^{k+1}_{k+1}-\left\langle s^{k+1}_{k+1},d^{k+1}\right\rangle \geq -M_{k+1}(\hat{x}+d^{k+1}).
 \end{equation*}
 
-In the nullstep case \(\hat{f}_{k+1}=\hat{f}\) so adding condition (\ref{no_ls}) to the inequality above, one obtains that
+In the null step case it holds \(\hat{f}_{k+1}=\hat{f}\) so adding condition (\ref{no_ls}) to the inequality above, one obtains that
 
 \begin{equation*}
 	m\delta_k+\left\langle s^{k+1}_{k+1},d^k-d^{k+1}\right\rangle \geq \hat{f}-M_{k+1}(\hat{x}+d^{k+1}).
@@ -541,13 +411,13 @@ Because \(m \in (0,1)\) and \(\left\langle s^{k+1}_{k+1},d^k-d^{k+1}\right\rangl
 	\lim_{k \to \infty} \delta_k = 0.
 \end{equation*}
 
-From  formulation (\ref{Noll_delta}) of the model decrease follows that \(C_k \to 0\) as \(k \to \infty\). Since {\(Q+\frac{1}{t_k}\mathbb{I} \succ \xi\mathbb{I}\)} due to \(\liminf_{k \to \infty} > 0\) and the bounded eigenvalues of \(Q\) we have 
+From  formulation (\ref{Noll_delta}) of the model decrease follows that \(C_k \to 0\) as \(k \to \infty\). Since {\(Q+\frac{1}{t_k}\mathbb{I} \succ \xi\mathbb{I}\)} due to \(\liminf_{k \to \infty} t_k > 0\) and the bounded eigenvalues of \(Q\) we have 
 
 \begin{equation*}
 	\xi \left(d^k\right)^{\top}d^k \leq \left(d^k\right)^{\top}\left(Q+\frac{1}{t_k}\mathbb{I}\right)d^k \to 0
 \end{equation*}
 
-This means that \(d^k \to 0\) for \(k \to \infty\) and therefore \(\lim_{k \to \infty}x^k = \hat{x}\). It also follows that \(\|S^k+\\vu^k\| \to 0\) as \(k \to \infty\). Passing to some subsequence if necessary we can conclude that \(S^k\) converges to some \(\bar{S}\) and as \(\hat{x}^k = \bar{x}\) for all \(k\) all requirements of Lemma \ref{Lemma5} are fulfilled.
+This means that \(d^k \to 0\) for \(k \to \infty\) and therefore \(\lim_{k \to \infty}x^k = \hat{x}\). It also follows that \(\|S^k+\nu^k\| \to 0\) as \(k \to \infty\). Passing to some subsequence if necessary we can conclude that \(S^k\) converges to some \(\bar{S}\) and as \(\hat{x}^k = \bar{x}\) for all \(k\) all requirements of Lemma \ref{Lemma5} are fulfilled.
 
 \end{proof}
 
@@ -555,31 +425,179 @@ This means that \(d^k \to 0\) for \(k \to \infty\) and therefore \(\lim_{k \to \
 	All results deduced in section \ref{On_diff_conv_res} are still valid for this algorithm as they do not depend on the kind of stabilization used.
 \end{remark}
 
-\subsection{\textcolor{red}{Some Remarks on the Choice of Q}}
+\subsection{Updating the Metric}
+
+%In this section concrete update rules for \(Q_k\) are described as well as the minor changes that have to be done to the proximal bundle algorithm from section \ref{sec_nonconv_inex} to adapt it to the variable metric approach.
+
+%\subsubsection{Update Rules for the Metric}
+
+In \cite{Noll2012} and \cite{Noll2013} it is not specified how the matrix \(Q_k\) is to be chosen.
+For convergence it is necessary that the eigenvalues of \(Q_k\) are bounded. Additionally the matrix \(Q_k+\frac{1}{t_k}\mathbb{I}\) has to be positive definite.
+Here we present two possible versions to update the metric matrix \(Q_k\) that fulfill both conditions.
+
+Both updates are based on the usual BFGS-update formula (named after Broyden, Goldfarb, Fletcher and Shanno)
+
+\begin{equation}
+	Q_{k+1} = Q_k + \frac{y^k{y^k}^{\top}}{\langle y^k,d^k\rangle}-\frac{Q_kd^k(Q_kd^k)^{\top}}{\langle d^k,Q_kd^k \rangle}.
+	\label{BFGS_update}
+\end{equation}
+
+Usually \(y^k\) is defined as the difference of the last two gradients of \(f\). To adapt the formula to the nondifferentiable case the difference \(y^k := g^{k+1}-g^k\) of two subgradients of \(f\) is taken instead as proposed in \cite{Haarala2007}.
+The starting matrix \(Q_1 = \mathbb{I}\).
+%used by Vl\v{c}ek  and Luk\v{s}an in \cite{Vlcek2001}. There the metric matrix is updated by the 
+
+%The matrix \(Q(\hat{x}\) is formed by a BFGS-Update from the \textcolor{red}{last known - which? how many? all from bundle??} subgradients.
+
+By definition the BFGS update is symmetric. To assure boundedness of the matrix \(Q_{k+1}\) the updates are manipulated in the two following ways:
+
+\subsubsection{Scaling of the Whole Matrix}
+
+A simple way to keep the absolute value all of eigenvalues of the constructed matrix \(Q_k\) below some threshold \(0 < q < \infty\) is to scale the whole matrix down as soon as the absolute value of one eigenvalue is larger than this number.
+To do this define \(\lambda_{max} := \max\{|\lambda_i|\mid \lambda_i \text{ is eigenvalue of } Q_k|\}\). If  \(\lambda_{max} > q\), set \(Q_k = \frac{q}{\lambda_{max}}Q_k\). This way the absolute value of all eigenvalues is always smaller or equal to \(q\).
+An advantage of this method is besides its simplicity that by scaling the whole matrix the ratio of the eigenvalues of \(Q_k\) is preserved. Scaling of \(Q_k\) corresponds to shrinking the whole quadratic function and in this way also the 'ratio of curvature' at different points of the graph stays the same. 
+
+\subsubsection{Adaptive Scaling of Single Eigenvalues}
+
+This second method is motivated by the following observation: The variable metric bundle algorithm is to be used for nonsmooth functions. This means that the objective function has some kinks. 
+For locally Lipschitz functions the number of kinks is finite and in between the kinks the function is smooth.
+This means, that there is indeed curvature information present in the smooth parts of the functions. At the kinks however the curvature is not defined. Taking a look at the one-sided differential quotient for \(x \in \R\) shows that it diverges at such points:
+Let a kink be at \(x_{\text{kink}} \in \R\) and the left sided limiting value of the derivative be \(f'(x_{\text{kink}}) = a\) the right-sided one \(f'(x_{\text{kink}}) = b \neq a\). Because \(f\) was assumed to be locally Lipschitz both limits exist and are finite.
+The following quotient can then be stated:
+\[ \lim_{h \searrow 0} \frac{f'(x_{\text{kink}}+h)-f'(x_{\text{kink}})}{h} = \frac{\overbrace{f'(x_{\text{kink}}+h)}^{\to b}-a}{h} = \pm \infty, \]
+the sign depending on if \(a > b\) or vice versa. \\
+In more dimensions this is the same for the components of the Hessian corresponding to the direction where the kink occurs. This supports also to the intuitive thought that at a kink the slope changes 'infinitly fast'.
+Numerically the BFGS-update (\ref{BFGS_update}) can result in very large values for the entries of \(Q_k\) corresponding to points near the kink.
+ 
+On the other hand due to the local Lipschitz property the slope of the objective function is always finite on closed sets. This means that there exists a neighborhood \(B_{\varepsilon}(x_{\text{kink}})\) where the function \(f\) behaves similar to the scaled modulus \(a|\cdot|\), \(a \in \R\), in the direction perpendicular to the kink. Therefore in this neighborhood almost no curvature is present.
+
+Summarized this means that on the one hand, the matrix \(Q_k\) should be close to zero in the components representing the directions perpendicular to the kink as soon as the iterates approach \(x_{\text{kink}}\). But contrary to that the method that constructs \(Q_k\) can give very high values for those components.
+
+The idea is now to scale only those eigenvalues of \(Q_k\) that are especially large. To lower the probability that eigenvalues are chosen which represent a really existing large curvature of of the objective function at the observed point, the change of the eigenvalues is viewed in relation to the step size \(d^k\).
+As the eigenvalues of a matrix \(A \in \R^n\) depend continuously on the entries of the matrix (see for example \cite[Theorem 1.2]{Werner1992}) the change in the eigenvalues is calculated by ordering them by size and then calculating \(\text{diff}_{\lambda_i}=|\lambda_i^{k-1}-\lambda_i^{k}|, i = 1,...,n\), where \(\lambda^{k-1}\) and \(\lambda^{k} \in \R^n\) are vectors with the sorted eigenvalues of \(Q_{k-1}\) and \(Q_{k}\) respectively as components.
+If \(\frac{\text{diff}_{\lambda_i}}{\|d^k\|} > q\) for a threshold \(q < \infty\) and any \(i = 1,...,n\), indicating that the \(i\)'th eigenvalue changes much while only a small step is done, the \(i\)'th eigenvalue is set to \(\lambda_i^{k}=\frac{1}{2}\lambda_1^{k-1}\) (remember that we stated before that near a kink there is often a very small curvature, hence halving the eigenvalue of the  matrix of the step before).
+
+Because this method considers only the relative change of the eigenvalues, it is still possible that one or more of them is larger than the threshold \(q\). If this is the case, the whole matrix can be scaled as described above.
+
+\begin{remark}
+	There appear many parameters to control the scaling of the metric update. Although these parameters were not especially tuned in this thesis they have a considerable impact on the convergence speed of the method also depending on the objective function used. This has to be kept in mind when implementing the method in practice.
+\end{remark}
+
+\subsubsection{Other Updating Possibilities}
+
+There are certainly many other possibilities to update the metric \(Q_k\). A third variation based on BFGS-updates is the limited memory update suggested in \cite{Nocedal1980}. If the update is skipped whenever \(\|\rho ss^{\top}\| = \frac{\|d^k\|}{\|y^k\|}> q\) the matrix \(Q_k\) stays bounded. This strategy is also supported by the fact that if \(\frac{\|d^k\|}{\|y^k\|}> q\) the change in the subgradient relative to the step size
+is rather small indicating that the current iterate lies within a region with only small changes in curvature. In such regions the update can be skipped.
+
+Another updating method is using the symmetric-rank-1 (SR1) update
+\[ Q_k = Q_{k-1}+\frac{(y^k-Q_kd^k)(y^k-Q_kd^k)^{\top}}{\Langle y^k-Q_kd^k,d^k \Rangle}. \]
+
+Boundedness can be assured in the same as for the normal BFGS update.
+
+In \cite{Haarala2007} where the metric matrix is updated also in null steps a BFGS update is used in serious steps and an SR1 update in null steps. 
+
+As a last remark on this topic we want to say that although in this thesis the adaption of update strategies originally developed to be used with gradients seems to work in the presented setting also with subgradients this does not always have to be the case.
+Although it is argued for example in \cite{Lewis2009} that locally Lipschitz functions are differentiable almost everywhere and with an adequate linesearch it is improbable to arrive at an iterate that is a nondifferentiable point of the objective function this can still happen. Especially if such a linesearch is not used like in the algorithm presented here.
+So despite the promising practical behavior this area is still open to research.
+
+%\textcolor{red}{remark that convergence can depend a lot on the threshold and how the matrix/eigenvalue is scaled in the two methods}
+
+
+
+%\textcolor{red}{are manipulated in the following way:\\
+%3 possibilities: \\
+%scaled BFGS-update\\
+%scaled SR1-update\\
+%LBFGS-update - Nocedal Paper from email}
+
+%\textcolor{red}{BFGS/Verfahren\\
+%seems to need less steps with ok optimality if updates are skipped and not matrix scaling is used (used y'd < ...)\\
+%try norm(d)/norm(y) -> not good; use the one above}
+
+%\textcolor{red}{SR1-Update\\
+%auch ok, braucht anderen bound um zu konvergieren}
+
+%\textcolor{red}{%If \(y^k = 0\) set the second term in the update formula to zero.
+%If \(\langle y^k,d^k \rangle <\zeta \) for some \(\zeta > 0\) set the second term to \(\frac{y^k{y^k}^{\top}}{\zeta}\). The same can be done for the last term of the update formula if \{}
+
+%\textcolor{red}{Algorithmus anpassen}
+ 
+%\begin{align*}
+	%\text{if} &\quad \left(\frac{y^k{y^k}^{\top}}{{y^k}^{\top}d^k}\right) > 1/3C \\
+	%&\quad \text{set } \frac{y^k{y^k}^{\top}}{\zeta} \\
+	%&\quad \zeta = \frac{\text{norm}\left(y^k{y^k}^{\top}\right)}{1/3C} \\
+	%\text{end} &
+%\end{align*}
+%same procedure for next term; all \(<1/3C\) for some overall threshold \(C\) 
+
+%A different procedure is used in \cite{Vlcek2001}. There the update is just skipped whenever \(\langle y^k, d^k \rangle < \zeta\).
+
 
 \begin{itemize}
-	\item \(Q\) is there to model curvature, if there is no curvature there, 
+	\item \(Q\) only updated in serious steps - why?
+	\item comment in SR1 update? Null steps?
+	%\item write down exact update from Vlcek
+	%\item find out how the different properties are assured
 \end{itemize}
 
+%eigenvalues of \(Q\) are bounded \(\to\) possible by manipulating BFGS update
+
+
+%\(Q+\frac{1}{t_k}\mathbb{I}\) such that \(\succ \xi \mathbb{I}\) for some fixed \(\xi > 0\). \\
+
+%\(\to\) explain noll again (ref to chapter 2) and relate to variable metric
+%Describe what is needed from Noll \(\to\) describe how to really ensure desired properties (Vlcek) 
+
+%extra subsection???
+%\(\to\) explain other changes like \(\delta_k\) \(\to\) say what is not changed
+
+%Inspired by the work of Noll in \cite{Noll2013} which is, to our best knowledge, the only other paper dealing with bundle methods for nonconvex functions with inexactness, we are interested to include some kind of curvature information into the bundle method from section \ref{sec_nonconv_inex}.
+
+
+%This is also used by Noll et al. in \cite{Noll2012} and Noll in \cite{Noll2013} for nonconvex functions with exact and inexact information respectively.
+%In the original papers the motivation is to approximate the original objective function by a quadratic model
+
+
+%This model is then again approximated to solve the bundle subproblem.
+
+%Here we take the same idea but interpret it more in the sense of a stabilization. The objective function is still first convexified and then this convexification approximated by a cutting plane model. The matrix \(Q(\hat{x})\) is added into the stabilization so that the
 
 
 
+%Here \(A \prec B \) means that the matrix \((B-A)\) is positive definite.
 
-\textcolor{red}{What can be done about it?\\
-To tackle the described problem, the following strategies were tested: 
-\begin{itemize}
-	\item scaling with \(\frac{1}{k}\)
-	\item manipulation only at the kinks
-\end{itemize}}
+%\subsection{Keywords}
+
+%important in Noll for me: optimize model + \(d^{\top}(Q+\frac{1}{t_k}\mathbb{I})d\)
+%-> some kind of second order information
+
+%important: \(Q+\frac{1}{t_k}\mathbb{I}\) must have all eigenvalues \(\geq 0\).
+
+%idea to get \(Q\): BFGS like in Fin-papers; theory
+
+%!!! check stopping criterion
+%connection between \(d^k\) and \(G^k/S^k\) now:
+%Optimality condition: 
+
+
+%\subsection{\textcolor{red}{Some Remarks on the Choice of Q}}
+%
+%\begin{itemize}
+	%\item \(Q\) is there to model curvature, if there is no curvature there, 
+%\end{itemize}
+%\textcolor{red}{What can be done about it?\\
+%To tackle the described problem, the following strategies were tested: 
+%\begin{itemize}
+	%\item scaling with \(\frac{1}{k}\)
+	%\item manipulation only at the kinks
+%\end{itemize}}
 
 \subsection{Numerical Testing}
 
-To compare the proximal bundle algorithm \ref{sec_nonconv_inex}.1 with its variable metric variant Algorithm  \ref{sec_variable_metric}.1 it is tested on some academic test functions and on a set of lower-\(\mathcal{C}^2\) functions in different dimensions.
+To compare the proximal bundle algorithm \ref{sec_nonconv_inex}.1 with its variable metric variant algorithm  \ref{sec_variable_metric}.1 it is tested on some academic test functions and on a set of lower-\(\mathcal{C}^2\) functions in different dimensions.
 The tests were done with the following parameters given in \cite{Hare2016}: \(m = 0.05\), \(\gamma = 2\) and \(t_0 = 0.1\). The chosen stopping tolerance was \(\mathtt{tol} = 10^{-6}\). If the algorithms did not meet the stopping condition after \(250n\) steps for \(x \in \R^n\), they were terminated. Contrary to \cite{Hare2016} the stopping test was taken as given in the algorithm and the tolerance was not multiplied by \(1+\hat{f}_k\).
-The proximity control parameters \(\kappa_-\) and \(\kappa_+\) from (\ref{t_minus}) and (\ref{t_plus}) respectively were chosen as \(\kappa_-= 0.8\) and \(\kappa_+=2\).  
+The proximity control parameters \(\kappa_-\) and \(\kappa_+\) from (\ref{t_minus}) and (\ref{t_plus}) respectively were chosen as \(\kappa_-= 0.8\) and \(\kappa_+\in\{1.2,2\}\).  
 
-\textcolor{red}{check what is missing of introduchtion \\
-introduction of noise forms}
+\textcolor{red}{-> check what is missing of introduchtion \\
+-> introduction of noise forms}
 
 To test the performance for inexact function and subgradient values different types of noise were introduced. This was done by adding randomly generated elements with norm less or equal to \(\sigma_k\) and \(\theta^k\) to the exact values \(f(x^{k+1})\) and \(g(x^{k+1})\) respectively.
 
@@ -587,10 +605,10 @@ Five different forms of noise were tested:
 
 
 \begin{itemize}[label={--}]
-	\item \(\text{N}_0\): No noise, \(\bar{\sigma}=\sigma_k=0\) and \(\bar{\theta}=\theta^k=0\) for all \(k\).
-	\item \(\text{N}_{\text{c}}^{\text{f,g}}\): Constant noise, \(\bar{\sigma}=\sigma_k=0.01\) and \(\bar{\theta}=\theta^k=0.01\) for all \(k\).
-	\item \(\text{N}_{\text{v}}^{\text{f,g}}\): Vanishing noise, \(\bar{\sigma}=0.01, \sigma_k = \min\{0.01,\|x^k\|/100\}\) and \(\bar{\theta}=0.01, \theta_k=\min\{0.01,\|x^k\|/100\}\) for all \(k\).
-	\item \(\text{N}_{\text{c}}^{\text{g}}\): Constant subgradient noise, \(\bar{\sigma}=\sigma_k=0\) and \(\bar{\theta}=\theta_k=0.01\) for all \(k\).
+	\item \(\text{N}_0\): No noise, \(\bar{\sigma}=\sigma_k=0\) and \(\bar{\theta}=\theta^k=0\) for all \(k\),
+	\item \(\text{N}_{\text{c}}^{\text{f,g}}\): Constant noise, \(\bar{\sigma}=\sigma_k=0.01\) and \(\bar{\theta}=\theta^k=0.01\) for all \(k\),
+	\item \(\text{N}_{\text{v}}^{\text{f,g}}\): Vanishing noise, \(\bar{\sigma}=0.01, \sigma_k = \min\{0.01,\|x^k\|/100\}\) and \(\bar{\theta}=0.01, \theta_k=\min\{0.01,\|x^k\|/100\}\) for all \(k\),
+	\item \(\text{N}_{\text{c}}^{\text{g}}\): Constant subgradient noise, \(\bar{\sigma}=\sigma_k=0\) and \(\bar{\theta}=\theta_k=0.01\) for all \(k\) and 
 	\item \(\text{N}_{\text{v}}^{\text{g}}\): Vanishing subgradient noise, \(\bar{\sigma}=\sigma_k=0\) and \(\bar{\theta}=0.01, \theta_k=\min\{0.01,\|x^k\|/100\}\) for all \(k\).
 \end{itemize}
 The exact case is used for comparison. The constant noise forms represent cases where the inexactness is outside of the optimizer's control. The vanishing noise forms represent cases where the noise can be controlled  but the mechanism is considered expensive, so it is only used when approaching the minimum.
@@ -600,19 +618,19 @@ To address the random values of the noise the tests for the last four noise form
 
 To compare the performance of the different methods the accuracy is measured by
 
-\[ \text{accuracy} = |\log_{10}(\hat{f}_{k^*})|. \]
+\[ \text{accuracy} = |\log_{10}(\hat{f}_{\bar{k}})|. \]
 
-\(\hat{f}_{k^*}\) being the current \(\hat{f}_k\) when the algorithm stopped.
+\(\hat{f}_{\bar{k}}\) being the current \(\hat{f}_k\) when the algorithm stopped.
 
 \subsubsection{Academic Test Examples}
 
 To explore the benefit of the matrix \(Q\) the algorithms \ref{sec_nonconv_inex}.1 and \ref{sec_variable_metric}.1 were tested on a smooth and a nonsmooth version of a badly conditioned parabola.
-The smooth test function was 
+The smooth test function is
 
 \[p(x): \R^2 \to \R, \quad x \mapsto \Langle x, Ax \Rangle,\]
 
-where the matrix was chosen as \(A = \begin{pmatrix} 1&0 \\ 0&50\end{pmatrix}\). The condition number of this matrix is \(\kappa_A = \frac{\lambda_{max}}{\lambda{min}} = 50\), where \(\lambda_{min}, \lambda_{max}\) are the smallest and largest eigenvalue of \(A\) respectively. From smooth optimization it is known that gradient descent methods have a rather poor convergence rate for such badly conditioned matrices (c.f. Chapter 7.4 in \cite{Ulbrich2012}).
-Figure \ref{fig_contour_parab} shows the sequences of serious iterates resulting from the two algorithms on the contour lines of the parabola. On the left the complete sequence is depicted. The plot on the right shows a detail of the left figure near the minimum of the objective
+where the matrix is chosen as \(A = \begin{pmatrix} 1&0 \\ 0&50\end{pmatrix}\). The condition number of this matrix is \(\kappa_A = \frac{\lambda_{max}}{\lambda{min}} = 50\), where \(\lambda_{min}, \lambda_{max}\) are the smallest and largest eigenvalue of \(A\) respectively. From smooth optimization it is known that gradient descent methods have a rather poor convergence rate for such badly conditioned matrices (c.f. Chapter 7.4 in \cite{Ulbrich2012}).
+Figure \ref{fig_contour_parab} shows the sequences of serious iterates resulting from the two algorithms on the contour lines of the parabola. On the left the complete sequence is depicted. The plot on the right shows a detail of the left figure near the minimum of the objective.
 As the descent direction taken in algorithm \ref{sec_nonconv_inex}.1 is an aggregate subgradient and second order information is only provided by the stabilization term \(\frac{1}{t_k}\|d\|^2\) we can see a zig-zagging behavior of the sequence for the parabola in figure \ref{fig_contour_parab}.
 Contrary to that the sequence of serous iterates provided by algorithm \ref{sec_variable_metric}.1 can take advantage of the second order information provided by \(Q\).
 It walks into the minimum almost in a straight line. The difference in behavior of the two algorithms is especially visible on the detail plot of \ref{fig_contour_parab} that shows the situation near the minimum: The proximal bundle algorithm needs a lot of steps circling around the minimum whereas the variable metric algorithm approaches the minimum directly. The resulting advantage of this behavior is the smaller number of steps needed by the variable metric algorithm. 
@@ -623,13 +641,13 @@ It walks into the minimum almost in a straight line. The difference in behavior 
 
 \begin{figure}[ht]
 	\begin{subfigure}[t]{0.49\textwidth}
-		%\includegraphics[width=\textwidth]{Pictures/Plots/final_parab.eps}
+		\includegraphics[width=\textwidth]{Pictures/Plots/final_parab.eps}
 		%\subcaption{}
 		%Parabola, \(kappa = 2\), sequwnces of \(x_{hats}\); Noll:\(10|1\), Hare: \(28|12\)
 	\end{subfigure}
 	\begin{subfigure}[t]{0.49\textwidth}
 		\begin{center}
-			%\includegraphics[width=\textwidth]{Pictures/Plots/final_parab_detail.eps}
+			\includegraphics[width=\textwidth]{Pictures/Plots/final_parab_detail.eps}
 			%\subcaption{detail, many steps of Hare in the end}
 		\end{center}
 	\end{subfigure}
@@ -642,16 +660,16 @@ The second test function is a nonsmooth version of the above parabola. The funct
 
 Due to the kink along the \(x_1\)-axis the curvature information supplied by \(Q\) is less reliable than for the smooth parabola.
 Figure \ref{fig_contour_nonsm_parab} shows the sequences constructed by the two algorithms. Still the sequence provided by the variable metric algorithm does less zig-zagging than the one coming from the proximal bundle algorithm.
-It is interesting to note, that the sequence provided by the proximal bundle algorithm is the same for both functions. This is not the case for the sequence generated by the metric bundle algorithm, because the second order information of the two objective functions is different.
+It is interesting to note, that the sequence provided by the proximal bundle algorithm is the same for both functions. This is not the case for the sequence generated by the metric bundle algorithm because the second order information of the two objective functions is different.
 
 \begin{figure}[ht]
 	\begin{subfigure}[t]{0.49\textwidth}
-		%\includegraphics[width=\textwidth]{Pictures/Plots/final_nonsm_parab.eps}
+		\includegraphics[width=\textwidth]{Pictures/Plots/final_nonsm_parab.eps}
 		%\subcaption{Parabola, \(kappa = 2\), sequwnces of \(x_{hats}\); Noll:\(21|9\), same for adapted, Hare: \(28|12\)}
 	\end{subfigure}
 	\begin{subfigure}[t]{0.49\textwidth}
 		\begin{center}
-			%\includegraphics[width=\textwidth]{Pictures/Plots/final_nonsm_parab_detail.eps}
+			\includegraphics[width=\textwidth]{Pictures/Plots/final_nonsm_parab_detail.eps}
 			%\subcaption{detail}
 		\end{center}
 	\end{subfigure}
@@ -660,7 +678,7 @@ It is interesting to note, that the sequence provided by the proximal bundle alg
 \end{figure}
 
 The bar plots in figures \ref{fig_bar_parab} and \ref{fig_bar_nonsm_parab} compare accuracy of the solution and the step sizes that are needed by the different algorithms for the various noise forms.
-\textcolor{red}{adaptive Q has to be explained before, reference}\\
+%\textcolor{red}{adaptive Q has to be explained before, reference}\\
 \textcolor{red}{Noise form \(\text{N}_{\text{v}}^{\text{g}}\) is the one that is most similar to no noise; one can see: gradient noise has not as much impact as inexact function value (makes sense because only calculating with subgradients) -> in those cases variable metric algorithm more exact, but all over desired tolerance
 in terms of exactness proximal bundle algorithm slightly better, but not much; the two variants of the variable metric algorithm are more or less the same.\\
 for step sizes> proximal bundle algorithm needs a lot more steps than variable metric especially in the case of constant function value and gradient noise}

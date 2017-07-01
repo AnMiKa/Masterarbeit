@@ -768,4 +768,30 @@
   isbn      = {3034601425},
 }
 
+@Book{Koenigsberger2002,
+  title     = {Analysis 2},
+  publisher = {Springer Berlin Heidelberg},
+  year      = {2002},
+  author    = {Konrad Königsberger},
+  doi       = {10.1007/978-3-662-05699-8},
+}
+
+@Book{Werner1992,
+  title     = {Numerische Mathematik 2},
+  publisher = {Vieweg, Wiesbaden},
+  year      = {1992},
+  author    = {Jochen Werner},
+}
+
+@Article{Nocedal1980,
+  author  = {Jorge Nocedal},
+  title   = {Updating Quasi-Newton Matrices With Limited Storage},
+  journal = {Mathematics of Computation},
+  year    = {1980},
+  volume  = {35},
+  number  = {151},
+  pages   = {773-782},
+  doi     = {10.2307/2006193},
+}
+
 @Comment{jabref-meta: databaseType:bibtex;}
