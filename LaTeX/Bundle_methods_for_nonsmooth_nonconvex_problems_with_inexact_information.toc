@@ -40,14 +40,15 @@
 \contentsline {subsubsection}{\numberline {5.4.3}Other Updating Possibilities}{37}
 \contentsline {subsection}{\numberline {5.5}Numerical Testing}{38}
 \contentsline {subsubsection}{\numberline {5.5.1}Academic Test Examples}{39}
-\contentsline {section}{\numberline {6}Application to Model Selection for Primal SVM}{43}
-\contentsline {subsection}{\numberline {6.1}Introduction}{43}
-\contentsline {subsection}{\numberline {6.2}Introduction to Support Vector Machines}{45}
-\contentsline {subsubsection}{\numberline {6.2.1}Risk minimization}{45}
-\contentsline {subsubsection}{\numberline {6.2.2}Support Vector machines}{46}
-\contentsline {subsection}{\numberline {6.3}Bilevel Approach and Inexact Bundle Method}{49}
-\contentsline {subsubsection}{\numberline {6.3.1}Reformulation as bilevel problem}{49}
-\contentsline {subsubsection}{\numberline {6.3.2}Solution of the Bilevel Program}{51}
-\contentsline {subsubsection}{\numberline {6.3.3}The Algorithm???}{58}
-\contentsline {subsection}{\numberline {6.4}Numerical Experiments}{59}
+\contentsline {subsubsection}{\numberline {5.5.2}Test Examples in Higher Dimensions}{43}
+\contentsline {section}{\numberline {6}Application to Model Selection for Primal SVM}{45}
+\contentsline {subsection}{\numberline {6.1}Introduction}{45}
+\contentsline {subsection}{\numberline {6.2}Introduction to Support Vector Machines}{46}
+\contentsline {subsubsection}{\numberline {6.2.1}Risk minimization}{47}
+\contentsline {subsubsection}{\numberline {6.2.2}Support Vector machines}{48}
+\contentsline {subsection}{\numberline {6.3}Bilevel Approach and Inexact Bundle Method}{50}
+\contentsline {subsubsection}{\numberline {6.3.1}Reformulation as bilevel problem}{51}
+\contentsline {subsubsection}{\numberline {6.3.2}Solution of the Bilevel Program}{53}
+\contentsline {subsubsection}{\numberline {6.3.3}The Algorithm???}{60}
+\contentsline {subsection}{\numberline {6.4}Numerical Experiments}{61}
 \contentsline {section}{References}{}
