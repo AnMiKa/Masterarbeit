@@ -38,10 +38,10 @@ A challenging question is how to update the matrices \(W_k\). It is important th
 In \cite{Noll2012} Noll et al. present a proximal bundle method for nonconvex objective functions. An important ingredient to the method is that not the objective function itself is approximated in the subproblem but a quadratic model of it:
 
 \begin{equation}
-	\Phi(x,\hat{x}) = \phi(x,\hat{x})+\frac{1}{2}\langle x-\hat{x},Q(\hat{x})(x-\hat{x})\rangle
+	\Phi(x,\hat{x}) = \phi(x,\hat{x})+\frac{1}{2}\Langle x-\hat{x},Q(\hat{x})(x-\hat{x})\Rangle
 \end{equation}
 
-The first order model \(\phi(\cdot,\hat{x})\) is convex and possibly nonsmooth. The second order part \(\frac{1}{2}\langle \cdot-\hat{x},Q(\hat{x})(\cdot-\hat{x})\rangle\) is quadratic but not necessarily convex.
+The first order model \(\phi(\cdot,\hat{x})\) is convex and possibly nonsmooth. The second order part \(\frac{1}{2}\Langle \cdot-\hat{x},Q(\hat{x})(\cdot-\hat{x})\Rangle\) is quadratic but not necessarily convex.
 
 As the first order part of this model is convex it can be approximated by a cutting plane model just like the objective function in usual convex bundle methods. The subproblem emerging from this approach is
 
@@ -90,7 +90,7 @@ In the same way as for (\ref{agg_subgr_dk}) from the optimality condition
 
 follows that 
 \begin{equation}
-	S^k+\nu^k = -\left(Q+\frac{1}{t_k}\mathbb{I}\right)d^k.
+	S^k+\nu^k = -\left(Q+\frac{1}{t_k}\mathbb{I}\right)d^k,
 	\label{subgr_Q}
 \end{equation}
 
@@ -134,12 +134,12 @@ Choose a starting point \(x^1 \in \R^n\) and compute \(f_1\) and \(g^1\). Set th
 For \(k = 1,2,3,  \dotsc \)   
 
 \begin{enumerate}
-	\item Calculate \[d^k = \arg \min_{d \in \R^n} \left\{ M_k(\hat{x}^k+d)+\mathbb{I}_X(\hat{x}^k+d)+\frac{1}{2}d^{\top}\left(Q+\frac{1}{t_k}\mathbb{I}\right)d\right\}.\]
+	\item Calculate \[d^k = \arg \min_{d \in \R^n} \left\{ M_k(\hat{x}^k+d)+\mathbb{I}_X(\hat{x}^k+d)+\frac{1}{2}\Langle d,\left(Q+\frac{1}{t_k}\mathbb{I}\right)d\Rangle\right\}.\]
 	\item Set %\textcolor{red}{\(\to\) other stopping condition!!!
 		\begin{align*} 
 		  G^k &= \sum_{j \in J_k}{\alpha_j^k s_j^k}, \\ %, \quad	\nu^k = -\frac{1}{t_k}d^k-G^k???????????\\
 			C_k &= \sum_{j \in J_k}{\alpha_j^k c_j^k}, \\
-	    \delta_k &=  C_k + (d^k)^{\top}\left(Q+\frac{1}{t_k}\mathbb{I}\right)d^k.
+	    \delta_k &=  C_k + \Langle d^k,\left(Q+\frac{1}{t_k}\mathbb{I}\right)d^k\Rangle.
 		\end{align*}
 		If \(\delta_k \leq \mathtt{tol} \rightarrow \) STOP.
 	\item Set \( x^{k+1} = \hat{x}^k + d^k \).
@@ -252,9 +252,9 @@ The proof is very similar to the one stated in \cite{Hare2016} but minor changes
 	\end{equation}
 	
 	where \(m, ~\delta_k > 0\). From this follows that the sequence \(\{\hat{f}_k\}\) is nonincreasing.
-	Since \(\{\hat{x}^k\} \subset X\) and \(f\) is continuous the sequence \(f(\hat{x}^k)\) is bounded. %\textcolor{red}{which assumption says \(f\) bounded below??? \(\to\) \(f\) subdifferentially regular \(\Rightarrow\) \(f\) finite}
-	With \(|\sigma_k| < \bar{\sigma}\) the sequence \(\{f(\hat{x}^k)+\sigma_k\} = \{\hat{f}_k\}\) is bounded below. Together with the fact that \(\{\hat{f}_k\}\) is nonincreasing one can conclude that it converges. \\
-	Using (\ref{nonincreasing}), one obtains
+	Since \(\{\hat{x}^k\}\) lird on yhr compact set \(X\) and \(f\) is continuous the sequence \(f(\hat{x}^k)\) is bounded. %\textcolor{red}{which assumption says \(f\) bounded below??? \(\to\) \(f\) subdifferentially regular \(\Rightarrow\) \(f\) finite}
+	With \(|\sigma_k| < \bar{\sigma}\) also the sequence \(\{f(\hat{x}^k)+\sigma_k\} = \{\hat{f}_k\}\) is bounded. Considering also the fact that \(\{\hat{f}_k\}\) is nonincreasing one can conclude that it converges. \\
+	From (\ref{nonincreasing}) follows that
 	
 	\begin{equation*}
 		0 \leq m \sum_{k = 1}^l \delta_k \leq \sum_{k = 1}^l \left(\hat{f}_k-\hat{f}_{k+1}\right),
@@ -268,22 +268,40 @@ The proof is very similar to the one stated in \cite{Hare2016} but minor changes
 	
 	This yields
 	\begin{equation*}
-		\sum_{k = 1}^{\infty} \delta_k = \sum_{k=1}^{\infty}\left(C^k+(d^k)^{\top}\left(Q+\frac{1}{t_k}\mathbb{I}\right)d^k\right) < \infty.
+		\sum_{k = 1}^{\infty} \delta_k = \sum_{k=1}^{\infty}\left(C^k+\Langle d^k,\left(Q+\frac{1}{t_k}\mathbb{I}\right)d^k\Rangle \right) < \infty.
 	\end{equation*}
 	
-	Hence, \(\delta_k \to 0\) as \(k \to \infty\). All quantities above are nonnegative due to positive definiteness of \(Q+\frac{1}{t_k}\mathbb{I}\), so it also holds that
+	Hence, \(\delta_k \to 0\) as \(k \to \infty\). All quantities above are nonnegative due to positive definiteness of \(Q+\frac{1}{t_k}\mathbb{I}\) and \(C_k \geq 0\) so it also holds that
 	
 	\begin{equation*}
-		C_k \to 0 \quad \text{and} \quad (d^k)^{\top}\left(Q+\frac{1}{t_k}\mathbb{I}\right)d^k \to 0.
+		C_k \to 0 \quad \text{and} \quad \Langle d^k,\left(Q+\frac{1}{t_k}\mathbb{I}\right)d^k\Rangle \to 0.
 	\end{equation*}
 	
-	For any accumulation point \(\bar{x}\) of the sequence \(\{\hat{x}^k\}\) the corresponding subsequence \(d^k \to 0\) for \(k \in K \subset \{1,2,...\} \). As \(\liminf_{k \to \infty} t_k > 0\) and the eigenvalues of \(Q\) are bounded the whole expression 
+	Finally we need to show that for any accumulation point \(\bar{x}\) of the sequence \(\{\hat{x}^k\}\) holds \(S^k \to \bar{S}\) and \(S^k+\nu^k \to 0\) for \(K \ni k \to \infty\) and the corresponding subsequence \(K \subset \{1,2,...\}\).
+Let \(\bar{k}\) denote the last iteration that produces a null step. From \(\{\hat{x}^k\}_{k \in K}\)  follows that for \(k > \bar{k}\) \(d^k = \hat{x}^{k+1}-\hat{x}^k \to 0\). As \(\liminf_{k \to \infty} t_k > 0\) and the eigenvalues of \(Q\) are bounded the expression 
 	
 	\begin{equation*}
-	 S^k + \nu^k = \left(Q+\frac{1}{t_k}I \right)d^k  \to 0 \quad \text{for} \quad k \in K.
+	 S^k + \nu^k = \left(Q+\frac{1}{t_k}I \right)d^k  \to 0 \quad \text{for} \quad k \in K
 	\end{equation*}
 	
-	And from local Lipschitz continuity of \(f\) follows then that \(S^k \to \bar{S}\) for \(k \in K\).
+	because 
+	
+	\[ \|\left(Q_k+\frac{1}{t_k}\mathbb{I}\right)d^k \| \leq \underbrace{\left(\|Q_k\|+\frac{1}{t_k}\right)}_{\text{bounded}}\underbrace{\|d^k\|}_{\to 0}.\]
+	
+	The implication \(S^k \to \bar{S}\) for \(k \in K\) follows from local Lipschitz continuity of \(f\).
+	By Rademacher's theorem this means that on any open set \(U\) \(f\) is differentiable except on a set \(U_{nd}\) of zero Lebesgue measure. As \(f\) is also Lipschitz continuous on any closed set containing such an open set \(U\) the gradient of \(f\) on \(U\) is bounded.
+	Let \(X \subset U\). By theorem 2.5.1 in \cite{Clarke1990} the subdifferential of \(f\) at any point \(x^k \in U\) is the convex hull of the limits of gradients \(\nabla f\) of \(f\) on the set \(U\setminus U_{nd}\)
+	
+		\[ \partial f(x^k) = \conv\{\lim \nabla f(y) \mid y \to x^k, y \notin U_{nd}\}. \]
+		
+		This means that also all subgradients on \(U\) are bounded and  therefore therefore in particular also the subgradients \(g_j^k, j \in J^k\) contained in the bundle.
+		From this follows that also the augmented subgradients \(s_j^k = g^k_j+\eta_k(x^j-\hat{x}^k)\) are bounded because \(\eta^k\) is bounded by assumption and \(x^j, \hat{x}^k \in X\). 
+		This means that 
+		
+		\[\|S^k\| = \|\sum_{j \in J^k}{\alpha_j^k s_j^k}\| \leq  \sum_{j \in J^k}{\|\alpha_j^k\|\underbrace{\|s^k_j\|}_{\leq s \in \R}} \leq s\underbrace{\sum_{j \in J^k}{\alpha_j^k}}_{=1} < \infty\]
+		
+		yielding the conclusion \(S^k \to \bar{S}\).
+		
 	
 \end{proof}
 
@@ -314,7 +332,7 @@ holds.
 	Define the optimal value of the subproblem (\ref{Q_subprob}) by 
 	
 	\begin{equation}
-		\Psi_k := M_k(x^{k+1})+\frac{1}{2}\left(d^k\right)^{\top}\left(Q+\frac{1}{t_k}\mathbb{I}\right)d^k.
+		\Psi_k := M_k(x^{k+1})+\frac{1}{2}\Langle d^k,\left(Q+\frac{1}{t_k}\mathbb{I}\right)d^k\Rangle.
 		\label{Psi}
 	\end{equation}
 	
@@ -322,20 +340,20 @@ holds.
 	From definition (\ref{aug_agg_lin}) follows
 
 %\begin{equation*}	
-	%A_k(\hat{x}+d) := M_k(x^{k+1})+\langle S^k,d-d^k\rangle
+	%A_k(\hat{x}+d) := M_k(x^{k+1})+\Langle S^k,d-d^k\Rangle
 	%\label{Noll_agg_lin}
 %\end{equation*}
 	%of the aggregate linearization follows
 	
 	\begin{equation*}
-		A_k(\hat{x}) = M_k(x^{k+1})-\langle S^k,d^k \rangle.
+		A_k(\hat{x}) = M_k(x^{k+1})-\Langle S^k,d^k \Rangle.
 	\end{equation*}
 	
 Using (\ref{subgr_Q}) for the second equality, the subgradient inequality for \(\nu^k \in \partial \mathtt{i}_{D}\) in the first inequality and (\ref{A_leq_M}) for the second inequality  one obtains
 	
 	\begin{align*}
-		\Psi^k+\frac{1}{2}\left(d^{k}\right)^{\top}\left(Q+\frac{1}{t_k}\mathbb{I}\right)d^k &= A_k(\hat{x})+\langle S^k,d^k\rangle + \left(d^{k}\right)^{\top}\left(Q+\frac{1}{t_k}\mathbb{I}\right)d^k \\
-		&= A_k(\hat{x})-\langle \nu^k,k \rangle \\
+		\Psi^k+\frac{1}{2}\Langle d^{k},\left(Q+\frac{1}{t_k}\mathbb{I}\right)d^k\Rangle &= A_k(\hat{x})+\Langle S^k,d^k\Rangle + \Langle d^{k},\left(Q+\frac{1}{t_k}\mathbb{I}\right)d^k\Rangle \\
+		&= A_k(\hat{x})-\Langle \nu^k,k \Rangle \\
 		&\leq A(\hat{x}) \\
 		&\leq M_k(\hat{x}) \\
 		& = \hat{f}.
@@ -345,12 +363,12 @@ By boundedness of \(d^k\) and \(Q+\frac{1}{t_k}\mathbb{I}\) this yields that \(\
 	In the next step is shown that \(\{\Psi_k\}\) is increasing. For this we obtain
 	
 	\begin{align*}
-		\Psi_{k+1} &= M_k(x^{k+2})+\frac{1}{2}\left(d^{k+1}\right)^{\top}\left(Q+\frac{1}{t_k}\mathbb{I} \right)d^{k+1} \\
-		&\geq A_k(x^{k+2})+\frac{1}{2}\left(d^{k+1}\right)^{\top}\left(Q+\frac{1}{t_k}\mathbb{I}\right)d^{k+1} \\
-		&= M_k(x^{k+1})+\langle S^k,x^{k+2}-x^{k+1} \rangle +\frac{1}{2}\left(d^{k+1}\right)^{\top}\left(Q+\frac{1}{t_k}\mathbb{I}\right)d^{k+1} \\
-		&= \Psi_k - \frac{1}{2}\left(d^{k}\right)^{\top}\left(Q+\frac{1}{t_k}\mathbb{I}\right)d^{k} + \frac{1}{2}\left(d^{k+1}\right)^{\top}\left(Q+\frac{1}{t_k}\mathbb{I}\right)d^{k+1} \\
-		& \qquad -\left(d^{k}\right)^{\top}\left(Q+\frac{1}{t_k}\mathbb{I}\right)\left(d^{k+1} - d^{k}\right) - \langle \nu^k, x^{k+2}-x^{k+1}\rangle\\
-		&\geq \Psi_k + \frac{1}{2}\left(d^{k+1}-d^{k}\right)^{\top}\left(Q+\frac{1}{t_k}\mathbb{I}\right)\left(d^{k+1} - d^{k}\right) \\
+		\Psi_{k+1} &= M_k(x^{k+2})+\frac{1}{2}\Langle d^{k+1},\left(Q+\frac{1}{t_k}\mathbb{I} \right)d^{k+1}\Rangle \\
+		&\geq A_k(x^{k+2})+\frac{1}{2}\Langle d^{k+1},\left(Q+\frac{1}{t_k}\mathbb{I}\right)d^{k+1}\Rangle \\
+		&= M_k(x^{k+1})+\Langle S^k,x^{k+2}-x^{k+1} \Rangle +\frac{1}{2}\Langle d^{k+1},\left(Q+\frac{1}{t_k}\mathbb{I}\right)d^{k+1}\Rangle \\
+		&= \Psi_k - \frac{1}{2}\Langle d^{k},\left(Q+\frac{1}{t_k}\mathbb{I}\right)d^{k}\Rangle + \frac{1}{2}\Langle d^{k+1},\left(Q+\frac{1}{t_k}\mathbb{I}\right)d^{k+1}\Rangle \\
+		& \qquad -\Langle d^{k},\left(Q+\frac{1}{t_k}\mathbb{I}\right)\left(d^{k+1} - d^{k}\right)\Rangle - \Langle \nu^k, x^{k+2}-x^{k+1}\Rangle\\
+		&\geq \Psi_k + \frac{1}{2}\Langle\left(d^{k+1}-d^{k}\right),\left(Q+\frac{1}{t_k}\mathbb{I}\right)\left(d^{k+1} - d^{k}\right)\Rangle \\
 		& =\Psi_k + \frac{1}{2}\underbrace{\|d^{k+1}-d^k\|_{Q+\frac{ 1}{t_k}\mathbb{I}}}_{\geq 0},
 	\end{align*}
 	
@@ -373,8 +391,8 @@ By the first line in (\ref{Noll_delta}) and the fact that the augmented aggregat
 by the KKT conditions follows
 
 \begin{align*}
-	\hat{f} &= \delta_k+M_k(\hat{x})-C_k-\left(d^{k}\right)^{\top}\left(Q+\frac{1}{t_k}\mathbb{I}\right)\left(d^{k}\right) \\
-	&= \delta_k + M_k(x^{k+1})-\langle S^k,d^k \rangle-\left(d^{k}\right)^{\top}\left(Q+\frac{1}{t_k}\mathbb{I}\right)\left(d^{k}\right)  \\
+	\hat{f} &= \delta_k+M_k(\hat{x})-C_k-\Langle d^{k},\left(Q+\frac{1}{t_k}\mathbb{I}\right)d^{k}\Rangle \\
+	&= \delta_k + M_k(x^{k+1})-\Langle S^k,d^k \Rangle-\Langle d^{k},\left(Q+\frac{1}{t_k}\mathbb{I}\right)d^{k}\Rangle \\
 	&= \delta_k + M_k(\hat{x}+d^k)+\Langle \nu^k, d^k \Rangle\\
 	&\geq \delta_k+M_k(\hat{x}+d^k)
 \end{align*}
@@ -389,23 +407,23 @@ Where the last inequality is given by \(\nu^k \in \partial\mathtt{i}_{X}(x^{k+1}
 By assumption (\ref{Model_update_1}) on the model, written for \(d=d^{k+1}\),
 
 \begin{equation*}
-	-\hat{f}_{k+1}+c^{k+1}_{k+1}-\left\langle s^{k+1}_{k+1},d^{k+1}\right\rangle \geq -M_{k+1}(\hat{x}+d^{k+1}).
+	-\hat{f}_{k+1}+c^{k+1}_{k+1}-\Langle s^{k+1}_{k+1},d^{k+1}\Rangle \geq -M_{k+1}(\hat{x}+d^{k+1}).
 \end{equation*}
 
 In the null step case it holds \(\hat{f}_{k+1}=\hat{f}\) so adding condition (\ref{no_ls}) to the inequality above, one obtains that
 
 \begin{equation*}
-	m\delta_k+\left\langle s^{k+1}_{k+1},d^k-d^{k+1}\right\rangle \geq \hat{f}-M_{k+1}(\hat{x}+d^{k+1}).
+	m\delta_k+\Langle s^{k+1}_{k+1},d^k-d^{k+1}\Rangle \geq \hat{f}-M_{k+1}(\hat{x}+d^{k+1}).
 \end{equation*}
 
 Combining this relation with (\ref{dfM}) yields
 
 \begin{equation*}
-	0 \leq \delta_{k+1} \leq m\delta_k + \left\langle s^{k+1}_{k+1},d^k-d^{k+1}\right\rangle.
+	0 \leq \delta_{k+1} \leq m\delta_k + \Langle s^{k+1}_{k+1},d^k-d^{k+1}\Rangle.
 	\label{delta_ineq}
 \end{equation*}
 
-Because \(m \in (0,1)\) and \(\left\langle s^{k+1}_{k+1},d^k-d^{k+1}\right\rangle \to 0\) as \(k \to \infty\) due to (\ref{d_to_0}) and the boundedness of \(\{\eta_k\}\) using \cite[Lemma 3, p.45]{Polyak1987} it follows from  (\ref{delta_ineq}) that 
+Because \(m \in (0,1)\) and \(\Langle s^{k+1}_{k+1},d^k-d^{k+1}\Rangle \to 0\) as \(k \to \infty\) due to (\ref{d_to_0}) and the boundedness of \(\{\eta_k\}\) using \cite[Lemma 3, p.45]{Polyak1987} it follows from  (\ref{delta_ineq}) that 
 
 \begin{equation*}
 	\lim_{k \to \infty} \delta_k = 0.
@@ -414,7 +432,7 @@ Because \(m \in (0,1)\) and \(\left\langle s^{k+1}_{k+1},d^k-d^{k+1}\right\rangl
 From  formulation (\ref{Noll_delta}) of the model decrease follows that \(C_k \to 0\) as \(k \to \infty\). Since {\(Q+\frac{1}{t_k}\mathbb{I} \succ \xi\mathbb{I}\)} due to \(\liminf_{k \to \infty} t_k > 0\) and the bounded eigenvalues of \(Q\) we have 
 
 \begin{equation*}
-	\xi \left(d^k\right)^{\top}d^k \leq \left(d^k\right)^{\top}\left(Q+\frac{1}{t_k}\mathbb{I}\right)d^k \to 0
+	\xi \Langle d^k,d^k\Rangle \leq \Langle d^k,\left(Q+\frac{1}{t_k}\mathbb{I}\right)d^k\Rangle \to 0
 \end{equation*}
 
 This means that \(d^k \to 0\) for \(k \to \infty\) and therefore \(\lim_{k \to \infty}x^k = \hat{x}\). It also follows that \(\|S^k+\nu^k\| \to 0\) as \(k \to \infty\). Passing to some subsequence if necessary we can conclude that \(S^k\) converges to some \(\bar{S}\) and as \(\hat{x}^k = \bar{x}\) for all \(k\) all requirements of Lemma \ref{Lemma5} are fulfilled.
@@ -439,7 +457,7 @@ Here we present two possible versions to update the metric matrix \(Q_k\) that f
 Both updates are based on the usual BFGS-update formula (named after Broyden, Goldfarb, Fletcher and Shanno)
 
 \begin{equation}
-	Q_{k+1} = Q_k + \frac{y^k{y^k}^{\top}}{\langle y^k,d^k\rangle}-\frac{Q_kd^k(Q_kd^k)^{\top}}{\langle d^k,Q_kd^k \rangle}.
+	Q_{k+1} = Q_k + \frac{y^k{y^k}^{\top}}{\Langle y^k,d^k\Rangle}-\frac{Q_kd^k(Q_kd^k)^{\top}}{\Langle d^k,Q_kd^k \Rangle}.
 	\label{BFGS_update}
 \end{equation}
 
@@ -525,7 +543,7 @@ So despite the promising practical behavior this area is still open to research.
 %auch ok, braucht anderen bound um zu konvergieren}
 
 %\textcolor{red}{%If \(y^k = 0\) set the second term in the update formula to zero.
-%If \(\langle y^k,d^k \rangle <\zeta \) for some \(\zeta > 0\) set the second term to \(\frac{y^k{y^k}^{\top}}{\zeta}\). The same can be done for the last term of the update formula if \{}
+%If \(\Langle y^k,d^k \Rangle <\zeta \) for some \(\zeta > 0\) set the second term to \(\frac{y^k{y^k}^{\top}}{\zeta}\). The same can be done for the last term of the update formula if \{}
 
 %\textcolor{red}{Algorithmus anpassen}
  
@@ -537,7 +555,7 @@ So despite the promising practical behavior this area is still open to research.
 %\end{align*}
 %same procedure for next term; all \(<1/3C\) for some overall threshold \(C\) 
 
-%A different procedure is used in \cite{Vlcek2001}. There the update is just skipped whenever \(\langle y^k, d^k \rangle < \zeta\).
+%A different procedure is used in \cite{Vlcek2001}. There the update is just skipped whenever \(\Langle y^k, d^k \Rangle < \zeta\).
 
 
 \begin{itemize}
@@ -811,59 +829,231 @@ Ferrier polynomials are nonconvex, except for \(f_2\), nonsmooth and lower-\(\ma
 The five test functions \(f_1,...f_5\) were optimized for the dimensions \(n=1,2,...,15,20,25,30\).
 The starting value for each test problem being \(x^1=[1,\frac{1}{4},\frac{1}{9},...,\frac{1}{n^2}]^{\top}\).
 
-\begin{figure}[ht]%
+Following plots are in Noll part with \(\kappa_+ = 2\) and in Hare part with \(\kappa_+ = 1.2\)
+\begin{figure}[H]%
 	\begin{subfigure}{0.49\textwidth}
-		\includegraphics[width=\textwidth]{Pictures/Plots/no_noise2.eps}%
+		\includegraphics[width=\textwidth]{Pictures/Plots/no_noise.eps}%
 	\end{subfigure}
 	\begin{subfigure}{0.49\textwidth}
-		\includegraphics[width=\textwidth]{Pictures/Plots/steps_no_noise2.eps}%
+		\includegraphics[width=\textwidth]{Pictures/Plots/steps_no_noise.eps}%
 	\end{subfigure}
 	\label{fig_no_noise}
 	\caption{No noise}
 \end{figure}
 
-\begin{figure}[ht]
+\begin{figure}[H]
 	\begin{subfigure}{0.49\textwidth}
-		\includegraphics[width=\textwidth]{Pictures/Plots/constant_noise2.eps}%
+		\includegraphics[width=\textwidth]{Pictures/Plots/constant_noise.eps}%
 	\end{subfigure}
 	\begin{subfigure}{0.49\textwidth}
-		\includegraphics[width=\textwidth]{Pictures/Plots/steps_constant_noise2.eps}%
+		\includegraphics[width=\textwidth]{Pictures/Plots/steps_constant_noise.eps}%
 	\end{subfigure}
 	\caption{Constant noise}%
 	\label{fig_const_noise}%
 \end{figure}
 
-\begin{figure}[ht]
+\begin{figure}[H]
 	\begin{subfigure}{0.49\textwidth}
-		\includegraphics[width=\textwidth]{Pictures/Plots/vanishing_noise2.eps}%
+		\includegraphics[width=\textwidth]{Pictures/Plots/vanishing_noise.eps}%
 	\end{subfigure}
 	\begin{subfigure}{0.49\textwidth}
-		\includegraphics[width=\textwidth]{Pictures/Plots/steps_vanishing_noise2.eps}%
+		\includegraphics[width=\textwidth]{Pictures/Plots/steps_vanishing_noise.eps}%
 	\end{subfigure}
 	\caption{Vanishing noise}%
 	\label{fig_van_noise}%
 \end{figure}
 
-\begin{figure}[ht]
+\begin{figure}[H]
 	\begin{subfigure}{0.49\textwidth}
-		\includegraphics[width=\textwidth]{Pictures/Plots/constant_gradient_noise2.eps}%
+		\includegraphics[width=\textwidth]{Pictures/Plots/constant_gradient_noise.eps}%
 	\end{subfigure}
 	\begin{subfigure}{0.49\textwidth}
-		\includegraphics[width=\textwidth]{Pictures/Plots/steps_constant_gradient_noise2.eps}%
+		\includegraphics[width=\textwidth]{Pictures/Plots/steps_constant_gradient_noise.eps}%
 	\end{subfigure}
 	\caption{Constant gradient noise}%
 	\label{fig_const_grad_noise}%
 \end{figure}
 
-\begin{figure}[ht]
+\begin{figure}[H]
 	\begin{subfigure}{0.49\textwidth}
-		\includegraphics[width=\textwidth]{Pictures/Plots/vanishing_gradient_noise2.eps}%
+		\includegraphics[width=\textwidth]{Pictures/Plots/vanishing_gradient_noise.eps}%
 	\end{subfigure}
 	\begin{subfigure}{0.49\textwidth}
-		\includegraphics[width=\textwidth]{Pictures/Plots/steps_vanishing_gradient_noise2.eps}%
+		\includegraphics[width=\textwidth]{Pictures/Plots/steps_vanishing_gradient_noise.eps}%
 	\end{subfigure}
 	\caption{Vanishing gradient noise}%
 	\label{fig_van_grad_noise}%
+\end{figure}
+
+Following plots are in Noll part with \(\kappa_+ = 2\) and in Hare part with \(\kappa_+ = 1.2\) for the big dimension
+\begin{figure}[H]%
+	\begin{subfigure}{0.49\textwidth}
+		\includegraphics[width=\textwidth]{Pictures/Plots/no_noise_b.eps}%
+	\end{subfigure}
+	\begin{subfigure}{0.49\textwidth}
+		\includegraphics[width=\textwidth]{Pictures/Plots/steps_no_noise_b.eps}%
+	\end{subfigure}
+	\label{fig_no_noise_large}
+	\caption{No noise}
+\end{figure}
+
+\begin{figure}[H]
+	\begin{subfigure}{0.49\textwidth}
+		\includegraphics[width=\textwidth]{Pictures/Plots/constant_noise_b.eps}%
+	\end{subfigure}
+	\begin{subfigure}{0.49\textwidth}
+		\includegraphics[width=\textwidth]{Pictures/Plots/steps_constant_noise_b.eps}%
+	\end{subfigure}
+	\caption{Constant noise}%
+	\label{fig_const_noise_large}%
+\end{figure}
+
+\begin{figure}[H]
+	\begin{subfigure}{0.49\textwidth}
+		\includegraphics[width=\textwidth]{Pictures/Plots/vanishing_noise_b.eps}%
+	\end{subfigure}
+	\begin{subfigure}{0.49\textwidth}
+		\includegraphics[width=\textwidth]{Pictures/Plots/steps_vanishing_noise_b.eps}%
+	\end{subfigure}
+	\caption{Vanishing noise}%
+	\label{fig_van_noise_large}%
+\end{figure}
+
+\begin{figure}[H]
+	\begin{subfigure}{0.49\textwidth}
+		\includegraphics[width=\textwidth]{Pictures/Plots/constant_gradient_noise_b.eps}%
+	\end{subfigure}
+	\begin{subfigure}{0.49\textwidth}
+		\includegraphics[width=\textwidth]{Pictures/Plots/steps_constant_gradient_noise_b.eps}%
+	\end{subfigure}
+	\caption{Constant gradient noise}%
+	\label{fig_const_grad_noise_large}%
+\end{figure}
+
+\begin{figure}[H]
+	\begin{subfigure}{0.49\textwidth}
+		\includegraphics[width=\textwidth]{Pictures/Plots/vanishing_gradient_noise_b.eps}%
+	\end{subfigure}
+	\begin{subfigure}{0.49\textwidth}
+		\includegraphics[width=\textwidth]{Pictures/Plots/steps_vanishing_gradient_noise_b.eps}%
+	\end{subfigure}
+	\caption{Vanishing gradient noise}%
+	\label{fig_van_grad_noise_large}%
+\end{figure}
+
+
+Following plots are in Noll part with \(\kappa_+ = 1.2, 2\) and in \(1/k\) part with \(\kappa_+ = 1.2\) for the small dimension
+\begin{figure}[H]%
+	\begin{subfigure}{0.49\textwidth}
+		\includegraphics[width=\textwidth]{Pictures/Plots/no_noise_comp.eps}%
+	\end{subfigure}
+	\begin{subfigure}{0.49\textwidth}
+		\includegraphics[width=\textwidth]{Pictures/Plots/steps_no_noise_comp.eps}%
+	\end{subfigure}
+	\label{fig_no_noise_comp}
+	\caption{No noise}
+\end{figure}
+
+\begin{figure}[H]
+	\begin{subfigure}{0.49\textwidth}
+		\includegraphics[width=\textwidth]{Pictures/Plots/constant_noise_comp.eps}%
+	\end{subfigure}
+	\begin{subfigure}{0.49\textwidth}
+		\includegraphics[width=\textwidth]{Pictures/Plots/steps_constant_noise_comp.eps}%
+	\end{subfigure}
+	\caption{Constant noise}%
+	\label{fig_const_noise_comp}%
+\end{figure}
+
+\begin{figure}[H]
+	\begin{subfigure}{0.49\textwidth}
+		\includegraphics[width=\textwidth]{Pictures/Plots/vanishing_noise_comp.eps}%
+	\end{subfigure}
+	\begin{subfigure}{0.49\textwidth}
+		\includegraphics[width=\textwidth]{Pictures/Plots/steps_vanishing_noise_comp.eps}%
+	\end{subfigure}
+	\caption{Vanishing noise}%
+	\label{fig_van_noise_comp}%
+\end{figure}
+
+\begin{figure}[H]
+	\begin{subfigure}{0.49\textwidth}
+		\includegraphics[width=\textwidth]{Pictures/Plots/constant_gradient_noise_comp.eps}%
+	\end{subfigure}
+	\begin{subfigure}{0.49\textwidth}
+		\includegraphics[width=\textwidth]{Pictures/Plots/steps_constant_gradient_noise_comp.eps}%
+	\end{subfigure}
+	\caption{Constant gradient noise}%
+	\label{fig_const_grad_noise_comp}%
+\end{figure}
+
+\begin{figure}[H]
+	\begin{subfigure}{0.49\textwidth}
+		\includegraphics[width=\textwidth]{Pictures/Plots/vanishing_gradient_noise_comp.eps}%
+	\end{subfigure}
+	\begin{subfigure}{0.49\textwidth}
+		\includegraphics[width=\textwidth]{Pictures/Plots/steps_vanishing_gradient_noise_comp.eps}%
+	\end{subfigure}
+	\caption{Vanishing gradient noise}%
+	\label{fig_van_grad_noise_comp}%
+\end{figure}
+
+
+
+Following plots are in Noll part with \(\kappa_+ = 1.2, 2\) and in \(1/k\) part with \(\kappa_+ = 1.2\) for the large dimension
+\begin{figure}[H]%
+	\begin{subfigure}{0.49\textwidth}
+		\includegraphics[width=\textwidth]{Pictures/Plots/no_noise_compb.eps}%
+	\end{subfigure}
+	\begin{subfigure}{0.49\textwidth}
+		\includegraphics[width=\textwidth]{Pictures/Plots/steps_no_noise_compb.eps}%
+	\end{subfigure}
+	\label{fig_no_noise_comp_large}
+	\caption{No noise}
+\end{figure}
+
+\begin{figure}[H]
+	\begin{subfigure}{0.49\textwidth}
+		\includegraphics[width=\textwidth]{Pictures/Plots/constant_noise_compb.eps}%
+	\end{subfigure}
+	\begin{subfigure}{0.49\textwidth}
+		\includegraphics[width=\textwidth]{Pictures/Plots/steps_constant_noise_compb.eps}%
+	\end{subfigure}
+	\caption{Constant noise}%
+	\label{fig_const_noise_comp_large}%
+\end{figure}
+
+\begin{figure}[H]
+	\begin{subfigure}{0.49\textwidth}
+		\includegraphics[width=\textwidth]{Pictures/Plots/vanishing_noise_compb.eps}%
+	\end{subfigure}
+	\begin{subfigure}{0.49\textwidth}
+		\includegraphics[width=\textwidth]{Pictures/Plots/steps_vanishing_noise_compb.eps}%
+	\end{subfigure}
+	\caption{Vanishing noise}%
+	\label{fig_van_noise_comp_large}%
+\end{figure}
+
+\begin{figure}[H]
+	\begin{subfigure}{0.49\textwidth}
+		\includegraphics[width=\textwidth]{Pictures/Plots/constant_gradient_noise_compb.eps}%
+	\end{subfigure}
+	\begin{subfigure}{0.49\textwidth}
+		\includegraphics[width=\textwidth]{Pictures/Plots/steps_constant_gradient_noise_compb.eps}%
+	\end{subfigure}
+	\caption{Constant gradient noise}%
+	\label{fig_const_grad_noise_comp_large_large}%
+\end{figure}
+
+\begin{figure}[H]
+	\begin{subfigure}{0.49\textwidth}
+		\includegraphics[width=\textwidth]{Pictures/Plots/vanishing_gradient_noise_compb.eps}%
+	\end{subfigure}
+	\begin{subfigure}{0.49\textwidth}
+		\includegraphics[width=\textwidth]{Pictures/Plots/steps_vanishing_gradient_noise_compb.eps}%
+	\end{subfigure}
+	\caption{Vanishing gradient noise}%
+	\label{fig_van_grad_noise_comp_large}%
 \end{figure}
 
 

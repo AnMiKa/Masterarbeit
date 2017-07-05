@@ -8,11 +8,11 @@
 \contentsline {subsubsection}{\numberline {1.1.3}The Descent Measure}{3}
 \contentsline {subsection}{\numberline {1.2}The Variable Metric Bundle Algorithm}{4}
 \contentsline {subsection}{\numberline {1.3}Convergence Analysis}{5}
-\contentsline {subsection}{\numberline {1.4}Updating the Metric}{11}
+\contentsline {subsection}{\numberline {1.4}Updating the Metric}{12}
 \contentsline {subsubsection}{\numberline {1.4.1}Scaling of the Whole Matrix}{12}
-\contentsline {subsubsection}{\numberline {1.4.2}Adaptive Scaling of Single Eigenvalues}{12}
-\contentsline {subsubsection}{\numberline {1.4.3}Other Updating Possibilities}{14}
+\contentsline {subsubsection}{\numberline {1.4.2}Adaptive Scaling of Single Eigenvalues}{13}
+\contentsline {subsubsection}{\numberline {1.4.3}Other Updating Possibilities}{15}
 \contentsline {subsection}{\numberline {1.5}Numerical Testing}{15}
 \contentsline {subsubsection}{\numberline {1.5.1}Academic Test Examples}{16}
-\contentsline {subsubsection}{\numberline {1.5.2}Test Examples in Higher Dimensions}{20}
+\contentsline {subsubsection}{\numberline {1.5.2}Test Examples in Higher Dimensions}{21}
 \contentsline {section}{References}{}

@@ -1,5 +1,11 @@
 \begin{thebibliography}{10}
 
+\bibitem{Clarke1990}
+Frank~H. Clarke.
+\newblock {\em Optimization and nonsmooth analysis}.
+\newblock Classics in Applied Mathematics. Society for Industrial and Applied
+  Mathematics Philadelphia, 1990.
+
 \bibitem{Haarala2007}
 Napsu Haarala, Kaisa Miettinen, and Marko~M. M{\"a}kel{\"a}.
 \newblock Globally convergent limited memory bundle method for large-scale

@@ -12,7 +12,7 @@ Plots: erstellt mit plots_nonconv_inex_test_small/large_dim.m
 
 steps_noiseform: stem plots steps
 noiseform: stem plots accuracy
-all with u = 2 (I think)
+all with u = 1.2
 
 with 2 in the end:
 Noll part with u = 2
@@ -20,11 +20,9 @@ Hare part with u = 1.2
 
 if contains "b": large dimension
 
-
-
-
-
-
+comp: Test in Noll wurde mit 1/kQ und normalem Update durchgeführt
+Verglichen mit U = 2 und u = 1.2 mit normalem Update
+1/k also with u = 1.2
 
 
 
