@@ -8,7 +8,7 @@ for m = 1:length(x)
         Z(m,n) = f5_testfunction(input);
     end
 end
-figure('Position',[10,10,230,230])
+figure('Position',[10,10,215,215])
 box on 
 meshc(X,Y,Z)
 colormap cool

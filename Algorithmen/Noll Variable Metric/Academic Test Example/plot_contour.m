@@ -45,7 +45,7 @@ ax.Position = [left bottom ax_width ax_height];
 
 %% Example: Nonsmooth Parabola
 [fnp_n,~,~,~,x_hats_np] = noll_variable_metric_nonconv_inex([-4;0.5],@nonsm_parab,@subgr_nonsm_parab,1);
-%[fnp4_n,~,~,x_hats_np4] = noll_variable_metric_nonconv_inex([-4;0.5],@nonsm_parab,@subgr_nonsm_parab,4);
+[fnp4_n,~,~,~,x_hats_np4] = noll_variable_metric_nonconv_inex([-4;0.5],@nonsm_parab,@subgr_nonsm_parab,4);
 [fnp_h,~,~,~,x_Hats_np] = bundle_nonconv_inex([-4;0.5],@parab,@grad_parab);
 
 % plot contour plot of the function

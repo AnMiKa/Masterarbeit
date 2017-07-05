@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=latex 2017.6.11)  3 JUL 2017 17:28
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=latex 2017.6.11)  4 JUL 2017 16:59
 entering extended mode
 **Bundle_methods_for_nonsmooth_nonconvex_problems_with_inexact_information.tex
 
@@ -521,91 +521,150 @@ LaTeX Font Info:    Try loading font information for U+msb on input line 5.
 
 ("C:\Program Files\Annika Programme\MiKTeX\tex\latex\amsfonts\umsb.fd"
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
-) [1
-
-])
+))
 \tf@toc=\write3
- [2]
-("D:\Annika\Uni\10. Semester\Masterarbeit\Proximal Bundle Inexact Information\Git Hub\Masterarbeit\LaTeX\Chapters/Prelim
-inaries.tex"
-LaTeX Font Info:    Try loading font information for OMS+lmr on input line 20.
+ [1
+
+]
+("D:\Annika\Uni\10. Semester\Masterarbeit\Proximal Bundle Inexact Information\Git Hub\Masterarbeit\LaTeX\Chapters/Variab
+le_Metric.tex"
+
+LaTeX Warning: Reference `sec_nonconv_inex' on page 1 undefined on input line 8.
+
+
+LaTeX Warning: Reference `opt_prob_nonconv_inex' on page 1 undefined on input line 12.
+
+
+LaTeX Warning: Reference `sec_nonconv_inex' on page 1 undefined on input line 12.
+
+
+LaTeX Warning: Reference `sec_conv_ex' on page 1 undefined on input line 17.
+
+LaTeX Font Info:    Try loading font information for OT1+lmtt on input line 26.
+("C:\Program Files\Annika Programme\MiKTeX\tex\latex\lm\ot1lmtt.fd"
+File: ot1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
+)
+
+LaTeX Warning: Reference `sub_prob_fin' on page 1 undefined on input line 29.
+
+[1]
+
+LaTeX Warning: Reference `cp_model' on page 2 undefined on input line 53.
+
+[2]
+
+LaTeX Warning: Reference `sec_simplifications' on page 3 undefined on input line 76.
+
+
+LaTeX Warning: Reference `agg_subgr_dk' on page 3 undefined on input line 84.
+
+
+LaTeX Warning: Reference `aug_agg_subgr' on page 3 undefined on input line 97.
+
+
+LaTeX Warning: Reference `nu' on page 3 undefined on input line 97.
+
+
+LaTeX Warning: Reference `mod_dec2' on page 3 undefined on input line 99.
+
+
+LaTeX Warning: Reference `aug_agg_lin' on page 3 undefined on input line 99.
+
+
+LaTeX Warning: Reference `aug_agg_err2' on page 3 undefined on input line 99.
+
+[3]
+
+LaTeX Warning: Reference `sec_nonconv_inex' on page 4 undefined on input line 112.
+
+
+LaTeX Warning: Reference `sec_nonconv_inex' on page 4 undefined on input line 114.
+
+
+LaTeX Warning: Reference `sec_nonconv_inex' on page 4 undefined on input line 118.
+
+[4] [5] [6] [7] [8]
+
+LaTeX Warning: Reference `aug_agg_lin' on page 9 undefined on input line 322.
+
+
+LaTeX Warning: Reference `A_leq_M' on page 9 undefined on input line 334.
+
+[9]
+
+LaTeX Warning: Reference `A_leq_M' on page 10 undefined on input line 357.
+
+
+LaTeX Warning: Reference `aug_agg_lin' on page 10 undefined on input line 357.
+
+
+LaTeX Warning: Reference `Model_update_1' on page 10 undefined on input line 389.
+
+[10]
+
+LaTeX Warning: Reference `On_diff_conv_res' on page 11 undefined on input line 425.
+
+[11] [12] [13]
+LaTeX Font Info:    Try loading font information for OMS+lmr on input line 544.
  ("C:\Program Files\Annika Programme\MiKTeX\tex\latex\lm\omslmr.fd"
 File: omslmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    Font shape `OMS/lmr/m/n' in size <12> not available
-(Font)              Font shape `OMS/lmsy/m/n' tried instead on input line 20.
+(Font)              Font shape `OMS/lmsy/m/n' tried instead on input line 544.
 
-Underfull \hbox (badness 10000) in paragraph at lines 25--26
 
- []
+LaTeX Warning: Reference `sec_nonconv_inex' on page 14 undefined on input line 604.
 
-[1] [2]
-Underfull \hbox (badness 10000) in paragraph at lines 140--141
 
- []
+LaTeX Warning: Reference `t_minus' on page 14 undefined on input line 606.
 
-)
-("D:\Annika\Uni\10. Semester\Masterarbeit\Proximal Bundle Inexact Information\Git Hub\Masterarbeit\LaTeX\Chapters/Bundle
-_Methods.tex" [3] [4] [5]
-Underfull \hbox (badness 10000) in paragraph at lines 118--119
 
- []
+LaTeX Warning: Reference `t_plus' on page 14 undefined on input line 606.
 
-[6]
-LaTeX Font Info:    Try loading font information for OT1+lmtt on input line 148.
- ("C:\Program Files\Annika Programme\MiKTeX\tex\latex\lm\ot1lmtt.fd"
-File: ot1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
-) [7] [8] [9] [10] [11])
-("D:\Annika\Uni\10. Semester\Masterarbeit\Proximal Bundle Inexact Information\Git Hub\Masterarbeit\LaTeX\Chapters/Simpli
-fications.tex" [12] [13] [14] [15] [16])
-("D:\Annika\Uni\10. Semester\Masterarbeit\Proximal Bundle Inexact Information\Git Hub\Masterarbeit\LaTeX\Chapters/Bundle
-_Method_nonconv_inex.tex" [17] [18]
-Underfull \hbox (badness 10000) in paragraph at lines 162--163
-
- []
-
-[19] [20] [21] [22] [23])
-("D:\Annika\Uni\10. Semester\Masterarbeit\Proximal Bundle Inexact Information\Git Hub\Masterarbeit\LaTeX\Chapters/Variab
-le_Metric.tex" [24] [25] [26] [27] [28] [29] [30] [31] [32] [33] [34] [35] [36] [37]
-Overfull \hbox (4.89206pt too wide) in paragraph at lines 608--609
+[14]
+Overfull \hbox (4.89206pt too wide) in paragraph at lines 620--621
 []$[][]$\T1/lmr/m/n/12 : Van-ish-ing sub-gra-di-ent noise, $[] \OT1/lmr/m/n/12 = \OML/lmm/m/it/12 [] \OT1/lmr/m/n/12 = 
 0$ \T1/lmr/m/n/12 and $[] \OT1/lmr/m/n/12 = 0\OML/lmm/m/it/12 :\OT1/lmr/m/n/12 01\OML/lmm/m/it/12 ; [] \OT1/lmr/m/n/12 
 = []\OMS/lmsy/m/n/12 f\OT1/lmr/m/n/12 0\OML/lmm/m/it/12 :\OT1/lmr/m/n/12 01\OML/lmm/m/it/12 ; \OMS/lmsy/m/n/12 k\OML/lmm
 /m/it/12 x[]\OMS/lmsy/m/n/12 k\OML/lmm/m/it/12 =\OT1/lmr/m/n/12 100\OMS/lmsy/m/n/12 g$
  []
 
-[38] [39]
+[15]
+
+LaTeX Warning: Reference `sec_nonconv_inex' on page 16 undefined on input line 639.
+
+
+LaTeX Warning: Reference `sec_nonconv_inex' on page 16 undefined on input line 646.
+
 File: Pictures/Plots/final_parab.eps Graphic file (type eps)
- <Pictures/Plots/final_parab.eps>
+<Pictures/Plots/final_parab.eps>
 File: Pictures/Plots/final_parab_detail.eps Graphic file (type eps)
  <Pictures/Plots/final_parab_detail.eps>
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10.95> on input line 652.
+(Font)              <10.95> on input line 664.
+ [16]
 File: Pictures/Plots/final_nonsm_parab.eps Graphic file (type eps)
-
-<Pictures/Plots/final_nonsm_parab.eps>
+ <Pictures/Plots/final_nonsm_parab.eps>
 File: Pictures/Plots/final_nonsm_parab_detail.eps Graphic file (type eps)
- <Pictures/Plots/final_nonsm_parab_detail.eps> [40]
+
+<Pictures/Plots/final_nonsm_parab_detail.eps> [17]
 File: Pictures/Plots/accuracy_bar_parab.eps Graphic file (type eps)
-
-<Pictures/Plots/accuracy_bar_parab.eps>
+ <Pictures/Plots/accuracy_bar_parab.eps>
 File: Pictures/Plots/steps_bar_parab.eps Graphic file (type eps)
- <Pictures/Plots/steps_bar_parab.eps> [41]
-File: Pictures/Plots/accuracy_bar_nonsm_parab.eps Graphic file (type eps)
 
-<Pictures/Plots/accuracy_bar_nonsm_parab.eps>
+<Pictures/Plots/steps_bar_parab.eps> [18]
+File: Pictures/Plots/accuracy_bar_nonsm_parab.eps Graphic file (type eps)
+ <Pictures/Plots/accuracy_bar_nonsm_parab.eps>
 File: Pictures/Plots/steps_bar_nonsm_parab.eps Graphic file (type eps)
- <Pictures/Plots/steps_bar_nonsm_parab.eps>
-Underfull \hbox (badness 10000) in paragraph at lines 726--726
+
+<Pictures/Plots/steps_bar_nonsm_parab.eps>
+Underfull \hbox (badness 10000) in paragraph at lines 738--738
 
  []
 
-[42] [43]
-
-LaTeX Warning: Reference `fig_ferr_pol' on page 44 undefined on input line 771.
-
+[19] [20]
 File: Pictures/Plots/testfun_f1.eps Graphic file (type eps)
-<Pictures/Plots/testfun_f1.eps>
+ <Pictures/Plots/testfun_f1.eps>
 File: Pictures/Plots/testfun_f2.eps Graphic file (type eps)
  <Pictures/Plots/testfun_f2.eps>
 File: Pictures/Plots/testfun_f3.eps Graphic file (type eps)
@@ -614,74 +673,33 @@ File: Pictures/Plots/testfun_f4.eps Graphic file (type eps)
 
 <Pictures/Plots/testfun_f4.eps>
 File: Pictures/Plots/testfun_f5.eps Graphic file (type eps)
- <Pictures/Plots/testfun_f5.eps> [44])
-("D:\Annika\Uni\10. Semester\Masterarbeit\Proximal Bundle Inexact Information\Git Hub\Masterarbeit\LaTeX\Chapters/Bileve
-l_Application.tex" [45] [46] [47] [48]
-Overfull \hbox (52.7907pt too wide) in paragraph at lines 125--126
-[]\T1/lmr/bx/n/12 Theorem 6.1 \T1/lmr/m/n/12 ([[], The-o-rem 6.1]) []\T1/lmr/m/it/12 Given a lin-early sep-a-ra-ble trai
-n-ing sam-ple $\OT1/lmr/m/n/12 
- = ((\OML/lmm/m/it/12 x[]; y[]\OT1/lmr/m/n/12 )\OML/lmm/m/it/12 ; :::; \OT1/lmr/m/n/12 (\OML/lmm/m/it/12 x[]; y[]\OT1/lm
-r/m/n/12 ))$
- []
+ <Pictures/Plots/testfun_f5.eps> [21]
+File: Pictures/Plots/no_noise2.eps Graphic file (type eps)
+ <Pictures/Plots/no_noise2.eps>
+File: Pictures/Plots/steps_no_noise2.eps Graphic file (type eps)
 
-[49] [50] [51]
+<Pictures/Plots/steps_no_noise2.eps>
+File: Pictures/Plots/constant_noise2.eps Graphic file (type eps)
+ <Pictures/Plots/constant_noise2.eps>
+File: Pictures/Plots/steps_constant_noise2.eps Graphic file (type eps)
+ <Pictures/Plots/steps_constant_noise2.eps>
+File: Pictures/Plots/vanishing_noise2.eps Graphic file (type eps)
 
-LaTeX Warning: Reference `??' on page 52 undefined on input line 268.
+<Pictures/Plots/vanishing_noise2.eps>
+File: Pictures/Plots/steps_vanishing_noise2.eps Graphic file (type eps)
+ <Pictures/Plots/steps_vanishing_noise2.eps>
+File: Pictures/Plots/constant_gradient_noise2.eps Graphic file (type eps)
 
-[52]
-Overfull \hbox (17.12895pt too wide) in paragraph at lines 309--312
-\T1/lmr/m/n/12 Let us first as-sume that the outer and in-ner ob-jec-tive func-tions and $\OML/lmm/m/it/12 w\OT1/lmr/m/n
-/12 (\OML/lmm/m/it/12 \OT1/lmr/m/n/12 ) = [] \OMS/lmsy/m/n/12 L[]\OT1/lmr/m/n/12 (\OML/lmm/m/it/12 w; \OT1/lmr/m/n/12 
-)$
- []
+<Pictures/Plots/constant_gradient_noise2.eps>
+File: Pictures/Plots/steps_constant_gradient_noise2.eps Graphic file (type eps)
+ <Pictures/Plots/steps_constant_gradient_noise2.eps>
+File: Pictures/Plots/vanishing_gradient_noise2.eps Graphic file (type eps)
 
-[53] [54]
-Underfull \hbox (badness 10000) in paragraph at lines 406--408
-
- []
-
-[55]
-Underfull \hbox (badness 10000) in paragraph at lines 427--428
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 429--430
-
- []
-
-[56]
-Underfull \hbox (badness 10000) in paragraph at lines 473--475
-
- []
-
-[57] [58] [59] [60]
-LaTeX Font Info:    Try loading font information for T1+lmtt on input line 651.
- ("C:\Program Files\Annika Programme\MiKTeX\tex\latex\lm\t1lmtt.fd"
-File: t1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
-)
-Overfull \hbox (0.53162pt too wide) in paragraph at lines 647--660
- [] 
- []
-
-[61]
-Underfull \hbox (badness 10000) in paragraph at lines 667--672
-
- []
-
-[62]
-Overfull \hbox (58.26138pt too wide) in paragraph at lines 766--767
-[] 
- []
-
-[63]
-Overfull \hbox (264.82431pt too wide) in paragraph at lines 783--784
-[] 
- []
-
-[64]) [65]
+<Pictures/Plots/vanishing_gradient_noise2.eps>
+File: Pictures/Plots/steps_vanishing_gradient_noise2.eps Graphic file (type eps)
+ <Pictures/Plots/steps_vanishing_gradient_noise2.eps>) [22]
 ("D:\Annika\Uni\10. Semester\Masterarbeit\Proximal Bundle Inexact Information\Git Hub\Masterarbeit\LaTeX\Bundle_methods_
-for_nonsmooth_nonconvex_problems_with_inexact_information.bbl" [66] [67] [68]) [69]
+for_nonsmooth_nonconvex_problems_with_inexact_information.bbl" [23]) [24]
 ("D:\Annika\Uni\10. Semester\Masterarbeit\Proximal Bundle Inexact Information\Git Hub\Masterarbeit\LaTeX\Bundle_methods_
 for_nonsmooth_nonconvex_problems_with_inexact_information.aux")
 
@@ -696,13 +714,12 @@ LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
 ### simple group (level 1) entered at line 1061 ({)
 ### bottom level 
 Here is how much of TeX's memory you used:
- 8076 strings out of 493922
- 128035 string characters out of 3142101
- 256019 words of memory out of 3000000
- 11177 multiletter control sequences out of 15000+200000
- 83054 words of font info for 68 fonts, out of 3000000 for 9000
+ 7926 strings out of 493922
+ 124869 string characters out of 3142101
+ 253026 words of memory out of 3000000
+ 11036 multiletter control sequences out of 15000+200000
+ 82736 words of font info for 67 fonts, out of 3000000 for 9000
  841 hyphenation exceptions out of 8191
- 40i,18n,48p,851b,2371s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 40i,17n,48p,851b,2376s stack positions out of 5000i,500n,10000p,200000b,50000s
 
-Output written on Bundle_methods_for_nonsmooth_nonconvex_problems_with_inexact_information.dvi (71 pages, 236820 bytes).
-
+Output written on Bundle_methods_for_nonsmooth_nonconvex_problems_with_inexact_information.dvi (25 pages, 80196 bytes).

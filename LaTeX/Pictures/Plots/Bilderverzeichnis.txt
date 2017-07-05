@@ -1,0 +1,34 @@
+Bilderverzeichnis
+
+
+bar-plots mit u1-2 als Anhang: haben proximal Bundle Algorithmus mit u = 1.2,
+andere mit u = 2
+Erstellt mit Test noise, alles in einem, erstellt auch Datensätze
+
+
+Stem Plots: 
+Daten: erstellt mit test_nonconv_inex_small/large_dim.m
+Plots: erstellt mit plots_nonconv_inex_test_small/large_dim.m
+
+steps_noiseform: stem plots steps
+noiseform: stem plots accuracy
+all with u = 2 (I think)
+
+with 2 in the end:
+Noll part with u = 2
+Hare part with u = 1.2
+
+if contains "b": large dimension
+
+
+
+
+
+
+
+
+
+
+
+
+

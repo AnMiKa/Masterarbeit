@@ -8,7 +8,7 @@ for m = 1:length(x)
         Z(m,n) = f1_testfunction(input);
     end
 end
-figure('Position',[10,10,230,230])
+figure('Position',[10,10,215,215])
 box on 
 meshc(X,Y,Z)
 colormap cool
@@ -16,6 +16,8 @@ colormap cool
 title('$f_1$','Interpreter','latex')
 xlabel('$x_1$','Interpreter','latex')
 ylabel('$x_2$','Interpreter','latex')
+zticks(1:5)
+zticklabels({'','','','','5'})
 pbaspect([1 1 2/3])
 
 ax = gca;

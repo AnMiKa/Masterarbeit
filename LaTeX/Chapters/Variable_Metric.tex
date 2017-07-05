@@ -449,7 +449,7 @@ The starting matrix \(Q_1 = \mathbb{I}\).
 
 %The matrix \(Q(\hat{x}\) is formed by a BFGS-Update from the \textcolor{red}{last known - which? how many? all from bundle??} subgradients.
 
-By definition the BFGS update is symmetric. To assure boundedness of the matrix \(Q_{k+1}\) the updates are manipulated in the two following ways:
+By definition the BFGS update is symmetric. To assure boundedness of the matrix \(Q_{k+1}\) the updates can be manipulated in the following ways:
 
 \subsubsection{Scaling of the Whole Matrix}
 
@@ -457,23 +457,35 @@ A simple way to keep the absolute value all of eigenvalues of the constructed ma
 To do this define \(\lambda_{max} := \max\{|\lambda_i|\mid \lambda_i \text{ is eigenvalue of } Q_k|\}\). If  \(\lambda_{max} > q\), set \(Q_k = \frac{q}{\lambda_{max}}Q_k\). This way the absolute value of all eigenvalues is always smaller or equal to \(q\).
 An advantage of this method is besides its simplicity that by scaling the whole matrix the ratio of the eigenvalues of \(Q_k\) is preserved. Scaling of \(Q_k\) corresponds to shrinking the whole quadratic function and in this way also the 'ratio of curvature' at different points of the graph stays the same. 
 
-\textcolor{red}{\subsubsection{Adaptive Scaling of Single Eigenvalues}}
+\subsubsection{Adaptive Scaling of Single Eigenvalues}
 
-\textcolor{red}{This second method is motivated by the following observation: The variable metric bundle algorithm is to be used for nonsmooth functions. This means that the objective function has some kinks. 
+This second method is motivated by the following observation: The variable metric bundle algorithm is to be used for nonsmooth functions. This means that the objective function has some kinks. 
 For locally Lipschitz functions the number of kinks is finite and in between the kinks the function is smooth.
 This means, that there is indeed curvature information present in the smooth parts of the functions. At the kinks however the curvature is not defined. Taking a look at the one-sided differential quotient for \(x \in \R\) shows that it diverges at such points:
 Let a kink be at \(x_{\text{kink}} \in \R\) and the left sided limiting value of the derivative be \(f'(x_{\text{kink}}) = a\) the right-sided one \(f'(x_{\text{kink}}) = b \neq a\). Because \(f\) was assumed to be locally Lipschitz both limits exist and are finite.
 The following quotient can then be stated:
 \[ \lim_{h \searrow 0} \frac{f'(x_{\text{kink}}+h)-f'(x_{\text{kink}})}{h} = \frac{\overbrace{f'(x_{\text{kink}}+h)}^{\to b}-a}{h} = \pm \infty, \]
-the sign depending on if \(a > b\) or vice versa. \\
+the sign depending on if \(a > b\) or vice versa. 
+
 In more dimensions this is the same for the components of the Hessian corresponding to the direction where the kink occurs. This supports also to the intuitive thought that at a kink the slope changes 'infinitly fast'.
-Numerically the BFGS-update (\ref{BFGS_update}) can result in very large values for the entries of \(Q_k\) corresponding to points near the kink.\\
-On the other hand due to the local Lipschitz property the slope of the objective function is always finite on closed sets. This means that there exists a neighborhood \(B_{\varepsilon}(x_{\text{kink}})\) where the function \(f\) behaves similar to the scaled modulus \(a|\cdot|\), \(a \in \R\), in the direction perpendicular to the kink. Therefore in this neighborhood almost no curvature is present.\\
-Summarized this means that on the one hand, the matrix \(Q_k\) should be close to zero in the components representing the directions perpendicular to the kink as soon as the iterates approach \(x_{\text{kink}}\). But contrary to that the method that constructs \(Q_k\) can give very high values for those components.\\
+Numerically the BFGS-update (\ref{BFGS_update}) can result in very large values for the entries of \(Q_k\) corresponding to points near the kink.
+
+On the other hand due to the local Lipschitz property the slope of the objective function is always finite on closed sets. This means that there exists a neighborhood \(B_{\varepsilon}(x_{\text{kink}})\) where the function \(f\) behaves similar to the scaled modulus \(a|\cdot|\), \(a \in \R\), in the direction perpendicular to the kink. Therefore in this neighborhood almost no curvature is present.
+
+Summarized this means that on the one hand, the matrix \(Q_k\) should be close to zero in the components representing the directions perpendicular to the kink as soon as the iterates approach \(x_{\text{kink}}\). But contrary to that the method that constructs \(Q_k\) can give very high values for those components.
+
 The idea is now to scale only those eigenvalues of \(Q_k\) that are especially large. To lower the probability that eigenvalues are chosen which represent a really existing large curvature of of the objective function at the observed point, the change of the eigenvalues is viewed in relation to the step size \(d^k\).
-As the eigenvalues of a matrix \(A \in \R^n\) depend continuously on the entries of the matrix (see for example \cite[Theorem 1.2]{Werner1992}) the change in the eigenvalues is calculated by ordering them by size and then calculating \(\text{diff}_{\lambda_i}=|\lambda_i^{k-1}-\lambda_i^{k}|, i = 1,...,n\), where \(\lambda^{k-1}\) and \(\lambda^{k} \in \R^n\) are vectors with the sorted eigenvalues of \(Q_{k-1}\) and \(Q_{k}\) respectively as components.
-If \(\frac{\text{diff}_{\lambda_i}}{\|d^k\|} > q\) for a threshold \(q < \infty\) and any \(i = 1,...,n\), indicating that the \(i\)'th eigenvalue changes much while only a small step is done, the \(i\)'th eigenvalue is set to \(\lambda_i^{k}=\frac{1}{2}\lambda_1^{k-1}\) (remember that we stated before that near a kink there is often a very small curvature, hence halving the eigenvalue of the  matrix of the step before).\\
-Because this method considers only the relative change of the eigenvalues, it is still possible that one or more of them is larger than the threshold \(q\). If this is the case, the whole matrix can be scaled as described above.}
+As the eigenvalues of a matrix \(A \in \R^n\) depend continuously on the entries of the matrix (see for example \cite[Theorem 1.2]{Werner1992}) the change in the eigenvalues could be calculated by ordering them by size and then calculating \(\text{diff}_{\lambda_i}=|\lambda_i^{k-1}-\lambda_i^{k}|, i = 1,...,n\), where \(\lambda^{k-1}\) and \(\lambda^{k} \in \R^n\) are vectors with the sorted eigenvalues of \(Q_{k-1}\) and \(Q_{k}\) respectively as components.
+If \(\frac{\text{diff}_{\lambda_i}}{\|d^k\|} > q\) for a threshold \(q < \infty\) and any \(i = 1,...,n\), indicating that the \(i\)'th eigenvalue changes much while only a small step is done, the \(i\)'th eigenvalue is set to \(\lambda_i^{k}=\frac{1}{2}\lambda_1^{k-1}\) (remember that we stated before that near a kink there is often a very small curvature, hence halving the eigenvalue of the  matrix of the step before).
+
+Because this method considers only the relative change of the eigenvalues, it is still possible that one or more of them is larger than the threshold \(q\). If this is the case, the whole matrix can be scaled as described above.
+
+This technique however lacks a practical method of implementation and has also some theoretical issues.
+The most important issue is that eigenvalues do not have any intrinsic order. Sorting them by size may work in most cases due to continuity but at least in the situation when an eigenvalue is scaled this is not a continuous operation any more. This can result in the eigenvalues being sorted differently in the next iteration such that all differences of eigenvalues that follow the one that contains the scaled one are not differences of corresponding eigenvalues.
+
+\textcolor{red}{write only the thing below; write things above as comment in third part of this section???}
+
+Another possibility is to not work with the change of the eigenvalues but with their absolute size like in the method presented before;  advantage: no additional scaling necessary any more
 
 \begin{remark}
 	There appear many parameters to control the scaling of the metric update. Although these parameters were not especially tuned in this thesis they have a considerable impact on the convergence speed of the method also depending on the objective function used. This has to be kept in mind when implementing the method in practice.
@@ -799,11 +811,61 @@ Ferrier polynomials are nonconvex, except for \(f_2\), nonsmooth and lower-\(\ma
 The five test functions \(f_1,...f_5\) were optimized for the dimensions \(n=1,2,...,15,20,25,30\).
 The starting value for each test problem being \(x^1=[1,\frac{1}{4},\frac{1}{9},...,\frac{1}{n^2}]^{\top}\).
 
+\begin{figure}[ht]%
+	\begin{subfigure}{0.49\textwidth}
+		\includegraphics[width=\textwidth]{Pictures/Plots/no_noise2.eps}%
+	\end{subfigure}
+	\begin{subfigure}{0.49\textwidth}
+		\includegraphics[width=\textwidth]{Pictures/Plots/steps_no_noise2.eps}%
+	\end{subfigure}
+	\label{fig_no_noise}
+	\caption{No noise}
+\end{figure}
 
+\begin{figure}[ht]
+	\begin{subfigure}{0.49\textwidth}
+		\includegraphics[width=\textwidth]{Pictures/Plots/constant_noise2.eps}%
+	\end{subfigure}
+	\begin{subfigure}{0.49\textwidth}
+		\includegraphics[width=\textwidth]{Pictures/Plots/steps_constant_noise2.eps}%
+	\end{subfigure}
+	\caption{Constant noise}%
+	\label{fig_const_noise}%
+\end{figure}
 
+\begin{figure}[ht]
+	\begin{subfigure}{0.49\textwidth}
+		\includegraphics[width=\textwidth]{Pictures/Plots/vanishing_noise2.eps}%
+	\end{subfigure}
+	\begin{subfigure}{0.49\textwidth}
+		\includegraphics[width=\textwidth]{Pictures/Plots/steps_vanishing_noise2.eps}%
+	\end{subfigure}
+	\caption{Vanishing noise}%
+	\label{fig_van_noise}%
+\end{figure}
 
-Two different stopping tolerances \(\mathtt{tol}=10^{-3}\) and \(\mathtt{tol}=10^{-6}\) were used.
-Additionally the computation times for the different algorithms and tests are plotted. \textcolor{red}{say on what machine that was done???}
+\begin{figure}[ht]
+	\begin{subfigure}{0.49\textwidth}
+		\includegraphics[width=\textwidth]{Pictures/Plots/constant_gradient_noise2.eps}%
+	\end{subfigure}
+	\begin{subfigure}{0.49\textwidth}
+		\includegraphics[width=\textwidth]{Pictures/Plots/steps_constant_gradient_noise2.eps}%
+	\end{subfigure}
+	\caption{Constant gradient noise}%
+	\label{fig_const_grad_noise}%
+\end{figure}
+
+\begin{figure}[ht]
+	\begin{subfigure}{0.49\textwidth}
+		\includegraphics[width=\textwidth]{Pictures/Plots/vanishing_gradient_noise2.eps}%
+	\end{subfigure}
+	\begin{subfigure}{0.49\textwidth}
+		\includegraphics[width=\textwidth]{Pictures/Plots/steps_vanishing_gradient_noise2.eps}%
+	\end{subfigure}
+	\caption{Vanishing gradient noise}%
+	\label{fig_van_grad_noise}%
+\end{figure}
+
 
 %\begin{figure}
 %\begin{minipage}[h]{0.49\textwidth}

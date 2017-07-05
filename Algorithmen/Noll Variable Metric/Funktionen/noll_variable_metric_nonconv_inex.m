@@ -180,7 +180,7 @@ if f_k_1 - f_hat <= -m * delta   % serious step condition
             case 3
                 Q = BFGS_update_Variation(d,g_hat_old,g_hat,Q);
             case 4
-                Q = BFGS_update_Variation2(d,g_hat_old,g_hat,Q);
+                Q = BFGS_update_Variation3(d,g_hat_old,g_hat,Q);
             case 5
                 Q = SR1_update_Variation(d,g_hat_old,g_hat,Q);
         end

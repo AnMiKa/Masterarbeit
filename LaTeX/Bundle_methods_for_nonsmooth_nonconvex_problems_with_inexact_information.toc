@@ -1,54 +1,18 @@
 \select@language {english}
 \select@language {english}
 \contentsline {section}{List of Symbols}{}
-\contentsline {section}{\numberline {1}Preliminaries}{1}
-\contentsline {subsection}{\numberline {1.1}Notation}{1}
-\contentsline {subsection}{\numberline {1.2}Definitions}{1}
-\contentsline {section}{\numberline {2}A Basic Bundle Method}{3}
-\contentsline {subsection}{\numberline {2.1}Derivation of the Bundle Method}{4}
-\contentsline {subsubsection}{\numberline {2.1.1}A Stabilized Cutting Plane Method}{4}
-\contentsline {subsubsection}{\numberline {2.1.2}Subproblem Reformulations}{6}
-\contentsline {subsection}{\numberline {2.2}The Prox-Operator}{7}
-\contentsline {subsection}{\numberline {2.3}???}{7}
-\contentsline {section}{\numberline {3}Variations of the Bundle Method}{12}
-\contentsline {subsection}{\numberline {3.1}Convex Bundle Methods with Inexact Information}{12}
-\contentsline {subsubsection}{\numberline {3.1.1}Different Types of Inexactness}{13}
-\contentsline {subsubsection}{\numberline {3.1.2}Noise Attenuation}{14}
-\contentsline {subsubsection}{\numberline {3.1.3}Convergence Results}{14}
-\contentsline {subsection}{\numberline {3.2}Nonconvex Bundle Methods with Exact Information}{15}
-\contentsline {subsubsection}{\numberline {3.2.1}Proximity Control}{15}
-\contentsline {subsubsection}{\numberline {3.2.2}Other Concepts}{16}
-\contentsline {section}{\numberline {4}Proximal Bundle Method for Nonconvex Functions with Inexact Information}{17}
-\contentsline {subsection}{\numberline {4.1}Derivation of the Method}{17}
-\contentsline {subsubsection}{\numberline {4.1.1}Inexactness}{18}
-\contentsline {subsubsection}{\numberline {4.1.2}Nonconvexity}{19}
-\contentsline {subsubsection}{\numberline {4.1.3}Aggregate Objects}{20}
-\contentsline {subsection}{\numberline {4.2}On Different Convergence Results}{22}
-\contentsline {subsubsection}{\numberline {4.2.1}The Constraint Set}{22}
-\contentsline {subsubsection}{\numberline {4.2.2}Exact Information and Vanishing Errors}{23}
-\contentsline {subsubsection}{\numberline {4.2.3}Convex Objective Functions}{23}
-\contentsline {section}{\numberline {5}Variable Metric Bundle Method}{24}
-\contentsline {subsection}{\numberline {5.1}Main Ingredients to the Method}{25}
-\contentsline {subsubsection}{\numberline {5.1.1}Variable Metric Bundle Methods}{25}
-\contentsline {subsubsection}{\numberline {5.1.2}Noll's Second Order Model}{26}
-\contentsline {subsubsection}{\numberline {5.1.3}The Descent Measure}{27}
-\contentsline {subsection}{\numberline {5.2}The Variable Metric Bundle Algorithm}{28}
-\contentsline {subsection}{\numberline {5.3}Convergence Analysis}{29}
-\contentsline {subsection}{\numberline {5.4}Updating the Metric}{35}
-\contentsline {subsubsection}{\numberline {5.4.1}Scaling of the Whole Matrix}{35}
-\contentsline {subsubsection}{\numberline {5.4.2}Adaptive Scaling of Single Eigenvalues}{36}
-\contentsline {subsubsection}{\numberline {5.4.3}Other Updating Possibilities}{37}
-\contentsline {subsection}{\numberline {5.5}Numerical Testing}{38}
-\contentsline {subsubsection}{\numberline {5.5.1}Academic Test Examples}{39}
-\contentsline {subsubsection}{\numberline {5.5.2}Test Examples in Higher Dimensions}{43}
-\contentsline {section}{\numberline {6}Application to Model Selection for Primal SVM}{45}
-\contentsline {subsection}{\numberline {6.1}Introduction}{45}
-\contentsline {subsection}{\numberline {6.2}Introduction to Support Vector Machines}{46}
-\contentsline {subsubsection}{\numberline {6.2.1}Risk minimization}{47}
-\contentsline {subsubsection}{\numberline {6.2.2}Support Vector machines}{48}
-\contentsline {subsection}{\numberline {6.3}Bilevel Approach and Inexact Bundle Method}{50}
-\contentsline {subsubsection}{\numberline {6.3.1}Reformulation as bilevel problem}{51}
-\contentsline {subsubsection}{\numberline {6.3.2}Solution of the Bilevel Program}{53}
-\contentsline {subsubsection}{\numberline {6.3.3}The Algorithm???}{60}
-\contentsline {subsection}{\numberline {6.4}Numerical Experiments}{61}
+\contentsline {section}{\numberline {1}Variable Metric Bundle Method}{1}
+\contentsline {subsection}{\numberline {1.1}Main Ingredients to the Method}{1}
+\contentsline {subsubsection}{\numberline {1.1.1}Variable Metric Bundle Methods}{1}
+\contentsline {subsubsection}{\numberline {1.1.2}Noll's Second Order Model}{2}
+\contentsline {subsubsection}{\numberline {1.1.3}The Descent Measure}{3}
+\contentsline {subsection}{\numberline {1.2}The Variable Metric Bundle Algorithm}{4}
+\contentsline {subsection}{\numberline {1.3}Convergence Analysis}{5}
+\contentsline {subsection}{\numberline {1.4}Updating the Metric}{11}
+\contentsline {subsubsection}{\numberline {1.4.1}Scaling of the Whole Matrix}{12}
+\contentsline {subsubsection}{\numberline {1.4.2}Adaptive Scaling of Single Eigenvalues}{12}
+\contentsline {subsubsection}{\numberline {1.4.3}Other Updating Possibilities}{14}
+\contentsline {subsection}{\numberline {1.5}Numerical Testing}{15}
+\contentsline {subsubsection}{\numberline {1.5.1}Academic Test Examples}{16}
+\contentsline {subsubsection}{\numberline {1.5.2}Test Examples in Higher Dimensions}{20}
 \contentsline {section}{References}{}
