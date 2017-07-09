@@ -74,6 +74,18 @@ Boris~T. Polyak.
 \newblock {\em Introduction to Optimization}.
 \newblock Optimization Software , Inc., Publications Division, New York, 1987.
 
+\bibitem{Rockafellar2009}
+R.~Tyrrell Rockafellar and Roger J.~B. Wets.
+\newblock {\em Variational Analysis}, volume 317 of {\em Grundlehren der
+  mathematischen Wissenschaften}.
+\newblock Springer Berlin Heidelberg, 3rd edition, 2009.
+
+\bibitem{Treiman1986}
+Jay~S. Treiman.
+\newblock Clarke's gradients and $\varepsilon$-subgradients in banach spaces.
+\newblock {\em Transactions of the American Mathematical Society},
+  294(1):65--65, jan 1986.
+
 \bibitem{Vlcek2001}
 J.~Vl\v{c}ek and L.~Luk\v{s}an.
 \newblock Globally convergent variable metric bundle method for nonconvex
@@ -81,9 +93,15 @@ J.~Vl\v{c}ek and L.~Luk\v{s}an.
 \newblock {\em Journal of Optimization Theory and Applications},
   111(2):407--430, 2001.
 
-\bibitem{Werner1992}
-Jochen Werner.
-\newblock {\em Numerische Mathematik 2}.
-\newblock Vieweg, Wiesbaden, 1992.
+\bibitem{Hare2009}
+Claudia~Sagastiz\`{a}bal Warren~Hare.
+\newblock Computing proximal points of nonconvex functions.
+\newblock {\em Mathematical Programming}, 116:221--258, 2009.
+
+\bibitem{Oliveira2014}
+Claude~Lemar\'{e}chal Welington~de Oliveira, Claudia~Sagastiz\`{a}bal.
+\newblock Convex proximal bundle methods in depth: a unified analysis for
+  inexact oracles.
+\newblock {\em Mathematical Programming}, 148:241--277, 2014.
 
 \end{thebibliography}
