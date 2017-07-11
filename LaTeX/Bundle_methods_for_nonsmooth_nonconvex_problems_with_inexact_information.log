@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=latex 2017.6.11)  8 JUL 2017 22:30
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=latex 2017.6.11)  10 JUL 2017 17:28
 entering extended mode
 **Bundle_methods_for_nonsmooth_nonconvex_problems_with_inexact_information.tex
 
@@ -526,187 +526,252 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
  [1
 
 ]
-("D:\Annika\Uni\10. Semester\Masterarbeit\Proximal Bundle Inexact Information\Git Hub\Masterarbeit\LaTeX\Chapters/Bundle
-_Method_nonconv_inex.tex"
+("D:\Annika\Uni\10. Semester\Masterarbeit\Proximal Bundle Inexact Information\Git Hub\Masterarbeit\LaTeX\Chapters/Bileve
+l_Application.tex"
 
-LaTeX Warning: Reference `conv_inexactness_1' on page 1 undefined on input line 43.
-
-
-LaTeX Warning: Reference `sig_p_thet_subgr' on page 1 undefined on input line 43.
-
-[1] [2]
-
-LaTeX Warning: Reference `subsec_prox_op' on page 3 undefined on input line 146.
+LaTeX Warning: Citation `Kunapuli2008' on page 1 undefined on input line 8.
 
 
-LaTeX Warning: Reference `prox_op' on page 3 undefined on input line 146.
+LaTeX Warning: Citation `Moore2011' on page 1 undefined on input line 8.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 163--164
+LaTeX Warning: Citation `Kunapuli2008' on page 1 undefined on input line 15.
 
- []
+
+LaTeX Warning: Citation `Kunapuli2008' on page 1 undefined on input line 29.
+
+
+LaTeX Warning: Citation `Outrata1998' on page 1 undefined on input line 32.
+
+
+LaTeX Warning: Citation `Moore2011' on page 1 undefined on input line 34.
+
+
+LaTeX Warning: Citation `Moore2010a' on page 1 undefined on input line 35.
+
+
+LaTeX Warning: Citation `Fuduli2004a' on page 1 undefined on input line 35.
+
+[1]
+
+LaTeX Warning: Citation `Cristianini2000' on page 2 undefined on input line 43.
+
+
+LaTeX Warning: Citation `Kunapuli2008' on page 2 undefined on input line 43.
+
+
+LaTeX Warning: Citation `Vapnik1999' on page 2 undefined on input line 48.
+
+
+LaTeX Warning: Citation `Cristianini2000' on page 2 undefined on input line 49.
+
+
+LaTeX Warning: Citation `Vapnik1998' on page 2 undefined on input line 54.
+
+[2]
+
+LaTeX Warning: Citation `Vapnik1999' on page 3 undefined on input line 67.
+
+
+LaTeX Warning: Citation `Vapnik1999' on page 3 undefined on input line 85.
+
+
+LaTeX Warning: Citation `Vapnik1999' on page 3 undefined on input line 87.
+
+
+LaTeX Warning: Citation `Vapnik1999' on page 3 undefined on input line 87.
+
+
+LaTeX Warning: Citation `Cristianini2000' on page 3 undefined on input line 88.
+
+
+LaTeX Warning: Citation `Kunapuli2008' on page 3 undefined on input line 92.
+
+
+LaTeX Warning: Citation `Vapnik1998' on page 3 undefined on input line 92.
 
 [3]
-LaTeX Font Info:    Try loading font information for OT1+lmtt on input line 225.
- ("C:\Program Files\Annika Programme\MiKTeX\tex\latex\lm\ot1lmtt.fd"
-File: ot1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
-)
 
-LaTeX Warning: Reference `agg_err' on page 4 undefined on input line 232.
+LaTeX Warning: Citation `Kunapuli2008' on page 4 undefined on input line 110.
+
+
+LaTeX Warning: Citation `Cristianini2000' on page 4 undefined on input line 119.
+
+
+LaTeX Warning: Citation `Cristianini2000' on page 4 undefined on input line 124.
+
+
+Overfull \hbox (53.29071pt too wide) in paragraph at lines 125--126
+[]\T1/lmr/bx/n/12 Theorem 1.1 \T1/lmr/m/n/12 ([[], The-o-rem 6.1]) []\T1/lmr/m/it/12 Given a lin-early sep-a-ra-ble trai
+n-ing sam-ple $\OT1/lmr/m/n/12 
+ = ((\OML/lmm/m/it/12 x[]; y[]\OT1/lmr/m/n/12 )\OML/lmm/m/it/12 ; :::; \OT1/lmr/m/n/12 (\OML/lmm/m/it/12 x[]; y[]\OT1/lm
+r/m/n/12 ))$
+ []
 
 [4]
 
-LaTeX Warning: Reference `t_plus' on page 5 undefined on input line 246.
+LaTeX Warning: Citation `Cristianini2000' on page 5 undefined on input line 144.
 
 
-LaTeX Warning: Reference `t_minus' on page 5 undefined on input line 246.
+LaTeX Warning: Citation `Kunapuli2008' on page 5 undefined on input line 174.
 
 
-LaTeX Warning: Reference `model_update_1' on page 5 undefined on input line 247.
+LaTeX Warning: Reference `SVM_1' on page 5 undefined on input line 175.
 
 
-LaTeX Warning: Reference `model_update_2' on page 5 undefined on input line 247.
-
-[5] [6]
-
-LaTeX Warning: Reference `conv_inexactness_1' on page 7 undefined on input line 359.
+LaTeX Warning: Reference `SVM_2' on page 5 undefined on input line 175.
 
 
-LaTeX Warning: Reference `conv_inexactness_2' on page 7 undefined on input line 359.
+LaTeX Warning: Reference `SVM_2' on page 5 undefined on input line 176.
 
-[7])
-("D:\Annika\Uni\10. Semester\Masterarbeit\Proximal Bundle Inexact Information\Git Hub\Masterarbeit\LaTeX\Chapters/Variab
-le_Metric.tex"
+[5]
 
-LaTeX Warning: Reference `sec_conv_ex' on page 8 undefined on input line 17.
+LaTeX Warning: Citation `Kunapuli2008' on page 6 undefined on input line 190.
+
+
+LaTeX Warning: Citation `Kunapuli2008' on page 6 undefined on input line 194.
+
+
+LaTeX Warning: Citation `Moore2011' on page 6 undefined on input line 194.
+
+[6]
+
+LaTeX Warning: Reference `SVM_2' on page 7 undefined on input line 219.
+
+
+LaTeX Warning: Citation `Kunapuli2008' on page 7 undefined on input line 236.
+
+[7]
+
+LaTeX Warning: Reference `??' on page 8 undefined on input line 268.
 
 [8]
+Overfull \hbox (17.12895pt too wide) in paragraph at lines 309--312
+\T1/lmr/m/n/12 Let us first as-sume that the outer and in-ner ob-jec-tive func-tions and $\OML/lmm/m/it/12 w\OT1/lmr/m/n
+/12 (\OML/lmm/m/it/12 \OT1/lmr/m/n/12 ) = [] \OMS/lmsy/m/n/12 L[]\OT1/lmr/m/n/12 (\OML/lmm/m/it/12 w; \OT1/lmr/m/n/12 
+)$
+ []
 
-LaTeX Warning: Reference `sub_prob_fin' on page 9 undefined on input line 29.
+
+LaTeX Warning: Citation `Koenigsberger2002' on page 9 undefined on input line 337.
 
 [9]
 
-LaTeX Warning: Reference `cp_model' on page 10 undefined on input line 53.
+LaTeX Warning: Reference `SVM_2' on page 10 undefined on input line 348.
 
 
-LaTeX Warning: Reference `sec_simplifications' on page 10 undefined on input line 76.
+LaTeX Warning: Reference `opt_con' on page 10 undefined on input line 373.
 
 
-LaTeX Warning: Reference `agg_subgr_dk' on page 10 undefined on input line 84.
+LaTeX Warning: Citation `Heinonen2004' on page 10 undefined on input line 385.
 
-[10] [11] [12] [13] [14] [15] [16] [17] [18] [19]
-Overfull \hbox (19.4302pt too wide) in paragraph at lines 466--467
-[]\T1/lmr/m/n/12 For this in-equal-ity we can iden-tify $\OML/lmm/m/it/12 u[] \OT1/lmr/m/n/12 = \OML/lmm/m/it/12 [] \OM
-S/lmsy/m/n/12  \OT1/lmr/m/n/12 0$\T1/lmr/m/n/12 , $\OML/lmm/m/it/12 q \OT1/lmr/m/n/12 = \OML/lmm/m/it/12 m \OMS/lmsy/m/
-n/12 2 \OT1/lmr/m/n/12 (0\OML/lmm/m/it/12 ; \OT1/lmr/m/n/12 1)$ \T1/lmr/m/n/12 and $\OML/lmm/m/it/12 a[] \OT1/lmr/m/n/12
- = \OMS/lmsy/m/n/12 j [] j 
+[10]
+Underfull \hbox (badness 10000) in paragraph at lines 406--408
+
  []
 
-[20] [21] [22] [23]
 
-LaTeX Warning: Reference `t_minus' on page 24 undefined on input line 693.
+LaTeX Warning: Citation `Rockafellar1985' on page 11 undefined on input line 419.
 
 
-LaTeX Warning: Reference `t_plus' on page 24 undefined on input line 693.
+Underfull \hbox (badness 10000) in paragraph at lines 427--428
 
-[24]
-Overfull \hbox (4.89206pt too wide) in paragraph at lines 715--716
-[]$[][]$\T1/lmr/m/n/12 : Van-ish-ing sub-gra-di-ent noise, $[] \OT1/lmr/m/n/12 = \OML/lmm/m/it/12 [] \OT1/lmr/m/n/12 = 
-0$ \T1/lmr/m/n/12 and $[] \OT1/lmr/m/n/12 = 0\OML/lmm/m/it/12 :\OT1/lmr/m/n/12 01\OML/lmm/m/it/12 ; [] \OT1/lmr/m/n/12 
-= []\OMS/lmsy/m/n/12 f\OT1/lmr/m/n/12 0\OML/lmm/m/it/12 :\OT1/lmr/m/n/12 01\OML/lmm/m/it/12 ; \OMS/lmsy/m/n/12 k\OML/lmm
-/m/it/12 x[]\OMS/lmsy/m/n/12 k\OML/lmm/m/it/12 =\OT1/lmr/m/n/12 100\OMS/lmsy/m/n/12 g$
  []
 
-[25]
-File: Pictures/Plots/final_parab.eps Graphic file (type eps)
- <Pictures/Plots/final_parab.eps>
-File: Pictures/Plots/final_parab_detail.eps Graphic file (type eps)
- <Pictures/Plots/final_parab_detail.eps>
-LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10.95> on input line 762.
- [26]
-File: Pictures/Plots/final_nonsm_parab.eps Graphic file (type eps)
+[11]
+Underfull \hbox (badness 10000) in paragraph at lines 429--430
 
-<Pictures/Plots/final_nonsm_parab.eps>
-File: Pictures/Plots/final_nonsm_parab_detail.eps Graphic file (type eps)
- <Pictures/Plots/final_nonsm_parab_detail.eps> [27]
-File: Pictures/Plots/accuracy_bar_parab_u_1-2.eps Graphic file (type eps)
-
-<Pictures/Plots/accuracy_bar_parab_u_1-2.eps>
-File: Pictures/Plots/steps_bar_parab_u_1-2.eps Graphic file (type eps)
- <Pictures/Plots/steps_bar_parab_u_1-2.eps> [28]
-File: Pictures/Plots/accuracy_bar_nonsm_parab_u_1-2.eps Graphic file (type eps)
-
-<Pictures/Plots/accuracy_bar_nonsm_parab_u_1-2.eps>
-File: Pictures/Plots/steps_bar_nonsm_parab_u_1-2.eps Graphic file (type eps)
- <Pictures/Plots/steps_bar_nonsm_parab_u_1-2.eps> [29]
-File: Pictures/Plots/testfun_f1.eps Graphic file (type eps)
-
-<Pictures/Plots/testfun_f1.eps>
-File: Pictures/Plots/testfun_f2.eps Graphic file (type eps)
- <Pictures/Plots/testfun_f2.eps>
-File: Pictures/Plots/testfun_f3.eps Graphic file (type eps)
- <Pictures/Plots/testfun_f3.eps>
-File: Pictures/Plots/testfun_f4.eps Graphic file (type eps)
-
-<Pictures/Plots/testfun_f4.eps>
-File: Pictures/Plots/testfun_f5.eps Graphic file (type eps)
- <Pictures/Plots/testfun_f5.eps>
-Overfull \hbox (26.27797pt too wide) in paragraph at lines 927--929
-[]\T1/lmr/m/n/12 The five test func-tions $\OML/lmm/m/it/12 f[]$ \T1/lmr/m/n/12 to $\OML/lmm/m/it/12 f[]$ \T1/lmr/m/n/12
- are op-ti-mized for the di-men-sions $\OML/lmm/m/it/12 n \OT1/lmr/m/n/12 = 2\OML/lmm/m/it/12 ; \OT1/lmr/m/n/12 3\OML/lm
-m/m/it/12 ; :::; \OT1/lmr/m/n/12 15\OML/lmm/m/it/12 ; \OT1/lmr/m/n/12 20\OML/lmm/m/it/12 ; \OT1/lmr/m/n/12 25\OML/lmm/m/
-it/12 ; \OT1/lmr/m/n/12 30\OML/lmm/m/it/12 ; \OT1/lmr/m/n/12 40\OML/lmm/m/it/12 ; \OT1/lmr/m/n/12 50$\T1/lmr/m/n/12 .
  []
 
-File: Pictures/Plots/no_noise.eps Graphic file (type eps)
-<Pictures/Plots/no_noise.eps>
-File: Pictures/Plots/steps_no_noise.eps Graphic file (type eps)
- <Pictures/Plots/steps_no_noise.eps>
 
-LaTeX Warning: Reference `fig_van_grad_noise_large' on page 30 undefined on input line 944.
+LaTeX Warning: Citation `Outrata1998' on page 12 undefined on input line 430.
 
-[30]
-File: Pictures/Plots/constant_noise.eps Graphic file (type eps)
- <Pictures/Plots/constant_noise.eps>
-File: Pictures/Plots/steps_constant_noise.eps Graphic file (type eps)
- <Pictures/Plots/steps_constant_noise.eps> [31]
-File: Pictures/Plots/vanishing_noise.eps Graphic file (type eps)
+LaTeX Font Info:    Try loading font information for OMS+lmr on input line 436.
+("C:\Program Files\Annika Programme\MiKTeX\tex\latex\lm\omslmr.fd"
+File: omslmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
+)
+LaTeX Font Info:    Font shape `OMS/lmr/m/n' in size <12> not available
+(Font)              Font shape `OMS/lmsy/m/n' tried instead on input line 436.
 
-<Pictures/Plots/vanishing_noise.eps>
-File: Pictures/Plots/steps_vanishing_noise.eps Graphic file (type eps)
- <Pictures/Plots/steps_vanishing_noise.eps>
+Underfull \hbox (badness 10000) in paragraph at lines 473--475
 
-LaTeX Warning: Reference `' on page 32 undefined on input line 981.
+ []
+
+[12]
+
+LaTeX Warning: Citation `Kunapuli2008' on page 13 undefined on input line 478.
 
 
-LaTeX Warning: Reference `' on page 32 undefined on input line 981.
+LaTeX Warning: Citation `Moore2011' on page 13 undefined on input line 500.
 
-[32]
+[13]
 
-LaTeX Warning: Reference `fig_const_noise_comp' on page 33 undefined on input line 991.
+LaTeX Warning: Citation `Moore2011' on page 14 undefined on input line 528.
+
+[14]
+
+LaTeX Warning: Reference `subgr_wb' on page 15 undefined on input line 586.
 
 
-LaTeX Warning: Reference `fig_van_noise_comp' on page 33 undefined on input line 991.
+LaTeX Warning: Reference `subgr_upp' on page 15 undefined on input line 586.
+
+LaTeX Font Info:    Try loading font information for OT1+lmtt on input line 592.
+("C:\Program Files\Annika Programme\MiKTeX\tex\latex\lm\ot1lmtt.fd"
+File: ot1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
+) [15]
+
+LaTeX Warning: Citation `Kunapuli2008' on page 16 undefined on input line 611.
+
+[16]
+LaTeX Font Info:    Try loading font information for T1+lmtt on input line 651.
+ ("C:\Program Files\Annika Programme\MiKTeX\tex\latex\lm\t1lmtt.fd"
+File: t1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
+)
+Overfull \hbox (0.53162pt too wide) in paragraph at lines 647--660
+ [] 
+ []
 
 
-LaTeX Warning: Reference `fig_van_grad_noise_comp_large' on page 33 undefined on input line 991.
+Underfull \hbox (badness 10000) in paragraph at lines 667--672
 
-File: Pictures/Plots/no_noise_comp.eps Graphic file (type eps)
-<Pictures/Plots/no_noise_comp.eps>
-File: Pictures/Plots/steps_no_noise_comp.eps Graphic file (type eps)
- <Pictures/Plots/steps_no_noise_comp.eps>
-File: Pictures/Plots/constant_gradient_noise.eps Graphic file (type eps)
+ []
 
-<Pictures/Plots/constant_gradient_noise.eps>
-File: Pictures/Plots/steps_constant_gradient_noise.eps Graphic file (type eps)
- <Pictures/Plots/steps_constant_gradient_noise.eps> [33]) [34]
+[17]
+Overfull \hbox (58.26138pt too wide) in paragraph at lines 766--767
+[] 
+ []
+
+[18]
+
+LaTeX Warning: Citation `Musicant2004' on page 19 undefined on input line 783.
+
+
+LaTeX Warning: Citation `Musicant2000' on page 19 undefined on input line 783.
+
+
+LaTeX Warning: Citation `Musicant2004' on page 19 undefined on input line 783.
+
+
+LaTeX Warning: Citation `Platt1999' on page 19 undefined on input line 783.
+
+
+LaTeX Warning: Citation `Kao2004' on page 19 undefined on input line 783.
+
+
+Overfull \hbox (264.82431pt too wide) in paragraph at lines 783--784
+[] 
+ []
+
+[19]) [20]
 ("D:\Annika\Uni\10. Semester\Masterarbeit\Proximal Bundle Inexact Information\Git Hub\Masterarbeit\LaTeX\Bundle_methods_
-for_nonsmooth_nonconvex_problems_with_inexact_information.bbl" [35]) [36]
+for_nonsmooth_nonconvex_problems_with_inexact_information.bbl" [21]) [22]
 ("D:\Annika\Uni\10. Semester\Masterarbeit\Proximal Bundle Inexact Information\Git Hub\Masterarbeit\LaTeX\Bundle_methods_
 for_nonsmooth_nonconvex_problems_with_inexact_information.aux")
 
 LaTeX Warning: There were undefined references.
+
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
 
  )
 (\end occurred inside a group at level 1)
@@ -714,13 +779,12 @@ LaTeX Warning: There were undefined references.
 ### simple group (level 1) entered at line 1061 ({)
 ### bottom level 
 Here is how much of TeX's memory you used:
- 7943 strings out of 493922
- 125375 string characters out of 3142101
- 256284 words of memory out of 3000000
- 11053 multiletter control sequences out of 15000+200000
- 82736 words of font info for 67 fonts, out of 3000000 for 9000
+ 7940 strings out of 493922
+ 124315 string characters out of 3142101
+ 255284 words of memory out of 3000000
+ 11075 multiletter control sequences out of 15000+200000
+ 75125 words of font info for 59 fonts, out of 3000000 for 9000
  841 hyphenation exceptions out of 8191
- 40i,23n,48p,1584b,2412s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 40i,18n,48p,1580b,2301s stack positions out of 5000i,500n,10000p,200000b,50000s
 
-Output written on Bundle_methods_for_nonsmooth_nonconvex_problems_with_inexact_information.dvi (37 pages, 124164 bytes).
-
+Output written on Bundle_methods_for_nonsmooth_nonconvex_problems_with_inexact_information.dvi (23 pages, 78044 bytes).

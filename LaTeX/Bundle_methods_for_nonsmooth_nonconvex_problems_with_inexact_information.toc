@@ -1,27 +1,14 @@
 \select@language {english}
 \select@language {english}
 \contentsline {section}{List of Symbols}{}
-\contentsline {section}{\numberline {1}Proximal Bundle Method for Nonconvex Functions with Inexact Information}{1}
-\contentsline {subsection}{\numberline {1.1}Derivation of the Method}{1}
-\contentsline {subsubsection}{\numberline {1.1.1}Inexactness}{1}
-\contentsline {subsubsection}{\numberline {1.1.2}Nonconvexity}{2}
-\contentsline {subsubsection}{\numberline {1.1.3}Aggregate Objects}{4}
-\contentsline {subsection}{\numberline {1.2}On Different Convergence Results}{6}
-\contentsline {subsubsection}{\numberline {1.2.1}The Constraint Set}{6}
-\contentsline {subsubsection}{\numberline {1.2.2}Exact Information and Vanishing Errors}{7}
-\contentsline {subsubsection}{\numberline {1.2.3}Convex Objective Functions}{7}
-\contentsline {section}{\numberline {2}Variable Metric Bundle Method}{8}
-\contentsline {subsection}{\numberline {2.1}Main Ingredients to the Method}{8}
-\contentsline {subsubsection}{\numberline {2.1.1}Variable Metric Bundle Methods}{9}
-\contentsline {subsubsection}{\numberline {2.1.2}Noll's Second Order Model}{9}
-\contentsline {subsubsection}{\numberline {2.1.3}The Descent Measure}{11}
-\contentsline {subsection}{\numberline {2.2}The Variable Metric Bundle Algorithm}{11}
-\contentsline {subsection}{\numberline {2.3}Convergence Analysis}{13}
-\contentsline {subsection}{\numberline {2.4}Updating the Metric}{21}
-\contentsline {subsubsection}{\numberline {2.4.1}Scaling of the Whole Matrix}{21}
-\contentsline {subsubsection}{\numberline {2.4.2}Adaptive Scaling of Single Eigenvalues}{22}
-\contentsline {subsubsection}{\numberline {2.4.3}Other Updating Possibilities}{23}
-\contentsline {subsection}{\numberline {2.5}Numerical Testing}{24}
-\contentsline {subsubsection}{\numberline {2.5.1}Academic Test Examples}{26}
-\contentsline {subsubsection}{\numberline {2.5.2}Test Examples in Higher Dimensions}{30}
+\contentsline {section}{\numberline {1}Application to Model Selection for Primal SVM}{1}
+\contentsline {subsection}{\numberline {1.1}Introduction}{1}
+\contentsline {subsection}{\numberline {1.2}Introduction to Support Vector Machines}{2}
+\contentsline {subsubsection}{\numberline {1.2.1}Risk minimization}{3}
+\contentsline {subsubsection}{\numberline {1.2.2}Support Vector machines}{4}
+\contentsline {subsection}{\numberline {1.3}Bilevel Approach and Inexact Bundle Method}{6}
+\contentsline {subsubsection}{\numberline {1.3.1}Reformulation as bilevel problem}{6}
+\contentsline {subsubsection}{\numberline {1.3.2}Solution of the Bilevel Program}{8}
+\contentsline {subsubsection}{\numberline {1.3.3}The Algorithm???}{15}
+\contentsline {subsection}{\numberline {1.4}Numerical Experiments}{16}
 \contentsline {section}{References}{}

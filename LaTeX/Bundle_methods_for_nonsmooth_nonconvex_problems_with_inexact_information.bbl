@@ -6,73 +6,74 @@ Frank~H. Clarke.
 \newblock Classics in Applied Mathematics. Society for Industrial and Applied
   Mathematics Philadelphia, 1990.
 
-\bibitem{Haarala2007}
-Napsu Haarala, Kaisa Miettinen, and Marko~M. M{\"a}kel{\"a}.
-\newblock Globally convergent limited memory bundle method for large-scale
-  nonsmooth optimization.
-\newblock {\em Mathematical Programming}, 109(1):181--205, 2007.
+\bibitem{Cristianini2000}
+Nello Cristianini and John Shawe-Taylor.
+\newblock {\em An Introduction to Support Vector Machines and Other
+  Kernel-based Learning Methods}.
+\newblock Cambridge University Press, 2000.
 
-\bibitem{Hare2010}
-Warren Hare and Claudia Sagastiz\`{a}bal.
-\newblock A redistributed proximal bundle method for nonconvex optimization.
-\newblock {\em SIAM Journal on Optimization}, 20(5):2442--2473, 2010.
+\bibitem{Fuduli2004a}
+A.~Fuduli, M.~Gaudioso, and G.~Giallombardo.
+\newblock Minimizing nonconvex nonsmooth functions via cutting planes and
+  proximity control.
+\newblock {\em {SIAM} Journal on Optimization}, 14(3):743--756, 2004.
 
-\bibitem{Hare2016}
-Warren Hare, Claudia Sagastiz{\`a}bal, and Mikhail Solodov.
-\newblock A proximal bundle method for nonsmooth nonconvex functions with
-  inexact information.
-\newblock {\em Computational Optimization and Applications}, 63:1--28, 2016.
+\bibitem{Heinonen2004}
+Juha Heinonen.
+\newblock Lectures on lipschitz analysis.
+\newblock Lectures at the 14th Jyv{\"a}skyl{\"a} Summer School in August 2004,
+  2004.
 
-\bibitem{Lemarechal1994}
-Claude Lemar{\'e}chal and Claudia Sagastiz{\'a}bal.
-\newblock {\em An approach to variable metric bundle methods}, pages 144--162.
-\newblock Springer Berlin Heidelberg, Berlin, Heidelberg, 1994.
+\bibitem{Kao2004}
+W.~C. Kao, K.~M. Chung, C.~L. Sun, and C.~J. Lin.
+\newblock Decomposition methods for linear support vector machines.
+\newblock {\em Neural Computation}, 16(8):1689--1704, Aug 2004.
 
-\bibitem{Lemarechal1997}
-Claude Lemar{\'e}chal and Claudia Sagastiz{\'a}bal.
-\newblock Variable metric bundle methods: From conceptual to implementable
-  forms.
-\newblock {\em Mathematical Programming}, 76(3):393--410, 1997.
+\bibitem{Koenigsberger2002}
+Konrad Königsberger.
+\newblock {\em Analysis 2}.
+\newblock Springer Berlin Heidelberg, 2002.
 
-\bibitem{Lewis2009}
-Adrian~S Lewis and Michael~L Overton.
-\newblock Nonsmooth optimization via bfgs.
-\newblock {\em submitted to SIAM Journal on Optimization}, pages 1--35, 2009.
+\bibitem{Kunapuli2008}
+Gautam Kunapuli.
+\newblock {\em A bilevel optimization approach to machine learning}.
+\newblock PhD thesis, Rensselaer Polytechnic Institute Troy, New York, 2008.
 
-\bibitem{Luksan1999}
-L.~Luk{\v{s}}an and J.~Vl{\v{c}}ek.
-\newblock Globally convergent variable metric method for convex nonsmooth
-  unconstrained minimization.
-\newblock {\em Journal of Optimization Theory and Applications},
-  102(3):593--613, sep 1999.
+\bibitem{Moore2010a}
+G.~Moore, C.~Bergeron, and K.~P. Bennett.
+\newblock Gradient-type methods for primal svm model selection.
+\newblock {\em Neural Information Processing Systems Workshop: Optimization for
+  Machine Learning}, 2010.
 
-\bibitem{Ulbrich2012}
-Stefan~Ulbrich Michael~Ulbrich.
-\newblock {\em Nichtlineare Optimierung}.
-\newblock Springer Basel AG, 2012.
+\bibitem{Moore2011}
+Gregory Moore, Charles Bergeron, and Kristin~P. Bennett.
+\newblock Model selection for primal svm.
+\newblock {\em Machine Learning}, 85(1):175--208, 2011.
 
-\bibitem{Nocedal1980}
-Jorge Nocedal.
-\newblock Updating quasi-newton matrices with limited storage.
-\newblock {\em Mathematics of Computation}, 35(151):773--782, 1980.
+\bibitem{Musicant2004}
+D.~R. Musicant and A.~Feinberg.
+\newblock Active set support vector regression.
+\newblock {\em IEEE Transactions on Neural Networks}, 15(2):268--275, March
+  2004.
 
-\bibitem{Noll2013}
-Dominikus Noll.
-\newblock Bundle method for non-convex minimization with inexact subgradients
-  and function values.
-\newblock In {\em Computational and Analytical Mathematics}, pages 555--592.
-  Springer Nature, 2013.
+\bibitem{Musicant2000}
+David~R. Musicant.
+\newblock {\em Data Mining via Mathematical Programming and Machine Learning}.
+\newblock PhD thesis, University of Wisconsin, Madison, 2000.
 
-\bibitem{Noll2012}
-Dominikus Noll, Olivier Prot, and Aude Rondepierre.
-\newblock A proximity control algorithm to minimize non-smooth and non-convex
-  functions.
-\newblock {\em Pacific Journal of Optimization}, 4(3):571--604, 2012.
+\bibitem{Outrata1998}
+Ji{\v{r}}i Outrata, Michal Ko{\v{c}}vara, and Jochem Zowe.
+\newblock {\em Nonsmooth Approach to Optimization Problems with Equilibrium
+  Constraints}.
+\newblock Springer {US}, 1998.
 
-\bibitem{Polyak1987}
-Boris~T. Polyak.
-\newblock {\em Introduction to Optimization}.
-\newblock Optimization Software , Inc., Publications Division, New York, 1987.
+\bibitem{Platt1999}
+John~C. Platt.
+\newblock Using analytic qp and sparseness to speed training of support vector
+  machines.
+\newblock In M.~J. Kearns, S.~A. Solla, and D.~A. Cohn, editors, {\em Advances
+  in Neural Information Processing Systems 11}, pages 557--563. MIT Press,
+  1999.
 
 \bibitem{Rockafellar2009}
 R.~Tyrrell Rockafellar and Roger J.~B. Wets.
@@ -80,28 +81,20 @@ R.~Tyrrell Rockafellar and Roger J.~B. Wets.
   mathematischen Wissenschaften}.
 \newblock Springer Berlin Heidelberg, 3rd edition, 2009.
 
-\bibitem{Treiman1986}
-Jay~S. Treiman.
-\newblock Clarke's gradients and $\varepsilon$-subgradients in banach spaces.
-\newblock {\em Transactions of the American Mathematical Society},
-  294(1):65--65, jan 1986.
+\bibitem{Rockafellar1985}
+R.T. Rockafellar.
+\newblock Extensions of subgradient calculus with applications to optimization.
+\newblock {\em Nonlinear Analysis: Theory, Methods {\&} Applications},
+  9(7):665--698, jul 1985.
 
-\bibitem{Vlcek2001}
-J.~Vl\v{c}ek and L.~Luk\v{s}an.
-\newblock Globally convergent variable metric bundle method for nonconvex
-  nondifferentiable unconstrained minimization.
-\newblock {\em Journal of Optimization Theory and Applications},
-  111(2):407--430, 2001.
+\bibitem{Vapnik1998}
+Vladimir~N. Vapnik.
+\newblock {\em Statistical Learning Theory}.
+\newblock JOHN WILEY \& SONS INC, 1998.
 
-\bibitem{Hare2009}
-Claudia~Sagastiz\`{a}bal Warren~Hare.
-\newblock Computing proximal points of nonconvex functions.
-\newblock {\em Mathematical Programming}, 116:221--258, 2009.
-
-\bibitem{Oliveira2014}
-Claude~Lemar\'{e}chal Welington~de Oliveira, Claudia~Sagastiz\`{a}bal.
-\newblock Convex proximal bundle methods in depth: a unified analysis for
-  inexact oracles.
-\newblock {\em Mathematical Programming}, 148:241--277, 2014.
+\bibitem{Vapnik1999}
+Vladimir~N. Vapnik.
+\newblock An overview of statistical learning theory.
+\newblock {\em IEEE Transactions on Neural Networks}, 10(5), 1999.
 
 \end{thebibliography}
