@@ -1,8 +1,8 @@
 \section{A Basic Bundle Method}
-\label{sec_conv_ex}
+\label{sec_basic_bundle}
 
 When bundle methods were first introduced in 1975 by Lemaréchal and Wolfe they were developed to minimize a convex (possibly nonsmooth) function \(f\) for which at least one subgradient at any point \(x\) can be computed \cite{Mifflin2012}.
-To provide an easier understanding of the proximal bundle method in \cite{Hare2016} and stress the most important ideas of how to deal with nonconvexity and inexactness first a basic bundle method is shown here. 
+To provide an easier understanding of the proximal bundle method from \cite{Hare2016} presented in section \ref{sec_nonconv_inex} and stress the most important ideas of how to deal with nonconvexity and inexactness in bundle methods first a basic bundle method is shown here. 
 
 %\textcolor{red}{link to chapter?}
 
@@ -24,7 +24,7 @@ The optimization problem considered in this section is
   \min_{x} f(x) \quad \text{s.t.} \quad x \in X
 \label{min_prob_basic}
 \end{equation}
-where \(f\) is a convex but possibly nondifferentiable function and \(X \subseteq \R^n\) is a  closed and convex set.
+where \(f\) is a convex but possibly nondifferentiable function and \(X \subset \R^n\) is a  closed and convex set.
 
 %\textcolor{red}{Define Problem again?? Incorporate ``set-constraint'' by writing \(h(x):= f(x)+\mathtt{i}_X\). \(\rightarrow\) later???}
 
@@ -34,10 +34,10 @@ where \(f\) is a convex but possibly nondifferentiable function and \(X \subsete
 
 The geometric idea of the \emph{cutting plane method} is to build a piecewise linear model of the objective function \(f\) that can be minimized more easily than the original objective function.
 This model is built from a \emph{bundle} of information that is gathered in the previous iterations.
-In the \(k\)'th iteration, the bundle consists of the previous iterates \(x^j\), the respective function values \(f(x^j)\) and a subgradient at each point \(g^j \in \partial f(x^j)\) for all indices \(j\) in the index set \(J_k\). From each of these triples, one can construct a linear function 
+In the \(k\)'th iteration, the bundle consists of the previous iterates \(x^j\), the respective function values \(f(x^j)\) and a subgradient at each point \(g^j \in \partial f(x^j)\) for all indices \(j\) in the index set \(J_k\). From each of these triples one can construct a linear function 
 
 \begin{equation*}
-	l_j(x) = f(x^j) + \Langle g^j,x-x^j \Rangle
+	l_j(x) := f(x^j) + \Langle g^j,x-x^j \Rangle
 \label{lin_fun}
 \end{equation*}  
 
@@ -45,11 +45,11 @@ where \(f(x^j) = l_j(x^j)\) and due to convexity \(f(x) \geq l_j(x), ~ x \in X\)
 The objective function \(f\) can then be approximated by the piecewise linear function
 
 \begin{equation}
-	m_k(x) = \max_{j \in J_k} l_j(x).
+	m_k(x) := \max_{j \in J_k} l_j(x).
 \label{cp_model}
 \end{equation}
 
-A new iterate \(x^{k+1}\) is found by solving the subproblem
+This function is therefore also called \emph{model function}. Instead of working with the original objective, a new iterate \(x^{k+1}\) is found by solving the subproblem
 
 \begin{equation*}
 	\min_{x} m_k(x) \quad \text{s.t.} \quad x \in X.
@@ -60,10 +60,10 @@ A new iterate \(x^{k+1}\) is found by solving the subproblem
 
 This subproblem should of course be easier to solve than the original task. A question that depends a lot on the structure of \(X\). If \(X = \R^n\) or a polyhedron, the problem can be solved easily. Still there are some major drawbacks to the idea. For example if \(X = \R^n\) the solution of the subproblem in the first iteration is always \(-\infty\).
 In general we can say that the subproblem does not necessarily have a solution.
-To tackle this problem a penalty term is introduced to the subproblem. It then reads
+To tackle this problem a regularization term is introduced to the subproblem. It then reads
 
 \begin{equation}
-	\min \tilde{m}_k(x) =  m_k(x) + \frac{1}{2 t_k}\|x-x^k\|^2 \quad \text{s.t.} \quad x \in X, ~t_k > 0.
+	\min \tilde{m}_k(x) =  m_k(x) + \frac{1}{2 t_k}\lVert x-x^k\rVert^2 \quad \text{s.t.} \quad x \in X, ~t_k > 0.
 \label{stabil_model_fun}
 \end{equation}
 
@@ -74,7 +74,7 @@ This new subproblem is strongly convex and therefore always has  a unique soluti
 %\textcolor{red}{Some nice sentences to explain the term a little bit more and to lead over to the next paragraph.\\ 
 %To understand the deeper motivation of this term see \cite{Hiriart-Urruty1993}. For this introduction it suffices to see that due to the regularization term the subproblem is now strongly convex and therefore always uniquely solvable.} \\
 
-The regularization term can be motivated and interpreted in many different ways, c.f. \cite{Hiriart-Urruty1993}. From different possible regularization terms the most popular in bundle methods is the penalty-like regularization used here.
+The regularization term can be motivated and interpreted in many different ways (c.f. \cite[chapter XV]{Hiriart-Urruty1993}). From different possible regularization terms the most popular in bundle methods is the penalty-like regularization used here.
 
 The second major step towards the bundle algorithm is the introduction of a so called \emph{stability center} or  \emph{serious point} \(\hat{x}^k\). It is the iterate that yields the ``best'' approximation of the optimal point up to the \(k\)'th iteration (not necessarily the lowest function value though).
 The updating technique for \(\hat{x}^k\) is crucial for the convergence of the method: If the next iterate yields a decrease of \(f\) that is ``large enough'', namely larger than a fraction of the decrease suggested by the model function for this iterate, the stability center is moved to that iterate. If this is not the case, the stability center remains unchanged.
@@ -94,12 +94,12 @@ If the actual decrease of the objective function is larger than a fraction of th
 \[ f(\hat{x}^k) - f(x^{k+1}) \geq m \delta^M_k, \quad m \in (0,1) \]
 
 set the stability center to \( \hat{x}^{k+1} = x^{k+1}\). This is called a \emph{serious} or \emph{descent step}.
-If this is not the case a \emph{null step} is executed and the serious iterate \(\hat{x}^{k+1} = \hat{x}^k\) remains the same .
+If this is not the case a \emph{null step} is executed and the serious iterate \(\hat{x}^{k+1} = \hat{x}^k\) remains the same.
 
-Besides the model decrease other forms of decrease measures and variations of these are possible. Some are presented in \cite{Hiriart-Urruty1993} and \cite{Oliveira2014}.
+Beside the model decrease other forms of decrease measures and variations of these are possible. Some are presented in \cite{Hiriart-Urruty1993} and \cite{Oliveira2014}.
 
 \subsubsection{Subproblem Reformulations}
-The subproblem to be solved to find the next iterate can be rewritten as a smooth optimization problem. For convenience we first rewrite the affine functions \(l_j\) with respect to the stability center \(\hat{x}^k\).
+The subproblem to be solved to find the next iterate can be rewritten as a smooth optimization problem. For convenience we first rewrite the affine functions \(l_j\) with respect to the stability center \(\hat{x}^k\):
 
 %\textcolor{red}{citation for this???!!!}
 
@@ -115,8 +115,7 @@ where
 \label{lin_err}
 \end{equation*}
 
-is the \emph{linearization error}. Due to convexity of \(f\) it is nonnegative. This property is essential for the convergence theory and will also be of interest when moving on to the case of nonconvex and inexact objective functions. \\
-
+is the \emph{linearization error}. Due to convexity of \(f\) it is nonnegative. This property is essential for the convergence theory and will also be of interest when moving on to the case of nonconvex and inexact objective functions.
 
 Subproblem (\ref{stabil_model_fun}) can now be written as
 
@@ -143,16 +142,21 @@ The new iterate is given by \(x^{k+1} = \hat{x}^k + d^k\). %\textcolor{red}{cita
 \subsection{The Prox-Operator}
 \label{subsec_prox_op}
 
-The constraint \(\hat{x}^k+d \in X\) can also be incorporated directly in the objective function by using the indicator function
+The constraint \(\hat{x}^k+d \in X\) can also be incorporated directly in the objective function by using the \emph{indicator function}
 
-\[ \mathtt{i}_X(x) = \left\{ \begin{array}{cl} 0, & \text{if } x \in X \\ +\infty, & \text{if } x \notin X \end{array} \right. .\]
+\[ \mathtt{i}_X(x) := \left\{ \begin{array}{cl} 0, & \text{if } x \in X \\ +\infty, & \text{if } x \notin X \end{array} \right. .\]
 
-This function is convex if and only if the set \(X\) is convex \cite{Rockafellar1996}.
+This function is convex if and only if the set \(X\) is convex \cite[p. 40]{Rockafellar2009}.
+
+\begin{remark}
+	The indicator function is actually an extended-real-valued function, meaning that it allows the function value \(+\infty\).
+	Introducing it into the subproblem means that the objective function of the subproblem also becomes an extended-real-valued function. As this is does not have any impact on the convergence theory we omit to introduce the concept of extended-real-valued functions here.
+\end{remark}
 
 Subproblem (\ref{stabil_model_fun}) then reads with respect to the serious point \(\hat{x}^k\)
 
 \begin{equation}
-	\min_{x \in \R^n} m_k(x) + \mathtt{i}_X(x) + \frac{1}{2t_k}\|x-\hat{x}^k\|^2. % \quad \text{s.t.} \quad {g^j}^{\top}d - e^k_j - \xi \leq 0, \quad j \in J_k
+	\min_{x \in \R^n} m_k(x) + \mathtt{i}_X(x) + \frac{1}{2t_k}\lVert x-\hat{x}^k\rVert^2. % \quad \text{s.t.} \quad {g^j}^{\top}d - e^k_j - \xi \leq 0, \quad j \in J_k
 \label{sub_prob_fin}
 \end{equation}
 
@@ -161,15 +165,15 @@ Subproblem (\ref{stabil_model_fun}) then reads with respect to the serious point
 The subproblem is now written as the \emph{Moreau-Yosida regularization} of \(\check{f}(x):= m_k(x) + \mathtt{i}_X(x)\). The emerging mapping is also known as \emph{proximal point mapping} \cite{Hare2010} or \emph{prox-operator}
 
 	\begin{equation}
-		prox_{t,\check{f}}(x) = \argmin_{y \in \R^n}\left\{\check{f}(y) + \frac{1}{2t}\|x-y\|^2\right\}, \quad t > 0.
+		prox_{t,\check{f}}(x) := \argmin_{y \in \R^n}\left\{\check{f}(y) + \frac{1}{2t}\|x-y\|^2\right\}, \quad t > 0.
 	\label{prox_op}
 	\end{equation}
 
 This special form of the subproblems gives the primal bundle method its name, \emph{proximal bundle method}. The above mapping also plays a key role when the method is generalized to nonconvex objective functions and inexact information.
 
 
-\subsection{???}
-\textcolor{red}{not aggregate Objects}
+\subsection{Aggregation and Stopping Condition}
+%\textcolor{red}{not aggregate Objects}
 
 We look again at a slightly different formulation of the bundle subproblem 
 
@@ -184,10 +188,10 @@ As the objective function is still convex (\(X\) is a convex set) the following 
 There exist a subgradient \(\nu^k \in \partial \mathtt{i}_{X}(\hat{x}^{k}+d^k)\) and Lagrangian multipliers \(\alpha_j, ~j \in J^k\) such that
 
 \begin{align}
-	& 0 = \nu^k + \frac{1}{t_k}d^k + \sum_{j \in J^k}\alpha_j g^j \label{KKT_1}\\
+	& 0 = \nu^k + \frac{1}{t_k}d^k + \sum_{j \in J^k}\alpha_j g^j,\label{KKT_1}\\
 	& \sum_{j \in J_k}\alpha_j = 1, \label{KKT_2}\\
 	& \alpha_j \geq 0, ~j \in J^k, \label{KKT_3}\\
-	& \Langle g^j,d^k\Rangle - e^k_j - \xi_k \leq 0, \label{KKT_4}\\
+	& \Langle g^j,d^k\Rangle - e^k_j - \xi_k \leq 0 \text{ and} \label{KKT_4}\\
 	& \sum_{j \in J^k} \alpha_j \left(\Langle g^j,d^k\Rangle - e^k_j - \xi_k\right) = 0 \label{KKT_5}.
 \end{align}
 
@@ -224,13 +228,13 @@ Here relation (\ref{xi}) was used to replace \(\xi_k\).
 
 The aggregate subgradient and error are used to formulate an implementable stopping condition for the bundle algorithm. The motivation behind that becomes clear with the following lemma.
 
-\begin{lemma}\cite[Theorem 6.68]{Geiger2002}
+\begin{lemma}[{\cite[Theorem 6.68, p. 387]{Geiger2002}}]
  Let \(X = \R^n\). Let \(\varepsilon > 0\), \(\hat{x}^k \in \R^n\) and \(g^j \in \partial f(x^j)\) for \(j \in J^k\). Then the set 
 
-\[ \mathcal{G}_{\varepsilon}^{k} := \left\{\sum_{j \in J^k}\alpha_j g^j \mid \sum_{j \in J^k} \alpha_j  e_j \leq \varepsilon, \sum_{j \in J^k}\alpha_j = 1, \alpha_j \geq 0, j \in J^k\right\} \]
+\[ \mathcal{G}_{\varepsilon}^{k} := \left\{\sum_{j \in J^k}\alpha_j g^j \biggm| \sum_{j \in J^k} \alpha_j  e_j \leq \varepsilon, \sum_{j \in J^k}\alpha_j = 1, \alpha_j \geq 0, j \in J^k\right\} \]
 
 is a subset of the \(\varepsilon\)-subdifferential of \(f(\hat{x}^k)\)
-\[ \mathcal{G}_{\varepsilon}^k \subseteq \partial_{\varepsilon}f(\hat{x}^k). \]
+\[ \mathcal{G}_{\varepsilon}^k \subset \partial_{\varepsilon}f(\hat{x}^k). \]
 
 \end{lemma}
 
@@ -238,7 +242,7 @@ This means that in the unconstrained case \(G^k \in \partial_{E_k} f(\hat{x}^k)\
 In the constrained case the stopping condition is written as
 
 \begin{equation*}
-	\delta_k = E^k+t_k\|G^k+\nu^k\|^2 \leq \mathtt{tol}
+	\delta_k = E^k+t_k\|G^k+\nu^k\|^2 \leq \mathtt{tol},
 \label{stop_cond}
 \end{equation*}
 
@@ -250,7 +254,7 @@ The relation
 \begin{align*}
 	\delta_k &= E^k+t_k\|G^k+\nu^k\|^2 \\
   &= E^k-\Langle G^k,d^k\Rangle - \Langle \nu^k,d^k \Rangle \\
-	&= f(\hat{x}^k)-m_k(x^{k+1}) - \Langle \nu^k,d^k \Rangle \\  
+	&= f(\hat{x}^k)-m_k(x^{k+1}) - \Langle \nu^k,d^k \Rangle, \\  
 \end{align*}
 
 where (\ref{agg_subgr}) and (\ref{agg_err}) were used, shows that the new \(\delta_k\) is only a small variation of the model decrease \(\delta^M_k\).
@@ -258,14 +262,14 @@ If the iterate \(x^{k+1}\) does not lie on the boundary of the constraint set \(
 
 For the model update the following two conditions are assumed to be fulfilled in consecutive null steps:
 \begin{align}
-	&m_{k+1}(\hat{x}^k+d) \geq f(\hat{x}^{k+1})-e^{k+1}_{k+1}+\left\langle g^{k+1},d \right\rangle \quad \forall d \in \R^n \label{model_update_1} \\
-	&m_{k+1}(\hat{x}^k+d) \geq a_k(\hat{x}^k+d) \quad \forall d \in \R^n 
+	&m_{k+1}(\hat{x}^k+d) \geq f(\hat{x}^{k+1})-e^{k+1}_{k+1}+\left\langle g^{k+1},d \right\rangle \quad \forall d \in \R^n  \text{ and}\label{model_update_1} \\
+	&m_{k+1}(\hat{x}^k+d) \geq a_k(\hat{x}^k+d) \quad \forall d \in \R^n.
 	\label{model_update_2}
 \end{align}
 
 The first condition means that the newly computed information is always put into the bundle. The second one is important when updating the bundle index set \(J^k\).
 It holds trivially if no or only inactive information \(j \text{ with }\alpha_j = 0\) is removed \cite{Hare2016}.
-It is also always satisfied if the aggregate linearization \(a_k\) itself is added to the bundle. In this case active information can be removed without violating the condition. This is the key idea of Kiwiel's aggregation technique and ensures that the set \( \{j \in J^k| \alpha_j >0 \} \) can be bounded.
+It is also always satisfied if the aggregate linearization \(a_k\) itself is added to the bundle. In this case active information can be removed without violating the condition. This is the key idea of Kiwiel's aggregation technique and ensures that the set \( \{j \in J^k\mid  \alpha_j >0 \} \) can be bounded.
 
 An issue of bundle methods is that in spite of the possibility to delete inactive information the bundle can still become very large. Kiwiel therefore proposed a totally different use of the aggregate objects in \cite{Kiwiel1986}. The aggregate subgradient can be used to build the \emph{aggregate linearization}
 
@@ -276,7 +280,9 @@ An issue of bundle methods is that in spite of the possibility to delete inactiv
 
 This function can be used to avoid memory overflow as it compresses the information of all bundle elements into one affine plane. Adding the function \(a_k\) to the cutting plane model preserves the assumptions (\ref{model_update_1}) and (\ref{model_update_2}) put on the model and can therefore be used instead of or in combination with the usual cutting planes.
 
-This can however impair the speed of convergence if the bundle is kept too small and provides hence less information about the objective function \cite{Oliveira2014a}.
+This can however impair the speed of convergence if the bundle is kept too small and provides hence less information about the objective function \cite[p. 654]{Oliveira2014a}.
+
+\subsection{The Algorithm}
 
 We have now all the ingredients so that the following basic bundle algorithm can be stated: 
 
@@ -288,11 +294,11 @@ We have now all the ingredients so that the following basic bundle algorithm can
 
 \hrule  \vspace{0.4ex} \hrule
 \vspace{1ex}
-\textbf{Algorithm \ref{sec_conv_ex}.1: Basic Bundle Method}
+\textbf{Algorithm \ref{sec_basic_bundle}.1: Basic Bundle Method}
 \vspace{1ex}
 \hrule
 \vspace{1ex}
-Select a descent parameter \( m \in (0,1)\) and a stopping tolerance \( \mathtt{tol} \geq 0\). Choose a starting point \(x^1 \in \R^n\) and compute \(f(x^1)\) and \(g^1\). Set the initial index set \(J_1:=\{1\}\) and the initial stability center to \(\hat{x}^1 := x^1\), \(f(\hat{x}^1) = f(x^1)\) and select \(t_1 > 0\).
+Select a descent parameter \( m \in (0,1)\) and a stopping tolerance \( \mathtt{tol} \geq 0\). Choose a starting point \(x^1 \in \R^n\) and compute \(f(x^1)\) and \(g^1\). Set the initial index set \(J_1:=\{1\}\) and the initial stability center to \(\hat{x}^1 := x^1\). Set \(f(\hat{x}^1) = f(x^1)\) and select \(t_1 > 0\).
 \end{minipage}
 
 For \(k = 1,2,3  \dotsc \)   
@@ -300,22 +306,23 @@ For \(k = 1,2,3  \dotsc \)
 \begin{enumerate}
 	\item Calculate
 	\[ d^k = \argmin_{d \in \R^n}{m_k(\hat{x}^k+d) + \mathtt{i}_X(\hat{x}^k+d) +\frac{1}{2t_k}\|d\|^2}  \]
-	and the corresponding Lagrange multiplier \(\alpha_j^k,~ j \in J_k\).
+	and the corresponding Lagrange multipliers \(\alpha_j^k,~ j \in J_k\).
 	\item Set
-		\begin{equation*}
-			\begin{split}
-				G^k = \sum_{j \in J_k}{\alpha^k_j g^k_j}, \quad E_k = \sum_{j \in J_k}{\alpha^k_j e^k_j}, \quad \text{and} \quad  \delta_k =  E_k + \frac{1}{t_k} d_k^2
-			\end{split}
-		\end{equation*}
+		\begin{align*}
+				G^k &= \sum_{j \in J_k}{\alpha^k_j g^k_j}, \\
+				E_k &= \sum_{j \in J_k}{\alpha^k_j e^k_j} \text{ and} \\
+				\delta_k &=  E_k + \frac{1}{t_k} d_k^2.
+		\end{align*}
 		If \(\delta_k \leq \mathtt{tol} \rightarrow \) STOP.
 	\item Set \( x^{k+1} = \hat{x}^k + d^k \).
 	\item Compute \(f(x^{k+1}),~ g^{k+1}\). \\
-	If 
-	\[f(x^{k+1}) \leq f(\hat{x}^k) - m\delta_k \quad \rightarrow  \text{serious step}. \]
+	If \(f(x^{k+1}) \leq f(\hat{x}^k) - m\delta_k \quad \rightarrow\) serious step. \\
+	\noindent\hspace*{2em}%
 	Set \(\hat{x}^{k+1} = x^{k+1}, ~f(\hat{x}^{k+1}) = f(x^{k+1})\) and select a suitable \(t_{k+1} > 0\). \\
 	Otherwise \(\rightarrow\text{ nullstep.}\) \\
+	\noindent\hspace*{2em}%
 	Set \(\hat{x}^{k+1} = \hat{x}^k, ~f(\hat{x}^{k+1})=f(x^{k+1})\) and choose \(t_{k+1} > 0\) in a suitable way.
-	\item Select the new bundle index set \(J_{k+1}\), calculate \(e_j^{k+1}\) for \(j \in J_{k+1}\)	and update the model \(m_k\).
+	\item Select the new bundle index set \(J_{k+1}\), calculate \(e_j^{k+1}\) for all \(j \in J_{k+1}\)	and update the model \(m_{k+1}\).
 \end{enumerate}
 \vspace{1ex}
 \hrule
@@ -342,9 +349,9 @@ at every serious step and
 at every null step.
 The idea behind this management of \(t_k\) is taken from the trust region method: If the computed iterate was good, the model is assumed to be reliable in a larger area around this serious iterate so bigger step sizes are allowed. If a null step was taken, the model seems to be too inaccurate far from the current serious point. Then smaller step sizes are used.
 A more sophisticated version of this kind of step size management is also used by Noll et al. in \cite{Noll2012} and \cite{Noll2013}. The trust region idea was very much exploited by Schramm and Zowe in \cite{Schramm1992a}.
-In the case \(X = R^n\) the sequence \(\{\hat{x}^k\}\) can be unbounded. In this case bounding \(t_k \leq t_{max} < \infty\) for all  \(k\) preserves the convergence proof \cite[Theorem 3.2.2]{Hiriart-Urruty1993}.
+In the case \(X = \R^n\) the sequence \(\{\hat{x}^k\}\) can be unbounded. In this case bounding \(t_k \leq t_{max} < \infty\) for all  \(k\) preserves the convergence proof \cite[Theorem 3.2.2, p. 308]{Hiriart-Urruty1993}.
 
-In general it can be shown that if \(f\) posses global minima and the basic bundle algorithm generates the sequence \(\{\hat{x}^k\}\) this sequence converges to a minimizer of problem (\ref{min_prob_basic}) (c.f \cite{Hiriart-Urruty1993}).
+In general it can be shown that if \(f\) posses global minima and the basic bundle algorithm generates the sequence \(\{\hat{x}^k\}\), this sequence converges to a minimizer of problem (\ref{min_prob_basic}) (c.f \cite{Hiriart-Urruty1993}).
 
 
 

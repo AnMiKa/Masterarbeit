@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=latex 2017.6.11)  10 JUL 2017 17:28
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=latex 2017.6.11)  17 JUL 2017 12:20
 entering extended mode
 **Bundle_methods_for_nonsmooth_nonconvex_problems_with_inexact_information.tex
 
@@ -456,22 +456,37 @@ Package: setspace 2011/12/19 v6.7a set line spacing
 \c@theorem=\count118
 
 ("D:\Annika\Uni\10. Semester\Masterarbeit\Proximal Bundle Inexact Information\Git Hub\Masterarbeit\LaTeX\Bundle_methods_
-for_nonsmooth_nonconvex_problems_with_inexact_information.aux")
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 116.
-LaTeX Font Info:    ... okay on input line 116.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 116.
-LaTeX Font Info:    ... okay on input line 116.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 116.
-LaTeX Font Info:    ... okay on input line 116.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 116.
-LaTeX Font Info:    ... okay on input line 116.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 116.
-LaTeX Font Info:    ... okay on input line 116.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 116.
-LaTeX Font Info:    ... okay on input line 116.
-LaTeX Font Info:    Try loading font information for T1+lmr on input line 116.
-
-("C:\Program Files\Annika Programme\MiKTeX\tex\latex\lm\t1lmr.fd"
+for_nonsmooth_nonconvex_problems_with_inexact_information.aux"
+("D:\Annika\Uni\10. Semester\Masterarbeit\Proximal Bundle Inexact Information\Git Hub\Masterarbeit\LaTeX\Chapters/Introd
+uction.aux")
+("D:\Annika\Uni\10. Semester\Masterarbeit\Proximal Bundle Inexact Information\Git Hub\Masterarbeit\LaTeX\Chapters/Prelim
+inaries.aux")
+("D:\Annika\Uni\10. Semester\Masterarbeit\Proximal Bundle Inexact Information\Git Hub\Masterarbeit\LaTeX\Chapters/Bundle
+_Methods.aux")
+("D:\Annika\Uni\10. Semester\Masterarbeit\Proximal Bundle Inexact Information\Git Hub\Masterarbeit\LaTeX\Chapters/Simpli
+fications.aux")
+("D:\Annika\Uni\10. Semester\Masterarbeit\Proximal Bundle Inexact Information\Git Hub\Masterarbeit\LaTeX\Chapters/Bundle
+_Method_nonconv_inex.aux")
+("D:\Annika\Uni\10. Semester\Masterarbeit\Proximal Bundle Inexact Information\Git Hub\Masterarbeit\LaTeX\Chapters/Variab
+le_Metric.aux")
+("D:\Annika\Uni\10. Semester\Masterarbeit\Proximal Bundle Inexact Information\Git Hub\Masterarbeit\LaTeX\Chapters/Bileve
+l_Application.aux")
+("D:\Annika\Uni\10. Semester\Masterarbeit\Proximal Bundle Inexact Information\Git Hub\Masterarbeit\LaTeX\Chapters/Append
+ix.aux"))
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 117.
+LaTeX Font Info:    ... okay on input line 117.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 117.
+LaTeX Font Info:    ... okay on input line 117.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 117.
+LaTeX Font Info:    ... okay on input line 117.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 117.
+LaTeX Font Info:    ... okay on input line 117.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 117.
+LaTeX Font Info:    ... okay on input line 117.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 117.
+LaTeX Font Info:    ... okay on input line 117.
+LaTeX Font Info:    Try loading font information for T1+lmr on input line 117.
+ ("C:\Program Files\Annika Programme\MiKTeX\tex\latex\lm\t1lmr.fd"
 File: t1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 Package caption Info: Begin \AtBeginDocument code.
@@ -480,211 +495,145 @@ Package caption Info: End \AtBeginDocument code.
 
 bibgerm.sty: babel.sty detected
 
-LaTeX Font Info:    Try loading font information for T1+lmss on input line 135.
+LaTeX Font Info:    Try loading font information for T1+lmss on input line 136.
 ("C:\Program Files\Annika Programme\MiKTeX\tex\latex\lm\t1lmss.fd"
 File: t1lmss.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 ("D:\Annika\Uni\10. Semester\Masterarbeit\Proximal Bundle Inexact Information\Git Hub\Masterarbeit\LaTeX\Bundle_methods_
 for_nonsmooth_nonconvex_problems_with_inexact_information.toc"
-LaTeX Font Info:    Try loading font information for OT1+lmr on input line 5.
+LaTeX Font Info:    Try loading font information for OT1+lmr on input line 6.
 
 ("C:\Program Files\Annika Programme\MiKTeX\tex\latex\lm\ot1lmr.fd"
 File: ot1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-LaTeX Font Info:    Try loading font information for OML+lmm on input line 5.
+LaTeX Font Info:    Try loading font information for OML+lmm on input line 6.
 
 ("C:\Program Files\Annika Programme\MiKTeX\tex\latex\lm\omllmm.fd"
 File: omllmm.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-LaTeX Font Info:    Try loading font information for OMS+lmsy on input line 5.
+LaTeX Font Info:    Try loading font information for OMS+lmsy on input line 6.
 
 ("C:\Program Files\Annika Programme\MiKTeX\tex\latex\lm\omslmsy.fd"
 File: omslmsy.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-LaTeX Font Info:    Try loading font information for OMX+lmex on input line 5.
+LaTeX Font Info:    Try loading font information for OMX+lmex on input line 6.
 
 ("C:\Program Files\Annika Programme\MiKTeX\tex\latex\lm\omxlmex.fd"
 File: omxlmex.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <12> on input line 5.
+(Font)              <12> on input line 6.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <8> on input line 5.
+(Font)              <8> on input line 6.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <6> on input line 5.
-LaTeX Font Info:    Try loading font information for U+msa on input line 5.
+(Font)              <6> on input line 6.
+LaTeX Font Info:    Try loading font information for U+msa on input line 6.
 
 ("C:\Program Files\Annika Programme\MiKTeX\tex\latex\amsfonts\umsa.fd"
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 5.
+LaTeX Font Info:    Try loading font information for U+msb on input line 6.
 
 ("C:\Program Files\Annika Programme\MiKTeX\tex\latex\amsfonts\umsb.fd"
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
-))
+) [1
+
+])
 \tf@toc=\write3
- [1
+ [2]
+("D:\Annika\Uni\10. Semester\Masterarbeit\Proximal Bundle Inexact Information\Git Hub\Masterarbeit\LaTeX\Chapters/Introd
+uction.tex" [1
 
-]
+]) [2]
+("D:\Annika\Uni\10. Semester\Masterarbeit\Proximal Bundle Inexact Information\Git Hub\Masterarbeit\LaTeX\Chapters/Prelim
+inaries.tex" [3
+
+
+] [4]) [5]
+("D:\Annika\Uni\10. Semester\Masterarbeit\Proximal Bundle Inexact Information\Git Hub\Masterarbeit\LaTeX\Chapters/Bundle
+_Methods.tex" [6
+
+
+] [7] [8]
+LaTeX Font Info:    Try loading font information for OT1+lmtt on input line 147.
+ ("C:\Program Files\Annika Programme\MiKTeX\tex\latex\lm\ot1lmtt.fd"
+File: ot1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
+) [9] [10] [11] [12]
+[13]) [14] [15]
+("D:\Annika\Uni\10. Semester\Masterarbeit\Proximal Bundle Inexact Information\Git Hub\Masterarbeit\LaTeX\Chapters/Simpli
+fications.tex" [16
+
+
+] [17] [18] [19]) [20]
+("D:\Annika\Uni\10. Semester\Masterarbeit\Proximal Bundle Inexact Information\Git Hub\Masterarbeit\LaTeX\Chapters/Bundle
+_Method_nonconv_inex.tex" [21
+
+
+] [22]
+Underfull \hbox (badness 10000) in paragraph at lines 166--167
+
+ []
+
+[23] [24] [25] [26] [27]) [28]
+("D:\Annika\Uni\10. Semester\Masterarbeit\Proximal Bundle Inexact Information\Git Hub\Masterarbeit\LaTeX\Chapters/Variab
+le_Metric.tex" [29
+
+
+] [30] [31] [32] [33] [34] [35] [36] [37] [38] [39] [40] [41] [42]
+Overfull \hbox (4.51106pt too wide) in paragraph at lines 562--563
+[]\T1/lmr/m/n/12 In the one di-men-sional case this means that we can de-note the \T1/lmr/m/it/12 right deriva-tive $\OM
+L/lmm/m/it/12 f\OT1/lmr/m/n/12 (\OML/lmm/m/it/12 x[]; \OT1/lmr/m/n/12 1) :=
+ []
+
+[43] [44] [45] [46]
+Overfull \hbox (4.89206pt too wide) in paragraph at lines 770--771
+[]$[][]$\T1/lmr/m/n/12 : Van-ish-ing sub-gra-di-ent noise, $[] \OT1/lmr/m/n/12 = \OML/lmm/m/it/12 [] \OT1/lmr/m/n/12 = 
+0$ \T1/lmr/m/n/12 and $[] \OT1/lmr/m/n/12 = 0\OML/lmm/m/it/12 :\OT1/lmr/m/n/12 01\OML/lmm/m/it/12 ; [] \OT1/lmr/m/n/12 
+= []\OMS/lmsy/m/n/12 f\OT1/lmr/m/n/12 0\OML/lmm/m/it/12 :\OT1/lmr/m/n/12 01\OML/lmm/m/it/12 ; \OMS/lmsy/m/n/12 k\OML/lmm
+/m/it/12 x[]\OMS/lmsy/m/n/12 k\OML/lmm/m/it/12 =\OT1/lmr/m/n/12 100\OMS/lmsy/m/n/12 g$
+ []
+
+[47]
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <10.95> on input line 817.
+ [48] [49] [50] [51] [52]) [53]
 ("D:\Annika\Uni\10. Semester\Masterarbeit\Proximal Bundle Inexact Information\Git Hub\Masterarbeit\LaTeX\Chapters/Bileve
-l_Application.tex"
-
-LaTeX Warning: Citation `Kunapuli2008' on page 1 undefined on input line 8.
+l_Application.tex" [54
 
 
-LaTeX Warning: Citation `Moore2011' on page 1 undefined on input line 8.
-
-
-LaTeX Warning: Citation `Kunapuli2008' on page 1 undefined on input line 15.
-
-
-LaTeX Warning: Citation `Kunapuli2008' on page 1 undefined on input line 29.
-
-
-LaTeX Warning: Citation `Outrata1998' on page 1 undefined on input line 32.
-
-
-LaTeX Warning: Citation `Moore2011' on page 1 undefined on input line 34.
-
-
-LaTeX Warning: Citation `Moore2010a' on page 1 undefined on input line 35.
-
-
-LaTeX Warning: Citation `Fuduli2004a' on page 1 undefined on input line 35.
-
-[1]
-
-LaTeX Warning: Citation `Cristianini2000' on page 2 undefined on input line 43.
-
-
-LaTeX Warning: Citation `Kunapuli2008' on page 2 undefined on input line 43.
-
-
-LaTeX Warning: Citation `Vapnik1999' on page 2 undefined on input line 48.
-
-
-LaTeX Warning: Citation `Cristianini2000' on page 2 undefined on input line 49.
-
-
-LaTeX Warning: Citation `Vapnik1998' on page 2 undefined on input line 54.
-
-[2]
-
-LaTeX Warning: Citation `Vapnik1999' on page 3 undefined on input line 67.
-
-
-LaTeX Warning: Citation `Vapnik1999' on page 3 undefined on input line 85.
-
-
-LaTeX Warning: Citation `Vapnik1999' on page 3 undefined on input line 87.
-
-
-LaTeX Warning: Citation `Vapnik1999' on page 3 undefined on input line 87.
-
-
-LaTeX Warning: Citation `Cristianini2000' on page 3 undefined on input line 88.
-
-
-LaTeX Warning: Citation `Kunapuli2008' on page 3 undefined on input line 92.
-
-
-LaTeX Warning: Citation `Vapnik1998' on page 3 undefined on input line 92.
-
-[3]
-
-LaTeX Warning: Citation `Kunapuli2008' on page 4 undefined on input line 110.
-
-
-LaTeX Warning: Citation `Cristianini2000' on page 4 undefined on input line 119.
-
-
-LaTeX Warning: Citation `Cristianini2000' on page 4 undefined on input line 124.
-
-
-Overfull \hbox (53.29071pt too wide) in paragraph at lines 125--126
-[]\T1/lmr/bx/n/12 Theorem 1.1 \T1/lmr/m/n/12 ([[], The-o-rem 6.1]) []\T1/lmr/m/it/12 Given a lin-early sep-a-ra-ble trai
+] [55] [56]
+Overfull \hbox (52.7907pt too wide) in paragraph at lines 125--126
+[]\T1/lmr/bx/n/12 Theorem 7.1 \T1/lmr/m/n/12 ([[], The-o-rem 6.1]) []\T1/lmr/m/it/12 Given a lin-early sep-a-ra-ble trai
 n-ing sam-ple $\OT1/lmr/m/n/12 
  = ((\OML/lmm/m/it/12 x[]; y[]\OT1/lmr/m/n/12 )\OML/lmm/m/it/12 ; :::; \OT1/lmr/m/n/12 (\OML/lmm/m/it/12 x[]; y[]\OT1/lm
 r/m/n/12 ))$
  []
 
-[4]
+[57] [58] [59] [60]
 
-LaTeX Warning: Citation `Cristianini2000' on page 5 undefined on input line 144.
+LaTeX Warning: Reference `??' on page 61 undefined on input line 268.
 
-
-LaTeX Warning: Citation `Kunapuli2008' on page 5 undefined on input line 174.
-
-
-LaTeX Warning: Reference `SVM_1' on page 5 undefined on input line 175.
-
-
-LaTeX Warning: Reference `SVM_2' on page 5 undefined on input line 175.
-
-
-LaTeX Warning: Reference `SVM_2' on page 5 undefined on input line 176.
-
-[5]
-
-LaTeX Warning: Citation `Kunapuli2008' on page 6 undefined on input line 190.
-
-
-LaTeX Warning: Citation `Kunapuli2008' on page 6 undefined on input line 194.
-
-
-LaTeX Warning: Citation `Moore2011' on page 6 undefined on input line 194.
-
-[6]
-
-LaTeX Warning: Reference `SVM_2' on page 7 undefined on input line 219.
-
-
-LaTeX Warning: Citation `Kunapuli2008' on page 7 undefined on input line 236.
-
-[7]
-
-LaTeX Warning: Reference `??' on page 8 undefined on input line 268.
-
-[8]
+[61]
 Overfull \hbox (17.12895pt too wide) in paragraph at lines 309--312
 \T1/lmr/m/n/12 Let us first as-sume that the outer and in-ner ob-jec-tive func-tions and $\OML/lmm/m/it/12 w\OT1/lmr/m/n
 /12 (\OML/lmm/m/it/12 \OT1/lmr/m/n/12 ) = [] \OMS/lmsy/m/n/12 L[]\OT1/lmr/m/n/12 (\OML/lmm/m/it/12 w; \OT1/lmr/m/n/12 
 )$
  []
 
-
-LaTeX Warning: Citation `Koenigsberger2002' on page 9 undefined on input line 337.
-
-[9]
-
-LaTeX Warning: Reference `SVM_2' on page 10 undefined on input line 348.
-
-
-LaTeX Warning: Reference `opt_con' on page 10 undefined on input line 373.
-
-
-LaTeX Warning: Citation `Heinonen2004' on page 10 undefined on input line 385.
-
-[10]
+[62] [63]
 Underfull \hbox (badness 10000) in paragraph at lines 406--408
 
  []
-
-
-LaTeX Warning: Citation `Rockafellar1985' on page 11 undefined on input line 419.
 
 
 Underfull \hbox (badness 10000) in paragraph at lines 427--428
 
  []
 
-[11]
+[64]
 Underfull \hbox (badness 10000) in paragraph at lines 429--430
 
  []
-
-
-LaTeX Warning: Citation `Outrata1998' on page 12 undefined on input line 430.
 
 LaTeX Font Info:    Try loading font information for OMS+lmr on input line 436.
 ("C:\Program Files\Annika Programme\MiKTeX\tex\latex\lm\omslmr.fd"
@@ -697,81 +646,60 @@ Underfull \hbox (badness 10000) in paragraph at lines 473--475
 
  []
 
-[12]
-
-LaTeX Warning: Citation `Kunapuli2008' on page 13 undefined on input line 478.
-
-
-LaTeX Warning: Citation `Moore2011' on page 13 undefined on input line 500.
-
-[13]
-
-LaTeX Warning: Citation `Moore2011' on page 14 undefined on input line 528.
-
-[14]
-
-LaTeX Warning: Reference `subgr_wb' on page 15 undefined on input line 586.
-
-
-LaTeX Warning: Reference `subgr_upp' on page 15 undefined on input line 586.
-
-LaTeX Font Info:    Try loading font information for OT1+lmtt on input line 592.
-("C:\Program Files\Annika Programme\MiKTeX\tex\latex\lm\ot1lmtt.fd"
-File: ot1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
-) [15]
-
-LaTeX Warning: Citation `Kunapuli2008' on page 16 undefined on input line 611.
-
-[16]
-LaTeX Font Info:    Try loading font information for T1+lmtt on input line 651.
+[65] [66] [67] [68] [69]
+LaTeX Font Info:    Try loading font information for T1+lmtt on input line 653.
  ("C:\Program Files\Annika Programme\MiKTeX\tex\latex\lm\t1lmtt.fd"
 File: t1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-Overfull \hbox (0.53162pt too wide) in paragraph at lines 647--660
+Overfull \hbox (0.53162pt too wide) in paragraph at lines 649--662
  [] 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 667--672
+Underfull \hbox (badness 10000) in paragraph at lines 681--686
 
  []
 
-[17]
-Overfull \hbox (58.26138pt too wide) in paragraph at lines 766--767
+[70] [71]
+Overfull \hbox (58.26138pt too wide) in paragraph at lines 780--781
 [] 
  []
 
-[18]
-
-LaTeX Warning: Citation `Musicant2004' on page 19 undefined on input line 783.
-
-
-LaTeX Warning: Citation `Musicant2000' on page 19 undefined on input line 783.
-
-
-LaTeX Warning: Citation `Musicant2004' on page 19 undefined on input line 783.
-
-
-LaTeX Warning: Citation `Platt1999' on page 19 undefined on input line 783.
-
-
-LaTeX Warning: Citation `Kao2004' on page 19 undefined on input line 783.
-
-
-Overfull \hbox (264.82431pt too wide) in paragraph at lines 783--784
+[72]
+Overfull \hbox (264.82431pt too wide) in paragraph at lines 797--798
 [] 
  []
 
-[19]) [20]
+) [73]
+("D:\Annika\Uni\10. Semester\Masterarbeit\Proximal Bundle Inexact Information\Git Hub\Masterarbeit\LaTeX\Chapters/Append
+ix.tex" [74
+
+
+]) [75]
 ("D:\Annika\Uni\10. Semester\Masterarbeit\Proximal Bundle Inexact Information\Git Hub\Masterarbeit\LaTeX\Bundle_methods_
-for_nonsmooth_nonconvex_problems_with_inexact_information.bbl" [21]) [22]
+for_nonsmooth_nonconvex_problems_with_inexact_information.bbl" [76
+
+] [77] [78] [79]) [80]
 ("D:\Annika\Uni\10. Semester\Masterarbeit\Proximal Bundle Inexact Information\Git Hub\Masterarbeit\LaTeX\Bundle_methods_
-for_nonsmooth_nonconvex_problems_with_inexact_information.aux")
+for_nonsmooth_nonconvex_problems_with_inexact_information.aux"
+("D:\Annika\Uni\10. Semester\Masterarbeit\Proximal Bundle Inexact Information\Git Hub\Masterarbeit\LaTeX\Chapters/Introd
+uction.aux")
+("D:\Annika\Uni\10. Semester\Masterarbeit\Proximal Bundle Inexact Information\Git Hub\Masterarbeit\LaTeX\Chapters/Prelim
+inaries.aux")
+("D:\Annika\Uni\10. Semester\Masterarbeit\Proximal Bundle Inexact Information\Git Hub\Masterarbeit\LaTeX\Chapters/Bundle
+_Methods.aux")
+("D:\Annika\Uni\10. Semester\Masterarbeit\Proximal Bundle Inexact Information\Git Hub\Masterarbeit\LaTeX\Chapters/Simpli
+fications.aux")
+("D:\Annika\Uni\10. Semester\Masterarbeit\Proximal Bundle Inexact Information\Git Hub\Masterarbeit\LaTeX\Chapters/Bundle
+_Method_nonconv_inex.aux")
+("D:\Annika\Uni\10. Semester\Masterarbeit\Proximal Bundle Inexact Information\Git Hub\Masterarbeit\LaTeX\Chapters/Variab
+le_Metric.aux")
+("D:\Annika\Uni\10. Semester\Masterarbeit\Proximal Bundle Inexact Information\Git Hub\Masterarbeit\LaTeX\Chapters/Bileve
+l_Application.aux")
+("D:\Annika\Uni\10. Semester\Masterarbeit\Proximal Bundle Inexact Information\Git Hub\Masterarbeit\LaTeX\Chapters/Append
+ix.aux"))
 
 LaTeX Warning: There were undefined references.
-
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
 
  )
 (\end occurred inside a group at level 1)
@@ -779,12 +707,13 @@ LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
 ### simple group (level 1) entered at line 1061 ({)
 ### bottom level 
 Here is how much of TeX's memory you used:
- 7940 strings out of 493922
- 124315 string characters out of 3142101
- 255284 words of memory out of 3000000
- 11075 multiletter control sequences out of 15000+200000
- 75125 words of font info for 59 fonts, out of 3000000 for 9000
+ 8137 strings out of 493922
+ 133199 string characters out of 3142101
+ 263524 words of memory out of 3000000
+ 11215 multiletter control sequences out of 15000+200000
+ 83054 words of font info for 68 fonts, out of 3000000 for 9000
  841 hyphenation exceptions out of 8191
- 40i,18n,48p,1580b,2301s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 40i,23n,48p,1622b,2288s stack positions out of 5000i,500n,10000p,200000b,50000s
 
-Output written on Bundle_methods_for_nonsmooth_nonconvex_problems_with_inexact_information.dvi (23 pages, 78044 bytes).
+Output written on Bundle_methods_for_nonsmooth_nonconvex_problems_with_inexact_information.dvi (82 pages, 278288 bytes).
+

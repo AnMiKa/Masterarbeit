@@ -41,7 +41,7 @@ for t = 1:T
 end
 % compute the final subgradient
 % scale by 100 like in the objective function
-DLlambda = 10000/T*sum(DLlambda,2); 
+DLlambda = 100/T*sum(DLlambda,2); 
 %toc
 end
 

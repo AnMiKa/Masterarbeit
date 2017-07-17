@@ -1,39 +1,50 @@
 \section{Introduction}
 
 There exists a sound and board theory of classical nonlinear optimization. However, this theory puts strong differentiability requirements on the given problem. Requirements that cannot always be fulfilled in practice.
-Examples for such practical application reach from problems in physics and mechanical engineering \cite{Clarke1990} over optimal control problems up to data analysis \cite{Bagirov2014} and machine learning \cite{Smola2007}.
+Examples for such nondifferentiable applications reach from problems in physics and mechanical engineering \cite{Clarke1990} over optimal control problems up to data analysis \cite{Bagirov2014} and machine learning \cite{Smola2007}.
 Other possible fields of applications are risk management and financial calculations \cite{Nesterov2016,Teo2010}. 
-Additionally there exist so called stiff problems that are theoretically smooth but numerically nonsmooth due to rapid changes in the gradient \cite{Maekelae1992}. \\
-There exists therefore a need for nonsmooth, that is not necessarily differentiable, optimization algorithms. A lot of the underlying theory and was developed in the 1970's, also driven by the ``First World Conference on Nonsmooth Optimization'' taking place in 1977 \cite{Mifflin2012}.
-Now, there exists a well understood theoretical framework of nonsmooth analysis to create the basis for practical algorithms. \\
-The most popular methods to tackle nonsmooth problems at the moment are bundle methods \cite{Hare2016}. First developed only for convex functions \cite{Lemarechal1978} the method was soon extended to cope also with nonconvex objective functions \cite{Mifflin1982}. \\
-Some time later these algorithms were again enhanced to deal with inexact information of the function value, the subgradient or both.\\
-Some natural applications for these cases are derivative free optimization and stochastic simulations \cite{Hare2016}. \textcolor{red}{Some more examples from different sources? Bilevel Problems?} \\
+Additionally there exist so called stiff problems that are theoretically smooth but numerically nonsmooth due to rapid changes in the gradient \cite{Maekelae1992}. There is hence a need for nonsmooth optimization algorithms.
+
+A lot of the underlying theory was developed in the 1970's also driven by the ``First World Conference on Nonsmooth Optimization'' taking place in 1977 \cite{Mifflin2012}.
+These days, there exists a well understood theoretical framework of nonsmooth analysis to create the basis for practical algorithms.
+
+The most popular methods to tackle nonsmooth problems at the moment are bundle methods \cite{Hare2016}. First developed only for convex functions \cite{Lemarechal1978} these methods were soon extended to cope also with nonconvex objective functions \cite{Mifflin1982}.
+Some time later the algorithms were again enhanced to deal with inexact information of the function value, the subgradient or both.
+Some natural applications for these cases are derivative free optimization and stochastic simulations \cite{Hare2016}.
+
+%\textcolor{red}{Some more examples from different sources? Bilevel Problems?} \\
 
 
-The basic idea of bundle methods is to model the original problem by a simpler function, often some sort of stabilized cutting plane model, that is minimized as a subproblem of the algorithm \cite{Hiriart-Urruty1993}. 
+The basic idea of bundle methods is to model the original problem by a simpler function, often some sort of stabilized cutting plane model, that is minimized as a subproblem of the algorithm \cite[chapter XV]{Hiriart-Urruty1993}. 
+The computed iterate is tested for sufficient descent and depending on the result is either taken as the new iterate or the model is enhanced.
 
-\textcolor{orange}{Adapt this part to what I finally really do: \\
-In this thesis two different types of model functions will be examined that allow the use of inexact information in small to medium-scale problems as well as in large-scale problems. A limited memory approach is examined for the latter case. \\}
-\textcolor{red}{what new? Combination of large-scale and inexact information - why needed \\
-don't forget What - why - how}
+In this thesis two bundle methods are presented and tested on some academic test functions. Then the usability of bundle algorithms for bilevel programs is explored.
 
-\textcolor{orange}{Adapt this part to what I finally really do: \\
-This thesis is organized as follows: \\
-introduction of the most important definitions and results of nonsmooth analysis. Then the introduction of a very basic bundle algorithm which is then generalized for nonconvex functions with nonsmooth optimization. \\
-Throughout study of this algorithm including comparison to other approaches to tackle inexact information. \\
-Introduction of variable metric (bundle) algorithm to tackle large-scale applications. ``discussion'' how far this is compatible with inexactness. \\
-Numerical testing \\ 
-discussion}
+After a short introduction of the most important definitions and results from nonsmooth analysis in section \ref{sec_prelim} a basic bundle algorithm for exact convex functions is stated in order to introduce the important concepts of this method in section \ref{sec_basic_bundle}. Then different methods to tackle inexactness and nonconvex objective functions are shortly presented in section \ref{sec_simplifications}.
+Section \ref{sec_nonconv_inex} reviews the proximal bundle algorithm for nonconvex inexact functions presented in \cite{Hare2016} and contains some closer analysis of the method. In section \ref{sec_variable_metric} a variable metric variant of that algorithm is developed using the nonsmooth second model suggested in \cite{Noll2012} and \cite{Noll2013}.
+This method makes it possible to incorporate second order information into the algorithm in order to speed up convergence.
+The two methods are compared on different academic examples.
+At last the nonconvex inexact bundle method is used on the application of parameter optimization in support vector classification. 
+
+ 
+%\textcolor{orange}{Adapt this part to what I finally really do: \\
+%In this thesis two different types of model functions will be examined that allow the use of inexact information in small to medium-scale problems as well as in large-scale problems. A limited memory approach is examined for the latter case. \\}
+%\textcolor{red}{what new?  - why needed \\
+%don't forget What - why - how}
+
+%\textcolor{orange}{Adapt this part to what I finally really do: \\
+%This thesis is organized as follows: \\
+%introduction of the most important definitions and results of nonsmooth analysis. Then the introduction of a very basic bundle algorithm which is then generalized for nonconvex functions with nonsmooth optimization. \\
+%Throughout study of this algorithm including comparison to other %approaches to tackle inexact information. \\
+%Introduction of variable metric (bundle) algorithm to tackle large-scale applications. ``discussion'' how far this is compatible with inexactness. \\
+%Numerical testing \\ 
+%discussion}
 
 This thesis is written with the acedemic 'we'.
 
 
-First a proximal bundle method \textcolor{red}{Difference between different regularizations explained before}...
-large-scale optimization: a metric bundle method instead of a proximal bundle method -> limited memory approach \\
+%First a proximal bundle method \textcolor{red}{Difference between different regularizations explained before}...
+%large-scale optimization: a metric bundle method instead of a proximal bundle method -> limited memory approach \\
 
 
-\textcolor{red}{from PhD-thesis}
-\begin{itemize}
-	\item 
-\end{itemize}
+%\textcolor{red}{from PhD-thesis}

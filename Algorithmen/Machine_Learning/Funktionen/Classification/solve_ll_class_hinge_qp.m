@@ -1,5 +1,5 @@
-function [ Wb ] = solve_ll_class_hingequad_qp( X, Y, lambda )
-%SOLVE_LL_CLASS_HINGEQUAD_QP solves the lower level problem of a bilevel
+function [ Wb ] = solve_ll_class_hinge_qp( X, Y, lambda )
+%SOLVE_LL_CLASS_HINGE_QPAS Solves the lower level problem of a bilevel
 %SVM classification algorithm for a given parameter lambda
 %   This is a subroutine to the bilevel bundle algorithm.
 %   The algorithm solves the lover level classification problem given as a
@@ -9,11 +9,9 @@ function [ Wb ] = solve_ll_class_hingequad_qp( X, Y, lambda )
 %   Kristin P. Bennett but it is rewritten for an SVM classification
 %   problem. 
 %   The objective function of the lower level problem is the one used in "A
-%   Bilevel Optimization Approach to Machine Learning" by Gautam Kunapuli
-%   but the max-term is additionally squared to make use of the theory
-%   developed in the paper by Moore et al.
-%   The algorithm uses MATLAB's quadprog algorithm with a sparse matrix
-%   formulation.
+%   Bilevel Optimization Approach to Machine Learning" by Gautam Kunapuli.
+%   The algorithm uses MATLAB's quadprog algorithm.
+%   This algorithm works with sparse matrices.
 
 % input arguments
 % name      object  --> dimensions
@@ -34,19 +32,21 @@ for t = 1:T
     % fold
     Xt = X;
     Yt = Y;
-    Xt(:,:,t) = [];
-    Yt(:,t) = [];
-    Xt = reshape(Xt,feat,J*(T-1));
-    Yt = reshape(Yt,J*(T-1),1);
+    if T > 1
+        Xt(:,:,t) = [];
+        Yt(:,t) = [];
+        Xt = reshape(Xt,feat,J*(T-1));
+        Yt = reshape(Yt,J*(T-1),1);
+    end
     
     % prepare the matrices used in the qpas algorithm
-    H = spdiags([lambda*ones(feat,1);0;ones(J*(T-1),1)],0,feat+1+J*(T-1),feat+1+J*(T-1));
-    XY = sparse(bsxfun(@times,Xt,Yt'));
-    A = [-XY' sparse(Yt) -spdiags(ones(J*(T-1),1),0,J*(T-1),J*(T-1))];
-    b = -ones(J*(T-1),1);
-    options = optimoptions(@quadprog, 'Algorithm', 'interior-point-convex',...
-    'MaxIterations', 100, 'ConstraintTolerance', 1.0000e-15, 'OptimalityTolerance', 1.0000e-15);
-    Wbxi = quadprog(H,[],A,b,[],[],[],[],[],options);
+    H = diag([lambda*ones(feat,1);0;zeros(J*max((T-1),1),1)]);
+    h = [zeros(feat+1,1);ones(J*max((T-1),1),1)];
+    XY = bsxfun(@times,Xt,Yt');
+    A = [-XY' Yt -eye(J*max((T-1),1))];
+    b = -ones(J*max((T-1),1),1);
+    lb = [-Inf*ones(feat+1,1);zeros(J*max((T-1),1),1)];
+    Wbxi = qpas(H,h,A,b,[],[],lb,[],0);
     Wb(:,t) = Wbxi(1:feat+1);
 end
 %toc

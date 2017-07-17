@@ -37,7 +37,7 @@ for t = 1:T
     tmp = [bsxfun(@times,Xval,(-i.*(ones(J,1)-Yval.*(Xval'*W(:,t)-b(t))).*Yval)'); (i.*(ones(J,1)-Yval.*(Xval'*W(:,t)-b(t))).*Yval)'];
     DLlambda(:,t) = 2/J*sum(tmp,2)'*Dwb(:,:,t)';
     % for gradient test:
-    %DLlambda = 1/J*sum(tmp,2)'*Dwb(:,:,t)';
+    %DLlambda = 2/J*sum(tmp,2)'*Dwb(:,:,t)';
 end
 % compute the final subgradient
 % scale by 100 like in the objective function

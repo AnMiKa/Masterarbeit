@@ -1,4 +1,3 @@
-
 function [] = boundary_as(w,data)
 
 % w = (-b,w)

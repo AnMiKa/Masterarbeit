@@ -5,7 +5,7 @@
 
 This section focuses on the proximal bundle method presented by Hare et al. in \cite{Hare2016}.
 The idea is to extend the basic bundle algorithm for nonconvex functions with both inexact function and subgradient information.
-The key idea of the algorithm is the one already developed by Hare and Sagastizábal in \cite{Hare2010}: When dealing with nonconvex functions a very critiicalcal difference to the convex case is that the linearization errors are not necessarily nonnegative any more. To tackle this problem the errors are manipulated to enforce nonnegativity. In this case this is done my modeling not the objective function directly but a convexified version of it.
+The key idea of the algorithm is the one already developed by Hare and Sagastizábal in \cite{Hare2010}: When dealing with nonconvex functions a very critical difference to the convex case is that the linearization errors are not necessarily nonnegative any more. To tackle this problem the errors are manipulated to enforce nonnegativity. In this case this is done my modeling not the objective function directly but a convexified version of it.
 
 \subsection{Derivation of the Method}
 %\textcolor{blue}{``assumptions and notations''}
@@ -19,32 +19,35 @@ Throughout this section we consider the optimization problem
 \label{opt_prob_nonconv_inex}
 \end{equation}
 
-The objective function \(f:\R^n \to \R\) is locally Lipschitz  and (subdifferentially) regular. \(X \subseteq \R^n\) is assumed to be a convex compact set. 
+The objective function \(f:\R^n \to \R\) is locally Lipschitz  and (subdifferentially) regular. \(X \subset \R^n\) is assumed to be a convex compact set. 
 
 %\begin{definition} \cite{Rockafellar2009}
 	%A function \(f:\R^n \to \bar{\R} = [-\infty, + \infty]\) is called \emph{proper} if \(f(x) < \infty\) for at least one \(x\in \R^n\) and \(f(x) > \infty ~ \forall x \in \R^n\).
 %\end{definition}
 
-\begin{definition} \cite[Theorem 7.25]{Rockafellar2009}
-	\(f: \R^n \to \bar{\R}\) is called \emph{subdifferentially regular} at \(\bar{x}\) if \(f(\bar{x})\) is finite and the epigraph
-	\[epi(f) := \{(x, \alpha) \in \R^n\times \R | \alpha \geq f(x)\}\]
+\begin{definition} \cite[Theorem 7.25, p. 260]{Rockafellar2009}
+	\(f: \R^n \to {\R}\) is called \emph{subdifferentially regular} at \(\bar{x} \in \R^n\) if %\(f(\bar{x})\) is finite and 
+	the epigraph
+	\[epi(f) := \left\{(x, \alpha) \in \R^n\times \R \mid \alpha \geq f(x) \right\}\]
 	is Clarke regular at \(\bar{x},f(\bar{x})\).
 \end{definition}
+
+Clarke regularity basicly means, that epigraph of a function \(f\) does not have any 'inward' corners. An exact definition is given in \cite[Definition 6.4, p. 199]{Rockafellar2009}.
 
 \subsubsection{Inexactness}
 
 It is assumed that both the function value as well as one element of the subdifferential can be provided in an inexact form.
 For the function value inexactness is defined straight forwardly: If 
 \begin{equation*}
-	\|f_x - f(x)\| \leq \sigma_x
+	\|f_x - f(x)\| \leq \sigma_x,
 \label{fun_inex}
 \end{equation*}
 
-then \(f_x\) approximates the value \(f(x)\) within \(\sigma_x\). This is slightly different from the definition in (\ref{conv_inexactness_1}). In the convex case it follows from (\ref{sig_p_thet_subgr}) that \( \bar{\sigma} \geq \sigma_x \geq -\theta_x \geq - \bar{\theta}\) and therefore \(f_x \in [f(x)-\bar{\theta},f(x)+\bar{\sigma}]\).
+then \(f_x\) approximates the value \(f(x)\) within \(\sigma_x\). This is slightly different from the definition in (\ref{conv_inexactness_1}). In the convex case it follows from (\ref{sig_p_thet_subgr}) that \( \bar{\sigma} \geq \sigma_x \geq -\theta_x \geq - \bar{\theta}\) and therefore \(f_x \in [f(x)-\bar{\theta},f(x)+\bar{\sigma}]\) for the overall error bounds \(\bar{\sigma}\) and \(\bar{\theta}\).
 
 As the 'normal' \(\varepsilon\)-subdifferential is not defined for nonconvex functions we adopt the notation used in \cite{Noll2013} and interpret inexactness in the following way: \(g \in \R^n\) approximates a subgradient  of \( \partial f(x)\) within \(\theta \geq 0\) if
 \begin{equation*}
-	g \in \partial f(x) + B_{\theta}(0) := \partial_{[\theta]}f(x)
+	g_x \in \partial f(x) + B_{\theta}(0) =: \partial_{[\theta]}f(x)
 \label{subgr_inex}
 \end{equation*}
 
@@ -52,9 +55,9 @@ where \(\partial f(x)\) is the Clarke subdifferential %\textcolor{red}{defined i
 of \(f\).
 
 The given definition of the inexactness can be motivated by the relation 
-	\[ g \in \partial_{[\theta]}f(x)\Leftrightarrow g \in \partial(f+\theta\|\cdot-x\|)(x) \]
+	\[ g_x \in \partial_{[\theta]}f(x)\Leftrightarrow g_x \in \partial(f+\theta\|\cdot-x\|)(x) \]
 noticed in \cite{Treiman1986}. It means that the approximation of the subgradient of \(f(x)\) is an exact subgradient of a small perturbation of \(f\) at \(x\).
-\(\partial_{[\varepsilon]}f(x)\) is also known as the Fréchet \(\varepsilon\)-subdifferential of \(f(x)\).
+The set \(\partial_{[\varepsilon]}f(x)\) is also known as the Fréchet \(\varepsilon\)-subdifferential of \(f(x)\).
 
 %\begin{definition}\cite{Jofre1998}
 	%Let \(f:\R^n \to \R\), \(\varepsilon\) > 0. The \emph{Fréchet \(\varepsilon\)-subdifferential} of \(f\) at \(x\) is defined by 
@@ -67,7 +70,7 @@ For convex objective functions this approximate subdifferential does \emph{not} 
 
 \[ \partial_{\theta}f(x) \subset \partial_{[\theta']}f(x) \]
  
-for a suitable \(\theta'\). Generally an explicit relation between \(\theta\) and \(\theta'\) is hard to find \cite{Noll2013}.
+for a suitable \(\theta'\). Generally an explicit relation between \(\theta\) and \(\theta'\) is hard to find \cite[p. 558]{Noll2013}.
 \end{remark}
 
 Like in the paper it is assumed that the errors are bounded although the bound does not have to be known:
@@ -274,7 +277,9 @@ Choose a starting point \(x^1 \in \R^n\) and compute \(f_1\) and \(g^1\). Set th
 For \(k = 1,2,3,  \dotsc \)   
 
 \begin{enumerate}
-	\item Calculate \[d^k = \arg \min_{d \in \R^n} \left\{ M_k(\hat{x}^k+d)+\mathbb{I}_X(\hat{x}^k+d)+\frac{1}{2t_k}\|d\|^2\right\}.\]
+	\item Calculate 
+	\[d^k = \argmin_{d \in \R^n} \left\{ M_k(\hat{x}^k+d)+\mathtt{i}_X(\hat{x}^k+d)+\frac{1}{2t_k}\|d\|^2\right\}.\]
+	
 	\item Set
 		\begin{align*} 
 		  G^k &= \sum_{j \in J_k}{\alpha_j^k s_j^k} \\%, \quad \nu^k \in \partial \mathtt{i}_{X}(x^{k+1}) \\
@@ -306,7 +311,7 @@ In terms of usability of the described algorithm it is interesting to see if str
 
 %The method above can handle nonconvex objective functions. It is not explicitly assumed, that the function taken has a finite minimum. Therefore
 The constraint set \(X\) ensures the boundedness of the sequence \(\{\hat{x}^k\}\).
-This is not necessary if the objective function is assumed to have bounded level sets \(\{x \in \R^n | f(x) \leq f(\hat{x}^1)\}\), an assumption commonly  used when optimizing nonconvex functions.
+This is not necessary if the objective function is assumed to have bounded level sets \(\{x \in \R^n \mid f(x) \leq f(\hat{x}^1)\}\), an assumption commonly  used when optimizing nonconvex functions.
 As the objective function is assumed to be continuous bounded level sets are compact. Additionally the descent test ensures that \(f(\hat{x}^{k+1}) \leq f(\hat{x}^k)\) for all \(k\). The proof holds therefore in the same way as with the set \(X\).
 
 Another possibility is to bound the step sizes \(t_k\) also from above. Then the sequence \(\{\hat{x}^k\}\) stays bounded and the proof still holds.

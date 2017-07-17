@@ -4,7 +4,7 @@
 
 \subsection{Introduction}
 
-In this chapter the nonconvex inexact bundle algorithm is applied to the problem of model selection for \emph{support vector machines} (SVM) solving classification tasks.
+In this part of the thesis the nonconvex inexact bundle algorithm is applied to the problem of model selection for \emph{support vector machines} (SVM) solving classification tasks.
 It relies on a bilevel formulation proposed by Kunapuli \cite{Kunapuli2008} and Moore et al. \cite{Moore2011}.
 
 A natural application for the inexact bundle algorithm is an optimization problem where the objective function value can only be computed iteratively. This is for example the case in bilevel optimization.
@@ -43,7 +43,7 @@ In \cite{Moore2010a} he also suggests the nonconvex exact bundle algorithm of Fu
 Support vector machines are linear learning machines that were developed in the 90's by Vapnik and co-workers. Soon they could outperform several other programs in this area \cite{Cristianini2000} and the subsequent interest in SVMs lead to a very versatile application of these machines \cite{Kunapuli2008}.
 
 The case that is considered here is binary support vector classification using supervised learning. \\
-In classification data from a possibly high dimensional vector space \(\tilde{X} \subseteq \R^n\), the \emph{feature} or \emph{input space} is divided into two classes. These lie in the \emph{output domain} \(\tilde{Y} = \{-1,1\}\). Elements from the feature space will mostly be called \emph{data points} here. They get \emph{labels} from the feature space. Labeled data points are called \emph{examples}. \\
+In classification data from a possibly high dimensional vector space \(\tilde{X} \subset \R^n\), the \emph{feature} or \emph{input space} is divided into two classes. These lie in the \emph{output domain} \(\tilde{Y} = \{-1,1\}\). Elements from the feature space will mostly be called \emph{data points} here. They get \emph{labels} from the feature space. Labeled data points are called \emph{examples}. \\
 The functional relation between the features and the class of an example is given by the usually unknown \emph{response} or \emph{target function} \(f(x)\). \\
 Supervised learning is a kind of machine learning task where the machine is given examples of input data with associated labels, the so called \emph{training data} \((X,Y)\). Mathematically this can be modeled by assuming that the examples are  drawn identically and independently distributed (iid) from the fixed joint distribution \(P(x,y)\). This usually unknown distribution states the probability that an data point \(x\) has the label \(y\) \cite{Vapnik1999}. \\
 The overall goal is then to optimize the generalization ability, meaning the ability to predict the output for unseen data correctly \cite{Cristianini2000}.
@@ -197,7 +197,7 @@ This makes it possible to optimize the hyper-parameters continuously.
 %Formal description of the bilevel problem for t-fold cross validation
 %Better model description --> see 2.2 (p.46) in thesis 
 
-Let \(\Omega = {(x^1,y_1),...,(x^l,y_l)} \subseteq \R^{n+1}\) be a given data set of size \(l = |\Omega|\). The associated index set is denoted by \(\mathcal{N}\). For classification the labels \(y_i\) are \(\pm1\).
+Let \(\Omega = {(x^1,y_1),...,(x^l,y_l)} \subset \R^{n+1}\) be a given data set of size \(l = |\Omega|\). The associated index set is denoted by \(\mathcal{N}\). For classification the labels \(y_i\) are \(\pm1\).
 For \(T\)-fold cross validation let \(\bar{\Omega}_t\) and \(\Omega_t\) be the training set and the validation set within the \(t\)'th fold and \(\bar{\mathcal{N}}_t\) and \(\mathcal{N}_t\) the respective index sets.
 Furthermore let \(f^t:\R^{n+1}\cap\mathcal{F} \to \R\) be the response function trained on the \(t\)'th fold and \(\lambda \in \Lambda\) the hyper-parameters to be optimized.
 For a general machine learning problem with upper and lower loss function \(\mathcal{L}_{upp}\) and \(\mathcal{L}_{low}\) respectively the bilevel problem writes
@@ -503,7 +503,7 @@ lower level problem convex -> therefore optimality conditions (some nonsmooth ve
 ---> what are the conditions? optimality condition Lipschitz? 
 
 Say (show) that all needed components are locally Lipschitz; state theorems about differentiability almost everywhere and convex hull of gradients gives set of subgradients\\
-introduce special notation (only for this chapter) and because of readability adopt ``gradient writing''
+introduce special notation (only for this section) and because of readability adopt ``gradient writing''
 
 Subgradients:
 \(\mathcal{G}_{upp,\lambda}, \mathcal{G}_{upp,w},\mathcal{G}_{upp,b}\) -> subgradients of outer objective \\
@@ -607,6 +607,8 @@ Names for algorithms: BBMH -> hinge as inner level, BBMH2 -> hingequad as inner 
 
 \subsection{Numerical Experiments}
 
+\textcolor{red}{Kommentar, wann \(\lambda\) optimierund sinnvoll \(\to\) dann, wenn Gewichte von \(w\) gross \(\to \) dann der Fall, wenn Trennun gim trainingsset gerade moeglich (aber im val set dann nicht mehr); wahrscheinlich mehr Sinn bei nichtlinearen Kernels, da dann eher Trennberkeit moeglich und mehr Gefahr von overfitting}
+
 The bilevel-bundle algorithm for classification was tested for four different data sets taken from the UCI Machine Learning Repository \emph{citations as said in ``names'' data??? }.
 For comparability with the already existing results presented in \cite{Kunapuli2008} the following data and specifications of it were taken:
 
@@ -663,6 +665,18 @@ Table ??? shows the results
 \end{center}
 
 \textcolor{red}{\(\lambda\) values in table not right, don`t know with which algorithms they were reached}
+
+11.07.2017 \\
+\(\lambda\) sensitivity has not so much to do with how data set looks, but how different trainings and validation set are.
+If they are very similar: not very \(\lambda\)-sensitive. If they are different: more sensitive
+
+For my algorithm: one  bigger trainings set that is divided into partitions; these partitions give the different trainings and validation sets for each fold.
+
+When sensitive??? -> probably when points are more spread over the plane; when there is little structure to the set; probably when also ``whole'' data set is ``\(\lambda\)-sensitive.
+
+From LTH-data: test1 and test3 the most promising -> for neither of them a minimum
+
+
 
 23.06.2017\\
 found out: for real results, have to do it with the functions I take in the algorithm -> this is hingequad for inner level and either hingeloss or hingequad for outer level\\

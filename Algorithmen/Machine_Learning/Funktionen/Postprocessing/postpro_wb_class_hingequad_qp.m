@@ -30,7 +30,7 @@ Wbxi = quadprog(H,h,A,b);
 W = Wbxi(1:feat);
 b = Wbxi(feat+1);
 Wb = [W;b];
-% nur f�r LTH-Test so
+% nur for LTH-Test so
 %Wb = [-b;W];
  
 toc
