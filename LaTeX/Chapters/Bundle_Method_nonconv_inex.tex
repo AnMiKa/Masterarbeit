@@ -76,12 +76,17 @@ for a suitable \(\theta'\). Generally an explicit relation between \(\theta\) an
 Like in the paper it is assumed that the errors are bounded although the bound does not have to be known:
 
 \begin{equation*}
-	|\sigma_j| \leq \bar{\sigma}, \bar{\sigma} > 0 \quad \text{and} \quad 0 \leq \theta_j \leq \bar{\theta} \quad \forall j \in J^k.
+	|\sigma_j| \leq \bar{\sigma}, \bar{\sigma} > 0 \quad \text{and} \quad 0 \leq \theta_j \leq \bar{\theta} \quad \forall j \in J^k \text{ and } \forall k.
 \label{err_bound}
 \end{equation*}
 
 %In the context of inexact information it is important to make a distinction between the (unknown) exact function value and its approximation. Throughout this section we therefore write \(f(x^j)\) for the exact function value  whereas the approximation will be written as \(f_j\)  or \(\hat{f}_k\) for the approximation at the current stability center.
-For ease of notation we write from now on \(f_j\) instead of \(f_{x^j}\) for the approximation of the function value at the \(j\)'th iterate in the bundle \(J\). The approximation at the \(k\)'th stability center reads \(\hat{f}_k\).
+For ease of notation we write from now on \(f_j\) and \(g_j\) instead of \(f_{x^j}\) and \(g_{x^j}\) for the approximation of the function value and subgradient at the \(j\)'th iterate in the bundle \(J^k\). The approximation at the \(k\)'th stability center reads \(\hat{f}_k\).
+
+\begin{remark}
+	Before the exact subgradient was denoted with \(g_j\). Here the same notation is used for the approximate subgradient.
+	We leave this double notation for the sake of readability and remark that for the remainder of this thesis \(g_j\) denotes the approximate subgradient. In the few situations, where the exact gradient is needed, it is marked clearly.
+\end{remark}
 
 
 %\textcolor{red}{remark to subgradient notation\\
@@ -146,35 +151,35 @@ So based on the results in \cite{Hare2009} not the objective function but a conv
 
 %For \(\check{f}(x) := m_(x)+\mathbb{I}_X(x)\) and \(\mu:=\frac{1}{t_k}\) this is just subproblem (\ref{sub_prob_long}) with the constraint \(x\in X\) incorporated in the objective function. Because of this special form of the subproblems primal bundle methods are also called proximal bundle methods.\\
 
-As already pointed out in \ref{subsec_prox_op} the bundle subproblem can be formulated by means of the prox-operator (\ref{prox_op}).
+As already pointed out in section \ref{subsec_prox_op} the bundle subproblem can be formulated by means of the prox-operator (\ref{prox_op}).
 
 %\textcolor{red}{explain in much more detail when read about calculation of proximal points for nonconvex functions. At the moment just main ideas.}
 
-The key idea is to use the relation
+The idea is to use the relation
 \begin{equation*}
 	prox_{T = \frac{1}{\eta}+t, f}(x) = prox_{t,f+\eta/2\|\cdot - x\|^2}(x).
 \label{prox_relation}
 \end{equation*}
 
-This means, that the proximal point of the function \(f\) for parameter \(T=\frac{1}{\eta}+t\), \(\eta, t > 0\) is the same as the one of the convexified function 
+This means, that the proximal point of the function \(f\) for the parameter \(T=\frac{1}{\eta}+t\), \(\eta, t > 0\), is the same as the one of the convexified function 
 
 \begin{equation}
 	\tilde{f}(y) = f(y) + \frac{\eta}{2}\|y-x\|^2
 \label{conv_obj}
 \end{equation}
 
-with respect to the parameter \(t\) \cite{Hare2010}. \(\eta\) is therefore called the \emph{convexification parameter} and \(t\) the \emph{prox-parameter}.\\
+with respect to the parameter \(t\) \cite{Hare2010}. The parameter \(\eta\) is therefore also called the \emph{convexification parameter} and \(t\) the \emph{prox-parameter}.
 
 %\textcolor{red}{say why/how... this is related to current stability center}
 %\textcolor{red}{Because new function to be approximated, subgradients ``new'':}
-The main difference of the method in \cite{Hare2016} to the basic bundle method is that the function that is modeled by the cutting plane model s no longer the original objective function \(f\) but the convexified version \(\tilde{f}\). This results in the following changes:
+The main difference of the method in \cite{Hare2016} to the basic bundle algorithm \ref{sec_basic_bundle}.1 is that the function that is modeled by the cutting plane model is no longer the original objective function \(f\) but the convexified version \(\tilde{f}\). This results in the following changes:
 
 In addition to downshifting the linear functions forming the model  they have a tilted slope.
 This is because instead of subgradients of the original objective \(f\) subgradients of the function \(\tilde{f}\) are taken. We call them \emph{augmented subgradients}.
-At the iterate \(x^j\) it is given by
+At the iterate \(x^j\) such a subgradient is given by
 
 \begin{align*}
-	s^k_j &= g^j + \eta_k \left(x^j-\hat{x}^k\right).
+	s^k_j &:= g^j + \eta_k \left(x^j-\hat{x}^k\right).
 	\label{aug_subgr}
 \end{align*}
 
@@ -199,24 +204,24 @@ The parameter \(\gamma \geq 0\) is a safeguarding parameter to keep the calculat
 
 
 The new model function can therefore be written as
-\begin{equation*}
+\begin{equation}
   M_k(\hat{x}^k +d) := \hat{f}_k + \max_{j \in J_k} \left\{\Langle s^k_j,d\Rangle -c^k_j \right\}.
 \label{aug_model}
-\end{equation*}
+\end{equation}
 
-At the proximal center \(\hat{x}^k\) holds \(	M_k(\hat{x}^k) ) \hat{f}_k\) for all \( k\) by the fact that then \(d = 0\) and \(c^k_j = 0\). 
+At the proximal center \(\hat{x}^k\) holds \(	M_k(\hat{x}^k) = \hat{f}_k\) for all \( k\) by the fact that then \(d = 0\) and \(c^k_j = 0\). 
 
 \subsubsection{Aggregate Objects}
 
-The definition of the \emph{augmented aggregate subgradient} \(S^k\),  \emph{error} \(C_k\) and \emph{linearization} \(A_k\) follows straightforwardly:
+The definitions of the \emph{augmented aggregate subgradient} \(S^k\),  \emph{error} \(C_k\) and \emph{linearization} \(A_k\) follow straightforwardly from the KKT-conditions. Again \(\alpha_j^k, j \in J^k\) denote the Lagrangian multipliers of the subproblem.
 
 \begin{align}
 	&S^k := \sum_{j \in J_k} \alpha_j^k s_j^k \label{aug_agg_subgr}, \\
-	&C_k := \sum_{j \in J_k}{\alpha_j^k c_j^k} \\%\label{aug_agg_err} \text{ and }
+	&C_k := \sum_{j \in J_k}{\alpha_j^k c_j^k} \text{ and } \\%\label{aug_agg_err} 
 	& A_k(\hat{x}^k+d) := M_k(x^{k+1})+\left\langle S^k, d-d^k \right\rangle \label{aug_agg_lin}.
 \end{align}
 
-Just as the model decrease
+The model decrease is
 \begin{equation}
 	\delta^k := C_k + t_k \|S^k + \nu^k\|^2 = C_k+\frac{1}{t_k}\|
 	d^k\|^2,
@@ -230,28 +235,28 @@ which contains the normal vector
 \end{equation}
 of the constraint set \(X\).
 
-The second formulation in (\ref{mod_dec2}) follows from the relation \(d^k = -t_k(S^k+\nu^k)\).
+The second formulation in (\ref{mod_dec2}) follows from the relation \(d^k = -t_k(S^k+\nu^k)\) which itself comes from the KKT-conditions.
 
 By the same argumentation as for (\ref{agg_err}) the KKT conditions also reveal another useful characterization of the augmented aggregate linearization error:
 
 \begin{equation}
-	C_k = \hat{f}_k - M_k(x^{k+1})+\Langle S^k, d^k \Rangle
+	C_k = \hat{f}_k - M_k(x^{k+1})+\Langle S^k, d^k \Rangle.
 \label{aug_agg_err2}
 \end{equation}
 
 As the model function \(M_k\) is convex even for nonconvex objective functions it is still minorized by the aggregate linearization. It holds 
 
 \begin{equation}
-	A_K(\hat{x}^k+d) \leq M_k(\hat{x}^k+d) \quad \forall d \in \R^n.
+	A_k(\hat{x}^k+d) \leq M_k(\hat{x}^k+d) \quad \forall d \in \R^n.
 \label{A_leq_M}
 \end{equation}
 
-The update of \(t_k\) can be done in the same way described in (\ref{t_plus}) and (\ref{t_minus}) for the basic bundle method. Similarly  the methods to update the bundle index set \(J^k\) stay valid.
+The update of \(t_k\) can be done in the same way as described in (\ref{t_plus}) and (\ref{t_minus}) for the basic bundle method. Similarly  the methods to update the bundle index set \(J^k\) stay valid.
 The update conditions (\ref{model_update_1}) and (\ref{model_update_2}) for the model are now written with respect to the augmented aggregate linearization and the approximate function value \(\hat{f}_{k+1}\).
 
 \begin{align}
-	&M_{k+1}(\hat{x}^k+d) \geq \hat{f}_{k+1}-c^{k+1}_{k+1}+\left\langle s^{k+1},d \right\rangle \quad \forall d \in \R^n \label{Model_update_1}\\
-	&M_{k+1}(\hat{x}^k+d) \geq A_k(\hat{x}^k+d) \quad \forall d \in \R^n.
+	&M_{k+1}(\hat{x}^k+d) \geq \hat{f}_{k+1}-c^{k+1}_{k+1}+\left\langle s^{k+1},d \right\rangle, \quad \forall d \in \R^n \text{ and} \label{Model_update_1}\\
+	&M_{k+1}(\hat{x}^k+d) \geq A_k(\hat{x}^k+d), \quad \forall d \in \R^n.
 	\label{Model_update_2}
 \end{align}
 

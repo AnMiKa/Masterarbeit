@@ -66,8 +66,8 @@ end
 %tic
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % set upper level objective function
-%fun = @ul_obj_class_hinge;
-fun = @ul_obj_class_hingequad;
+fun = @ul_obj_class_hinge;
+%fun = @ul_obj_class_hingequad;
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 u_1 = 1.2; % parameter for t update
@@ -94,8 +94,8 @@ W = Wb(1:end-1,:);
 b = Wb(end,:);
 Dwb = subgr_ll_class_hingequad(W,b,X,Y,x_hat); % find subgradient of w (and b) with respect to x
 % set subgradient function for upper level problem
-%g = subgr_ul_class_hinge(W,b,X,Y,Dwb);  % subgradient at point bundle point
-g = subgr_ul_class_hingequad(W,b,X,Y,Dwb);
+g = subgr_ul_class_hinge(W,b,X,Y,Dwb);  % subgradient at point bundle point
+%g = subgr_ul_class_hingequad(W,b,X,Y,Dwb);
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 f = feval(fun,X,Y,W,b);   % (inexact) function values at bundle points
@@ -152,8 +152,8 @@ W = Wb(1:end-1,:);
 b = Wb(end,:);
 Dwb = subgr_ll_class_hingequad(W,b,X,Y,x_hat+d); % find subgradient of w (and b) with respect to x
 % set subgradient function for upper level problem
-%g(:,end+1) = subgr_ul_class_hinge(W,b,X,Y,Dwb);  % subgradient at point bundle point
-g(:,end+1) = subgr_ul_class_hingequad(W,b,X,Y,Dwb);
+g(:,end+1) = subgr_ul_class_hinge(W,b,X,Y,Dwb);  % subgradient at point bundle point
+%g(:,end+1) = subgr_ul_class_hingequad(W,b,X,Y,Dwb);
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % evaluate function and subgradient

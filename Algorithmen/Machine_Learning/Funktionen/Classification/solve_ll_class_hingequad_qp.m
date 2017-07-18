@@ -45,7 +45,7 @@ for t = 1:T
     A = [-XY' sparse(Yt) -spdiags(ones(J*(T-1),1),0,J*(T-1),J*(T-1))];
     b = -ones(J*(T-1),1);
     options = optimoptions(@quadprog, 'Algorithm', 'interior-point-convex',...
-    'MaxIterations', 100, 'ConstraintTolerance', 1.0000e-15, 'OptimalityTolerance', 1.0000e-15);
+    'MaxIterations', 5000, 'ConstraintTolerance', 1.0000e-10, 'OptimalityTolerance', 1.0000e-10);
     Wbxi = quadprog(H,[],A,b,[],[],[],[],[],options);
     Wb(:,t) = Wbxi(1:feat+1);
 end

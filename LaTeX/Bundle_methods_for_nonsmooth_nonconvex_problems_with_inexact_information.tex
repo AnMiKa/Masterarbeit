@@ -119,11 +119,13 @@
 %TODO
  %% check command for ,...,
 
-%\input{First_Pages/Coverpage}
+\input{First_Pages/Coverpage}
 %\textcolor{red}{second title page} \\
 %\textcolor{red}{Author and title on back of thesis}
 %\include{First_Pages/Declaration}
 %\include{First_Pages/Acknowledgment}
+\include{First_Pages/Abstract}
+\include{First_Pages/Summary}
 
 %\include{First_Pages/List_of_Symbols}
 
@@ -132,7 +134,11 @@
 %\thispagestyle{empty} % keine Seitenzahl
 \pagestyle{empty} %keine Seitenzahlen
 \addtocontents{toc}{%
-  \protect\contentsline{section}{List of Symbols}{}}
+  \protect\contentsline{section}{Acknowledgments}{}
+	\protect\contentsline{section}{Abstract}{}
+	\protect\contentsline{section}{List of Symbols}{}
+	\protect\contentsline{section}{List of Figures}{}
+	\protect\contentsline{section}{List of Tables}{}}
 \tableofcontents%}
 \newpage
 
@@ -149,12 +155,13 @@
 
 \newpage
 \addtocontents{toc}{%
+  \protect\contentsline{section}{German Summary}{}
   \protect\contentsline{section}{References}{}}
 \newpage
 \singlespacing
 \textcolor{red}{Rechtschreibfehler, Namen, Stil überprüfen}
 \bibliography{Bibliography}
-	\bibliographystyle{plain}
+	\bibliographystyle{abbrv}
 
 
 \end{document}

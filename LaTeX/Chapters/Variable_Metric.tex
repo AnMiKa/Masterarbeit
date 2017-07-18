@@ -15,7 +15,7 @@ Throughout this section we still consider the optimization problem (\ref{opt_pro
 %\textcolor{blue}{explanation}
 
 As already mentioned in section \ref{sec_basic_bundle} the stabilization term can be interpreted in many different ways. In the context of this section we can understand it as a pretty rough approximation of the curvature of the objective function.
-In this thesis we work with locally Lipschitz continuous functions. Rademacher's theorem \cite[Theorem 3.1, p.18]{Heinonen2004} states that on any open set \(U \subset \R^n\) such a function is differentiable at almost every point in \(U\). The set of points where the function is nondifferentiable is of zero Lebesgue measure.
+In this thesis we work with locally Lipschitz continuous functions. Rademacher's theorem \cite[Theorem 3.1, p. 18]{Heinonen2004} states that on any open set \(U \subset \R^n\) such a function is differentiable at almost every point in \(U\). The set of points where the function is nondifferentiable is of zero Lebesgue measure.
 This means that between those points curvature information can be present and can be used to speed up convergence.
 
 %Of course bundle methods are designed to work with non differentiable objectives so it cannot be expected that the function provides any kind of curvature. However, if it has regions where there is curvature, this information can be used to speed up convergence.
@@ -644,7 +644,7 @@ In \cite{Haarala2007} where the metric matrix is updated also in null steps a BF
 \end{remark} 
 
 As a last remark on this topic we want to say that although in this thesis the adaption of update strategies originally developed to be used with gradients seems to work in the presented setting also with subgradients this does not always have to be the case.
-Although it is argued for example in \cite{Lewis2009} that locally Lipschitz functions are differentiable almost everywhere and with an adequate linesearch it is improbable to arrive at an iterate that is a nondifferentiable point of the objective function this can still happen. Especially if such a linesearch is not used like in the algorithm presented here.
+Although it is argued for example in \cite{Lewis2008} that locally Lipschitz functions are differentiable almost everywhere and with an adequate linesearch it is improbable to arrive at an iterate that is a nondifferentiable point of the objective function this can still happen. Especially if such a linesearch is not used like in the algorithm presented here.
 So despite the promising practical behavior this area is still open to research.
 
 %\textcolor{red}{remark that convergence can depend a lot on the threshold and how the matrix/eigenvalue is scaled in the two methods}

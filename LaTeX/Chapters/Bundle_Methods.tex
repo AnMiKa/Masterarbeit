@@ -348,7 +348,7 @@ at every serious step and
 
 at every null step.
 The idea behind this management of \(t_k\) is taken from the trust region method: If the computed iterate was good, the model is assumed to be reliable in a larger area around this serious iterate so bigger step sizes are allowed. If a null step was taken, the model seems to be too inaccurate far from the current serious point. Then smaller step sizes are used.
-A more sophisticated version of this kind of step size management is also used by Noll et al. in \cite{Noll2012} and \cite{Noll2013}. The trust region idea was very much exploited by Schramm and Zowe in \cite{Schramm1992a}.
+A more sophisticated version of this kind of step size management is also used by Noll et al. in \cite{Noll2012} and \cite{Noll2013}. The trust region idea was very much exploited by Schramm and Zowe in \cite{Schramm1992}.
 In the case \(X = \R^n\) the sequence \(\{\hat{x}^k\}\) can be unbounded. In this case bounding \(t_k \leq t_{max} < \infty\) for all  \(k\) preserves the convergence proof \cite[Theorem 3.2.2, p. 308]{Hiriart-Urruty1993}.
 
 In general it can be shown that if \(f\) posses global minima and the basic bundle algorithm generates the sequence \(\{\hat{x}^k\}\), this sequence converges to a minimizer of problem (\ref{min_prob_basic}) (c.f \cite{Hiriart-Urruty1993}).
