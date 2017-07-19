@@ -35,7 +35,7 @@ The two plots below depict the situation for \(x \in \R^n\) for \(n = 2,3,...,15
 \end{figure}
 
 
-The following plots show the situation for larger dimensions \(n = 20,25,30,40,50\).
+The following plots show the situation for larger dimensions \(n = \{20,25,30,40,50\}\).
 
 
 \begin{figure}[H]%
@@ -45,8 +45,9 @@ The following plots show the situation for larger dimensions \(n = 20,25,30,40,5
 	\begin{subfigure}{0.49\textwidth}
 		%\includegraphics[width=\textwidth]{Pictures/Plots/steps_no_noise_b.eps}%
 	\end{subfigure}
-	\label{fig_no_noise_large}
 	\caption{Comparison of accuracy and number of steps for the proximal bundle algorithm and the variable metric bundle algorithm in the case of no noise}
+	\label{fig_no_noise_large}
+
 \end{figure}
 
 \vspace{-1.5em}
@@ -105,18 +106,18 @@ The following plots show the situation for larger dimensions \(n = 20,25,30,40,5
 Next come the figures that illustrate the difference in behavior for different step size updating parameter \(\kappa_+\) and the performance of the hybrid method. In this method the metric matrix is scaled for boundedness of the eigenvalues and then scaled again by \(1/k\).
 
 
-\begin{figure}[H]
-	\begin{subfigure}{0.49\textwidth}
-		%\includegraphics[width=\textwidth]{Pictures/Plots/constant_noise_comp.eps}%
-	\end{subfigure}
-	\begin{subfigure}{0.49\textwidth}
-		%\includegraphics[width=\textwidth]{Pictures/Plots/steps_constant_noise_comp.eps}%
-	\end{subfigure}
-	\caption{Influence of the step size updating parameter \(\kappa_+ = 1.2\) and \(\kappa_+ =2 \) and performance of the hybrid method for constant noise. The reached accuracy is depicted on the left, the needed number of steps on the right.}%
-	\label{fig_const_noise_comp}%
-\end{figure}
-
-\vspace{-1.5em}
+%\begin{figure}[H]
+	%\begin{subfigure}{0.49\textwidth}
+		%%\includegraphics[width=\textwidth]{Pictures/Plots/constant_noise_comp.eps}%
+	%\end{subfigure}
+	%\begin{subfigure}{0.49\textwidth}
+		%%\includegraphics[width=\textwidth]{Pictures/Plots/steps_constant_noise_comp.eps}%
+	%\end{subfigure}
+	%\caption{Influence of the step size updating parameter \(\kappa_+ = 1.2\) and \(\kappa_+ =2 \) and performance of the hybrid method for constant noise. The reached accuracy is depicted on the left, the needed number of steps on the right.}%
+	%\label{fig_const_noise_comp}%
+%\end{figure}
+%
+%\vspace{-1.5em}
 
 \begin{figure}[H]
 	\begin{subfigure}{0.49\textwidth}
@@ -131,18 +132,18 @@ Next come the figures that illustrate the difference in behavior for different s
 
 \vspace{-1.5em}
 
-%\begin{figure}[H]
-	%\begin{subfigure}{0.49\textwidth}
-		%%\includegraphics[width=\textwidth]{Pictures/Plots/constant_gradient_noise_comp.eps}%
-	%\end{subfigure}
-	%\begin{subfigure}{0.49\textwidth}
-		%%\includegraphics[width=\textwidth]{Pictures/Plots/steps_constant_gradient_noise_comp.eps}%
-	%\end{subfigure}
-	%\caption{Influence of the step size updating parameter \(\kappa_+ = 1.2\) and \(\kappa_+ =2 \) and performance of the hybrid method for constant gradient noise.}%
-	%\label{fig_const_grad_noise_comp}%
-%\end{figure}
-%
-%\vspace{-1.5em}
+\begin{figure}[H]
+	\begin{subfigure}{0.49\textwidth}
+		%\includegraphics[width=\textwidth]{Pictures/Plots/constant_gradient_noise_comp.eps}%
+	\end{subfigure}
+	\begin{subfigure}{0.49\textwidth}
+		%\includegraphics[width=\textwidth]{Pictures/Plots/steps_constant_gradient_noise_comp.eps}%
+	\end{subfigure}
+	\caption{Influence of the step size updating parameter \(\kappa_+ = 1.2\) and \(\kappa_+ =2 \) and performance of the hybrid method for constant gradient noise.}%
+	\label{fig_const_grad_noise_comp}%
+\end{figure}
+
+\vspace{-1.5em}
 
 \begin{figure}[H]
 	\begin{subfigure}{0.49\textwidth}

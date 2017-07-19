@@ -275,8 +275,7 @@ A bundle algorithm that deals with nonconvexity and inexact function and subgrad
 \vspace{1ex}
 \hrule
 \vspace{1ex}
-Select parameters \( m \in (0,1), \gamma > 0 \) and a stopping tolerance \( \mathtt{tol} \geq 0\). \\
-Choose a starting point \(x^1 \in \R^n\) and compute \(f_1\) and \(g^1\). Set the initial index set \(J_1:=\{1\}\) and the initial prox-center to \(\hat{x}^1 := x^1\), \(\hat{f}_1 = f_1\) and select \(t_1 > 0\).
+Select parameters \( m \in (0,1), \gamma > 0 \) and a stopping tolerance \( \mathtt{tol} \geq 0\). Choose a starting point \(x^1 \in \R^n\) and compute \(f_1\) and \(g^1\). Set the initial index set \(J_1:=\{1\}\) and the initial prox-center to \(\hat{x}^1 := x^1\). Set \(\hat{f}_1 = f_1\) and select \(t_1 > 0\).
 \end{minipage}
 
 For \(k = 1,2,3,  \dotsc \)   
@@ -288,20 +287,22 @@ For \(k = 1,2,3,  \dotsc \)
 	\item Set
 		\begin{align*} 
 		  G^k &= \sum_{j \in J_k}{\alpha_j^k s_j^k} \\%, \quad \nu^k \in \partial \mathtt{i}_{X}(x^{k+1}) \\
-			C_k &= \sum_{j \in J_k}{\alpha_j^k c_j^k}, \\
+			C_k &= \sum_{j \in J_k}{\alpha_j^k c_j^k} \text{ and} \\
 	    \delta_k &=  C_k + \frac{1}{t_k}\|d^k\|^2.
 		\end{align*}
 		If \(\delta_k \leq \mathtt{tol} \rightarrow \) STOP.
 	\item Set \( x^{k+1} = \hat{x}^k + d^k \).
 	\item Compute \(f^{k+1}, g^{k+1}\). \\
-	If 
-	\[f^{k+1} \leq \hat{f}^k - m\delta_k \quad \rightarrow \text{ serious step} \]
+	If \(f^{k+1} \leq \hat{f}^k - m\delta_k \quad \rightarrow\) serious step: \\
+	\noindent\hspace*{2em}%
 	Set \(\hat{x}^{k+1} = x^{k+1}, \hat{f}^{k+1} = f^{k+1}\) and select \(t_{k+1} > 0\). \\
-	Otherwise \(\rightarrow \text{nullstep} \) \\
+	Otherwise \(\quad \rightarrow\) nullstep: \\
+	\noindent\hspace*{2em}%
 	Set \(\hat{x}^{k+1} = \hat{x}^k, \hat{f}^{k+1}=f^{k+1}\) and choose \(0 < t_{k+1} \leq t_k\). 	
 	\item Select new bundle index set \(J_{k+1}\), calculate 
-	\[ \eta_k = \max{\left\{\max_{j \in J_{k+1}, x^j \neq \hat{x}^{k+1}}{\frac{-2e_j^k}{|x^j - \hat{x}^{k+1}|^2}, 0}\right\}}+\gamma  \]
-	and update the model \(M_k\).
+	\[ \eta_{k+1} = \max{\left\{\max_{j \in J_{k+1}, x^j \neq \hat{x}^{k+1}}{\frac{-2e_j^{k+1}}{|x^j - \hat{x}^{k+1}|^2}, 0}\right\}}+\gamma  \]
+	and \(c^{k+1}_j\) for all \(j \in J^{k+1}\).
+	Update the model \(M_k\).
 \end{enumerate}
 \vspace{1ex}
 \hrule
@@ -319,24 +320,24 @@ The constraint set \(X\) ensures the boundedness of the sequence \(\{\hat{x}^k\}
 This is not necessary if the objective function is assumed to have bounded level sets \(\{x \in \R^n \mid f(x) \leq f(\hat{x}^1)\}\), an assumption commonly  used when optimizing nonconvex functions.
 As the objective function is assumed to be continuous bounded level sets are compact. Additionally the descent test ensures that \(f(\hat{x}^{k+1}) \leq f(\hat{x}^k)\) for all \(k\). The proof holds therefore in the same way as with the set \(X\).
 
-Another possibility is to bound the step sizes \(t_k\) also from above. Then the sequence \(\{\hat{x}^k\}\) stays bounded and the proof still holds.
-In \cite{Oliveira2014} another stopping criterion is supposed that ensures convergence even for unbounded sequences \(\{\hat{x}^k\}\).
-\textcolor{red}{Is this also possible in my case or only for convex???}
+%Another possibility is to bound the step sizes \(t_k\) also from above. Then the sequence \(\{\hat{x}^k\}\) stays bounded and the proof still holds.
+In \cite{Oliveira2014} another stopping criterion is proposed that ensures convergence even for unbounded sequences \(\{\hat{x}^k\}\).
+%\textcolor{red}{Is this also possible in my case or only for convex???}
 
 \subsubsection{Exact Information and Vanishing Errors}
 
 As the presented algorithm was originally designed for nonconvex objective functions where function values as well as subgradients are available in an exact manner, all convergence results stay the same with the error bounds \(\bar{\sigma} = \bar{\theta} = 0\).
 As already indicated previously this is the case because inexactness can be seen as a kind of nonconvexity and no additional concepts had to be added to the method when generalizing it to the inexact setting.
 
-If we additionally require the objective function to be lower-\(\mathcal{C}^2\) it can be proven that the sequence \(\{\eta_k\}\) is bounded \cite{Hare2010}.
-This is not possible in the case of inexact information even for convex objective functions.
+If we additionally require the objective function to be lower-\(\mathcal{C}^2\) it can be proven that the sequence \(\{\eta_k\}\) is bounded \cite[Lemma 3, p. 2454]{Hare2010}.
+This is not possible in the case of inexact information even for convex objective functions (see example in \cite[p. 22]{Hare2016}).
 
-For asymptotically vanishing errors, meaning \(\lim_{k \to \infty} \sigma_k = 0 \) and \(\lim_{k \to \infty} \theta_k = 0 \) the convergence theory holds equally well with error bounds \(\bar{\sigma} = \bar{\theta} = 0\) in \cite[Lemma 5]{Hare2016}. Still it is difficult if not impossible to show that the sequence \(\{\eta_k\}\) is bounded without further assumptions.
+For asymptotically vanishing errors, meaning \(\lim_{k \to \infty} \sigma_k = 0 \) and \(\lim_{k \to \infty} \theta_k = 0 \) the convergence theory holds equally well with error bounds \(\bar{\sigma} = \bar{\theta} = 0\) in \cite[Lemma 5, p. 11]{Hare2016}. Still it is difficult if not impossible to show that the sequence \(\{\eta_k\}\) is bounded without further assumptions.
 Under the assumption that \(f\) is lower-\(\mathcal{C}^2\) and some continuity bounds on the errors
 \[ \frac{|\sigma_j-\hat{\sigma}_k|}{\|x^j-\hat{x}^k\|^2} \leq L_{\sigma}, \qquad \frac{\theta_j}{\|x^j-\hat{x}^k\|} \leq L_{\theta} \quad \forall k \text{ and } \forall j \in J_k\]
 boundedness of the sequence \(\{\eta_k\}\) can be shown. The question remains however if those assumptions are possible to be assured in practice.
 
-\textcolor{red}{remark on \(\eta_k\)? how does it behave in my applications???}
+%\textcolor{red}{remark on \(\eta_k\)? how does it behave in my applications???}
 
 
 %It can be shown however that under the condition that the error on the function value at the centers is Lipschitz continuous and the objective function is lower-\(\mathcal{C}^2\) the sequence \(\{\eta_k\}\) is  bounded.
@@ -365,9 +366,9 @@ boundedness of the sequence \(\{\eta_k\}\) can be shown. The question remains ho
 
 \subsubsection{Convex Objective Functions}
 
-An obvious gain when working with convex objective functions is that the approximate stationarity condition of \cite[Lemma 5 (iii)]{Hare2016} is now an approximate optimality condition.
+An obvious gain when working with convex objective functions is that the approximate stationarity condition of \cite[Lemma 5 (iii), p. 12]{Hare2016} is then an approximate optimality condition.
 If one takes the error definitions (\ref{conv_inexactness_1}) and (\ref{conv_inexactness_2}) that are available in the convex case
-and assumes \(X = \R^n\) statement (22) in \cite{Hare2016} therefore means that 
+and assumes \(X = \R^n\), statement (22) in \cite[p. 12]{Hare2016} therefore means that 
 
 %0 is in the \(\bar{\sigma}+\bar{\theta}\)-subdifferential of \(f(\bar{x})\).
 
@@ -375,7 +376,7 @@ and assumes \(X = \R^n\) statement (22) in \cite{Hare2016} therefore means that
 
 Thus \(\bar{x}\) is \((\bar{\sigma}+\bar{\theta})\)-optimal.
 
-This follows from the definition of \(S^k\) in (\ref{aug_agg_subgr}) and local Lipschitz continuity of the \(\varepsilon\)-subdifferential \cite[Proposition 12.68]{Rockafellar2009}.
+This follows from the definition of \(S^k\) in (\ref{aug_agg_subgr}) and local Lipschitz continuity of the \(\varepsilon\)-subdifferential \cite[Proposition 12.68, p. 573]{Rockafellar2009}.
 
 %...as laid down previously the definition of an approximate subgradient does not coincide with the usual \(\varepsilon\)-subdifferential for convex functions.
 %\textcolor{red}{both definitions used for interpretation of last statement of Lemma 5.}
@@ -399,9 +400,9 @@ This follows from the definition of \(S^k\) in (\ref{aug_agg_subgr}) and local L
 
 %\textcolor{red}{Better convergence results? \(\bar{\sigma}\) instead of \(2\bar{\sigma}\)}
 
-\textcolor{red}{beweis für \(\bar{\sigma}\)-optimalität}
+%\textcolor{red}{beweis für \(\bar{\sigma}\)-optimalität}
 
-\textcolor{red}{bounded \(t_k\) instead of D? better????}
+%\textcolor{red}{bounded \(t_k\) instead of D? better????}
 %This means we consider now inexactness of the following type
 %
 %\begin{align}

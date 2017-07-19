@@ -1,6 +1,6 @@
 % train and plot for different lambda-values
 
-data = data_as;
+data = data_self;
 
 % train 
 %lambda = linspace(0,100,500);

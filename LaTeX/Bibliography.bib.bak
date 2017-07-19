@@ -779,10 +779,11 @@
   doi     = {10.2307/2006193},
 }
 
-@InProceedings{Lewis2008,
-  author = {Adrian S. Lewis and Michael L. Overton},
-  title  = {Nonsmooth Optimization via {BFGS}},
-  year   = {2008},
+@Article{Lewis2008,
+  author  = {Adrian S. Lewis and Michael L. Overton},
+  title   = {Nonsmooth Optimization via {BFGS}},
+  journal = {Submitted to SIAM Journal on Optimization},
+  year    = {2008},
 }
 
 @Book{Stoer1970,
@@ -818,6 +819,16 @@
   doi      = {10.1007/s10479-007-0176-2},
   issn     = {1572-9338},
   url      = {http://dx.doi.org/10.1007/s10479-007-0176-2},
+}
+
+@Book{Koenigsberger2003,
+  title     = {Analysis 1},
+  publisher = {Springer-Verlag GmbH},
+  year      = {2003},
+  author    = {Konrad K\"onigsberger},
+  date      = {2003-09-11},
+  ean       = {9783540403715},
+  isbn      = {354040371X},
 }
 
 @Comment{jabref-meta: databaseType:bibtex;}

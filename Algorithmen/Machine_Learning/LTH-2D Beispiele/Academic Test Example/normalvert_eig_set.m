@@ -5,17 +5,17 @@
 % Generate random numbers from a multivariate normal distribution with
 % parameters |mu = [2,3]| and |sigma = [1,1.5;1.5,3]|.
 % test set
-mu1 = [2,3.5];
-mu2 = [2,7];
-sigma = [2,1.5;1.5,3];
+mu1 = [2,3];
+mu2 = [0,8];
+sigma = [1.5,1.5;1.5,3];
 %rng default  % For reproducibility
 %for different folds
 folds = 3;
 rtX = zeros(2,200,3);
 
 for i = 1:folds
-    rtX(:,1:100,i) = mvnrnd(mu1+[1,-1]*0.4*i,sigma+[-0.25,0;0,0.1]*i,100)';
-    rtX(:,101:end,i) = mvnrnd(mu2,sigma+[-0.25,0;0,0.1]*i,100)';
+    rtX(:,1:100,i) = mvnrnd(mu1,sigma,100)';
+    rtX(:,101:end,i) = mvnrnd(mu2,sigma,100)';
 end
 % rtv1 = mvnrnd(mu1,sigma,300)';
 % rtv2 = mvnrnd(mu2,sigma,300)';
