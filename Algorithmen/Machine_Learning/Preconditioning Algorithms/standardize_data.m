@@ -1,4 +1,4 @@
-function [ data_standard ] = standardize_data( data, import )
+function [ data_standard ] = standardize_data( data, import, short )
 %STANDARDIZE_DATA standardizes a data set to zero mean and unit standard
 %deviation
 
@@ -15,7 +15,11 @@ function [ data_standard ] = standardize_data( data, import )
 if import
     data = importdata(data);
 end
-data_short = data(:,1:end-1);
+if short
+    data_short = data;
+else
+    data_short = data(:,1:end-1);
+end
 
 % calculate the mean of every column (except label column)
 mu = mean(data_short);
@@ -25,6 +29,10 @@ sigma = std(data_short);
 
 % calculate standardized data
 data_short = bsxfun(@rdivide,bsxfun(@minus,data_short,mu),sigma);
-data_standard = [data_short data(:,end)];
+if short
+    data_standard = data_short;
+else
+    data_standard = [data_short data(:,end)];
+end
 end
 

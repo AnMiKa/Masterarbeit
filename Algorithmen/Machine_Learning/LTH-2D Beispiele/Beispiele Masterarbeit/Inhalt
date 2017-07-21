@@ -1,0 +1,28 @@
+Beispiel Masterarbeit:
+
+Datensätze:
+	grundsätzlich:
+		Datensätze mit je 3 Folds
+		Größe: 2 Mal? (einmal für LTH und einmal für bundle?)
+		Größe: Bilevel bundle: Daten einzeln in X, Y
+		                       feat x J x T, J x T
+		Datensätze als Trainings- und Validation set
+		vorhanden: Cancer
+			   Ionosphere	
+			   syn_small 
+
+
+
+
+
+	Spezielle Datensätze:
+		
+
+
+
+Funktionen:
+	lambda_range:
+		plottet lambda vs. Fehler
+		gibt Norm von W aus
+		Daten wie für bundle Algorithmus
+		benutzt geleiche Funktionen wie Algorithmus

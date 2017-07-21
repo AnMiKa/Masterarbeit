@@ -2,14 +2,18 @@ function [ dfdwb ] = subgr_ul_class_hinge_wb( X, Y, W, b )
 %UNTITLED3 Summary of this function goes here
 %   Detailed explanation goes here
 
-[feat,J,T] = size(X);
+[feat,J,T,G] = size(X);
+
+X = reshape(X,feat,J*G,T);
+Y = reshape(Y,J*G,T);
+J = J*G;
 
 dfdw = zeros(feat,1);
 dfdb = 0;
 for t = 1:T
     if T > 1
-        Xt = Xt(:,:,t);
-        Yt = Yt(:,t);
+        Xt = X(:,:,t);
+        Yt = Y(:,t);
     else
         Xt = X;
         Yt = Y;

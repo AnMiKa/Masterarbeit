@@ -1,4 +1,4 @@
-function [ Dwb ] = subgr_ll_class_hingequad( W, b, X, Y, lambda )
+function [ Dwb ] = subgr_ll_class_hingequad2( W, b, X, Y, lambda )
 %SUBGR_LL_CLASS_HINGEQUAD calculates the subgradient of the implicit
 %function coming from the lower level problem of a bilevel classification 
 %problem.
@@ -35,11 +35,8 @@ for t = 1:T
     if T > 1
         Xt(:,:,t,:) = [];
         Yt(:,t,:) = [];
-        Xt = reshape(Xt,feat,J*(T-1)*G);
-        Yt = reshape(Yt,J*(T-1)*G,1);
-    else
-        Xt = reshape(Xt,feat,J*G);
-        Yt = reshape(Yt,J*G,1);
+        Xt = reshape(Xt,feat,J*(T-1),G);
+        Yt = reshape(Yt,J*(T-1),G);
     end
     % select the corresponding weight vector and bias
     Wt = W(:,t);
@@ -47,16 +44,30 @@ for t = 1:T
     
     % prepare the linear system derived from the optimality conditions to
     % calculate the subgradient
-    delta = sign(max(ones(J*max((T-1),1)*G,1)-Yt.*(Xt'*Wt-bt),0));
-    i = delta == 0;
-    delta(i)=1;
-    XXY = zeros(feat);
-    for j = 1:J*max((T-1),1)*G
-        XXY = XXY+delta(j)*(Yt(j)*Xt(:,j))*(Yt(j)*Xt(:,j))';
+    delta = zeros(J*(T-1),G);
+    XXY = zeros(feat,feat,G);
+    Hwb = zeros(feat,J*(T-1),G);
+    Hb = zeros(J*(T-1),G);
+    
+    for g = 1:G
+        delta(:,g) = sign(max(ones(J*max((T-1),1),1)-Yt(:,g).*(Xt(:,g)'*Wt-bt),0));
+        i = delta(:,g) == 0;
+        delta(i,g)=1;
+        
+        for j = 1:J*max((T-1),1)
+            XXY(:,:,g) = XXY(:,:,g)+delta(j,g)*(Yt(j,g)*Xt(:,j,g))*(Yt(j,g)*Xt(:,j,g))';
+        end
+        Hwb(:,:,g) = bsxfun(@times,Xt(:,:,g),(delta(:,g).*Yt(:,g).^2)');
+        Hb(:,g) = delta(:,g).*Yt(:,g).^2;
     end
+    
+    XXY = sum(XXY,3);
+    Hwb = sum(Hwb,3);
+    Hb = sum(Hb,2);
+    
     Hw = sum(lambda)*eye(feat)+2*XXY;
-    Hwb = -2*sum(bsxfun(@times,Xt,(delta.*Yt.^2)'),2);
-    Hb = 2*sum(delta.*Yt.^2);
+    Hwb = -2*sum(Hwb,2);
+    Hb = 2*sum(Hb);
     H = [[Hw,Hwb];[Hwb',Hb]];
     h = [-Wt;0];
     % calculation of the subgradient of the t'th fold

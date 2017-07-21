@@ -40,7 +40,7 @@ lb = [-Inf,-x_hat+1e-15]';   % bounds for [xi, d=lambda]
 % problem has to be solved rather exact because the bundle algorithm
 % assumes d to be the argmin of the given subproblem
 options_ip = optimoptions(@quadprog, 'Algorithm', 'interior-point-convex',...
-   'MaxIterations', 500, 'ConstraintTolerance', 1.0000e-15, 'OptimalityTolerance', 1.0000e-15);
+   'MaxIterations', 5000, 'ConstraintTolerance', 1.0000e-15, 'OptimalityTolerance', 1.0000e-15);
 % solve the actual subproblem
 [xi_d, ~, ~, ~, lambda] = quadprog(H, r, A, b, [], [], lb, [], [], options_ip);
 % extract the lagrange multipliers of the inequality constraints

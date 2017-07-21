@@ -314,18 +314,104 @@ Hence the final resulting bilevel formulation for model selection in support vec
 
 In this section algorithm \ref{sec_bundle_nonconv_inex}.1 is used to solve the bilevel problems presented above for different synthetic and real world data sets.
 
+\begin{itemize}
+	\item Problem what to optimize
+	\item comment on nonlinear 
+	\item overfitting
+	\item pictures that show situation
+\end{itemize}
 
 
+\subsubsection{Selection of the Data Sets}
+
+\begin{itemize}
+	\item parameter \(\lambda\) against overfitting, there to make generalization better
+	\item data sets that ``allow'' for high overfitting: not too big, many features
+\end{itemize}
+
+The following two real world data sets are used:
+
+\begin{center}
+\begin{table}[H]%
+	\begin{tabular}{lcccc}
+		\hline
+    Data set & \(l_{train}\) & \(l_{test}\) & n & T \\
+		\hline
+		Wisconsin Breast Cancer Database & 240 & 443 & 9 & 3 \\
+		John Hopkins University Ionosphere Database & 240 & 111 & 33 & 3
+	\end{tabular}
+	\caption{}
+\end{table}
+\end{center}
 
 
+Plots
+
+\begin{figure}[H]
+	\begin{subfigure}{0.49\textwidth}
+		\includegraphics[width=\textwidth]{Pictures/Plots/lambda_vs_err_io_ca_final.eps}%
+	\end{subfigure}
+	\begin{subfigure}{0.49\textwidth}
+		\includegraphics[width=\textwidth]{Pictures/Plots/lambda_vs_err_ss_sb_b5_final.eps}%
+	\end{subfigure}
+	\caption{Plots of the hingloss error for different $\lambda$ values. The figure on the right shows the plot for the \textup{\texttt{cancer}} (left axis) and \textup{\texttt{ionosphere}} (right axis) data sets. The blot on the left depicts the situation for the sythetic sets \textup{\texttt{syn small}}, \textup{\texttt{syn big}} (left axis) and \textup{\texttt{syn box}} (right axis).}%
+	\label{fig_lambda_vs_err}%
+\end{figure}
 
 
+results
 
+\begin{center}
+\begin{table}[H]%
+	\begin{tabular}{llcccc}
+		\hline
+    Data set & algorithm & 0.1 & 1 & 10 & 100 \\
+		\hline
+		\texttt{cancer} & Bundle & 1.0975 & 1.0974 & 1.0974 & 1.1341 \\
+		 & Noll Bundle & 1.0947 & 1.0947 & 1.0947 & 1.0947 \\
+		 &  fminsearch & 1.0974 & 1.0974 & 1.0974 & -10 \\
+		 & fmindnb & 1.0974 \\
+		\texttt{ionosphere} & Bundle & 2.6081 & 2.3108 & 0.3953 & 4.7401 \\
+		 & Noll Bundle & 3.5386 & 3.6521 & 10 & 8.2773 \\
+		 & fminsearch & 3.5104 & 3.5104 & 3.5104 & 3.5104 \\
+		 & fminbnd & 3.5104 \\
+		\texttt{syn small} & Bundle & 0.0337 & 0.031 & 0.0329& 0.03 \\
+		 & Bundle Noll & 0.0323 & 0.0352 & 0.0352 & 0 \\
+		 & fminsearch & 0.0346 & -0.1939 & -1.79 & -3.5673 \\
+		 & fminbnd & 0.0346 \\
+		\texttt{syn big} & Bundle & 0.1 & 1 & 10 & 100 \\
+		 & Bundle Noll & 0.0099 & 0.0108 & 0.0109 & 0.0086 \\
+		 & fminsearch & 0.0114 & -0.8748 & -0.8748 & -0.8748 \\
+		 & fminbnd & 0.0206 & plot: 0.0114\\
+		\texttt{syn box} & Bundle & 0.1 & 1 & 4.8486 & 4.45336 \\
+		 & Bundle Noll & 0.1 & 1 & 4.2760 & 0 \\
+		 & fminsearch & 4.8950 & 4.8950 & 4.8950 & 4.8950 \\
+		 & fminbnd & 4.8950 \\
+	\end{tabular}
+	\caption{}
+\end{table}
+\end{center}
 
+times
 
+\begin{center}
+\begin{table}[H]%
+	\begin{tabular}{llcccc}
+		\hline
+    Data set & algorithm & 0.1 & 1 & 10 & 100 \\
+		\hline
+		\texttt{syn big} & Bundle Noll & 202 & 320 & 386 & 503 \\
+		 & fminsearch & 672 & 637 & 587 & 741 \\
+		 & fminbnd & 557
+	\end{tabular}
+	\caption{}
+\end{table}
+\end{center}
 
-
-
+sometimes says problem not convex, then negative values. Why??? Because tries negative lambda values in course of optimization and then it gets negative \\
+sometimes even for negative lambda in the end right solution \\
+can I find out why bundle methods so bad? \\
+try matlab method (smooth) with subgradient???
 
 
 

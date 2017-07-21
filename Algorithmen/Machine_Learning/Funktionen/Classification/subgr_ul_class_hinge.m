@@ -20,7 +20,11 @@ function [ DLlambda ] = subgr_ul_class_hinge( W, b, X, Y, Dwb )
 
 fprintf('Find a subgradient of the upper level classification problem. \n')
 %tic
-[~,J,T] = size(X);
+[feat,J,T,G] = size(X);
+
+X = reshape(X,feat,J*G,T);
+Y = reshape(Y,J*G,T);
+J = J*G;
 DLlambda = zeros(1,T);
 for t = 1:T
     % select the partition of the validation set corresponding to the t'th

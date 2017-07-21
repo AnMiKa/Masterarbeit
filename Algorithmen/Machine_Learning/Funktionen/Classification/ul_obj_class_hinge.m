@@ -18,7 +18,11 @@ function [ f ] = ul_obj_class_hinge( X, Y, W, b )
 
 
 fprintf('Evaluate the upper level objective for a given weight vector. \n')
-[~,J,T] = size(X);
+[feat,J,T,G] = size(X);
+
+X = reshape(X,feat,J*G,T);
+Y = reshape(Y,J*G,T);
+J = J*G;
 f = 0;
 for t =  1:T
     % select the partition of the validation set corresponding to the t'th

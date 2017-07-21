@@ -2,9 +2,12 @@
 % runs for qpas
 % runs for quadprog, only test one a bit strange (tol: 1e-15)
 
-[X,Y] = precond_data('Data/ready_to_use/pima_standard_pm1.mat',1,1:768,1);
+%[X,Y] = precond_data('Data/ready_to_use/pima_standard_pm1.mat',1,1:768,1);
+
+X = reshape(Xtcancer,9,80,1,3);
+Y = reshape(Ytcancer,80,1,3);
 [feat, n] = size(X);
-lambda = 20*rand(1)-10;
+lambda = 20*rand(3,1)-10;
 
 % %% Test 1: df/dlambda for hingequad loss for w, b - 'runs qpas' (for pima)
 % % qp: sometimes 1e-18 or even 0, sometimes 0.02??? -> same min in
@@ -27,18 +30,18 @@ lambda = 20*rand(1)-10;
 % %assert(abs(dfdl_num-dfdl_fun)<1e-4,'df/dlambda for hingequad loss gives bigger variation than 10^-4') 
 
 %% Test 2: df/dw - does not exist???
-eps = 1e-7; 
-W = rand(feat,1);
-b = rand(1);
-dfdwb_num = zeros(feat+1,1);
-I = eye(feat);
-for i = 1:feat
-    dfdwb_num(i) = 1/(2*eps)*(ul_obj_class_hingequad(X,Y,W+I(:,i)*eps,b)-ul_obj_class_hingequad(X,Y,W-I(:,i)*eps,b));
-end
-dfdwb_num(feat+1) = 1/(2*eps)*(ul_obj_class_hingequad(X,Y,W,b+eps)-ul_obj_class_hingequad(X,Y,W,b-eps));
-dfdwb_fun = subgr_ul_class_hingequad_wb(X,Y,W,b);
-abs(dfdwb_num-dfdwb_fun)
-assert(sum(abs(dfdwb_num-dfdwb_fun)>1e-6)==0,'df/dw gives bigger variation than 10^-6 in %d components.\n',sum(abs(dfdwb_num-dfdwb_fun)>1e-6)); 
+% eps = 1e-7; 
+% W = rand(feat,1);
+% b = rand(1);
+% dfdwb_num = zeros(feat+1,1);
+% I = eye(feat);
+% for i = 1:feat
+%     dfdwb_num(i) = 1/(2*eps)*(ul_obj_class_hingequad(X,Y,W+I(:,i)*eps,b)-ul_obj_class_hingequad(X,Y,W-I(:,i)*eps,b));
+% end
+% dfdwb_num(feat+1) = 1/(2*eps)*(ul_obj_class_hingequad(X,Y,W,b+eps)-ul_obj_class_hingequad(X,Y,W,b-eps));
+% dfdwb_fun = subgr_ul_class_hingequad_wb(X,Y,W,b);
+% abs(dfdwb_num-dfdwb_fun)
+% assert(sum(abs(dfdwb_num-dfdwb_fun)>1e-6)==0,'df/dw gives bigger variation than 10^-6 in %d components.\n',sum(abs(dfdwb_num-dfdwb_fun)>1e-6)); 
 % now eps = 10^-8 and 10^-5 or eps = 10^-7 and 10^-6 because of scaling 
 
 % %% Test 3: df/dw quad
@@ -66,7 +69,7 @@ assert(sum(abs(dfdwb_num-dfdwb_fun)>1e-6)==0,'df/dw gives bigger variation than 
 % 
 
 %% Test 3: dwb/dlambda for hingequad loss for w, b - 'runs qpas, quadprog' except for ionosphere (10^-3)
-eps = 1e-8;
+eps = 1e-9;
 Wb1 = solve_ll_class_hingequad_qp(X,Y,lambda+eps);
 Wb2 = solve_ll_class_hingequad_qp(X,Y,lambda-eps);
 Wb = solve_ll_class_hingequad_qp(X,Y,lambda);

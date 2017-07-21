@@ -27,25 +27,37 @@ function [ Wb ] = solve_ll_class_hingequad_qp( X, Y, lambda )
 fprintf('Solve the lower level classificaion problem for given hyperparameter. \n')
 %tic
 
-[feat,J,T] = size(X);
+[feat,J,T,G] = size(X);
+
 Wb = zeros(feat+1,T);
+
 for t = 1:T
     % select the partition of the trainings set corresponding to the t'th
     % fold
     Xt = X;
     Yt = Y;
-    Xt(:,:,t) = [];
-    Yt(:,t) = [];
-    Xt = reshape(Xt,feat,J*(T-1));
-    Yt = reshape(Yt,J*(T-1),1);
-    
-    % prepare the matrices used in the qpas algorithm
-    H = spdiags([lambda*ones(feat,1);0;ones(J*(T-1),1)],0,feat+1+J*(T-1),feat+1+J*(T-1));
-    XY = sparse(bsxfun(@times,Xt,Yt'));
-    A = [-XY' sparse(Yt) -spdiags(ones(J*(T-1),1),0,J*(T-1),J*(T-1))];
-    b = -ones(J*(T-1),1);
+    if T > 1
+        Xt(:,:,t,:) = [];
+        Yt(:,t,:) = [];
+    end
+    Xt = reshape(Xt,feat,J*max((T-1),1),G);
+    Yt = reshape(Yt,J*max((T-1),1),G,1);
+
+    % prepare the matrices used in the quadprog algorithm
+    H = sparse(feat+1+J*max((T-1),1),feat+1+J*max((T-1),1));
+    XY = sparse(feat,J*max((T-1),1));
+    for g = 1:G
+        H = H + spdiags([lambda(g)*ones(feat,1);0;ones(J*max((T-1),1),1)],0,feat+1+J*max((T-1),1),feat+1+J*max((T-1),1));
+        XY = XY + sparse(bsxfun(@times,Xt(:,:,g),Yt(:,g)'));
+    end
+%     if lambda < 0
+%         pause
+%     end
+
+    A = [-XY' sparse(sum(Yt,2)) -spdiags(G*ones(J*max((T-1),1),1),0,J*max((T-1),1),J*max((T-1),1))];
+    b = -G*ones(J*max((T-1),1),1);
     options = optimoptions(@quadprog, 'Algorithm', 'interior-point-convex',...
-    'MaxIterations', 5000, 'ConstraintTolerance', 1.0000e-10, 'OptimalityTolerance', 1.0000e-10);
+    'MaxIterations', 5000, 'ConstraintTolerance', 1.0000e-15, 'OptimalityTolerance', 1.0000e-15);
     Wbxi = quadprog(H,[],A,b,[],[],[],[],[],options);
     Wb(:,t) = Wbxi(1:feat+1);
 end
