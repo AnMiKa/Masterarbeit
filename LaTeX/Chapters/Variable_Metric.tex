@@ -59,10 +59,10 @@ The matrix \(Q(\hat{x}^k)\) itself does not have to be positive definite. In fac
 We adopt the notation in \cite{Noll2013} and write
 
 \begin{equation*}
-		Q(\hat{x}^k):=Q_k = Q_k^{\top} \quad \text{and} \quad -q\mathbb{I} \prec Q_k \prec q\mathbb{I} \text{ for a } q  > 0.
+		Q(\hat{x}^k):=Q_k = Q_k^{\top} \quad \text{and} \quad -q\mathbb{I} \preccurlyeq Q_k \preccurlyeq q\mathbb{I} \text{ for a } q  > 0.
 \end{equation*}
 
-The notation \( A \prec B\) with \(A, B \in \R^{n\times n}\) means that the matrix \((B-A)\) is positive definite.
+The notation \( A \preccurlyeq B\) with \(A, B \in \R^{n\times n}\) means that the matrix \((B-A)\) is positive semidefinite. The symbol \(\prec\)  means analogously that \((B-A)\) is positive definite.
 
 As the matrix \(Q_k\) is symmetric it can also be pulled into the stabilization term. This means the \(k\)'th bundle subproblem can also be written as
 
@@ -114,7 +114,7 @@ From this the model decrease (\ref{mod_dec2}) can be calculated using (\ref{aug_
 	&= \hat{f}_k - A_k(x^{k+1}) - \Langle\nu^k,d^k\Rangle\\
 	%&= C_k - (S^k)^{\top}d^k - (\nu^k)^{\top}d^k \\
 	&= C_k - \Langle S^k+\nu^k,d^k\Rangle \\
-	&= C_k + \Langle d^k,\left(Q_k+\frac{1}{t_k}\mathbb{I}\right)d^k\Rangle.
+	&= C_k + \Langle d^k,\left(Q_k+\frac{1}{t_k}\mathbb{I}\right)d^k\Rangle \quad \forall k \in \N.
 	\label{Noll_delta}
 \end{split}
 \end{equation}
@@ -156,11 +156,11 @@ For \(k = 1,2,3,  \dotsc \)
 	\item Compute \(f^{k+1}, g^{k+1}\). \\
 	If \(f^{k+1} \leq \hat{f}^k - m\delta_k \quad \rightarrow \) serious step: \\
 	\noindent\hspace*{2em}%
-	Set \(\hat{x}^{k+1} = x^{k+1}, \hat{f}^{k+1} = f^{k+1}\) and select \(t_{k+1} > t_{min}\). \\
-	Calculate a symmetric matrix \(Q_{k+1}\) with \(-q\mathbb{I} \prec Q_{k+1} \prec q\mathbb{I}\) and adjust \(t_{k+1}\) such that \(Q_{k+1}+\frac{1}{t_k}\mathbb{I} \succ 0\).\\
+	Set \(\hat{x}^{k+1} = x^{k+1}, \hat{f}^{k+1} = {f}^{k+1}\) and calculate a symmetric matrix \(Q_{k+1}\) with \(-q\mathbb{I} \preccurlyeq Q_{k+1} \preccurlyeq q\mathbb{I}\). \\
+	Adjust \(t_{k+1}\) such that \(Q_{k+1}+\frac{1}{t_{k+1}}\mathbb{I} \succ 0\) and \(t_{k+1} > t_{min}\).\\
 	Otherwise \(\quad \rightarrow\) nullstep: \\
 	\noindent\hspace*{2em}%
-	Set \(\hat{x}^{k+1} = \hat{x}^k, \hat{f}^{k+1}=f^{k+1}\) and choose \(0 < t_{k+1} \leq t_k\). 	
+	Set \(\hat{x}^{k+1} = \hat{x}^k, \hat{f}^{k+1}=\hat{f}^{k}\) and choose \(t_{min} < t_{k+1} \leq t_k\). 	
 	\item Select the new bundle index set \(J_{k+1}\). Calculate 
 	\[ \eta_{k+1} = \max{\left\{\max_{j \in J_{k+1}, x^j \neq \hat{x}^{k+1}}{\frac{-2e_j^{k+1}}{|x^j - \hat{x}^{k+1}|^2}, 0}\right\}}+\gamma  \]
 	and \(c^{k+1}_j \) for all \(j \in J^{k+1}\). Update the model \(M^{k+1}\).
@@ -182,13 +182,13 @@ In the paper all convergence properties are first stated in \cite[Lemma 5]{Hare2
 	(i) If \(C^k \to 0\) as \(k \to \infty\), then 
 	\[ \sum_{j \in J^k}\alpha_j^k\|x^j-\hat{x}^k\| \to 0 \text{ as } k \to \infty. \]
 	
-	(ii) If additionally for some subset \(K \subset \{1,2,\dots\}\),
-	\[\hat{x}^k \to \bar{x}, S^k \to \bar{S} \text{ as } K \ni k \to \infty, \text{ with } \{\eta_k\mid k \in K\} \text{ bounded,} \]
+	(ii) If additionally for some subset \(\tilde{K} \subset \{1,2,\dots\}\),
+	\[\hat{x}^k \to \bar{x}, S^k \to \bar{S} \text{ as } K \ni k \to \infty, \text{ with } \{\eta_k\mid k \in \tilde{K}\} \text{ bounded,} \]
 	
 	then we also have 
 	\[\bar{S} \in \partial f(\bar{x})+B_{\bar{\theta}}(0).\]
 	
-	(iii) If in addition \(S^k + \nu^k \to 0\) as \(K \in k \to \infty\), then \(\bar{x}\) satisfies the approximate stationarity condition 
+	(iii) If in addition \(S^k + \nu^k \to 0\) as \(\tilde{K} \in k \to \infty\), then \(\bar{x}\) satisfies the approximate stationarity condition 
 	\begin{equation}
 		0 \in \left(\partial f(\bar{x}) + \partial \mathtt{i}_X(\bar{x}) \right) + B_{\bar{\theta}}(0).
 	\end{equation}
@@ -199,15 +199,68 @@ In the paper all convergence properties are first stated in \cite[Lemma 5]{Hare2
 	\end{equation}
 \end{lemma}
 
-As neither the stabilization nor the descent test are involved in the proof of Lemma \ref{Lemma5} it is the same as in \cite{Hare2016}.
+As neither the stabilization nor the descent test are involved in the proof of lemma \ref{Lemma5} it is the same as in \cite{Hare2016}.
 
-We prove now that also the variable metric version of the algorithm fulfills all requirements of Lemma \ref{Lemma5}.
+We prove now that also the variable metric version of the algorithm fulfills all requirements of lemma \ref{Lemma5}.
 The proof is divided into two parts. The first case covers the case of infinitely many serious steps, the second one considers infinitely many null steps after a finite number of serious steps.
 
 %For both proofs the following lemma is needed:
 
 For both proofs the equivalence of norms is used between the Euclidean norm and the norm \(\Vert \cdot \Vert_{Q_k+\frac{1}{t_k}\mathbb{I}}\).
-As the algorithm assures, that \(-q\mathbb{I} \prec Q_k \prec q\mathbb{I}\) for some \(q > 0\), the step size can be bounded from below by \(t_{min} = \frac{1}{q} - \varepsilon \) for a small \(\varepsilon > 0\). This means, the matrix \(Q_k+\frac{1}{t_k}\mathbb{I}\) is uniformly bounded for all \(k\). Because the matrix is also symmetric it can be used to define a scalar product which induces indeed the norm \(\Vert \cdot \Vert_{Q_k+\frac{1}{t_k}\mathbb{I}}\).
+We show here shortly, that the matrix \(Q_k+\frac{1}{t_k}\mathbb{I}\) can be used to define a scalar product which induces the norm \(\Vert \cdot \Vert_{Q_k+\frac{1}{t_k}\mathbb{I}}\).
+
+In order to do this, it is first shown, that the matrix \(Q_k+\frac{1}{t_k}\mathbb{I}\) is bounded.
+
+\begin{proposition}
+\label{prop_bounded}
+	The matrix \(Q_k+\frac{1}{t_k}\mathbb{I}\) is bounded in the sense that \(\left\Vert Q_k+\frac{1}{t_k}\mathbb{I} \right\Vert_2 < \infty \) for all \(k\) and the spectral norm \(\Vert \cdot \Vert_2\) \cite[Example 5.6.6]{Horn2012}.
+	
+	This means also that the following relation holds for all vectors \(x\in\R^n\):
+	
+	\begin{equation}
+		\left\Vert\left(Q_k+\frac{1}{t_k}\mathbb{I}\right)x\right\Vert \leq \left\vert q + \frac{1}{t_{min}} \right\vert \Vert x\Vert < \infty , \quad \forall k,
+		\label{rel_bound}
+	\end{equation}
+	
+	where \(q > 0\) is the bound on the eigenvalues of \(Q_k\) and \(t_{min}\) the lower bound for the step size.
+\end{proposition}
+
+\begin{proof}
+	%To show boundedness of the matrix \(Q_k+\frac{1}{t_k}\mathbb{I}\) we show that the spectral norm of this matrix is bounded.
+	
+	Algorithm \ref{sec_variable_metric}.1 ensures that \( -q \mathbb{I}  \preccurlyeq Q_k \preccurlyeq q\mathbb{I} \) for some preset constant \(q >0\). This means, that the matrices \(Q_k + q\mathbb{I} \) and \(q \mathbb{I} - Q_k \) are positive semidefinite yielding that all their eigenvalues are nonnegative.
+	
+In section \ref{proof_eigval} in the appendix it is shown that the eigenvalues of a matrix of the form \(A+b\mathbb{I}\) for \(A \in \R^{n\times n}, b \in \R\) are \(\tilde{\lambda}_i := \lambda^A_i+b \), with \(\lambda^A_i\), \(i =1,...,n\) being the eigenvalues of the matrix \(A\).
+This means that the following holds for all eigenvalues \(\lambda^k_{i}\), \(i = 1,...,n\), of \(Q_k\) for all \(k\):
+
+\begin{equation*}
+	\lambda^k_{i} + q \geq 0 \text{ and } q - \lambda^k_{i} \geq 0 \quad \Rightarrow \quad \vert \lambda^k_{i} \vert \leq q, \quad  i = 1,...,n, \quad  \forall k.
+\end{equation*}
+	
+The step size \(t_k\) is bounded below by \(t_{min}\) for all \(k\). This yields for the spectral norm that
+
+\begin{equation}
+		\Vert Q_k+\frac{1}{t_k}\mathbb{I} \Vert_2 =  \vert \lambda^k_{max}+\frac{1}{t_k} \vert \leq \vert q+\frac{1}{t_{min}} \vert < \infty, \quad \forall k.
+		\label{bound}
+\end{equation}
+
+Here \(\lambda^k_{max}\) denotes the eigenvalue of \(Q_k\)  that fulfills \(\lambda^k_{max} = \argmax_{i \in \{1,...,n\}} \vert \lambda^k_{i}+\frac{1}{t_k} \vert\).
+
+The spectral norm is induced by the Euclidean norm thus it is compatible with it. Therefore with relation (\ref{bound}) it holds
+
+\[ \left\Vert Q_k+\frac{1}{t_k}\mathbb{I} \right\Vert \leq \left\Vert Q_k+\frac{1}{t_k}\mathbb{I} \right\Vert_2 \Vert x \Vert \leq \left\vert q+\frac{1}{t_{min}} \right\vert \Vert x \Vert< \infty , \quad \forall k.\]
+
+\end{proof}
+
+
+
+\begin{proposition}
+\label{prop_norm}
+	The norm \(\Vert \cdot \Vert_{Q_k+\frac{1}{t_k}\mathbb{I}}\) induced by the matrix \(Q_k+\frac{1}{t_k}\mathbb{I}\) is well-defined for all \(k\).
+\end{proposition}
+
+The proof to this proposition is found in section \ref{proof_norm} of the appendix.
+
 %\begin{proposition}
 	%Under the assumption that the matrix \(Q_k+\frac{1}{t_k}\mathbb{I}\) is uniformly bounded for all \(k\) the expression \(\Vert \cdot \Vert_{Q_k+\frac{1}{t_k}\mathbb{I}}\) defines a norm.
 %\end{proposition}
@@ -281,22 +334,24 @@ The first part of the convergence proof is now stated.
 \begin{theorem}[c.f. {\cite[Theorem 6, p. 14]{Hare2016}}]
 \label{theo_inf_ser_steps}
 	%\(\to\) take only part with \(\liminf_{k\to\infty}t_k > 0 \) because other one not used in null steps and algorithm this way. \\
-	Let algorithm \ref{sec_variable_metric}.1 generate an infinite number of serious steps. Then \(\delta_k \to 0\) as \(k \to \infty\). 
-	Let the sequence \(\{\eta_k\}\) be bounded. As \(k \to \infty\) we have \(C_k \to 0\), and for every accumulation point \(\bar{x}\) of \(\{\hat{x}^k\}\) there exists \(\bar{S}\) such that \(S^k \to \bar{S}\) and \(S^k + \nu^k \to 0\).
-In particular if the cardinality of \(\{j \in J^k\mid \alpha_j^k > 0\}\) is uniformly bounded in \(k\) then the conclusions of Lemma \ref{Lemma5} hold.
+	Let algorithm \ref{sec_variable_metric}.1 generate an infinite number of serious steps. Then \(\delta_k \to 0\) as \(K \ni k \to \infty\) for the sequence of serious steps \(K \subset \{1,2,...\}\). 
+	Let the sequence \(\{\eta_k\}\) be bounded. As \(K \ni k \to \infty\) we have \(C_k \to 0\). For every accumulation point \(\bar{x}\) of \(\{\hat{x}^k\}\) there exists a subsequence \(\tilde{K}\) and  a vector \(\bar{S}\) such that \(S^{\tilde{k}} \to \bar{S}\) and \(S^{\tilde{k}} + \nu^{\tilde{k}} \to 0\) for \(\tilde{K} \ni \tilde{k} \to \infty\).
+In particular if the cardinality of \(\{j \in J^k\mid \alpha_j^k > 0\}\) is uniformly bounded in \(k\) then the conclusions of lemma \ref{Lemma5} hold.
 \end{theorem}
 
 The proof is very similar to the one stated in \cite{Hare2016} but minor changes have to be made due to the different formulation of the nominal decrease \(\delta_k\).
 
 \begin{proof}
-	At each serious step we have
+	Let \(K \subset \{1,2,...\}\) denote the subsequence of serious steps. (For the sake of readability the same index \(k\) that is used in the algorithm for all steps is used here only for the serious steps.)
+	At each of those steps we have
 	
 	\begin{equation}
-		\hat{f}_{k+1} \leq \hat{f}_k - m\delta_k,
+		\hat{f}_{k+1} \leq \hat{f}_k - m\delta_{k}, \quad {k} \in {K} 
 	\label{nonincreasing}
 	\end{equation}
 	
-	where \(m, ~\delta_k > 0\). From this follows that the sequence \(\{\hat{f}_k\}\) is nonincreasing.
+	where \(m, ~\delta_{k} > 0\). 
+	As \(\hat{f}_k\) is only updated in serious steps it follows that the sequence \(\{\hat{f}_k\}\) is nonincreasing.
 	Since the sequence \(\{\hat{x}^k\}\) lies in the compact set \(X\) and \(f\) is continuous the sequence \(\{f(\hat{x}^k)\}\) is bounded. %\textcolor{red}{which assumption says \(f\) bounded below??? \(\to\) \(f\) subdifferentially regular \(\Rightarrow\) \(f\) finite}
 	With \(|\sigma_k| < \bar{\sigma}\) also the sequence \(\{f(\hat{x}^k)+\sigma_k\} = \{\hat{f}_k\}\) is bounded. Considering also the fact that \(\{\hat{f}_k\}\) is nonincreasing one can conclude that it converges. \\
 	From (\ref{nonincreasing}) follows that
@@ -322,32 +377,33 @@ The proof is very similar to the one stated in \cite{Hare2016} but minor changes
 		C_k \to 0 \quad \text{and} \quad \Langle d^k,\left(Q_k+\frac{1}{t_k}\mathbb{I}\right)d^k\Rangle \to 0.
 	\end{equation*}
 	
-	Finally we need to show that for any accumulation point \(\bar{x}\) of the sequence \(\{\hat{x}^k\}\) holds \(S^k \to \bar{S}\) and \(S^k+\nu^k \to 0\) for \(K \ni k \to \infty\) and the suitable subsequence \(K \subset \{1,2,...\}\).
-Let \(\hat{K'} \subset \{1,2,...\}\) denote the subset such that the sequence \(\{\hat{x}^{k'}\}\) converges to its accumulation point \(\bar{x}\) for \(k' \in K'\). Let then \(\hat{K'} \subset K'\) be the subset of iterates where serious steps were done. 
-From \(\{\hat{x}^{k'}\}_{k' \in K'} \to \bar{x}\)  follows that  \(d^{\hat{k'}} = \hat{x}^{\hat{k'}+1}-\hat{x}^{\hat{k'}} \to 0\) for \(\hat{K'} \ni \hat{k'} \to \infty \). The step size \(t_k\) is bounded below by \(t_{min} > 0\) so \(\liminf_{k \to \infty} t_k > 0\). Because of this and because the eigenvalues of \(Q_k\) are bounded the expression 
+	Finally we need to show that for any accumulation point \(\bar{x}\) of the sequence \(\{\hat{x}^{\tilde{k}}\}\) holds \(S^{\tilde{k}} \to \bar{S}\) and \(S^{\tilde{k}}+\nu^{\tilde{k}} \to 0\) for \(\tilde{K} \ni {\tilde{k}} \to \infty\) and the suitable subsequence \(\tilde{K} \subset K\).
+Let \({K'} \subset K\) denote the subset such that the sequence \(\{\hat{x}^{k'}\}\) converges to its accumulation point \(\bar{x}\) for \(k' \in K'\). %Let then \(\hat{K'} \subset K'\) be the subset of iterates where serious steps were done. 
+As we only consider the subsequence of serious steps it follows from \(\{\hat{x}^{k'}\}_{k' \in K'} \to \bar{x}\) that  \(d^{{k'}} = \hat{x}^{{k'}+1}-\hat{x}^{{k'}} \to 0\) for \({K'} \ni {k'} \to \infty \). The step size \(t_k\) is bounded below by \(t_{min} > 0\) and because the eigenvalues of \(Q_k\) are bounded the expression 
 	
 	\begin{equation*}
-	 S^{\hat{k'}} + \nu^{\hat{k'}} = \left(Q_{\hat{k'}}+\frac{1}{t_{\hat{k'}}}\mathbb{I} \right)d^{\hat{k'}}  \to 0 \quad \text{for} \quad \hat{K'} \ni \hat{k'} \to \infty
+	 S^{{k'}} + \nu^{{k'}} = \left(Q_{{k'}}+\frac{1}{t_{{k'}}}\mathbb{I} \right)d^{{k'}}  \to 0 \quad \text{for} \quad {K'} \ni {k'} \to \infty
 	\end{equation*}
 	
 	because 
 	
-	\[ \lVert S^{\hat{k'}} + \nu^{\hat{k'}} \rVert = \left\Vert\left(Q_{\hat{k'}}+\frac{1}{t_{\hat{k'}}}\mathbb{I}\right)d^{\hat{k'}} \right\Vert \leq \underbrace{\left(\lVert Q_{\hat{k'}}\rVert+\frac{1}{t_{\hat{k'}}}\right)}_{\text{bounded}}\underbrace{\|d^{\hat{k'}}\|}_{\to 0}.\]
+	\[ \lVert S^{{k'}} + \nu^{{k'}} \rVert = \left\Vert\left(Q_{{k'}}+\frac{1}{t_{{k'}}}\mathbb{I}\right)d^{{k'}} \right\Vert \leq \left \vert q + \frac{1}{t_{min}}\right\vert \underbrace{\|d^{{k'}}\|}_{\to 0}.\]
 	
-	The implication \(S^k \to \bar{S}\) for \(k \in K\) follows from local Lipschitz continuity of \(f\).
-	By Rademacher's theorem this property yields that on any open set \(U\) the function \(f\) is differentiable except on a set \(U_{\text{nd}}\) of zero Lebesgue measure. As \(f\) is also Lipschitz continuous on any closed set containing such an open set \(U\), the gradient of \(f\) on \(U\) is bounded.
-	Let \(X \subset U\). By theorem 2.5.1 in \cite[p. 63]{Clarke1990} the subdifferential of \(f\) at any point \(x^k \in U\) is the convex hull of the limits of gradients \(\nabla f\) of \(f\) on the set \(U\setminus U_{\text{nd}}\)
+	Here the last inequality follows from (\ref{rel_bound}).
+	The implication \(S^{\tilde{k}} \to \bar{S}\) for \({\tilde{k}} \in \tilde{K}\) follows from local Lipschitz continuity of \(f\).
+	By Rademacher's theorem this property yields that on any open set \(\Omega\) the function \(f\) is differentiable except on a set \(\Omega_{\text{nd}}\) of zero Lebesgue measure. As \(f\) is also Lipschitz continuous on any closed set containing such an open set \(\Omega\), the gradient of \(f\) on \(\Omega\) is bounded.
+	Let \(X \subset \Omega\). By theorem 2.5.1 in \cite[p. 63]{Clarke1990} the subdifferential of \(f\) at any point \(x^k \in \Omega\) is the convex hull of the limits of gradients \(\nabla f\) of \(f\) on the set \(\Omega\setminus \Omega_{\text{nd}}\)
 	
-		\[ \partial f(x^k) = \conv\{\lim \nabla f(y) \mid y \to x^k, y \notin U_{\text{nd}}\}. \]
+		\[ \partial f(x^k) = \conv\{\lim \nabla f(y) \mid y \to x^k, y \notin \Omega_{\text{nd}}\}. \]
 		
-		This means that also all subgradients on \(U\) are bounded. As the subgradient error is assumed to be bounded by \(\bar{\theta}\) the set of approximate subgradients \(\{g^j, j \in J^k\}\) contained in the bundle is bounded as well.
+		This means that also all subgradients on \(\Omega\) are bounded. As the subgradient error is assumed to be bounded by \(\bar{\theta}\) the set of approximate subgradients \(\{g^j, j \in J^k\}\) contained in the bundle is bounded as well.
 		From this follows that also the augmented subgradients \(s_j^k = g^j+\eta_k(x^j-\hat{x}^k)\) are bounded because \(\eta^k\) is bounded by assumption and \(x^j, \hat{x}^k \in X\).		
 Defining \(s:= \max_{k,j}\|s^k_j\|\) this yields that 
 		
 		\[\Vert S^k\Vert = \bigg\Vert\sum_{j \in J^k}{\alpha_j^k s_j^k}\bigg\Vert \leq  \sum_{j \in J^k}{\Vert\alpha_j^k\Vert\underbrace{\Vert s^k_j\Vert}_{\leq s \in \R}} \leq s\underbrace{\sum_{j \in J^k}{\alpha_j^k}}_{=1} < \infty \quad \forall k. \]
 		
 		It follows that the sequence \(S^k\) is bounded.
-		By the Bolzano-Weierstrass theorem \cite[p. 51]{Koenigsberger2003} every bounded sequence has a convergent subsequence. Let \(K \subset \hat{K'}\) denote the index set of this converging subsequence and \(\bar{S}\) the corresponding accumulation point. Then finally \(S^k \to \bar{S}\) for \(K \ni k\to \infty\).
+		By the Bolzano-Weierstrass theorem \cite[p. 51]{Koenigsberger2003} every bounded sequence has a convergent subsequence. Let \(\tilde{K} \subset \hat{K'}\) denote the index set of this converging subsequence and \(\bar{S}\) the corresponding accumulation point. Then finally \(S^{\tilde{k}} \to \bar{S}\) for \(\tilde{K} \ni {\tilde{k}}\to \infty\).
 		
 	
 \end{proof}
@@ -388,7 +444,7 @@ yielding inequality (\ref{subgr_ineq}) above.
 \begin{theorem} [c.f. {\cite[Theorem 7, p. 16]{Hare2016}}]
 	Let a finite number of serious iterates be followed by infinite null steps. Let the sequence \(\{\eta_k\}\) be bounded.
 	Then \(\{x^k\} \to \hat{x}\), \(\delta_k \to 0\), \(C_k \to 0\), \(S^k + \nu^k \to 0\) and there exist \(K\subset \{1,2,...\}\) and \(\bar{S}\) such that \(S^k \to \bar{S}\) as \(K \ni k \to \infty\). \\
-	In particular if the cardinality of \(\{j \in J^k\mid \alpha_j^k > 0 \}\) is uniformly bounded in \(k\) then the conclusions of Lemma \ref{Lemma5} hold for \(\bar{x} = \hat{x}\). 
+	In particular if the cardinality of \(\{j \in J^k\mid \alpha_j^k > 0 \}\) is uniformly bounded in \(k\) then the conclusions of lemma \ref{Lemma5} hold for \(\bar{x} = \hat{x}\). 
 \end{theorem}
 
 \begin{proof}
@@ -446,7 +502,7 @@ By boundedness of \(d^k\) and boundedness and positive definiteness \(Q+\frac{1}
 	
 Here the first inequality comes from (\ref{A_leq_M}) and the fact that \(t_{k+1} \leq t_{k}\) for null steps. The second equality follows from (\ref{aug_agg_lin}), the fourth equality by (\ref{subgr_Q}) and (\ref{Psi}) and the last inequality holds by the subgradient inequality for \(\nu^k \in \mathtt{i}_X(x^{k+1})\) and the fact that \(x^{k+1},x^{k+2} \in X\).
 
-As \(Q\) is fixed in null steps and  \(\liminf_{k \to \infty} t_k > 0\) (because \(t_k > t_{min} >0\) for all \(k\)) the sequence \(\{\Psi_k\}\) is increasing and bounded from above. It is therefore convergent.
+%As \(Q\) is fixed in null steps and  \(t_k > t_{min} >0\) for all \(k\) the sequence \(\{\Psi_k\}\) is increasing and bounded from above. It is therefore convergent.
 
 Looking again at (\ref{Psi_increase}) and taking into account that \(1/t_k \geq 1/t_{\bar{k}}\) in the null step case we have
 
@@ -454,10 +510,12 @@ Looking again at (\ref{Psi_increase}) and taking into account that \(1/t_k \geq 
 	\Psi_{k+1} - \Psi_k & \geq \frac{1}{2}\Vert d^{k+1}-d^k\Vert^2_{Q+\frac{1}{t_k}\mathbb{I}} \\
 	%&= \frac{1}{2}\Langle\left(d^{k+1}-d^{k}\right),\left(Q+\frac{1}{t_k}\mathbb{I}\right)\left(d^{k+1} - d^{k}\right)\Rangle \\
 	%&\geq \frac{1}{2}\Langle\left(d^{k+1}-d^{k}\right),\left(Q+\frac{1}{t_{\bar{k}}}\mathbb{I}\right)\left(d^{k+1} - d^{k}\right)\Rangle \\
-	&\geq \frac{1}{2}{\lVert d^{k+1}-d^k\rVert}^2_{Q+\frac{1}{t_{\bar{k}}}\mathbb{I}}.
+	&\geq \frac{1}{2}{\lVert d^{k+1}-d^k\rVert}^2_{Q+\frac{1}{t_{\bar{k}}}\mathbb{I}} \geq 0.
 \end{align*}
 
-As the sequence \(\{\Psi_k\}\) is converging this yields
+This means that the sequence \(\{\Psi_k\}\) is increasing and bounded from above. Thus the sequence is convergent.
+
+This yields
 
 \begin{equation}
 	|\Psi_{k+1} - \Psi_k | \to 0 \quad \Rightarrow \quad \Vert d^{k+1}-d^k\Vert \to 0 \text{ for } k \to \infty
@@ -502,7 +560,7 @@ In combination with (\ref{dfM}) this yields
 	\label{delta_ineq}
 \end{equation}
 
-For the next step Lemma 3 and the corollary below it from \cite[p. 45]{Polyak1987} are used. They state that for
+For the next step lemma 3 and the corollary below it from \cite[p. 45]{Polyak1987} are used. They state that for
 
  \begin{equation*}
 	u_{k+1} \leq qu_k + a_k, \quad q < 1, \quad a_k \geq 0, \quad a_k \to 0 \text{ and } u_k \geq 0
@@ -517,27 +575,29 @@ Taking the first and the last part of inequality (\ref{delta_ineq}) we can ident
 The lemma then gives that
 
 \begin{equation*}
-	\lim_{k \to \infty} \delta_k = \lim_{k \to \infty} C_k + \Langle d^k,\left(Q_k+\frac{1}{t_k}\mathbb{I}\right)d^k\Rangle = 0.
+	\lim_{k \to \infty} \delta_k = \lim_{k \to \infty} C_k + \Langle d^k,\left(Q+\frac{1}{t_k}\mathbb{I}\right)d^k\Rangle = 0.
 \end{equation*}
 
-By the fact that \(C_k \geq 0\) for all \(k\) and positive definiteness of \(Q_k+\frac{1}{t_k}\mathbb{I} \)  it follows that all summands above are nonnegative and hence \(C_k \to 0\) as \(k \to \infty\). Since \(Q+\frac{1}{t_k}\mathbb{I}\) is also bounded due to \(\liminf_{k \to \infty} t_k > 0\) and the bounded eigenvalues of \(Q\)  we have 
+By the fact that \(C_k \geq 0\) for all \(k\) and positive definiteness of \(Q+\frac{1}{t_k}\mathbb{I} \)  it follows that all summands above are nonnegative and hence \(C_k \to 0\) as \(k \to \infty\). As the matrix \(Q+\frac{1}{t_k}\mathbb{I}\) is bounded due to \(t_k > t_{min} > 0\) and the bounded eigenvalues of \(Q\) and because in null steps \(t_k \leq t_{\bar{k}}\),
+
+we have 
 
 \begin{equation*}
-	  \lVert d^k\rVert^2_{Q+\frac{1}{t_k}\mathbb{I}} \geq c\Vert d^k\Vert^2 \to 0
+	  \lVert d^k\rVert^2_{Q+\frac{1}{t_k}\mathbb{I}} \geq  \lVert d^k\rVert^2_{Q+\frac{1}{t_{\bar{k}}}\mathbb{I}} \geq c\Vert d^k\Vert^2 \to 0.
 \end{equation*}
 
 for a constant \(c \in \R \) by the equivalence of norms.
 
 This means that \(d^k \to 0\) for \(k \to \infty\) and therefore \(\lim_{k \to \infty}x^k = \hat{x}\). It also follows that \(\Vert S^k+\nu^k\Vert \to 0\) as \(k \to \infty\) because of 
 
-\[ \Vert S^{{k}} + \nu^{{k}} \Vert = \left\Vert\left(Q_{k}+\frac{1}{t_{{k}}}\mathbb{I}\right)d^{{k}} \right\Vert \leq \underbrace{\left(\Vert Q_{{k}}\Vert+\frac{1}{t_{{k}}}\right)}_{\text{bounded}}\underbrace{\Vert d^{k}\Vert}_{\to 0} \to 0.\]
+\[ \Vert S^{{k}} + \nu^{{k}} \Vert = \left\Vert\left(Q+\frac{1}{t_{{k}}}\mathbb{I}\right)d^{{k}} \right\Vert \leq \left \vert q + \frac{1}{t_{min}}\right\vert \underbrace{\Vert d^{k}\Vert}_{\to 0} \to 0.\]
 
-By the same arguments as in the proof of theorem \ref{theo_inf_ser_steps} the local Lipschitz property of the objective function \(f\) and boundedness of the subgradient errors \(\theta_k\) yield boundedness of the sequence \(S^k\). Passing to some subsequence \(K \subset \{1,2,...\}\) if necessary we can therefore conclude that the sequence \(\{S^k\}_{k\in K}\) converges to some \(\bar{S}\) and as \(\hat{x}^k = \bar{x}\) for all \(k \geq \bar{k}\) all requirements of Lemma \ref{Lemma5} are fulfilled.
+By the same arguments as in the proof of theorem \ref{theo_inf_ser_steps} the local Lipschitz property of the objective function \(f\) and boundedness of the subgradient errors \(\theta_k\) yield boundedness of the sequence \(S^k\). Passing to some subsequence \(K \subset \{1,2,...\}\) if necessary we can therefore conclude that the sequence \(\{S^k\}_{k\in K}\) converges to some \(\bar{S}\) and as \(\hat{x}^k = \bar{x}\) for all \(k \geq \bar{k}\) all requirements of lemma \ref{Lemma5} are fulfilled.
 
 \end{proof}
 
 \begin{remark}
-	In case the matrix \(Q_k\) is also updated in null steps the proof still holds as long as the assumptions on boundedness of \(Q_k\) and positive definiteness of \(Q_k+\frac{1}{t_k}\mathbb{I}\) are still valid.
+	In case the matrix \(Q_k\) is also updated in null steps the proof still holds as long as the assumptions on boundedness of \(Q_k\) and especially  positive definiteness of \(Q_k+\frac{1}{t_k}\mathbb{I}\) even in the limit \(k = \infty\) are still valid.
 \end{remark}
 
 \begin{remark}
@@ -667,7 +727,7 @@ The above two methods were tested in practice and the results of the algorithm a
 
 \subsubsection{Other Updating Possibilities}
 
-There are certainly many other possibilities to update the metric \(Q_k\). A third variation based on BFGS-updates is the limited memory update suggested in \cite{Nocedal1980}. If the update is skipped whenever \(\frac{\Vert d^k\Vert}{\Vert y^k\Vert}> \tilde{q}, \tilde{q}>0\), the matrix \(Q_k\) stays bounded. This strategy is also supported by the fact that if \(\frac{\Vert d^k\Vert}{\Vert y^k\Vert}> \tilde{q}\) the change in the subgradient relative to the step size
+There are certainly many other possibilities to update the metric \(Q_k\). A third variation based on BFGS-updates is the limited memory update suggested in \cite{Nocedal1980}. If the update is skipped whenever \(\frac{\Vert d^k\Vert}{\Vert y^k\Vert}> \tilde{q}, \tilde{q}>0\), the matrix \(Q_k\) stays bounded. (Remark that in general \(\tilde{q}\neq q\), so it is not directly the lower bound for the step size \(t_{min}\).) This strategy is also supported by the fact that if \(\frac{\Vert d^k\Vert}{\Vert y^k\Vert}> \tilde{q}\) the change in the subgradient relative to the step size
 is rather small indicating that the current iterate lies within a region with only small changes in curvature. In such regions the update can be skipped.
 It is also possible to alter the updates presented above by a special choice of the subgradients. For example trying to compute the directional derivative or using more information by considering more subgradients of the bundle.
  

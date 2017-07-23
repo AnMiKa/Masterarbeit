@@ -1,6 +1,57 @@
 % Appendix
 \section{Appendix}
 
+\subsection{Omitted Proofs}
+
+In this section the proofs that were omitted in the main part of the thesis are given.
+
+\subsubsection{Eigenvalues of the Metric Matrix}
+\label{proof_eigval}
+
+\begin{proposition}
+		Let \(A \in \R^{n\times n}\), \(b \in \R\) and \(\mathbb{I} \in \R^{n\times n}\) the identity matrix.
+		Let \(\lambda^A_i\), \(i = 1,...,n\) be the eigenvalues of the matrix \(A\). Then the eigenvalues of the matrix \(A+b\mathbb{I}\) are given by \(\tilde{\lambda}_i := \lambda^A_i + b\) for all \(i = 1,...,n\).
+\end{proposition}
+
+\begin{proof}
+	Let \(v^i\), \(i = 1,...,n\) be the corresponding eigenvectors to the eigenvalues \(\lambda^A+i\). Then it follows that for \(i = 1,...,n\)
+	
+	\[ (A+b\mathbb{I})v^i = Av^i+bv^i = (\lambda_i^A + b)v^i. \]
+	
+	This means that \(v^i\) is an eigenvector of \(A+b\mathbb{I}\) to the eigenvalue \(\lambda_i^A + b\) for all \(i = 1,...,n\).
+\end{proof}
+
+\subsubsection{Proof of Proposition \ref{prop_norm}}
+\label{proof_norm}
+
+\begin{proof}
+	We show that the scalar product \(\Langle x,y \Rangle_{Q_k+\frac{1}{t_k}\mathbb{I}} := x^{\top} (Q_k+\frac{1}{t_k}\mathbb{I})y\) is well-defined.
+	This yields directly that also the norm induced by the scalar product is well-defined (see for example \cite[Corollary 12.6, p.172]{Liesen2015}).
+	
+	By proposition \ref{prop_bounded} the matrix \(Q_k+\frac{1}{t_k}\mathbb{I}\) is bounded and relation (\ref{rel_bound}) assures that the following calculations are valid for all \(k\).
+	
+	We prove now that the matrix \(Q_k+\frac{1}{t_k}\mathbb{I}\) can be used to define a scalar product.
+	
+From the rules for matrix-vector multiplication follows that
+
+\[ (x+y)^{\top}\left(Q_k+\frac{1}{t_k}\mathbb{I}\right)z = x^{\top}\left(Q_k+\frac{1}{t_k}\mathbb{I}\right)z + y^{\top}\left(Q_k+\frac{1}{t_k}\mathbb{I}\right)z, \quad x,y,z \in \R^n\]
+
+and 
+
+\[ x^{\top}\left(Q_k+\frac{1}{t_k}\mathbb{I}\right)(y+z) = x^{\top}\left(Q_k+\frac{1}{t_k}\mathbb{I}\right)y + x^{\top}\left(Q_k+\frac{1}{t_k}\mathbb{I}\right)z, \quad x,y,z \in \R^n.\]
+
+Thus linearity of the defined scalar product is proven.
+
+The symmetry of \(Q_k+\frac{1}{t_k}\mathbb{I}\) yields symmetry of the scalar product by
+
+\[ x^{\top} \underbrace{\left(Q_k+\frac{1}{t_k}\mathbb{I}\right)y}_{:=\tilde{y}} = \tilde{y}^{\top}x = y^{\top}\left(Q_k+\frac{1}{t_k}\mathbb{I}\right)^{\top}x = y^{\top}\left(Q_k+\frac{1}{t_k}\mathbb{I}\right)x.   \]
+
+Finally positive definiteness of the scalar product follows directly from positive definiteness of the matrix \(Q_k+\frac{1}{t_k}\mathbb{I}\).
+
+This means the scalar product \(\langle \cdot,\cdot \rangle_{Q_k+\frac{1}{t_k}\mathbb{I}}\) is well defined and thus induces the norm \(\Vert \cdot \Vert_{Q_k+\frac{1}{t_k}\mathbb{I}}\).
+\end{proof}
+
+
 \subsection{Additional Figures}
 
 \subsubsection{Variable Metric Bundle Method}

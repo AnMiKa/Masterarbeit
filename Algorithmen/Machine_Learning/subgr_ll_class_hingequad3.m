@@ -1,4 +1,4 @@
-function [ Dwb ] = subgr_ll_class_hingequad2( W, b, X, Y, lambda )
+function [ Dwb ] = subgr_ll_class_hingequad3( W, b, X, Y, lambda )
 %SUBGR_LL_CLASS_HINGEQUAD calculates the subgradient of the implicit
 %function coming from the lower level problem of a bilevel classification 
 %problem.
@@ -25,7 +25,7 @@ function [ Dwb ] = subgr_ll_class_hingequad2( W, b, X, Y, lambda )
 
 fprintf('Find a subgradient of the lower level classification problem. \n')
 %tic
-[feat,J,T,G] = size(X);
+[feat,J,T] = size(X);
 Dwb = zeros(1,feat+1,T);
 for t = 1:T
     % select the partition of the trainings set corresponding to the t'th
@@ -33,10 +33,13 @@ for t = 1:T
     Xt = X;
     Yt = Y;
     if T > 1
-        Xt(:,:,t,:) = [];
-        Yt(:,t,:) = [];
-        Xt = reshape(Xt,feat,J*max((T-1),1),G);
-        Yt = reshape(Yt,J*max((T-1),1),G);
+        Xt(:,:,t) = [];
+        Yt(:,t) = [];
+        Xt = reshape(Xt,feat,J*(T-1));
+        Yt = reshape(Yt,J*(T-1),1);
+    else
+        Xt = reshape(Xt,feat,J);
+        Yt = reshape(Yt,J,1);
     end
     % select the corresponding weight vector and bias
     Wt = W(:,t);
@@ -44,30 +47,16 @@ for t = 1:T
     
     % prepare the linear system derived from the optimality conditions to
     % calculate the subgradient
-    delta = zeros(J*max((T-1),1),G);
-    XXY = zeros(feat,feat,G);
-    Hwb = zeros(feat,J*max((T-1),1),G);
-    Hb = zeros(J*max((T-1),1),G);
-    
-    for g = 1:G
-        delta(:,g) = sign(max(ones(J*max((T-1),1),1)-Yt(:,g).*(Xt(:,g)'*Wt-bt),0));
-        i = delta(:,g) == 0;
-        delta(i,g)=1;
-        
-        for j = 1:J*max((T-1),1)
-            XXY(:,:,g) = XXY(:,:,g)+delta(j,g)*(Yt(j,g)*Xt(:,j,g))*(Yt(j,g)*Xt(:,j,g))';
-        end
-        Hwb(:,:,g) = bsxfun(@times,Xt(:,:,g),(delta(:,g).*Yt(:,g).^2)');
-        Hb(:,g) = delta(:,g).*Yt(:,g).^2;
+    delta = sign(max(ones(J*max((T-1),1),1)-Yt.*(Xt'*Wt-bt),0));
+    i = delta == 0;
+    delta(i)=1;
+    XXY = zeros(feat);
+    for j = 1:J*max((T-1),1)
+        XXY = XXY+delta(j)*(Yt(j)*Xt(:,j))*(Yt(j)*Xt(:,j))';
     end
-    
-    XXY = sum(XXY,3);
-    Hwb = sum(Hwb,3);
-    Hb = sum(Hb,2);
-    
     Hw = sum(lambda)*eye(feat)+2*XXY;
-    Hwb = -2*sum(Hwb,2);
-    Hb = 2*sum(Hb);
+    Hwb = -2*sum(bsxfun(@times,Xt,(delta.*Yt.^2)'),2);
+    Hb = 2*sum(delta.*Yt.^2);
     H = [[Hw,Hwb];[Hwb',Hb]];
     h = [-Wt;0];
     % calculation of the subgradient of the t'th fold

@@ -1,309 +1,309 @@
 \section{Application to Model Selection for Primal SVM}
 
-\textcolor{red}{Skalarprodukt anpassen, Vektoren nicht fett oder neue definition, notation, \(\lambda \in \Lambda\) einfugen}
-
-\subsection{Introduction}
-
-In this part of the thesis the nonconvex inexact bundle algorithm is applied to the problem of model selection for \emph{support vector machines} (SVMs) solving classification tasks.
-It relies on a bilevel formulation proposed by Kunapuli in \cite{Kunapuli2008} and Moore et al. in \cite{Moore2011}.
-
-A natural application for the inexact bundle algorithm is an optimization problem where the objective function value can only be computed iteratively. This is for example the case in bilevel optimization.
-%If this objective function is iteratively optimized, the function value i never exact. But by the stopping condition it is (often???) possible to have the needed error bound on the function value (what about the gradient???). (Comment on asymptotical exactness?)
-
-%A general bilevel problem can be formulated as 
-%Bilevel optimization deals with a class of constrained optimization problems where one or more of the optimization variables are again constrained by optimization problems.
-A general bilevel program can be formulated as in \cite[p. 20]{Kunapuli2008}
-
-\begin{equation}
-	\begin{array}{cll}
-	\displaystyle\min_{x \in X, y} & F(x,y) & \text{upper level} \vspace{0.5ex}\\
-	\text{s.t.} & G(x,y) \leq 0 & \vspace{1em}\\
-	& y \in \begin{Bmatrix} \displaystyle\argmax_{y\in Y} & f(x,y) \vspace{0.5ex}\\
-	                        \text{s.t.} & g(x,y) \leq 0 
-													\end{Bmatrix}. & \text{lower level}
-	\end{array}
-\end{equation}
-
-It consists of an \emph{upper} or \emph{outer level} which is the overall function to be optimized. Contrary to usual constrained optimization problems which are constrained by explicitly given equalities and inequalities a  bilevel program is additionally constrained by a second optimization problem, the \emph{lower} or \emph{inner level} problem.
-
-Solving bilevel problems can be divided roughly in two classes: implicit and explicit solution methods. 
-In the explicit methods the lower level problem is usually rewritten by its KKT conditions, these are then added as constraints to the upper level problem. With this solution method the upper and lower level are solved simultaneously. For the setting of model selection for support vector machines as it is used here, this method is described in detail in \cite{Kunapuli2008}.
-
-The second approach is the implicit one. Here the lower level problem is solved directly in every iteration of the outer optimization algorithm and the solution is plugged into the upper level objective. 
-
-Obviously if the inner level problem is solved numerically, the solution cannot be exact. Additionally the \emph{solution map} \( S(x) = \{y \in \R^k \mid y\), that solves the lower level problem, is can be nondifferentiable \cite{Outrata1998} and since elements of  the solution map are plugged into the outer level objective function in the implicit approach, the outer level function then becomes nonsmooth itself.This is why the inexact bundle algorithm seems a natural choice to tackle these bilevel problems. 
-
-Moore et al. use the implicit approach in \cite{Moore2011} for support vector regression. However they use a gradient decent method which is not guaranteed to stop at an optimal solution.
-In \cite{Moore2010a} he also suggests the nonconvex exact bundle algorithm of Fuduli et al. \cite{Fuduli2004a} for solving the bilevel regression problem. This allows for nonsmooth inner problems and can theoretically solve some of the issues of the gradient descent method. It ignores however, that the objective function values can only be calculated approximately. A fact which is not addressed in Fuduli's algorithm.
-
-%\subsection{Notation and Expressions}
-
-%training set, validation /holdout set...
-
-\subsection{Introduction to Support Vector Machines}
-%In times of big data machine learning is a very active field of research. 
-Support vector machines are linear learning machines that were developed in the 1990's by Vapnik and co-workers. Soon they could outperform several other programs in this area \cite{Cristianini2000} and the subsequent interest in SVMs lead to a very versatile application of these machines \cite{Kunapuli2008}.
-
-The case that is considered here is binary support vector classification using supervised learning. 
-For a throughout introduction to this subject see also \cite{Cristianini2000}. Here a summary of the most important expressions and results is given.
-
-In classification data from a possibly high dimensional vector space \(\tilde{X} \subset \R^n\), the \emph{feature} or \emph{input space} is divided into two classes. These lie in the \emph{output domain} \(\tilde{Y} = \{-1,1\}\). Elements from the feature space will mostly be called \emph{data points} here. They get \emph{labels} from the feature space. Labeled data points are called \emph{examples}.
-The functional relation between the features and the class of an example is given by the usually unknown \emph{response} or \emph{target function} \(f(x)\).
-Supervised learning is a kind of machine learning task where the machine is given examples of input data with associated labels, the so called \emph{training data} \((X,Y)\). Mathematically this can be modeled by assuming that the examples are  drawn identically and independently distributed (iid) from the fixed joint distribution \(P(x,y)\). This usually unknown distribution states the probability that a data point \(x\) has the label \(y\) \cite[p. 988]{Vapnik1999}.
-The overall goal is then to optimize the generalization ability, meaning the ability to predict the output for unseen data correctly \cite[chapter 1.2]{Cristianini2000}.
-%The overall goal of machine learning is to optimize the generalization ability of the algorithm --> this means: predict output for unlabeled input as well as possible.
-%task is to find a mapping that predicts the output given unlabeled input as good as possible \cite{Cristianini2000}. 
-
-\subsubsection{Risk minimization}
-The concept of SVM's was originally inspired by the statistical learning theory developed by Vapnik. For a throughout analysis see \cite{Vapnik1998}.
-
-%from: Vapnik - Statistical Learning Theory overview \cite{Vapnik1998}
-The idea of \emph{risk minimization} is to find from a fixed set or class of functions the one that is the best approximation to the response function. This is done by minimizing a loss function that compares the given labels of the examples to the response of the learning machine.
-%goal: find best available (from set of functions that was chosen before) approximation to the actual (unknown) ``response function'' --> function that ``classifies'' the data
-%Minimize loss between response of ``supervisor'' and response of learning machine
-
-As the response function is not known only the expected value of the loss can be calculated. It is given by the \emph{risk functional} 
-
-\begin{equation}
-	R(\lambda) = \int{\mathcal{L}(y,f_{\lambda}(x))\text{d}P(x,y)}.
-\label{risk_func}
-\end{equation}
-
-Here \(\mathcal{L}: \R^2 \to \R\) is the loss function, \(f_{\lambda}: \R^{n}\cap\mathcal{F} \to \R, ~ \lambda \in \Lambda\) the approximate response function found by the learning machine and \(P(x,y)\) the joint distribution the training data is drawn from. The goal is now to find a function \(f_{\bar{\lambda}}(x)\) in the chosen function space \(\mathcal{F}\) that minimizes this risk functional \cite[989]{Vapnik1999}.
-
-As the only given information is provided by the training set inductive principles are used to work with the \emph{empirical risk}, rather than with the risk functional.
-The empirical risk only depends on the finite training set  and is given by 
-
-%goal: find \(f_{\lambda_0}(x)\) that minimizes this functional
-%\(P(x,y)\) is unknown
-%Because only a data sample is known: Work with the empirical risk
-
-\begin{equation}
-	R_{\text{emp}}(\lambda) = \frac{1}{l} \sum_{i = 1}^{l}\mathcal{L}(y_i,f_{\lambda}(x^i)),
-\label{emp_risk}
-\end{equation}
-
-where \(l\) is the number of data points.
-%L: Loss function 
-%Goal: approximate \(Q(z,\lambda_0)\) by \(Q(z,\lambda_l)\) that minimizes the empirical risk. --> is called ERM (empirical risk minimization induction principle)
-The law of large numbers ensures that the empirical risk converges to the risk functional as the number of data points grows to infinity. This however does not guarantee that the function \(f_{\lambda,\text{emp}}\) that minimizes the empirical risk also converges towards the function \(f_{\bar{\lambda}}\) that minimizes the risk functional.
-The theory of consistency provides necessary and sufficient conditions that solve this issue  \cite[p. 989]{Vapnik1999}.
-
-Vapnik therefore introduced the structural risk minimization (SRM) induction principle . It ensures that the used set of functions has a structure that makes it strongly consistent \cite{Vapnik1999}. Additionally it takes the complexity of the function that is used to approximate the target function into account. ``The SRM principle actually suggests a tradeoff between the quality of the approximation and the complexity of the approximating function'' \cite[p. 994]{Vapnik1999}.
-This reduces the risk of \emph{overfitting}, meaning to overly fit the function to the training data with the result of poor generalization \cite[chapter 1.3]{Cristianini2000}.
-
-%Therefore: structural risk Minimization induction Principle (SRM) --> is strongly consistent --> idea: minimize the empirical risk by considering the complexity of the model (given by CV-dimension)
-
-Support vector machines fulfill all conditions of the SRM principle. Due to the kernel trick that allows for nonlinear classification tasks it is also very powerful. For more detailed information on this see \cite{Kunapuli2008, Vapnik1998} and references therein.
-
-\subsubsection{Support Vector machines}
-
-In the case of linear binary classification one searches for a an affine hyperplane \(w \in \R^n\) shifted by \(b \in \R\) to separate the given data. The vector \(w\) is called weight vector and \(b\) is the bias.
-
-Let the data be linearly separable. The function deciding how the data is classified can then be written as
-
-\[ f(x) = \text{sign}(\Langle w,x\Rangle-b). \]
-
-Support vector machines aim at finding such a hyperplane that separates also unseen data optimally.
-
-\textcolor{red}{???Picture of hyperplane}
-
-One problem of this intuitive approach is that the representation of a hyperplane is not unique. If the plane described by \((w,b)\) separates the data, there exist infinitely many hyperplanes \((tw,b)\), \(t>0\), that separate the data in the same way.
-To have a unique description of a separating hyperplane the \emph{canonical hyperplane for given data} \(x \in X\) is defined by 
-
-\[ f(x) = \Langle w, x\Rangle - b  \quad \text{s.t.} \quad \min_i \Langle w,x^i\Rangle -b| = 1.\] 
-
-This is always possible in the case where the data is  linearly separable and means that the inverse of the norm of the weight vector is equal to the distance of the closest point \(x \in X \) to  the hyperplane \cite[p. 10]{Kunapuli2008}.
-
-
-%Kunapuli: representation of hyperplane not unique --> if \((w,b)\) separates data, infinitely many hyperplanes \((tw,tb) \forall t > 0\) also separate data --> need unique representation --> w.l.o.g. define \emph{canonical hyperplane} for given data \(x \in X\) as function 
-%only valid for separable data
-
-This gives rise to the following definition:
-The \emph{margin} is the minimal Euclidean distance between a training example \(x^i\) and the separating hyperplane.
-%one can show that margin invese proportional to norm of \(w\).
-A bigger margin means a lower complexity of the function \cite{Cristianini2000}. 
-
-A \emph{maximal margin hyperplane} is the hyperplane that realizes the maximal possible margin for a given data set.
-
-%Theorem 6.1
-\begin{proposition}[{\cite[Proposition 6.1]{Cristianini2000}}]
-Given a linearly separable training sample \ \(\Omega = \{(x^i,y_i),...,(x^l,y_l)\}\) the hyperplane \((w,b)\) that solves the optimization problem
-
-\[\|w\|^2 \quad \text{s.t.} \quad y_i(\Langle w,x\Rangle-b)\geq 1, \quad i = 1,...,l, \]
-
-realizes a maximal margin hyperplane.
-\end{proposition}
-
-The proof is given in \cite[chapter 6.1]{Cristianini2000}. 
-
-Generally one cannot assume the data to be linearly separable. This is why in most applications a so called \emph{soft margin classifier} is used. It introduces the slack variables \(\xi_i\) that measure the distance of the misclassified points to the hyperplane:
-
-%from this follows: soft margin classifyer --> not any more assumption that data linearly separable --> slack variables \(\xi_i\) measure the distance of misclassified points
-
-%Def 2.6:
-%\begin{definition} \cite{Cristianini2000}
-Fix \(\gamma > 0\). A \emph{margin slack variable of the example} \((x^i,y_i)\) with respect to the hyperplane \((w,b)\) and target margin \(\gamma\) is 
-
-\[\xi_i = \max(0, \gamma - y_i(\Langle w,x\Rangle+b))\] 
-
-%\end{definition}  
-If \(\xi_i > \gamma\) the point is considered misclassified. 
-One can also say that \(\|\xi\|\) measures the amount by which training set ``fails to have margin \(\gamma\)'' \cite{Cristianini2000}.
-
-For support vector machines the target margin is set to \(\gamma = 1\).
-
-%Book uses \(\xi^2\) -> then \(\xi>0\) not needed any more; only \(\xi\) also used -> 1-norm
-This results finally in the following slightly different
-optimization problems for finding an optimal separating hyperplane \((w,b)\): 
-
-\begin{align}
-\begin{split}
-	\min_{w,b,\xi} \quad & \frac{1}{2} \|w\|^2_2+C\sum_{i=1}^l{\xi_i} \\
-	\text{s.t.} \quad & y_i(\Langle w,x^i\Rangle-b) \geq 1 - \xi_i \\
-	& \xi_i \geq 0 \\
-	& 	\forall i = 1, \dots , l
-\end{split}
-\label{SVM_1}
-\end{align}
-
-and
-
-\begin{align}
-\begin{split}
-	\min_{w,b,\xi} \quad & \frac{1}{2} \|w\|^2_2+C\sum_{i=1}^l{\xi_i^2} \vspace{0.5ex}\\
-	\text{s.t.} \quad & y_i(\Langle w,x^i\Rangle-b) \geq 1 - \xi_i \vspace{0.5ex}\\
-	& 	\forall i = 1, \dots , l.
-\end{split}
-\label{SVM_2}
-\end{align}
-
-The first part of the respective objective functions are the regularizations, the second part are the actual loss functions. 
-The parameter \(C > 0\) gives a trade-off between the richness of the chosen set of functions \(f_{\lambda}\) to reduce the error on the training data and the danger of overfitting to have good generalization. It has to be chosen a priori \cite{Kunapuli2008}.
-The two optimization problems only differ in the norm chosen for the loss function. In (\ref{SVM_1}) the one-norm is chosen, in (\ref{SVM_2}) the squared two-norm is used.
-Problem (\ref{SVM_2}) is the one that is finally used in the bilevel approach where smoothness of the objective function of the inner level problem is needed to calculate all needed subgradients.
-
-\subsection{Bilevel Approach and Inexact Bundle Method}
-%Check if regression case also included?????
-
-The hyper-parameter \(C\) in the objective function of the classification problem has to be set beforehand. This step is part of the model selection process.
-To set this parameter optimally different methods can be used.
-A very intuitive and widely used approach is doing  and \emph{cross validation} (CV) with a grid search implementation.
-%very costly, discrete parameter choice, not practicable in case of many parameter
-
-To prevent overfitting and get a good parameter selection, especially in case of little data, commonly \(T\)-fold cross validation is used.
-For this technique the training data is randomly partitioned into \(T\) subsets of equal size. One of these subsets is then left out of the training set and instead used afterwards to get an estimate of the generalization error. 
-To use CV for model selection it has to be embedded into an optimization algorithm over the hyper-parameter space. 
-Commonly this is done by discretizing the parameter space and for \(T\)-fold CV training \(T\) models at each grid point. The resulting models are then compared to find the best parameters in the grid.
-Obviously for a growing number of hyper-parameters this is very costly. An additional drawback is that the parameters are only chosen from a finite set \cite[p. 30]{Kunapuli2008}.
-
-\subsubsection{Reformulation as Bilevel Problem}
-
-A more recent approach is the formulation as a bilevel problem used in \cite{Kunapuli2008} and \cite{Moore2011}.
-This makes it possible to optimize the hyper-parameters continuously.
-
-%Formal description of the bilevel problem for t-fold cross validation
-%Better model description --> see 2.2 (p.46) in thesis 
-
-Let \(\Omega = \{(x^1,y_1),...,(x^l,y_l)\} \subset \R^{n+1}\) be a given data set of size \(l = |\Omega|\). The associated index set is denoted by \(\mathcal{N}\). For classification the labels \(y_i\) are \(\pm1\).
-For \(T\)-fold cross validation let \(\bar{\Omega}_t\) and \(\Omega_t\) be the training set and the validation set respectively within the \(t\)'th fold and \(\bar{\mathcal{N}}_t\) and \(\mathcal{N}_t\) the respective index sets.
-Furthermore let \(f^t:\R^{n+1}\cap\mathcal{F} \to \R\) be the response function trained on the \(t\)'th fold and \(\lambda \in \Lambda\) the hyper-parameters to be optimized.
-For a general machine learning problem with upper and lower loss function \(\mathcal{L}_{upp}\) and \(\mathcal{L}_{low}\) respectively the bilevel problem reads
- 
-%%% introduce \mathcal(F) already before as the function space
-
-\begin{equation}
-	\begin{array}{cll}
-	\displaystyle\min_{\lambda, f^t} & \mathcal{L}_{upp}\left(\lambda,f^1|_{\Omega_1},...,f^T|_{\Omega_T}\right) & \text{upper level} \vspace{0.5ex}\\
-	\text{s.t.} & \lambda \in \Lambda & \vspace{1em}\\
-	& \text{for } t = 1,...,T: & \\
-	& f^t \in \begin{Bmatrix} \displaystyle\argmin_{f\in \mathcal{F}} & \mathcal{L}_{low}(\lambda,f,(x^i,y_i)_{i = 1}^l\in \bar{\Omega}_t) \vspace{0.5ex}\\
-	                        \text{s.t.} & g_{low}(\lambda,f) \leq 0 
-													\end{Bmatrix}. & \text{lower level}
-	\end{array}
-\end{equation}
-
-In the case of support vector classification the \(T\) inner problems have the classical SVM formulation %(\ref{SVM_1}) or 
-(\ref{SVM_2}). % (but all \(T\) problems have the same formulation).
-The problem can also be rewritten into an unconstrained form. This form is helpful when using the inexact bundle algorithm for solving the bilevel problem.
-For the \(t\)'th fold the resulting hyperplane is identified with the pair \((w^t,b_t) \in \R^{n+1}\).
-The inner level problem for the \(t\)'th fold can therefore be stated as
-
+%\textcolor{red}{Skalarprodukt anpassen, Vektoren nicht fett oder neue definition, notation, \(\lambda \in \Lambda\) einfugen}
+%
+%\subsection{Introduction}
+%
+%In this part of the thesis the nonconvex inexact bundle algorithm is applied to the problem of model selection for \emph{support vector machines} (SVMs) solving classification tasks.
+%It relies on a bilevel formulation proposed by Kunapuli in \cite{Kunapuli2008} and Moore et al. in \cite{Moore2011}.
+%
+%A natural application for the inexact bundle algorithm is an optimization problem where the objective function value can only be computed iteratively. This is for example the case in bilevel optimization.
+%%If this objective function is iteratively optimized, the function value i never exact. But by the stopping condition it is (often???) possible to have the needed error bound on the function value (what about the gradient???). (Comment on asymptotical exactness?)
+%
+%%A general bilevel problem can be formulated as 
+%%Bilevel optimization deals with a class of constrained optimization problems where one or more of the optimization variables are again constrained by optimization problems.
+%A general bilevel program can be formulated as in \cite[p. 20]{Kunapuli2008}
+%
 %\begin{equation}
-	%(w^t,b_t) \in \argmin_{w,b}\left\{ \frac{\lambda}{2} \|w\|^2_2+\sum_{i\in \bar{\mathcal{N}}_t}{\max\left(1-y_i(w^{\top}x^i-b),0\right)}\right\}
-%\label{lower_t_1}
+	%\begin{array}{cll}
+	%\displaystyle\min_{x \in X, y} & F(x,y) & \text{upper level} \vspace{0.5ex}\\
+	%\text{s.t.} & G(x,y) \leq 0 & \vspace{1em}\\
+	%& y \in \begin{Bmatrix} \displaystyle\argmax_{y\in Y} & f(x,y) \vspace{0.5ex}\\
+	                        %\text{s.t.} & g(x,y) \leq 0 
+													%\end{Bmatrix}. & \text{lower level}
+	%\end{array}
 %\end{equation}
-
-%or
-
-\begin{equation}
-	(w^t,b_t) \in \argmin_{w,b} \left\{\frac{\lambda}{2} \|w\|^2_2+\sum_{i\in \bar{\mathcal{N}}_t}{\max\left\{1-y_i\left(\Langle w,x^i\Rangle-b\right),0\right\}^2}\right\}
-\label{lower_t_2}
-\end{equation}
-
-Where the hyper-parameter \(\lambda = \frac{1}{C}\) is used  due to numerical stability \cite[p. 38]{Kunapuli2008}.
-
-For the upper level objective function there are different choices possible.
-Simply put the outer level objective should compare the different inner level solutions and pick the best one. An intuitive choice is therefore to pick the misclassification loss, that counts how many data points of the respective validation set \(\Omega_t\) are misclassified when taking function \(f^t\).
-
-The misclassification loss can be written as
-
-\begin{equation}
-	\mathcal{L}_{mis} = \frac{1}{T}\sum_{t=1}^T\frac{1}{|\mathcal{N}_t|}\sum_{i \in \mathcal{N}_t}{\left[-y_i\left(\Langle w^t,x^i\Rangle-b_t\right)\right]_{\star}},
-\label{misclass_loss}
-\end{equation}
-
-where the step function \(()_{\star}\) is defined componentwise for a vector as
-\begin{equation}
-	(r_{\star})_i = \left\{\begin{array}{c} 1, \quad \text{if } r_i > 0, \\ 0, \quad \text{if } r_i \leq 0 \end{array} \right. .
-\label{step_fun}
-\end{equation}
-
-The drawback of this simple loss function is that it is not continuous and as such not suitable for subgradient based optimization. Therefore another loss function is used for the upper level problem - the \emph{hinge loss}. It is an upper bound on the misclassification loss and reads
-
-\begin{equation}
-		\mathcal{L}_{hinge} = \frac{1}{T}\sum_{t=1}^T\frac{1}{|\mathcal{N}_t|}\sum_{i \in \mathcal{N}_t}{\max\left(1-y_i\left(\Langle w^t,x^i\Rangle-b_t\right),0\right)}.
-\label{hinge_loss}
-\end{equation}
-
-It is also possible to square the max term. This results in the loss function
-
-\begin{equation}
-		\mathcal{L}_{hinge} = \frac{1}{T}\sum_{t=1}^T\frac{1}{|\mathcal{N}_t|}\sum_{i \in \mathcal{N}_t}{\max\left\{1-y_i\left(\Langle w^t,x^i\Rangle-b_t\right),0\right\}^2}.
-\label{hingequad_loss}
-\end{equation}
-
-In figure (\ref{??}) it can be seen that its minimum and overall progress is more similar to the misclassification loss than the one of the hinge loss. 
-\textcolor{red}{For this reason we progress taking the squared form of the hinge loss, abbreviating with \emph{hingequad loss} for convenience.\\
-No, take hingeloss because of nonsmoothness}
-
-%\textcolor{red}{also possible to square the max term\\
-%formula \\
-%from plots: seems to match the misclassification loss a bit better -> used it instead/also}
-
-Hence the final resulting bilevel formulation for model selection in support vector classification is 
-
+%
+%It consists of an \emph{upper} or \emph{outer level} which is the overall function to be optimized. Contrary to usual constrained optimization problems which are constrained by explicitly given equalities and inequalities a  bilevel program is additionally constrained by a second optimization problem, the \emph{lower} or \emph{inner level} problem.
+%
+%Solving bilevel problems can be divided roughly in two classes: implicit and explicit solution methods. 
+%In the explicit methods the lower level problem is usually rewritten by its KKT conditions, these are then added as constraints to the upper level problem. With this solution method the upper and lower level are solved simultaneously. For the setting of model selection for support vector machines as it is used here, this method is described in detail in \cite{Kunapuli2008}.
+%
+%The second approach is the implicit one. Here the lower level problem is solved directly in every iteration of the outer optimization algorithm and the solution is plugged into the upper level objective. 
+%
+%Obviously if the inner level problem is solved numerically, the solution cannot be exact. Additionally the \emph{solution map} \( S(x) = \{y \in \R^k \mid y\), that solves the lower level problem, is can be nondifferentiable \cite{Outrata1998} and since elements of  the solution map are plugged into the outer level objective function in the implicit approach, the outer level function then becomes nonsmooth itself.This is why the inexact bundle algorithm seems a natural choice to tackle these bilevel problems. 
+%
+%Moore et al. use the implicit approach in \cite{Moore2011} for support vector regression. However they use a gradient decent method which is not guaranteed to stop at an optimal solution.
+%In \cite{Moore2010a} he also suggests the nonconvex exact bundle algorithm of Fuduli et al. \cite{Fuduli2004a} for solving the bilevel regression problem. This allows for nonsmooth inner problems and can theoretically solve some of the issues of the gradient descent method. It ignores however, that the objective function values can only be calculated approximately. A fact which is not addressed in Fuduli's algorithm.
+%
+%%\subsection{Notation and Expressions}
+%
+%%training set, validation /holdout set...
+%
+%\subsection{Introduction to Support Vector Machines}
+%%In times of big data machine learning is a very active field of research. 
+%Support vector machines are linear learning machines that were developed in the 1990's by Vapnik and co-workers. Soon they could outperform several other programs in this area \cite{Cristianini2000} and the subsequent interest in SVMs lead to a very versatile application of these machines \cite{Kunapuli2008}.
+%
+%The case that is considered here is binary support vector classification using supervised learning. 
+%For a throughout introduction to this subject see also \cite{Cristianini2000}. Here a summary of the most important expressions and results is given.
+%
+%In classification data from a possibly high dimensional vector space \(\tilde{X} \subset \R^n\), the \emph{feature} or \emph{input space} is divided into two classes. These lie in the \emph{output domain} \(\tilde{Y} = \{-1,1\}\). Elements from the feature space will mostly be called \emph{data points} here. They get \emph{labels} from the feature space. Labeled data points are called \emph{examples}.
+%The functional relation between the features and the class of an example is given by the usually unknown \emph{response} or \emph{target function} \(f(x)\).
+%Supervised learning is a kind of machine learning task where the machine is given examples of input data with associated labels, the so called \emph{training data} \((X,Y)\). Mathematically this can be modeled by assuming that the examples are  drawn identically and independently distributed (iid) from the fixed joint distribution \(P(x,y)\). This usually unknown distribution states the probability that a data point \(x\) has the label \(y\) \cite[p. 988]{Vapnik1999}.
+%The overall goal is then to optimize the generalization ability, meaning the ability to predict the output for unseen data correctly \cite[chapter 1.2]{Cristianini2000}.
+%%The overall goal of machine learning is to optimize the generalization ability of the algorithm --> this means: predict output for unlabeled input as well as possible.
+%%task is to find a mapping that predicts the output given unlabeled input as good as possible \cite{Cristianini2000}. 
+%
+%\subsubsection{Risk minimization}
+%The concept of SVM's was originally inspired by the statistical learning theory developed by Vapnik. For a throughout analysis see \cite{Vapnik1998}.
+%
+%%from: Vapnik - Statistical Learning Theory overview \cite{Vapnik1998}
+%The idea of \emph{risk minimization} is to find from a fixed set or class of functions the one that is the best approximation to the response function. This is done by minimizing a loss function that compares the given labels of the examples to the response of the learning machine.
+%%goal: find best available (from set of functions that was chosen before) approximation to the actual (unknown) ``response function'' --> function that ``classifies'' the data
+%%Minimize loss between response of ``supervisor'' and response of learning machine
+%
+%As the response function is not known only the expected value of the loss can be calculated. It is given by the \emph{risk functional} 
+%
+%\begin{equation}
+	%R(\lambda) = \int{\mathcal{L}(y,f_{\lambda}(x))\text{d}P(x,y)}.
+%\label{risk_func}
+%\end{equation}
+%
+%Here \(\mathcal{L}: \R^2 \to \R\) is the loss function, \(f_{\lambda}: \R^{n}\cap\mathcal{F} \to \R, ~ \lambda \in \Lambda\) the approximate response function found by the learning machine and \(P(x,y)\) the joint distribution the training data is drawn from. The goal is now to find a function \(f_{\bar{\lambda}}(x)\) in the chosen function space \(\mathcal{F}\) that minimizes this risk functional \cite[989]{Vapnik1999}.
+%
+%As the only given information is provided by the training set inductive principles are used to work with the \emph{empirical risk}, rather than with the risk functional.
+%The empirical risk only depends on the finite training set  and is given by 
+%
+%%goal: find \(f_{\lambda_0}(x)\) that minimizes this functional
+%%\(P(x,y)\) is unknown
+%%Because only a data sample is known: Work with the empirical risk
+%
+%\begin{equation}
+	%R_{\text{emp}}(\lambda) = \frac{1}{l} \sum_{i = 1}^{l}\mathcal{L}(y_i,f_{\lambda}(x^i)),
+%\label{emp_risk}
+%\end{equation}
+%
+%where \(l\) is the number of data points.
+%%L: Loss function 
+%%Goal: approximate \(Q(z,\lambda_0)\) by \(Q(z,\lambda_l)\) that minimizes the empirical risk. --> is called ERM (empirical risk minimization induction principle)
+%The law of large numbers ensures that the empirical risk converges to the risk functional as the number of data points grows to infinity. This however does not guarantee that the function \(f_{\lambda,\text{emp}}\) that minimizes the empirical risk also converges towards the function \(f_{\bar{\lambda}}\) that minimizes the risk functional.
+%The theory of consistency provides necessary and sufficient conditions that solve this issue  \cite[p. 989]{Vapnik1999}.
+%
+%Vapnik therefore introduced the structural risk minimization (SRM) induction principle . It ensures that the used set of functions has a structure that makes it strongly consistent \cite{Vapnik1999}. Additionally it takes the complexity of the function that is used to approximate the target function into account. ``The SRM principle actually suggests a tradeoff between the quality of the approximation and the complexity of the approximating function'' \cite[p. 994]{Vapnik1999}.
+%This reduces the risk of \emph{overfitting}, meaning to overly fit the function to the training data with the result of poor generalization \cite[chapter 1.3]{Cristianini2000}.
+%
+%%Therefore: structural risk Minimization induction Principle (SRM) --> is strongly consistent --> idea: minimize the empirical risk by considering the complexity of the model (given by CV-dimension)
+%
+%Support vector machines fulfill all conditions of the SRM principle. Due to the kernel trick that allows for nonlinear classification tasks it is also very powerful. For more detailed information on this see \cite{Kunapuli2008, Vapnik1998} and references therein.
+%
+%\subsubsection{Support Vector machines}
+%
+%In the case of linear binary classification one searches for a an affine hyperplane \(w \in \R^n\) shifted by \(b \in \R\) to separate the given data. The vector \(w\) is called weight vector and \(b\) is the bias.
+%
+%Let the data be linearly separable. The function deciding how the data is classified can then be written as
+%
+%\[ f(x) = \text{sign}(\Langle w,x\Rangle-b). \]
+%
+%Support vector machines aim at finding such a hyperplane that separates also unseen data optimally.
+%
+%\textcolor{red}{???Picture of hyperplane}
+%
+%One problem of this intuitive approach is that the representation of a hyperplane is not unique. If the plane described by \((w,b)\) separates the data, there exist infinitely many hyperplanes \((tw,b)\), \(t>0\), that separate the data in the same way.
+%To have a unique description of a separating hyperplane the \emph{canonical hyperplane for given data} \(x \in X\) is defined by 
+%
+%\[ f(x) = \Langle w, x\Rangle - b  \quad \text{s.t.} \quad \min_i \Langle w,x^i\Rangle -b| = 1.\] 
+%
+%This is always possible in the case where the data is  linearly separable and means that the inverse of the norm of the weight vector is equal to the distance of the closest point \(x \in X \) to  the hyperplane \cite[p. 10]{Kunapuli2008}.
+%
+%
+%%Kunapuli: representation of hyperplane not unique --> if \((w,b)\) separates data, infinitely many hyperplanes \((tw,tb) \forall t > 0\) also separate data --> need unique representation --> w.l.o.g. define \emph{canonical hyperplane} for given data \(x \in X\) as function 
+%%only valid for separable data
+%
+%This gives rise to the following definition:
+%The \emph{margin} is the minimal Euclidean distance between a training example \(x^i\) and the separating hyperplane.
+%%one can show that margin invese proportional to norm of \(w\).
+%A bigger margin means a lower complexity of the function \cite{Cristianini2000}. 
+%
+%A \emph{maximal margin hyperplane} is the hyperplane that realizes the maximal possible margin for a given data set.
+%
+%%Theorem 6.1
+%\begin{proposition}[{\cite[Proposition 6.1]{Cristianini2000}}]
+%Given a linearly separable training sample \ \(\Omega = \{(x^i,y_i),...,(x^l,y_l)\}\) the hyperplane \((w,b)\) that solves the optimization problem
+%
+%\[\|w\|^2 \quad \text{s.t.} \quad y_i(\Langle w,x\Rangle-b)\geq 1, \quad i = 1,...,l, \]
+%
+%realizes a maximal margin hyperplane.
+%\end{proposition}
+%
+%The proof is given in \cite[chapter 6.1]{Cristianini2000}. 
+%
+%Generally one cannot assume the data to be linearly separable. This is why in most applications a so called \emph{soft margin classifier} is used. It introduces the slack variables \(\xi_i\) that measure the distance of the misclassified points to the hyperplane:
+%
+%%from this follows: soft margin classifyer --> not any more assumption that data linearly separable --> slack variables \(\xi_i\) measure the distance of misclassified points
+%
+%%Def 2.6:
+%%\begin{definition} \cite{Cristianini2000}
+%Fix \(\gamma > 0\). A \emph{margin slack variable of the example} \((x^i,y_i)\) with respect to the hyperplane \((w,b)\) and target margin \(\gamma\) is 
+%
+%\[\xi_i = \max(0, \gamma - y_i(\Langle w,x\Rangle+b))\] 
+%
+%%\end{definition}  
+%If \(\xi_i > \gamma\) the point is considered misclassified. 
+%One can also say that \(\|\xi\|\) measures the amount by which training set ``fails to have margin \(\gamma\)'' \cite{Cristianini2000}.
+%
+%For support vector machines the target margin is set to \(\gamma = 1\).
+%
+%%Book uses \(\xi^2\) -> then \(\xi>0\) not needed any more; only \(\xi\) also used -> 1-norm
+%This results finally in the following slightly different
+%optimization problems for finding an optimal separating hyperplane \((w,b)\): 
+%
 %\begin{align}
 %\begin{split}
-	%\min_{w,\bm{b}} \quad &  \mathcal{L}_{hinge}(w,\bm{b}) = \frac{1}{T}\sum_{t=1}^T\frac{1}{|\mathcal{N}_t|}\sum_{i \in \mathcal{N}_t}{\max\left(1-y_i((w^t)^{\top}x-b_t),0\right)}\\
-	%\text{subject to} \quad &  \lambda > 0 \\
-	%& \text{for } t = 1,...,T \\
-	%& (w^t,b_t) \in \argmin_{w,b}\left\{ \frac{\lambda}{2} \|w\|^2_2+\sum_{i\in \bar{\mathcal{N}}_t}{\max\left(1-y_i(w^{\top}x^i-b),0\right)}\right\} \\
+	%\min_{w,b,\xi} \quad & \frac{1}{2} \|w\|^2_2+C\sum_{i=1}^l{\xi_i} \\
+	%\text{s.t.} \quad & y_i(\Langle w,x^i\Rangle-b) \geq 1 - \xi_i \\
+	%& \xi_i \geq 0 \\
+	%& 	\forall i = 1, \dots , l
 %\end{split}
-%\label{model_1}
+%\label{SVM_1}
 %\end{align}
 %
-%and 
+%and
+%
+%\begin{align}
+%\begin{split}
+	%\min_{w,b,\xi} \quad & \frac{1}{2} \|w\|^2_2+C\sum_{i=1}^l{\xi_i^2} \vspace{0.5ex}\\
+	%\text{s.t.} \quad & y_i(\Langle w,x^i\Rangle-b) \geq 1 - \xi_i \vspace{0.5ex}\\
+	%& 	\forall i = 1, \dots , l.
+%\end{split}
+%\label{SVM_2}
+%\end{align}
+%
+%The first part of the respective objective functions are the regularizations, the second part are the actual loss functions. 
+%The parameter \(C > 0\) gives a trade-off between the richness of the chosen set of functions \(f_{\lambda}\) to reduce the error on the training data and the danger of overfitting to have good generalization. It has to be chosen a priori \cite{Kunapuli2008}.
+%The two optimization problems only differ in the norm chosen for the loss function. In (\ref{SVM_1}) the one-norm is chosen, in (\ref{SVM_2}) the squared two-norm is used.
+%Problem (\ref{SVM_2}) is the one that is finally used in the bilevel approach where smoothness of the objective function of the inner level problem is needed to calculate all needed subgradients.
+%
+%\subsection{Bilevel Approach and Inexact Bundle Method}
+%%Check if regression case also included?????
+%
+%The hyper-parameter \(C\) in the objective function of the classification problem has to be set beforehand. This step is part of the model selection process.
+%To set this parameter optimally different methods can be used.
+%A very intuitive and widely used approach is doing  and \emph{cross validation} (CV) with a grid search implementation.
+%%very costly, discrete parameter choice, not practicable in case of many parameter
+%
+%To prevent overfitting and get a good parameter selection, especially in case of little data, commonly \(T\)-fold cross validation is used.
+%For this technique the training data is randomly partitioned into \(T\) subsets of equal size. One of these subsets is then left out of the training set and instead used afterwards to get an estimate of the generalization error. 
+%To use CV for model selection it has to be embedded into an optimization algorithm over the hyper-parameter space. 
+%Commonly this is done by discretizing the parameter space and for \(T\)-fold CV training \(T\) models at each grid point. The resulting models are then compared to find the best parameters in the grid.
+%Obviously for a growing number of hyper-parameters this is very costly. An additional drawback is that the parameters are only chosen from a finite set \cite[p. 30]{Kunapuli2008}.
 
-\begin{align}
-\begin{split}
-	\min_{w,b} \quad &  \mathcal{L}_{hinge}(w,b) = \frac{1}{T}\sum_{t=1}^T\frac{1}{|\mathcal{N}_t|}\sum_{i \in \mathcal{N}_t}{\max\left\{1-y_i\left(\Langle w^t,x^i\Rangle-b_t\right),0\right\}^2}\\
-	\text{s.t.} \quad & \lambda > 0 \\
-	& \text{for } t = 1,...,T \\
-	& (w^t,b_t) \in \argmin_{w,b}\left\{ \frac{\lambda}{2} \|w\|^2_2+\sum_{i\in \bar{\mathcal{N}}_t}\max\left\{1-y_i\left(\Langle w,x^i\Rangle-b\right),0\right\}^2\right\}. \\
-\end{split}
-\label{model_2}
-\end{align}
+%\subsubsection{Reformulation as Bilevel Problem}
+%
+%A more recent approach is the formulation as a bilevel problem used in \cite{Kunapuli2008} and \cite{Moore2011}.
+%This makes it possible to optimize the hyper-parameters continuously.
+%
+%%Formal description of the bilevel problem for t-fold cross validation
+%%Better model description --> see 2.2 (p.46) in thesis 
+%
+%Let \(\Omega = \{(x^1,y_1),...,(x^l,y_l)\} \subset \R^{n+1}\) be a given data set of size \(l = |\Omega|\). The associated index set is denoted by \(\mathcal{N}\). For classification the labels \(y_i\) are \(\pm1\).
+%For \(T\)-fold cross validation let \(\bar{\Omega}_t\) and \(\Omega_t\) be the training set and the validation set respectively within the \(t\)'th fold and \(\bar{\mathcal{N}}_t\) and \(\mathcal{N}_t\) the respective index sets.
+%Furthermore let \(f^t:\R^{n+1}\cap\mathcal{F} \to \R\) be the response function trained on the \(t\)'th fold and \(\lambda \in \Lambda\) the hyper-parameters to be optimized.
+%For a general machine learning problem with upper and lower loss function \(\mathcal{L}_{upp}\) and \(\mathcal{L}_{low}\) respectively the bilevel problem reads
+ %
+%%%% introduce \mathcal(F) already before as the function space
+%
+%\begin{equation}
+	%\begin{array}{cll}
+	%\displaystyle\min_{\lambda, f^t} & \mathcal{L}_{upp}\left(\lambda,f^1|_{\Omega_1},...,f^T|_{\Omega_T}\right) & \text{upper level} \vspace{0.5ex}\\
+	%\text{s.t.} & \lambda \in \Lambda & \vspace{1em}\\
+	%& \text{for } t = 1,...,T: & \\
+	%& f^t \in \begin{Bmatrix} \displaystyle\argmin_{f\in \mathcal{F}} & \mathcal{L}_{low}(\lambda,f,(x^i,y_i)_{i = 1}^l\in \bar{\Omega}_t) \vspace{0.5ex}\\
+	                        %\text{s.t.} & g_{low}(\lambda,f) \leq 0 
+													%\end{Bmatrix}. & \text{lower level}
+	%\end{array}
+%\end{equation}
+%
+%In the case of support vector classification the \(T\) inner problems have the classical SVM formulation %(\ref{SVM_1}) or 
+%(\ref{SVM_2}). % (but all \(T\) problems have the same formulation).
+%The problem can also be rewritten into an unconstrained form. This form is helpful when using the inexact bundle algorithm for solving the bilevel problem.
+%For the \(t\)'th fold the resulting hyperplane is identified with the pair \((w^t,b_t) \in \R^{n+1}\).
+%The inner level problem for the \(t\)'th fold can therefore be stated as
+%
+%%\begin{equation}
+	%%(w^t,b_t) \in \argmin_{w,b}\left\{ \frac{\lambda}{2} \|w\|^2_2+\sum_{i\in \bar{\mathcal{N}}_t}{\max\left(1-y_i(w^{\top}x^i-b),0\right)}\right\}
+%%\label{lower_t_1}
+%%\end{equation}
+%
+%%or
+%
+%\begin{equation}
+	%(w^t,b_t) \in \argmin_{w,b} \left\{\frac{\lambda}{2} \|w\|^2_2+\sum_{i\in \bar{\mathcal{N}}_t}{\max\left\{1-y_i\left(\Langle w,x^i\Rangle-b\right),0\right\}^2}\right\}
+%\label{lower_t_2}
+%\end{equation}
+%
+%Where the hyper-parameter \(\lambda = \frac{1}{C}\) is used  due to numerical stability \cite[p. 38]{Kunapuli2008}.
+%
+%For the upper level objective function there are different choices possible.
+%Simply put the outer level objective should compare the different inner level solutions and pick the best one. An intuitive choice is therefore to pick the misclassification loss, that counts how many data points of the respective validation set \(\Omega_t\) are misclassified when taking function \(f^t\).
+%
+%The misclassification loss can be written as
+%
+%\begin{equation}
+	%\mathcal{L}_{mis} = \frac{1}{T}\sum_{t=1}^T\frac{1}{|\mathcal{N}_t|}\sum_{i \in \mathcal{N}_t}{\left[-y_i\left(\Langle w^t,x^i\Rangle-b_t\right)\right]_{\star}},
+%\label{misclass_loss}
+%\end{equation}
+%
+%where the step function \(()_{\star}\) is defined componentwise for a vector as
+%\begin{equation}
+	%(r_{\star})_i = \left\{\begin{array}{c} 1, \quad \text{if } r_i > 0, \\ 0, \quad \text{if } r_i \leq 0 \end{array} \right. .
+%\label{step_fun}
+%\end{equation}
+%
+%The drawback of this simple loss function is that it is not continuous and as such not suitable for subgradient based optimization. Therefore another loss function is used for the upper level problem - the \emph{hinge loss}. It is an upper bound on the misclassification loss and reads
+%
+%\begin{equation}
+		%\mathcal{L}_{hinge} = \frac{1}{T}\sum_{t=1}^T\frac{1}{|\mathcal{N}_t|}\sum_{i \in \mathcal{N}_t}{\max\left(1-y_i\left(\Langle w^t,x^i\Rangle-b_t\right),0\right)}.
+%\label{hinge_loss}
+%\end{equation}
+%
+%It is also possible to square the max term. This results in the loss function
+%
+%\begin{equation}
+		%\mathcal{L}_{hinge} = \frac{1}{T}\sum_{t=1}^T\frac{1}{|\mathcal{N}_t|}\sum_{i \in \mathcal{N}_t}{\max\left\{1-y_i\left(\Langle w^t,x^i\Rangle-b_t\right),0\right\}^2}.
+%\label{hingequad_loss}
+%\end{equation}
+%
+%In figure (\ref{??}) it can be seen that its minimum and overall progress is more similar to the misclassification loss than the one of the hinge loss. 
+%\textcolor{red}{For this reason we progress taking the squared form of the hinge loss, abbreviating with \emph{hingequad loss} for convenience.\\
+%No, take hingeloss because of nonsmoothness}
+%
+%%\textcolor{red}{also possible to square the max term\\
+%%formula \\
+%%from plots: seems to match the misclassification loss a bit better -> used it instead/also}
+%
+%Hence the final resulting bilevel formulation for model selection in support vector classification is 
+%
+%%\begin{align}
+%%\begin{split}
+	%%\min_{w,\bm{b}} \quad &  \mathcal{L}_{hinge}(w,\bm{b}) = \frac{1}{T}\sum_{t=1}^T\frac{1}{|\mathcal{N}_t|}\sum_{i \in \mathcal{N}_t}{\max\left(1-y_i((w^t)^{\top}x-b_t),0\right)}\\
+	%%\text{subject to} \quad &  \lambda > 0 \\
+	%%& \text{for } t = 1,...,T \\
+	%%& (w^t,b_t) \in \argmin_{w,b}\left\{ \frac{\lambda}{2} \|w\|^2_2+\sum_{i\in \bar{\mathcal{N}}_t}{\max\left(1-y_i(w^{\top}x^i-b),0\right)}\right\} \\
+%%\end{split}
+%%\label{model_1}
+%%\end{align}
+%%
+%%and 
+%
+%\begin{align}
+%\begin{split}
+	%\min_{w,b} \quad &  \mathcal{L}_{hinge}(w,b) = \frac{1}{T}\sum_{t=1}^T\frac{1}{|\mathcal{N}_t|}\sum_{i \in \mathcal{N}_t}{\max\left\{1-y_i\left(\Langle w^t,x^i\Rangle-b_t\right),0\right\}^2}\\
+	%\text{s.t.} \quad & \lambda > 0 \\
+	%& \text{for } t = 1,...,T \\
+	%& (w^t,b_t) \in \argmin_{w,b}\left\{ \frac{\lambda}{2} \|w\|^2_2+\sum_{i\in \bar{\mathcal{N}}_t}\max\left\{1-y_i\left(\Langle w,x^i\Rangle-b\right),0\right\}^2\right\}. \\
+%\end{split}
+%\label{model_2}
+%\end{align}
 
 
 \subsubsection{Solution of the Bilevel Program}
@@ -565,7 +565,7 @@ subgradient??? is this smooth? with respect to \(\lambda\)
 From this the needed subgradients can be calculated via:
 
 \begin{equation}
-	2\cdot\begin{pmatrix} \sum_{i \in \bar{\mathcal{N}_t}}\frac{\lambda}{2}+{y_i^2x^i(x^i)^{\top}} & \sum_{i \in \bar{\mathcal{N}_t}}	{-y_i^2x^i} \\ \sum_{i \in \bar{\mathcal{N}_t}}{-y_i^2(x^i)^{\top}} & \sum_{i \in \bar{\mathcal{N}_t}}{y_i^2}\end{pmatrix}
+	2\cdot\begin{pmatrix} \frac{\lambda}{2}+\sum_{i \in \bar{\mathcal{N}_t}}{y_i^2x^i(x^i)^{\top}} & \sum_{i \in \bar{\mathcal{N}_t}}	{-y_i^2x^i} \\ \sum_{i \in \bar{\mathcal{N}_t}}{-y_i^2(x^i)^{\top}} & \sum_{i \in \bar{\mathcal{N}_t}}{y_i^2}\end{pmatrix}
 	\cdot \begin{pmatrix} \partial_{\lambda}w \\ \partial_{\lambda}b\end{pmatrix}
 	= \begin{pmatrix}-w \\ 0\end{pmatrix}
 \label{subgr_wb}
@@ -581,6 +581,88 @@ similar calculation leads to
 	\partial_{\lambda}w &= -\frac{w}{\lambda} \\
 	\partial_{\lambda}b &= 0
 \end{align}
+
+\textcolor{red}{does not work with just Hingeloss because set valued optimality condition --> have to find ``corresponding'' equation to the chosen subgradient --> do not know how}
+
+\subsubsection{Multi Group Model}
+
+Idea: different samples within the group have different have different quality --> put the samples with similar quality within one group --> give it its own \(\lambda_g\) such that the groups are weighted depending on their quality.
+
+two goals: better modleing and implicit information about the groups provided by the parameter \(\lambda_g\) -> small \(\lambda\) good quality, large \(\lambda\) bad quality???
+
+Examle: different people do same experiment; measure same data...
+
+\textbf{Model (Bilevel Problem)}
+
+\begin{align}
+\begin{split}
+	\min_{w,b} \quad &  \mathcal{L}_{hinge}(w,b) = \frac{1}{T}\sum_{t=1}^T\frac{1}{|\mathcal{N}_t|}\sum_{i \in \mathcal{N}_t}{\max\left\{1-y_i\left(\Langle w^t,x^i\Rangle-b_t\right),0\right\}}\\
+	\text{s.t.} \quad & \lambda = [\lambda_1,...,\lambda_G]^{\top} > 0 \text{ and} \\
+	& \text{for } t = 1,...,T \\
+	& (w^t,b_t) \in \argmin_{w,b}\left\{ \sum_{g = 1}^G \left(\frac{\lambda_g}{2} \|w\|^2_2+\sum_{i\in \bar{\mathcal{N}}_t^g}\max\left\{1-y_i\left(\Langle w,x^i\Rangle-b\right),0\right\}^2\right)\right\}. \\
+\end{split}
+\label{multi_group}
+\end{align}
+
+
+Reformulation of the lower level objective:
+
+\begin{equation*}
+	\mathcal{L}_{low}(w,b) =  \frac{\sum_{g = 1}^G\lambda_g}{2} \|w\|^2_2+\sum_{i\in \bar{\mathcal{N}}_t}\max\left\{1-y_i\left(\Langle w,x^i\Rangle-b\right),0\right\}^2
+\label{ll_mult_group}
+\end{equation*}
+
+
+
+\textbf{Derivatives}
+
+overall gradient:
+	\[ \frac{\textup{d}\mathcal{L}_{upp}}{\textup{d}\lambda} = {\underbrace{\frac{\partial \mathcal{L}_{upp}}{\partial (w,b)}}_{\in \R^{n+1}}} ^{\top} \underbrace{\frac{\partial (w,b)}{\partial \lambda}}_{\in \R^{n+1 \times G}} \in \R^G\]
+
+
+gradient outer level objective: 
+	\[ \frac{\partial \mathcal{L}_{upp}}{\partial w} = \frac{1}{T}\sum_{t=1}^T\frac{1}{|\mathcal{N}_t|}\sum_{i \in \mathcal{N}_t} \delta_i \left( -y_i x^i\right) \in \R^n\]
+	
+	\[ \frac{\partial \mathcal{L}_{upp}}{\partial b} = \frac{1}{T}\sum_{t=1}^T\frac{1}{|\mathcal{N}_t|}\sum_{i \in \mathcal{N}_t} \delta_i y_i \in \R\]
+	
+	\[ \delta_i = \left\{ \begin{array}{cl} 1 & \text{if } 1-y_i\left(\Langle w,x^i\Rangle-b\right) > 0 \\
+		0 & \text{else}\end{array} \right.\]
+
+
+in MATLAB: 
+	\[ \frac{\partial \mathcal{L}_{upp}}{\partial w} = \frac{1}{T}\texttt{sum}(-\texttt{bsxfun}(\texttt{@times},X,\texttt{delta}.*Y) ,2) \in \R^n\]
+	
+	\[ \frac{\partial \mathcal{L}_{upp}}{\partial b} = \frac{1}{T}\texttt{sum}(\texttt{delta}.*Y ,1) \in \R\]
+	
+	
+gradient lower level objective:\\
+first optimality conditions \(0 = \frac{\partial \mathcal{L}_{low}}{\partial w}, 0 = \frac{\partial \mathcal{L}_{low}}{\partial b}\):
+	\[ 0 = {\sum_{g = 1}^G(\lambda_g}w) + 2\sum_{i \in \bar{\mathcal{N}}_t}\delta_i \left\{1-y_i\left(\Langle w,x^i\Rangle -b\right) \right\}(-y_ix^i) \in \R^n \]
+		
+	\[0 = 2\sum_{i \in \bar{\mathcal{N}}_t}\delta_i \left\{1-y_i\left(\Langle w,x^i\Rangle -b\right) \right\}(y_i) \in \R \]
+	
+	derivatives with respect to \(\lambda_g, g = 1,...,G\), then \(\in \R^{n+1 \times G}\)
+	
+	write one column of the matrix \(\in \R^{n+1}\) \(\to\) \(G\) such columns:
+	
+	\[ 0 = w + \lambda_g\frac{\partial w}{\partial \lambda_g} + 2 \sum_{i \in  \bar{\mathcal{N}}_t} \delta_i \left(y_i^2x^i(x^i)^{\top}\frac{\partial w}{\partial \lambda_g} - y_i^2x^i \frac{\partial b}{\partial \lambda_g}\right) \in \R^n \]
+	
+	\[ 0 = 2\sum_{i \in  \bar{\mathcal{N}}_t} \delta_i \left(-y_i^2(x^i)^{\top} \frac{\partial w}{\partial \lambda_g} + y_i^2 \frac{\partial b}{\partial \lambda_g}\right) \in \R\] 
+
+
+	rewrite to calculate \([\partial w / \partial \lambda, \partial b / \partial \lambda]^{\top} \in \R^{n+1 \times G}\) \(\to\) have to calculate every column of this matrix on its own \\
+	solve \(G\) times this system of equations
+	
+	\[ 2\begin{pmatrix} \frac{\lambda_g}{2}+\sum_{i \in  \bar{\mathcal{N}}_t}{\delta_i(y_i^2x^i(x^i)^{\top})} &  \sum_{i \in  \bar{\mathcal{N}}_t} \delta_i (- y_i^2x^i )	\\
+	\sum_{i \in  \bar{\mathcal{N}}_t} \delta_i (-y_i^2(x^i)^{\top}) & \sum_{i \in  \bar{\mathcal{N}}_t} \delta_i (y_i^2 )
+	\end{pmatrix} 
+	\begin{pmatrix}	\frac{\partial w}{\partial \lambda_g} \\ \frac{\partial b}{\partial \lambda_g}
+	\end{pmatrix} 
+	= \begin{pmatrix} w \\ 0	\end{pmatrix} \]
+
+
+
+
 
 \subsubsection{The Algorithm???}
 

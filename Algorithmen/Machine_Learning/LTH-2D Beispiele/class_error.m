@@ -1,4 +1,4 @@
-function [ err, norm_W ] = class_error(lambda,X,Y)
+function [ err, W, b, norm_W ] = class_error(lambda,X,Y)
 
 
 % calculate wb for all folds

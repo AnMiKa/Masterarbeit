@@ -111,7 +111,7 @@ Support vector machines aim at finding such a hyperplane that separates also uns
 One problem of this intuitive approach is that the representation of a hyperplane is not unique. If the plane described by \((w,b)\) separates the data, there exist infinitely many hyperplanes \((tw,b)\), \(t>0\), that separate the data in the same way.
 To have a unique description of a separating hyperplane the \emph{canonical hyperplane for given data} \(x \in X\) is defined by 
 
-\[ f(x) = \Langle w, x\Rangle - b  \quad \text{s.t.} \quad \min_i \Langle w,x^i\Rangle -b| = 1.\] 
+\[ f(x) = \Langle w, x\Rangle - b  \quad \text{s.t.} \quad \min_i \vert\Langle w,x^i\Rangle -b\vert = 1.\] 
 
 This is always possible in the case where the data is  linearly separable and means that the inverse of the norm of the weight vector is equal to the distance of the closest point \(x \in X \) to  the hyperplane \cite[p. 10]{Kunapuli2008}.
 
