@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=latex 2017.6.11)  23 JUL 2017 21:13
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=latex 2017.6.11)  24 JUL 2017 18:28
 entering extended mode
 **Bundle_methods_for_nonsmooth_nonconvex_problems_with_inexact_information.tex
 
@@ -458,9 +458,7 @@ Package: setspace 2011/12/19 v6.7a set line spacing
 ("D:\Annika\Uni\10. Semester\Masterarbeit\Proximal Bundle Inexact Information\Git Hub\Masterarbeit\LaTeX\Bundle_methods_
 for_nonsmooth_nonconvex_problems_with_inexact_information.aux"
 ("D:\Annika\Uni\10. Semester\Masterarbeit\Proximal Bundle Inexact Information\Git Hub\Masterarbeit\LaTeX\Chapters/Bileve
-l_Application.aux")
-("D:\Annika\Uni\10. Semester\Masterarbeit\Proximal Bundle Inexact Information\Git Hub\Masterarbeit\LaTeX\Chapters/Bileve
-l_Application_2.aux"))
+l_Application.aux"))
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 117.
 LaTeX Font Info:    ... okay on input line 117.
 LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 117.
@@ -537,7 +535,7 @@ l_Application.tex" [1
 LaTeX Warning: Reference `??' on page 8 undefined on input line 276.
 
 
-LaTeX Warning: Reference `sec_bundle_nonconv_inex' on page 8 undefined on input line 315.
+LaTeX Warning: Reference `sec_nonconv_inex' on page 8 undefined on input line 315.
 
 [8]
 LaTeX Font Info:    Try loading font information for OMS+lmr on input line 318.
@@ -557,73 +555,32 @@ LaTeX Font Info:    Try loading font information for T1+lmtt on input line 357.
  ("C:\Program Files\Annika Programme\MiKTeX\tex\latex\lm\t1lmtt.fd"
 File: t1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-[9] [10]) [11]
-("D:\Annika\Uni\10. Semester\Masterarbeit\Proximal Bundle Inexact Information\Git Hub\Masterarbeit\LaTeX\Chapters/Bileve
-l_Application_2.tex"
-Overfull \hbox (17.12895pt too wide) in paragraph at lines 319--322
+[9] [10]
+Overfull \hbox (17.12895pt too wide) in paragraph at lines 430--433
 \T1/lmr/m/n/12 Let us first as-sume that the outer and in-ner ob-jec-tive func-tions and $\OML/lmm/m/it/12 w\OT1/lmr/m/n
 /12 (\OML/lmm/m/it/12 \OT1/lmr/m/n/12 ) = [] \OMS/lmsy/m/n/12 L[]\OT1/lmr/m/n/12 (\OML/lmm/m/it/12 w; \OT1/lmr/m/n/12 
 )$
  []
 
-[12
-
-
-] [13]
-Underfull \hbox (badness 10000) in paragraph at lines 416--418
+[11] [12]
+Underfull \hbox (badness 10000) in paragraph at lines 527--529
 
  []
 
-[14]
-Underfull \hbox (badness 10000) in paragraph at lines 437--438
+[13]
+Underfull \hbox (badness 10000) in paragraph at lines 551--553
 
  []
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 439--440
-
- []
-
-[15]
-Underfull \hbox (badness 10000) in paragraph at lines 483--485
-
- []
-
-[16] [17] [18] [19] [20]
-LaTeX Font Info:    Try loading font information for OT1+lmtt on input line 689.
- ("C:\Program Files\Annika Programme\MiKTeX\tex\latex\lm\ot1lmtt.fd"
-File: ot1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
-) [21] [22]
-Overfull \hbox (0.53162pt too wide) in paragraph at lines 764--777
- [] 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 796--801
-
- []
-
-[23] [24]
-Overfull \hbox (58.26138pt too wide) in paragraph at lines 895--896
-[] 
- []
-
-[25]
-Overfull \hbox (264.82431pt too wide) in paragraph at lines 912--913
-[] 
- []
-
-) [26]
+[14] [15] [16] [17] [18]) [19]
 ("D:\Annika\Uni\10. Semester\Masterarbeit\Proximal Bundle Inexact Information\Git Hub\Masterarbeit\LaTeX\Bundle_methods_
-for_nonsmooth_nonconvex_problems_with_inexact_information.bbl" [27
+for_nonsmooth_nonconvex_problems_with_inexact_information.bbl") [20
 
-]) [28]
+]
 ("D:\Annika\Uni\10. Semester\Masterarbeit\Proximal Bundle Inexact Information\Git Hub\Masterarbeit\LaTeX\Bundle_methods_
 for_nonsmooth_nonconvex_problems_with_inexact_information.aux"
 ("D:\Annika\Uni\10. Semester\Masterarbeit\Proximal Bundle Inexact Information\Git Hub\Masterarbeit\LaTeX\Chapters/Bileve
-l_Application.aux")
-("D:\Annika\Uni\10. Semester\Masterarbeit\Proximal Bundle Inexact Information\Git Hub\Masterarbeit\LaTeX\Chapters/Bileve
-l_Application_2.aux"))
+l_Application.aux"))
 
 LaTeX Warning: There were undefined references.
 
@@ -633,12 +590,12 @@ LaTeX Warning: There were undefined references.
 ### simple group (level 1) entered at line 1061 ({)
 ### bottom level 
 Here is how much of TeX's memory you used:
- 7928 strings out of 493922
- 125721 string characters out of 3142101
- 256022 words of memory out of 3000000
- 11043 multiletter control sequences out of 15000+200000
- 83704 words of font info for 70 fonts, out of 3000000 for 9000
+ 7865 strings out of 493922
+ 123885 string characters out of 3142101
+ 257468 words of memory out of 3000000
+ 10992 multiletter control sequences out of 15000+200000
+ 82768 words of font info for 67 fonts, out of 3000000 for 9000
  841 hyphenation exceptions out of 8191
  40i,19n,48p,647b,2323s stack positions out of 5000i,500n,10000p,200000b,50000s
 
-Output written on Bundle_methods_for_nonsmooth_nonconvex_problems_with_inexact_information.dvi (29 pages, 91312 bytes).
+Output written on Bundle_methods_for_nonsmooth_nonconvex_problems_with_inexact_information.dvi (21 pages, 69036 bytes).

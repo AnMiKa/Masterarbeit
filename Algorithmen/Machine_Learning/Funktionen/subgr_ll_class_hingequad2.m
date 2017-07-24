@@ -50,10 +50,7 @@ for t = 1:T
     Hb = zeros(J*max((T-1),1),G);
     
     for g = 1:G
-        delta(:,g) = sign(max(ones(J*max((T-1),1),1)-Yt(:,g).*(Xt(:,g)'*Wt-bt),0));
-        i = delta(:,g) == 0;
-        delta(i,g)=1;
-        
+        delta(:,g) = sign(max(ones(J*max((T-1),1),1)-Yt(:,g).*(Xt(:,:,g)'*Wt-bt),0));        
         for j = 1:J*max((T-1),1)
             XXY(:,:,g) = XXY(:,:,g)+delta(j,g)*(Yt(j,g)*Xt(:,j,g))*(Yt(j,g)*Xt(:,j,g))';
         end

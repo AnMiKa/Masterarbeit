@@ -253,7 +253,7 @@ The misclassification loss can be written as
 \label{misclass_loss}
 \end{equation}
 
-where the step function \(()_{\star}\) is defined componentwise for a vector as
+where the step function \((\cdot)_{\star}\) is defined component wise for a vector as
 \begin{equation}
 	(r_{\star})_i = \left\{\begin{array}{c} 1, \quad \text{if } r_i > 0, \\ 0, \quad \text{if } r_i \leq 0 \end{array} \right. .
 \label{step_fun}
@@ -312,7 +312,7 @@ Hence the final resulting bilevel formulation for model selection in support vec
 
 \subsection{Numerical Experiments}
 
-In this section algorithm \ref{sec_bundle_nonconv_inex}.1 is used to solve the bilevel problems presented above for different synthetic and real world data sets.
+In this section algorithm \ref{sec_nonconv_inex}.1 is used to solve the bilevel problems presented above for different synthetic and real world data sets.
 
 \begin{itemize}
 	\item Problem what to optimize
@@ -368,7 +368,7 @@ results
     Data set & algorithm & 0.1 & 1 & 10 & 100 \\
 		\hline
 		\texttt{cancer} & Bundle & 1.0975 & 1.0974 & 1.0974 & 1.1341 \\
-		 & Noll Bundle & 1.0947 & 1.0947 & 1.0947 & 1.0947 \\
+		 & Noll Bundle & 1.0974 & 1.0974 & 1.0974 & 1.0974 \\
 		 &  fminsearch & 1.0974 & 1.0974 & 1.0974 & -10 \\
 		 & fmindnb & 1.0974 \\
 		\texttt{ionosphere} & Bundle & 2.6081 & 2.3108 & 0.3953 & 4.7401 \\
@@ -412,6 +412,322 @@ sometimes says problem not convex, then negative values. Why??? Because tries ne
 sometimes even for negative lambda in the end right solution \\
 can I find out why bundle methods so bad? \\
 try matlab method (smooth) with subgradient???
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsubsection{Solution of the Bilevel Program}
+
+\textcolor{red}{ab hier: Theorie fehlt\\
+!!! notation - oder in prelininaries einfugen}
+%ingredients for bundle method
+
+To solve the given bilevel problem with the above presented nonconvex inexact bundle algorithm the algorithm jumps between the two levels. Once the inner level problems are solved for a given \(\lambda\) - this is possible with any QP-solver as the problems are convex - the bundle algorithm takes the outcome \(w\) and \(b\) and optimizes the hyper-parameter again.
+
+The difficulty with this approach is that the bundle algorithm needs one subgradient of the outer level objective function with respect to the parameter \(\lambda\). However to compute this subgradient also one subgradient of \(w\) and \(b\) with respect to \(\lambda\) has to be known.
+
+\textbf{The Differentiable Case}
+\textcolor{red}{example in differentiable case}\\
+Let us first assume that the outer and inner objective functions and \(w(\lambda)= \argmin \mathcal{L}_{low}(w,\lambda)\) are sufficiently often continuously differentiable to demonstrate the procedure of calculating the needed {(sub-)gradients}.
+
+Let \(\mathcal{L}_{upp}(w,\lambda)\) be the objective function of the outer level problem, where the variable \(b\) was left out for the sake of simplicity.
+To find an optimal hyper parameter \(\lambda\) given the input \(w\) the gradient \(g^{upp}_{\lambda}\) of \(\mathcal{L}_{upp}\) with respect to \(\lambda\) is needed in every iteration of the solving algorithm.
+In order to calculate this gradient the chain rule is used yielding
+
+\begin{equation*}
+	g^{upp}_{\lambda} = \left(\frac{\partial}{\partial w}\mathcal{L}_{upp}(w,\lambda) \right)^{\top}\frac{\partial w(\lambda)}{\partial\lambda}+\frac{\partial}{\partial \lambda}\mathcal{L}_{upp}(w,\lambda).
+\end{equation*}
+
+The challenge is here to find the term \(\frac{\partial w(\lambda)}{\partial\lambda}\) because 
+
+\[ \frac{\partial w}{\partial \lambda} \in \frac{\partial }{\partial \lambda} \argmin_{w} \mathcal{L}_{low}(w,\lambda). \]
+
+Assuming \(\mathcal{L}_{low}\) is twice continuously differentiable at the  optimal solution \(w^*\) of the lower level problem the optimality condition for any parameter \(\lambda_0 > 0\)
+
+\begin{equation}
+	0 = \frac{\partial}{\partial w}\mathcal{L}_{low}(w^*,\lambda_0)
+\label{opt_con}
+\end{equation}
+
+
+can be used to calculate the needed gradient in an indirect manner.
+
+In the differentiable case the theoretical framework for the following calculations is given by the implicit function theorem.
+
+\begin{theorem}[{c.f. \cite[chapter 3.4]{Koenigsberger2002}}]
+	Let \(F: U \times V \to Z \), \(U\in\R^m, V,Z\in \R^n \), be a \(\mathcal{C}^1\) mapping, \((x_0,y_0) \in U\times V\)  and \(F(x_0,y_0) = 0\). If the matrix \(\frac{\partial}{\partial y}F(x_0,y_0)\) is invertible, there exist neighborhoods \(U_0\subset U\) of \(x_0\) and \(V_0\subset V\) of \(y_0\) and a continuously differentiable mapping \(f:U_0 \to V_0\) with 
+	\begin{equation*}
+	F(x,y) = 0, (x,y)\in U_0\times V_0  \quad \Leftrightarrow \quad y = f(x), x\in U_0.
+	%\label{imp_fun_theo}
+	\end{equation*}
+\end{theorem}
+
+Identifying \(x \estimates \lambda\), \(y \estimates w\) and  \(F(x_0,y_0) \estimates \frac{\partial}{\partial w} \mathcal{L}_{low}(w^*,\lambda_0)\) and assuming \(\frac{\partial^2 }{\partial  w^2}\mathcal{L}_{low}(w^*,\lambda_0)\) is invertible this theorem provides the existence of the continuously differentiable function \(w(\lambda)\) whose gradient is needed. \\
+\textcolor{red}{what about the neighborhoods?}
+
+If the inner level loss function yields a linear optimality condition in \(w\) it is possible to calculate the gradient explicitly. This is for example the case for SVM loss functions with a squared one- or two-norm as given in problem (\ref{SVM_2}).
+The optimality condition can then be written as the linear system
+
+\begin{equation*}
+	H(\lambda)w = h(\lambda).
+\end{equation*}
+
+By taking the partial derivative with respect to \(\lambda\) on both sides of the system one gets
+
+\begin{equation*}
+	\frac{\partial H(\lambda)}{\partial \lambda}w+H(\lambda)\frac{\partial w}{\partial \lambda} = \frac{\partial h(\lambda)}{\partial  \lambda}.
+\end{equation*}
+
+If \(H(\lambda)\) is invertible for all \(\lambda \in \Lambda\) then the needed gradient is given by 
+
+\begin{equation*}
+	\frac{\partial w}{\partial \lambda} = H^{-1}(\lambda)\left(\frac{\partial h(\lambda)}{\partial \lambda}-\frac{\partial H(\lambda)}{\partial \lambda}w\right).
+\end{equation*}
+
+%\textcolor{red}{why H invertible??? - because we assume existence of \(w\)???}\\
+
+\textbf{The Nondifferentiable Case}
+\textcolor{red}{now for subgradients}
+
+In practice we cannot expect \(\mathcal{L}_{low}\) to satisfy such strong differentiability properties.
+It is therefore only assumed that \(\mathcal{L}_{low}\) is once continuously differentiable in \(w\). This assures that the optimality condition of the lower level problem is an equality like in (\ref{opt_con}).
+%If \(\mathcal{L}_{low}\) was only locally Lipschitz the optimality condition states that zero is part of the subgradient set  \(\partial \mathcal{L}_{low}(w^*,\lambda_0)\).  
+Contrary to the exemplary calculations from above in practice the second derivative \(\frac{\partial^2}{\partial w \partial \lambda} \mathcal{L}_{low}(w(\lambda),\lambda)\) however is not existent in this form, but a set of subgradients.
+
+
+
+\textcolor{red}{\textbf{Notation}}\\
+First the theoretical framework given to derive the results from above in the nondifferentiable case
+
+
+
+\textcolor{red}{An important result about Lipschitz functions is Rademacher's theorem which states that these functions are differentiable almost everywhere but on a set of Lebesgue measure zero\cite[Theorem 3.1]{Heinonen2004}. 
+Clarke deduces from this that the subdifferential at each of the nondifferentiable points is the convex hull of the limits of the sequence gradients a these points \cite[see Theorem 2.5.1]{Clarke1990}.}
+
+This motivates the multidimensional definition of Clake's generalized gradient 
+
+\textcolor{red}{
+\begin{definition}[{\cite[Definition 2.6.1]{Clarke1990}}]
+	\emph{generalized Jacobian}: \(F:\R^n \to \R^m\), with locally Lipschitz component functions \(F(x) = (f_1(x),...,f_m(x))\).\\
+	Denote generalized Jacobian by \(\partial F(x) = conv\left(\lim JF(x_i)|x_i\to x, x_i \notin \Omega_F \right) \) where \(\Omega_F\) is the set of nondifferentiable points of \(F\)
+\end{definition}
+(after that comes proposition with properties of \(\partial F\))}
+
+
+\textcolor{red}{To facilitate readability we use the following notation for the derivation of the nondifferentiable results.}
+
+The \emph{'partial' subdifferential} of a function \(f(a^*,b_0,c_0,...)\) at the point \(a^*\) with respect to one variable \(a\) when all other variables are fixed is denoted by 
+\begin{equation*}
+	\partial^{a} f(a^*,b_0,c_0,...).
+\end{equation*}
+
+A subgradient of this subdifferential is written \(g^{a} \in \partial^{a} f(a^*,b_0,c_0,...)\).
+
+Next step: show that chain rule is still valid in the nonsmooth case
+Chain rules for subdifferential \\
+
+\begin{theorem}[{\cite[Theorem 2.6.6]{Clarke1990}}]
+	Let \(f(x)=\phi(F(x))\), with the locally Lipschitz functions \(F: \R^n \to \R^m\) and \(\phi:\R^m \to \R\). Then \(f\) is locally Lipschitz and it holds
+	\begin{equation*}
+		\partial f \subset \text{conv}\left\{\partial \phi(F(x))\partial F(x)\right\}.
+	\end{equation*}
+	If in addition \(\phi\) is strictly differentiable at \(F(x)\), then equality holds.
+\end{theorem}
+
+\textcolor{red}{strictly differentiable: c.f. \cite[Theorem 9.17 and 9.18]{Rockafellar2009} locally Lipschitz continuous and at most one subgradient at the point in question (see also comment to Definition 91 in \cite{Rockafellar2009})}
+
+\begin{theorem}[c.f. {\cite[Theorem 7.1]{Rockafellar1985}}]
+	Let \(p(x) = f(F(x))\), where \(F:\R^n \to \R^d\) is locally Lipschitz and \(f:\R^d \to \R\) is lower semicontinuous. 
+	Assume \[\nexists y \in \partial^{\infty}f(F(\bar{x})), y \neq 0 \quad \text{with} \quad 0 \in y \partial F(\bar{x}). \]
+	Then for the sets 
+	\[ M(\bar{x}):= \partial f(F(\bar{x}))\partial F(\bar{x}), \quad M^{\infty}(\bar{x}):= \partial^{\infty}f(F(\bar{x}))\partial F(\bar{x}), \]
+	one has \(\hat{\partial}p(\bar{x}) \subset M(\bar{x})\) and \(\hat{\partial}^{\infty} p(\bar{x}) \subset M^{\infty}(\bar{x})\).
+\end{theorem}
+
+The main idea is to replace the inner level problem by its optimality condition
+
+
+\(\partial(w,b)\) means in this case that the subdifferential is taken with respect to the variables \(w\) and \(b\). \\
+-> theory for subdifferentials in more than one variable!!! \\
+
+For convex inner level problem this replacement is equivalent to the original problem.
+
+The difference to the approach described in \cite{Kunapuli2008} is that the problem is not smoothly replaced by its KKT conditions but only by this optimality condition. The weight vector \(w\) and bias \(b\) are treated as a function of \(\lambda\) and are optimized separately from this hyper-parameter.
+The reformulated bilevel problem becomes:
+
+\begin{align}
+	\begin{split}
+	\min_{w,\bm{b}} \quad &  \mathcal{L}_{hinge}(w,\bm{b}) = \frac{1}{T}\sum_{t=1}^T\frac{1}{|\mathcal{N}_t|}\sum_{i \in \mathcal{N}_t}{\max\left(1-y_i((w^t)^{\top}x-b_t),0\right)}\\
+	\text{subject to} \quad & \lambda > 0 \\
+	& \text{for } t = 1,...,T \\
+	& 0 \in \partial(w,b)\mathcal{L}_{low}(\lambda,w^t,b_t) \\
+\end{split}
+\label{SVM_opt_cond}
+\end{align}
+
+where \(\mathcal{L}_{low}\) can be the objective function of either of the two presented lower level problems.
+
+
+
+solve the inner level problem (quadratic problem in constrained case) by some QP solver \\
+put solution into upper level problem and solve it by using bundle method \\
+difficulty: subgradient is needed to build model of the objective function --> need subgradient \(\frac{\partial \mathcal{L}}{\partial \lambda}\) --> for this need \(\frac{\partial (W,b)}{\partial \lambda}\) \\
+but \((w,b)\) not available as functions -> only values
+
+Moore et al. \cite{Moore2011} describe a method for getting the subgradient from the KKt-conditions of the lower level problem:
+
+lower level problem convex -> therefore optimality conditions (some nonsmooth version -> source???) necessary and sufficient -> make ``subgradient'' of optimality conditions and then derive subgradient of w, b from this. \\
+---> what are the conditions? optimality condition Lipschitz? 
+
+Say (show) that all needed components are locally Lipschitz; state theorems about differentiability almost everywhere and convex hull of gradients gives set of subgradients\\
+introduce special notation (only for this section) and because of readability adopt ``gradient writing''
+
+Subgradients:
+\(\mathcal{G}_{upp,\lambda}, \mathcal{G}_{upp,w},\mathcal{G}_{upp,b}\) -> subgradients of outer objective \\
+\(g_w, g_b\) -> subgradient of w, b
+
+\[ final subgradient = \left(\mathcal{G}_{upp,w}(w,b,\lambda)\right)^{\top}g_w+\left(\mathcal{G}_{upp,b}(w,b,\lambda)\right)^{\top}g_b+\mathcal{G}_{upp,\lambda}(w,b,\lambda) 
+\label{subgr_upp}\]
+
+subgradients \(\mathcal{G}_{upp,...}\) easy to find (assumption that locally Lipschitz) -> in this application differentiable
+
+difficulty: find \(g_w, g_b\)
+important: optimality condition must be a linear system in \(w,b\) -> this is the case in this application
+\[ H(\lambda)\cdot (w,b)^{\top} = h(\lambda) \]
+
+find subgradients of each element (from differentiation rules follows)
+
+\[ \partial_{\lambda} H\cdot (w,b)^{\top} + H \cdot(\partial_{\lambda} w, \partial_{\lambda} b)^{\top} = \partial_{\lambda} h  \]
+
+solve this for \((w,b)\):
+\[ (\partial_{\lambda} w, \partial_{\lambda}b)^{\top} = H^{-1}\left(\partial_{\lambda}h-\partial_{\lambda} H \cdot(w,b)^{\top}\right) \]
+
+matrix \(H\) has to be inverted -> in the feature space so scalable with size of data set -> still can be very costly \cite{Moore2011}
+
+Applied to the two bilevel classification problems derived above, the subgradients have the following form:
+
+derivative of upper level objective:
+Notation: \(\delta_i := 1-y_i(w^{\top}x^i-b)\)
+
+\begin{align}
+	\partial_{w}\mathcal{L}_{upp}&= \frac{1}{T}\sum_{t=1}^T\frac{1}{\mathcal{N}_t}\sum_{i \in \mathcal{N}_t}{\left\{\begin{array}{cl} -y_ix^i & \text{if } \delta_i >0 \\ 0 & \text{if } \delta_i \leq 0 \end{array} \right.} \\
+	\partial_{b}\mathcal{L}_{upp}&= \frac{1}{T}\sum_{t=1}^T\frac{1}{\mathcal{N}_t}\sum_{i \in \mathcal{N}_t}{\left\{\begin{array}{cl} y_i & \text{if } \delta_i >0 \\ 0 & \text{if } \delta_i \leq 0 \end{array} \right.}
+	\end{align}
+	
+	here at the kink subgradient 0 is taken
+
+for hingequad: -> here subgradient \\
+optimality condition:
+\begin{align}
+	0 = \partial_{w}\mathcal{L}_{low} &= \lambda w+2\sum_{i \in \bar{\mathcal{N}_t}}{\left\{\begin{array}{cl} (1-y_i(w^{\top}x^i-b))(-y_ix^i) & \text{if } \delta_i >0 \\ 0 & \text{if } \delta_i \leq 0 \end{array} \right.} \\
+	0 = \partial_b\mathcal{L}_{low} &= 2\sum_{i \in \bar{\mathcal{N}_t}}{\left\{\begin{array}{cl} (1-y_i(w^{\top}x^i-b))(y_i) & \text{if } \delta_i >0 \\ 0 & \text{if } \delta_i \leq 0 \end{array} \right.}
+	\end{align}
+	
+subgradient??? is this smooth? with respect to \(\lambda\)
+\begin{align}
+	0 &= w+\lambda\partial_{\lambda}w+2\sum_{i \in \bar{\mathcal{N}_t}}{\left\{\begin{array}{cl} (-y_i(\partial_{\lambda}w^{\top}x^i-\partial_{\lambda}b))(-y_ix^i) & \text{if } \delta_i >0 \\ 0 & \text{if } \delta_i \leq 0 \end{array} \right.} \\
+	0 &= 2\sum_{i \in \bar{\mathcal{N}_t}}{\left\{\begin{array}{cl} (-y_i(\partial_{\lambda}w^{\top}x^i-\partial_{\lambda}b))(y_i) & \text{if } \delta_i >0 \\ 0 & \text{if } \delta_i \leq 0 \end{array} \right.}
+\end{align}
+
+From this the needed subgradients can be calculated via:
+
+\begin{equation}
+	2\cdot\begin{pmatrix} \frac{\lambda}{2}+\sum_{i \in \bar{\mathcal{N}_t}}{y_i^2x^i(x^i)^{\top}} & \sum_{i \in \bar{\mathcal{N}_t}}	{-y_i^2x^i} \\ \sum_{i \in \bar{\mathcal{N}_t}}{-y_i^2(x^i)^{\top}} & \sum_{i \in \bar{\mathcal{N}_t}}{y_i^2}\end{pmatrix}
+	\cdot \begin{pmatrix} \partial_{\lambda}w \\ \partial_{\lambda}b\end{pmatrix}
+	= \begin{pmatrix}-w \\ 0\end{pmatrix}
+\label{subgr_wb}
+\end{equation}
+
+for hinge not quad:
+
+not as much information in the subgradient/derivative
+
+similar calculation leads to 
+
+\begin{align}
+	\partial_{\lambda}w &= -\frac{w}{\lambda} \\
+	\partial_{\lambda}b &= 0
+\end{align}
+
+\textcolor{red}{does not work with just Hingeloss because set valued optimality condition --> have to find ``corresponding'' equation to the chosen subgradient --> do not know how}
+
+\subsubsection{Multi Group Model}
+
+Idea: different samples within the group have different have different quality --> put the samples with similar quality within one group --> give it its own \(\lambda_g\) such that the groups are weighted depending on their quality.
+
+two goals: better modleing and implicit information about the groups provided by the parameter \(\lambda_g\) -> small \(\lambda\) good quality, large \(\lambda\) bad quality???
+
+Examle: different people do same experiment; measure same data...
+
+\textbf{Model (Bilevel Problem)}
+
+\begin{align}
+\begin{split}
+	\min_{w,b} \quad &  \mathcal{L}_{hinge}(w,b) = \frac{1}{T}\sum_{t=1}^T\frac{1}{|\mathcal{N}_t|}\sum_{i \in \mathcal{N}_t}{\max\left\{1-y_i\left(\Langle w^t,x^i\Rangle-b_t\right),0\right\}}\\
+	\text{s.t.} \quad & \lambda = [\lambda_1,...,\lambda_G]^{\top} > 0 \text{ and} \\
+	& \text{for } t = 1,...,T \\
+	& (w^t,b_t) \in \argmin_{w,b}\left\{ \sum_{g = 1}^G \left(\frac{\lambda_g}{2} \|w\|^2_2+\sum_{i\in \bar{\mathcal{N}}_t^g}\max\left\{1-y_i\left(\Langle w,x^i\Rangle-b\right),0\right\}^2\right)\right\}. \\
+\end{split}
+\label{multi_group}
+\end{align}
+
+
+Reformulation of the lower level objective:
+
+\begin{equation*}
+	\mathcal{L}_{low}(w,b) =  \frac{\sum_{g = 1}^G\lambda_g}{2} \|w\|^2_2+\sum_{i\in \bar{\mathcal{N}}_t}\max\left\{1-y_i\left(\Langle w,x^i\Rangle-b\right),0\right\}^2
+\label{ll_mult_group}
+\end{equation*}
+
+
+
+\textbf{Derivatives}
+
+overall gradient:
+	\[ \frac{\textup{d}\mathcal{L}_{upp}}{\textup{d}\lambda} = {\underbrace{\frac{\partial \mathcal{L}_{upp}}{\partial (w,b)}}_{\in \R^{n+1}}} ^{\top} \underbrace{\frac{\partial (w,b)}{\partial \lambda}}_{\in \R^{n+1 \times G}} \in \R^G\]
+
+
+gradient outer level objective: 
+	\[ \frac{\partial \mathcal{L}_{upp}}{\partial w} = \frac{1}{T}\sum_{t=1}^T\frac{1}{|\mathcal{N}_t|}\sum_{i \in \mathcal{N}_t} \delta_i \left( -y_i x^i\right) \in \R^n\]
+	
+	\[ \frac{\partial \mathcal{L}_{upp}}{\partial b} = \frac{1}{T}\sum_{t=1}^T\frac{1}{|\mathcal{N}_t|}\sum_{i \in \mathcal{N}_t} \delta_i y_i \in \R\]
+	
+	\[ \delta_i = \left\{ \begin{array}{cl} 1 & \text{if } 1-y_i\left(\Langle w,x^i\Rangle-b\right) > 0 \\
+		0 & \text{else}\end{array} \right.\]
+
+
+in MATLAB: 
+	\[ \frac{\partial \mathcal{L}_{upp}}{\partial w} = \frac{1}{T}\texttt{sum}(-\texttt{bsxfun}(\texttt{@times},X,\texttt{delta}.*Y) ,2) \in \R^n\]
+	
+	\[ \frac{\partial \mathcal{L}_{upp}}{\partial b} = \frac{1}{T}\texttt{sum}(\texttt{delta}.*Y ,1) \in \R\]
+	
+	
+gradient lower level objective:\\
+first optimality conditions \(0 = \frac{\partial \mathcal{L}_{low}}{\partial w}, 0 = \frac{\partial \mathcal{L}_{low}}{\partial b}\):
+	\[ 0 = {\sum_{g = 1}^G(\lambda_g}w) + 2\sum_{i \in \bar{\mathcal{N}}_t}\delta_i \left\{1-y_i\left(\Langle w,x^i\Rangle -b\right) \right\}(-y_ix^i) \in \R^n \]
+		
+	\[0 = 2\sum_{i \in \bar{\mathcal{N}}_t}\delta_i \left\{1-y_i\left(\Langle w,x^i\Rangle -b\right) \right\}(y_i) \in \R \]
+	
+	derivatives with respect to \(\lambda_g, g = 1,...,G\), then \(\in \R^{n+1 \times G}\)
+	
+	write one column of the matrix \(\in \R^{n+1}\) \(\to\) \(G\) such columns:
+	
+	\[ 0 = w + \lambda_g\frac{\partial w}{\partial \lambda_g} + 2 \sum_{i \in  \bar{\mathcal{N}}_t} \delta_i \left(y_i^2x^i(x^i)^{\top}\frac{\partial w}{\partial \lambda_g} - y_i^2x^i \frac{\partial b}{\partial \lambda_g}\right) \in \R^n \]
+	
+	\[ 0 = 2\sum_{i \in  \bar{\mathcal{N}}_t} \delta_i \left(-y_i^2(x^i)^{\top} \frac{\partial w}{\partial \lambda_g} + y_i^2 \frac{\partial b}{\partial \lambda_g}\right) \in \R\] 
+
+
+	rewrite to calculate \([\partial w / \partial \lambda, \partial b / \partial \lambda]^{\top} \in \R^{n+1 \times G}\) \(\to\) have to calculate every column of this matrix on its own \\
+	solve \(G\) times this system of equations
+	
+	\[ 2\begin{pmatrix} \frac{\lambda_g}{2}\mathbb{I}+\sum_{i \in  \bar{\mathcal{N}}_t}{\delta_i(y_i^2x^i(x^i)^{\top})} &  \sum_{i \in  \bar{\mathcal{N}}_t} \delta_i (- y_i^2x^i )	\\
+	\sum_{i \in  \bar{\mathcal{N}}_t} \delta_i (-y_i^2(x^i)^{\top}) & \sum_{i \in  \bar{\mathcal{N}}_t} \delta_i (y_i^2 )
+	\end{pmatrix} 
+	\begin{pmatrix}	\frac{\partial w}{\partial \lambda_g} \\ \frac{\partial b}{\partial \lambda_g}
+	\end{pmatrix} 
+	= \begin{pmatrix} -w \\ 0	\end{pmatrix} \]
+
 
 
 

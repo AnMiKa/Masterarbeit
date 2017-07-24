@@ -32,7 +32,7 @@ fprintf('Solve the bundle subproblem for a trial step and Lagrange multipliers. 
 [n,lJ] = size(s);
 
 % assemble the matrices used in quadprog
-H = [zeros(n + 1, 1), [zeros(1, n); 1/t * eye(n)]];
+H = [zeros(n + 1, 1), [zeros(1, n); (1/t * eye(n)+_]];
 r = [1; zeros(n, 1)];
 A = [-ones(lJ, 1), s'];
 b = c;

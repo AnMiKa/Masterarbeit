@@ -16,18 +16,13 @@ N.~Cristianini and J.~Shawe-Taylor.
 A.~Fuduli, M.~Gaudioso, and G.~Giallombardo.
 \newblock Minimizing nonconvex nonsmooth functions via cutting planes and
   proximity control.
-\newblock {\em {SIAM} Journal on Optimization}, 14(3):743--756, 2004.
+\newblock {\em {SIAM} J. Optim}, 14(3):743--756, 2004.
 
 \bibitem{Heinonen2004}
 J.~Heinonen.
 \newblock Lectures on {Lipschitz} analysis.
 \newblock Lectures at the 14th Jyv{\"a}skyl{\"a} Summer School in August 2004,
   2004.
-
-\bibitem{Kao2004}
-W.~C. Kao, K.~M. Chung, C.~L. Sun, and C.~J. Lin.
-\newblock Decomposition methods for linear support vector machines.
-\newblock {\em Neural Computation}, 16(8):1689--1704, Aug 2004.
 
 \bibitem{Koenigsberger2002}
 K.~K\"onigsberger.
@@ -49,30 +44,11 @@ G.~Moore, C.~Bergeron, and K.~P. Bennett.
 \newblock Model selection for primal {SVM}.
 \newblock {\em Machine Learning}, 85(1):175--208, 2011.
 
-\bibitem{Musicant2000}
-D.~R. Musicant.
-\newblock {\em Data Mining via Mathematical Programming and Machine Learning}.
-\newblock PhD thesis, University of Wisconsin, Madison, 2000.
-
-\bibitem{Musicant2004}
-D.~R. Musicant and A.~Feinberg.
-\newblock Active set support vector regression.
-\newblock {\em IEEE Transactions on Neural Networks}, 15(2):268--275, March
-  2004.
-
 \bibitem{Outrata1998}
 J.~Outrata, M.~Ko{\v{c}}vara, and J.~Zowe.
 \newblock {\em Nonsmooth Approach to Optimization Problems with Equilibrium
   Constraints}.
 \newblock Springer {US}, 1998.
-
-\bibitem{Platt1999}
-J.~C. Platt.
-\newblock Using analytic {QP} and sparseness to speed training of support
-  vector machines.
-\newblock In M.~J. Kearns, S.~A. Solla, and D.~A. Cohn, editors, {\em Advances
-  in Neural Information Processing Systems 11}, pages 557--563. MIT Press,
-  1999.
 
 \bibitem{Rockafellar1985}
 R.~Rockafellar.
@@ -94,7 +70,7 @@ V.~N. Vapnik.
 \bibitem{Vapnik1999}
 V.~N. Vapnik.
 \newblock An overview of statistical learning theory.
-\newblock {\em IEEE Transactions on Neural Networks}, 10(5):988--999, 1999.
+\newblock {\em IEEE Trans. Neural Networks}, 10(5):988--999, 1999.
 
 \bibitem{Vapnik2013}
 V.~N. Vapnik.

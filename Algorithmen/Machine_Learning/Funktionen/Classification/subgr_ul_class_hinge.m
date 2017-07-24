@@ -22,24 +22,24 @@ fprintf('Find a subgradient of the upper level classification problem. \n')
 %tic
 [feat,J,T,G] = size(X);
 
-X = reshape(X,feat,J*G,T);
-Y = reshape(Y,J*G,T);
-J = J*G;
-DLlambda = zeros(1,T);
+DLlambda = zeros(G,T);
 for t = 1:T
     % select the partition of the validation set corresponding to the t'th
     % fold
     if T > 1
-        Xval = X(:,:,t);
-        Yval = Y(:,t);
+        Xval = X(:,:,t,:);
+        Yval = Y(:,t,:);
     else
         Xval = X;
         Yval = Y;
     end
+    Xval = reshape(Xval,feat,J*G);
+    Yval = reshape(Yval,J*G,1);
     % compute the parts of the subgradient foldwise
-    i = ones(J,1)-Yval.*(Xval'*W(:,t)-b(t)) >= 0;
-    tmp = [bsxfun(@times,Xval,(-i.*Yval)'); (i.*Yval)'];
-    DLlambda(:,t) = 1/J*(sum(tmp,2))'*Dwb(:,:,t)';
+    %delta = sign(max(ones(J*G,1)-Yval.*(Xval'*W(:,t)-b(t)),0));
+    delta = ones(J*G,1);
+    tmp = [bsxfun(@times,Xval,(-delta.*Yval)'); (delta.*Yval)'];
+    DLlambda(:,t) = 1/(J*G)*(sum(tmp,2))'*Dwb(:,:,t);
     % for gradient test:
     %DLlambda = 1/J*(sum(tmp,2))'*Dwb(:,:,t)';
 end

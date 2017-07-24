@@ -4,8 +4,8 @@
 
 %[X,Y] = precond_data('Data/ready_to_use/pima_standard_pm1.mat',1,1:768,1);
 
-X = reshape(Xtcancer,9,80,1,3);
-Y = reshape(Ytcancer,80,1,3);
+X = reshape(Xtcancer,9,80*3,1);
+Y = reshape(Ytcancer,80*3,1);
 [feat,J,T,G] = size(X);
 lam = 20*rand(1)-10;
 lambda = repmat(lam,G,1);
@@ -70,7 +70,7 @@ lambda = repmat(lam,G,1);
 % 
 
 %% Test 3: dwb/dlambda for hingequad loss for w, b - 'runs qpas, quadprog' except for ionosphere (10^-3)
-eps = 1e-6;
+eps = 1e-5;
 Wb1 = solve_ll_class_hingequad_qp(X,Y,lambda+eps);
 Wb2 = solve_ll_class_hingequad_qp(X,Y,lambda-eps);
 
@@ -81,8 +81,9 @@ dwbdl_num = 1/(2*eps)*(Wb1-Wb2);
 dwbdl_fun = subgr_ll_class_hingequad(W,b,X,Y,lambda);
 dwbdl_fun2 = subgr_ll_class_hingequad2(W,b,X,Y,lambda);
 %dwbdl_fun3 = subgr_ll_class_hingequad3(W,b,X,Y,lambda);
-abs(Wb1-Wb2)
-dwbdl_fun-dwbdl_fun2
-abs(dwbdl_num'-dwbdl_fun)
+diff_Wb = abs(Wb1-Wb2)
+%diff = dwbdl_fun-dwbdl_fun2
+%diff_subgr1 = abs(dwbdl_num'-dwbdl_fun)
+diff_subgr2 = abs(dwbdl_num'-dwbdl_fun2)
 
 %assert(sum(abs(dwbdl_num-dwbdl_fun')>1e-3)==0,'dwb/dlambda for hingequad loss gives bigger variation than 10^-3 in %d components. \n',sum(abs(dwbdl_num-dwbdl_fun')>1e-6)==0) 

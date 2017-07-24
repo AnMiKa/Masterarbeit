@@ -20,22 +20,22 @@ function [ f ] = ul_obj_class_hinge( X, Y, W, b )
 fprintf('Evaluate the upper level objective for a given weight vector. \n')
 [feat,J,T,G] = size(X);
 
-X = reshape(X,feat,J*G,T);
-Y = reshape(Y,J*G,T);
-J = J*G;
 f = 0;
 for t =  1:T
     % select the partition of the validation set corresponding to the t'th
     % fold
     if T > 1
-        Xt = X(:,:,t);
-        Yt = Y(:,t);
+        Xt = X(:,:,t,:);
+        Yt = Y(:,t,:);
     else
         Xt = X;
         Yt = Y;
     end
+    Xt = reshape(Xt,feat,J*G);
+    Yt = reshape(Yt,J*G,1);
+    
     % compute value for each fold
-    f = f + 1/J*sum(max(ones(J,1)-Yt.*(Xt'*W(:,t)-b(t)),0));
+    f = f + 1/(J*G)*sum(max(ones((J*G),1)-Yt.*(Xt'*W(:,t)-b(t)),0),1);
 end
 % compute final function value
 % scale objective function by 100

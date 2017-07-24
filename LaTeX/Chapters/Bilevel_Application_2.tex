@@ -653,12 +653,12 @@ first optimality conditions \(0 = \frac{\partial \mathcal{L}_{low}}{\partial w},
 	rewrite to calculate \([\partial w / \partial \lambda, \partial b / \partial \lambda]^{\top} \in \R^{n+1 \times G}\) \(\to\) have to calculate every column of this matrix on its own \\
 	solve \(G\) times this system of equations
 	
-	\[ 2\begin{pmatrix} \frac{\lambda_g}{2}+\sum_{i \in  \bar{\mathcal{N}}_t}{\delta_i(y_i^2x^i(x^i)^{\top})} &  \sum_{i \in  \bar{\mathcal{N}}_t} \delta_i (- y_i^2x^i )	\\
+	\[ 2\begin{pmatrix} \frac{\lambda_g}{2}\mathbb{I}+\sum_{i \in  \bar{\mathcal{N}}_t}{\delta_i(y_i^2x^i(x^i)^{\top})} &  \sum_{i \in  \bar{\mathcal{N}}_t} \delta_i (- y_i^2x^i )	\\
 	\sum_{i \in  \bar{\mathcal{N}}_t} \delta_i (-y_i^2(x^i)^{\top}) & \sum_{i \in  \bar{\mathcal{N}}_t} \delta_i (y_i^2 )
 	\end{pmatrix} 
 	\begin{pmatrix}	\frac{\partial w}{\partial \lambda_g} \\ \frac{\partial b}{\partial \lambda_g}
 	\end{pmatrix} 
-	= \begin{pmatrix} w \\ 0	\end{pmatrix} \]
+	= \begin{pmatrix} -w \\ 0	\end{pmatrix} \]
 
 
 

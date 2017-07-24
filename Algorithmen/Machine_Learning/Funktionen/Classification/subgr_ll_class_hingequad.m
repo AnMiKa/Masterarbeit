@@ -26,7 +26,7 @@ function [ Dwb ] = subgr_ll_class_hingequad( W, b, X, Y, lambda )
 fprintf('Find a subgradient of the lower level classification problem. \n')
 %tic
 [feat,J,T,G] = size(X);
-Dwb = zeros(1,feat+1,T);
+Dwb = zeros(feat+1,G,T);
 for t = 1:T
     % select the partition of the trainings set corresponding to the t'th
     % fold
@@ -47,20 +47,25 @@ for t = 1:T
     
     % prepare the linear system derived from the optimality conditions to
     % calculate the subgradient
-    delta = sign(max(ones(J*max((T-1),1)*G,1)-Yt.*(Xt'*Wt-bt),0));
-    i = delta == 0;
-    delta(i)=1;
+    %delta = sign(max(ones(J*max((T-1),1)*G,1)-Yt.*(Xt'*Wt-bt),0));
+    delta = ones(J*max((T-1),1)*G,1);
     XXY = zeros(feat);
     for j = 1:J*max((T-1),1)*G
-        XXY = XXY+delta(j)*(Yt(j)*Xt(:,j))*(Yt(j)*Xt(:,j))';
+        XXY = XXY + delta(j)*(Yt(j)*Xt(:,j))*(Yt(j)*Xt(:,j))';
     end
-    Hw = sum(lambda)*eye(feat)+2*XXY;
     Hwb = -2*sum(bsxfun(@times,Xt,(delta.*Yt.^2)'),2);
     Hb = 2*sum(delta.*Yt.^2);
-    H = [[Hw,Hwb];[Hwb',Hb]];
     h = [-Wt;0];
-    % calculation of the subgradient of the t'th fold
-    Dwb(:,:,t) = H\h;
+
+    for g = 1:G
+        Hw = lambda(g)*eye(feat)+2*XXY;
+        H = [[Hw,Hwb];[Hwb',Hb]];
+        if min(abs(eig(H))) < 1e-10 
+            pause
+        end
+        % calculation of the subgradient of the t'th fold
+        Dwb(:,g,t) = H\h;
+    end
 end
 %toc
 end
