@@ -36,8 +36,8 @@ for t = 1:T
     Xval = reshape(Xval,feat,J*G);
     Yval = reshape(Yval,J*G,1);
     % compute the parts of the subgradient foldwise
-    %delta = sign(max(ones(J*G,1)-Yval.*(Xval'*W(:,t)-b(t)),0));
-    delta = ones(J*G,1);
+    delta = sign(max(ones(J*G,1)-Yval.*(Xval'*W(:,t)-b(t)),0));
+    %delta = ones(J*G,1);
     tmp = [bsxfun(@times,Xval,(-delta.*Yval)'); (delta.*Yval)'];
     DLlambda(:,t) = 1/(J*G)*(sum(tmp,2))'*Dwb(:,:,t);
     % for gradient test:

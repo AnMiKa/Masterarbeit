@@ -1,4 +1,4 @@
-function [ f_hat, x_hat, delta, time ] = bundle_bilevel_class( x0, X, Y, kmax, m, t, tol, gamma)
+function [ f_hat, x_hat, k, time ] = bundle_bilevel_class( x0, X, Y, kmax, m, t, tol, gamma)
 
 
 % Input arguments
@@ -94,8 +94,10 @@ Wb = solve_ll_class_hingequad_qp(X,Y,x_hat);
 W = Wb(1:end-1,:);
 b = Wb(end,:);
 Dwb = subgr_ll_class_hingequad(W,b,X,Y,x_hat); % find subgradient of w (and b) with respect to x
+%Dwb = subgr_ll_class_hingequad_oMG(W,b,X,Y,x_hat);
 % set subgradient function for upper level problem
 g = subgr_ul_class_hinge(W,b,X,Y,Dwb);  % subgradient at point bundle point
+%g = subgr_ul_class_hinge_oMG(W,b,X,Y,Dwb);
 %g = subgr_ul_class_hingequad(W,b,X,Y,Dwb);
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -152,8 +154,10 @@ Wb = solve_ll_class_hingequad_qp(X,Y,x_hat+d);
 W = Wb(1:end-1,:);
 b = Wb(end,:);
 Dwb = subgr_ll_class_hingequad(W,b,X,Y,x_hat+d); % find subgradient of w (and b) with respect to x
+%Dwb = subgr_ll_class_hingequad_oMG(W,b,X,Y,x_hat+d);
 % set subgradient function for upper level problem
 g(:,end+1) = subgr_ul_class_hinge(W,b,X,Y,Dwb);  % subgradient at point bundle point
+%g(:,end+1) = subgr_ul_class_hinge_oMG(W,b,X,Y,Dwb);
 %g(:,end+1) = subgr_ul_class_hingequad(W,b,X,Y,Dwb);
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 

@@ -1,16 +1,5 @@
 \select@language {english}
 \select@language {english}
 \contentsline {section}{Acknowledgments}{} \contentsline {section}{Abstract}{} \contentsline {section}{List of Symbols}{} \contentsline {section}{List of Figures}{} \contentsline {section}{List of Tables}{}
-\contentsline {section}{\numberline {1}Application to Model Selection for Primal SVM}{1}
-\contentsline {subsection}{\numberline {1.1}Introduction}{1}
-\contentsline {subsection}{\numberline {1.2}Introduction to Support Vector Machines}{2}
-\contentsline {subsubsection}{\numberline {1.2.1}Risk minimization}{3}
-\contentsline {subsubsection}{\numberline {1.2.2}Support Vector machines}{4}
-\contentsline {subsection}{\numberline {1.3}Bilevel Approach and Inexact Bundle Method}{6}
-\contentsline {subsubsection}{\numberline {1.3.1}Reformulation as Bilevel Problem}{7}
-\contentsline {subsubsection}{\numberline {1.3.2}Solution of the Bilevel Program}{9}
-\contentsline {subsection}{\numberline {1.4}Numerical Experiments}{9}
-\contentsline {subsubsection}{\numberline {1.4.1}Selection of the Data Sets}{9}
-\contentsline {subsubsection}{\numberline {1.4.2}Solution of the Bilevel Program}{11}
-\contentsline {subsubsection}{\numberline {1.4.3}Multi Group Model}{17}
+\contentsline {subsection}{\numberline {0.1}Application of Outrata-theory to bilevel problem}{1}
 \contentsline {section}{German Summary}{} \contentsline {section}{References}{}

@@ -47,8 +47,8 @@ for t = 1:T
     
     % prepare the linear system derived from the optimality conditions to
     % calculate the subgradient
-    %delta = sign(max(ones(J*max((T-1),1)*G,1)-Yt.*(Xt'*Wt-bt),0));
-    delta = ones(J*max((T-1),1)*G,1);
+    delta = sign(max(ones(J*max((T-1),1)*G,1)-Yt.*(Xt'*Wt-bt),0));
+    %delta = ones(J*max((T-1),1)*G,1);
     XXY = zeros(feat);
     for j = 1:J*max((T-1),1)*G
         XXY = XXY + delta(j)*(Yt(j)*Xt(:,j))*(Yt(j)*Xt(:,j))';

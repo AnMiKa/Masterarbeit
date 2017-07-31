@@ -170,11 +170,9 @@ optimization problems for finding an optimal separating hyperplane \((w,b)\):
 and
 
 \begin{align}
-\begin{split}
 	\min_{w,b,\xi} \quad & \frac{1}{2} \|w\|^2_2+C\sum_{i=1}^l{\xi_i^2} \vspace{0.5ex}\\
 	\text{s.t.} \quad & y_i(\Langle w,x^i\Rangle-b) \geq 1 - \xi_i \vspace{0.5ex}\\
 	& 	\forall i = 1, \dots , l.
-\end{split}
 \label{SVM_2}
 \end{align}
 
@@ -662,12 +660,19 @@ Examle: different people do same experiment; measure same data...
 
 \textbf{Model (Bilevel Problem)}
 
+
+for simplicity: all groups of same size; in all folds same number of elements of each group
+
+!! not possible to work with \(\lambda\) here, have to work with \(C\)-Formulation
+
+
+
 \begin{align}
 \begin{split}
 	\min_{w,b} \quad &  \mathcal{L}_{hinge}(w,b) = \frac{1}{T}\sum_{t=1}^T\frac{1}{|\mathcal{N}_t|}\sum_{i \in \mathcal{N}_t}{\max\left\{1-y_i\left(\Langle w^t,x^i\Rangle-b_t\right),0\right\}}\\
-	\text{s.t.} \quad & \lambda = [\lambda_1,...,\lambda_G]^{\top} > 0 \text{ and} \\
+	\text{s.t.} \quad & C = [C_1,...,C_G]^{\top} > 0 \text{ and} \\
 	& \text{for } t = 1,...,T \\
-	& (w^t,b_t) \in \argmin_{w,b}\left\{ \sum_{g = 1}^G \left(\frac{\lambda_g}{2} \|w\|^2_2+\sum_{i\in \bar{\mathcal{N}}_t^g}\max\left\{1-y_i\left(\Langle w,x^i\Rangle-b\right),0\right\}^2\right)\right\}. \\
+	& (w^t,b_t) \in \argmin_{w,b}\left\{ \sum_{g = 1}^G \left(\frac{1}{2} \|w\|^2_2+C_g\sum_{i\in \bar{\mathcal{N}}_t^g}\max\left\{1-y_i\left(\Langle w,x^i\Rangle-b\right),0\right\}^2\right)\right\}. \\
 \end{split}
 \label{multi_group}
 \end{align}
@@ -676,11 +681,44 @@ Examle: different people do same experiment; measure same data...
 Reformulation of the lower level objective:
 
 \begin{equation*}
-	\mathcal{L}_{low}(w,b) =  \frac{\sum_{g = 1}^G\lambda_g}{2} \|w\|^2_2+\sum_{i\in \bar{\mathcal{N}}_t}\max\left\{1-y_i\left(\Langle w,x^i\Rangle-b\right),0\right\}^2
+	\mathcal{L}_{low}(w,b) =  \frac{1}{2} \|w\|^2+\sum_{g = 1}^GC_g\left(\sum_{i\in \bar{\mathcal{N}}_t^g}\max\left\{1-y_i\left(\Langle w,x^i\Rangle-b\right),0\right\}^2\right)
 \label{ll_mult_group}
 \end{equation*}
 
+Reformulation for solution of lower level problem with \texttt{qudprog}:
 
+\begin{align*}
+	\min_{w,b,\xi} \quad & \frac{1}{2} \|w\|^2_2+\sum_{g = 1}^G\left(C_g\sum_{i \in \bar{\mathcal{N}}_t^g}{\xi_i^2}\right) \vspace{0.5ex}\\
+	\text{s.t.} \quad & y_i\left(\Langle w,x^i\Rangle-b\right) \geq 1 - \xi_i \vspace{0.5ex}\\
+	& 	\forall i \in \bigcup_{g =1}^G \bar{\mathcal{N}}_t^g = \bar{\mathcal{N}}_t
+\label{MultiSVM_QP}
+\end{align*}
+
+the \(\mathcal{N}_t^g\) are pairwise disjoint
+
+\(w \in \R^n, b\in \R, \xi \in \R^{\vert\bar{\mathcal{N}}_t \vert}\)
+
+matrices for MATLAB calculations:
+
+\begin{equation*}
+\begin{split}
+	& \frac{1}{2} \langle x,Hx \rangle + h \\
+	& Ax \leq b
+\end{split}
+\end{equation*}
+
+\begin{equation}
+	H = \begin{pmatrix}
+		\mathbb{I}_{n\times n} \\
+		& 0 \\
+		& & 2 C \\
+	\end{pmatrix}
+	\in \R^{feat+1+J\max\{T-1,1\}G\times feat+1+J\max\{T-1,1\}G}
+\end{equation}
+
+\[ h = 0, \qquad A = \begin{pmatrix} -YX^{\top} & Y & -\mathbb{I}_{J\max\{T-1,1\}G \times J\max\{T-1,1\}G} \\ \end{pmatrix},  \qquad b = -\mathtt{ones}(J\max\{T-1,1\}G,1) \] 
+
+with \(C = [\underbrace{c_1,...,c_1}_{J\max\{T-1,1\} \text{ times}},c_2,...,c_2,...,c_G,...,c_G]^{\top}\).
 
 \textbf{Derivatives}
 

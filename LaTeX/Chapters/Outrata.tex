@@ -1,0 +1,160 @@
+\subsection{Application of Outrata-theory to bilevel problem}
+
+\begin{remark}
+	For multigroup (optimization in more than one variable) only ``C-formulation'' possible, not \(\lambda\)-formulation.
+\end{remark}
+
+procedure taken from Outrata et al. in \cite{Outrata1998}
+
+Follow steps in Appendix A:
+
+\textbf{A.1 Problem }
+
+bilevel problem has to be adapted to fit the theory
+
+\(\to\) general: \(U_{\text{ad}}\) compact and convex, this means adapt constraint for the \(C_g\); (no disadvantage compared to grid search)
+
+\(\to\) Inner level problem: introduce implicit bias \\
+By adding a column of ones to the data matrix \(X\) the last component of \(\tilde{w}:=(w,w_b)^{\top}\) is the bias \\
+Disadvantage: bias now also in regularization \\
+Advantage: problem fits theory (for Hingequad)
+
+\(\to\) Outer level problem: has to be continuously differentiable \\
+Take hingequad function\\
+reformulation of outer level problem as constrained smooth optimization problem (for both loss functions possible) seems to be not possible as outer level problem (A.1) in \cite{Outrata1998} is unconstrained in \(z\) except for the implicit function constraint
+
+\(\Rightarrow\) Bilevel problem:
+
+1.
+\begin{equation}
+\begin{split}
+	\min_{\tilde{w}} \quad &  \mathcal{L}_{hingequad}(\tilde{w}) = \frac{1}{T}\sum_{t=1}^T\frac{1}{|\mathcal{N}_t|}\sum_{i \in \mathcal{N}_t}{\max\left\{1-y_i\Langle \tilde{w}^t,x^i\Rangle,0\right\}^2}\\
+	\text{s.t.} \quad & \bar{c} \leq C_g \leq \bar{C}, \quad \text{for} \quad \bar{c},\bar{C} \in \R_+, \quad \bar{c} < \bar{C}\quad g = 1,...,G\\
+	& \text{for } t = 1,...,T \\
+	& \begin{Bmatrix}
+		\tilde{w}^t \in \argmin_{\tilde{w}}\left\{ \frac{1}{2} \left(\|\tilde{w}\|^2_2+\sum_{g=1}^G C_g\sum_{i\in \bar{\mathcal{N}}^g_t}\xi_i^2\right)\right\} \\
+		\text{s.t. for } i \in \bigcup_{g=1}^G \mathcal{N}_t^g: \quad y_i\Langle \tilde{w},x^i\Rangle \geq 1 - \xi_i
+	\end{Bmatrix}
+\end{split}
+\label{bilevel_1}
+\end{equation}
+
+%2.
+%\begin{equation}
+%\begin{split}
+	%\min_{\tilde{w},\zeta} \quad &  \mathcal{L}_{hingequad}(\tilde{w},\zeta) = \frac{1}{T}\sum_{t=1}^T\frac{1}{|\mathcal{N}_t|}\sum_{i \in \mathcal{N}_t}{\zeta_i^2}\\
+	%\text{s.t.} \quad & C_g \geq c \in \R_+, \quad g = 1,...,G\\
+	%& \text{for } i \in \bigcup_{t=1}^T \mathcal{N}_t: y_i(\Langle \tilde{w},x^i\Rangle-b) \geq 1 - \zeta_i \\
+	%& \text{for } t = 1,...,T \\
+	%& \tilde{w}^t \in \argmin_{\tilde{w}}\left\{ \frac{1}{2} \|\tilde{w}\|^2_2+\sum_{g=1}^G C_g\sum_{i\in \bar{\mathcal{N}}^g_t}\max\left\{1-y_i\Langle \tilde{w},x^i\Rangle,0\right\}^2\right\}. \\
+%\end{split}
+%\label{bilevel_2}
+%\end{equation}
+
+%3.
+%\begin{equation}
+%\begin{split}
+	%\min_{\tilde{w},\zeta} \quad &  \mathcal{L}_{hinge}(\tilde{w},\zeta) = \frac{1}{T}\sum_{t=1}^T\frac{1}{|\mathcal{N}_t|}\sum_{i \in \mathcal{N}_t}{\zeta_i}\\
+	%\text{s.t.} \quad & C_g \geq c \in \R_+, \quad g = 1,...,G\\
+	%& \text{for } i \in \bigcup_{t=1}^T \mathcal{N}_t: y_i(\Langle \tilde{w},x^i\Rangle-b) \geq 1 - \zeta_i \\
+	%& \zeta_i \geq 0 \\
+	%& \text{for } t = 1,...,T \\
+	%& \tilde{w}^t \in \argmin_{\tilde{w}}\left\{ \frac{1}{2} \|\tilde{w}\|^2_2+\sum_{g=1}^G C_g\sum_{i\in \bar{\mathcal{N}}^g_t}\max\left\{1-y_i\Langle \tilde{w},x^i\Rangle,0\right\}^2\right\}. \\
+%\end{split}
+%\label{bilevel_3}
+%\end{equation}
+corresponding variables: \\
+\(x \to (C_1,...,C_G)\) \\
+\(y,z\) (both used for the same variable in Outrata) \(\to (\tilde{w},\xi)^{\top}\)
+
+\textbf{A.2 Assumptions}
+
+\begin{itemize}
+	\item \(U_{\text{ad}}\) compact, nonempty \checkmark
+	\item \(\mathcal{L}_{hingequad}\) is continuously differentiable \checkmark
+	\item \(S\) is single valued on \(\tilde{A}\) (open set containing \(U_{\text{ad}}\)) \\
+	this follows from theorem 4.8 in \cite[p. 82]{Outrata1998} \checkmark \\
+	derivation see below
+	\item the considered GE is strongly regular (at all points \((x,z)\) with \(x \in \tilde{A}, z = S(x)\))\\
+	this follows form theorem 5.8 in \cite[p. 96]{Outrata1998} \checkmark \\
+	derivation see below
+\end{itemize}
+
+\textbf{Derivations}
+
+To assert the above assumptions rewrite lower level problem as given in A.3.1:
+
+size of variables: \(\tilde{w} \in \R^{feat+1}\), \(\xi \in \R^N\)
+
+\begin{equation}
+\begin{split}
+	\min_{(\tilde{w},\xi)} & f(\tilde{w},\xi) :=\frac{1}{2} \Langle \begin{pmatrix}\tilde{w} \\ \xi \end{pmatrix}, \begin{pmatrix} \mathbb{I}\\ & C \end{pmatrix} \begin{pmatrix}	\tilde{w}\\ \xi \end{pmatrix} \Rangle \\
+	\text{s.t.} & \begin{pmatrix}-y_1(x^1)^{\top} & -1 \\
+		\vdots & & \ddots \\ -y_N(x^N)^{\top} & & & -1\end{pmatrix}  \begin{pmatrix}	\tilde{w}\\ \xi\end{pmatrix} \leq \begin{pmatrix}	-1\\\vdots\\-1\end{pmatrix}\\
+	& \text{for} \quad i \in \bigcup_{g=1}^G \mathcal{N}_t^g
+\end{split}
+\label{ll_equilib}
+\end{equation}
+
+with \(C := (\underbrace{C_1,...,C_1}_{\vert \mathcal{N}_t^1 \vert\text{ times}},...,\underbrace{C_G,...,C_G}_{\vert \mathcal{N}_t^G \vert\text{ times}})^{\top}\) and \(N := \vert \bigcup_{g=1}^G \mathcal{N}_t^g\vert\).
+
+\begin{definition}[{\cite[Definition 4.2, p. 79]{Outrata1998}}]
+	The function \(F\) is said to be strongly monotone on \(\Omega\) if there exists an \(\alpha > 0\) such that
+	\[ \Langle F(v)-F(w),v-w\Rangle \geq \alpha \Vert v-w \Vert^2  \quad \text{for all } v,w \in \Omega. \]
+\end{definition}
+
+\begin{theorem}[{\cite[Theorem 4.4 (ii), p. 79]{Outrata1998}}]
+	If \(F\) is strongly monotone on \(\Omega\), then the equilibrium problem has exactly one solution.
+\end{theorem}
+
+Check strong monotonicity for \(F = \nabla f\):
+\begin{equation*}
+	\Langle \begin{pmatrix} \mathbb{I}\\ & C \end{pmatrix} (v-w),v-w\Rangle = \sum_{i=1}^N \lambda_i (v_i-w_i)^2 \geq \min\{1,\lambda_{min}\} \Vert v-w \Vert^2, \quad \forall v,w \in \R^{feat+1+N}.
+\end{equation*}
+
+Here the \(\lambda_i > 0\) are the eigenvalues and \(\lambda_{min}\) the largest eigenvalue of the positive definite matrix \(\begin{pmatrix} \mathbb{I}\\ & C \end{pmatrix}\). As the \(C_g\) are constrained away from 0 all eigenvalues are strictly larger than zero.
+Thus the theorem applies.
+
+The set \(\Omega\) is the constraint set of the lower level problem. It is given in the form of (4.3) in the book.
+
+\begin{theorem}[{\cite[Theorem 4.8, p. 82]{Outrata1998}}]
+	Let \(F\) be strongly monotone on \(\Omega\) given by (4.3) and \((\bar{w},\bar{\xi})\) be the unique solution of the lower level problem. Assume that the linear independence constraint qualification holds at \((\bar{w},\bar{\xi})\). Then the GE (4.14) (special form of the GE, provided in this case) possesses a unique solution \((\hat{y},\hat{\lambda})\) with \(\hat{y} = (\bar{w},\bar{\xi})\).
+\end{theorem}
+
+Theorem above essentially states that there is a unique solution of the KKT equations.
+Compare also to theorem 16.14 in \cite{Ulbrich2012}.
+
+Frage: wie ist \(\bar{y}:=y(\bar{x})\) in der (ESCQ) auf Seite 92 gemeint???\\
+Ist \(\bar{y}\) die optimale L\"osung des lower level Problems f\"u den Parameter \(\bar{x}\) oder ist es einfach irgendein \(y\) und es soll lediglich die Zugeh\"origkeit in der (ESCQ) zum Parameter \(\bar{x}\) ausdr\"ucken?
+
+\begin{theorem}[{\cite[Theorem 5.8, p. 96]{Outrata1998}}]
+	Suppose that for some \(x_0 \in \tilde{\mathcal{A}}\) the gradients \(\nabla_y h^i(x_0,y_0)\), for \(i = 1,...,l\) and \(\nabla_y g^j(x_0,y_0)\), for all \(j \in \{1,...,s\}\) corresponding to active inequalities at the point \((x_0,y_0)\) are linearly independent.\\
+	Additionally suppose that the Jacobian with respect to \(y\) of the Lagrangian \(\mathcal(J)_y\mathcal{L}(x_0,y_0,\mu_0,\lambda_0)\) is strictly copositive with respect to \(\ker(\mathcal{J}_y H(x_0,y_0))\cap\ker(\mathcal{J}_y\underbrace{G_{I^+}}_{\text{only active inequalities with } \lambda^j > 0}(x_0,y_0))\).
+	Then the GE is strongly regular.
+\end{theorem}
+
+Linear independence:
+
+no equalitiy constraints \\
+Jacobian of the inequality constraints: \(\begin{pmatrix}-y_1(x^1)^{\top} & -1 \\
+		\vdots & & \ddots \\ -y_N(x^N)^{\top} & & & -1\end{pmatrix}\) \\
+		linearly independent because of identity in the last part of the matrix
+
+Lagrangian of the lower level problem:
+
+\[ \mathcal{L}(\tilde{C},(\tilde{w},\xi),\lambda) = \begin{pmatrix} \mathbb{I}\\ & C \end{pmatrix} \begin{pmatrix}	\tilde{w}\\ \xi \end{pmatrix} + (\lambda_1,...,\lambda_N)\begin{pmatrix}-y_1(x^1)^{\top} & -1 \\
+		\vdots & & \ddots \\ -y_N(x^N)^{\top} & & & -1\end{pmatrix} \]
+
+Jacobian with respect to \((\tilde{w},\xi)\):
+
+\[ \nabla_{(\tilde{w},\xi)}\mathcal{L}(\tilde{C},(\tilde{w},\xi),\lambda) = \begin{pmatrix} \mathbb{I}\\ & C \end{pmatrix} \]
+
+As shown before this matrix is uniformly positive definite. This means that it is also strictly copositive.
+
+
+
+
+
+
+
+

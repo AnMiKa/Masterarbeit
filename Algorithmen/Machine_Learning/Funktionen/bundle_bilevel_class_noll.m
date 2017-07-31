@@ -108,8 +108,10 @@ Wb = solve_ll_class_hingequad_qp(X,Y,x_hat);
 W = Wb(1:end-1,:);
 b = Wb(end,:);
 Dwb = subgr_ll_class_hingequad(W,b,X,Y,x_hat); % find subgradient of w (and b) with respect to x
+%Dwb = subgr_ll_class_hingequad_oMG(W,b,X,Y,x_hat);
 % set subgradient function for upper level problem
 g = subgr_ul_class_hinge(W,b,X,Y,Dwb);  % subgradient at point bundle point
+%g = subgr_ul_class_hinge_oMG(W,b,X,Y,Dwb);
 %g = subgr_ul_class_hingequad(W,b,X,Y,Dwb);
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -122,7 +124,7 @@ c = 0;                   % initial augmented error
 Q = eye(n);              % initial approximation to metric matrix
 
 % parameters for t-update
-u_1 = 2;
+u_1 = 1.2;
 u_2 = 0.8;
 t_min = 1e-9; % minimal t value to make sure that sequence does not have 0 as accumulation point
 
@@ -134,7 +136,7 @@ for k = 1 : kmax
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % set solver for upper level problem
 %[d,~,alpha] = solve_ul_class_qpas(x_hat,s,c,t);   % solver using qpas
-[d,~,alpha] = solve_ul_class_qp(x_hat,s,c,t);    % solver using MATLAB's quadprog
+[d,~,alpha] = solve_ul_Q_class_qp(x_hat,Q,s,c,t);    % solver using MATLAB's quadprog
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % aggregate objects:
@@ -172,8 +174,10 @@ Wb = solve_ll_class_hingequad_qp(X,Y,x_hat+d);
 W = Wb(1:end-1,:);
 b = Wb(end,:);
 Dwb = subgr_ll_class_hingequad(W,b,X,Y,x_hat+d); % find subgradient of w (and b) with respect to x
+%Dwb = subgr_ll_class_hingequad_oMG(W,b,X,Y,x_hat+d);
 % set subgradient function for upper level problem
 g(:,end+1) = subgr_ul_class_hinge(W,b,X,Y,Dwb);  % subgradient at point bundle point
+%g(:,end+1) = subgr_ul_class_hinge_oMG(W,b,X,Y,Dwb);
 %g(:,end+1) = subgr_ul_class_hingequad(W,b,X,Y,Dwb);
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 

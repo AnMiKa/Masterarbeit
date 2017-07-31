@@ -32,11 +32,11 @@ fprintf('Solve the bundle subproblem for a trial step and Lagrange multipliers. 
 [n,lJ] = size(s);
 
 % assemble the matrices used in quadprog
-H = [zeros(n + 1, 1), [zeros(1, n); (1/t * eye(n)+_]];
+H = [zeros(n + 1, 1), [zeros(1, n); 1/t * eye(n)]];
 r = [1; zeros(n, 1)];
 A = [-ones(lJ, 1), s'];
 b = c;
-lb = [-Inf,-x_hat+1e-15]';   % bounds for [xi, d=lambda]
+lb = [-Inf,-x_hat'+1e-9*ones(1,n)]';   % bounds for [xi, d=lambda]
 % problem has to be solved rather exact because the bundle algorithm
 % assumes d to be the argmin of the given subproblem
 options_ip = optimoptions(@quadprog, 'Algorithm', 'interior-point-convex',...
@@ -48,11 +48,11 @@ options_ip = optimoptions(@quadprog, 'Algorithm', 'interior-point-convex',...
 % function
 alpha = lambda.ineqlin(1:lJ);
 % gives a warnig if sum(alpha) not close enough to 1
-if abs(norm(alpha)-1) > 1e-15
-    warning('abs(norm(alpha)-1) > 1e-15')
+if abs(sum(alpha)-1) > 1e-15
+    warning('abs(sum(alpha)-1) > 1e-15')
 end
 
-d = xi_d(2);
+d = xi_d(2:end);
 % gives a warning if d == 0
 if d == 0
     warning('lambda = 0')

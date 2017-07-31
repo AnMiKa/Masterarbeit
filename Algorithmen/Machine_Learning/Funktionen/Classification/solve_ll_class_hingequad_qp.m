@@ -47,7 +47,7 @@ for t = 1:T
     H = sparse(feat+1+J*max((T-1),1),feat+1+J*max((T-1),1));
     XY = sparse(feat,J*max((T-1),1));
     for g = 1:G
-        H = H + spdiags([lambda(g)*ones(feat,1);0;ones(J*max((T-1),1),1)],0,feat+1+J*max((T-1),1),feat+1+J*max((T-1),1));
+        H = H + spdiags([lambda(g)*ones(feat,1);0;2*ones(J*max((T-1),1),1)],0,feat+1+J*max((T-1),1),feat+1+J*max((T-1),1));
         XY = XY + sparse(bsxfun(@times,Xt(:,:,g),Yt(:,g)'));
     end
 %     if lambda < 0

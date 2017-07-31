@@ -1,48 +1,4 @@
-\begin{thebibliography}{10}
-
-\bibitem{Clarke1990}
-F.~H. Clarke.
-\newblock {\em Optimization and nonsmooth analysis}.
-\newblock Classics in Applied Mathematics. Society for Industrial and Applied
-  Mathematics Philadelphia, 1990.
-
-\bibitem{Cristianini2000}
-N.~Cristianini and J.~Shawe-Taylor.
-\newblock {\em An Introduction to Support Vector Machines and Other
-  Kernel-based Learning Methods}.
-\newblock Cambridge University Press, 2000.
-
-\bibitem{Fuduli2004a}
-A.~Fuduli, M.~Gaudioso, and G.~Giallombardo.
-\newblock Minimizing nonconvex nonsmooth functions via cutting planes and
-  proximity control.
-\newblock {\em {SIAM} J. Optim}, 14(3):743--756, 2004.
-
-\bibitem{Heinonen2004}
-J.~Heinonen.
-\newblock Lectures on {Lipschitz} analysis.
-\newblock Lectures at the 14th Jyv{\"a}skyl{\"a} Summer School in August 2004,
-  2004.
-
-\bibitem{Koenigsberger2002}
-K.~K\"onigsberger.
-\newblock {\em Analysis 2}.
-\newblock Springer Berlin Heidelberg, 2002.
-
-\bibitem{Kunapuli2008}
-G.~Kunapuli.
-\newblock {\em A bilevel optimization approach to machine learning}.
-\newblock PhD thesis, Rensselaer Polytechnic Institute Troy, New York, 2008.
-
-\bibitem{Moore2010a}
-G.~Moore, C.~Bergeron, and K.~P. Bennett.
-\newblock Gradient-type methods for primal {SVM} model selection.
-\newblock Technical report, Rensselaer Polytechnic Institute, 2010.
-
-\bibitem{Moore2011}
-G.~Moore, C.~Bergeron, and K.~P. Bennett.
-\newblock Model selection for primal {SVM}.
-\newblock {\em Machine Learning}, 85(1):175--208, 2011.
+\begin{thebibliography}{1}
 
 \bibitem{Outrata1998}
 J.~Outrata, M.~Ko{\v{c}}vara, and J.~Zowe.
@@ -50,31 +6,9 @@ J.~Outrata, M.~Ko{\v{c}}vara, and J.~Zowe.
   Constraints}.
 \newblock Springer {US}, 1998.
 
-\bibitem{Rockafellar1985}
-R.~Rockafellar.
-\newblock Extensions of subgradient calculus with applications to optimization.
-\newblock {\em Nonlinear Analysis: Theory, Methods {\&} Applications},
-  9(7):665--698, jul 1985.
-
-\bibitem{Rockafellar2009}
-R.~T. Rockafellar and R.~J.~B. Wets.
-\newblock {\em Variational Analysis}, volume 317 of {\em Grundlehren der
-  mathematischen Wissenschaften}.
-\newblock Springer Berlin Heidelberg, 3rd edition, 2009.
-
-\bibitem{Vapnik1998}
-V.~N. Vapnik.
-\newblock {\em Statistical Learning Theory}.
-\newblock JOHN WILEY \& SONS INC, 1998.
-
-\bibitem{Vapnik1999}
-V.~N. Vapnik.
-\newblock An overview of statistical learning theory.
-\newblock {\em IEEE Trans. Neural Networks}, 10(5):988--999, 1999.
-
-\bibitem{Vapnik2013}
-V.~N. Vapnik.
-\newblock {\em The Nature of Statistical Learning Theory}.
-\newblock Springer New York, 2013.
+\bibitem{Ulbrich2012}
+M.~Ulbrich and S.~Ulbrich.
+\newblock {\em Nichtlineare Optimierung}.
+\newblock Springer Basel AG, 2012.
 
 \end{thebibliography}

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=latex 2017.6.11)  24 JUL 2017 18:28
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=latex 2017.6.11)  31 JUL 2017 20:26
 entering extended mode
 **Bundle_methods_for_nonsmooth_nonconvex_problems_with_inexact_information.tex
 
@@ -457,8 +457,8 @@ Package: setspace 2011/12/19 v6.7a set line spacing
 
 ("D:\Annika\Uni\10. Semester\Masterarbeit\Proximal Bundle Inexact Information\Git Hub\Masterarbeit\LaTeX\Bundle_methods_
 for_nonsmooth_nonconvex_problems_with_inexact_information.aux"
-("D:\Annika\Uni\10. Semester\Masterarbeit\Proximal Bundle Inexact Information\Git Hub\Masterarbeit\LaTeX\Chapters/Bileve
-l_Application.aux"))
+("D:\Annika\Uni\10. Semester\Masterarbeit\Proximal Bundle Inexact Information\Git Hub\Masterarbeit\LaTeX\Chapters/Outrat
+a.aux"))
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 117.
 LaTeX Font Info:    ... okay on input line 117.
 LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 117.
@@ -487,38 +487,38 @@ File: t1lmss.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 ("D:\Annika\Uni\10. Semester\Masterarbeit\Proximal Bundle Inexact Information\Git Hub\Masterarbeit\LaTeX\Bundle_methods_
 for_nonsmooth_nonconvex_problems_with_inexact_information.toc"
-LaTeX Font Info:    Try loading font information for OT1+lmr on input line 5.
+LaTeX Font Info:    Try loading font information for OT1+lmr on input line 4.
 
 ("C:\Program Files\Annika Programme\MiKTeX\tex\latex\lm\ot1lmr.fd"
 File: ot1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-LaTeX Font Info:    Try loading font information for OML+lmm on input line 5.
+LaTeX Font Info:    Try loading font information for OML+lmm on input line 4.
 
 ("C:\Program Files\Annika Programme\MiKTeX\tex\latex\lm\omllmm.fd"
 File: omllmm.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-LaTeX Font Info:    Try loading font information for OMS+lmsy on input line 5.
+LaTeX Font Info:    Try loading font information for OMS+lmsy on input line 4.
 
 ("C:\Program Files\Annika Programme\MiKTeX\tex\latex\lm\omslmsy.fd"
 File: omslmsy.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-LaTeX Font Info:    Try loading font information for OMX+lmex on input line 5.
+LaTeX Font Info:    Try loading font information for OMX+lmex on input line 4.
 
 ("C:\Program Files\Annika Programme\MiKTeX\tex\latex\lm\omxlmex.fd"
 File: omxlmex.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <12> on input line 5.
+(Font)              <12> on input line 4.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <8> on input line 5.
+(Font)              <8> on input line 4.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <6> on input line 5.
-LaTeX Font Info:    Try loading font information for U+msa on input line 5.
+(Font)              <6> on input line 4.
+LaTeX Font Info:    Try loading font information for U+msa on input line 4.
 
 ("C:\Program Files\Annika Programme\MiKTeX\tex\latex\amsfonts\umsa.fd"
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 5.
+LaTeX Font Info:    Try loading font information for U+msb on input line 4.
 
 ("C:\Program Files\Annika Programme\MiKTeX\tex\latex\amsfonts\umsb.fd"
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
@@ -527,75 +527,58 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
  [1
 
 ]
-("D:\Annika\Uni\10. Semester\Masterarbeit\Proximal Bundle Inexact Information\Git Hub\Masterarbeit\LaTeX\Chapters/Bileve
-l_Application.tex" [1
+("D:\Annika\Uni\10. Semester\Masterarbeit\Proximal Bundle Inexact Information\Git Hub\Masterarbeit\LaTeX\Chapters/Outrat
+a.tex" [1
 
-] [2] [3] [4] [5] [6] [7]
-
-LaTeX Warning: Reference `??' on page 8 undefined on input line 276.
-
-
-LaTeX Warning: Reference `sec_nonconv_inex' on page 8 undefined on input line 315.
-
-[8]
-LaTeX Font Info:    Try loading font information for OMS+lmr on input line 318.
+]
+LaTeX Font Info:    Try loading font information for OMS+lmr on input line 73.
  ("C:\Program Files\Annika Programme\MiKTeX\tex\latex\lm\omslmr.fd"
 File: omslmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    Font shape `OMS/lmr/m/n' in size <12> not available
-(Font)              Font shape `OMS/lmsy/m/n' tried instead on input line 318.
-File: Pictures/Plots/lambda_vs_err_io_ca_final.eps Graphic file (type eps)
- <Pictures/Plots/lambda_vs_err_io_ca_final.eps>
-File: Pictures/Plots/lambda_vs_err_ss_sb_b5_final.eps Graphic file (type eps)
+(Font)              Font shape `OMS/lmsy/m/n' tried instead on input line 73.
 
-<Pictures/Plots/lambda_vs_err_ss_sb_b5_final.eps>
-LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10.95> on input line 357.
-LaTeX Font Info:    Try loading font information for T1+lmtt on input line 357.
- ("C:\Program Files\Annika Programme\MiKTeX\tex\latex\lm\t1lmtt.fd"
-File: t1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
-)
-[9] [10]
-Overfull \hbox (17.12895pt too wide) in paragraph at lines 430--433
-\T1/lmr/m/n/12 Let us first as-sume that the outer and in-ner ob-jec-tive func-tions and $\OML/lmm/m/it/12 w\OT1/lmr/m/n
-/12 (\OML/lmm/m/it/12 \OT1/lmr/m/n/12 ) = [] \OMS/lmsy/m/n/12 L[]\OT1/lmr/m/n/12 (\OML/lmm/m/it/12 w; \OT1/lmr/m/n/12 
-)$
+Overfull \hbox (1.62653pt too wide) detected at line 113
+[] \OT1/lmr/m/n/12 = [] \OML/lmm/m/it/12 []\OT1/lmr/m/n/12 (\OML/lmm/m/it/12 v[] \OMS/lmsy/m/n/12   \OML/lmm/m/it/12 w[
+]\OT1/lmr/m/n/12 )[] \OMS/lmsy/m/n/12  []f\OT1/lmr/m/n/12 1\OML/lmm/m/it/12 ; []\OMS/lmsy/m/n/12 gk\OML/lmm/m/it/12 v 
+\OMS/lmsy/m/n/12   \OML/lmm/m/it/12 w\OMS/lmsy/m/n/12 k[]\OML/lmm/m/it/12 ;  \OMS/lmsy/m/n/12 8\OML/lmm/m/it/12 v; w \OM
+S/lmsy/m/n/12 2 \U/msb/m/n/12 R[]\OML/lmm/m/it/12 :
  []
 
-[11] [12]
-Underfull \hbox (badness 10000) in paragraph at lines 527--529
-
+[2]
+Overfull \hbox (17.10449pt too wide) in paragraph at lines 131--134
+\T1/lmr/m/it/12 Additionally sup-pose that the Ja-co-bian with re-spect to $\OML/lmm/m/it/12 y$ \T1/lmr/m/it/12 of the L
+a-grangian $[]\OML/lmm/m/it/12 J\OT1/lmr/m/n/12 )[]\OMS/lmsy/m/n/12 L\OT1/lmr/m/n/12 (\OML/lmm/m/it/12 x[]; y[]; []; [
+]\OT1/lmr/m/n/12 )$
  []
 
-[13]
-Underfull \hbox (badness 10000) in paragraph at lines 551--553
 
+Overfull \hbox (22.17288pt too wide) in paragraph at lines 131--134
+\T1/lmr/m/it/12 is strictly copos-i-tive with re-spect to $[]\OT1/lmr/m/n/12 (\OMS/lmsy/m/n/12 J[]\OML/lmm/m/it/12 H\OT1
+/lmr/m/n/12 (\OML/lmm/m/it/12 x[]; y[]\OT1/lmr/m/n/12 )) \OMS/lmsy/m/n/12 \ []\OT1/lmr/m/n/12 (\OMS/lmsy/m/n/12 J[] []\O
+T1/lmr/m/n/12 (\OML/lmm/m/it/12 x[]; y[]\OT1/lmr/m/n/12 ))$\T1/lmr/m/it/12 .
  []
 
-[14] [15] [16] [17] [18]) [19]
+[3]) [4]
 ("D:\Annika\Uni\10. Semester\Masterarbeit\Proximal Bundle Inexact Information\Git Hub\Masterarbeit\LaTeX\Bundle_methods_
-for_nonsmooth_nonconvex_problems_with_inexact_information.bbl") [20
+for_nonsmooth_nonconvex_problems_with_inexact_information.bbl") [5
 
 ]
 ("D:\Annika\Uni\10. Semester\Masterarbeit\Proximal Bundle Inexact Information\Git Hub\Masterarbeit\LaTeX\Bundle_methods_
 for_nonsmooth_nonconvex_problems_with_inexact_information.aux"
-("D:\Annika\Uni\10. Semester\Masterarbeit\Proximal Bundle Inexact Information\Git Hub\Masterarbeit\LaTeX\Chapters/Bileve
-l_Application.aux"))
-
-LaTeX Warning: There were undefined references.
-
- )
+("D:\Annika\Uni\10. Semester\Masterarbeit\Proximal Bundle Inexact Information\Git Hub\Masterarbeit\LaTeX\Chapters/Outrat
+a.aux")) )
 (\end occurred inside a group at level 1)
 
 ### simple group (level 1) entered at line 1061 ({)
 ### bottom level 
 Here is how much of TeX's memory you used:
- 7865 strings out of 493922
- 123885 string characters out of 3142101
- 257468 words of memory out of 3000000
- 10992 multiletter control sequences out of 15000+200000
- 82768 words of font info for 67 fonts, out of 3000000 for 9000
+ 7754 strings out of 493922
+ 121992 string characters out of 3142101
+ 252247 words of memory out of 3000000
+ 10897 multiletter control sequences out of 15000+200000
+ 63623 words of font info for 52 fonts, out of 3000000 for 9000
  841 hyphenation exceptions out of 8191
- 40i,19n,48p,647b,2323s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 40i,26n,48p,504b,2225s stack positions out of 5000i,500n,10000p,200000b,50000s
 
-Output written on Bundle_methods_for_nonsmooth_nonconvex_problems_with_inexact_information.dvi (21 pages, 69036 bytes).
+Output written on Bundle_methods_for_nonsmooth_nonconvex_problems_with_inexact_information.dvi (6 pages, 14824 bytes).
