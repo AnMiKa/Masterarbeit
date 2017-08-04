@@ -4,10 +4,10 @@
 
 \subsection{Introduction}
 
-In this part of the thesis the nonconvex inexact bundle algorithm is applied to the problem of model selection for \emph{support vector machines} (SVMs) solving classification tasks.
+In this part of the thesis the nonconvex inexact bundle algorithm \textcolor{red}{number in thesis} is applied to the problem of model selection for \emph{support vector machines} (SVMs) solving classification tasks.
 It relies on a bilevel formulation proposed by Kunapuli in \cite{Kunapuli2008} and Moore et al. in \cite{Moore2011}.
 
-A natural application for the inexact bundle algorithm is an optimization problem where the objective function value can only be computed iteratively. This is for example the case in bilevel optimization.
+A natural application for the inexact bundle algorithm is an optimization problem where the objective function value and subgradient can only be computed by numerical approximation. This is for example the case in bilevel optimization.
 %If this objective function is iteratively optimized, the function value i never exact. But by the stopping condition it is (often???) possible to have the needed error bound on the function value (what about the gradient???). (Comment on asymptotical exactness?)
 
 %A general bilevel problem can be formulated as 
@@ -16,15 +16,18 @@ A general bilevel program can be formulated as in \cite[p. 20]{Kunapuli2008}
 
 \begin{equation}
 	\begin{array}{cll}
-	\displaystyle\min_{x \in X, y} & F(x,y) & \text{upper level} \vspace{0.5ex}\\
+	\displaystyle\min_{x \in X, y \in \R^k} & F(x,y) & \text{upper level} \vspace{0.5ex}\\
 	\text{s.t.} & G(x,y) \leq 0 & \vspace{1em}\\
 	& y \in \begin{Bmatrix} \displaystyle\argmax_{y\in Y} & f(x,y) \vspace{0.5ex}\\
 	                        \text{s.t.} & g(x,y) \leq 0 
 													\end{Bmatrix}. & \text{lower level}
 	\end{array}
+	\label{bilevel}
 \end{equation}
 
-It consists of an \emph{upper} or \emph{outer level} which is the overall function to be optimized. Contrary to usual constrained optimization problems which are constrained by explicitly given equalities and inequalities a  bilevel program is additionally constrained by a second optimization problem, the \emph{lower} or \emph{inner level} problem.
+The two objecective functions \(F\) and \(f\) map from \(\R^n\times\R^k\) into \(\R\) and the constraint functions \(G\) and \(g\) map from \(\R^n\times\R^k\) into \(\R^L\) and \(\R^l\) respectively. 
+
+The problem consists of an \emph{upper} or \emph{outer level} which is the overall function to be optimized. Contrary to usual constrained optimization problems which are constrained by explicitly given equalities and inequalities a  bilevel program is additionally constrained by a second optimization problem, the \emph{lower} or \emph{inner level} problem.
 
 Solving bilevel problems can be divided roughly in two classes: implicit and explicit solution methods. 
 In the explicit methods the lower level problem is usually rewritten by its KKT conditions, these are then added as constraints to the upper level problem. With this solution method the upper and lower level are solved simultaneously. For the setting of model selection for support vector machines as it is used here, this method is described in detail in \cite{Kunapuli2008}.
@@ -39,6 +42,14 @@ In \cite{Moore2010a} he also suggests the nonconvex exact bundle algorithm of Fu
 %\subsection{Notation and Expressions}
 
 %training set, validation /holdout set...
+
+\subsection{Notation}
+
+special notation only in this chapter, \(x,y\) now different. Optimization variable now \(\lambda,C\).
+with index -> data, without variables from problem.
+Will be clear from context.
+
+do this due to the standard notation in the field of SVM
 
 \subsection{Introduction to Support Vector Machines}
 %In times of big data machine learning is a very active field of research. 
@@ -149,47 +160,73 @@ Fix \(\gamma > 0\). A \emph{margin slack variable of the example} \((x^i,y_i)\) 
 
 %\end{definition}  
 If \(\xi_i > \gamma\) the point is considered misclassified. 
-One can also say that \(\|\xi\|\) measures the amount by which training set ``fails to have margin \(\gamma\)'' \cite{Cristianini2000}.
+One can also say that \(\|\xi\|\) measures the amount by which training set ``fails to have a margin of \(\gamma\)'' \cite[section 2.1.1]{Cristianini2000}.
 
 For support vector machines the target margin is set to \(\gamma = 1\).
 
 %Book uses \(\xi^2\) -> then \(\xi>0\) not needed any more; only \(\xi\) also used -> 1-norm
-This results finally in the following slightly different
-optimization problems for finding an optimal separating hyperplane \((w,b)\): 
+%This results finally in the following slightly different
+%optimization problems for finding an optimal separating hyperplane \((w,b)\):
+
+This results in the following optimization problem for finding an optimal separating hyperplane \((w,b)\): 
 
 \begin{align}
 \begin{split}
-	\min_{w,b,\xi} \quad & \frac{1}{2} \|w\|^2_2+C\sum_{i=1}^l{\xi_i} \\
-	\text{s.t.} \quad & y_i(\Langle w,x^i\Rangle-b) \geq 1 - \xi_i \\
+	\min_{w,b,\xi} \quad & \frac{1}{2} \|w\|^2+C\sum_{i=1}^l{\xi_i} \\
+	\text{s.t.} \quad & y_i\left(\Langle w,x^i\Rangle-b\right) \geq 1 - \xi_i \\
 	& \xi_i \geq 0 \\
 	& 	\forall i = 1, \dots , l
 \end{split}
 \label{SVM_1}
 \end{align}
 
-and
+%and
+%
+%\begin{align}
+%\begin{split}
+	%\min_{w,b,\xi} \quad & \frac{1}{2} \|w\|^2_2+C\sum_{i=1}^l{\xi_i^2} \vspace{0.5ex}\\
+	%\text{s.t.} \quad & y_i\left(\Langle w,x^i\Rangle-b\right) \geq 1 - \xi_i \vspace{0.5ex}\\
+	%& 	\forall i = 1, \dots , l.
+%\end{split}
+%\label{SVM_2}
+%\end{align}
+
+%The first part of the respective objective functions are the regularizations, the second part are the actual loss functions.
+The first part of the objective function is the regularization, the second part the actual loss function. 
+The parameter \(C > 0\) gives a trade-off between the richness of the chosen set of functions \(f_{\lambda}\) to reduce the error on the training data and the danger of overfitting to have good generalization. It has to be chosen a priori \cite{Kunapuli2008}.
+%The two optimization problems only differ in the norm chosen for the loss function. In (\ref{SVM_1}) the one-norm is chosen, in (\ref{SVM_2}) the squared two-norm is used.
+
+To derive a subgradient of the bilevel problem introduced later in this section another formulation of the classification problem is used.
+It makes use of the \emph{implicit bias}, meaning that the bias is not calculated separately but as part of the variable \(w\). 
+By adding an additional one to the end of each feature vector we can use the vectors \(\tilde{x}_i := (x_i,1)^{\top}\) and \(\tilde{w} := (w,w_b)\) to state the following optimization problem:
 
 \begin{align}
-	\min_{w,b,\xi} \quad & \frac{1}{2} \|w\|^2_2+C\sum_{i=1}^l{\xi_i^2} \vspace{0.5ex}\\
-	\text{s.t.} \quad & y_i(\Langle w,x^i\Rangle-b) \geq 1 - \xi_i \vspace{0.5ex}\\
+\begin{split}
+	\min_{\tilde{w},\xi} \quad & \frac{1}{2} \|\tilde{w}\|^2+C\sum_{i=1}^l{\xi_i} \vspace{0.5ex}\\
+	\text{s.t.} \quad & y_i\Langle \tilde{w},\tilde{x}^i\Rangle = y_i\left(\Langle w,x^i\Rangle-w_b\right) \geq 1 - \xi_i \vspace{0.5ex}\\
+	& \xi_i \geq 0 \\
 	& 	\forall i = 1, \dots , l.
-\label{SVM_2}
+\end{split}
+\label{SVM_bias}
 \end{align}
 
-The first part of the respective objective functions are the regularizations, the second part are the actual loss functions. 
-The parameter \(C > 0\) gives a trade-off between the richness of the chosen set of functions \(f_{\lambda}\) to reduce the error on the training data and the danger of overfitting to have good generalization. It has to be chosen a priori \cite{Kunapuli2008}.
-The two optimization problems only differ in the norm chosen for the loss function. In (\ref{SVM_1}) the one-norm is chosen, in (\ref{SVM_2}) the squared two-norm is used.
-Problem (\ref{SVM_2}) is the one that is finally used in the bilevel approach where smoothness of the objective function of the inner level problem is needed to calculate all needed subgradients.
+Not treating the bias separately is a strategy used for example to achieve a more efficient implementation \cite[section 3.2, p. 22]{Gunn1998}. In the course of this section the gain of this particular formulation is the fact that it has a unique solution \textcolor{red}{compare for... where it is shown}.
+It is however shown in \cite[section 3.2, p. 22]{Gunn1998} that the solutions that are found with explicit and implicit bias are different.
+This results from the fact that in case of implicit bias it also enters the regularization term.
 
-\subsection{Bilevel Approach and Inexact Bundle Method}
+From now on we work with formulation (\ref{SVM_bias}) of the support vector classification problem. To see the derivation of the bilevel problem with the explicit bias compare for \cite{Kunapuli2008}.
+
+\subsection{Bilevel Approach and Multiple Hyper-Parameters}
 %Check if regression case also included?????
+
+%\textcolor{red}{adapt all section titles -> introduction of MultiGroup}
 
 The hyper-parameter \(C\) in the objective function of the classification problem has to be set beforehand. This step is part of the model selection process.
 To set this parameter optimally different methods can be used.
-A very intuitive and widely used approach is doing  and \emph{cross validation} (CV) with a grid search implementation.
+A very intuitive and widely used approach is doing  and \emph{cross validation} (CV) with a grid search implementation \cite[p. 30]{Kunapuli2008}.
 %very costly, discrete parameter choice, not practicable in case of many parameter
 
-To prevent overfitting and get a good parameter selection, especially in case of little data, commonly \(T\)-fold cross validation is used.
+To prevent overfitting and get a good parameter selection, especially in case of little data, commonly \(T\)-fold cross validation is used \cite[p. 30]{Kunapuli2008}.
 For this technique the training data is randomly partitioned into \(T\) subsets of equal size. One of these subsets is then left out of the training set and instead used afterwards to get an estimate of the generalization error. 
 To use CV for model selection it has to be embedded into an optimization algorithm over the hyper-parameter space. 
 Commonly this is done by discretizing the parameter space and for \(T\)-fold CV training \(T\) models at each grid point. The resulting models are then compared to find the best parameters in the grid.
@@ -205,7 +242,7 @@ This makes it possible to optimize the hyper-parameters continuously.
 
 Let \(\Omega = \{(x^1,y_1),...,(x^l,y_l)\} \subset \R^{n+1}\) be a given data set of size \(l = |\Omega|\). The associated index set is denoted by \(\mathcal{N}\). For classification the labels \(y_i\) are \(\pm1\).
 For \(T\)-fold cross validation let \(\bar{\Omega}_t\) and \(\Omega_t\) be the training set and the validation set respectively within the \(t\)'th fold and \(\bar{\mathcal{N}}_t\) and \(\mathcal{N}_t\) the respective index sets.
-Furthermore let \(f^t:\R^{n+1}\cap\mathcal{F} \to \R\) be the response function trained on the \(t\)'th fold and \(\lambda \in \Lambda\) the hyper-parameters to be optimized.
+Furthermore let \(f^t:\R^{n+1}\cap\mathcal{F} \to \R\) be the response function trained on the \(t\)'th fold and \(\lambda \in \Lambda\) the hyper-parameter to be optimized.
 For a general machine learning problem with upper and lower loss function \(\mathcal{L}_{upp}\) and \(\mathcal{L}_{low}\) respectively the bilevel problem reads
  
 %%% introduce \mathcal(F) already before as the function space
@@ -221,10 +258,10 @@ For a general machine learning problem with upper and lower loss function \(\mat
 	\end{array}
 \end{equation}
 
-In the case of support vector classification the \(T\) inner problems have the classical SVM formulation %(\ref{SVM_1}) or 
-(\ref{SVM_2}). % (but all \(T\) problems have the same formulation).
-The problem can also be rewritten into an unconstrained form. This form is helpful when using the inexact bundle algorithm for solving the bilevel problem.
-For the \(t\)'th fold the resulting hyperplane is identified with the pair \((w^t,b_t) \in \R^{n+1}\).
+In the case of support vector classification the \(T\) inner problems have the SVM formulation %(\ref{SVM_1}) or 
+(\ref{SVM_bias}). % (but all \(T\) problems have the same formulation).
+This problem can also be rewritten into an unconstrained form. It is helpful when using the inexact bundle algorithm for solving the bilevel problem.
+For the \(t\)'th fold the resulting hyperplane is identified with the variable \(\tilde{w}^t \in \R^{n+1}\).
 The inner level problem for the \(t\)'th fold can therefore be stated as
 
 %\begin{equation}
@@ -235,19 +272,20 @@ The inner level problem for the \(t\)'th fold can therefore be stated as
 %or
 
 \begin{equation}
-	(w^t,b_t) \in \argmin_{w,b} \left\{\frac{\lambda}{2} \|w\|^2_2+\sum_{i\in \bar{\mathcal{N}}_t}{\max\left\{1-y_i\left(\Langle w,x^i\Rangle-b\right),0\right\}^2}\right\}
-\label{lower_t_2}
+	(\tilde{w}^t) \in \argmin_{\tilde{w}} \left\{\frac{1}{2} \|\tilde{w}\|^2+C\sum_{i\in \bar{\mathcal{N}}_t}{\max\left\{1-y_i\Langle \tilde{w},\tilde{x}^i\Rangle,0\right\}}\right\}.
+\label{lower_t}
 \end{equation}
 
-Where the hyper-parameter \(\lambda = \frac{1}{C}\) is used  due to numerical stability \cite[p. 38]{Kunapuli2008}.
+%Where the hyper-parameter \(\lambda = \frac{1}{C}\) is used  due to numerical stability \cite[p. 38]{Kunapuli2008}.
 
-For the upper level objective function there are different choices possible.
+For the upper level objective function there are different choices possible. All that are presented here use the implicit bias. They all can also be used with the explicit bias term.
+
 Simply put the outer level objective should compare the different inner level solutions and pick the best one. An intuitive choice is therefore to pick the misclassification loss, that counts how many data points of the respective validation set \(\Omega_t\) are misclassified when taking function \(f^t\).
 
 The misclassification loss can be written as
 
 \begin{equation}
-	\mathcal{L}_{mis} = \frac{1}{T}\sum_{t=1}^T\frac{1}{|\mathcal{N}_t|}\sum_{i \in \mathcal{N}_t}{\left[-y_i\left(\Langle w^t,x^i\Rangle-b_t\right)\right]_{\star}},
+	\mathcal{L}_{mis} = \frac{1}{T}\sum_{t=1}^T\frac{1}{|\mathcal{N}_t|}\sum_{i \in \mathcal{N}_t}{\left[-y_i\Langle \tilde{w}^t,\tilde{x}^i\Rangle\right]_{\star}},
 \label{misclass_loss}
 \end{equation}
 
@@ -257,28 +295,31 @@ where the step function \((\cdot)_{\star}\) is defined component wise for a vect
 \label{step_fun}
 \end{equation}
 
-The drawback of this simple loss function is that it is not continuous and as such not suitable for subgradient based optimization. Therefore another loss function is used for the upper level problem - the \emph{hinge loss}. It is an upper bound on the misclassification loss and reads
+The drawback of this simple loss function is that it is not continuous and as such not suitable for subgradient based optimization. Therefore another loss function is used for the upper level problem - the \emph{hinge loss} or \emph{L1-loss}. It is an upper bound on the misclassification loss and reads
 
 \begin{equation}
-		\mathcal{L}_{hinge} = \frac{1}{T}\sum_{t=1}^T\frac{1}{|\mathcal{N}_t|}\sum_{i \in \mathcal{N}_t}{\max\left(1-y_i\left(\Langle w^t,x^i\Rangle-b_t\right),0\right)}.
+		\mathcal{L}_{hinge} = \frac{1}{T}\sum_{t=1}^T\frac{1}{|\mathcal{N}_t|}\sum_{i \in \mathcal{N}_t}{\max\left\{1-y_i\Langle \tilde{w}^t,\tilde{x}^i\Rangle,0\right\}}.
 \label{hinge_loss}
 \end{equation}
 
-It is also possible to square the max term. This results in the loss function
+It is also possible to square the max term. This results in the \emph{L2-loss} function
 
 \begin{equation}
-		\mathcal{L}_{hinge} = \frac{1}{T}\sum_{t=1}^T\frac{1}{|\mathcal{N}_t|}\sum_{i \in \mathcal{N}_t}{\max\left\{1-y_i\left(\Langle w^t,x^i\Rangle-b_t\right),0\right\}^2}.
+		\mathcal{L}_{hinge} = \frac{1}{T}\sum_{t=1}^T\frac{1}{|\mathcal{N}_t|}\sum_{i \in \mathcal{N}_t}{\max\left\{1-y_i\Langle \tilde{w}^t,\tilde{x}^i\Rangle,0\right\}^2}.
 \label{hingequad_loss}
 \end{equation}
 
-In figure (\ref{??}) it can be seen that its minimum and overall progress is more similar to the misclassification loss than the one of the hinge loss. 
-\textcolor{red}{For this reason we progress taking the squared form of the hinge loss, abbreviating with \emph{hingequad loss} for convenience.\\
-No, take hingeloss because of nonsmoothness}
+We refer to this second loss function also as \emph{hingequad loss}.
+
+%In figure (\ref{??}) it can be seen that its minimum and overall progress is more similar to the misclassification loss than the one of the hinge loss. 
+%\textcolor{red}{For this reason we progress taking the squared form of the hinge loss, abbreviating with \emph{hingequad loss} for convenience.\\
+%No, take hingeloss because of nonsmoothness}
 
 %\textcolor{red}{also possible to square the max term\\
 %formula \\
 %from plots: seems to match the misclassification loss a bit better -> used it instead/also}
 
+For the bilevel problem discussed in this thesis the hingequad function is chosen as objective of the upper level problem.
 Hence the final resulting bilevel formulation for model selection in support vector classification is 
 
 %\begin{align}
@@ -295,16 +336,165 @@ Hence the final resulting bilevel formulation for model selection in support vec
 
 \begin{align}
 \begin{split}
-	\min_{w,b} \quad &  \mathcal{L}_{hinge}(w,b) = \frac{1}{T}\sum_{t=1}^T\frac{1}{|\mathcal{N}_t|}\sum_{i \in \mathcal{N}_t}{\max\left\{1-y_i\left(\Langle w^t,x^i\Rangle-b_t\right),0\right\}^2}\\
-	\text{s.t.} \quad & \lambda > 0 \\
+	\min_{C} \quad &  \mathcal{L}_{hingequad}(\tilde{w}) = \frac{1}{T}\sum_{t=1}^T\frac{1}{|\mathcal{N}_t|}\sum_{i \in \mathcal{N}_t}{\max\left\{1-y_i\Langle \tilde{w}^t,\tilde{x}^i\Rangle,0\right\}^2}\\
+	\text{s.t.} \quad & C > 0 \\
 	& \text{for } t = 1,...,T \\
-	& (w^t,b_t) \in \argmin_{w,b}\left\{ \frac{\lambda}{2} \|w\|^2_2+\sum_{i\in \bar{\mathcal{N}}_t}\max\left\{1-y_i\left(\Langle w,x^i\Rangle-b\right),0\right\}^2\right\}. \\
+	& \tilde{w}^t \in \argmin_{\tilde{w}}\left\{ \frac{1}{2} \|\tilde{w}\|^2+C\sum_{i\in \bar{\mathcal{N}}_t}\max\left\{1-y_i\Langle \tilde{w},\tilde{x}^i\Rangle,0\right\}\right\}. \\
 \end{split}
-\label{model_2}
+\label{model}
 \end{align}
 
 
-\subsubsection{Solution of the Bilevel Program}
+\subsubsection{Multiple Hyper-parameters}
+
+To examine the performance of the bilevel approach in the more dimensional case a model suggested by Moore et al. in \cite{Moore2011} and called \emph{multi-group} support vector classification (multiSVC). There different hyper-parameters are allowed for different subgroups of the trainings data.
+In section 4.3 of \cite{Moore2011} the model is described for a regression function. In this thesis the same technique is used for classification.
+
+The motivation behind the approach is that different groups of samples from the trainings set can have slightly different properties and should therefore have their own weighting parameters \(C_g\).
+On the one hand this can improve the generalization results, on the other hand properties of the different data groups can be identified by their respective hyper-parameters. Moore et al. explain in \cite[section 4.3, p. 9]{Moore2011} that for example a large \(C_g\) signifies reliable data in the respective group whereas a smaller \(C_g\) suggests a poorer quality.
+
+To perform multiSVC divide the trainings data into \(G\) (pairwise disjoint) groups.
+Define the vector of hyper-parameters \(C := [C_1,...,C_G]^{\top}\).
+For \(T\)-fold cross validation the \(t\)'th lower level problem in the constrained form can be stated as 
+
+\begin{align*}
+\begin{split}
+	\min_{\tilde{w},\xi} \quad & \frac{1}{2} \|\tilde{w}\|^2+\sum_{g = 1}^G\left(C_g\sum_{i \in \bar{\mathcal{N}}_t^g}{\xi_i}\right) \vspace{0.5ex}\\
+	\text{s.t.} \quad & y_i\Langle \tilde{w},\tilde{x}^i\Rangle \geq 1 - \xi_i \vspace{0.5ex}\\
+	& \xi_i \geq 0 \\
+	& 	\forall i \in \bigcup_{g =1}^G \bar{\mathcal{N}}_t^g = \bar{\mathcal{N}}_t.
+\end{split}
+%\label{MultiSVC_QP}
+\end{align*}
+
+Here \(\bar{\mathcal{N}}_t^g\) is the index set that contains the indices of the data of the \(g\)'th group in the \(t\)'th fold.
+
+The whole bilevel problem (stated with the unconstrained lower level problem) is given by
+
+\begin{align}
+\begin{split}
+	\min_{C} \quad &  \mathcal{L}_{hingequad}(\tilde{w}) = \frac{1}{T}\sum_{t=1}^T\frac{1}{|\mathcal{N}_t|}\sum_{i \in \mathcal{N}_t}{\max\left\{1-y_i\Langle \tilde{w}^t,\tilde{x}^i\Rangle,0\right\}^2}\\
+	\text{s.t.} \quad & C = [C_1,...,C_G]^{\top} > 0 \text{ and} \\
+	& \text{for } t = 1,...,T \\
+	& \tilde{w}^t \in \argmin_{\tilde{w}}\left\{\frac{1}{2} \|\tilde{w}\|^2+\sum_{g=1}^G \left(C_g\sum_{i\in \bar{\mathcal{N}}_t^g}\max\left\{1-y_i\Langle \tilde{w},\tilde{x}^i\Rangle,0\right\}\right)\right\}.
+\end{split}
+\label{multi_group}
+\end{align}
+
+As the multigroup problem contains the single group bilevel problem (\ref{model}) as a special case we consider only problem (\ref{multi_group}) in the following sections.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Here \(\bar{\mathcal{N}}_t^g\) the index set that contains the indices of the data in the \(g\)'th group of the \(t\)'th fold.
+%
+%Reformulation of the lower level objective:
+%
+%\begin{equation*}
+	%\mathcal{L}_{low}(w,b) =  \frac{1}{2} \|w\|^2+\sum_{g = 1}^GC_g\left(\sum_{i\in \bar{\mathcal{N}}_t^g}\max\left\{1-y_i\left(\Langle w,x^i\Rangle-b\right),0\right\}^2\right)
+%\label{ll_mult_group}
+%\end{equation*}
+
+%\begin{align*}
+	%\min_{w,b,\xi} \quad & \frac{1}{2} \|w\|^2_2+\sum_{g = 1}^G\left(C_g\sum_{i \in \bar{\mathcal{N}}_t^g}{\xi_i^2}\right) \vspace{0.5ex}\\
+	%\text{s.t.} \quad & y_i\left(\Langle w,x^i\Rangle-b\right) \geq 1 - \xi_i \vspace{0.5ex}\\
+	%& 	\forall i \in \bigcup_{g =1}^G \bar{\mathcal{N}}_t^g = \bar{\mathcal{N}}_t
+%\label{MultiSVM_QP}
+%\end{align*}
+%
+%the \(\mathcal{N}_t^g\) are pairwise disjoint
+
+%\(w \in \R^n, b\in \R, \xi \in \R^{\vert\bar{\mathcal{N}}_t \vert}\)
+
+
+
+
+\subsection{Solution with the Inexact Bundle Algorithm}
+
+\textcolor{red}{more introduction\\
+remark on missing error bounds for function value and subgradient}
+
+The bilevel problem (\ref{multi_group}) derived above is to be solved with the bilevel algorithm \textcolor{red}{which one? more?}.
+This requires having in every iteration an approximate value of the upper level objective function and an approximate subgradient of the upper level objective.
+
+To see the issues arising when computing especially the subgradient of a bilevel objective let us again consider the general bilevel problem (\ref{bilevel}).
+
+At the current iterate \(x^k\) (this is now no data point but the optimization variable of the upper level problem) the function value of the upper level objective function can be computed by solving the lower level problem given \(x^k\).
+The resulting solution \(y^k\) is then inserted into the upper level objective and its value can be calculated.
+
+For computing a subgradient, it is not that simple. Additionally to the variation of the upper level function \(F\) with respect to the variable \(x\) also the variation of the solution \(y^k\) with respect to \(x\) has to be considered.
+To do this we follow the strategy described in \cite{Outrata1998}. Refer there also for a more throughout analysis on this subject.
+
+Consider the general bilevel problem formulation (\ref{bilevel}) without the explicit constraint \(G(x,y) \leq 0\).
+Let the feasible set \(X\) be a nonempty compact set and \(\tilde{A}\) and open set containing \(X\).
+
+To use the implicit programming approach suggested in the book,  the following assumptions have to hold true:
+
+\begin{itemize}
+\item[(A1)] The upper level objective \(F\) is continuously differentiable on \(\tilde{A}\times \R^k\).
+\item[(A2)] The lower level program possesses a unique solution \(y_x\) for every \(x\in \tilde{A}\).
+\item[(A3)] The generalized equation coming from the lower level program is strongly regular at all points \((x,y_x)\), where \(x \in \tilde{A}\) and \(y_x\) is the corresponding solution of the lower level problem.
+\end{itemize}
+
+A \emph{(perturbed) generalized equation} is a relation of the form
+
+\[ 0 \in H(x,y)+N_{U}(y), \]
+
+where \(H:\R^n\times \R^k \to \R^k\) and \(N_{U}(y)\) denotes the \emph{normal cone} to the convex set \(U \subset \R^k\) at the point \(y\in \R^k\).
+
+\begin{definition}[{\cite[Definition 2.6, p. 18]{Outrata1998}}]
+	Let \(U\) be a convex subset of \(\R^k\) and \(y\) in the closure of \(U\). Then
+	
+	\begin{equation*}
+		N_U(y) := \{\xi\in \R^k \mid \Langle \xi,z-y\Rangle \leq 0 \quad \forall z \in U \}
+	\label{norm_cone}
+	\end{equation*}
+	
+	is called normal cone to \(U\) at \(y\).
+\end{definition}
+ 
+The constraint induced by the inner level problem can be rewritten as a generalized equation via its optimality condition.
+Let \(U\) correspond to the feasible set of the inner level problem defined by the intersection of the set \(Y\) with the set defined by \(g(\bar{x},y)\leq 0\) for a fixed variable \(\bar{x} \in X \).
+Then the lower level problem can be expressed in an unconstrained way by using the indicator function defined in (\ref{indicator_fun}). If the constraint set is convex, the indicator function is a convex function and for every element of its subdifferential the subgradient inequality (\ref{subgr_ineq}) holds.
+
+This yields that for all elements \(\xi\) of the subdifferential \(\partial \mathtt{i}_U(y)\) it holds
+
+\begin{equation*}
+\begin{split}
+	&\mathtt{i}_U(z)-\mathtt{i}_U(y) \geq \Langle \xi, z-y\Rangle \quad \forall z \in U \\
+	\Leftrightarrow & \Langle \xi, z-y\Rangle \leq 0 \quad \forall z \in U,
+\end{split}
+\end{equation*}
+
+because for \(y,z \in U\) the indicator function is zero. This means that the subdifferential of the indicator function of the set \(U\) at the point \(y\) coincides with the normal cone to the set \(U\) at the point \(y\) and so for a constrained minimizer of the function \(f(x,\cdot)\) on the set \(U\) the following optimality condition holds:
+
+\[ 0 \in \partial f(x,y) + N_U(y). \]
+
+If the subdifferential of \(f\) at the point \((x,y)\) is single valued, this is a generalized equation.
+
+Let us now verify the above assumptions for the hyper-parameter finding bilevel problem (\ref{multi_group}).
+First of all, the feasible set \(X\) has to be a convex compact set. In order to assure that, the constraint of the hyper-parameter \(C\) has to be adapted.
+Therefore choose two constants \(l_C, u_C > 0\) with \(l_C < u_C\) and constrain the vector \(C\) by the component wise meant inequalities
+
+\[ l_c \leq C \leq u_C. \]
+
+Assumption (A1) is fulfilled as \(\mathcal{L}_{hingequad}\) is a continuously differentiable function because of the squared max-term.
+
+Next assumption (A2) is verified. In order to do this consider the lower level problem in its unconstrained formulation.
+It is the sum of a strictly convex (\(\frac{1}{2}\Vert \tilde{w}\Vert^2\)) and a convex function (\(\sum_{g=1}^G \left(C_g\sum_{i\in \bar{\mathcal{N}}_t^g}\max\left\{1-y_i\Langle \tilde{w},\tilde{x}^i\Rangle,0\right\}\right)\)). This means the function is strictly convex. It has therefore a unique global minimizer \(\tilde{w}^*\) for any vector of hyper-parameters \(C\).
+Hence the assumption is fulfilled.
+
+Finally to show that assumption (A3) holds for the considered, strong regularity has to be shown for the corresponding generalized equation.
+In order to do this the lower level problem is considered in its constrained form. 
+
+Let \(\tilde{w}^*\in \R^{n+1}\) denote the unique solution of the unconstrained problem. Due to the equivalence of the two problem formulations the optimal solution of the constrained problem is given by \((\tilde{w}^*,\xi^*)\), with \(\xi_i = 1-y_i\left(\Langle w,x^i\Rangle-b\right)\).
+Suppose that at this point the 
+
+
+
+
+
+
+
 
 
 
@@ -464,7 +654,7 @@ In the differentiable case the theoretical framework for the following calculati
 Identifying \(x \estimates \lambda\), \(y \estimates w\) and  \(F(x_0,y_0) \estimates \frac{\partial}{\partial w} \mathcal{L}_{low}(w^*,\lambda_0)\) and assuming \(\frac{\partial^2 }{\partial  w^2}\mathcal{L}_{low}(w^*,\lambda_0)\) is invertible this theorem provides the existence of the continuously differentiable function \(w(\lambda)\) whose gradient is needed. \\
 \textcolor{red}{what about the neighborhoods?}
 
-If the inner level loss function yields a linear optimality condition in \(w\) it is possible to calculate the gradient explicitly. This is for example the case for SVM loss functions with a squared one- or two-norm as given in problem (\ref{SVM_2}).
+If the inner level loss function yields a linear optimality condition in \(w\) it is possible to calculate the gradient explicitly. This is for example the case for SVM loss functions with a squared one- or two-norm as given in problem (\ref{SVM_1}).
 The optimality condition can then be written as the linear system
 
 \begin{equation*}
@@ -666,37 +856,6 @@ for simplicity: all groups of same size; in all folds same number of elements of
 !! not possible to work with \(\lambda\) here, have to work with \(C\)-Formulation
 
 
-
-\begin{align}
-\begin{split}
-	\min_{w,b} \quad &  \mathcal{L}_{hinge}(w,b) = \frac{1}{T}\sum_{t=1}^T\frac{1}{|\mathcal{N}_t|}\sum_{i \in \mathcal{N}_t}{\max\left\{1-y_i\left(\Langle w^t,x^i\Rangle-b_t\right),0\right\}}\\
-	\text{s.t.} \quad & C = [C_1,...,C_G]^{\top} > 0 \text{ and} \\
-	& \text{for } t = 1,...,T \\
-	& (w^t,b_t) \in \argmin_{w,b}\left\{ \sum_{g = 1}^G \left(\frac{1}{2} \|w\|^2_2+C_g\sum_{i\in \bar{\mathcal{N}}_t^g}\max\left\{1-y_i\left(\Langle w,x^i\Rangle-b\right),0\right\}^2\right)\right\}. \\
-\end{split}
-\label{multi_group}
-\end{align}
-
-
-Reformulation of the lower level objective:
-
-\begin{equation*}
-	\mathcal{L}_{low}(w,b) =  \frac{1}{2} \|w\|^2+\sum_{g = 1}^GC_g\left(\sum_{i\in \bar{\mathcal{N}}_t^g}\max\left\{1-y_i\left(\Langle w,x^i\Rangle-b\right),0\right\}^2\right)
-\label{ll_mult_group}
-\end{equation*}
-
-Reformulation for solution of lower level problem with \texttt{qudprog}:
-
-\begin{align*}
-	\min_{w,b,\xi} \quad & \frac{1}{2} \|w\|^2_2+\sum_{g = 1}^G\left(C_g\sum_{i \in \bar{\mathcal{N}}_t^g}{\xi_i^2}\right) \vspace{0.5ex}\\
-	\text{s.t.} \quad & y_i\left(\Langle w,x^i\Rangle-b\right) \geq 1 - \xi_i \vspace{0.5ex}\\
-	& 	\forall i \in \bigcup_{g =1}^G \bar{\mathcal{N}}_t^g = \bar{\mathcal{N}}_t
-\label{MultiSVM_QP}
-\end{align*}
-
-the \(\mathcal{N}_t^g\) are pairwise disjoint
-
-\(w \in \R^n, b\in \R, \xi \in \R^{\vert\bar{\mathcal{N}}_t \vert}\)
 
 matrices for MATLAB calculations:
 

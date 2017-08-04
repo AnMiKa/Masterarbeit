@@ -144,7 +144,10 @@ The new iterate is given by \(x^{k+1} = \hat{x}^k + d^k\). %\textcolor{red}{cita
 
 The constraint \(\hat{x}^k+d \in X\) can also be incorporated directly in the objective function by using the \emph{indicator function}
 
-\[ \mathtt{i}_X(x) := \left\{ \begin{array}{cl} 0, & \text{if } x \in X \\ +\infty, & \text{if } x \notin X \end{array} \right. .\]
+\begin{equation}
+	\mathtt{i}_X(x) := \left\{ \begin{array}{cl} 0, & \text{if } x \in X \\ +\infty, & \text{if } x \notin X \end{array} \right. .
+\label{indicator_fun}
+\end{equation}
 
 This function is convex if and only if the set \(X\) is convex \cite[p. 40]{Rockafellar2009}.
 
