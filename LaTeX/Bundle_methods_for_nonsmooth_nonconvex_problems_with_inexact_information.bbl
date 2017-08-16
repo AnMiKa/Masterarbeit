@@ -131,11 +131,6 @@ K.~C. Kiwiel.
 \newblock Technical report, Systems Research Institute, Polish Academy of
   Sciences, 2010.
 
-\bibitem{Koenigsberger2002}
-K.~K\"onigsberger.
-\newblock {\em Analysis 2}.
-\newblock Springer Berlin Heidelberg, 2002.
-
 \bibitem{Koenigsberger2003}
 K.~K\"onigsberger.
 \newblock {\em Analysis 1}.
@@ -179,6 +174,10 @@ L.~Luk{\v{s}}an and J.~Vl{\v{c}}ek.
   unconstrained minimization.
 \newblock {\em Journal of Optimization Theory and Applications},
   102(3):593--613, sep 1999.
+
+\bibitem{2017}
+The {MathWorks}, Inc.
+\newblock {\em Documentation: Optimization Toolbox (quadprog)}, 2017.
 
 \bibitem{Mifflin1982}
 R.~Mifflin.
@@ -251,12 +250,6 @@ B.~T. Polyak.
 \newblock {\em Introduction to Optimization}.
 \newblock Optimization Software , Inc., Publications Division, New York, 1987.
 
-\bibitem{Rockafellar1985}
-R.~Rockafellar.
-\newblock Extensions of subgradient calculus with applications to optimization.
-\newblock {\em Nonlinear Analysis: Theory, Methods {\&} Applications},
-  9(7):665--698, jul 1985.
-
 \bibitem{Rockafellar1970}
 R.~T. Rockafellar.
 \newblock {\em Convex Analysis}.
@@ -298,6 +291,11 @@ M.~V. Solodov.
 \newblock {\em Constraint Qualifications}.
 \newblock Wiley Encyclopedia of Operations Research and Management Science,
   2011.
+
+\bibitem{Spingarn1981}
+J.~E. Spingarn.
+\newblock Submonotone subdifferentials of {Lipschitz} functions.
+\newblock {\em Trans. Amer. Math. Soc.}, 264:77 -- 89, 1981.
 
 \bibitem{Stoer1970}
 J.~Stoer and C.~Witzgall.

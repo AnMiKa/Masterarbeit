@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=latex 2017.6.11)  4 AUG 2017 00:15
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=latex 2017.6.11)  16 AUG 2017 16:29
 entering extended mode
 **Bundle_methods_for_nonsmooth_nonconvex_problems_with_inexact_information.tex
 
@@ -571,77 +571,70 @@ fications.tex" [16
 _Method_nonconv_inex.tex" [21
 
 
-] [22] [23] [24] [25] [26] [27]) [28]
+] [22] [23] [24] [25] [26] [27] [28] [29]
+Overfull \hbox (10.06355pt too wide) in paragraph at lines 522--522
+[] 
+ []
+
+[30]
+Overfull \hbox (10.01024pt too wide) in paragraph at lines 540--540
+[] 
+ []
+
+) [31]
 ("D:\Annika\Uni\10. Semester\Masterarbeit\Proximal Bundle Inexact Information\Git Hub\Masterarbeit\LaTeX\Chapters/Variab
-le_Metric.tex" [29
+le_Metric.tex" [32
 
 
-] [30] [31] [32] [33] [34] [35] [36] [37] [38] [39] [40] [41] [42] [43]
-Overfull \hbox (4.51106pt too wide) in paragraph at lines 666--667
+] [33] [34] [35] [36] [37] [38] [39] [40] [41] [42] [43] [44] [45]
+Overfull \hbox (4.51106pt too wide) in paragraph at lines 647--648
 []\T1/lmr/m/n/12 In the one di-men-sional case this means that we can de-note the \T1/lmr/m/it/12 right deriva-tive $\OM
 L/lmm/m/it/12 f\OT1/lmr/m/n/12 (\OML/lmm/m/it/12 x[]; \OT1/lmr/m/n/12 1) :=
  []
 
-[44] [45] [46] [47]
-Overfull \hbox (4.89206pt too wide) in paragraph at lines 875--876
+[46] [47] [48] [49]
+Overfull \hbox (4.89206pt too wide) in paragraph at lines 856--857
 []$[][]$\T1/lmr/m/n/12 : Van-ish-ing sub-gra-di-ent noise, $[] \OT1/lmr/m/n/12 = \OML/lmm/m/it/12 [] \OT1/lmr/m/n/12 = 
 0$ \T1/lmr/m/n/12 and $[] \OT1/lmr/m/n/12 = 0\OML/lmm/m/it/12 :\OT1/lmr/m/n/12 01\OML/lmm/m/it/12 ; [] \OT1/lmr/m/n/12 
 = []\OMS/lmsy/m/n/12 f\OT1/lmr/m/n/12 0\OML/lmm/m/it/12 :\OT1/lmr/m/n/12 01\OML/lmm/m/it/12 ; \OMS/lmsy/m/n/12 k\OML/lmm
 /m/it/12 x[]\OMS/lmsy/m/n/12 k\OML/lmm/m/it/12 =\OT1/lmr/m/n/12 100\OMS/lmsy/m/n/12 g$
  []
 
-[48]
+[50]
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10.95> on input line 922.
- [49] [50] [51] [52] [53]) [54]
+(Font)              <10.95> on input line 903.
+ [51] [52] [53] [54] [55]) [56] [57]
 ("D:\Annika\Uni\10. Semester\Masterarbeit\Proximal Bundle Inexact Information\Git Hub\Masterarbeit\LaTeX\Chapters/Bileve
-l_Application.tex" [55
+l_Application.tex" [58
 
 
-] [56] [57] [58] [59] [60] [61] [62] [63] [64] [65] [66]
-LaTeX Font Info:    Try loading font information for OMS+lmr on input line 508.
+] [59] [60] [61] [62] [63] [64] [65] [66] [67] [68] [69] [70]
+Overfull \hbox (1.40381pt too wide) in paragraph at lines 529--530
+[]\T1/lmr/m/n/12 where $\OML/lmm/m/it/12 L\OT1/lmr/m/n/12 (\OML/lmm/m/it/12 C; []; ; \OT1/lmr/m/n/12 ) = []([]\OML/lmm
+/m/it/12 ; []\OT1/lmr/m/n/12 )\OML/lmm/m/it/12 H\OT1/lmr/m/n/12 (\OML/lmm/m/it/12 C\OT1/lmr/m/n/12 )([]\OML/lmm/m/it/12
+ ; []\OT1/lmr/m/n/12 )[] + []$ \T1/lmr/m/n/12 is the La-grangian
+ []
+
+[71]
+LaTeX Font Info:    Try loading font information for T1+lmtt on input line 602.
+ ("C:\Program Files\Annika Programme\MiKTeX\tex\latex\lm\t1lmtt.fd"
+File: t1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
+) [72] [73]
+LaTeX Font Info:    Try loading font information for OMS+lmr on input line 674.
 
 ("C:\Program Files\Annika Programme\MiKTeX\tex\latex\lm\omslmr.fd"
 File: omslmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    Font shape `OMS/lmr/m/n' in size <12> not available
-(Font)              Font shape `OMS/lmsy/m/n' tried instead on input line 508.
+(Font)              Font shape `OMS/lmsy/m/n' tried instead on input line 674.
+ [74]
 File: Pictures/Plots/lambda_vs_err_io_ca_final.eps Graphic file (type eps)
  <Pictures/Plots/lambda_vs_err_io_ca_final.eps>
 File: Pictures/Plots/lambda_vs_err_ss_sb_b5_final.eps Graphic file (type eps)
 
-<Pictures/Plots/lambda_vs_err_ss_sb_b5_final.eps>
-LaTeX Font Info:    Try loading font information for T1+lmtt on input line 547.
- ("C:\Program Files\Annika Programme\MiKTeX\tex\latex\lm\t1lmtt.fd"
-File: t1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
-)
-[67] [68]
-Overfull \hbox (17.12895pt too wide) in paragraph at lines 620--623
-\T1/lmr/m/n/12 Let us first as-sume that the outer and in-ner ob-jec-tive func-tions and $\OML/lmm/m/it/12 w\OT1/lmr/m/n
-/12 (\OML/lmm/m/it/12 \OT1/lmr/m/n/12 ) = [] \OMS/lmsy/m/n/12 L[]\OT1/lmr/m/n/12 (\OML/lmm/m/it/12 w; \OT1/lmr/m/n/12 
-)$
- []
-
-[69] [70]
-Underfull \hbox (badness 10000) in paragraph at lines 717--719
-
- []
-
-[71]
-Underfull \hbox (badness 10000) in paragraph at lines 741--743
-
- []
-
-[72] [73] [74] [75]
-Overfull \hbox (44.48114pt too wide) detected at line 880
-\OML/lmm/m/it/12 h \OT1/lmr/m/n/12 = 0\OML/lmm/m/it/12 ;  A \OT1/lmr/m/n/12 = [] \OML/lmm/m/it/12 ;  b \OT1/lmr/m/n/12 =
- \OMS/lmsy/m/n/12  []\OT1/lmr/m/n/12 (\OML/lmm/m/it/12 J []\OMS/lmsy/m/n/12 f\OML/lmm/m/it/12 T \OMS/lmsy/m/n/12   \OT1/
-lmr/m/n/12 1\OML/lmm/m/it/12 ; \OT1/lmr/m/n/12 1\OMS/lmsy/m/n/12 g\OML/lmm/m/it/12 G; \OT1/lmr/m/n/12 1)
- []
-
-[76]) [77]
+<Pictures/Plots/lambda_vs_err_ss_sb_b5_final.eps> [75]) [76]
 ("D:\Annika\Uni\10. Semester\Masterarbeit\Proximal Bundle Inexact Information\Git Hub\Masterarbeit\LaTeX\Chapters/Outrat
-a.tex" [78
+a.tex" [77
 
 
 ]
@@ -652,7 +645,7 @@ Overfull \hbox (1.62653pt too wide) detected at line 113
 S/lmsy/m/n/12 2 \U/msb/m/n/12 R[]\OML/lmm/m/it/12 :
  []
 
-[79]
+[78]
 Overfull \hbox (17.10449pt too wide) in paragraph at lines 131--134
 \T1/lmr/m/it/12 Additionally sup-pose that the Ja-co-bian with re-spect to $\OML/lmm/m/it/12 y$ \T1/lmr/m/it/12 of the L
 a-grangian $[]\OML/lmm/m/it/12 J\OT1/lmr/m/n/12 )[]\OMS/lmsy/m/n/12 L\OT1/lmr/m/n/12 (\OML/lmm/m/it/12 x[]; y[]; []; [
@@ -666,16 +659,16 @@ Overfull \hbox (22.17288pt too wide) in paragraph at lines 131--134
 T1/lmr/m/n/12 (\OML/lmm/m/it/12 x[]; y[]\OT1/lmr/m/n/12 ))$\T1/lmr/m/it/12 .
  []
 
-[80]) [81]
+[79]) [80]
 ("D:\Annika\Uni\10. Semester\Masterarbeit\Proximal Bundle Inexact Information\Git Hub\Masterarbeit\LaTeX\Chapters/Append
-ix.tex" [82
+ix.tex" [81
 
 
-] [83]) [84]
+] [82]) [83]
 ("D:\Annika\Uni\10. Semester\Masterarbeit\Proximal Bundle Inexact Information\Git Hub\Masterarbeit\LaTeX\Bundle_methods_
-for_nonsmooth_nonconvex_problems_with_inexact_information.bbl" [85
+for_nonsmooth_nonconvex_problems_with_inexact_information.bbl" [84
 
-] [86] [87]) [88]
+] [85] [86]) [87]
 ("D:\Annika\Uni\10. Semester\Masterarbeit\Proximal Bundle Inexact Information\Git Hub\Masterarbeit\LaTeX\Bundle_methods_
 for_nonsmooth_nonconvex_problems_with_inexact_information.aux"
 ("D:\Annika\Uni\10. Semester\Masterarbeit\Proximal Bundle Inexact Information\Git Hub\Masterarbeit\LaTeX\Chapters/Introd
@@ -695,23 +688,19 @@ l_Application.aux")
 ("D:\Annika\Uni\10. Semester\Masterarbeit\Proximal Bundle Inexact Information\Git Hub\Masterarbeit\LaTeX\Chapters/Outrat
 a.aux")
 ("D:\Annika\Uni\10. Semester\Masterarbeit\Proximal Bundle Inexact Information\Git Hub\Masterarbeit\LaTeX\Chapters/Append
-ix.aux"))
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
- )
+ix.aux")) )
 (\end occurred inside a group at level 1)
 
 ### simple group (level 1) entered at line 1061 ({)
 ### bottom level 
 Here is how much of TeX's memory you used:
- 8165 strings out of 493922
- 134371 string characters out of 3142101
- 261111 words of memory out of 3000000
+ 8164 strings out of 493922
+ 134348 string characters out of 3142101
+ 265126 words of memory out of 3000000
  11230 multiletter control sequences out of 15000+200000
- 84015 words of font info for 71 fonts, out of 3000000 for 9000
+ 83373 words of font info for 69 fonts, out of 3000000 for 9000
  841 hyphenation exceptions out of 8191
- 40i,26n,48p,1627b,2330s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 40i,26n,48p,1627b,2325s stack positions out of 5000i,500n,10000p,200000b,50000s
 
-Output written on Bundle_methods_for_nonsmooth_nonconvex_problems_with_inexact_information.dvi (91 pages, 314760 bytes).
+Output written on Bundle_methods_for_nonsmooth_nonconvex_problems_with_inexact_information.dvi (90 pages, 316940 bytes).
 

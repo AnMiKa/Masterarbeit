@@ -9,12 +9,13 @@ In this section the proofs that were omitted in the main part of the thesis are 
 \label{proof_eigval}
 
 \begin{proposition}
-		Let \(A \in \R^{n\times n}\), \(b \in \R\) and \(\mathbb{I} \in \R^{n\times n}\) the identity matrix.
+		Let \(A \in \R^{n\times n}\) a symmetric matrix, \(b \in \R\) and \(\mathbb{I} \in \R^{n\times n}\) the identity matrix.
 		Let \(\lambda^A_i\), \(i = 1,...,n\) be the eigenvalues of the matrix \(A\). Then the eigenvalues of the matrix \(A+b\mathbb{I}\) are given by \(\tilde{\lambda}_i := \lambda^A_i + b\) for all \(i = 1,...,n\).
 \end{proposition}
 
 \begin{proof}
-	Let \(v^i\), \(i = 1,...,n\) be the corresponding eigenvectors to the eigenvalues \(\lambda^A+i\). Then it follows that for \(i = 1,...,n\)
+	Due to the symmetry of the matrix \(A\) it possesses  \(n\) real eigenvalues \(\lambda^A_i\).
+	Let \(v^i\), \(i = 1,...,n\) be the corresponding eigenvectors. It follows that for \(i = 1,...,n\)
 	
 	\[ (A+b\mathbb{I})v^i = Av^i+bv^i = (\lambda_i^A + b)v^i. \]
 	
@@ -26,7 +27,7 @@ In this section the proofs that were omitted in the main part of the thesis are 
 
 \begin{proof}
 	We show that the scalar product \(\Langle x,y \Rangle_{Q_k+\frac{1}{t_k}\mathbb{I}} := x^{\top} (Q_k+\frac{1}{t_k}\mathbb{I})y\) is well-defined.
-	This yields directly that also the norm induced by the scalar product is well-defined (see for example \cite[Corollary 12.6, p.172]{Liesen2015}).
+	This yields directly that also the norm induced by the scalar product is well-defined (see for example \cite[Corollary 12.6, p. 172]{Liesen2015}).
 	
 	By proposition \ref{prop_bounded} the matrix \(Q_k+\frac{1}{t_k}\mathbb{I}\) is bounded and relation (\ref{rel_bound}) assures that the following calculations are valid for all \(k\).
 	

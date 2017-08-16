@@ -75,10 +75,10 @@ for a suitable \(\theta'\). Generally an explicit relation between \(\theta\) an
 
 Like in the paper it is assumed that the errors are bounded although the bound does not have to be known:
 
-\begin{equation*}
+\begin{equation}
 	|\sigma_j| \leq \bar{\sigma}, \bar{\sigma} > 0 \quad \text{and} \quad 0 \leq \theta_j \leq \bar{\theta} \quad \forall j \in J^k \text{ and } \forall k.
 \label{err_bound}
-\end{equation*}
+\end{equation}
 
 %In the context of inexact information it is important to make a distinction between the (unknown) exact function value and its approximation. Throughout this section we therefore write \(f(x^j)\) for the exact function value  whereas the approximation will be written as \(f_j\)  or \(\hat{f}_k\) for the approximation at the current stability center.
 For ease of notation we write from now on \(f_j\) and \(g_j\) instead of \(f_{x^j}\) and \(g_{x^j}\) for the approximation of the function value and subgradient at the \(j\)'th iterate in the bundle \(J^k\). The approximation at the \(k\)'th stability center reads \(\hat{f}_k\).
@@ -178,20 +178,20 @@ In addition to downshifting the linear functions forming the model  they have a 
 This is because instead of subgradients of the original objective \(f\) subgradients of the function \(\tilde{f}\) are taken. We call them \emph{augmented subgradients}.
 At the iterate \(x^j\) such a subgradient is given by
 
-\begin{align*}
-	s^k_j &:= g^j + \eta_k \left(x^j-\hat{x}^k\right).
+\begin{equation}
+	s^k_j := g^j + \eta_k \left(x^j-\hat{x}^k\right).
 	\label{aug_subgr}
-\end{align*}
+\end{equation}
 
 %Additionally they are shifted downwards to keep the linearization error nonnegative
 Downshifting is done in a way that keeps the linearization error nonnegative.
 The \emph{augmented linearization error} is therefore defined as 
 
-\begin{equation*}
+\begin{equation}
 	0 \leq c^k_j := e^k_j + b_j^k, \quad \text{with} \quad \left\{ \begin{array}{l} e_j^k := \hat{f}_k - f_j - \Langle g^j, \hat{x}^k-x^j\Rangle	 \vspace{1ex} \\
 	b_j^k := \frac{\eta_k}{2}\|x^j-\hat{x}^k\|^2 \end{array}\right.
 \label{aug_lin_err}
-\end{equation*}
+\end{equation}
 
 and 
 
@@ -275,7 +275,7 @@ A bundle algorithm that deals with nonconvexity and inexact function and subgrad
 \vspace{1ex}
 \hrule
 \vspace{1ex}
-Select parameters \( m \in (0,1), \gamma > 0 \) and a stopping tolerance \( \mathtt{tol} \geq 0\). Choose a starting point \(x^1 \in \R^n\) and compute \(f_1\) and \(g^1\). Set the initial index set \(J_1:=\{1\}\) and the initial prox-center to \(\hat{x}^1 := x^1\). Set \(\hat{f}_1 = f_1\) and select \(t_1 > 0\).
+Select parameters \( m \in (0,1), \gamma > 0 \) and a stopping tolerance \( \mathtt{tol} \geq 0\). Choose a starting point \(x^1 \in \R^n\) and compute \(f_1\) and \(g^1\). Set the initial index set \(J_1:=\{1\}\) and the initial prox-center to \(\hat{x}^1 := x^1\). Set \(\hat{f}_1 = f_1\), \(s^1_1 = g^1\) and select \(t_1 > 0\). Initialize \(c^1_1 = 0\) and \(M_1(\hat{x}^1+d)=\hat{f}_1+\Langle s^1_1,d\Rangle\).
 \end{minipage}
 
 For \(k = 1,2,3,  \dotsc \)   
@@ -301,8 +301,8 @@ For \(k = 1,2,3,  \dotsc \)
 	Set \(\hat{x}^{k+1} = \hat{x}^k, \hat{f}^{k+1}=\hat{f}^{k}\) and choose \(0 < t_{k+1} \leq t_k\). 	
 	\item Select new bundle index set \(J_{k+1}\), calculate 
 	\[ \eta_{k+1} = \max{\left\{\max_{j \in J_{k+1}, x^j \neq \hat{x}^{k+1}}{\frac{-2e_j^{k+1}}{|x^j - \hat{x}^{k+1}|^2}, 0}\right\}}+\gamma  \]
-	and \(c^{k+1}_j\) for all \(j \in J^{k+1}\).
-	Update the model \(M_k\).
+	and \(c^{k+1}_j\) by (\ref{aug_lin_err}) for all \(j \in J^{k+1}\).
+	Update the model \(M_{k+1}\) such that conditions (\ref{Model_update_1}) and (\ref{Model_update_2}) are fulfilled.
 \end{enumerate}
 \vspace{1ex}
 \hrule
@@ -449,6 +449,130 @@ This follows from the definition of \(S^k\) in (\ref{aug_agg_subgr}) and local L
 To conclude this section we can say: At the moment there exist two fundamentally different approaches to tackle inexactness in various bundle methods depending on if the method is developed for convex or nonconvex objective functions.
 In the nonconvex case inexactness is only considered in the paper by Hare, Sagastiz{\`{a}}bal and Sodolov \cite{Hare2016} presented above and Noll \cite{Noll2013}. In these cases the inexactness can be seen as an additional nonconvexity. In practice this means that the algorithm can be taken from the nonconvex case with no or only minor changes. This includes that all results of the exact case remain true as soon as function and subgradient are evaluated in an exact way.
 In case of convex objective functions with inexact information stronger convergence results are possible. However to be able to exploit convexity in order to achieve those results the algorithms look different from those designed for nonconvex objective functions and are generally not able to deal with such functions. 
+
+\subsubsection{Aggregation}
+
+In \cite{Hare2016} it is assumed, that the set \(\{j \in J^k \mid \alpha^k_j > 0\}\) is uniformly bounded for all \(k\).
+In Remark 2 in \cite[p. 11]{Hare2016} it is mentioned that this is possible if the set \(X\) is polyhedral and an active-set solver is used to solve the subproblem.
+
+Another possibility to assure boundedness of the set is the aggregation technique mentioned in section \ref{sec_agg}.
+In this context is has however to be mentioned that it is not immediately clear if the proof of Lemma 5 in \cite[p. 11]{Hare2016} still holds in that case.
+For exact function and subgradient information convergence of a very similar method to algorithm \ref{sec_nonconv_inex}.1 is proven also with use of the aggregation technique in \cite{Hare2010}.
+%For algorithm \ref{sec_nonconv_inex}.1 this lies beyond the scope of this thesis.
+
+The lemma states the following results:
+\begin{lemma}[{\cite[Lemma 5]{Hare2016}}]\label{Lemma5}
+	Suppose that the cardinality of the set \(\{j \in J^k\mid \alpha_j^k > 0\}\) is uniformly bounded in \(k\).
+	
+	(i) If \(C^k \to 0\) as \(k \to \infty\), then 
+	\[ \sum_{j \in J^k}\alpha_j^k\|x^j-\hat{x}^k\| \to 0 \text{ as } k \to \infty. \]
+	
+	(ii) If additionally for some subset \(\tilde{K} \subset \{1,2,\dots\}\),
+	\[\hat{x}^k \to \bar{x}, S^k \to \bar{S} \text{ as } K \ni k \to \infty, \text{ with } \{\eta_k\mid k \in \tilde{K}\} \text{ bounded,} \]
+	
+	then we also have 
+	\[\bar{S} \in \partial f(\bar{x})+B_{\bar{\theta}}(0).\]
+	
+	(iii) If in addition \(S^k + \nu^k \to 0\) as \(\tilde{K} \in k \to \infty\), then \(\bar{x}\) satisfies the approximate stationarity condition 
+	\begin{equation}
+		0 \in \left(\partial f(\bar{x}) + \partial \mathtt{i}_X(\bar{x}) \right) + B_{\bar{\theta}}(0).
+	\end{equation}
+	
+	(iv) Finally if \(f\) is also lower-\(\mathcal{C}^1\), then for each \(\varepsilon > 0\) there exists \(\rho > 0\) such that
+	\begin{equation}
+		f(y) \geq f(\bar{x})-(\bar{\theta}+\varepsilon)\|y-\bar{x}\|-2\bar{\sigma}, \quad \text{ for all } y \in X\cap B_{\rho}(\bar{x}).
+	\end{equation}
+\end{lemma}
+
+For algorithm \ref{sec_nonconv_inex}.1 it has to be shown that item (ii) of this lemma also holds if there are aggregate subgradients in the bundle.
+Here only the missing links are sketched to extend the proof to this case.
+
+Therefore let (as in \cite{Hare2016}) \(p^j\) denote for each \(j\)  the orthogonal projection of the approximate subgradient \(g^j\) on the closed convex set \(\partial f(x^j)\). Then it holds by assumption on the approximate subgradient that \(\Vert g^j-p^j\Vert \leq \theta_j \leq \bar{\theta}\).
+Furthermore let \(S^k_n\) denote the (augmented) aggregate subgradients in the \(k\)'th bundle.
+Without loss of generality we can assume that there is only one aggregate subgradient in the bundle. (If there are more, this results merely in more aggregate terms of the same form and behavior in the convex sum, so it does not alter the argumentation.)
+The subscript \(n\) of \(S^k_n\) signals, that already \(n\) aggregate subgradients were incorporated in the current aggregate subgradient.
+
+The proof works with induction over the number of aggregate subgradients contained in the current subgradient.
+
+Denote the multiplier of the \(k\)'th index set corresponding to the aggregate subgradient \(\alpha^k_n\). The remainder of the index set \(J^k\), corresponding to the approximate subgradients, is denoted by \(J^k_g\).
+
+To begin the induction recall that at iteration \(k\) \(S^k_0 = \sum_{j \in J^k_g} \alpha^k_j(g^j+\eta_k(x^j-\hat{x}^k))\) by (\ref{aug_subgr}) and (\ref{aug_agg_subgr}) and that \(J^k_g = J^k\) in this case.
+
+From this follows that
+\begin{align}
+\begin{split}
+	S^k_1 &= \sum_{j \in J^k_g}\alpha_j^k\left(g^j+\eta_k(x^j-\hat{x}^k)\right) + \alpha^k_n S^k_0 \\
+	&=\sum_{j \in J^k_g}\alpha_j^k\left(g^j+\eta_k(x^j-\hat{x}^k)\right) + \alpha^k_n \sum_{j \in J^{k-1}_g} \alpha^{k-1}_j\left(g^j+\eta_{k-1}(x^j-\hat{x}^{k-1})\right) \\
+	&= \sum_{j \in J^k_g}\alpha_j^k p^j + \sum_{j \in J^k_g}\alpha_j^k (g^j-p^j) + \eta_k \sum_{j \in J^k_g}\alpha_j^k (x^j-\hat{x}^k) \\
+	&+ \alpha^k_n \left(\sum_{j \in J^{k-1}_g} \alpha^{k-1}_j p^j + \sum_{j \in J^{k-1}_g} \alpha^{k-1}_j(g^j-p^j) + \eta_{k-1}\sum_{j \in J^{k-1}_g} \alpha^{k-1}_j(x^j-\hat{x}^{k-1})\right)
+	\label{calc_lem5_1}
+\end{split}
+\end{align}
+
+As it is explained in the paper due to the uniform boundedness of the set \(J^k\) it is possible to consider it as some fixed index set (for example \(\{1,...,N\}\)). Unused indices are filled with \(\alpha^k_j=0\). Let then \(J\) be the set of all \(j\in J^k\) such that \(\liminf_{k\to\infty}\alpha^k_j >0\). From item (i) of Lemma \ref{Lemma5} follows then that \(\Vert x^j-\hat{x}^k\Vert \to 0\). Hence also \(\Vert x^j-\bar{x}\Vert \leq \Vert x^j-\hat{x}^k\Vert + \Vert \hat{x}^k-\bar{x}\Vert \to 0 \).
+It holds that \(p^j \in \partial f(x^j)\) and \(x^j \to \bar{x}\) for \(j \in J\) and \(\{\alpha^k_j\} \to 0 \) for \(j \notin J\). Due to the boundedness of the subdifferentials (this follows from Lipschitz continuity of the function \(f\) and is explained in more detail for example in the proof of Theorem \ref{theo_inf_ser_steps}) passing on a subsequence \(K \subset \{1,2,...\}\) yields that there exists \(\bar{p}\) with \(p^j \to \bar{p}\) for \(j \in J\) and \(k \in K\).
+The second and fifth term in the third equation of equation \ref{calc_lem5_1} are in \(B_{\bar{\theta}}(0)\) and the third and sixth term go to zero.
+Then 
+
+\begin{align*}
+	\lim_{K \ni k \to \infty} S^k_1 &=  \lim_{K \ni k \to \infty} \sum_{j \in J^k_g}\alpha_j^k p^j + \sum_{j \in J^k_g}\alpha_j^k (g^j-p^j) + \eta \sum_{j \in J^k_g}\alpha_j^k (x^j-\hat{x}^k) \\
+	&+ \lim_{K \ni k \to \infty} \alpha^k_n \left(\sum_{j \in J^{k-1}_g} \alpha^{k-1}_j p^j + \sum_{j \in J^{k-1}_g} \alpha^{k-1}_j(g^j-p^j) + \eta_{k-1}\sum_{j \in J^{k-1}_g} \alpha^{k-1}_j(x^j-\hat{x}^{k-1})\right) \\
+	&= \lim_{K \ni k \to \infty} \sum_{j \in J^k_g}\alpha_j^k p^j + \alpha^k_n \sum_{j \in J^{k-1}_g} \alpha^{k-1}_j p^j + \sum_{j \in J^k_g}\alpha_j^k (g^j-p^j) + \sum_{j \in J^{k-1}_g} \alpha^{k-1}_j(g^j-p^j) \\
+	&= \lim_{K \ni k \to \infty} \sum_{j \in J^k_g}\alpha_j^k p^j + \alpha^k_n \sum_{j \in J^{k-1}_g} \alpha^{k-1}_j p^j + B_{\bar{\theta}}(0),
+\end{align*}
+
+and due to outer semicontinuity of the Clarke subdifferential \cite[Proposition 6.6 p. 202]{Rockafellar2009} and \(\sum_{j\in J^k}\alpha^k_j = 1\) it follows that 
+
+\[ \lim_{K \ni k \to \infty} \sum_{j \in J^k_g}\alpha_j^k p^j + \alpha^k_n \sum_{j \in J^{k-1}_g} \alpha^{k-1}_j p^j \in \partial f(\bar{x}). \]
+
+This proves assertion (ii) for a bundle containing one aggregate subgradients that only consist of genuine approximate (augmented) subgradients.
+
+Assume now that \(\lim_{K\ni k \to \infty} S^k_{n} \in \partial f(\bar{x})+B_{\bar{\theta}}(0)\) holds also for bundles containing aggregate subgradients of the form \(S^k_n\).
+The inductive step gives then:
+
+\begin{align}
+\begin{split}
+	S^k_{n+1} &= \sum_{j \in J^k_g}\alpha_j^k\left(g^j+\eta_k(x^j-\hat{x}^k)\right) + \alpha^k_{n+1} \left( \alpha^{k-1}_n S^{k-1}_n+\sum_{j \in J^{k-1}_g} \alpha^{k-1}_j\left(g^j+\eta_{k-1}(x^j-\hat{x}^{k-1})\right)\right) \\
+	&= \sum_{j \in J^k_g}\alpha_j^k\left(g^j+\eta_k(x^j-\hat{x}^k)\right) + \alpha^k_{n+1} \sum_{j \in J^{k-1}_g} \alpha^{k-1}_j\left(g^j+\eta_{k-1}(x^j-\hat{x}^{k-1})\right) \\
+	&+ \alpha^k_{n+1}\alpha^{k-1}_n S^{k-1}_n
+	\label{calc_lem5_2}
+\end{split}
+\end{align}
+
+With the same argumentation as above follows that in the limit the first tow terms of the second equation in (\ref{calc_lem5_2}) are in \(\partial f(\bar{x})+B_{\bar{\theta}}(0)\) and from the induction assumption follows that also the last term is.
+This proves item (ii) also for the use of aggregation technique.
+
+%first show that also for aggregate gradients \(G^j\) one can find vectors \(P^j\) such that \(\Vert G^j-P^j\Vert \leq \bar{\theta}\).
+%
+%By induction:
+%
+%\(k=2\): only one aggregate subgradient \(G^1 = \sum_{j \in J^1}\alpha^1_j g^j\) possible, consists only of approximate subgradients \(g^j\).
+%Choose \(P^1 = \sum_{j \in J^1}\alpha^1_j p^j\) where \(p^j \in \partial f(x^j)\)
+%
+%then \(\Vert G^1-P^1\Vert \leq \Vert \sum_{j \in J^1}\alpha^1_j(g^j-p^j)\Vert \leq \sum_{j \in J^1}\alpha^1_j \Vert g^j-p^j\Vert\leq \bar{\theta} \) 
+%
+%used: first inequlity:  \(\alpha^k_j \geq 0 \), second inequality: sum of \(\alpha^k_j\) is one, norm because of projection \(\leq \bar{\theta}\)
+%
+%\(k =3\): one aggregate subgradient contains already aggregate subgradients; again with induction argument: can say that it contains only one, that is only from genuine approximate subgradients
+%
+%\[G^{3} = \alpha^{2}_2G^2+\sum_{j \neq 2, j \in J^{2}}\alpha^2_j g^j = \alpha^2_i \left(\sum_{\tilde{j}\in J^1}{\alpha^1_{\tilde{j}}g^{\tilde{j}}}\right) +\sum_{j \neq 2, j \in J^{2}}\alpha^2_j g^j \] 
+%
+%Now take for the approximate subgradients \(p^j\) as projection and for \(G^2\) \(P^2\) and build from that \(P^3\)
+%
+%in the same way for \(k \to k+1\) possible, because \(\Vert G^k-P^k\Vert \leq \bar{theta}\) for all aggregate subgradients and for the approximate ones of course also
+%
+%now have to show that still
+%
+%\[ \lim_{k\to\infty} \sum_{j\in J^k}\alpha^k_j P^j \in \partial f(\bar{x}) \]
+%
+%here \(P^j\) subgradient projections and aggregate projections.
+%
+%know that every \(P^j\) is a convex combination of projections hence also bounded, hence there exists converging subsequence.
+%
+%What does it converge to?
+%Think it does not help...
+
+
 
 %changes in the algorithm are more involved. The reason for this is that generally stronger convergence results are possible with inexactness in the convex case than in the nonconvex case. %This means however, that the inexactness cannot be incorporated as easily into the algorithm
 

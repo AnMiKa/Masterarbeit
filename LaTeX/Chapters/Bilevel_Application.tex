@@ -1,6 +1,7 @@
 \section{Application to Model Selection for Primal SVM}
 
-\textcolor{red}{Skalarprodukt anpassen, Vektoren nicht fett oder neue definition, notation, \(\lambda \in \Lambda\) einfugen}
+\textcolor{red}{Skalarprodukt anpassen, Vektoren nicht fett oder neue definition, notation, \(\lambda \in \Lambda\) einfugen\\
+Vektoren (in gesamter Arbeit) in runden Klammern}
 
 \subsection{Introduction}
 
@@ -45,11 +46,21 @@ In \cite{Moore2010a} he also suggests the nonconvex exact bundle algorithm of Fu
 
 \subsection{Notation}
 
-special notation only in this chapter, \(x,y\) now different. Optimization variable now \(\lambda,C\).
-with index -> data, without variables from problem.
-Will be clear from context.
+As short remark on the notation in this chapter is required.
 
-do this due to the standard notation in the field of SVM
+Due to standard notation in the field of SVM, the variables \(x\) and \(y\) are used in this chapter in two different contexts.
+In the setting of bilevel problems as used in (\ref{bilevel}) \(x \in X \subset \R^n\) and \(y \in \R^k\) are the optimization variables of the bilevel problem.
+
+In the setting of SVMs \(x^i \in \R^{feat}\) is an element of the \emph{feature space} that contains the values of one data point. The corresponding variable \(y_i \in \{-1,1\}\) of the \emph{output domain} contains the class in the data point \(x^i\) lies. Sometimes the indices of the samples are omitted to express the general dependency on the data (x,y).
+%All samples can be wrapped up in a martix \(X \in \R^{feat\times nd}\) and a vector \(Y\in \R^{nd}\).
+
+During the most part of the chapter, \(x^i\) and \(y^i\) are used as in the context of SVMs. In the cases where they are used to describe the variables of an optimization problem, this is clearly indicated.
+
+%special notation only in this chapter, \(x,y\) now different. Optimization variable now \(\lambda,C\).
+%with index -> data, without variables from problem.
+%Will be clear from context.
+%
+%do this due to the standard notation in the field of SVM
 
 \subsection{Introduction to Support Vector Machines}
 %In times of big data machine learning is a very active field of research. 
@@ -58,7 +69,7 @@ Support vector machines are linear learning machines that were developed in the 
 The case that is considered here is binary support vector classification using supervised learning. 
 For a throughout introduction to this subject see also \cite{Cristianini2000}. Here a summary of the most important expressions and results is given.
 
-In classification data from a possibly high dimensional vector space \(\tilde{X} \subset \R^n\), the \emph{feature} or \emph{input space} is divided into two classes. These lie in the \emph{output domain} \(\tilde{Y} = \{-1,1\}\). Elements from the feature space will mostly be called \emph{data points} here. They get \emph{labels} from the feature space. Labeled data points are called \emph{examples}.
+In classification data from a possibly high dimensional vector space \(\tilde{X} \subset \R^{feat}\), the feature or \emph{input space} is divided into two classes. These lie in the output domain \(\tilde{Y} = \{-1,1\}\). Elements from the feature space will mostly be called \emph{data points} here. They get \emph{labels} from the feature space. Labeled data points are called \emph{examples}.
 The functional relation between the features and the class of an example is given by the usually unknown \emph{response} or \emph{target function} \(f(x)\).
 Supervised learning is a kind of machine learning task where the machine is given examples of input data with associated labels, the so called \emph{training data} \((X,Y)\). Mathematically this can be modeled by assuming that the examples are  drawn identically and independently distributed (iid) from the fixed joint distribution \(P(x,y)\). This usually unknown distribution states the probability that a data point \(x\) has the label \(y\) \cite[p. 988]{Vapnik1999}.
 The overall goal is then to optimize the generalization ability, meaning the ability to predict the output for unseen data correctly \cite[chapter 1.2]{Cristianini2000}.
@@ -107,9 +118,9 @@ This reduces the risk of \emph{overfitting}, meaning to overly fit the function 
 
 Support vector machines fulfill all conditions of the SRM principle. Due to the kernel trick that allows for nonlinear classification tasks it is also very powerful. For more detailed information on this see \cite{Kunapuli2008} and references therein.
 
-\subsubsection{Support Vector machines}
+\subsubsection{Support Vector Machines}
 
-In the case of linear binary classification one searches for a an affine hyperplane \(w \in \R^n\) shifted by \(b \in \R\) to separate the given data. The vector \(w\) is called weight vector and \(b\) is the bias.
+In the case of linear binary classification one searches for a an affine hyperplane \(w \in \R^feat\) shifted by \(b \in \R\) to separate the given data. The vector \(w\) is called weight vector and \(b\) is the bias.
 
 Let the data be linearly separable. The function deciding how the data is classified can then be written as
 
@@ -170,60 +181,93 @@ For support vector machines the target margin is set to \(\gamma = 1\).
 
 This results in the following optimization problem for finding an optimal separating hyperplane \((w,b)\): 
 
-\begin{align}
-\begin{split}
-	\min_{w,b,\xi} \quad & \frac{1}{2} \|w\|^2+C\sum_{i=1}^l{\xi_i} \\
-	\text{s.t.} \quad & y_i\left(\Langle w,x^i\Rangle-b\right) \geq 1 - \xi_i \\
-	& \xi_i \geq 0 \\
-	& 	\forall i = 1, \dots , l
-\end{split}
-\label{SVM_1}
-\end{align}
 
 %and
 %
-%\begin{align}
-%\begin{split}
-	%\min_{w,b,\xi} \quad & \frac{1}{2} \|w\|^2_2+C\sum_{i=1}^l{\xi_i^2} \vspace{0.5ex}\\
-	%\text{s.t.} \quad & y_i\left(\Langle w,x^i\Rangle-b\right) \geq 1 - \xi_i \vspace{0.5ex}\\
-	%& 	\forall i = 1, \dots , l.
-%\end{split}
-%\label{SVM_2}
-%\end{align}
+\begin{align}
+\begin{split}
+	\min_{w,b,\xi} \quad & \frac{1}{2} \|w\|^2_2+\frac{C}{2}\sum_{i=1}^{nd}{\xi_i^2} \vspace{0.5ex}\\
+	\text{s.t.} \quad & y_i\left(\Langle w,x^i\Rangle-b\right) \geq 1 - \xi_i \vspace{0.5ex}\\
+	& 	\forall i = 1, \dots , nd.
+\end{split}
+\label{SVM_2}
+\end{align}
 
 %The first part of the respective objective functions are the regularizations, the second part are the actual loss functions.
 The first part of the objective function is the regularization, the second part the actual loss function. 
 The parameter \(C > 0\) gives a trade-off between the richness of the chosen set of functions \(f_{\lambda}\) to reduce the error on the training data and the danger of overfitting to have good generalization. It has to be chosen a priori \cite{Kunapuli2008}.
 %The two optimization problems only differ in the norm chosen for the loss function. In (\ref{SVM_1}) the one-norm is chosen, in (\ref{SVM_2}) the squared two-norm is used.
 
-To derive a subgradient of the bilevel problem introduced later in this section another formulation of the classification problem is used.
-It makes use of the \emph{implicit bias}, meaning that the bias is not calculated separately but as part of the variable \(w\). 
+Instead of the Euclidean norm it is also possible to use the 1-norm in the loss function. Then the resulting optimization problem reads
+
+\begin{align*}
+\begin{split}
+	\min_{w,b,\xi} \quad & \frac{1}{2} \|w\|^2+C\sum_{i=1}^{nd}{\xi_i} \\
+	\text{s.t.} \quad & y_i\left(\Langle w,x^i\Rangle-b\right) \geq 1 - \xi_i \\
+	& \xi_i \geq 0 \\
+	& 	\forall i = 1, \dots , nd.
+\end{split}
+%\label{SVM_1}
+\end{align*}
+
+In this form, however, the problem does not fit the theory described in \cite{Outrata1998}, which is used later to solve the constructed bilevel problem. \textcolor{red}{refer to appendix were counterexample to strong regularity is given?\\
+It is shown in appendix ... that there exist data sets for which the strong regularity condition stated in ... is violated. Thus the subgradient of the upper level objective function cannot be calculated as proposed in \cite{Outrata1998}.}
+
+
+%To derive a subgradient of the bilevel problem introduced later in this section another formulation of the classification problem is used.
+In order to fulfill all conditions assumed in \cite{Outrata1998} it is necessary to reformulate problem (\ref{SVM_2}).
+The new formulation makes use of the \emph{implicit bias}, meaning that the bias is not calculated separately but as part of the variable \(w\). 
 By adding an additional one to the end of each feature vector we can use the vectors \(\tilde{x}_i := (x_i,1)^{\top}\) and \(\tilde{w} := (w,w_b)\) to state the following optimization problem:
 
 \begin{align}
 \begin{split}
-	\min_{\tilde{w},\xi} \quad & \frac{1}{2} \|\tilde{w}\|^2+C\sum_{i=1}^l{\xi_i} \vspace{0.5ex}\\
+	\min_{\tilde{w},\xi} \quad & \frac{1}{2} \|\tilde{w}\|^2+\frac{C}{2}\sum_{i=1}^{nd}{\xi_i^2} \vspace{0.5ex}\\
 	\text{s.t.} \quad & y_i\Langle \tilde{w},\tilde{x}^i\Rangle = y_i\left(\Langle w,x^i\Rangle-w_b\right) \geq 1 - \xi_i \vspace{0.5ex}\\
-	& \xi_i \geq 0 \\
-	& 	\forall i = 1, \dots , l.
+	& 	\forall i = 1, \dots , nd.
 \end{split}
 \label{SVM_bias}
 \end{align}
 
 Not treating the bias separately is a strategy used for example to achieve a more efficient implementation \cite[section 3.2, p. 22]{Gunn1998}. In the course of this section the gain of this particular formulation is the fact that it has a unique solution \textcolor{red}{compare for... where it is shown}.
 It is however shown in \cite[section 3.2, p. 22]{Gunn1998} that the solutions that are found with explicit and implicit bias are different.
-This results from the fact that in case of implicit bias it also enters the regularization term.
+This results from the fact that in case of implicit bias the variable \(b\) also enters the regularization term.
 
-From now on we work with formulation (\ref{SVM_bias}) of the support vector classification problem. To see the derivation of the bilevel problem with the explicit bias compare for \cite{Kunapuli2008}.
+From now on we work with the implicit bias. To see the derivation of the bilevel problem with the explicit bias compare for \cite[section 2.2]{Kunapuli2008}.
 
-\subsection{Bilevel Approach and Multiple Hyper-Parameters}
+\subsubsection{Multiple Hyper-parameters}
+
+To examine the performance of the bilevel approach in the more dimensional case a model suggested by Moore et al. in \cite{Moore2011} and called \emph{multi-group} support vector classification (multiSVC) is used. There different hyper-parameters are allowed for different subgroups of the trainings data.
+In section 4.3 of \cite{Moore2011} the model is described for a regression function. In this thesis the same technique is used for classification.
+
+The motivation behind the approach is that different groups of samples from the training set can have slightly different properties and should therefore have their own weighting parameters \(C_g\).
+On the one hand this can improve the generalization results. On the other hand properties of the different data groups can be identified by their respective hyper-parameters. Moore et al. explain in \cite[section 4.3, p. 9]{Moore2011} that for example a large \(C_g\) signifies reliable data in the respective group whereas a smaller \(C_g\) suggests a poorer quality.
+
+To perform multiSVC divide the trainings data into \(G\) (pairwise disjoint) groups.
+Define the vector of hyper-parameters \(C := [C_1,...,C_G]^{\top}\). For the sake simplicity in this thesis all the groups are of equal size but all derivations are also possible for differently sized groups.
+
+%For \(T\)-fold cross validation the \(t\)'th 
+The multi-group classification problem in constrained form can be stated as 
+
+\begin{align}
+\begin{split}
+	\min_{\tilde{w},\xi} \quad & \frac{1}{2} \|\tilde{w}\|^2+\sum_{g = 1}^G\left(\frac{C_g}{2}\sum_{i \in n_g} {\xi_i^2}\right) \vspace{0.5ex}\\
+	\text{s.t.} \quad & y_i\Langle \tilde{w},\tilde{x}^i\Rangle \geq 1 - \xi_i \vspace{0.5ex}\\
+	& 	\forall i \in \bigcup_{g =1}^G n_g =\{1,...,nd\}.
+\end{split}
+\label{MultiSVC_QP}
+\end{align}
+
+Here \(n_g\) is the index set that contains the indices of the data of the \(g\)'th group.
+
+
+\subsection{Formulation of the Bilevel Problem}
 %Check if regression case also included?????
 
 %\textcolor{red}{adapt all section titles -> introduction of MultiGroup}
 
-The hyper-parameter \(C\) in the objective function of the classification problem has to be set beforehand. This step is part of the model selection process.
-To set this parameter optimally different methods can be used.
-A very intuitive and widely used approach is doing  and \emph{cross validation} (CV) with a grid search implementation \cite[p. 30]{Kunapuli2008}.
+The hyper-parameters \(C_g\) in the objective function of the classification problem have to be set beforehand. This step is part of the model selection process.
+To set the parameters optimally different methods can be used.
+A very intuitive and widely used approach is doing \emph{cross validation} (CV) with a grid search implementation \cite[p. 30]{Kunapuli2008}.
 %very costly, discrete parameter choice, not practicable in case of many parameter
 
 To prevent overfitting and get a good parameter selection, especially in case of little data, commonly \(T\)-fold cross validation is used \cite[p. 30]{Kunapuli2008}.
@@ -232,7 +276,7 @@ To use CV for model selection it has to be embedded into an optimization algorit
 Commonly this is done by discretizing the parameter space and for \(T\)-fold CV training \(T\) models at each grid point. The resulting models are then compared to find the best parameters in the grid.
 Obviously for a growing number of hyper-parameters this is very costly. An additional drawback is that the parameters are only chosen from a finite set \cite[p. 30]{Kunapuli2008}.
 
-\subsubsection{Reformulation as Bilevel Problem}
+%\subsubsection{Reformulation as Bilevel Problem}
 
 A more recent approach is the formulation as a bilevel problem used in \cite{Kunapuli2008} and \cite{Moore2011}.
 This makes it possible to optimize the hyper-parameters continuously.
@@ -240,14 +284,14 @@ This makes it possible to optimize the hyper-parameters continuously.
 %Formal description of the bilevel problem for t-fold cross validation
 %Better model description --> see 2.2 (p.46) in thesis 
 
-Let \(\Omega = \{(x^1,y_1),...,(x^l,y_l)\} \subset \R^{n+1}\) be a given data set of size \(l = |\Omega|\). The associated index set is denoted by \(\mathcal{N}\). For classification the labels \(y_i\) are \(\pm1\).
-For \(T\)-fold cross validation let \(\bar{\Omega}_t\) and \(\Omega_t\) be the training set and the validation set respectively within the \(t\)'th fold and \(\bar{\mathcal{N}}_t\) and \(\mathcal{N}_t\) the respective index sets.
-Furthermore let \(f^t:\R^{n+1}\cap\mathcal{F} \to \R\) be the response function trained on the \(t\)'th fold and \(\lambda \in \Lambda\) the hyper-parameter to be optimized.
+Let \(\Omega = \{(x^1,y_1),...,(x^{nd},y_{nd})\} \subset \R^{feat+1}\) be a given data set of size \(nd = |\Omega|\). The associated index set is denoted by \(\mathcal{N}\). For classification the labels \(y_i\) are \(\pm1\).
+For \(T\)-fold cross validation let \(\bar{\Omega}_t\) and \(\Omega_t\) be the training set and the validation set respectively within the \(t\)'th fold and \(\bar{\mathcal{N}}_t\) and \(\mathcal{N}_t\) the respective index sets. For multi-group SVC the index set \(\bar{\mathcal{N}}_t\) is again divided into the \(G\) sets \(\bar{\mathcal{N}}_t^g\) to account for the different groups associated with the different hyper-parameters.
+Furthermore let \(f^t:\R^{feat+1}\cap\mathcal{F} \to \R\) be the response function trained on the \(t\)'th fold and \(\lambda \in \Lambda\) the hyper-parameter to be optimized.
 For a general machine learning problem with upper and lower loss function \(\mathcal{L}_{upp}\) and \(\mathcal{L}_{low}\) respectively the bilevel problem reads
  
 %%% introduce \mathcal(F) already before as the function space
 
-\begin{equation}
+\begin{equation*}
 	\begin{array}{cll}
 	\displaystyle\min_{\lambda, f^t} & \mathcal{L}_{upp}\left(\lambda,f^1|_{\Omega_1},...,f^T|_{\Omega_T}\right) & \text{upper level} \vspace{0.5ex}\\
 	\text{s.t.} & \lambda \in \Lambda & \vspace{1em}\\
@@ -256,12 +300,12 @@ For a general machine learning problem with upper and lower loss function \(\mat
 	                        \text{s.t.} & g_{low}(\lambda,f) \leq 0 
 													\end{Bmatrix}. & \text{lower level}
 	\end{array}
-\end{equation}
+\end{equation*}
 
-In the case of support vector classification the \(T\) inner problems have the SVM formulation %(\ref{SVM_1}) or 
-(\ref{SVM_bias}). % (but all \(T\) problems have the same formulation).
+In the case of multigroup support vector classification the \(T\) inner problems have the SVM formulation %(\ref{SVM_1}) or 
+(\ref{MultiSVC_QP}). % (but all \(T\) problems have the same formulation).
 This problem can also be rewritten into an unconstrained form. It is helpful when using the inexact bundle algorithm for solving the bilevel problem.
-For the \(t\)'th fold the resulting hyperplane is identified with the variable \(\tilde{w}^t \in \R^{n+1}\).
+For the \(t\)'th fold the resulting hyperplane is identified with the variable \(\tilde{w}^t \in \R^{feat+1}\).
 The inner level problem for the \(t\)'th fold can therefore be stated as
 
 %\begin{equation}
@@ -272,20 +316,20 @@ The inner level problem for the \(t\)'th fold can therefore be stated as
 %or
 
 \begin{equation}
-	(\tilde{w}^t) \in \argmin_{\tilde{w}} \left\{\frac{1}{2} \|\tilde{w}\|^2+C\sum_{i\in \bar{\mathcal{N}}_t}{\max\left\{1-y_i\Langle \tilde{w},\tilde{x}^i\Rangle,0\right\}}\right\}.
-\label{lower_t}
+	\tilde{w}^t \in \argmin_{\tilde{w}} \left\{\frac{1}{2} \|\tilde{w}\|^2+\sum_{g=1}^G\left(\frac{C_g}{2}\sum_{i\in \bar{\mathcal{N}}_t^g}{\max\left\{1-y_i\Langle \tilde{w},\tilde{x}^i\Rangle,0\right\}^2}\right)\right\}.
+\label{lower_unconstr}
 \end{equation}
 
 %Where the hyper-parameter \(\lambda = \frac{1}{C}\) is used  due to numerical stability \cite[p. 38]{Kunapuli2008}.
 
-For the upper level objective function there are different choices possible. All that are presented here use the implicit bias. They all can also be used with the explicit bias term.
+For the upper level objective function different choices are possible. All that are presented here use the implicit bias. They all can also be used with the explicit bias term.
 
 Simply put the outer level objective should compare the different inner level solutions and pick the best one. An intuitive choice is therefore to pick the misclassification loss, that counts how many data points of the respective validation set \(\Omega_t\) are misclassified when taking function \(f^t\).
 
 The misclassification loss can be written as
 
 \begin{equation}
-	\mathcal{L}_{mis} = \frac{1}{T}\sum_{t=1}^T\frac{1}{|\mathcal{N}_t|}\sum_{i \in \mathcal{N}_t}{\left[-y_i\Langle \tilde{w}^t,\tilde{x}^i\Rangle\right]_{\star}},
+	\mathcal{L}_{mis}(\tilde{w}) = \frac{1}{T}\sum_{t=1}^T\frac{1}{|\mathcal{N}_t|}\sum_{i \in \mathcal{N}_t}{\left(-y_i\Langle \tilde{w}^t,\tilde{x}^i\Rangle\right)_{\star}},
 \label{misclass_loss}
 \end{equation}
 
@@ -295,17 +339,17 @@ where the step function \((\cdot)_{\star}\) is defined component wise for a vect
 \label{step_fun}
 \end{equation}
 
-The drawback of this simple loss function is that it is not continuous and as such not suitable for subgradient based optimization. Therefore another loss function is used for the upper level problem - the \emph{hinge loss} or \emph{L1-loss}. It is an upper bound on the misclassification loss and reads
+The drawback of this simple loss function is that it is not continuous and thus not suitable for subgradient based optimization. Therefore another loss function is used for the upper level problem, the \emph{hinge loss} or \emph{L1-loss}. It is an upper bound on the misclassification loss and reads
 
 \begin{equation}
-		\mathcal{L}_{hinge} = \frac{1}{T}\sum_{t=1}^T\frac{1}{|\mathcal{N}_t|}\sum_{i \in \mathcal{N}_t}{\max\left\{1-y_i\Langle \tilde{w}^t,\tilde{x}^i\Rangle,0\right\}}.
+		\mathcal{L}_{hinge}(\tilde{w}) = \frac{1}{T}\sum_{t=1}^T\frac{1}{|\mathcal{N}_t|}\sum_{i \in \mathcal{N}_t}{\max\left\{1-y_i\Langle \tilde{w}^t,\tilde{x}^i\Rangle,0\right\}}.
 \label{hinge_loss}
 \end{equation}
 
 It is also possible to square the max term. This results in the \emph{L2-loss} function
 
 \begin{equation}
-		\mathcal{L}_{hinge} = \frac{1}{T}\sum_{t=1}^T\frac{1}{|\mathcal{N}_t|}\sum_{i \in \mathcal{N}_t}{\max\left\{1-y_i\Langle \tilde{w}^t,\tilde{x}^i\Rangle,0\right\}^2}.
+		\mathcal{L}_{hingequad}(\tilde{w}) = \frac{1}{T}\sum_{t=1}^T\frac{1}{|\mathcal{N}_t|}\sum_{i \in \mathcal{N}_t}{\max\left\{1-y_i\Langle \tilde{w}^t,\tilde{x}^i\Rangle,0\right\}^2}.
 \label{hingequad_loss}
 \end{equation}
 
@@ -320,7 +364,7 @@ We refer to this second loss function also as \emph{hingequad loss}.
 %from plots: seems to match the misclassification loss a bit better -> used it instead/also}
 
 For the bilevel problem discussed in this thesis the hingequad function is chosen as objective of the upper level problem.
-Hence the final resulting bilevel formulation for model selection in support vector classification is 
+Hence the final resulting bilevel formulation for model selection in multigroup support vector classification is 
 
 %\begin{align}
 %\begin{split}
@@ -337,51 +381,14 @@ Hence the final resulting bilevel formulation for model selection in support vec
 \begin{align}
 \begin{split}
 	\min_{C} \quad &  \mathcal{L}_{hingequad}(\tilde{w}) = \frac{1}{T}\sum_{t=1}^T\frac{1}{|\mathcal{N}_t|}\sum_{i \in \mathcal{N}_t}{\max\left\{1-y_i\Langle \tilde{w}^t,\tilde{x}^i\Rangle,0\right\}^2}\\
-	\text{s.t.} \quad & C > 0 \\
+	\text{s.t.} \quad & C := (C_1,...,C_G) > 0 \\
 	& \text{for } t = 1,...,T \\
-	& \tilde{w}^t \in \argmin_{\tilde{w}}\left\{ \frac{1}{2} \|\tilde{w}\|^2+C\sum_{i\in \bar{\mathcal{N}}_t}\max\left\{1-y_i\Langle \tilde{w},\tilde{x}^i\Rangle,0\right\}\right\}. \\
+	& \tilde{w}^t \in \argmin_{\tilde{w}}\left\{ \frac{1}{2} \|\tilde{w}\|^2+\sum_{g=1}^G\left(\frac{C_g}{2}\sum_{i\in \bar{\mathcal{N}}_t^g}\max\left\{1-y_i\Langle \tilde{w},\tilde{x}^i\Rangle,0\right\}^2\right)\right\}. \\
 \end{split}
-\label{model}
+\label{bilevel_fin}
 \end{align}
 
-
-\subsubsection{Multiple Hyper-parameters}
-
-To examine the performance of the bilevel approach in the more dimensional case a model suggested by Moore et al. in \cite{Moore2011} and called \emph{multi-group} support vector classification (multiSVC). There different hyper-parameters are allowed for different subgroups of the trainings data.
-In section 4.3 of \cite{Moore2011} the model is described for a regression function. In this thesis the same technique is used for classification.
-
-The motivation behind the approach is that different groups of samples from the trainings set can have slightly different properties and should therefore have their own weighting parameters \(C_g\).
-On the one hand this can improve the generalization results, on the other hand properties of the different data groups can be identified by their respective hyper-parameters. Moore et al. explain in \cite[section 4.3, p. 9]{Moore2011} that for example a large \(C_g\) signifies reliable data in the respective group whereas a smaller \(C_g\) suggests a poorer quality.
-
-To perform multiSVC divide the trainings data into \(G\) (pairwise disjoint) groups.
-Define the vector of hyper-parameters \(C := [C_1,...,C_G]^{\top}\).
-For \(T\)-fold cross validation the \(t\)'th lower level problem in the constrained form can be stated as 
-
-\begin{align*}
-\begin{split}
-	\min_{\tilde{w},\xi} \quad & \frac{1}{2} \|\tilde{w}\|^2+\sum_{g = 1}^G\left(C_g\sum_{i \in \bar{\mathcal{N}}_t^g}{\xi_i}\right) \vspace{0.5ex}\\
-	\text{s.t.} \quad & y_i\Langle \tilde{w},\tilde{x}^i\Rangle \geq 1 - \xi_i \vspace{0.5ex}\\
-	& \xi_i \geq 0 \\
-	& 	\forall i \in \bigcup_{g =1}^G \bar{\mathcal{N}}_t^g = \bar{\mathcal{N}}_t.
-\end{split}
-%\label{MultiSVC_QP}
-\end{align*}
-
-Here \(\bar{\mathcal{N}}_t^g\) is the index set that contains the indices of the data of the \(g\)'th group in the \(t\)'th fold.
-
-The whole bilevel problem (stated with the unconstrained lower level problem) is given by
-
-\begin{align}
-\begin{split}
-	\min_{C} \quad &  \mathcal{L}_{hingequad}(\tilde{w}) = \frac{1}{T}\sum_{t=1}^T\frac{1}{|\mathcal{N}_t|}\sum_{i \in \mathcal{N}_t}{\max\left\{1-y_i\Langle \tilde{w}^t,\tilde{x}^i\Rangle,0\right\}^2}\\
-	\text{s.t.} \quad & C = [C_1,...,C_G]^{\top} > 0 \text{ and} \\
-	& \text{for } t = 1,...,T \\
-	& \tilde{w}^t \in \argmin_{\tilde{w}}\left\{\frac{1}{2} \|\tilde{w}\|^2+\sum_{g=1}^G \left(C_g\sum_{i\in \bar{\mathcal{N}}_t^g}\max\left\{1-y_i\Langle \tilde{w},\tilde{x}^i\Rangle,0\right\}\right)\right\}.
-\end{split}
-\label{multi_group}
-\end{align}
-
-As the multigroup problem contains the single group bilevel problem (\ref{model}) as a special case we consider only problem (\ref{multi_group}) in the following sections.
+Obviously this bilevel problem contains the usual support vector classification with only one data group as a special case.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -410,13 +417,12 @@ As the multigroup problem contains the single group bilevel problem (\ref{model}
 
 \subsection{Solution with the Inexact Bundle Algorithm}
 
-\textcolor{red}{more introduction\\
-remark on missing error bounds for function value and subgradient}
+\textcolor{red}{more introduction}
 
-The bilevel problem (\ref{multi_group}) derived above is to be solved with the bilevel algorithm \textcolor{red}{which one? more?}.
+The bilevel problem (\ref{bilevel_fin}) derived above is to be solved with the bundle algorithm \textcolor{red}{which one? more?}.
 This requires having in every iteration an approximate value of the upper level objective function and an approximate subgradient of the upper level objective.
 
-To see the issues arising when computing especially the subgradient of a bilevel objective let us again consider the general bilevel problem (\ref{bilevel}).
+To understand the issues arising when computing especially the subgradient of a bilevel objective consider again the general bilevel problem (\ref{bilevel}).
 
 At the current iterate \(x^k\) (this is now no data point but the optimization variable of the upper level problem) the function value of the upper level objective function can be computed by solving the lower level problem given \(x^k\).
 The resulting solution \(y^k\) is then inserted into the upper level objective and its value can be calculated.
@@ -427,7 +433,7 @@ To do this we follow the strategy described in \cite{Outrata1998}. Refer there a
 Consider the general bilevel problem formulation (\ref{bilevel}) without the explicit constraint \(G(x,y) \leq 0\).
 Let the feasible set \(X\) be a nonempty compact set and \(\tilde{A}\) and open set containing \(X\).
 
-To use the implicit programming approach suggested in the book,  the following assumptions have to hold true:
+To use the implicit programming approach suggested in \cite{Outrata1998},  the following assumptions have to hold true:
 
 \begin{itemize}
 \item[(A1)] The upper level objective \(F\) is continuously differentiable on \(\tilde{A}\times \R^k\).
@@ -435,7 +441,7 @@ To use the implicit programming approach suggested in the book,  the following a
 \item[(A3)] The generalized equation coming from the lower level program is strongly regular at all points \((x,y_x)\), where \(x \in \tilde{A}\) and \(y_x\) is the corresponding solution of the lower level problem.
 \end{itemize}
 
-A \emph{(perturbed) generalized equation} is a relation of the form
+A \emph{(perturbed) generalized equation} (GE) is a relation of the form
 
 \[ 0 \in H(x,y)+N_{U}(y), \]
 
@@ -469,33 +475,195 @@ because for \(y,z \in U\) the indicator function is zero. This means that the su
 
 \[ 0 \in \partial f(x,y) + N_U(y). \]
 
-If the subdifferential of \(f\) at the point \((x,y)\) is single valued, this is a generalized equation.
+If \(f\) is continuously differentiable, the function \(\partial f = \nabla f : \R^n\times\R^k \to \R^k\) is single valued and continuous and the relation above is a generalized equation.
 
-Let us now verify the above assumptions for the hyper-parameter finding bilevel problem (\ref{multi_group}).
+\subsubsection{Subgradient Calculation}
+
+Let us now verify the above assumptions (A1) -- (A3) for the hyper-parameter finding bilevel problem (\ref{bilevel_fin}).
 First of all, the feasible set \(X\) has to be a convex compact set. In order to assure that, the constraint of the hyper-parameter \(C\) has to be adapted.
-Therefore choose two constants \(l_C, u_C > 0\) with \(l_C < u_C\) and constrain the vector \(C\) by the component wise meant inequalities
+Therefore choose two constants \(l_C, u_C > 0\) with \(l_C < u_C\) constrain the vector \(C\) by the component wise meant inequalities
 
-\[ l_c \leq C \leq u_C. \]
+\[ l_C \leq C \leq u_C. \]
 
 Assumption (A1) is fulfilled as \(\mathcal{L}_{hingequad}\) is a continuously differentiable function because of the squared max-term.
 
 Next assumption (A2) is verified. In order to do this consider the lower level problem in its unconstrained formulation.
-It is the sum of a strictly convex (\(\frac{1}{2}\Vert \tilde{w}\Vert^2\)) and a convex function (\(\sum_{g=1}^G \left(C_g\sum_{i\in \bar{\mathcal{N}}_t^g}\max\left\{1-y_i\Langle \tilde{w},\tilde{x}^i\Rangle,0\right\}\right)\)). This means the function is strictly convex. It has therefore a unique global minimizer \(\tilde{w}^*\) for any vector of hyper-parameters \(C\).
+It has a strictly convex function and therefore a unique global minimizer. Denoting the vector of all slack variables \(\xi_i\) with \(\xi\) this minimizer is given by \((\tilde{w}^*,\xi^*)^{\top}\). It depends on the vector of hyper-parameters \(C\).
 Hence the assumption is fulfilled.
 
-Finally to show that assumption (A3) holds for the considered, strong regularity has to be shown for the corresponding generalized equation.
-In order to do this the lower level problem is considered in its constrained form. 
 
-Let \(\tilde{w}^*\in \R^{n+1}\) denote the unique solution of the unconstrained problem. Due to the equivalence of the two problem formulations the optimal solution of the constrained problem is given by \((\tilde{w}^*,\xi^*)\), with \(\xi_i = 1-y_i\left(\Langle w,x^i\Rangle-b\right)\).
-Suppose that at this point the 
+Finally to show that assumption (A3) holds, strong regularity has to be shown for the corresponding generalized equation.
+For this consider the lower level problem in its unconstrained form.
+It can be rewritten in matrix form using the following definitions:
+
+\begin{equation*}
+\begin{split}
+	&H(C):= \begin{pmatrix} \mathbb{I} \\ & \tilde{C}\end{pmatrix}\in \R^{n_1\times n_1} \\
+	&A := \begin{pmatrix}	-y_1(x^1)^{\top} & -1 \\
+		\vdots & & \ddots \\ -y_N(x^N)^{\top} & & & -1\end{pmatrix} \in \R^{nd \times n_1}, \quad  b:= \begin{pmatrix}-1\\\vdots\\-1\end{pmatrix} \in \R^{nd}.
+\end{split}
+\end{equation*}
+
+Here \(\tilde{C}\) is a diagonal matrix with the vector \((C_1,...,C_1,...,C_G,...,C_G)^{\top}\) on the diagonal such that the hyper-parameters correspond to the \(\xi_i\) of the different groups. The number \(n_1 = feat+1+nd\) where \(feat\) is the dimension of the feature space and \(nd\) the number of data points in the sample.
+
+Then the lower level problem can be written as
+
+\begin{align}
+\begin{split}
+	\min_{\tilde{w},\xi} & \quad \frac{1}{2} (\tilde{w}^{\top},\xi^{\top}) H(C) \begin{pmatrix}\tilde{w}\\\xi\end{pmatrix} \\
+	\text{s.t.} & \quad A \begin{pmatrix}\tilde{w}\\\xi\end{pmatrix} \leq b.
+\end{split}
+\label{low_QP}
+\end{align}
+
+This formulation of the lower level problem corresponds to the one in Appendix A.1.3 in \cite{Outrata1998}. Only the objective function depends on the hyper-parameter \(C\), not the constraints.
+
+For this optimization problem the KKT conditions are necessary and sufficient. This means that at the minimum \((\tilde{w}^*,\xi^*)\) holds
+
+\begin{align*}
+	& \text{there is a } \mu^* \in \R^{nd} \text{ such that} \\
+	&\nabla_{(\tilde{w},\xi)} L(C,\tilde{w}^*,\xi^*,\mu^*) = 0 \\
+	& \mu^* \geq 0, \quad A \begin{pmatrix}\tilde{w}^*\\\xi^*\end{pmatrix} \leq b, \quad \Langle\mu^*,\left(A \begin{pmatrix}\tilde{w}^*\\\xi^*\end{pmatrix} - b\right)\Rangle = 0,
+\end{align*}
+
+where \(L(C,\tilde{w},\xi,\mu) = \frac{1}{2}(\tilde{w}^{\top},\xi^{\top})H(C)(\tilde{w}^{\top},\xi^{\top})^{\top}+\Langle\mu,\left(A (\tilde{w}^{\top},\xi^{\top})^{\top} - b\right)\Rangle\) is the Lagrangian of the problem and \(\mu^*\) the multiplier corresponding to the inequality constraints.
+
+Using the KKT conditions a special GE can be derived for problem (\ref{low_QP}):
+
+\begin{equation}
+	0 \in \begin{bmatrix} \nabla_{(\tilde{w},\xi)}L(C,\tilde{w}^*,\xi^*,\mu^*)\\ - A \left((\tilde{w}^*)^{\top},(\xi^*)^{\top}\right)^{\top} + b\end{bmatrix} + N_{\R^{feat+1}\times\R^{nd}_+}.
+\label{GE}
+\end{equation}
+
+%This formulation of the GE follows from the KKT conditions of the problem. 
+The derivation of this particular form is given in \cite[chapter 4, p. 71--72 and chapter 5, p. 92]{Outrata1998}.
+
+Showing strong regularity for the above GE is done by using Theorem 5.7 in \cite{Outrata1998}.
+Therefore define the following index sets:
+
+\begin{align*}
+	& I(\tilde{w},\xi) = \{i \in \{1,...,nd\} \mid A (\tilde{w},\xi)^{\top} - b = 0\} \\
+	& I_+(\tilde{w},\xi,\mu) = \{i\in I(\tilde{w},\xi) \mid \mu_i > 0\}
+\end{align*},
+
+which denote the set of \emph{active} and \emph{stronly acitve} inequality constraints respectively.
+
+For problem (\ref{low_QP}) the \emph{linear independence constraint qualification} (LICQ) holds at every feasible point \((\tilde{w},\xi)\) because all rows of the matrix \(A\) are linearly independent. This means that linear independence particularly holds for all rows corresponding to the active constraints at any minimum \((\tilde{w}^*,\xi^*)\).
+
+From this and the following theorem follows then strong regularity of the GE (\ref{GE}).
+
+\begin{theorem}[c.f. {\cite[Theorem 5.7, p. 95]{Outrata1998}}]
+	
+\end{theorem}
+
+\begin{definition}[{\cite[Definition 4.4, p. 81]{Outrata1998}}]
+	Let \(M \in \R^{n\times n}\) be a matrix and \(K \subset \R^n\) a cone. The matrix \(M\) is strictly copositive with respect to \(K\) if 
+	\[ \langle d,Md \rangle > 0 \quad \text{for all} \quad d \in K, d\neq 0. \]
+\end{definition}
+
+To assure that the Hessian of the Lagrangian is well defined, the objective function has to the two times continuously differentiable. This is given for the quadratic objective function of (\ref{low_QP}).
+
+%From the LICQ follows that the KKT multiplier \(\mu^*\) at a minimum \((\tilde{w}^*,\xi^*)\) is unique.
+The matrix \(A_{I_+(\tilde{w}^*,\xi^*,\mu^*)}\) contains only the rows of the matrix \(A\) corresponding to strongly active constraints. 
 
 
 
 
 
+%In order to do this the lower level problem is considered in its constrained form. 
+
+%Let \(\tilde{w}^*\in \R^{n+1}\) denote the unique solution of the unconstrained problem. 
+%
+%Due to the equivalence of the two problem formulations the optimal slack variables of the constrained problem are given by \(\xi_i^* = 1-y_i\Langle \tilde{w}^*,\tilde{x}^i\Rangle\).
 
 
+\subsection{On Error Bounds and Regularity}
 
+\textcolor{red}{The algorithms \ref{sec_nonconv_inex}.1 and \ref{sec_variable_metric}.1 -- only one? } put some assumptions on the objective function and the nature of the inexactness. In this section we give a short comment on how far theses assumptions can be met.
+
+
+\subsubsection{Error Bounds}
+
+It is assumed in (\ref{err_bound}) that the error on the function value and subgradient are bounded. This bound does not have to be known, but it has to exist and allows an estimation of the possible accuracy to which the algorithm\textcolor{red}{s} can solve the given problem (c.f. Lemma \ref{Lemma5}).
+
+Due to the complicated structure of bilevel problems no tight error bounds can be given for problem (\ref{bilevel_fin}) but the existence of general error bounds can be shown.
+
+%no ``usefull'' error bounds due to complicated structure of bilevel problem \\
+%only can show that there exist some bounds \\
+
+The error on the function value in bilevel problems originates from the fact, that in the implicit approach the numerically calculated minimal point of the lower level is inserted into the upper level function.
+Of course, this optimal point can only be approximated to a given tolerance.
+As the lower level problem of (\ref{bilevel_fin}) is a strictly convex quadratic optimization problem, a very common stopping criterion is to check for approximate first order optimality.
+
+For constrained problems first order optimality means that the KKT conditions (which are necessary and sufficient in the convex case) are fulfilled.
+Approximate optimality then means, that the conditions hold true within the bounds of a chosen stopping tolerance \(\mathtt{tol}
+ >0\).
+
+The solver that is used for the numerical solution of the problem in this thesis is the \texttt{quadprog} solver from MATLAB. This solver uses the above stopping condition scaled by the input values \cite{2017}.
+
+This  however cannot give an estimate for the minimizing argument of the lower level objective.
+This can be seen when taking a strictly convex whose slope is so small, that the stopping condition is fulfilled for every point on a compact subset of the feasible set \(U_C\).
+In this case also the approximate minimizing point found by any algorithm can be any point in \(U_C\). 
+
+It still can be assured, that the minimizer \(\tilde{w}\) found by an algorithm is not infinitely far away from the exact minimizer \(\tilde{w}^*\).
+This follows immediately if the constraint set is compact. If it is unbounded in any direction this follows from strict convexity.
+Without loss of generality instead of the KKT conditions one can consider the first order optimality condition in the unconstrained case, namely that the norm of the gradient at a minimizer is zero. (Due to unboundedness of the constraint set is the examined directions the problem can be treated as an unconstrained one for them. In the direction where the constraint set is bounded, possible choices for \(\tilde{w}\) are also bounded.)
+For strictly convex functions the gradient is strictly monotone, hence the area where its norm is smaller or equal to any chosen tolerance is compact. This means that in this case all possible choices of \(\tilde{w}\) are bounded.
+
+Using local Lipschitz continuity of the upper level objective function on the admissible set we can conclude that
+
+\[ \Vert \mathcal{L}_{upp}(\tilde{w})-\mathcal{L}_{upp}(\tilde{w}^*) \Vert \leq L_{upp}\Vert \tilde{w}-\tilde{w}^* \Vert \leq  L_{upp} D_{\tilde{w}}(\mathtt{tol}) \]
+
+where \(  L_{upp}\) is the Lipschitz constant of the upper level objective on the admissible set. The number \(D_{\tilde{w}}(\mathtt{tol})\) is the maximal distance of points \(\tilde{w}_1\) and \(\tilde{w}_2\) in the compact set originating from the intersection of the constraint set and the set where the lower level objective has a gradient smaller than the chosen tolerance \(\mathtt{tol}\). 
+%Observing this, it is known however from \textcolor{red}{\cite[chapter 5]{Outrata1998}} that in case of strong regularity the solution map \textcolor{red}{\(C = S(\tilde{w})\)} is single valued and Lipschitz on the admissible set \textcolor{red}{U_{\textup{ad}}}.
+%This means that particularly for the exact minimizing argument \(\tilde{w}^*\) and for all \textcolor{red}{w im Urild der solution map...} the following estimate holds:
+%
+%\[ L_S\Vert \tilde{w}-\tilde{w}^* \Vert .\]
+%
+
+An equally loose bound can be provided for the approximate subgradient via local Lipschitz continuity of the upper level objective and Lipschitz continuity of the solution map \cite[chapter 5]{Outrata1998}.
+The inexactness of the subgradient has two reasons. On the one hand the subgradient is not calculated at the exact minimizer \(\tilde{w}^*\) but at an approximated point \(\tilde{w}\).
+
+Here the theory yields that
+\[ \Vert \mathcal{L}_{upp}(\tilde{w}(C_1))-\mathcal{L}_{upp}(\tilde{w}(C_2)) \Vert \leq L_{upp}\Vert \tilde{w}(C_1)-\tilde{w}(C_2) \Vert \leq  L_{upp} L_{w}\Vert C_1-C_2\Vert, \ \forall C_1, C_2 \in U_{ad}. \]
+
+As the subdifferential is bounded by the Lipschitz constant on an open, bounded set containing \(U_{ad}\) there exists a bound for part of the subgradient error originating from the subgradient only at an approximate point to the original iterate.
+
+On the other hand for computation of the subgradient the adjoint problem \textcolor{red}{ref} has to be solved numerically and therefore only gives an approximate solution.
+As the adjoint problem is also a strictly convex constrained optimization problem its minimizing argument \textcolor{red}{... name?} can be estimated the same way as above.
+
+Hence the following error inequality can be stated:
+
+\begin{align*}
+	\Langle \textcolor{red}{matrix*(\tilde{w}^*-\tilde{w})}, (p^*-p) \Rangle &\leq \Vert matrix \Vert \Vert(\tilde{w}^*-\tilde{w}) \Vert \Vert (p^*-p) \Vert \\
+	& \leq \Vert matrix \Vert D_{\tilde{w}} D_{p}.
+\end{align*}
+
+\textcolor{red}{check this inequality once again}
+\(D_{p}\) 'diameter' for \(p\).
+
+
+%\( f^j = \mathcal{L}_{upp}(C^j) = \mathcal{L}_{upp}(w(C^j))\) \\
+%\(w(C^j) \neq w^*(C^j)\)\\
+%Due to the compactness of the feasible set of the lower level problem there is a bound on how far \(w\) can be away from \(w^*\) (not more then the diameter of the feasible set) \\
+%Due to Lipschitz continuity of the upper level objective and the implicit function \(w(C)\) there is also a general bound on the subgradients of the upper level problem (the combines Lipschitz constant)
+
+\subsubsection{Regularity}
+
+For the proof of Lemma \ref{Lemma5} regularity of the upper level objective function with the solution map inserted is required.
+
+We have however to remark here, that from Proposition 7.4 in \cite{Outrata1998} only follows weak semismoothness of this function.
+In \cite[p. 82]{Spingarn1981} an example is given that semismooth, quasidifferentiable function does not have to be subdifferentially regular. As semismooth functions are a subset of weakly semismooth functions, we cannot conclude that the objective function of (\ref{bilevel_fin}) with the solution of the lower level plugged in is regular.
+
+Proving regularity for the particular instance (\ref{bilevel_fin}) of a bilevel problem may be possible, taking into account the structure provided by the strictly convex objective functions of both levels and the equivalence relations (3) in \cite[p. 5]{Hare2016}. It lies however beyond the scope of this thesis.
+
+%actually in Lemma 5 of \cite{Hare2016} the regularity of the objective function is needed because it entails outer semicontinuity of the subdifferential. If this is not the case, then only upper semicontinuity of the subdifferential is given.
+%Therefore I don't know if Lemma 5 still holds.
+
+%known to show regularity: local Lipschitz property of solution map\\
+%weak semismoothness of upper level objective with solution map inserted (p.134)\\
+%Solution map also semismooth? (p. 9)\\
+%def (weak) semismoothness p. 32
 
 
 \subsection{Numerical Experiments}
@@ -605,326 +773,326 @@ try matlab method (smooth) with subgradient???
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\subsubsection{Solution of the Bilevel Program}
-
-\textcolor{red}{ab hier: Theorie fehlt\\
-!!! notation - oder in prelininaries einfugen}
-%ingredients for bundle method
-
-To solve the given bilevel problem with the above presented nonconvex inexact bundle algorithm the algorithm jumps between the two levels. Once the inner level problems are solved for a given \(\lambda\) - this is possible with any QP-solver as the problems are convex - the bundle algorithm takes the outcome \(w\) and \(b\) and optimizes the hyper-parameter again.
-
-The difficulty with this approach is that the bundle algorithm needs one subgradient of the outer level objective function with respect to the parameter \(\lambda\). However to compute this subgradient also one subgradient of \(w\) and \(b\) with respect to \(\lambda\) has to be known.
-
-\textbf{The Differentiable Case}
-\textcolor{red}{example in differentiable case}\\
-Let us first assume that the outer and inner objective functions and \(w(\lambda)= \argmin \mathcal{L}_{low}(w,\lambda)\) are sufficiently often continuously differentiable to demonstrate the procedure of calculating the needed {(sub-)gradients}.
-
-Let \(\mathcal{L}_{upp}(w,\lambda)\) be the objective function of the outer level problem, where the variable \(b\) was left out for the sake of simplicity.
-To find an optimal hyper parameter \(\lambda\) given the input \(w\) the gradient \(g^{upp}_{\lambda}\) of \(\mathcal{L}_{upp}\) with respect to \(\lambda\) is needed in every iteration of the solving algorithm.
-In order to calculate this gradient the chain rule is used yielding
-
-\begin{equation*}
-	g^{upp}_{\lambda} = \left(\frac{\partial}{\partial w}\mathcal{L}_{upp}(w,\lambda) \right)^{\top}\frac{\partial w(\lambda)}{\partial\lambda}+\frac{\partial}{\partial \lambda}\mathcal{L}_{upp}(w,\lambda).
-\end{equation*}
-
-The challenge is here to find the term \(\frac{\partial w(\lambda)}{\partial\lambda}\) because 
-
-\[ \frac{\partial w}{\partial \lambda} \in \frac{\partial }{\partial \lambda} \argmin_{w} \mathcal{L}_{low}(w,\lambda). \]
-
-Assuming \(\mathcal{L}_{low}\) is twice continuously differentiable at the  optimal solution \(w^*\) of the lower level problem the optimality condition for any parameter \(\lambda_0 > 0\)
-
-\begin{equation}
-	0 = \frac{\partial}{\partial w}\mathcal{L}_{low}(w^*,\lambda_0)
-\label{opt_con}
-\end{equation}
-
-
-can be used to calculate the needed gradient in an indirect manner.
-
-In the differentiable case the theoretical framework for the following calculations is given by the implicit function theorem.
-
-\begin{theorem}[{c.f. \cite[chapter 3.4]{Koenigsberger2002}}]
-	Let \(F: U \times V \to Z \), \(U\in\R^m, V,Z\in \R^n \), be a \(\mathcal{C}^1\) mapping, \((x_0,y_0) \in U\times V\)  and \(F(x_0,y_0) = 0\). If the matrix \(\frac{\partial}{\partial y}F(x_0,y_0)\) is invertible, there exist neighborhoods \(U_0\subset U\) of \(x_0\) and \(V_0\subset V\) of \(y_0\) and a continuously differentiable mapping \(f:U_0 \to V_0\) with 
-	\begin{equation*}
-	F(x,y) = 0, (x,y)\in U_0\times V_0  \quad \Leftrightarrow \quad y = f(x), x\in U_0.
-	%\label{imp_fun_theo}
-	\end{equation*}
-\end{theorem}
-
-Identifying \(x \estimates \lambda\), \(y \estimates w\) and  \(F(x_0,y_0) \estimates \frac{\partial}{\partial w} \mathcal{L}_{low}(w^*,\lambda_0)\) and assuming \(\frac{\partial^2 }{\partial  w^2}\mathcal{L}_{low}(w^*,\lambda_0)\) is invertible this theorem provides the existence of the continuously differentiable function \(w(\lambda)\) whose gradient is needed. \\
-\textcolor{red}{what about the neighborhoods?}
-
-If the inner level loss function yields a linear optimality condition in \(w\) it is possible to calculate the gradient explicitly. This is for example the case for SVM loss functions with a squared one- or two-norm as given in problem (\ref{SVM_1}).
-The optimality condition can then be written as the linear system
-
-\begin{equation*}
-	H(\lambda)w = h(\lambda).
-\end{equation*}
-
-By taking the partial derivative with respect to \(\lambda\) on both sides of the system one gets
-
-\begin{equation*}
-	\frac{\partial H(\lambda)}{\partial \lambda}w+H(\lambda)\frac{\partial w}{\partial \lambda} = \frac{\partial h(\lambda)}{\partial  \lambda}.
-\end{equation*}
-
-If \(H(\lambda)\) is invertible for all \(\lambda \in \Lambda\) then the needed gradient is given by 
-
-\begin{equation*}
-	\frac{\partial w}{\partial \lambda} = H^{-1}(\lambda)\left(\frac{\partial h(\lambda)}{\partial \lambda}-\frac{\partial H(\lambda)}{\partial \lambda}w\right).
-\end{equation*}
-
-%\textcolor{red}{why H invertible??? - because we assume existence of \(w\)???}\\
-
-\textbf{The Nondifferentiable Case}
-\textcolor{red}{now for subgradients}
-
-In practice we cannot expect \(\mathcal{L}_{low}\) to satisfy such strong differentiability properties.
-It is therefore only assumed that \(\mathcal{L}_{low}\) is once continuously differentiable in \(w\). This assures that the optimality condition of the lower level problem is an equality like in (\ref{opt_con}).
-%If \(\mathcal{L}_{low}\) was only locally Lipschitz the optimality condition states that zero is part of the subgradient set  \(\partial \mathcal{L}_{low}(w^*,\lambda_0)\).  
-Contrary to the exemplary calculations from above in practice the second derivative \(\frac{\partial^2}{\partial w \partial \lambda} \mathcal{L}_{low}(w(\lambda),\lambda)\) however is not existent in this form, but a set of subgradients.
-
-
-
-\textcolor{red}{\textbf{Notation}}\\
-First the theoretical framework given to derive the results from above in the nondifferentiable case
-
-
-
-\textcolor{red}{An important result about Lipschitz functions is Rademacher's theorem which states that these functions are differentiable almost everywhere but on a set of Lebesgue measure zero\cite[Theorem 3.1]{Heinonen2004}. 
-Clarke deduces from this that the subdifferential at each of the nondifferentiable points is the convex hull of the limits of the sequence gradients a these points \cite[see Theorem 2.5.1]{Clarke1990}.}
-
-This motivates the multidimensional definition of Clake's generalized gradient 
-
-\textcolor{red}{
-\begin{definition}[{\cite[Definition 2.6.1]{Clarke1990}}]
-	\emph{generalized Jacobian}: \(F:\R^n \to \R^m\), with locally Lipschitz component functions \(F(x) = (f_1(x),...,f_m(x))\).\\
-	Denote generalized Jacobian by \(\partial F(x) = conv\left(\lim JF(x_i)|x_i\to x, x_i \notin \Omega_F \right) \) where \(\Omega_F\) is the set of nondifferentiable points of \(F\)
-\end{definition}
-(after that comes proposition with properties of \(\partial F\))}
-
-
-\textcolor{red}{To facilitate readability we use the following notation for the derivation of the nondifferentiable results.}
-
-The \emph{'partial' subdifferential} of a function \(f(a^*,b_0,c_0,...)\) at the point \(a^*\) with respect to one variable \(a\) when all other variables are fixed is denoted by 
-\begin{equation*}
-	\partial^{a} f(a^*,b_0,c_0,...).
-\end{equation*}
-
-A subgradient of this subdifferential is written \(g^{a} \in \partial^{a} f(a^*,b_0,c_0,...)\).
-
-Next step: show that chain rule is still valid in the nonsmooth case
-Chain rules for subdifferential \\
-
-\begin{theorem}[{\cite[Theorem 2.6.6]{Clarke1990}}]
-	Let \(f(x)=\phi(F(x))\), with the locally Lipschitz functions \(F: \R^n \to \R^m\) and \(\phi:\R^m \to \R\). Then \(f\) is locally Lipschitz and it holds
-	\begin{equation*}
-		\partial f \subset \text{conv}\left\{\partial \phi(F(x))\partial F(x)\right\}.
-	\end{equation*}
-	If in addition \(\phi\) is strictly differentiable at \(F(x)\), then equality holds.
-\end{theorem}
-
-\textcolor{red}{strictly differentiable: c.f. \cite[Theorem 9.17 and 9.18]{Rockafellar2009} locally Lipschitz continuous and at most one subgradient at the point in question (see also comment to Definition 91 in \cite{Rockafellar2009})}
-
-\begin{theorem}[c.f. {\cite[Theorem 7.1]{Rockafellar1985}}]
-	Let \(p(x) = f(F(x))\), where \(F:\R^n \to \R^d\) is locally Lipschitz and \(f:\R^d \to \R\) is lower semicontinuous. 
-	Assume \[\nexists y \in \partial^{\infty}f(F(\bar{x})), y \neq 0 \quad \text{with} \quad 0 \in y \partial F(\bar{x}). \]
-	Then for the sets 
-	\[ M(\bar{x}):= \partial f(F(\bar{x}))\partial F(\bar{x}), \quad M^{\infty}(\bar{x}):= \partial^{\infty}f(F(\bar{x}))\partial F(\bar{x}), \]
-	one has \(\hat{\partial}p(\bar{x}) \subset M(\bar{x})\) and \(\hat{\partial}^{\infty} p(\bar{x}) \subset M^{\infty}(\bar{x})\).
-\end{theorem}
-
-The main idea is to replace the inner level problem by its optimality condition
-
-
-\(\partial(w,b)\) means in this case that the subdifferential is taken with respect to the variables \(w\) and \(b\). \\
--> theory for subdifferentials in more than one variable!!! \\
-
-For convex inner level problem this replacement is equivalent to the original problem.
-
-The difference to the approach described in \cite{Kunapuli2008} is that the problem is not smoothly replaced by its KKT conditions but only by this optimality condition. The weight vector \(w\) and bias \(b\) are treated as a function of \(\lambda\) and are optimized separately from this hyper-parameter.
-The reformulated bilevel problem becomes:
-
-\begin{align}
-	\begin{split}
-	\min_{w,\bm{b}} \quad &  \mathcal{L}_{hinge}(w,\bm{b}) = \frac{1}{T}\sum_{t=1}^T\frac{1}{|\mathcal{N}_t|}\sum_{i \in \mathcal{N}_t}{\max\left(1-y_i((w^t)^{\top}x-b_t),0\right)}\\
-	\text{subject to} \quad & \lambda > 0 \\
-	& \text{for } t = 1,...,T \\
-	& 0 \in \partial(w,b)\mathcal{L}_{low}(\lambda,w^t,b_t) \\
-\end{split}
-\label{SVM_opt_cond}
-\end{align}
-
-where \(\mathcal{L}_{low}\) can be the objective function of either of the two presented lower level problems.
-
-
-
-solve the inner level problem (quadratic problem in constrained case) by some QP solver \\
-put solution into upper level problem and solve it by using bundle method \\
-difficulty: subgradient is needed to build model of the objective function --> need subgradient \(\frac{\partial \mathcal{L}}{\partial \lambda}\) --> for this need \(\frac{\partial (W,b)}{\partial \lambda}\) \\
-but \((w,b)\) not available as functions -> only values
-
-Moore et al. \cite{Moore2011} describe a method for getting the subgradient from the KKt-conditions of the lower level problem:
-
-lower level problem convex -> therefore optimality conditions (some nonsmooth version -> source???) necessary and sufficient -> make ``subgradient'' of optimality conditions and then derive subgradient of w, b from this. \\
----> what are the conditions? optimality condition Lipschitz? 
-
-Say (show) that all needed components are locally Lipschitz; state theorems about differentiability almost everywhere and convex hull of gradients gives set of subgradients\\
-introduce special notation (only for this section) and because of readability adopt ``gradient writing''
-
-Subgradients:
-\(\mathcal{G}_{upp,\lambda}, \mathcal{G}_{upp,w},\mathcal{G}_{upp,b}\) -> subgradients of outer objective \\
-\(g_w, g_b\) -> subgradient of w, b
-
-\[ final subgradient = \left(\mathcal{G}_{upp,w}(w,b,\lambda)\right)^{\top}g_w+\left(\mathcal{G}_{upp,b}(w,b,\lambda)\right)^{\top}g_b+\mathcal{G}_{upp,\lambda}(w,b,\lambda) 
-\label{subgr_upp}\]
-
-subgradients \(\mathcal{G}_{upp,...}\) easy to find (assumption that locally Lipschitz) -> in this application differentiable
-
-difficulty: find \(g_w, g_b\)
-important: optimality condition must be a linear system in \(w,b\) -> this is the case in this application
-\[ H(\lambda)\cdot (w,b)^{\top} = h(\lambda) \]
-
-find subgradients of each element (from differentiation rules follows)
-
-\[ \partial_{\lambda} H\cdot (w,b)^{\top} + H \cdot(\partial_{\lambda} w, \partial_{\lambda} b)^{\top} = \partial_{\lambda} h  \]
-
-solve this for \((w,b)\):
-\[ (\partial_{\lambda} w, \partial_{\lambda}b)^{\top} = H^{-1}\left(\partial_{\lambda}h-\partial_{\lambda} H \cdot(w,b)^{\top}\right) \]
-
-matrix \(H\) has to be inverted -> in the feature space so scalable with size of data set -> still can be very costly \cite{Moore2011}
-
-Applied to the two bilevel classification problems derived above, the subgradients have the following form:
-
-derivative of upper level objective:
-Notation: \(\delta_i := 1-y_i(w^{\top}x^i-b)\)
-
-\begin{align}
-	\partial_{w}\mathcal{L}_{upp}&= \frac{1}{T}\sum_{t=1}^T\frac{1}{\mathcal{N}_t}\sum_{i \in \mathcal{N}_t}{\left\{\begin{array}{cl} -y_ix^i & \text{if } \delta_i >0 \\ 0 & \text{if } \delta_i \leq 0 \end{array} \right.} \\
-	\partial_{b}\mathcal{L}_{upp}&= \frac{1}{T}\sum_{t=1}^T\frac{1}{\mathcal{N}_t}\sum_{i \in \mathcal{N}_t}{\left\{\begin{array}{cl} y_i & \text{if } \delta_i >0 \\ 0 & \text{if } \delta_i \leq 0 \end{array} \right.}
-	\end{align}
-	
-	here at the kink subgradient 0 is taken
-
-for hingequad: -> here subgradient \\
-optimality condition:
-\begin{align}
-	0 = \partial_{w}\mathcal{L}_{low} &= \lambda w+2\sum_{i \in \bar{\mathcal{N}_t}}{\left\{\begin{array}{cl} (1-y_i(w^{\top}x^i-b))(-y_ix^i) & \text{if } \delta_i >0 \\ 0 & \text{if } \delta_i \leq 0 \end{array} \right.} \\
-	0 = \partial_b\mathcal{L}_{low} &= 2\sum_{i \in \bar{\mathcal{N}_t}}{\left\{\begin{array}{cl} (1-y_i(w^{\top}x^i-b))(y_i) & \text{if } \delta_i >0 \\ 0 & \text{if } \delta_i \leq 0 \end{array} \right.}
-	\end{align}
-	
-subgradient??? is this smooth? with respect to \(\lambda\)
-\begin{align}
-	0 &= w+\lambda\partial_{\lambda}w+2\sum_{i \in \bar{\mathcal{N}_t}}{\left\{\begin{array}{cl} (-y_i(\partial_{\lambda}w^{\top}x^i-\partial_{\lambda}b))(-y_ix^i) & \text{if } \delta_i >0 \\ 0 & \text{if } \delta_i \leq 0 \end{array} \right.} \\
-	0 &= 2\sum_{i \in \bar{\mathcal{N}_t}}{\left\{\begin{array}{cl} (-y_i(\partial_{\lambda}w^{\top}x^i-\partial_{\lambda}b))(y_i) & \text{if } \delta_i >0 \\ 0 & \text{if } \delta_i \leq 0 \end{array} \right.}
-\end{align}
-
-From this the needed subgradients can be calculated via:
-
-\begin{equation}
-	2\cdot\begin{pmatrix} \frac{\lambda}{2}+\sum_{i \in \bar{\mathcal{N}_t}}{y_i^2x^i(x^i)^{\top}} & \sum_{i \in \bar{\mathcal{N}_t}}	{-y_i^2x^i} \\ \sum_{i \in \bar{\mathcal{N}_t}}{-y_i^2(x^i)^{\top}} & \sum_{i \in \bar{\mathcal{N}_t}}{y_i^2}\end{pmatrix}
-	\cdot \begin{pmatrix} \partial_{\lambda}w \\ \partial_{\lambda}b\end{pmatrix}
-	= \begin{pmatrix}-w \\ 0\end{pmatrix}
-\label{subgr_wb}
-\end{equation}
-
-for hinge not quad:
-
-not as much information in the subgradient/derivative
-
-similar calculation leads to 
-
-\begin{align}
-	\partial_{\lambda}w &= -\frac{w}{\lambda} \\
-	\partial_{\lambda}b &= 0
-\end{align}
-
-\textcolor{red}{does not work with just Hingeloss because set valued optimality condition --> have to find ``corresponding'' equation to the chosen subgradient --> do not know how}
-
-\subsubsection{Multi Group Model}
-
-Idea: different samples within the group have different have different quality --> put the samples with similar quality within one group --> give it its own \(\lambda_g\) such that the groups are weighted depending on their quality.
-
-two goals: better modleing and implicit information about the groups provided by the parameter \(\lambda_g\) -> small \(\lambda\) good quality, large \(\lambda\) bad quality???
-
-Examle: different people do same experiment; measure same data...
-
-\textbf{Model (Bilevel Problem)}
-
-
-for simplicity: all groups of same size; in all folds same number of elements of each group
-
-!! not possible to work with \(\lambda\) here, have to work with \(C\)-Formulation
-
-
-
-matrices for MATLAB calculations:
-
-\begin{equation*}
-\begin{split}
-	& \frac{1}{2} \langle x,Hx \rangle + h \\
-	& Ax \leq b
-\end{split}
-\end{equation*}
-
-\begin{equation}
-	H = \begin{pmatrix}
-		\mathbb{I}_{n\times n} \\
-		& 0 \\
-		& & 2 C \\
-	\end{pmatrix}
-	\in \R^{feat+1+J\max\{T-1,1\}G\times feat+1+J\max\{T-1,1\}G}
-\end{equation}
-
-\[ h = 0, \qquad A = \begin{pmatrix} -YX^{\top} & Y & -\mathbb{I}_{J\max\{T-1,1\}G \times J\max\{T-1,1\}G} \\ \end{pmatrix},  \qquad b = -\mathtt{ones}(J\max\{T-1,1\}G,1) \] 
-
-with \(C = [\underbrace{c_1,...,c_1}_{J\max\{T-1,1\} \text{ times}},c_2,...,c_2,...,c_G,...,c_G]^{\top}\).
-
-\textbf{Derivatives}
-
-overall gradient:
-	\[ \frac{\textup{d}\mathcal{L}_{upp}}{\textup{d}\lambda} = {\underbrace{\frac{\partial \mathcal{L}_{upp}}{\partial (w,b)}}_{\in \R^{n+1}}} ^{\top} \underbrace{\frac{\partial (w,b)}{\partial \lambda}}_{\in \R^{n+1 \times G}} \in \R^G\]
-
-
-gradient outer level objective: 
-	\[ \frac{\partial \mathcal{L}_{upp}}{\partial w} = \frac{1}{T}\sum_{t=1}^T\frac{1}{|\mathcal{N}_t|}\sum_{i \in \mathcal{N}_t} \delta_i \left( -y_i x^i\right) \in \R^n\]
-	
-	\[ \frac{\partial \mathcal{L}_{upp}}{\partial b} = \frac{1}{T}\sum_{t=1}^T\frac{1}{|\mathcal{N}_t|}\sum_{i \in \mathcal{N}_t} \delta_i y_i \in \R\]
-	
-	\[ \delta_i = \left\{ \begin{array}{cl} 1 & \text{if } 1-y_i\left(\Langle w,x^i\Rangle-b\right) > 0 \\
-		0 & \text{else}\end{array} \right.\]
-
-
-in MATLAB: 
-	\[ \frac{\partial \mathcal{L}_{upp}}{\partial w} = \frac{1}{T}\texttt{sum}(-\texttt{bsxfun}(\texttt{@times},X,\texttt{delta}.*Y) ,2) \in \R^n\]
-	
-	\[ \frac{\partial \mathcal{L}_{upp}}{\partial b} = \frac{1}{T}\texttt{sum}(\texttt{delta}.*Y ,1) \in \R\]
-	
-	
-gradient lower level objective:\\
-first optimality conditions \(0 = \frac{\partial \mathcal{L}_{low}}{\partial w}, 0 = \frac{\partial \mathcal{L}_{low}}{\partial b}\):
-	\[ 0 = {\sum_{g = 1}^G(\lambda_g}w) + 2\sum_{i \in \bar{\mathcal{N}}_t}\delta_i \left\{1-y_i\left(\Langle w,x^i\Rangle -b\right) \right\}(-y_ix^i) \in \R^n \]
-		
-	\[0 = 2\sum_{i \in \bar{\mathcal{N}}_t}\delta_i \left\{1-y_i\left(\Langle w,x^i\Rangle -b\right) \right\}(y_i) \in \R \]
-	
-	derivatives with respect to \(\lambda_g, g = 1,...,G\), then \(\in \R^{n+1 \times G}\)
-	
-	write one column of the matrix \(\in \R^{n+1}\) \(\to\) \(G\) such columns:
-	
-	\[ 0 = w + \lambda_g\frac{\partial w}{\partial \lambda_g} + 2 \sum_{i \in  \bar{\mathcal{N}}_t} \delta_i \left(y_i^2x^i(x^i)^{\top}\frac{\partial w}{\partial \lambda_g} - y_i^2x^i \frac{\partial b}{\partial \lambda_g}\right) \in \R^n \]
-	
-	\[ 0 = 2\sum_{i \in  \bar{\mathcal{N}}_t} \delta_i \left(-y_i^2(x^i)^{\top} \frac{\partial w}{\partial \lambda_g} + y_i^2 \frac{\partial b}{\partial \lambda_g}\right) \in \R\] 
-
-
-	rewrite to calculate \([\partial w / \partial \lambda, \partial b / \partial \lambda]^{\top} \in \R^{n+1 \times G}\) \(\to\) have to calculate every column of this matrix on its own \\
-	solve \(G\) times this system of equations
-	
-	\[ 2\begin{pmatrix} \frac{\lambda_g}{2}\mathbb{I}+\sum_{i \in  \bar{\mathcal{N}}_t}{\delta_i(y_i^2x^i(x^i)^{\top})} &  \sum_{i \in  \bar{\mathcal{N}}_t} \delta_i (- y_i^2x^i )	\\
-	\sum_{i \in  \bar{\mathcal{N}}_t} \delta_i (-y_i^2(x^i)^{\top}) & \sum_{i \in  \bar{\mathcal{N}}_t} \delta_i (y_i^2 )
-	\end{pmatrix} 
-	\begin{pmatrix}	\frac{\partial w}{\partial \lambda_g} \\ \frac{\partial b}{\partial \lambda_g}
-	\end{pmatrix} 
-	= \begin{pmatrix} -w \\ 0	\end{pmatrix} \]
-
+%\subsubsection{Solution of the Bilevel Program}
+%
+%\textcolor{red}{ab hier: Theorie fehlt\\
+%!!! notation - oder in prelininaries einfugen}
+%%ingredients for bundle method
+%
+%To solve the given bilevel problem with the above presented nonconvex inexact bundle algorithm the algorithm jumps between the two levels. Once the inner level problems are solved for a given \(\lambda\) - this is possible with any QP-solver as the problems are convex - the bundle algorithm takes the outcome \(w\) and \(b\) and optimizes the hyper-parameter again.
+%
+%The difficulty with this approach is that the bundle algorithm needs one subgradient of the outer level objective function with respect to the parameter \(\lambda\). However to compute this subgradient also one subgradient of \(w\) and \(b\) with respect to \(\lambda\) has to be known.
+%
+%\textbf{The Differentiable Case}
+%\textcolor{red}{example in differentiable case}\\
+%Let us first assume that the outer and inner objective functions and \(w(\lambda)= \argmin \mathcal{L}_{low}(w,\lambda)\) are sufficiently often continuously differentiable to demonstrate the procedure of calculating the needed {(sub-)gradients}.
+%
+%Let \(\mathcal{L}_{upp}(w,\lambda)\) be the objective function of the outer level problem, where the variable \(b\) was left out for the sake of simplicity.
+%To find an optimal hyper parameter \(\lambda\) given the input \(w\) the gradient \(g^{upp}_{\lambda}\) of \(\mathcal{L}_{upp}\) with respect to \(\lambda\) is needed in every iteration of the solving algorithm.
+%In order to calculate this gradient the chain rule is used yielding
+%
+%\begin{equation*}
+	%g^{upp}_{\lambda} = \left(\frac{\partial}{\partial w}\mathcal{L}_{upp}(w,\lambda) \right)^{\top}\frac{\partial w(\lambda)}{\partial\lambda}+\frac{\partial}{\partial \lambda}\mathcal{L}_{upp}(w,\lambda).
+%\end{equation*}
+%
+%The challenge is here to find the term \(\frac{\partial w(\lambda)}{\partial\lambda}\) because 
+%
+%\[ \frac{\partial w}{\partial \lambda} \in \frac{\partial }{\partial \lambda} \argmin_{w} \mathcal{L}_{low}(w,\lambda). \]
+%
+%Assuming \(\mathcal{L}_{low}\) is twice continuously differentiable at the  optimal solution \(w^*\) of the lower level problem the optimality condition for any parameter \(\lambda_0 > 0\)
+%
+%\begin{equation}
+	%0 = \frac{\partial}{\partial w}\mathcal{L}_{low}(w^*,\lambda_0)
+%\label{opt_con}
+%\end{equation}
+%
+%
+%can be used to calculate the needed gradient in an indirect manner.
+%
+%In the differentiable case the theoretical framework for the following calculations is given by the implicit function theorem.
+%
+%\begin{theorem}[{c.f. \cite[chapter 3.4]{Koenigsberger2002}}]
+	%Let \(F: U \times V \to Z \), \(U\in\R^m, V,Z\in \R^n \), be a \(\mathcal{C}^1\) mapping, \((x_0,y_0) \in U\times V\)  and \(F(x_0,y_0) = 0\). If the matrix \(\frac{\partial}{\partial y}F(x_0,y_0)\) is invertible, there exist neighborhoods \(U_0\subset U\) of \(x_0\) and \(V_0\subset V\) of \(y_0\) and a continuously differentiable mapping \(f:U_0 \to V_0\) with 
+	%\begin{equation*}
+	%F(x,y) = 0, (x,y)\in U_0\times V_0  \quad \Leftrightarrow \quad y = f(x), x\in U_0.
+	%%\label{imp_fun_theo}
+	%\end{equation*}
+%\end{theorem}
+%
+%Identifying \(x \estimates \lambda\), \(y \estimates w\) and  \(F(x_0,y_0) \estimates \frac{\partial}{\partial w} \mathcal{L}_{low}(w^*,\lambda_0)\) and assuming \(\frac{\partial^2 }{\partial  w^2}\mathcal{L}_{low}(w^*,\lambda_0)\) is invertible this theorem provides the existence of the continuously differentiable function \(w(\lambda)\) whose gradient is needed. \\
+%\textcolor{red}{what about the neighborhoods?}
+%
+%If the inner level loss function yields a linear optimality condition in \(w\) it is possible to calculate the gradient explicitly. This is for example the case for SVM loss functions with a squared one- or two-norm as given in problem (\ref{SVM_2}).
+%The optimality condition can then be written as the linear system
+%
+%\begin{equation*}
+	%H(\lambda)w = h(\lambda).
+%\end{equation*}
+%
+%By taking the partial derivative with respect to \(\lambda\) on both sides of the system one gets
+%
+%\begin{equation*}
+	%\frac{\partial H(\lambda)}{\partial \lambda}w+H(\lambda)\frac{\partial w}{\partial \lambda} = \frac{\partial h(\lambda)}{\partial  \lambda}.
+%\end{equation*}
+%
+%If \(H(\lambda)\) is invertible for all \(\lambda \in \Lambda\) then the needed gradient is given by 
+%
+%\begin{equation*}
+	%\frac{\partial w}{\partial \lambda} = H^{-1}(\lambda)\left(\frac{\partial h(\lambda)}{\partial \lambda}-\frac{\partial H(\lambda)}{\partial \lambda}w\right).
+%\end{equation*}
+%
+%%\textcolor{red}{why H invertible??? - because we assume existence of \(w\)???}\\
+%
+%\textbf{The Nondifferentiable Case}
+%\textcolor{red}{now for subgradients}
+%
+%In practice we cannot expect \(\mathcal{L}_{low}\) to satisfy such strong differentiability properties.
+%It is therefore only assumed that \(\mathcal{L}_{low}\) is once continuously differentiable in \(w\). This assures that the optimality condition of the lower level problem is an equality like in (\ref{opt_con}).
+%%If \(\mathcal{L}_{low}\) was only locally Lipschitz the optimality condition states that zero is part of the subgradient set  \(\partial \mathcal{L}_{low}(w^*,\lambda_0)\).  
+%Contrary to the exemplary calculations from above in practice the second derivative \(\frac{\partial^2}{\partial w \partial \lambda} \mathcal{L}_{low}(w(\lambda),\lambda)\) however is not existent in this form, but a set of subgradients.
+%
+%
+%
+%\textcolor{red}{\textbf{Notation}}\\
+%First the theoretical framework given to derive the results from above in the nondifferentiable case
+%
+%
+%
+%\textcolor{red}{An important result about Lipschitz functions is Rademacher's theorem which states that these functions are differentiable almost everywhere but on a set of Lebesgue measure zero\cite[Theorem 3.1]{Heinonen2004}. 
+%Clarke deduces from this that the subdifferential at each of the nondifferentiable points is the convex hull of the limits of the sequence gradients a these points \cite[see Theorem 2.5.1]{Clarke1990}.}
+%
+%This motivates the multidimensional definition of Clake's generalized gradient 
+%
+%\textcolor{red}{
+%\begin{definition}[{\cite[Definition 2.6.1]{Clarke1990}}]
+	%\emph{generalized Jacobian}: \(F:\R^n \to \R^m\), with locally Lipschitz component functions \(F(x) = (f_1(x),...,f_m(x))\).\\
+	%Denote generalized Jacobian by \(\partial F(x) = conv\left(\lim JF(x_i)|x_i\to x, x_i \notin \Omega_F \right) \) where \(\Omega_F\) is the set of nondifferentiable points of \(F\)
+%\end{definition}
+%(after that comes proposition with properties of \(\partial F\))}
+%
+%
+%\textcolor{red}{To facilitate readability we use the following notation for the derivation of the nondifferentiable results.}
+%
+%The \emph{'partial' subdifferential} of a function \(f(a^*,b_0,c_0,...)\) at the point \(a^*\) with respect to one variable \(a\) when all other variables are fixed is denoted by 
+%\begin{equation*}
+	%\partial^{a} f(a^*,b_0,c_0,...).
+%\end{equation*}
+%
+%A subgradient of this subdifferential is written \(g^{a} \in \partial^{a} f(a^*,b_0,c_0,...)\).
+%
+%Next step: show that chain rule is still valid in the nonsmooth case
+%Chain rules for subdifferential \\
+%
+%\begin{theorem}[{\cite[Theorem 2.6.6]{Clarke1990}}]
+	%Let \(f(x)=\phi(F(x))\), with the locally Lipschitz functions \(F: \R^n \to \R^m\) and \(\phi:\R^m \to \R\). Then \(f\) is locally Lipschitz and it holds
+	%\begin{equation*}
+		%\partial f \subset \text{conv}\left\{\partial \phi(F(x))\partial F(x)\right\}.
+	%\end{equation*}
+	%If in addition \(\phi\) is strictly differentiable at \(F(x)\), then equality holds.
+%\end{theorem}
+%
+%\textcolor{red}{strictly differentiable: c.f. \cite[Theorem 9.17 and 9.18]{Rockafellar2009} locally Lipschitz continuous and at most one subgradient at the point in question (see also comment to Definition 91 in \cite{Rockafellar2009})}
+%
+%\begin{theorem}[c.f. {\cite[Theorem 7.1]{Rockafellar1985}}]
+	%Let \(p(x) = f(F(x))\), where \(F:\R^n \to \R^d\) is locally Lipschitz and \(f:\R^d \to \R\) is lower semicontinuous. 
+	%Assume \[\nexists y \in \partial^{\infty}f(F(\bar{x})), y \neq 0 \quad \text{with} \quad 0 \in y \partial F(\bar{x}). \]
+	%Then for the sets 
+	%\[ M(\bar{x}):= \partial f(F(\bar{x}))\partial F(\bar{x}), \quad M^{\infty}(\bar{x}):= \partial^{\infty}f(F(\bar{x}))\partial F(\bar{x}), \]
+	%one has \(\hat{\partial}p(\bar{x}) \subset M(\bar{x})\) and \(\hat{\partial}^{\infty} p(\bar{x}) \subset M^{\infty}(\bar{x})\).
+%\end{theorem}
+%
+%The main idea is to replace the inner level problem by its optimality condition
+%
+%
+%\(\partial(w,b)\) means in this case that the subdifferential is taken with respect to the variables \(w\) and \(b\). \\
+%-> theory for subdifferentials in more than one variable!!! \\
+%
+%For convex inner level problem this replacement is equivalent to the original problem.
+%
+%The difference to the approach described in \cite{Kunapuli2008} is that the problem is not smoothly replaced by its KKT conditions but only by this optimality condition. The weight vector \(w\) and bias \(b\) are treated as a function of \(\lambda\) and are optimized separately from this hyper-parameter.
+%The reformulated bilevel problem becomes:
+%
+%\begin{align}
+	%\begin{split}
+	%\min_{w,\bm{b}} \quad &  \mathcal{L}_{hinge}(w,\bm{b}) = \frac{1}{T}\sum_{t=1}^T\frac{1}{|\mathcal{N}_t|}\sum_{i \in \mathcal{N}_t}{\max\left(1-y_i((w^t)^{\top}x-b_t),0\right)}\\
+	%\text{subject to} \quad & \lambda > 0 \\
+	%& \text{for } t = 1,...,T \\
+	%& 0 \in \partial(w,b)\mathcal{L}_{low}(\lambda,w^t,b_t) \\
+%\end{split}
+%\label{SVM_opt_cond}
+%\end{align}
+%
+%where \(\mathcal{L}_{low}\) can be the objective function of either of the two presented lower level problems.
+%
+%
+%
+%solve the inner level problem (quadratic problem in constrained case) by some QP solver \\
+%put solution into upper level problem and solve it by using bundle method \\
+%difficulty: subgradient is needed to build model of the objective function --> need subgradient \(\frac{\partial \mathcal{L}}{\partial \lambda}\) --> for this need \(\frac{\partial (W,b)}{\partial \lambda}\) \\
+%but \((w,b)\) not available as functions -> only values
+%
+%Moore et al. \cite{Moore2011} describe a method for getting the subgradient from the KKt-conditions of the lower level problem:
+%
+%lower level problem convex -> therefore optimality conditions (some nonsmooth version -> source???) necessary and sufficient -> make ``subgradient'' of optimality conditions and then derive subgradient of w, b from this. \\
+%---> what are the conditions? optimality condition Lipschitz? 
+%
+%Say (show) that all needed components are locally Lipschitz; state theorems about differentiability almost everywhere and convex hull of gradients gives set of subgradients\\
+%introduce special notation (only for this section) and because of readability adopt ``gradient writing''
+%
+%Subgradients:
+%\(\mathcal{G}_{upp,\lambda}, \mathcal{G}_{upp,w},\mathcal{G}_{upp,b}\) -> subgradients of outer objective \\
+%\(g_w, g_b\) -> subgradient of w, b
+%
+%\[ final subgradient = \left(\mathcal{G}_{upp,w}(w,b,\lambda)\right)^{\top}g_w+\left(\mathcal{G}_{upp,b}(w,b,\lambda)\right)^{\top}g_b+\mathcal{G}_{upp,\lambda}(w,b,\lambda) 
+%\label{subgr_upp}\]
+%
+%subgradients \(\mathcal{G}_{upp,...}\) easy to find (assumption that locally Lipschitz) -> in this application differentiable
+%
+%difficulty: find \(g_w, g_b\)
+%important: optimality condition must be a linear system in \(w,b\) -> this is the case in this application
+%\[ H(\lambda)\cdot (w,b)^{\top} = h(\lambda) \]
+%
+%find subgradients of each element (from differentiation rules follows)
+%
+%\[ \partial_{\lambda} H\cdot (w,b)^{\top} + H \cdot(\partial_{\lambda} w, \partial_{\lambda} b)^{\top} = \partial_{\lambda} h  \]
+%
+%solve this for \((w,b)\):
+%\[ (\partial_{\lambda} w, \partial_{\lambda}b)^{\top} = H^{-1}\left(\partial_{\lambda}h-\partial_{\lambda} H \cdot(w,b)^{\top}\right) \]
+%
+%matrix \(H\) has to be inverted -> in the feature space so scalable with size of data set -> still can be very costly \cite{Moore2011}
+%
+%Applied to the two bilevel classification problems derived above, the subgradients have the following form:
+%
+%derivative of upper level objective:
+%Notation: \(\delta_i := 1-y_i(w^{\top}x^i-b)\)
+%
+%\begin{align}
+	%\partial_{w}\mathcal{L}_{upp}&= \frac{1}{T}\sum_{t=1}^T\frac{1}{\mathcal{N}_t}\sum_{i \in \mathcal{N}_t}{\left\{\begin{array}{cl} -y_ix^i & \text{if } \delta_i >0 \\ 0 & \text{if } \delta_i \leq 0 \end{array} \right.} \\
+	%\partial_{b}\mathcal{L}_{upp}&= \frac{1}{T}\sum_{t=1}^T\frac{1}{\mathcal{N}_t}\sum_{i \in \mathcal{N}_t}{\left\{\begin{array}{cl} y_i & \text{if } \delta_i >0 \\ 0 & \text{if } \delta_i \leq 0 \end{array} \right.}
+	%\end{align}
+	%
+	%here at the kink subgradient 0 is taken
+%
+%for hingequad: -> here subgradient \\
+%optimality condition:
+%\begin{align}
+	%0 = \partial_{w}\mathcal{L}_{low} &= \lambda w+2\sum_{i \in \bar{\mathcal{N}_t}}{\left\{\begin{array}{cl} (1-y_i(w^{\top}x^i-b))(-y_ix^i) & \text{if } \delta_i >0 \\ 0 & \text{if } \delta_i \leq 0 \end{array} \right.} \\
+	%0 = \partial_b\mathcal{L}_{low} &= 2\sum_{i \in \bar{\mathcal{N}_t}}{\left\{\begin{array}{cl} (1-y_i(w^{\top}x^i-b))(y_i) & \text{if } \delta_i >0 \\ 0 & \text{if } \delta_i \leq 0 \end{array} \right.}
+	%\end{align}
+	%
+%subgradient??? is this smooth? with respect to \(\lambda\)
+%\begin{align}
+	%0 &= w+\lambda\partial_{\lambda}w+2\sum_{i \in \bar{\mathcal{N}_t}}{\left\{\begin{array}{cl} (-y_i(\partial_{\lambda}w^{\top}x^i-\partial_{\lambda}b))(-y_ix^i) & \text{if } \delta_i >0 \\ 0 & \text{if } \delta_i \leq 0 \end{array} \right.} \\
+	%0 &= 2\sum_{i \in \bar{\mathcal{N}_t}}{\left\{\begin{array}{cl} (-y_i(\partial_{\lambda}w^{\top}x^i-\partial_{\lambda}b))(y_i) & \text{if } \delta_i >0 \\ 0 & \text{if } \delta_i \leq 0 \end{array} \right.}
+%\end{align}
+%
+%From this the needed subgradients can be calculated via:
+%
+%\begin{equation}
+	%2\cdot\begin{pmatrix} \frac{\lambda}{2}+\sum_{i \in \bar{\mathcal{N}_t}}{y_i^2x^i(x^i)^{\top}} & \sum_{i \in \bar{\mathcal{N}_t}}	{-y_i^2x^i} \\ \sum_{i \in \bar{\mathcal{N}_t}}{-y_i^2(x^i)^{\top}} & \sum_{i \in \bar{\mathcal{N}_t}}{y_i^2}\end{pmatrix}
+	%\cdot \begin{pmatrix} \partial_{\lambda}w \\ \partial_{\lambda}b\end{pmatrix}
+	%= \begin{pmatrix}-w \\ 0\end{pmatrix}
+%\label{subgr_wb}
+%\end{equation}
+%
+%for hinge not quad:
+%
+%not as much information in the subgradient/derivative
+%
+%similar calculation leads to 
+%
+%\begin{align}
+	%\partial_{\lambda}w &= -\frac{w}{\lambda} \\
+	%\partial_{\lambda}b &= 0
+%\end{align}
+%
+%\textcolor{red}{does not work with just Hingeloss because set valued optimality condition --> have to find ``corresponding'' equation to the chosen subgradient --> do not know how}
+%
+%\subsubsection{Multi Group Model}
+%
+%Idea: different samples within the group have different have different quality --> put the samples with similar quality within one group --> give it its own \(\lambda_g\) such that the groups are weighted depending on their quality.
+%
+%two goals: better modleing and implicit information about the groups provided by the parameter \(\lambda_g\) -> small \(\lambda\) good quality, large \(\lambda\) bad quality???
+%
+%Examle: different people do same experiment; measure same data...
+%
+%\textbf{Model (Bilevel Problem)}
+%
+%
+%for simplicity: all groups of same size; in all folds same number of elements of each group
+%
+%!! not possible to work with \(\lambda\) here, have to work with \(C\)-Formulation
+%
+%
+%
+%matrices for MATLAB calculations:
+%
+%\begin{equation*}
+%\begin{split}
+	%& \frac{1}{2} \langle x,Hx \rangle + h \\
+	%& Ax \leq b
+%\end{split}
+%\end{equation*}
+%
+%\begin{equation}
+	%H = \begin{pmatrix}
+		%\mathbb{I}_{n\times n} \\
+		%& 0 \\
+		%& & 2 C \\
+	%\end{pmatrix}
+	%\in \R^{feat+1+J\max\{T-1,1\}G\times feat+1+J\max\{T-1,1\}G}
+%\end{equation}
+%
+%\[ h = 0, \qquad A = \begin{pmatrix} -YX^{\top} & Y & -\mathbb{I}_{J\max\{T-1,1\}G \times J\max\{T-1,1\}G} \\ \end{pmatrix},  \qquad b = -\mathtt{ones}(J\max\{T-1,1\}G,1) \] 
+%
+%with \(C = [\underbrace{c_1,...,c_1}_{J\max\{T-1,1\} \text{ times}},c_2,...,c_2,...,c_G,...,c_G]^{\top}\).
+%
+%\textbf{Derivatives}
+%
+%overall gradient:
+	%\[ \frac{\textup{d}\mathcal{L}_{upp}}{\textup{d}\lambda} = {\underbrace{\frac{\partial \mathcal{L}_{upp}}{\partial (w,b)}}_{\in \R^{n+1}}} ^{\top} \underbrace{\frac{\partial (w,b)}{\partial \lambda}}_{\in \R^{n+1 \times G}} \in \R^G\]
+%
+%
+%gradient outer level objective: 
+	%\[ \frac{\partial \mathcal{L}_{upp}}{\partial w} = \frac{1}{T}\sum_{t=1}^T\frac{1}{|\mathcal{N}_t|}\sum_{i \in \mathcal{N}_t} \delta_i \left( -y_i x^i\right) \in \R^n\]
+	%
+	%\[ \frac{\partial \mathcal{L}_{upp}}{\partial b} = \frac{1}{T}\sum_{t=1}^T\frac{1}{|\mathcal{N}_t|}\sum_{i \in \mathcal{N}_t} \delta_i y_i \in \R\]
+	%
+	%\[ \delta_i = \left\{ \begin{array}{cl} 1 & \text{if } 1-y_i\left(\Langle w,x^i\Rangle-b\right) > 0 \\
+		%0 & \text{else}\end{array} \right.\]
+%
+%
+%in MATLAB: 
+	%\[ \frac{\partial \mathcal{L}_{upp}}{\partial w} = \frac{1}{T}\texttt{sum}(-\texttt{bsxfun}(\texttt{@times},X,\texttt{delta}.*Y) ,2) \in \R^n\]
+	%
+	%\[ \frac{\partial \mathcal{L}_{upp}}{\partial b} = \frac{1}{T}\texttt{sum}(\texttt{delta}.*Y ,1) \in \R\]
+	%
+	%
+%gradient lower level objective:\\
+%first optimality conditions \(0 = \frac{\partial \mathcal{L}_{low}}{\partial w}, 0 = \frac{\partial \mathcal{L}_{low}}{\partial b}\):
+	%\[ 0 = {\sum_{g = 1}^G(\lambda_g}w) + 2\sum_{i \in \bar{\mathcal{N}}_t}\delta_i \left\{1-y_i\left(\Langle w,x^i\Rangle -b\right) \right\}(-y_ix^i) \in \R^n \]
+		%
+	%\[0 = 2\sum_{i \in \bar{\mathcal{N}}_t}\delta_i \left\{1-y_i\left(\Langle w,x^i\Rangle -b\right) \right\}(y_i) \in \R \]
+	%
+	%derivatives with respect to \(\lambda_g, g = 1,...,G\), then \(\in \R^{n+1 \times G}\)
+	%
+	%write one column of the matrix \(\in \R^{n+1}\) \(\to\) \(G\) such columns:
+	%
+	%\[ 0 = w + \lambda_g\frac{\partial w}{\partial \lambda_g} + 2 \sum_{i \in  \bar{\mathcal{N}}_t} \delta_i \left(y_i^2x^i(x^i)^{\top}\frac{\partial w}{\partial \lambda_g} - y_i^2x^i \frac{\partial b}{\partial \lambda_g}\right) \in \R^n \]
+	%
+	%\[ 0 = 2\sum_{i \in  \bar{\mathcal{N}}_t} \delta_i \left(-y_i^2(x^i)^{\top} \frac{\partial w}{\partial \lambda_g} + y_i^2 \frac{\partial b}{\partial \lambda_g}\right) \in \R\] 
+%
+%
+	%rewrite to calculate \([\partial w / \partial \lambda, \partial b / \partial \lambda]^{\top} \in \R^{n+1 \times G}\) \(\to\) have to calculate every column of this matrix on its own \\
+	%solve \(G\) times this system of equations
+	%
+	%\[ 2\begin{pmatrix} \frac{\lambda_g}{2}\mathbb{I}+\sum_{i \in  \bar{\mathcal{N}}_t}{\delta_i(y_i^2x^i(x^i)^{\top})} &  \sum_{i \in  \bar{\mathcal{N}}_t} \delta_i (- y_i^2x^i )	\\
+	%\sum_{i \in  \bar{\mathcal{N}}_t} \delta_i (-y_i^2(x^i)^{\top}) & \sum_{i \in  \bar{\mathcal{N}}_t} \delta_i (y_i^2 )
+	%\end{pmatrix} 
+	%\begin{pmatrix}	\frac{\partial w}{\partial \lambda_g} \\ \frac{\partial b}{\partial \lambda_g}
+	%\end{pmatrix} 
+	%= \begin{pmatrix} -w \\ 0	\end{pmatrix} \]
+%
 
 
 

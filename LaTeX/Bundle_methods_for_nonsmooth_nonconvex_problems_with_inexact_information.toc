@@ -26,42 +26,44 @@
 \contentsline {subsubsection}{\numberline {5.1.2}Nonconvexity}{23}
 \contentsline {subsubsection}{\numberline {5.1.3}Aggregate Objects}{24}
 \contentsline {subsection}{\numberline {5.2}On Different Convergence Results}{26}
-\contentsline {subsubsection}{\numberline {5.2.1}The Constraint Set}{26}
+\contentsline {subsubsection}{\numberline {5.2.1}The Constraint Set}{27}
 \contentsline {subsubsection}{\numberline {5.2.2}Exact Information and Vanishing Errors}{27}
-\contentsline {subsubsection}{\numberline {5.2.3}Convex Objective Functions}{27}
-\contentsline {section}{\numberline {6}Variable Metric Bundle Method}{29}
-\contentsline {subsection}{\numberline {6.1}Main Ingredients to the Method}{29}
-\contentsline {subsubsection}{\numberline {6.1.1}Variable Metric Bundle Methods}{29}
-\contentsline {subsubsection}{\numberline {6.1.2}Noll's Second Order Model}{30}
-\contentsline {subsubsection}{\numberline {6.1.3}The Descent Measure}{31}
-\contentsline {subsection}{\numberline {6.2}The Variable Metric Bundle Algorithm}{32}
-\contentsline {subsection}{\numberline {6.3}Convergence Analysis}{33}
-\contentsline {subsection}{\numberline {6.4}Updating the Metric}{43}
-\contentsline {subsubsection}{\numberline {6.4.1}Scaling of the Whole Matrix}{43}
-\contentsline {subsubsection}{\numberline {6.4.2}Adaptive Scaling of Single Eigenvalues}{44}
-\contentsline {subsubsection}{\numberline {6.4.3}Other Updating Possibilities}{46}
-\contentsline {subsection}{\numberline {6.5}Numerical Tests}{47}
-\contentsline {subsubsection}{\numberline {6.5.1}Academic Test Examples}{48}
-\contentsline {subsubsection}{\numberline {6.5.2}Test Examples in Higher Dimensions}{51}
-\contentsline {section}{\numberline {7}Application to Model Selection for Primal SVM}{55}
-\contentsline {subsection}{\numberline {7.1}Introduction}{55}
-\contentsline {subsection}{\numberline {7.2}Notation}{56}
-\contentsline {subsection}{\numberline {7.3}Introduction to Support Vector Machines}{56}
-\contentsline {subsubsection}{\numberline {7.3.1}Risk minimization}{57}
-\contentsline {subsubsection}{\numberline {7.3.2}Support Vector machines}{58}
-\contentsline {subsection}{\numberline {7.4}Bilevel Approach and Multiple Hyper-Parameters}{61}
-\contentsline {subsubsection}{\numberline {7.4.1}Reformulation as Bilevel Problem}{61}
-\contentsline {subsubsection}{\numberline {7.4.2}Multiple Hyper-parameters}{63}
-\contentsline {subsection}{\numberline {7.5}Solution with the Inexact Bundle Algorithm}{64}
-\contentsline {subsection}{\numberline {7.6}Numerical Experiments}{67}
-\contentsline {subsubsection}{\numberline {7.6.1}Selection of the Data Sets}{67}
-\contentsline {subsubsection}{\numberline {7.6.2}Solution of the Bilevel Program}{69}
-\contentsline {subsubsection}{\numberline {7.6.3}Multi Group Model}{75}
-\contentsline {subsection}{\numberline {7.7}Application of Outrata-theory to bilevel problem}{78}
-\contentsline {section}{\numberline {8}Appendix}{82}
-\contentsline {subsection}{\numberline {8.1}Omitted Proofs}{82}
-\contentsline {subsubsection}{\numberline {8.1.1}Eigenvalues of the Metric Matrix}{82}
-\contentsline {subsubsection}{\numberline {8.1.2}Proof of Proposition \ref {prop_norm}}{82}
-\contentsline {subsection}{\numberline {8.2}Additional Figures}{83}
-\contentsline {subsubsection}{\numberline {8.2.1}Variable Metric Bundle Method}{83}
+\contentsline {subsubsection}{\numberline {5.2.3}Convex Objective Functions}{28}
+\contentsline {subsubsection}{\numberline {5.2.4}Aggregation}{28}
+\contentsline {section}{\numberline {6}Variable Metric Bundle Method}{32}
+\contentsline {subsection}{\numberline {6.1}Main Ingredients to the Method}{32}
+\contentsline {subsubsection}{\numberline {6.1.1}Variable Metric Bundle Methods}{32}
+\contentsline {subsubsection}{\numberline {6.1.2}Noll's Second Order Model}{33}
+\contentsline {subsubsection}{\numberline {6.1.3}The Descent Measure}{34}
+\contentsline {subsection}{\numberline {6.2}The Variable Metric Bundle Algorithm}{35}
+\contentsline {subsection}{\numberline {6.3}Convergence Analysis}{36}
+\contentsline {subsection}{\numberline {6.4}Updating the Metric}{45}
+\contentsline {subsubsection}{\numberline {6.4.1}Scaling of the Whole Matrix}{45}
+\contentsline {subsubsection}{\numberline {6.4.2}Adaptive Scaling of Single Eigenvalues}{46}
+\contentsline {subsubsection}{\numberline {6.4.3}Other Updating Possibilities}{48}
+\contentsline {subsection}{\numberline {6.5}Numerical Tests}{49}
+\contentsline {subsubsection}{\numberline {6.5.1}Academic Test Examples}{51}
+\contentsline {subsubsection}{\numberline {6.5.2}Test Examples in Higher Dimensions}{53}
+\contentsline {section}{\numberline {7}Application to Model Selection for Primal SVM}{58}
+\contentsline {subsection}{\numberline {7.1}Introduction}{58}
+\contentsline {subsection}{\numberline {7.2}Notation}{59}
+\contentsline {subsection}{\numberline {7.3}Introduction to Support Vector Machines}{60}
+\contentsline {subsubsection}{\numberline {7.3.1}Risk minimization}{60}
+\contentsline {subsubsection}{\numberline {7.3.2}Support Vector Machines}{61}
+\contentsline {subsubsection}{\numberline {7.3.3}Multiple Hyper-parameters}{64}
+\contentsline {subsection}{\numberline {7.4}Formulation of the Bilevel Problem}{65}
+\contentsline {subsection}{\numberline {7.5}Solution with the Inexact Bundle Algorithm}{68}
+\contentsline {subsubsection}{\numberline {7.5.1}Subgradient Calculation}{69}
+\contentsline {subsection}{\numberline {7.6}On Error Bounds and Regularity}{72}
+\contentsline {subsubsection}{\numberline {7.6.1}Error Bounds}{72}
+\contentsline {subsubsection}{\numberline {7.6.2}Regularity}{74}
+\contentsline {subsection}{\numberline {7.7}Numerical Experiments}{74}
+\contentsline {subsubsection}{\numberline {7.7.1}Selection of the Data Sets}{75}
+\contentsline {subsection}{\numberline {7.8}Application of Outrata-theory to bilevel problem}{77}
+\contentsline {section}{\numberline {8}Appendix}{81}
+\contentsline {subsection}{\numberline {8.1}Omitted Proofs}{81}
+\contentsline {subsubsection}{\numberline {8.1.1}Eigenvalues of the Metric Matrix}{81}
+\contentsline {subsubsection}{\numberline {8.1.2}Proof of Proposition \ref {prop_norm}}{81}
+\contentsline {subsection}{\numberline {8.2}Additional Figures}{82}
+\contentsline {subsubsection}{\numberline {8.2.1}Variable Metric Bundle Method}{82}
 \contentsline {section}{German Summary}{} \contentsline {section}{References}{}

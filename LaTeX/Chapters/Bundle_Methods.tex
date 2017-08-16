@@ -110,10 +110,10 @@ The subproblem to be solved to find the next iterate can be rewritten as a smoot
 \end{align*}	
 
 where
-\begin{equation*}
+\begin{equation}
 	e^k_j := f(\hat{x}^k)-f(x^j) + \Langle g^j,x^j-\hat{x}^k\Rangle \geq 0 \quad \forall j \in J_k
 \label{lin_err}
-\end{equation*}
+\end{equation}
 
 is the \emph{linearization error}. Due to convexity of \(f\) it is nonnegative. This property is essential for the convergence theory and will also be of interest when moving on to the case of nonconvex and inexact objective functions.
 
@@ -176,6 +176,7 @@ This special form of the subproblems gives the primal bundle method its name, \e
 
 
 \subsection{Aggregation and Stopping Condition}
+\label{sec_agg}
 %\textcolor{red}{not aggregate Objects}
 
 We look again at a slightly different formulation of the bundle subproblem 
@@ -272,7 +273,7 @@ For the model update the following two conditions are assumed to be fulfilled in
 
 The first condition means that the newly computed information is always put into the bundle. The second one is important when updating the bundle index set \(J^k\).
 It holds trivially if no or only inactive information \(j \text{ with }\alpha_j = 0\) is removed \cite{Hare2016}.
-It is also always satisfied if the aggregate linearization \(a_k\) itself is added to the bundle. In this case active information can be removed without violating the condition. This is the key idea of Kiwiel's aggregation technique and ensures that the set \( \{j \in J^k\mid  \alpha_j >0 \} \) can be bounded.
+It is also always satisfied if the aggregate linearization \(a_k\) itself is added to the bundle. In this case active information can be removed without violating the condition. This is the key idea of Kiwiel's aggregation technique and ensures that the set \( \{j \in J^k\mid  \alpha_j >0 \} \) can be bounded also for nonpolyhedral constraint sets (c.f. \cite[Remark 2, p. 11]{Hare2016}).
 
 An issue of bundle methods is that in spite of the possibility to delete inactive information the bundle can still become very large. Kiwiel therefore proposed a totally different use of the aggregate objects in \cite{Kiwiel1986}. The aggregate subgradient can be used to build the \emph{aggregate linearization}
 
@@ -301,7 +302,7 @@ We have now all the ingredients so that the following basic bundle algorithm can
 \vspace{1ex}
 \hrule
 \vspace{1ex}
-Select a descent parameter \( m \in (0,1)\) and a stopping tolerance \( \mathtt{tol} \geq 0\). Choose a starting point \(x^1 \in \R^n\) and compute \(f(x^1)\) and \(g^1\). Set the initial index set \(J_1:=\{1\}\) and the initial stability center to \(\hat{x}^1 := x^1\). Set \(f(\hat{x}^1) = f(x^1)\) and select \(t_1 > 0\).
+Select a descent parameter \( m \in (0,1)\) and a stopping tolerance \( \mathtt{tol} \geq 0\). Choose a starting point \(x^1 \in \R^n\) and compute \(f(x^1)\) and \(g^1\). Set the initial index set \(J_1:=\{1\}\) and the initial stability center to \(\hat{x}^1 := x^1\). Set \(f(\hat{x}^1) = f(x^1)\) and select \(t_1 > 0\). Initialize \(m_1(\hat{x}^1+d) = f(\hat{x}^1)+\Langle g^1,d \Rangle\) and \(e^1_1 = 0\).
 \end{minipage}
 
 For \(k = 1,2,3  \dotsc \)   
@@ -325,7 +326,7 @@ For \(k = 1,2,3  \dotsc \)
 	Otherwise \(\quad \rightarrow \)  nullstep:\\
 	\noindent\hspace*{2em}%
 	Set \(\hat{x}^{k+1} = \hat{x}^k, ~f(\hat{x}^{k+1})=f(\hat{x}^{k})\) and choose \(t_{k+1} > 0\) in a suitable way.
-	\item Select the new bundle index set \(J_{k+1}\), calculate \(e_j^{k+1}\) for all \(j \in J_{k+1}\)	and update the model \(m_{k+1}\).
+	\item Select the new bundle index set \(J_{k+1}\), calculate \(e_j^{k+1}\) by (\ref{lin_err}) for all \(j \in J_{k+1}\)	and update the model \(m_{k+1}\).
 \end{enumerate}
 \vspace{1ex}
 \hrule
@@ -354,7 +355,7 @@ The idea behind this management of \(t_k\) is taken from the trust region method
 A more sophisticated version of this kind of step size management is also used by Noll et al. in \cite{Noll2012} and \cite{Noll2013}. The trust region idea was very much exploited by Schramm and Zowe in \cite{Schramm1992}.
 In the case \(X = \R^n\) the sequence \(\{\hat{x}^k\}\) can be unbounded. In this case bounding \(t_k \leq t_{max} < \infty\) for all  \(k\) preserves the convergence proof \cite[Theorem 3.2.2, p. 308]{Hiriart-Urruty1993}.
 
-In general it can be shown that if \(f\) posses global minima and the basic bundle algorithm generates the sequence \(\{\hat{x}^k\}\), this sequence converges to a minimizer of problem (\ref{min_prob_basic}) (c.f \cite{Hiriart-Urruty1993}).
+In general it can be shown that if \(f\) possesses global minima and the basic bundle algorithm generates the sequence \(\{\hat{x}^k\}\), this sequence converges to a minimizer of problem (\ref{min_prob_basic}) (c.f \cite{Hiriart-Urruty1993}).
 
 
 

@@ -60,7 +60,7 @@ It is also possible to define a subdifferential for nonconvex functions. This is
 \label{nonconv_subdiff}
 	Let \(f: \R^n \to \R\) be locally Lipschitz (and not necessarily convex).
 	The \emph{subdifferential} of \(f\) at \(x \in \R^n\) is the set
-\[ \partial f(x) := \left\{g \in \R^n \biggm| \limsup_{y \to x,~ h \searrow 0}\frac{f(y+hv)-f(y)}{h} \quad \forall v \in \R^n \right\}. \]
+\[ \partial f(x) := \left\{g \in \R^n \biggm| \limsup_{y \to x,~ h \searrow 0}\frac{f(y+hv)-f(y)}{h} \geq \Langle g, v\Rangle \quad \forall v \in \R^n \right\}. \]
 \end{definition} 
 
 All convex functions are locally Lipschitz \cite[Theorem 3.1.1, p. 16]{Hiriart-Urruty1996} so the above definition holds also for convex functions. In fact if the function is convex the subdifferential from definition \ref{nonconv_subdiff} is equivalent to the one from definition \ref{conv_subdiff} \cite[Proposition 2.2.7, p. 36]{Clarke1990}.

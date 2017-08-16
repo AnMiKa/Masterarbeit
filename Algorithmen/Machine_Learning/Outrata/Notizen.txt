@@ -1,0 +1,6 @@
+Notizen Outrata Programmierung
+
+- multiplier für Hingequad sehr gut
+	-> entweder <1e-19 oder >1e-3
+	-> passen auch zu constraint-Ergebnissen (diese etwa 1e-16 für 0)
+	   (in erster Spalte)

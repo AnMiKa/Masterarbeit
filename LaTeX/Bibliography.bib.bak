@@ -851,4 +851,27 @@
   pagetotal = {662},
 }
 
+@TechReport{Gunn1998,
+  author      = {Steve R. Gunn},
+  title       = {Support Vector Machines for Classification and Regression},
+  institution = {Faculty of Enigneering, Science and Mathematics, School of Electronics and Computer Science, University of Southampton},
+  year        = {1998},
+}
+
+@Manual{2017,
+  title        = {Documentation: Optimization Toolbox (quadprog)},
+  organization = {The {MathWorks}, Inc.},
+  year         = {2017},
+}
+
+@Article{Spingarn1981,
+  author  = {Jonathan E. Spingarn},
+  title   = {Submonotone subdifferentials of {Lipschitz} functions},
+  journal = {Trans. Amer. Math. Soc.},
+  year    = {1981},
+  volume  = {264},
+  pages   = {77 -- 89},
+  doi     = {10.1090/S0002-9947-1981-0597868-8},
+}
+
 @Comment{jabref-meta: databaseType:bibtex;}
