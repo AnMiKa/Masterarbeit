@@ -1,69 +1,19 @@
 \select@language {english}
 \select@language {english}
 \contentsline {section}{Acknowledgments}{} \contentsline {section}{Abstract}{} \contentsline {section}{List of Symbols}{} \contentsline {section}{List of Figures}{} \contentsline {section}{List of Tables}{}
-\contentsline {section}{\numberline {1}Introduction}{1}
-\contentsline {section}{\numberline {2}Preliminaries}{3}
-\contentsline {subsection}{\numberline {2.1}Notation}{3}
-\contentsline {subsection}{\numberline {2.2}Nonsmooth Analysis}{3}
-\contentsline {section}{\numberline {3}A Basic Bundle Method}{6}
-\contentsline {subsection}{\numberline {3.1}Derivation of the Bundle Method}{6}
-\contentsline {subsubsection}{\numberline {3.1.1}A Stabilized Cutting Plane Method}{6}
-\contentsline {subsubsection}{\numberline {3.1.2}Subproblem Reformulations}{8}
-\contentsline {subsection}{\numberline {3.2}The Prox-Operator}{9}
-\contentsline {subsection}{\numberline {3.3}Aggregation and Stopping Condition}{10}
-\contentsline {subsection}{\numberline {3.4}The Algorithm}{13}
-\contentsline {section}{\numberline {4}Variations of the Bundle Method}{16}
-\contentsline {subsection}{\numberline {4.1}Convex Bundle Methods with Inexact Information}{16}
-\contentsline {subsubsection}{\numberline {4.1.1}Different Types of Inexactness}{16}
-\contentsline {subsubsection}{\numberline {4.1.2}Noise Attenuation}{17}
-\contentsline {subsubsection}{\numberline {4.1.3}Convergence Results}{18}
-\contentsline {subsection}{\numberline {4.2}Nonconvex Bundle Methods with Exact Information}{18}
-\contentsline {subsubsection}{\numberline {4.2.1}Proximity Control}{19}
-\contentsline {subsubsection}{\numberline {4.2.2}Other Concepts}{20}
-\contentsline {section}{\numberline {5}Proximal Bundle Method for Nonconvex Functions with Inexact Information}{21}
-\contentsline {subsection}{\numberline {5.1}Derivation of the Method}{21}
-\contentsline {subsubsection}{\numberline {5.1.1}Inexactness}{21}
-\contentsline {subsubsection}{\numberline {5.1.2}Nonconvexity}{23}
-\contentsline {subsubsection}{\numberline {5.1.3}Aggregate Objects}{24}
-\contentsline {subsection}{\numberline {5.2}On Different Convergence Results}{26}
-\contentsline {subsubsection}{\numberline {5.2.1}The Constraint Set}{27}
-\contentsline {subsubsection}{\numberline {5.2.2}Exact Information and Vanishing Errors}{27}
-\contentsline {subsubsection}{\numberline {5.2.3}Convex Objective Functions}{28}
-\contentsline {subsubsection}{\numberline {5.2.4}Aggregation}{28}
-\contentsline {section}{\numberline {6}Variable Metric Bundle Method}{32}
-\contentsline {subsection}{\numberline {6.1}Main Ingredients to the Method}{32}
-\contentsline {subsubsection}{\numberline {6.1.1}Variable Metric Bundle Methods}{32}
-\contentsline {subsubsection}{\numberline {6.1.2}Noll's Second Order Model}{33}
-\contentsline {subsubsection}{\numberline {6.1.3}The Descent Measure}{34}
-\contentsline {subsection}{\numberline {6.2}The Variable Metric Bundle Algorithm}{35}
-\contentsline {subsection}{\numberline {6.3}Convergence Analysis}{36}
-\contentsline {subsection}{\numberline {6.4}Updating the Metric}{45}
-\contentsline {subsubsection}{\numberline {6.4.1}Scaling of the Whole Matrix}{45}
-\contentsline {subsubsection}{\numberline {6.4.2}Adaptive Scaling of Single Eigenvalues}{46}
-\contentsline {subsubsection}{\numberline {6.4.3}Other Updating Possibilities}{48}
-\contentsline {subsection}{\numberline {6.5}Numerical Tests}{49}
-\contentsline {subsubsection}{\numberline {6.5.1}Academic Test Examples}{51}
-\contentsline {subsubsection}{\numberline {6.5.2}Test Examples in Higher Dimensions}{53}
-\contentsline {section}{\numberline {7}Application to Model Selection for Primal SVM}{58}
-\contentsline {subsection}{\numberline {7.1}Introduction}{58}
-\contentsline {subsection}{\numberline {7.2}Notation}{59}
-\contentsline {subsection}{\numberline {7.3}Introduction to Support Vector Machines}{60}
-\contentsline {subsubsection}{\numberline {7.3.1}Risk minimization}{60}
-\contentsline {subsubsection}{\numberline {7.3.2}Support Vector Machines}{61}
-\contentsline {subsubsection}{\numberline {7.3.3}Multiple Hyper-parameters}{64}
-\contentsline {subsection}{\numberline {7.4}Formulation of the Bilevel Problem}{65}
-\contentsline {subsection}{\numberline {7.5}Solution with the Inexact Bundle Algorithm}{68}
-\contentsline {subsubsection}{\numberline {7.5.1}Subgradient Calculation}{69}
-\contentsline {subsection}{\numberline {7.6}On Error Bounds and Regularity}{72}
-\contentsline {subsubsection}{\numberline {7.6.1}Error Bounds}{72}
-\contentsline {subsubsection}{\numberline {7.6.2}Regularity}{74}
-\contentsline {subsection}{\numberline {7.7}Numerical Experiments}{74}
-\contentsline {subsubsection}{\numberline {7.7.1}Selection of the Data Sets}{75}
-\contentsline {subsection}{\numberline {7.8}Application of Outrata-theory to bilevel problem}{77}
-\contentsline {section}{\numberline {8}Appendix}{81}
-\contentsline {subsection}{\numberline {8.1}Omitted Proofs}{81}
-\contentsline {subsubsection}{\numberline {8.1.1}Eigenvalues of the Metric Matrix}{81}
-\contentsline {subsubsection}{\numberline {8.1.2}Proof of Proposition \ref {prop_norm}}{81}
-\contentsline {subsection}{\numberline {8.2}Additional Figures}{82}
-\contentsline {subsubsection}{\numberline {8.2.1}Variable Metric Bundle Method}{82}
+\contentsline {section}{\numberline {1}Application to Model Selection for Primal SVM}{1}
+\contentsline {subsection}{\numberline {1.1}Introduction}{1}
+\contentsline {subsection}{\numberline {1.2}Notation}{2}
+\contentsline {subsection}{\numberline {1.3}Introduction to Support Vector Machines}{3}
+\contentsline {subsubsection}{\numberline {1.3.1}Risk minimization}{3}
+\contentsline {subsubsection}{\numberline {1.3.2}Support Vector Machines}{5}
+\contentsline {subsubsection}{\numberline {1.3.3}Multiple Hyper-parameters}{8}
+\contentsline {subsection}{\numberline {1.4}Formulation of the Bilevel Problem}{8}
+\contentsline {subsection}{\numberline {1.5}Solution with the Inexact Bundle Algorithm}{11}
+\contentsline {subsubsection}{\numberline {1.5.1}Assumptions}{11}
+\contentsline {subsubsection}{\numberline {1.5.2}The Adjoint Problem}{16}
+\contentsline {subsection}{\numberline {1.6}On Error Bounds and Regularity}{17}
+\contentsline {subsubsection}{\numberline {1.6.1}Error Bounds}{18}
+\contentsline {subsubsection}{\numberline {1.6.2}Regularity}{20}
+\contentsline {subsection}{\numberline {1.7}Numerical Experiments}{20}
 \contentsline {section}{German Summary}{} \contentsline {section}{References}{}

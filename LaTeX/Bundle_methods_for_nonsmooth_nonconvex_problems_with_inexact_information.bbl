@@ -1,44 +1,10 @@
 \begin{thebibliography}{10}
 
-\bibitem{Apkarian2008}
-P.~Apkarian, D.~Noll, and O.~Prot.
-\newblock A trust region spectral bundle method for non-convex eigenvalue
-  optimization.
-\newblock {\em {SIAM} J. Optim.}, 19(1):281--306, jan 2008.
-
-\bibitem{Bagirov2014}
-A.~Bagirov, N.~Karmitsa, and M.~M. M{\"a}kel{\"a}.
-\newblock {\em Introduction to Nonsmooth Optimization: Theory, Practice and
-  Software}.
-\newblock Springer International Publishing Switzerland, 2014.
-
-\bibitem{Clarke1990}
-F.~H. Clarke.
-\newblock {\em Optimization and nonsmooth analysis}.
-\newblock Classics in Applied Mathematics. Society for Industrial and Applied
-  Mathematics Philadelphia, 1990.
-
-\bibitem{Colson2007}
-B.~Colson, P.~Marcotte, and G.~Savard.
-\newblock An overview of bilevel optimization.
-\newblock {\em Annals of Operations Research}, 153(1):235--256, Sep 2007.
-
 \bibitem{Cristianini2000}
 N.~Cristianini and J.~Shawe-Taylor.
 \newblock {\em An Introduction to Support Vector Machines and Other
   Kernel-based Learning Methods}.
 \newblock Cambridge University Press, 2000.
-
-\bibitem{Oliveira2014a}
-W.~de~Oliveira and C.~Sagastiz{\'{a}}bal.
-\newblock Bundle methods in the{ XXIst} century: A bird's-eye view.
-\newblock {\em Pesquisa Operacional}, 34(3):647--670, dec 2014.
-
-\bibitem{Fuduli2004}
-A.~Fuduli, M.~Gaudioso, and G.~Giallombardo.
-\newblock A {DC} piecewise affine model and a bundling technique in nonconvex
-  nonsmooth minimization.
-\newblock {\em Optim. Method. Softw.}, 19(1):89--102, 2004.
 
 \bibitem{Fuduli2004a}
 A.~Fuduli, M.~Gaudioso, and G.~Giallombardo.
@@ -46,27 +12,11 @@ A.~Fuduli, M.~Gaudioso, and G.~Giallombardo.
   proximity control.
 \newblock {\em {SIAM} J. Optim}, 14(3):743--756, 2004.
 
-\bibitem{Geiger2002}
-C.~Geiger and C.~Kanzow.
-\newblock {\em Theorie und Numerik restringierter Optimierungsaufgaben}.
-\newblock Springer-Lehrbuch Masterclass. Springer Berlin Heidelberg, 2002.
-
 \bibitem{Gunn1998}
 S.~R. Gunn.
 \newblock Support vector machines for classification and regression.
 \newblock Technical report, Faculty of Enigneering, Science and Mathematics,
   School of Electronics and Computer Science, University of Southampton, 1998.
-
-\bibitem{Haarala2007}
-N.~Haarala, K.~Miettinen, and M.~M. M{\"a}kel{\"a}.
-\newblock Globally convergent limited memory bundle method for large-scale
-  nonsmooth optimization.
-\newblock {\em Math. Program.}, 109(1):181--205, 2007.
-
-\bibitem{Hare2010}
-W.~Hare and C.~Sagastiz\`{a}bal.
-\newblock A redistributed proximal bundle method for nonconvex optimization.
-\newblock {\em SIAM J. Optim.}, 20(5):2442--2473, 2010.
 
 \bibitem{Hare2016}
 W.~Hare, C.~Sagastiz{\`a}bal, and M.~Solodov.
@@ -74,123 +24,14 @@ W.~Hare, C.~Sagastiz{\`a}bal, and M.~Solodov.
   inexact information.
 \newblock {\em Computational Optimization and Applications}, 63:1--28, 2016.
 
-\bibitem{Heinonen2004}
-J.~Heinonen.
-\newblock Lectures on {Lipschitz} analysis.
-\newblock Lectures at the 14th Jyv{\"a}skyl{\"a} Summer School in August 2004,
-  2004.
-
-\bibitem{Hintermueller2001}
-M.~Hinterm\"uller.
-\newblock A proximal bundle method based on approximate subgradients.
-\newblock {\em Computational Optimization and Applications}, 20:245--266, 2001.
-
-\bibitem{Hiriart-Urruty1993}
-J.-B. Hiriart-Urruty and C.~Lemar{\'{e}}chal.
-\newblock {\em Convex Analysis and Minimization Algorithms {II}}, volume 306 of
-  {\em Grundlehren der mathematischen Wissenschaften}.
-\newblock Springer Berlin Heidelberg, 1993.
-
-\bibitem{Hiriart-Urruty1996}
-J.-B. Hiriart-Urruty and C.~Lemar\'{e}chal.
-\newblock {\em Convex Analysis and Minimization Algorithms I}, volume 305 of
-  {\em Grundlehren der mathematischen Wissenschaften}.
-\newblock Springer Berlin Heidelberg, 2 edition, 1996.
-
-\bibitem{Jofre1998}
-A.~Jofr{\'{e}}, D.~T. Luc, and M.~Th{\'{e}}ra.
-\newblock $\varepsilon$-subdifferential and $\varepsilon$-monotonicity.
-\newblock {\em Nonlinear Analysis: Theory, Methods {\&} Applications},
-  33(1):71--90, jul 1998.
-
-\bibitem{Liesen2015}
-V.~M. J\"org~Liesen.
-\newblock {\em Linear Algebra}.
-\newblock Springer International Publishing, 2015.
-
-\bibitem{Kiwiel1985}
-K.~C. Kiwiel.
-\newblock {\em Methods of Descent for Nondifferentiable Optimization}.
-\newblock Springer, 1985.
-
-\bibitem{Kiwiel1986}
-K.~C. Kiwiel.
-\newblock An aggregate subgradient method for nonsmooth and nonconvex
-  minimization.
-\newblock {\em J. Comput. Appl. Math.}, 14(3):391--400, 1986.
-
-\bibitem{Kiwiel2006}
-K.~C. Kiwiel.
-\newblock A proximal bundle method with approximate subgradient linearizations.
-\newblock {\em {SIAM} J. Optim}, 16(4):1007--1023, jan 2006.
-
-\bibitem{Kiwiel2010}
-K.~C. Kiwiel.
-\newblock Bundle methods for convex minimization with partially inexact
-  oracles.
-\newblock Technical report, Systems Research Institute, Polish Academy of
-  Sciences, 2010.
-
-\bibitem{Koenigsberger2003}
-K.~K\"onigsberger.
-\newblock {\em Analysis 1}.
-\newblock Springer-Verlag GmbH, 2003.
-
 \bibitem{Kunapuli2008}
 G.~Kunapuli.
 \newblock {\em A bilevel optimization approach to machine learning}.
 \newblock PhD thesis, Rensselaer Polytechnic Institute Troy, New York, 2008.
 
-\bibitem{Lemarechal1978}
-C.~Lemar{\'e}chal.
-\newblock Nonsmooth optimization and descent methods.
-\newblock {IIASA} research report, International Institute for Applied Systems
-  Analysis, 1978.
-
-\bibitem{Lemarechal1994}
-C.~Lemar{\'e}chal and C.~Sagastiz{\'a}bal.
-\newblock {\em An approach to variable metric bundle methods}, pages 144--162.
-\newblock Springer Berlin Heidelberg, 1994.
-
-\bibitem{Lemarechal1997}
-C.~Lemar{\'e}chal and C.~Sagastiz{\'a}bal.
-\newblock Variable metric bundle methods: From conceptual to implementable
-  forms.
-\newblock {\em Math. Program.}, 76(3):393--410, 1997.
-
-\bibitem{Lewis2008}
-A.~S. Lewis and M.~L. Overton.
-\newblock Nonsmooth optimization via {BFGS}.
-\newblock {\em Submitted to SIAM Journal on Optimization}, 2008.
-
-\bibitem{Lewis2015}
-A.~S. Lewis and S.~J. Wright.
-\newblock A proximal method for composite minimization.
-\newblock {\em Math. Program.}, 158(1-2):501--546, aug 2015.
-
-\bibitem{Luksan1999}
-L.~Luk{\v{s}}an and J.~Vl{\v{c}}ek.
-\newblock Globally convergent variable metric method for convex nonsmooth
-  unconstrained minimization.
-\newblock {\em Journal of Optimization Theory and Applications},
-  102(3):593--613, sep 1999.
-
 \bibitem{2017}
 The {MathWorks}, Inc.
 \newblock {\em Documentation: Optimization Toolbox (quadprog)}, 2017.
-
-\bibitem{Mifflin1982}
-R.~Mifflin.
-\newblock A modification and an extension of {Lemar{\'e}chal's} algorithm for
-  nonsmooth minimization.
-\newblock In {\em Mathematical Programming Studies}, volume~17, pages 77--90.
-  Springer Nature, 1982.
-
-\bibitem{Mifflin2012}
-R.~Mifflin and C.~Sagastiz\`{a}bal.
-\newblock A science fiction story in nonsmooth optimization originating at
-  {IIASA}.
-\newblock {\em Documenta Mathematica}, Extra Volume ISMP:291--300, 2012.
 
 \bibitem{Moore2010a}
 G.~Moore, C.~Bergeron, and K.~P. Bennett.
@@ -202,123 +43,16 @@ G.~Moore, C.~Bergeron, and K.~P. Bennett.
 \newblock Model selection for primal {SVM}.
 \newblock {\em Machine Learning}, 85(1):175--208, 2011.
 
-\bibitem{Nesterov2016}
-Y.~Nesterov and V.~Shikhman.
-\newblock Algorithmic principle of least revenue for finding market equilibria.
-\newblock In B.~Goldengorin, editor, {\em Optimization and Its Applications in
-  Control and Data Sciences}, volume 115 of {\em Springer Optimization and Its
-  Applications}, pages 381--435. Springer Nature, 2016.
-
-\bibitem{Nocedal1980}
-J.~Nocedal.
-\newblock Updating quasi-newton matrices with limited storage.
-\newblock {\em Math. Comput.}, 35(151):773--782, 1980.
-
-\bibitem{Noll2010}
-D.~Noll.
-\newblock Cutting plane oracles to minimize non-smooth non-convex functions.
-\newblock {\em Set-Valued and Variational Analysis}, 18(3-4):531--568, sep
-  2010.
-
-\bibitem{Noll2013}
-D.~Noll.
-\newblock Bundle method for non-convex minimization with inexact subgradients
-  and function values.
-\newblock In {\em Computational and Analytical Mathematics}, pages 555--592.
-  Springer Nature, 2013.
-
-\bibitem{Noll2005}
-D.~Noll and P.~Apkarian.
-\newblock Spectral bundle method for non-convex maximum eigenvalue functions:
-  first-order methods.
-\newblock {\em Math. Program.}, 104(2-3):701--727, jul 2005.
-
-\bibitem{Noll2012}
-D.~Noll, O.~Prot, and A.~Rondepierre.
-\newblock A proximity control algorithm to minimize non-smooth and non-convex
-  functions.
-\newblock {\em Pacific Journal of Optimization}, 4(3):571--604, 2012.
-
 \bibitem{Outrata1998}
 J.~Outrata, M.~Ko{\v{c}}vara, and J.~Zowe.
 \newblock {\em Nonsmooth Approach to Optimization Problems with Equilibrium
   Constraints}.
 \newblock Springer {US}, 1998.
 
-\bibitem{Polyak1987}
-B.~T. Polyak.
-\newblock {\em Introduction to Optimization}.
-\newblock Optimization Software , Inc., Publications Division, New York, 1987.
-
-\bibitem{Rockafellar1970}
-R.~T. Rockafellar.
-\newblock {\em Convex Analysis}.
-\newblock Princeton University Press, Princeton, New Jersey, 1970.
-
-\bibitem{Rockafellar2009}
-R.~T. Rockafellar and R.~J.~B. Wets.
-\newblock {\em Variational Analysis}, volume 317 of {\em Grundlehren der
-  mathematischen Wissenschaften}.
-\newblock Springer Berlin Heidelberg, 3rd edition, 2009.
-
-\bibitem{Horn2012}
-C.~R.~J. Roger A.~Horn.
-\newblock {\em Matrix Analysis}.
-\newblock Cambridge University Press, 2012.
-
-\bibitem{Schramm1992}
-H.~Schramm and J.~Zowe.
-\newblock A version of the bundle idea for minimizing a nonsmooth function:
-  conceptual idea, convergence analysis, numerical results.
-\newblock {\em {SIAM} J. Optim}, 2(1):121--152, feb 1992.
-
-\bibitem{Smola2007}
-A.~J. Smola, S.~V.~N. Vishwanathan, and Q.~V. Le.
-\newblock Bundle methods for machine learning.
-\newblock In {\em Proceedings of the 20th International Conference on Neural
-  Information Processing Systems}, NIPS'07, pages 1377--1384, USA, 2007. Curran
-  Associates Inc.
-
-\bibitem{Solodov2003}
-M.~V. Solodov.
-\newblock On approximations with finite precision in bundle methods for
-  nonsmooth optimization.
-\newblock {\em Journal of Optimization Theory and Applications},
-  119(1):151--165, 2003.
-
-\bibitem{Solodov2011}
-M.~V. Solodov.
-\newblock {\em Constraint Qualifications}.
-\newblock Wiley Encyclopedia of Operations Research and Management Science,
-  2011.
-
 \bibitem{Spingarn1981}
 J.~E. Spingarn.
 \newblock Submonotone subdifferentials of {Lipschitz} functions.
 \newblock {\em Trans. Amer. Math. Soc.}, 264:77 -- 89, 1981.
-
-\bibitem{Stoer1970}
-J.~Stoer and C.~Witzgall.
-\newblock {\em Convexity and Optimization in Finite Dimensions {I}}, volume 163
-  of {\em Die Grundlehren der mathematischen Wissenschaften}.
-\newblock Springer Berlin Heidelberg, 1970.
-
-\bibitem{Teo2010}
-C.~H. Teo, A.~J. Smola, S.~Vishwanathan, and Q.~V. Le.
-\newblock Bundle methods for regularized risk minimization.
-\newblock {\em Journal of Machine Learning Research}, 11:311--365, 2010.
-
-\bibitem{Treiman1986}
-J.~S. Treiman.
-\newblock {Clarke}'s gradients and $\varepsilon$-subgradients in {Banach}
-  spaces.
-\newblock {\em Transactions of the American Mathematical Society},
-  294(1):65--65, jan 1986.
-
-\bibitem{Ulbrich2012}
-M.~Ulbrich and S.~Ulbrich.
-\newblock {\em Nichtlineare Optimierung}.
-\newblock Springer Basel AG, 2012.
 
 \bibitem{Vapnik1998}
 V.~N. Vapnik.
@@ -335,22 +69,9 @@ V.~N. Vapnik.
 \newblock {\em The Nature of Statistical Learning Theory}.
 \newblock Springer New York, 2013.
 
-\bibitem{Vlcek2001}
-J.~Vl\v{c}ek and L.~Luk\v{s}an.
-\newblock Globally convergent variable metric bundle method for nonconvex
-  nondifferentiable unconstrained minimization.
-\newblock {\em Journal of Optimization Theory and Applications},
-  111(2):407--430, 2001.
-
-\bibitem{Hare2009}
-C.~S. Warren~Hare.
-\newblock Computing proximal points of nonconvex functions.
-\newblock {\em Math. Program.}, 116:221--258, 2009.
-
-\bibitem{Oliveira2014}
-C.~L. Welington~de Oliveira, Claudia~Sagastiz\`{a}bal.
-\newblock Convex proximal bundle methods in depth: a unified analysis for
-  inexact oracles.
-\newblock {\em Math. Program.}, 148:241--277, 2014.
+\bibitem{Wachsmuth2013}
+G.~Wachsmuth.
+\newblock On licq and the uniqueness of lagrange multipliers.
+\newblock {\em Operations Research Letters}, 41(1):78 -- 80, 2013.
 
 \end{thebibliography}

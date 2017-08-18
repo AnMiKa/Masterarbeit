@@ -1,6 +1,8 @@
 Notizen Outrata Programmierung
 
 - multiplier für Hingequad sehr gut
-	-> entweder <1e-19 oder >1e-3
+	-> entweder <1e-18 oder >1e-3
 	-> passen auch zu constraint-Ergebnissen (diese etwa 1e-16 für 0)
-	   (in erster Spalte)
+	   (in erster Spalte)???
+????????? X passent mit 1er Spalte gemacht (vorher vergessen) -> jetzt passt gar nichts mehr -> Ax-b = [1,...,1]'
+????????? all Xi = 0 ???

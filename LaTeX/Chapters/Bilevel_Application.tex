@@ -56,6 +56,12 @@ In the setting of SVMs \(x^i \in \R^{feat}\) is an element of the \emph{feature 
 
 During the most part of the chapter, \(x^i\) and \(y^i\) are used as in the context of SVMs. In the cases where they are used to describe the variables of an optimization problem, this is clearly indicated.
 
+There appear also different derivatives in this chapter.
+For a continuously differentiable function \(f:\R^n \times \R^m \to \R\) we denote the \emph{gradient} at \((\bar{x},\bar{y})\) by \(\nabla f(\bar{x},\bar{y}) \in \R^{n+m}\). The partial gradient with respect to \(x\) is indicated by \(\nabla_yf(\bar{x},\bar{y}) \in \R^m \). %If \(f\) is twice continuously differentiable the \emph{Hessian matrix} at the point \((\bar{x},\bar{y})\) is given by \(\nabla^2 f(\bar{x},\bar{y}) \in \R^{n+m \times n+m}\).
+For a continuously differentiable vector valued function \(F:\R^n \times \R^m \to \R^k\) the \emph{Jacobian matrix} is given by \( \mathcal{J}F(\bar{x},\bar{y}) \in \R^{k \times n+m}\). The partial Jacobian with respect to the variable \(y\) is denoted \(\mathcal{J}_y F(\bar{x},\bar{y}) \in \R^{k \times m}\).
+
+Finally let \(M \in \R^{n\times m}\) be a matrix and \(I \subset \{1,...,n\}\) an index set. Then the expression \(M_{I}\) denotes the matrix that consists of the rows of \(M\) corresponding to the indices in the set \(I\). %For a vector \(v \in \R^n\) the vector \(v_{I}\) consists of the components of \(v\) corresponding to the set \(I\).
+
 %special notation only in this chapter, \(x,y\) now different. Optimization variable now \(\lambda,C\).
 %with index -> data, without variables from problem.
 %Will be clear from context.
@@ -417,7 +423,7 @@ Obviously this bilevel problem contains the usual support vector classification 
 
 \subsection{Solution with the Inexact Bundle Algorithm}
 
-\textcolor{red}{more introduction}
+\textcolor{red}{more introduction?}
 
 The bilevel problem (\ref{bilevel_fin}) derived above is to be solved with the bundle algorithm \textcolor{red}{which one? more?}.
 This requires having in every iteration an approximate value of the upper level objective function and an approximate subgradient of the upper level objective.
@@ -430,9 +436,10 @@ The resulting solution \(y^k\) is then inserted into the upper level objective a
 For computing a subgradient, it is not that simple. Additionally to the variation of the upper level function \(F\) with respect to the variable \(x\) also the variation of the solution \(y^k\) with respect to \(x\) has to be considered.
 To do this we follow the strategy described in \cite{Outrata1998}. Refer there also for a more throughout analysis on this subject.
 
+\subsubsection{Assumptions}
+
 Consider the general bilevel problem formulation (\ref{bilevel}) without the explicit constraint \(G(x,y) \leq 0\).
 Let the feasible set \(X\) be a nonempty compact set and \(\tilde{A}\) and open set containing \(X\).
-
 To use the implicit programming approach suggested in \cite{Outrata1998},  the following assumptions have to hold true:
 
 \begin{itemize}
@@ -477,7 +484,7 @@ because for \(y,z \in U\) the indicator function is zero. This means that the su
 
 If \(f\) is continuously differentiable, the function \(\partial f = \nabla f : \R^n\times\R^k \to \R^k\) is single valued and continuous and the relation above is a generalized equation.
 
-\subsubsection{Subgradient Calculation}
+%\subsubsection{Conditions on the Lower Level Problem}
 
 Let us now verify the above assumptions (A1) -- (A3) for the hyper-parameter finding bilevel problem (\ref{bilevel_fin}).
 First of all, the feasible set \(X\) has to be a convex compact set. In order to assure that, the constraint of the hyper-parameter \(C\) has to be adapted.
@@ -487,13 +494,7 @@ Therefore choose two constants \(l_C, u_C > 0\) with \(l_C < u_C\) constrain the
 
 Assumption (A1) is fulfilled as \(\mathcal{L}_{hingequad}\) is a continuously differentiable function because of the squared max-term.
 
-Next assumption (A2) is verified. In order to do this consider the lower level problem in its unconstrained formulation.
-It has a strictly convex function and therefore a unique global minimizer. Denoting the vector of all slack variables \(\xi_i\) with \(\xi\) this minimizer is given by \((\tilde{w}^*,\xi^*)^{\top}\). It depends on the vector of hyper-parameters \(C\).
-Hence the assumption is fulfilled.
-
-
-Finally to show that assumption (A3) holds, strong regularity has to be shown for the corresponding generalized equation.
-For this consider the lower level problem in its unconstrained form.
+Next assumptions (A2) and (A3) are verified. In order to do this consider the lower level problem in its unconstrained formulation.
 It can be rewritten in matrix form using the following definitions:
 
 \begin{equation*}
@@ -501,6 +502,7 @@ It can be rewritten in matrix form using the following definitions:
 	&H(C):= \begin{pmatrix} \mathbb{I} \\ & \tilde{C}\end{pmatrix}\in \R^{n_1\times n_1} \\
 	&A := \begin{pmatrix}	-y_1(x^1)^{\top} & -1 \\
 		\vdots & & \ddots \\ -y_N(x^N)^{\top} & & & -1\end{pmatrix} \in \R^{nd \times n_1}, \quad  b:= \begin{pmatrix}-1\\\vdots\\-1\end{pmatrix} \in \R^{nd}.
+		\label{matrices}
 \end{split}
 \end{equation*}
 
@@ -518,7 +520,9 @@ Then the lower level problem can be written as
 
 This formulation of the lower level problem corresponds to the one in Appendix A.1.3 in \cite{Outrata1998}. Only the objective function depends on the hyper-parameter \(C\), not the constraints.
 
-For this optimization problem the KKT conditions are necessary and sufficient. This means that at the minimum \((\tilde{w}^*,\xi^*)\) holds
+Problem (\ref{low_QP}) has a strictly convex function and therefore a unique global minimizer. Denoting the vector of all slack variables \(\xi_i\) with \(\xi\) this minimizer is given by \((\tilde{w}^*,\xi^*)^{\top}\). It depends on the vector of hyper-parameters \(C\).
+
+Due to convexity for this problem the KKT conditions are necessary and sufficient. This means that at the minimum \((\tilde{w}^*,\xi^*)\) holds
 
 \begin{align*}
 	& \text{there is a } \mu^* \in \R^{nd} \text{ such that} \\
@@ -526,49 +530,118 @@ For this optimization problem the KKT conditions are necessary and sufficient. T
 	& \mu^* \geq 0, \quad A \begin{pmatrix}\tilde{w}^*\\\xi^*\end{pmatrix} \leq b, \quad \Langle\mu^*,\left(A \begin{pmatrix}\tilde{w}^*\\\xi^*\end{pmatrix} - b\right)\Rangle = 0,
 \end{align*}
 
-where \(L(C,\tilde{w},\xi,\mu) = \frac{1}{2}(\tilde{w}^{\top},\xi^{\top})H(C)(\tilde{w}^{\top},\xi^{\top})^{\top}+\Langle\mu,\left(A (\tilde{w}^{\top},\xi^{\top})^{\top} - b\right)\Rangle\) is the Lagrangian of the problem and \(\mu^*\) the multiplier corresponding to the inequality constraints.
+for a given \(C\), where \(L(C,\tilde{w},\xi,\mu) = \frac{1}{2}(\tilde{w}^{\top},\xi^{\top})H(C)(\tilde{w}^{\top},\xi^{\top})^{\top}+\Langle\mu,\left(A (\tilde{w}^{\top},\xi^{\top})^{\top} - b\right)\Rangle\) is the Lagrangian of the problem and \(\mu^*\) the multiplier corresponding to the inequality constraints.
 
 Using the KKT conditions a special GE can be derived for problem (\ref{low_QP}):
 
 \begin{equation}
-	0 \in \begin{bmatrix} \nabla_{(\tilde{w},\xi)}L(C,\tilde{w}^*,\xi^*,\mu^*)\\ - A \left((\tilde{w}^*)^{\top},(\xi^*)^{\top}\right)^{\top} + b\end{bmatrix} + N_{\R^{feat+1}\times\R^{nd}_+}.
+	0 \in \begin{bmatrix} \nabla_{(\tilde{w},\xi)}L(C,\tilde{w},\xi,\mu)\\ - A \left((\tilde{w})^{\top},(\xi)^{\top}\right)^{\top} + b\end{bmatrix} + N_{\R^{feat+1}\times\R^{nd}_+}.
 \label{GE}
 \end{equation}
 
-%This formulation of the GE follows from the KKT conditions of the problem. 
 The derivation of this particular form is given in \cite[chapter 4, p. 71--72 and chapter 5, p. 92]{Outrata1998}.
 
-Showing strong regularity for the above GE is done by using Theorem 5.7 in \cite{Outrata1998}.
-Therefore define the following index sets:
+This new GE is very convenient due to the simple structure of the cone but it depends now also on the Lagrange multiplier \(\mu\). Therefore this multiplier also has to be unique at the solution \(\tilde{w}^*,\xi^*\).
+To check this introduce the following index sets:
 
 \begin{align*}
 	& I(\tilde{w},\xi) = \{i \in \{1,...,nd\} \mid A (\tilde{w},\xi)^{\top} - b = 0\} \\
-	& I_+(\tilde{w},\xi,\mu) = \{i\in I(\tilde{w},\xi) \mid \mu_i > 0\}
+	& I_+(\tilde{w},\xi) = \{i\in I(\tilde{w},\xi) \mid \mu_i > 0\}
 \end{align*},
 
 which denote the set of \emph{active} and \emph{stronly acitve} inequality constraints respectively.
+The set \(I_+\) also depends on the multiplier \(\mu\). In cases where \(\mu\) is not unique, this has to be indicated by writing \(I_+(\tilde{w},\xi,\mu)\).  As it is shown in the following that for the presented problem the multiplier \(\mu\) is always unique, it is however omitted. 
 
-For problem (\ref{low_QP}) the \emph{linear independence constraint qualification} (LICQ) holds at every feasible point \((\tilde{w},\xi)\) because all rows of the matrix \(A\) are linearly independent. This means that linear independence particularly holds for all rows corresponding to the active constraints at any minimum \((\tilde{w}^*,\xi^*)\).
+For the optimal Lagrange multiplier \(\mu^*\) to be unique the \emph{linear independence constraint qualification} (LICQ) has to hold in the minimum \cite[Theorem 4.8, p. 82]{Outrata1998}, \cite[Theorem 1, p. 3]{Wachsmuth2013}.
 
-From this and the following theorem follows then strong regularity of the GE (\ref{GE}).
+In the present case, where there are only inequality constraints, the LICQ holds at a point \((\tilde{w},\xi)\) if the rows of the matrix \(\mathcal{J}_{(\tilde{w},\xi)}\left(A(\tilde{w},\xi)^{\top} - b\right) = A\) that correspond to the indices in \(I(\tilde{w},\xi)\) are linearly independent \cite[p. 82, 96]{Outrata1998}.
 
-\begin{theorem}[c.f. {\cite[Theorem 5.7, p. 95]{Outrata1998}}]
-	
-\end{theorem}
+For problem (\ref{low_QP}) the LICQ holds at every feasible point \((\tilde{w},\xi)\) because all rows of the matrix \(A\) are linearly independent. This means that linear independence particularly holds for all rows corresponding to the active constraints at any minimum \((\tilde{w}^*,\xi^*)\).
+Hence the lower level problem possesses a unique solution vector \((\tilde{w}^*,\xi^*)\) and a unique corresponding Lagrange multiplier \(\mu^*\) For every hyper-parameter (vector) \(C\). Thus assumption (A2) is fulfilled.
 
+
+Finally to show that assumption (A3) holds, strong regularity has to be shown for the generalized equation (\ref{GE}).
+This is done by using Theorem 5.8 in \cite[p. 96]{Outrata1998}.
+
+For stating the theorem the following definition is needed:
 \begin{definition}[{\cite[Definition 4.4, p. 81]{Outrata1998}}]
 	Let \(M \in \R^{n\times n}\) be a matrix and \(K \subset \R^n\) a cone. The matrix \(M\) is strictly copositive with respect to \(K\) if 
 	\[ \langle d,Md \rangle > 0 \quad \text{for all} \quad d \in K, d\neq 0. \]
 \end{definition}
 
-To assure that the Hessian of the Lagrangian is well defined, the objective function has to the two times continuously differentiable. This is given for the quadratic objective function of (\ref{low_QP}).
+\begin{theorem}[c.f. {\cite[Theorem 5.8, p. 96]{Outrata1998}}]
+	Suppose that LICQ holds at \((\tilde{w},\xi)\) and that the matrix \(\mathcal{J}_{(\tilde{w},\xi)}\left(\nabla_{(\tilde{w},\xi)}L(C,\tilde{w},\xi,\mu)\right)\) is strictly copositive with respect to the kernel of the matrix \(A_{I_+}\). \\
+	Then the GE (\ref{GE}) is strongly regular at \((C,\tilde{w},\xi,\mu)\).
+\end{theorem}
 
+To assure that the Hessian of the Lagrangian is well defined, the lower level objective function has to be two times continuously differentiable. This is given for the quadratic objective function of (\ref{low_QP}) and it holds that 
+
+\[\mathcal{J}_{(\tilde{w},\xi)}\left(\nabla_{(\tilde{w},\xi)}L(C,\tilde{w},\xi,\mu)\right) = \begin{pmatrix} \mathbb{I} \\ & \tilde{C}\end{pmatrix}. \] 
 %From the LICQ follows that the KKT multiplier \(\mu^*\) at a minimum \((\tilde{w}^*,\xi^*)\) is unique.
-The matrix \(A_{I_+(\tilde{w}^*,\xi^*,\mu^*)}\) contains only the rows of the matrix \(A\) corresponding to strongly active constraints. 
+%The matrix \(A_{I_+(\tilde{w}^*,\xi^*,\mu^*)}\) contains only the rows of the matrix \(A\) corresponding to strongly active constraints. 
+
+Because all components of the vector \((C_1,...,C_1,...,C_G,...,C_G)^{\top}\) are greater than zero, this matrix is positive definite and as such strictly copositive on the whole \(\R^{feat+1+nd}\).
+This means that all necessary conditions are fulfilled in order to compute a subgradient with respect to \(C\) of the upper level objective function \(\mathcal{L}_{upp}(\tilde{C},\xi(C))\) in the way presented in \cite{Outrata1998}.
+
+\subsubsection{The Adjoint Problem}
+
+In order to calculate the needed subgradient of bilevel problem the technique of \emph{adjoint equations} is used. This technique is well known from optimal control (c.f. \cite[p. 126]{Outrata1998} and references therein). For the derivation of the adjoint problem and the relults used below, refer to chapters 6 and 7 of \cite{Outrata1998}. 
+
+The adjoint problem to the given bilevel problem (\ref{bilevel_fin}) can be stated as the following constrained quadratic problem using the expressions defined in (\ref{matrices}):
+
+\begin{equation}
+\begin{split}
+	\min_{p} & \quad\frac{1}{2}\Langle p,H(C)p\Rangle - \Langle \nabla_{(\tilde{w},\xi)} \mathcal{L}_{upp}(\tilde{w},\xi),p\Rangle \\
+	\text{s.t.} & \quad A_{I_+M}p = 0.
+\end{split}
+\label{adj_prob}
+\end{equation}
+
+Here the index set \(I_+M = I_+(\tilde{w},\xi) \cup M_i(\tilde{w},\xi)\).
+The set \(M_i(\tilde{w},\xi) \subset I(\tilde{w},\xi) \setminus I_+(\tilde{w},\xi)\) is a subset of the inequality constraints, that are active but not strictly active at the point \((\tilde{w},\xi)\) and has to be chosen suitably.
+What this means is explained next.
+
+First introduce the notation \(I_0(\tilde{w},\xi) = I(\tilde{w},\xi) \setminus I_+(\tilde{w},\xi)\). Constraints whose indices are in this set are also calles \emph{weakly active}. Let \(\mathcal{P}(I_0(\tilde{w},\xi))\) be the power set of this index set and \(\mathbb{K}(\tilde{w},\xi)\) an index set that contains indices for all elements of the set \(\mathcal{P}(I_0(\tilde{w},\xi))\). The index set \(M_i(\tilde{w},\xi)\) is then the element of \(\mathcal{P}(I_0(\tilde{w},\xi))\) corresponding to the index \(i \in \mathbb{K}(\tilde{w},\xi)\).
+To ensure a proper choice of the index set \(M_i(\tilde{w},\xi)\) the book offers a theorem and a corollary that are applicable in the given context.
+
+For better readability the brackets behind the index sets are omitted. All index sets refer to the same point.
+
+\begin{theorem}[c.f. {\cite[Theorem 7.10, p. 137]{Outrata1998}}]
+	\label{theo_710}
+	Consider the GE (\ref{GE}) at the point \((C,\tilde{w},\xi,\mu)\). Suppose that the assumptions (A2) and (A3) hold and that for a given \(i\in \mathbb{K}(\tilde{w},\xi)\) the following system in \((z_1,z_2,z_3,z_4)\) is inconsistent:
+	
+	\begin{align*}
+		-(A_{I_0 \setminus M_i})^{\top}z_1+(H(C))^{\top}z_3-(A_{I_+\cup M})^{\top}z_4 &= 0 \\
+		z_2+A_{M_i}z_3 &= 0\\
+		\left(\mathcal{J}_C\left(H(C)(\tilde{w},\xi)^{\top}\right)\right)^{\top}z_3 &= 0 \\	
+		(z_1,z_2) \geq 0 \quad (z_1,z_2) &\neq 0 \\
+		z_3 \in \ker(A_{I_+}).
+	\end{align*}
+	
+	Then subgradient can be calculated via the method above.
+\end{theorem}
+
+\begin{corollary}[c.f. {\cite[Corollary 7.12, p. 139]{Outrata1998}}]
+	Let the assumptions of Theorem \ref{theo_710} be fulfilled. Suppose that the constraints do not depend on the variable \(C\) and that 
+	
+	\[  \ker\left(\mathcal{J}_C\left(H(C)(\tilde{w},\xi)^{\top}\right)^{\top}\right) \cap \ker\left(A_{I_+}\right) = \{0\} .\]
+	
+	Then the subgradient can be calculated via the method above for each \(i \in \mathbb{K}(\tilde{w},\xi)\).
+\end{corollary}
+
+Neither the assumptions of the corollary nor those of the theorem can be assured in general. They have therefore to be checked for the specific situation in every iteration.
+
+\textcolor{red}{how checked? to be added when programmed}
 
 
 
 
+
+
+
+%\textcolor{red}{ now adjoint problem\\
+%Remark on M\\
+%what about \(M_i\) \\}
 
 %In order to do this the lower level problem is considered in its constrained form. 
 
@@ -584,7 +657,7 @@ The matrix \(A_{I_+(\tilde{w}^*,\xi^*,\mu^*)}\) contains only the rows of the ma
 
 \subsubsection{Error Bounds}
 
-It is assumed in (\ref{err_bound}) that the error on the function value and subgradient are bounded. This bound does not have to be known, but it has to exist and allows an estimation of the possible accuracy to which the algorithm\textcolor{red}{s} can solve the given problem (c.f. Lemma \ref{Lemma5}).
+It is assumed in (\ref{err_bound}) that the error on the function value and subgradient are bounded. This bound does not have to be known, but it has to exist and allows an estimation of the possible accuracy to which the algorithm\textcolor{red}{s???} can solve the given problem (c.f. Lemma \ref{Lemma5}).
 
 Due to the complicated structure of bilevel problems no tight error bounds can be given for problem (\ref{bilevel_fin}) but the existence of general error bounds can be shown.
 
@@ -623,24 +696,28 @@ where \(  L_{upp}\) is the Lipschitz constant of the upper level objective on th
 
 An equally loose bound can be provided for the approximate subgradient via local Lipschitz continuity of the upper level objective and Lipschitz continuity of the solution map \cite[chapter 5]{Outrata1998}.
 The inexactness of the subgradient has two reasons. On the one hand the subgradient is not calculated at the exact minimizer \(\tilde{w}^*\) but at an approximated point \(\tilde{w}\).
+As the subdifferential is bounded by the Lipschitz constant on \(U_{ad}\) the bound for that part of the subgradient error that originates from taking the subgradient only at an approximate point is given by \(2L_{upp}L_{w}\). Here \(L_{\tilde{w}}\) is the Lipschitz constant of the solution function \(\tilde{w}(C)\).
 
-Here the theory yields that
-\[ \Vert \mathcal{L}_{upp}(\tilde{w}(C_1))-\mathcal{L}_{upp}(\tilde{w}(C_2)) \Vert \leq L_{upp}\Vert \tilde{w}(C_1)-\tilde{w}(C_2) \Vert \leq  L_{upp} L_{w}\Vert C_1-C_2\Vert, \ \forall C_1, C_2 \in U_{ad}. \]
 
-As the subdifferential is bounded by the Lipschitz constant on an open, bounded set containing \(U_{ad}\) there exists a bound for part of the subgradient error originating from the subgradient only at an approximate point to the original iterate.
+%Here the theory yields that
+%\[ \Vert \mathcal{L}_{upp}(\tilde{w}(C_1))-\mathcal{L}_{upp}(\tilde{w}(C_2)) \Vert \leq L_{upp}\Vert \tilde{w}(C_1)-\tilde{w}(C_2) \Vert \leq  L_{upp} L_{w}\Vert C_1-C_2\Vert, \ \forall C_1, C_2 \in U_{ad}. \]
 
-On the other hand for computation of the subgradient the adjoint problem \textcolor{red}{ref} has to be solved numerically and therefore only gives an approximate solution.
-As the adjoint problem is also a strictly convex constrained optimization problem its minimizing argument \textcolor{red}{... name?} can be estimated the same way as above.
 
-Hence the following error inequality can be stated:
+On the other hand for computation of the subgradient the adjoint problem (\ref{adj_prob}) has to be solved numerically and therefore only gives an approximate solution.
+As the adjoint problem is also a strictly convex constrained optimization problem its minimizing argument \(p\) can be estimated the same way as above.
+
+%Hence the following inequality can be stated for the error:
+Hence the distance between the exact subgradient and the approximate one in the sense of \(p\) is
 
 \begin{align*}
-	\Langle \textcolor{red}{matrix*(\tilde{w}^*-\tilde{w})}, (p^*-p) \Rangle &\leq \Vert matrix \Vert \Vert(\tilde{w}^*-\tilde{w}) \Vert \Vert (p^*-p) \Vert \\
-	& \leq \Vert matrix \Vert D_{\tilde{w}} D_{p}.
+	\Langle \mathcal{J}_CH(C)\tilde{w}^*, (p^*-p) \Rangle &\leq \Vert \mathcal{J}_CH(C) \Vert_2 \Vert\tilde{w}^* \Vert \Vert p^*-p \Vert \\
+	& \leq \Vert \max\{1,C_{max}\} \Vert \tilde{w}_{max}  D_{p}(\mathtt{tol}).
 \end{align*}
 
-\textcolor{red}{check this inequality once again}
-\(D_{p}\) 'diameter' for \(p\).
+Here \(C_{max}\) denotes the maximum component of the vector of hyper-parameters and \(\tilde{w}_{max}\) is the maximum of the function \(\tilde{w}(C)\) on \(U_{ad}\).
+The sum of those bounds is the overall bound of the approximate subgradient error.
+%\textcolor{red}{check this inequality once again}
+%\(D_{p}\) 'diameter' for \(p\).
 
 
 %\( f^j = \mathcal{L}_{upp}(C^j) = \mathcal{L}_{upp}(w(C^j))\) \\
@@ -655,7 +732,9 @@ For the proof of Lemma \ref{Lemma5} regularity of the upper level objective func
 We have however to remark here, that from Proposition 7.4 in \cite{Outrata1998} only follows weak semismoothness of this function.
 In \cite[p. 82]{Spingarn1981} an example is given that semismooth, quasidifferentiable function does not have to be subdifferentially regular. As semismooth functions are a subset of weakly semismooth functions, we cannot conclude that the objective function of (\ref{bilevel_fin}) with the solution of the lower level plugged in is regular.
 
-Proving regularity for the particular instance (\ref{bilevel_fin}) of a bilevel problem may be possible, taking into account the structure provided by the strictly convex objective functions of both levels and the equivalence relations (3) in \cite[p. 5]{Hare2016}. It lies however beyond the scope of this thesis.
+Proving regularity for the particular instance (\ref{bilevel_fin}) of a bilevel problem may be possible, taking into account the structure provided by the strictly convex objective functions of both levels and the fact that the class of semismooth and regular functions is identical to the class of lower-\(\mathcal{C}^1\) functions \cite[equation (3), p. 5]{Hare2016}. It lies however beyond the scope of this thesis.
+
+%\textcolor{red}{equivalent to lower-1}
 
 %actually in Lemma 5 of \cite{Hare2016} the regularity of the objective function is needed because it entails outer semicontinuity of the subdifferential. If this is not the case, then only upper semicontinuity of the subdifferential is given.
 %Therefore I don't know if Lemma 5 still holds.
@@ -665,113 +744,114 @@ Proving regularity for the particular instance (\ref{bilevel_fin}) of a bilevel 
 %Solution map also semismooth? (p. 9)\\
 %def (weak) semismoothness p. 32
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \subsection{Numerical Experiments}
-
-In this section algorithm \ref{sec_nonconv_inex}.1 is used to solve the bilevel problems presented above for different synthetic and real world data sets.
-
-\begin{itemize}
-	\item Problem what to optimize
-	\item comment on nonlinear 
-	\item overfitting
-	\item pictures that show situation
-\end{itemize}
-
-
-\subsubsection{Selection of the Data Sets}
-
-\begin{itemize}
-	\item parameter \(\lambda\) against overfitting, there to make generalization better
-	\item data sets that ``allow'' for high overfitting: not too big, many features
-\end{itemize}
-
-The following two real world data sets are used:
-
-\begin{center}
-\begin{table}[H]%
-	\begin{tabular}{lcccc}
-		\hline
-    Data set & \(l_{train}\) & \(l_{test}\) & n & T \\
-		\hline
-		Wisconsin Breast Cancer Database & 240 & 443 & 9 & 3 \\
-		John Hopkins University Ionosphere Database & 240 & 111 & 33 & 3
-	\end{tabular}
-	\caption{}
-\end{table}
-\end{center}
-
-
-Plots
-
-\begin{figure}[H]
-	\begin{subfigure}{0.49\textwidth}
-		\includegraphics[width=\textwidth]{Pictures/Plots/lambda_vs_err_io_ca_final.eps}%
-	\end{subfigure}
-	\begin{subfigure}{0.49\textwidth}
-		\includegraphics[width=\textwidth]{Pictures/Plots/lambda_vs_err_ss_sb_b5_final.eps}%
-	\end{subfigure}
-	\caption{Plots of the hingloss error for different $\lambda$ values. The figure on the right shows the plot for the \textup{\texttt{cancer}} (left axis) and \textup{\texttt{ionosphere}} (right axis) data sets. The blot on the left depicts the situation for the sythetic sets \textup{\texttt{syn small}}, \textup{\texttt{syn big}} (left axis) and \textup{\texttt{syn box}} (right axis).}%
-	\label{fig_lambda_vs_err}%
-\end{figure}
-
-
-results
-
-\begin{center}
-\begin{table}[H]%
-	\begin{tabular}{llcccc}
-		\hline
-    Data set & algorithm & 0.1 & 1 & 10 & 100 \\
-		\hline
-		\texttt{cancer} & Bundle & 1.0975 & 1.0974 & 1.0974 & 1.1341 \\
-		 & Noll Bundle & 1.0974 & 1.0974 & 1.0974 & 1.0974 \\
-		 &  fminsearch & 1.0974 & 1.0974 & 1.0974 & -10 \\
-		 & fmindnb & 1.0974 \\
-		\texttt{ionosphere} & Bundle & 2.6081 & 2.3108 & 0.3953 & 4.7401 \\
-		 & Noll Bundle & 3.5386 & 3.6521 & 10 & 8.2773 \\
-		 & fminsearch & 3.5104 & 3.5104 & 3.5104 & 3.5104 \\
-		 & fminbnd & 3.5104 \\
-		\texttt{syn small} & Bundle & 0.0337 & 0.031 & 0.0329& 0.03 \\
-		 & Bundle Noll & 0.0323 & 0.0352 & 0.0352 & 0 \\
-		 & fminsearch & 0.0346 & -0.1939 & -1.79 & -3.5673 \\
-		 & fminbnd & 0.0346 \\
-		\texttt{syn big} & Bundle & 0.1 & 1 & 10 & 100 \\
-		 & Bundle Noll & 0.0099 & 0.0108 & 0.0109 & 0.0086 \\
-		 & fminsearch & 0.0114 & -0.8748 & -0.8748 & -0.8748 \\
-		 & fminbnd & 0.0206 & plot: 0.0114\\
-		\texttt{syn box} & Bundle & 0.1 & 1 & 4.8486 & 4.45336 \\
-		 & Bundle Noll & 0.1 & 1 & 4.2760 & 0 \\
-		 & fminsearch & 4.8950 & 4.8950 & 4.8950 & 4.8950 \\
-		 & fminbnd & 4.8950 \\
-	\end{tabular}
-	\caption{}
-\end{table}
-\end{center}
-
-times
-
-\begin{center}
-\begin{table}[H]%
-	\begin{tabular}{llcccc}
-		\hline
-    Data set & algorithm & 0.1 & 1 & 10 & 100 \\
-		\hline
-		\texttt{syn big} & Bundle Noll & 202 & 320 & 386 & 503 \\
-		 & fminsearch & 672 & 637 & 587 & 741 \\
-		 & fminbnd & 557
-	\end{tabular}
-	\caption{}
-\end{table}
-\end{center}
-
-sometimes says problem not convex, then negative values. Why??? Because tries negative lambda values in course of optimization and then it gets negative \\
-sometimes even for negative lambda in the end right solution \\
-can I find out why bundle methods so bad? \\
-try matlab method (smooth) with subgradient???
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%In this section algorithm \ref{sec_nonconv_inex}.1 is used to solve the bilevel problems presented above for different synthetic and real world data sets.
+%
+%\begin{itemize}
+	%\item Problem what to optimize
+	%\item comment on nonlinear 
+	%\item overfitting
+	%\item pictures that show situation
+%\end{itemize}
+%
+%
+%\subsubsection{Selection of the Data Sets}
+%
+%\begin{itemize}
+	%\item parameter \(\lambda\) against overfitting, there to make generalization better
+	%\item data sets that ``allow'' for high overfitting: not too big, many features
+%\end{itemize}
+%
+%The following two real world data sets are used:
+%
+%\begin{center}
+%\begin{table}[H]%
+	%\begin{tabular}{lcccc}
+		%\hline
+    %Data set & \(l_{train}\) & \(l_{test}\) & n & T \\
+		%\hline
+		%Wisconsin Breast Cancer Database & 240 & 443 & 9 & 3 \\
+		%John Hopkins University Ionosphere Database & 240 & 111 & 33 & 3
+	%\end{tabular}
+	%\caption{}
+%\end{table}
+%\end{center}
+%
+%
+%Plots
+%
+%\begin{figure}[H]
+	%\begin{subfigure}{0.49\textwidth}
+		%\includegraphics[width=\textwidth]{Pictures/Plots/lambda_vs_err_io_ca_final.eps}%
+	%\end{subfigure}
+	%\begin{subfigure}{0.49\textwidth}
+		%\includegraphics[width=\textwidth]{Pictures/Plots/lambda_vs_err_ss_sb_b5_final.eps}%
+	%\end{subfigure}
+	%\caption{Plots of the hingloss error for different $\lambda$ values. The figure on the right shows the plot for the \textup{\texttt{cancer}} (left axis) and \textup{\texttt{ionosphere}} (right axis) data sets. The blot on the left depicts the situation for the sythetic sets \textup{\texttt{syn small}}, \textup{\texttt{syn big}} (left axis) and \textup{\texttt{syn box}} (right axis).}%
+	%\label{fig_lambda_vs_err}%
+%\end{figure}
+%
+%
+%results
+%
+%\begin{center}
+%\begin{table}[H]%
+	%\begin{tabular}{llcccc}
+		%\hline
+    %Data set & algorithm & 0.1 & 1 & 10 & 100 \\
+		%\hline
+		%\texttt{cancer} & Bundle & 1.0975 & 1.0974 & 1.0974 & 1.1341 \\
+		 %& Noll Bundle & 1.0974 & 1.0974 & 1.0974 & 1.0974 \\
+		 %&  fminsearch & 1.0974 & 1.0974 & 1.0974 & -10 \\
+		 %& fmindnb & 1.0974 \\
+		%\texttt{ionosphere} & Bundle & 2.6081 & 2.3108 & 0.3953 & 4.7401 \\
+		 %& Noll Bundle & 3.5386 & 3.6521 & 10 & 8.2773 \\
+		 %& fminsearch & 3.5104 & 3.5104 & 3.5104 & 3.5104 \\
+		 %& fminbnd & 3.5104 \\
+		%\texttt{syn small} & Bundle & 0.0337 & 0.031 & 0.0329& 0.03 \\
+		 %& Bundle Noll & 0.0323 & 0.0352 & 0.0352 & 0 \\
+		 %& fminsearch & 0.0346 & -0.1939 & -1.79 & -3.5673 \\
+		 %& fminbnd & 0.0346 \\
+		%\texttt{syn big} & Bundle & 0.1 & 1 & 10 & 100 \\
+		 %& Bundle Noll & 0.0099 & 0.0108 & 0.0109 & 0.0086 \\
+		 %& fminsearch & 0.0114 & -0.8748 & -0.8748 & -0.8748 \\
+		 %& fminbnd & 0.0206 & plot: 0.0114\\
+		%\texttt{syn box} & Bundle & 0.1 & 1 & 4.8486 & 4.45336 \\
+		 %& Bundle Noll & 0.1 & 1 & 4.2760 & 0 \\
+		 %& fminsearch & 4.8950 & 4.8950 & 4.8950 & 4.8950 \\
+		 %& fminbnd & 4.8950 \\
+	%\end{tabular}
+	%\caption{}
+%\end{table}
+%\end{center}
+%
+%times
+%
+%\begin{center}
+%\begin{table}[H]%
+	%\begin{tabular}{llcccc}
+		%\hline
+    %Data set & algorithm & 0.1 & 1 & 10 & 100 \\
+		%\hline
+		%\texttt{syn big} & Bundle Noll & 202 & 320 & 386 & 503 \\
+		 %& fminsearch & 672 & 637 & 587 & 741 \\
+		 %& fminbnd & 557
+	%\end{tabular}
+	%\caption{}
+%\end{table}
+%\end{center}
+%
+%sometimes says problem not convex, then negative values. Why??? Because tries negative lambda values in course of optimization and then it gets negative \\
+%sometimes even for negative lambda in the end right solution \\
+%can I find out why bundle methods so bad? \\
+%try matlab method (smooth) with subgradient???
+%
+%
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %\subsubsection{Solution of the Bilevel Program}
 %

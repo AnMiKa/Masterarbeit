@@ -871,7 +871,18 @@
   year    = {1981},
   volume  = {264},
   pages   = {77 -- 89},
-  doi     = {10.1090/S0002-9947-1981-0597868-8},
+  doi     = {10.2307/1998411},
+}
+
+@Book{Clarke2013,
+  title     = {Functional Analysis, Calculus of Variations and Optimal Control},
+  publisher = {Springer},
+  year      = {2013},
+  author    = {Francis Clarke},
+  date      = {2013-02-06},
+  ean       = {9781447148197},
+  isbn      = {1447148193},
+  pagetotal = {608},
 }
 
 @Comment{jabref-meta: databaseType:bibtex;}
