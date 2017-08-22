@@ -1,5 +1,11 @@
 \begin{thebibliography}{10}
 
+\bibitem{Boser1992}
+B.~E. Boser, I.~M. Guyon, and V.~N. Vapnik.
+\newblock A training algorithm for optimal margin classifiers.
+\newblock In {\em Proceedings of the Fifth Annual Workshop on Computational
+  Learning Theory}, COLT '92, pages 144--152, New York, NY, USA, 1992. ACM.
+
 \bibitem{Cristianini2000}
 N.~Cristianini and J.~Shawe-Taylor.
 \newblock {\em An Introduction to Support Vector Machines and Other

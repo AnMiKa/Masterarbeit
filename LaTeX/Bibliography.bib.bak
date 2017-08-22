@@ -885,4 +885,18 @@
   pagetotal = {608},
 }
 
+@Article{Wachsmuth2013,
+  author   = {Gerd Wachsmuth},
+  title    = {On LICQ and the uniqueness of Lagrange multipliers},
+  journal  = {Operations Research Letters},
+  year     = {2013},
+  volume   = {41},
+  number   = {1},
+  pages    = {78 - 80},
+  doi      = {http://dx.doi.org/10.1016/j.orl.2012.11.009},
+  issn     = {0167-6377},
+  keywords = {Lagrange multiplier, Constraint qualification, Optimality conditions},
+  url      = {http://www.sciencedirect.com/science/article/pii/S0167637712001459},
+}
+
 @Comment{jabref-meta: databaseType:bibtex;}

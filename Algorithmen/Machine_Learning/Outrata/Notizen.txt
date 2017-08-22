@@ -6,3 +6,208 @@ Notizen Outrata Programmierung
 	   (in erster Spalte)???
 ????????? X passent mit 1er Spalte gemacht (vorher vergessen) -> jetzt passt gar nichts mehr -> Ax-b = [1,...,1]'
 ????????? all Xi = 0 ???
+
+
+--------------------------------------------------------------------------------
+18.08.
+
+1. Cancer Daten für implicit bias hergerichtet
+	Spalte mit 1ern an X angehängt
+	Y so belassen
+
+2. C = 5 (MonoGroup); sehr genaue Lösung des Algo (Toleranzen: 1e-15)
+
+3. Ergebnisse:
+	Multiplier: 0: < 1e-18, nicht 0: > 1e-3 -> gute "Trennung"
+	Ausgewertete Nebenbedingungen:
+		A1: alle < 1e-15 -> passt zu Toleranz im Algorithmus
+		A2: alle < 1e-14 -> passt ganz gut zu Toleranz im Algorithmus
+		A3: alle < 1e-15 -> passt zu Toleranz im Algorithmus
+		für alle 3 sind Multiplikatoren und constraints genau komplementär
+		-> d.h. entweder streng aktiv oder inaktiv
+		-> in der Praxis dürfte sich daher kein Problem mit M ergeben, da M immer leer
+	
+	???!!!  Dachte, dass alle Nebenbedingungen aktiv sein müssen aufgrund
+		der Struktur des Problems -> dem ist aber nicht so - WARUM???
+	! von der Geometrie her: eigentlich nur die aktiv, die den Rand der Menge
+		bilden, wo w gerade anstöst
+		dann müssten xi = 1-yx^T*w sein, wo aktive Nabenbedingung
+		-> RICHTIG (siehe auch Ulbrich )
+	
+	berechnetes (1-yx^T*w) Xi: !muss auf Zusammensetzung der Folds achten
+		allgemein muss gelten:  Xi >(=) 1-yx^T*w -> passt auf 1e-14
+		Unterschied der "aktiven" Xi entsprechend auch 1e-14
+
+	Xi aus Algorithmus:
+		überall >(=) 0 -> passt
+		dort wo Multiplikator = 0, auc Xi = 0
+		Multiplikator = 0 heißt: inaktive Nabenbedingung (in meinem Fall)
+		Xi = 0 heißt, dass Pink richtig klassifiziert und er auf oder außerhalb
+		des Margins liegt -> Anzahl würde dazu passen -> 87 insgesamt über 3 Folds
+		missklassifiziert
+
+4. Zusammenfassung:
+	bei den Größen scheint alles so zusammenzupassen wie es soll
+	Auffällig: anscheinend gibt es keine schwach aktiven Nebenbedingungen
+		-> kann das mit M ein Problem geben? -> vielleicht; Vorteil: nicht so viel zu 
+		überprufen, das M immer leer
+		
+5. finden der Menge M / der schwach aktiven Indizes
+	??? Ist es schlimm, wenn immer leer? Im Buch steht ja, daraus, das äußere Subdifferntial
+		(oder so ähnlich)
+	Idee: benutze für die ca-0-Toleranz zum Finden der Indizes 10*tol dess Algorithmus
+
+	programmiert -> bis jetzt ohne check des Theorems
+	getestet -> erster Teil, wenn keine schwach aktiven Indizes vorhanden
+ 
+
+6. Programmiere Adjoint Problem
+	!!! Upper Level Problem nicht von Xi abhängig -> 2 Möglichkeiten
+	1. Xi-Teil überall weglassen und p nur für \tilde(w) berechnen
+	2. Subgradient der Upper Level Zielfunktion mit 0 für Xi erweitern
+
+	zu 1.:  was ist der Effekt davon??? Wird dadurch \tilde(w) auch anders berechnet?
+		denke: kein Einfluss auf Zeilfunktion, aber einfluss auf Nebenbedingungen
+		-> daher nicht dasselbe Minimierungsergebnis
+		-> nehme Variante 2
+	
+7. Alle 3 Algorithmen in einen zusammengefasst, da dies einfacher mit den Übergaben
+	interessant: p hat im Xi-Teil nur da Einträge, wo auch aktive Indizes
+
+   auch noch (partiellen) (sub-)gradienten der ul Funktion nach w eingefügt,
+   da Berechnungen sonst nicht gehen
+
+--------------------------------------------------------------------------------
+20.08.
+
+8. Abend 19.08.: gesamt-Subgradient von ul passt nicht
+   Morgen 20.08: gesamt-Subgradient von ul passt meistens, nur manchmal nicht
+   eps = 1e-7
+	schreibe C-Werte auf, für die es nicht passt:
+		C = 1.066527701805844, d2 = 0.019361686115533
+		C = 0.046342241340674, d2 = 3.309885120206866
+		C = 0.844358455109103, d2 = 0.021647705840061
+		C = 43.141382746354459, d2 = 0.044932378224155
+		C = 54.986020183633201, d2 = 0.037718954130043
+		Bereich wo es nicht passt ist größer: ~54.5-57.3
+	Werte, bei denen es passt:	
+		C = 3.997826490988965, d2 = 3.440290452516592e-07
+		C = 2.598704028506542, d2 = 3.285576871903118e-06
+		C = 80.006848022430759, d2 = 2.163999313076204e-08
+		C = 91.064759442952294, d2 = 1.214774056068624e-07
+		C = 2.721371174173275, d2 = 1.536464602214238e-05
+		
+   für eps = 1e-5: wenn es passt, passt es mit 1e-9,10 (also besser)		
+
+	habe obere, untere und zentrale Differenz für numerischen Subgradienten genommen
+	sind alle sehr nah beieinander -> sieht so aus, als ob Funktion glatt wäre
+	-> sind immer, egal wie d2, maximal 1e-7 auseinander
+	!!! wenn eps 1e-3: -> Abstand der Ableitungen ~1e-5
+	    wenn eps 1e-10 -> Abstand teilweise nur 1e-2 -> denke numerische Probleme 
+			      bei Berechnung von w; Cs zu nah eieinander
+			      Abstand und d2 scheinen höhere Korelation zu haben
+
+	Ideen: Dort wo Subgradienten nicht zusammenpassen nicht glatt???
+	       Wie kann man das testen?
+		- plotten?
+		- genauere Berechnungen? -> siehe oben verschiedene eps
+
+9. Plotten: Plot-Skript geschrieben
+		-> ergibt nicht den erwarteten Plot
+		-> kein Minimum (nur bei 0, sollte bei 1,5? sein)
+		-> kann an implizitem bias liegen
+	ll Zielfunktion noch mal für lambda (=1/C) geschrieben und mit selbem
+	Plot-Skript geplottet -> hat ein eindeutiges Minimum bei lambda = 16.6
+	Minimum für C müsste also bei C = 0.060240963855422 liegen
+	Das kann sein! noch mal Bereich plotten -> passt, auf neuem Plot ist
+	das Minimum bei 0.06 zu sehen
+
+   -> aber: Funktionen sehen insgesamt schon sehr glatt aus
+	werden Stellen, wo Gradienten schlecht, wiedergespiegelt???
+	Versuch im Intervall: C = [53,58] -> plot ist gerade Linie, quasi Gerade
+	Gradienten passen dazu
+	noch mal Gradienten-Test angeschaut: scheint als wäre eher der berechnete 
+	Gradient das Problem -> verändert sich mehr
+   -> schaue die Situation um 0.04 herum an, da größerer Unterchied der Gradienten
+	Plot zeigt quasi gerads, waagrechte Linie
+	Aus Plot geht hervor, dass numerisch berechnete Subgradienten besser als
+	die "Funktions"-Subgradienten
+	Aber sehen auch ählnich genug aus, um damit arbeiten zu können
+
+10. Datensätze, die mit lambda gut waren für implicit bias plotten
+	folgende Datensätze:
+		Ionosphere
+		syn small
+		syn big
+		syn box
+	zunächst für imp bias herrichten -> erledigt für:
+		Ionosphere
+		Box
+		SynBig
+		SynSmall
+		
+	!!! nicht für alle Datensätze sind Validierungsdatensätze vorhanden
+	    ist insofern nicht schlimm, da für Illustration etc. Validierungsdatensatz
+	    nicht unbedingt vonnöten
+	
+	Plotten der Datensätze für lambda -> Orientierung des Plot-Rahmens an bereits
+	bestehenden Plots
+		Datensatz:	lambda	C
+		Cancer		16.5	0.06
+		Ionosphere	25-350  0.002-0.04
+		Box		70-80	0.0125-0.143
+		SynBig		0.05	20
+		SynSmall	0.15	6.66
+
+-----------------------------------------------------------------------------
+21.08.
+	Plotten der Daten für C-Funktion und überprüfen des Minimums
+	In Gruppen zusammenfassen
+		0 - 1  Ionosphere, Cancer, Box
+		5 - 25 SynBig, SynSmall
+	Daten speichern!
+		erledigt:	Datensatz	C_min	Y	    ohne *100
+				Cancer		0.06	10-90	    0.1-0.9
+				Ionosphere	0.024	40-100      0.4-1
+				Box		0.014	50-95	    0.5-0.95
+				SynSmall	6.65	1.6-2.1	    ---
+				SynBig		16.5	0.018-0.036 ---
+
+   !!! Achtung bei C=0 -> funtioniert jetzt nicht mehr (anders als lambda=0)
+	denn im Fall C = 0 jetzt nur noch Regularisierung anstatt nur Zielfunktion
+
+   !!! noch einmal prüfen, ob Skalierung überhaupt noch vonnöten
+	Für erste 3 könnte sie weggelassen werden, für Synsmall, Synbig nicht
+
+-----------------------------------------------------------------------------
+22.08.
+
+Hare / Noll Algorithmus laufen lassen
+erst Mal noch mit Skalierung
+
+	Datensatz	Hare	Noll
+	Cancer
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -17,16 +17,16 @@ A general bilevel program can be formulated as in \cite[p. 20]{Kunapuli2008}
 
 \begin{equation}
 	\begin{array}{cll}
-	\displaystyle\min_{x \in X, y \in \R^k} & F(x,y) & \text{upper level} \vspace{0.5ex}\\
-	\text{s.t.} & G(x,y) \leq 0 & \vspace{1em}\\
-	& y \in \begin{Bmatrix} \displaystyle\argmax_{y\in Y} & f(x,y) \vspace{0.5ex}\\
-	                        \text{s.t.} & g(x,y) \leq 0 
+	\displaystyle\min_{C \in U_{ad}, \tilde{w} \in \R^k} & \mathcal{L}_{upp}(C,\tilde{w}) & \text{upper level} \vspace{0.5ex}\\
+	\text{s.t.} & \mathcal{G}_{upp}(C,\tilde{w}) \leq 0 & \vspace{1em}\\
+	& \tilde{w} \in \begin{Bmatrix} \displaystyle\argmax_{\tilde{w}\in W} & \mathcal{L}_{low}(C,\tilde{w}) \vspace{0.5ex}\\
+	                        \text{s.t.} & \mathcal{G}_{low}(C,\tilde{w}) \leq 0 
 													\end{Bmatrix}. & \text{lower level}
 	\end{array}
 	\label{bilevel}
 \end{equation}
 
-The two objecective functions \(F\) and \(f\) map from \(\R^n\times\R^k\) into \(\R\) and the constraint functions \(G\) and \(g\) map from \(\R^n\times\R^k\) into \(\R^L\) and \(\R^l\) respectively. 
+The two objecective functions \(\mathcal{L}_{upp}\) and \(\mathcal{L}_{low}\) map from \(\R^n\times\R^k\) into \(\R\) and the constraint functions \(\mathcal{G}_{upp}\) and \(\mathcal{G}_{low}\) map from \(\R^n\times\R^k\) into \(\R^l\) and \(\R^s\) respectively. 
 
 The problem consists of an \emph{upper} or \emph{outer level} which is the overall function to be optimized. Contrary to usual constrained optimization problems which are constrained by explicitly given equalities and inequalities a  bilevel program is additionally constrained by a second optimization problem, the \emph{lower} or \emph{inner level} problem.
 
@@ -35,10 +35,10 @@ In the explicit methods the lower level problem is usually rewritten by its KKT 
 
 The second approach is the implicit one. Here the lower level problem is solved directly in every iteration of the outer optimization algorithm and the solution is plugged into the upper level objective. 
 
-Obviously if the inner level problem is solved numerically, the solution cannot be exact. Additionally the \emph{solution map} \( S(x) = \{y \in \R^k \mid y\), that solves the lower level problem, is can be nondifferentiable \cite{Outrata1998} and since elements of  the solution map are plugged into the outer level objective function in the implicit approach, the outer level function then becomes nonsmooth itself.This is why the inexact bundle algorithm seems a natural choice to tackle these bilevel problems. 
+Obviously if the inner level problem is solved numerically, the solution cannot be exact. Additionally the \emph{solution map} \( S(C) = \{w\in \R^k \mid w\) solves the lower level problem for a given \(C\}\), can be nondifferentiable \cite{Outrata1998} and since elements of  the solution map are plugged into the outer level objective function in the implicit approach, the outer level function then becomes nonsmooth itself. This is why the inexact bundle algorithm seems a natural choice to tackle these bilevel problems. 
 
-Moore et al. use the implicit approach in \cite{Moore2011} for support vector regression. However they use a gradient decent method which is not guaranteed to stop at an optimal solution.
-In \cite{Moore2010a} he also suggests the nonconvex exact bundle algorithm of Fuduli et al. \cite{Fuduli2004a} for solving the bilevel regression problem. This allows for nonsmooth inner problems and can theoretically solve some of the issues of the gradient descent method. It ignores however, that the objective function values can only be calculated approximately. A fact which is not addressed in Fuduli's algorithm.
+Moore et al. use the implicit approach in \cite{Moore2011} for support vector regression. However they use a gradient descent method which is not guaranteed to stop at an optimal solution.
+In \cite{Moore2010a} it is also suggested to use the nonconvex exact bundle algorithm of Fuduli et al. \cite{Fuduli2004a} for solving the bilevel regression problem. This method allows for nonsmooth inner problems and can theoretically solve some of the issues of the gradient descent method. It ignores however, that the objective function values can only be calculated approximately. A fact which is not addressed in Fuduli's algorithm.
 
 %\subsection{Notation and Expressions}
 
@@ -48,19 +48,20 @@ In \cite{Moore2010a} he also suggests the nonconvex exact bundle algorithm of Fu
 
 As short remark on the notation in this chapter is required.
 
-Due to standard notation in the field of SVM, the variables \(x\) and \(y\) are used in this chapter in two different contexts.
-In the setting of bilevel problems as used in (\ref{bilevel}) \(x \in X \subset \R^n\) and \(y \in \R^k\) are the optimization variables of the bilevel problem.
+Due to standard notation in the field of SVM, the variables \(x\) and \(y\) are used in this chapter in a different manner than before.
+%In the setting of bilevel problems as used in (\ref{bilevel}) \(x \in X \subset \R^n\) and \(y \in \R^k\) are the optimization variables of the bilevel problem.
 
-In the setting of SVMs \(x^i \in \R^{feat}\) is an element of the \emph{feature space} that contains the values of one data point. The corresponding variable \(y_i \in \{-1,1\}\) of the \emph{output domain} contains the class in the data point \(x^i\) lies. Sometimes the indices of the samples are omitted to express the general dependency on the data (x,y).
+In the setting of SVMs \(x^i \in \R^{n_f}\) is an element of the \emph{feature space} that contains the values of one data point. The corresponding variable \(y_i \in \{-1,1\}\) of the \emph{output domain} contains the class in which the data point \(x^i\) lies. Sometimes the indices of the samples are omitted to express the general dependency on the data (x,y).
 %All samples can be wrapped up in a martix \(X \in \R^{feat\times nd}\) and a vector \(Y\in \R^{nd}\).
+The optimization variable of the bundle method is denoted by \(C\) during this chapter.
 
-During the most part of the chapter, \(x^i\) and \(y^i\) are used as in the context of SVMs. In the cases where they are used to describe the variables of an optimization problem, this is clearly indicated.
+%During the most part of the chapter, \(x^i\) and \(y^i\) are used as in the context of SVMs. In the cases where they are used to describe the variables of an optimization problem, this is clearly indicated.
 
 There appear also different derivatives in this chapter.
-For a continuously differentiable function \(f:\R^n \times \R^m \to \R\) we denote the \emph{gradient} at \((\bar{x},\bar{y})\) by \(\nabla f(\bar{x},\bar{y}) \in \R^{n+m}\). The partial gradient with respect to \(x\) is indicated by \(\nabla_yf(\bar{x},\bar{y}) \in \R^m \). %If \(f\) is twice continuously differentiable the \emph{Hessian matrix} at the point \((\bar{x},\bar{y})\) is given by \(\nabla^2 f(\bar{x},\bar{y}) \in \R^{n+m \times n+m}\).
-For a continuously differentiable vector valued function \(F:\R^n \times \R^m \to \R^k\) the \emph{Jacobian matrix} is given by \( \mathcal{J}F(\bar{x},\bar{y}) \in \R^{k \times n+m}\). The partial Jacobian with respect to the variable \(y\) is denoted \(\mathcal{J}_y F(\bar{x},\bar{y}) \in \R^{k \times m}\).
+For a continuously differentiable function \(f:\R^n \times \R^k \to \R\) we denote the \emph{gradient} at \((\bar{C},\bar{\tilde{w}})\) by \(\nabla f(\bar{C},\bar{\tilde{w}}) \in \R^{n+k}\). The partial gradient with respect to \(\tilde{w}\) is indicated by \(\nabla_{\tilde{w}}f(\bar{C},\bar{\tilde{w}}) \in \R^k \). %If \(f\) is twice continuously differentiable the \emph{Hessian matrix} at the point \((\bar{x},\bar{y})\) is given by \(\nabla^2 f(\bar{x},\bar{y}) \in \R^{n+m \times n+m}\).
+For a continuously differentiable vector valued function \(F:\R^n \times \R^k \to \R^m\) the \emph{Jacobian matrix} is given by \( \mathcal{J}F(\bar{C},\bar{\tilde{w}}) \in \R^{m \times (n+k)}\). The partial Jacobian with respect to the variable \(\tilde{w}\) is denoted \(\mathcal{J}_{\tilde{w}} F(\bar{C},\bar{\tilde{w}}) \in \R^{m \times k}\).
 
-Finally let \(M \in \R^{n\times m}\) be a matrix and \(I \subset \{1,...,n\}\) an index set. Then the expression \(M_{I}\) denotes the matrix that consists of the rows of \(M\) corresponding to the indices in the set \(I\). %For a vector \(v \in \R^n\) the vector \(v_{I}\) consists of the components of \(v\) corresponding to the set \(I\).
+Finally let \(M \in \R^{n\times k}\) be a matrix and \(I \subset \{1,...,n\}\) an index set. Then the expression \(M_{I}\) denotes the matrix that consists of the rows of \(M\) corresponding to the indices in the set \(I\). %For a vector \(v \in \R^n\) the vector \(v_{I}\) consists of the components of \(v\) corresponding to the set \(I\).
 
 %special notation only in this chapter, \(x,y\) now different. Optimization variable now \(\lambda,C\).
 %with index -> data, without variables from problem.
@@ -70,14 +71,14 @@ Finally let \(M \in \R^{n\times m}\) be a matrix and \(I \subset \{1,...,n\}\) a
 
 \subsection{Introduction to Support Vector Machines}
 %In times of big data machine learning is a very active field of research. 
-Support vector machines are linear learning machines that were developed in the 1990's by Vapnik and co-workers. Soon they could outperform several other programs in this area \cite{Cristianini2000} and the subsequent interest in SVMs lead to a very versatile application of these machines \cite{Kunapuli2008}.
+Support vector machines are linear learning machines that were developed in the 1990's by Vapnik and co-workers (see \cite{Boser1992}, where SWMs were introduced). Soon they could outperform several other programs in this area \cite{Cristianini2000} and the subsequent interest in SVMs led to a very versatile application of these machines \cite{Kunapuli2008}.
 
 The case that is considered here is binary support vector classification using supervised learning. 
 For a throughout introduction to this subject see also \cite{Cristianini2000}. Here a summary of the most important expressions and results is given.
 
-In classification data from a possibly high dimensional vector space \(\tilde{X} \subset \R^{feat}\), the feature or \emph{input space} is divided into two classes. These lie in the output domain \(\tilde{Y} = \{-1,1\}\). Elements from the feature space will mostly be called \emph{data points} here. They get \emph{labels} from the feature space. Labeled data points are called \emph{examples}.
+In classification data from a possibly high dimensional vector space \(\tilde{X} \subset \R^{n_f}\), the feature or \emph{input space} is divided into two classes. These lie in the output domain \(\tilde{Y} = \{-1,1\}\). Elements from the feature space will mostly be called \emph{data points} here. They get \emph{labels} from the feature space. Labeled data points are called \emph{examples}.
 The functional relation between the features and the class of an example is given by the usually unknown \emph{response} or \emph{target function} \(f(x)\).
-Supervised learning is a kind of machine learning task where the machine is given examples of input data with associated labels, the so called \emph{training data} \((X,Y)\). Mathematically this can be modeled by assuming that the examples are  drawn identically and independently distributed (iid) from the fixed joint distribution \(P(x,y)\). This usually unknown distribution states the probability that a data point \(x\) has the label \(y\) \cite[p. 988]{Vapnik1999}.
+Supervised learning is a kind of machine learning task where the machine is given examples of input data with associated labels, the so called \emph{training data} \((X,Y)\). Mathematically this can be modeled by assuming that the examples are  drawn \emph{identically and independently distributed} (iid) from the fixed joint distribution \(P(x,y)\). This usually unknown distribution states the probability that a data point \(x\) has the label \(y\) \cite[p. 988]{Vapnik1999}.
 The overall goal is then to optimize the generalization ability, meaning the ability to predict the output for unseen data correctly \cite[chapter 1.2]{Cristianini2000}.
 %The overall goal of machine learning is to optimize the generalization ability of the algorithm --> this means: predict output for unlabeled input as well as possible.
 %task is to find a mapping that predicts the output given unlabeled input as good as possible \cite{Cristianini2000}. 
@@ -90,14 +91,14 @@ The idea of \emph{risk minimization} is to find from a fixed set or class of fun
 %goal: find best available (from set of functions that was chosen before) approximation to the actual (unknown) ``response function'' --> function that ``classifies'' the data
 %Minimize loss between response of ``supervisor'' and response of learning machine
 
-As the response function is not known only the expected value of the loss can be calculated. It is given by the \emph{risk functional} 
+As the response function is not known, only the expected value of the loss can be calculated. It is given by the \emph{risk functional} 
 
 \begin{equation}
 	R(\lambda) = \int{\mathcal{L}(y,f_{\lambda}(x))\text{d}P(x,y)}.
 \label{risk_func}
 \end{equation}
 
-Here \(\mathcal{L}: \R^2 \to \R\) is the loss function, \(f_{\lambda}: \R^{n}\cap\mathcal{F} \to \R, ~ \lambda \in \Lambda\) the approximate response function found by the learning machine and \(P(x,y)\) the joint distribution the training data is drawn from. The goal is now to find a function \(f_{\bar{\lambda}}(x)\) in the chosen function space \(\mathcal{F}\) that minimizes this risk functional \cite[989]{Vapnik1999}.
+Here \(\mathcal{L}: \R^2 \to \R\) is the loss function, \(f_{\lambda}: \R^{n_f} \to \R, ~ \lambda \in \Lambda\) the approximate response function found by the learning machine and \(P(x,y)\) the joint distribution the training data is drawn from. The goal is now to find a function \(f_{\bar{\lambda}}(x)\) in a chosen function space \(\mathcal{F}\) that minimizes this risk functional \cite[p. 989]{Vapnik1999}.
 
 As the only given information is provided by the training set inductive principles are used to work with the \emph{empirical risk}, rather than with the risk functional.
 The empirical risk only depends on the finite training set  and is given by 
@@ -107,17 +108,17 @@ The empirical risk only depends on the finite training set  and is given by
 %Because only a data sample is known: Work with the empirical risk
 
 \begin{equation}
-	R_{\text{emp}}(\lambda) = \frac{1}{l} \sum_{i = 1}^{l}\mathcal{L}(y_i,f_{\lambda}(x^i)),
+	R_{\text{emp}}(\lambda) = \frac{1}{n_d} \sum_{i = 1}^{n_d}\mathcal{L}(y_i,f_{\lambda}(x^i)),
 \label{emp_risk}
 \end{equation}
 
-where \(l\) is the number of data points.
+where \(n_d\) is the number of data points.
 %L: Loss function 
 %Goal: approximate \(Q(z,\lambda_0)\) by \(Q(z,\lambda_l)\) that minimizes the empirical risk. --> is called ERM (empirical risk minimization induction principle)
-The law of large numbers ensures that the empirical risk converges to the risk functional as the number of data points grows to infinity. This however does not guarantee that the function \(f_{\lambda,\text{emp}}\) that minimizes the empirical risk also converges towards the function \(f_{\bar{\lambda}}\) that minimizes the risk functional.
+The law of large numbers ensures that the empirical risk converges to the risk functional as the number of data points grows to infinity. This however does not guarantee that the function \(f_{\bar{\lambda},\text{emp}}\) that minimizes the empirical risk also converges towards the function \(f_{\bar{\lambda}}\) that minimizes the risk functional.
 The theory of consistency provides necessary and sufficient conditions that solve this issue  \cite[p. 989]{Vapnik1999}.
 
-Vapnik therefore introduced the structural risk minimization (SRM) induction principle . It ensures that the used set of functions has a structure that makes it strongly consistent \cite{Vapnik1999}. Additionally it takes the complexity of the function that is used to approximate the target function into account. ``The SRM principle actually suggests a tradeoff between the quality of the approximation and the complexity of the approximating function'' \cite[p. 994]{Vapnik1999}.
+Vapnik therefore introduced the structural risk minimization (SRM) induction principle. It ensures that the used set of functions has a structure that makes it strongly consistent \cite{Vapnik1999}. Additionally it takes the complexity of the function that is used to approximate the target function into account. ``The SRM principle actually suggests a tradeoff between the quality of the approximation and the complexity of the approximating function'' \cite[p. 994]{Vapnik1999}.
 This reduces the risk of \emph{overfitting}, meaning to overly fit the function to the training data with the result of poor generalization \cite[chapter 1.3]{Cristianini2000}.
 
 %Therefore: structural risk Minimization induction Principle (SRM) --> is strongly consistent --> idea: minimize the empirical risk by considering the complexity of the model (given by CV-dimension)
@@ -126,9 +127,9 @@ Support vector machines fulfill all conditions of the SRM principle. Due to the 
 
 \subsubsection{Support Vector Machines}
 
-In the case of linear binary classification one searches for a an affine hyperplane \(w \in \R^feat\) shifted by \(b \in \R\) to separate the given data. The vector \(w\) is called weight vector and \(b\) is the bias.
+In the case of linear binary classification one searches for a an affine hyperplane \(w \in \R^{n_f}\) shifted by \(b \in \R\) to separate the given data. The vector \(w\) is called weight vector and \(b\) is the bias.
 
-Let the data be linearly separable. The function deciding how the data is classified can then be written as
+Let the data be linearly separable. This means, that there exists an affine hyperplane \((w,b)\) such that all data points from one class are on the same side of the hyperplane. The function deciding how the data is classified can be written as
 
 \[ f(x) = \text{sign}(\Langle w,x\Rangle-b). \]
 
@@ -136,12 +137,12 @@ Support vector machines aim at finding such a hyperplane that separates also uns
 
 \textcolor{red}{???Picture of hyperplane}
 
-One problem of this intuitive approach is that the representation of a hyperplane is not unique. If the plane described by \((w,b)\) separates the data, there exist infinitely many hyperplanes \((tw,b)\), \(t>0\), that separate the data in the same way.
+One problem of this approach is that the representation of a hyperplane is not unique. If the plane described by \((w,b)\) separates the data, there exist infinitely many hyperplanes \((tw,b)\), \(t>0\), that separate the data in the same way.
 To have a unique description of a separating hyperplane the \emph{canonical hyperplane for given data} \(x \in X\) is defined by 
 
 \[ f(x) = \Langle w, x\Rangle - b  \quad \text{s.t.} \quad \min_i \vert\Langle w,x^i\Rangle -b\vert = 1.\] 
 
-This is always possible in the case where the data is  linearly separable and means that the inverse of the norm of the weight vector is equal to the distance of the closest point \(x \in X \) to  the hyperplane \cite[p. 10]{Kunapuli2008}.
+To find such a hyperplane is always possible in the case where the data is  linearly separable. It means that the inverse of the norm of the weight vector is equal to the distance of the closest point \(x \in X \) to  the hyperplane \cite[p. 10]{Kunapuli2008}.
 
 
 %Kunapuli: representation of hyperplane not unique --> if \((w,b)\) separates data, infinitely many hyperplanes \((tw,tb) \forall t > 0\) also separate data --> need unique representation --> w.l.o.g. define \emph{canonical hyperplane} for given data \(x \in X\) as function 
@@ -156,9 +157,9 @@ A \emph{maximal margin hyperplane} is the hyperplane that realizes the maximal p
 
 %Theorem 6.1
 \begin{proposition}[{\cite[Proposition 6.1]{Cristianini2000}}]
-Given a linearly separable training sample \ \(\Omega = \{(x^i,y_i),...,(x^l,y_l)\}\) the hyperplane \((w,b)\) that solves the optimization problem
+Given a linearly separable training sample \ \(\Omega = \{(x^1,y_1),...,(x^{n_d},y_{n_d})\}\) the hyperplane \((w,b)\) that solves the optimization problem
 
-\[\|w\|^2 \quad \text{s.t.} \quad y_i(\Langle w,x\Rangle-b)\geq 1, \quad i = 1,...,l, \]
+\[\|w\|^2 \quad \text{s.t.} \quad y_i(\Langle w,x^i\Rangle-b)\geq 1, \quad i = 1,...,n_d, \]
 
 realizes a maximal margin hyperplane.
 \end{proposition}
@@ -173,11 +174,11 @@ Generally one cannot assume the data to be linearly separable. This is why in mo
 %\begin{definition} \cite{Cristianini2000}
 Fix \(\gamma > 0\). A \emph{margin slack variable of the example} \((x^i,y_i)\) with respect to the hyperplane \((w,b)\) and target margin \(\gamma\) is 
 
-\[\xi_i = \max(0, \gamma - y_i(\Langle w,x\Rangle+b))\] 
+\[\xi_i = \max(0, \gamma - y_i(\Langle w,x^i\Rangle+b))\] 
 
 %\end{definition}  
 If \(\xi_i > \gamma\) the point is considered misclassified. 
-One can also say that \(\|\xi\|\) measures the amount by which training set ``fails to have a margin of \(\gamma\)'' \cite[section 2.1.1]{Cristianini2000}.
+One can also say that \(\|\xi\|\) ``measures the amount by which the training set fails to have margin \(\gamma\)'' \cite[section 2.1.1]{Cristianini2000}.
 
 For support vector machines the target margin is set to \(\gamma = 1\).
 
@@ -192,9 +193,9 @@ This results in the following optimization problem for finding an optimal separa
 %
 \begin{align}
 \begin{split}
-	\min_{w,b,\xi} \quad & \frac{1}{2} \|w\|^2_2+\frac{C}{2}\sum_{i=1}^{nd}{\xi_i^2} \vspace{0.5ex}\\
+	\min_{w,b,\xi} \quad & \frac{1}{2} \|w\|^2_2+\frac{C}{2}\sum_{i=1}^{n_d}{\xi_i^2} \vspace{0.5ex}\\
 	\text{s.t.} \quad & y_i\left(\Langle w,x^i\Rangle-b\right) \geq 1 - \xi_i \vspace{0.5ex}\\
-	& 	\forall i = 1, \dots , nd.
+	& 	\forall i = 1, \dots , n_d.
 \end{split}
 \label{SVM_2}
 \end{align}
@@ -208,10 +209,10 @@ Instead of the Euclidean norm it is also possible to use the 1-norm in the loss 
 
 \begin{align*}
 \begin{split}
-	\min_{w,b,\xi} \quad & \frac{1}{2} \|w\|^2+C\sum_{i=1}^{nd}{\xi_i} \\
+	\min_{w,b,\xi} \quad & \frac{1}{2} \|w\|^2+C\sum_{i=1}^{n_d}{\xi_i} \\
 	\text{s.t.} \quad & y_i\left(\Langle w,x^i\Rangle-b\right) \geq 1 - \xi_i \\
 	& \xi_i \geq 0 \\
-	& 	\forall i = 1, \dots , nd.
+	& 	\forall i = 1, \dots , n_d.
 \end{split}
 %\label{SVM_1}
 \end{align*}
@@ -223,13 +224,13 @@ It is shown in appendix ... that there exist data sets for which the strong regu
 %To derive a subgradient of the bilevel problem introduced later in this section another formulation of the classification problem is used.
 In order to fulfill all conditions assumed in \cite{Outrata1998} it is necessary to reformulate problem (\ref{SVM_2}).
 The new formulation makes use of the \emph{implicit bias}, meaning that the bias is not calculated separately but as part of the variable \(w\). 
-By adding an additional one to the end of each feature vector we can use the vectors \(\tilde{x}_i := (x_i,1)^{\top}\) and \(\tilde{w} := (w,w_b)\) to state the following optimization problem:
+By adding an additional '1' to the end of each feature vector we can use the vectors \(\tilde{x}_i := (x_i^{\top},1)^{\top}\) and \(\tilde{w} := (w^{\top},w_b)^{\top}\) to state the following optimization problem:
 
 \begin{align}
 \begin{split}
-	\min_{\tilde{w},\xi} \quad & \frac{1}{2} \|\tilde{w}\|^2+\frac{C}{2}\sum_{i=1}^{nd}{\xi_i^2} \vspace{0.5ex}\\
+	\min_{\tilde{w},\xi} \quad & \frac{1}{2} \|\tilde{w}\|^2+\frac{C}{2}\sum_{i=1}^{n_d}{\xi_i^2} \vspace{0.5ex}\\
 	\text{s.t.} \quad & y_i\Langle \tilde{w},\tilde{x}^i\Rangle = y_i\left(\Langle w,x^i\Rangle-w_b\right) \geq 1 - \xi_i \vspace{0.5ex}\\
-	& 	\forall i = 1, \dots , nd.
+	& 	\forall i = 1, \dots , n_d.
 \end{split}
 \label{SVM_bias}
 \end{align}
@@ -242,28 +243,28 @@ From now on we work with the implicit bias. To see the derivation of the bilevel
 
 \subsubsection{Multiple Hyper-parameters}
 
-To examine the performance of the bilevel approach in the more dimensional case a model suggested by Moore et al. in \cite{Moore2011} and called \emph{multi-group} support vector classification (multiSVC) is used. There different hyper-parameters are allowed for different subgroups of the trainings data.
+To examine the performance of the bilevel approach in the more dimensional case a model suggested by Moore et al. in \cite{Moore2011} called \emph{multi-group} support vector classification (multiSVC) is used. This model allows different hyper-parameters for different subgroups of the trainings data.
 In section 4.3 of \cite{Moore2011} the model is described for a regression function. In this thesis the same technique is used for classification.
 
 The motivation behind the approach is that different groups of samples from the training set can have slightly different properties and should therefore have their own weighting parameters \(C_g\).
-On the one hand this can improve the generalization results. On the other hand properties of the different data groups can be identified by their respective hyper-parameters. Moore et al. explain in \cite[section 4.3, p. 9]{Moore2011} that for example a large \(C_g\) signifies reliable data in the respective group whereas a smaller \(C_g\) suggests a poorer quality.
+On the one hand this can improve the generalization results. On the other hand properties of the different data groups can be identified by their respective hyper-parameters. Moore et al. explain in \cite[section 4.3, p. 9]{Moore2011} that for example a large value of \(C_g\) signifies reliable data in the respective group whereas a smaller \(C_g\) suggests a poorer quality.
 
-To perform multiSVC divide the trainings data into \(G\) (pairwise disjoint) groups.
-Define the vector of hyper-parameters \(C := [C_1,...,C_G]^{\top}\). For the sake simplicity in this thesis all the groups are of equal size but all derivations are also possible for differently sized groups.
+To perform multiSVC, divide the trainings data into \(G\) (pairwise disjoint) groups.
+Define the vector of hyper-parameters \(C := (C_1,...,C_G)^{\top}\). For the sake of simplicity in this thesis all the groups are of equal size but all derivations are also possible for differently sized groups.
 
 %For \(T\)-fold cross validation the \(t\)'th 
 The multi-group classification problem in constrained form can be stated as 
 
 \begin{align}
 \begin{split}
-	\min_{\tilde{w},\xi} \quad & \frac{1}{2} \|\tilde{w}\|^2+\sum_{g = 1}^G\left(\frac{C_g}{2}\sum_{i \in n_g} {\xi_i^2}\right) \vspace{0.5ex}\\
+	\min_{\tilde{w},\xi} \quad & \frac{1}{2} \|\tilde{w}\|^2+\sum_{g = 1}^G\left(\frac{C_g}{2}\sum_{i \in N_g} {\xi_i^2}\right) \vspace{0.5ex}\\
 	\text{s.t.} \quad & y_i\Langle \tilde{w},\tilde{x}^i\Rangle \geq 1 - \xi_i \vspace{0.5ex}\\
-	& 	\forall i \in \bigcup_{g =1}^G n_g =\{1,...,nd\}.
+	& 	\forall i \in \bigcup_{g =1}^G N_g =\{1,...,n_d\}.
 \end{split}
 \label{MultiSVC_QP}
 \end{align}
 
-Here \(n_g\) is the index set that contains the indices of the data of the \(g\)'th group.
+Here \(N_g\) is the index set that contains the indices of the data of the \(g\)'th group.
 
 
 \subsection{Formulation of the Bilevel Problem}
@@ -290,9 +291,9 @@ This makes it possible to optimize the hyper-parameters continuously.
 %Formal description of the bilevel problem for t-fold cross validation
 %Better model description --> see 2.2 (p.46) in thesis 
 
-Let \(\Omega = \{(x^1,y_1),...,(x^{nd},y_{nd})\} \subset \R^{feat+1}\) be a given data set of size \(nd = |\Omega|\). The associated index set is denoted by \(\mathcal{N}\). For classification the labels \(y_i\) are \(\pm1\).
+Let \(\Omega = \{(x^1,y_1),...,(x^{n_d},y_{n_d})\} \subset \R^{n_f+1}\) be a given data set of size \(n_d = |\Omega|\). The associated index set is denoted by \(\mathcal{N}\). For classification the labels \(y_i\) are \(\pm1\).
 For \(T\)-fold cross validation let \(\bar{\Omega}_t\) and \(\Omega_t\) be the training set and the validation set respectively within the \(t\)'th fold and \(\bar{\mathcal{N}}_t\) and \(\mathcal{N}_t\) the respective index sets. For multi-group SVC the index set \(\bar{\mathcal{N}}_t\) is again divided into the \(G\) sets \(\bar{\mathcal{N}}_t^g\) to account for the different groups associated with the different hyper-parameters.
-Furthermore let \(f^t:\R^{feat+1}\cap\mathcal{F} \to \R\) be the response function trained on the \(t\)'th fold and \(\lambda \in \Lambda\) the hyper-parameter to be optimized.
+Furthermore let \(f^t:\R^{n_f+1} \to \R\) be the response function trained on the \(t\)'th fold and \(\lambda \in \Lambda\) the hyper-parameter to be optimized.
 For a general machine learning problem with upper and lower loss function \(\mathcal{L}_{upp}\) and \(\mathcal{L}_{low}\) respectively the bilevel problem reads
  
 %%% introduce \mathcal(F) already before as the function space
@@ -303,7 +304,7 @@ For a general machine learning problem with upper and lower loss function \(\mat
 	\text{s.t.} & \lambda \in \Lambda & \vspace{1em}\\
 	& \text{for } t = 1,...,T: & \\
 	& f^t \in \begin{Bmatrix} \displaystyle\argmin_{f\in \mathcal{F}} & \mathcal{L}_{low}(\lambda,f,(x^i,y_i)_{i = 1}^l\in \bar{\Omega}_t) \vspace{0.5ex}\\
-	                        \text{s.t.} & g_{low}(\lambda,f) \leq 0 
+	                        \text{s.t.} & \mathcal{G}_{low}(\lambda,f) \leq 0 
 													\end{Bmatrix}. & \text{lower level}
 	\end{array}
 \end{equation*}
@@ -311,7 +312,7 @@ For a general machine learning problem with upper and lower loss function \(\mat
 In the case of multigroup support vector classification the \(T\) inner problems have the SVM formulation %(\ref{SVM_1}) or 
 (\ref{MultiSVC_QP}). % (but all \(T\) problems have the same formulation).
 This problem can also be rewritten into an unconstrained form. It is helpful when using the inexact bundle algorithm for solving the bilevel problem.
-For the \(t\)'th fold the resulting hyperplane is identified with the variable \(\tilde{w}^t \in \R^{feat+1}\).
+For the \(t\)'th fold the resulting hyperplane is identified with the variable \(\tilde{w}^t \in \R^{n_f+1}\).
 The inner level problem for the \(t\)'th fold can therefore be stated as
 
 %\begin{equation}
@@ -330,7 +331,7 @@ The inner level problem for the \(t\)'th fold can therefore be stated as
 
 For the upper level objective function different choices are possible. All that are presented here use the implicit bias. They all can also be used with the explicit bias term.
 
-Simply put the outer level objective should compare the different inner level solutions and pick the best one. An intuitive choice is therefore to pick the misclassification loss, that counts how many data points of the respective validation set \(\Omega_t\) are misclassified when taking function \(f^t\).
+Simply put, the outer level objective should compare the different inner level solutions and pick the best one. An intuitive choice is therefore to pick the misclassification loss, that counts how many data points of the respective validation set \(\Omega_t\) are misclassified when taking function \(f^t\).
 
 The misclassification loss can be written as
 
@@ -430,131 +431,131 @@ This requires having in every iteration an approximate value of the upper level 
 
 To understand the issues arising when computing especially the subgradient of a bilevel objective consider again the general bilevel problem (\ref{bilevel}).
 
-At the current iterate \(x^k\) (this is now no data point but the optimization variable of the upper level problem) the function value of the upper level objective function can be computed by solving the lower level problem given \(x^k\).
-The resulting solution \(y^k\) is then inserted into the upper level objective and its value can be calculated.
+At the current iterate \(C^k\) the function value of the upper level objective function can be computed by solving the lower level problem given \(C^k\).
+The resulting solution \(\tilde{w}^k = (\tilde{w}^{1,k},...,\tilde{w}^{T,k})\) is then inserted into the upper level objective and its value can be calculated.
 
-For computing a subgradient, it is not that simple. Additionally to the variation of the upper level function \(F\) with respect to the variable \(x\) also the variation of the solution \(y^k\) with respect to \(x\) has to be considered.
+For computing a subgradient, it is not that simple. Additionally to the variation of the upper level function \(\mathcal{L}_{upp}\) with respect to the variable \(\tilde{w}\) also the variation of the solution \(\tilde{w}^k\) with respect to \(C\) has to be considered.
 To do this we follow the strategy described in \cite{Outrata1998}. Refer there also for a more throughout analysis on this subject.
 
 \subsubsection{Assumptions}
 
-Consider the general bilevel problem formulation (\ref{bilevel}) without the explicit constraint \(G(x,y) \leq 0\).
-Let the feasible set \(X\) be a nonempty compact set and \(\tilde{A}\) and open set containing \(X\).
+Consider the general bilevel problem formulation (\ref{bilevel}) without the explicit constraint \(\mathcal{G}_{upp}(C,\tilde{w}) \leq 0\).
+Let the feasible set \(U_{ad}\) be a nonempty compact set and \(\tilde{A}\) an open set containing \(U_{ad}\).
 To use the implicit programming approach suggested in \cite{Outrata1998},  the following assumptions have to hold true:
 
 \begin{itemize}
-\item[(A1)] The upper level objective \(F\) is continuously differentiable on \(\tilde{A}\times \R^k\).
-\item[(A2)] The lower level program possesses a unique solution \(y_x\) for every \(x\in \tilde{A}\).
-\item[(A3)] The generalized equation coming from the lower level program is strongly regular at all points \((x,y_x)\), where \(x \in \tilde{A}\) and \(y_x\) is the corresponding solution of the lower level problem.
+\item[(A1)] The upper level objective \(\mathcal{L}_{upp}\) is continuously differentiable on \(\tilde{A}\times \R^k\).
+\item[(A2)] The lower level program possesses a unique solution \(\tilde{w}_C\) for every \(C\in \tilde{A}\).
+\item[(A3)] The generalized equation coming from the lower level program is strongly regular at all points \((C,\tilde{w}_C)\), where \(C \in \tilde{A}\) and \(\tilde{w}_C\) is the corresponding solution of the lower level problem.
 \end{itemize}
 
 A \emph{(perturbed) generalized equation} (GE) is a relation of the form
 
-\[ 0 \in H(x,y)+N_{U}(y), \]
+\[ 0 \in H(C,\tilde{w})+N_{U}(\tilde{w}), \]
 
-where \(H:\R^n\times \R^k \to \R^k\) and \(N_{U}(y)\) denotes the \emph{normal cone} to the convex set \(U \subset \R^k\) at the point \(y\in \R^k\).
+where \(H:\R^n\times \R^k \to \R^k\) and \(N_{U}(\tilde{w})\) denotes the \emph{normal cone} to the convex set \(U \subset \R^k\) at the point \(\tilde{w}\in \R^k\).
 
 \begin{definition}[{\cite[Definition 2.6, p. 18]{Outrata1998}}]
-	Let \(U\) be a convex subset of \(\R^k\) and \(y\) in the closure of \(U\). Then
+	Let \(U\) be a convex subset of \(\R^k\) and \(\tilde{w}\) in the closure of \(U\). Then
 	
 	\begin{equation*}
-		N_U(y) := \{\xi\in \R^k \mid \Langle \xi,z-y\Rangle \leq 0 \quad \forall z \in U \}
+		N_U(\tilde{w}) := \{\zeta\in \R^k \mid \Langle \zeta,v-\tilde{w}\Rangle \leq 0 \quad \forall v \in U \}
 	\label{norm_cone}
 	\end{equation*}
 	
-	is called normal cone to \(U\) at \(y\).
+	is called normal cone to \(U\) at \(\tilde{w}\).
 \end{definition}
  
 The constraint induced by the inner level problem can be rewritten as a generalized equation via its optimality condition.
-Let \(U\) correspond to the feasible set of the inner level problem defined by the intersection of the set \(Y\) with the set defined by \(g(\bar{x},y)\leq 0\) for a fixed variable \(\bar{x} \in X \).
+Let \(U\) correspond to the feasible set of the inner level problem defined by the intersection of the set \(W\) with the set defined by \(\mathcal{G}_{low}(\bar{C},\tilde{w})\leq 0\) for a fixed variable \(\bar{C} \in U_{ad} \).
 Then the lower level problem can be expressed in an unconstrained way by using the indicator function defined in (\ref{indicator_fun}). If the constraint set is convex, the indicator function is a convex function and for every element of its subdifferential the subgradient inequality (\ref{subgr_ineq}) holds.
 
-This yields that for all elements \(\xi\) of the subdifferential \(\partial \mathtt{i}_U(y)\) it holds
+This yields that for all elements \(\zeta\) of the subdifferential \(\partial \mathtt{i}_U(\tilde{w})\) it holds
 
 \begin{equation*}
 \begin{split}
-	&\mathtt{i}_U(z)-\mathtt{i}_U(y) \geq \Langle \xi, z-y\Rangle \quad \forall z \in U \\
-	\Leftrightarrow & \Langle \xi, z-y\Rangle \leq 0 \quad \forall z \in U,
+	&\mathtt{i}_U(v)-\mathtt{i}_U(\tilde{w}) \geq \Langle \zeta, v-\tilde{w}\Rangle \quad \forall v \in U \\
+	\Leftrightarrow & \Langle \zeta, v-\tilde{w}\Rangle \leq 0 \quad \forall v \in U,
 \end{split}
 \end{equation*}
 
-because for \(y,z \in U\) the indicator function is zero. This means that the subdifferential of the indicator function of the set \(U\) at the point \(y\) coincides with the normal cone to the set \(U\) at the point \(y\) and so for a constrained minimizer of the function \(f(x,\cdot)\) on the set \(U\) the following optimality condition holds:
+because for \(\tilde{w},v \in U\) the indicator function is zero. This means that the subdifferential of the indicator function of the set \(U\) at the point \(\tilde{w}\) coincides with the normal cone to the set \(U\) at the point \(\tilde{w}\) and so for a constrained minimizer of the function \(\mathcal{L}_{low}(C,\cdot)\) on the set \(U\) the following optimality condition holds:
 
-\[ 0 \in \partial f(x,y) + N_U(y). \]
+\[ 0 \in \partial \mathcal{L}_{low}(C,\tilde{w}) + N_U(\tilde{w}). \]
 
-If \(f\) is continuously differentiable, the function \(\partial f = \nabla f : \R^n\times\R^k \to \R^k\) is single valued and continuous and the relation above is a generalized equation.
+If \(\mathcal{L}_{low}\) is continuously differentiable, the function \(\partial \mathcal{L}_{low} = \{\nabla \mathcal{L}_{low}\} : \R^n\times\R^k \to \R^k\) is single valued and continuous and the relation above is a generalized equation.
 
 %\subsubsection{Conditions on the Lower Level Problem}
 
 Let us now verify the above assumptions (A1) -- (A3) for the hyper-parameter finding bilevel problem (\ref{bilevel_fin}).
-First of all, the feasible set \(X\) has to be a convex compact set. In order to assure that, the constraint of the hyper-parameter \(C\) has to be adapted.
+First of all, the feasible set \(U_{ad}\), where the hyper-parameter \(C\) is chosen from, has to be a convex compact set. In order to assure that, the constraint on the hyper-parameter \(C\) has to be adapted.
 Therefore choose two constants \(l_C, u_C > 0\) with \(l_C < u_C\) constrain the vector \(C\) by the component wise meant inequalities
 
 \[ l_C \leq C \leq u_C. \]
 
 Assumption (A1) is fulfilled as \(\mathcal{L}_{hingequad}\) is a continuously differentiable function because of the squared max-term.
 
-Next assumptions (A2) and (A3) are verified. In order to do this consider the lower level problem in its unconstrained formulation.
+Next assumptions (A2) and (A3) are verified. In order to do this consider the lower level problem in its constrained formulation (\ref{MultiSVC_QP}).
 It can be rewritten in matrix form using the following definitions:
 
 \begin{equation*}
 \begin{split}
 	&H(C):= \begin{pmatrix} \mathbb{I} \\ & \tilde{C}\end{pmatrix}\in \R^{n_1\times n_1} \\
-	&A := \begin{pmatrix}	-y_1(x^1)^{\top} & -1 \\
-		\vdots & & \ddots \\ -y_N(x^N)^{\top} & & & -1\end{pmatrix} \in \R^{nd \times n_1}, \quad  b:= \begin{pmatrix}-1\\\vdots\\-1\end{pmatrix} \in \R^{nd}.
+	&A := \begin{pmatrix}	-y_1(\tilde{x}^1)^{\top} & -1 \\
+		\vdots & & \ddots \\ -y_N(\tilde{x}^N)^{\top} & & & -1\end{pmatrix} \in \R^{nd \times n_1}, \quad  a:= \begin{pmatrix}-1\\\vdots\\-1\end{pmatrix} \in \R^{nd}.
 		\label{matrices}
 \end{split}
 \end{equation*}
 
-Here \(\tilde{C}\) is a diagonal matrix with the vector \((C_1,...,C_1,...,C_G,...,C_G)^{\top}\) on the diagonal such that the hyper-parameters correspond to the \(\xi_i\) of the different groups. The number \(n_1 = feat+1+nd\) where \(feat\) is the dimension of the feature space and \(nd\) the number of data points in the sample.
+Here \(\tilde{C}\) is a diagonal matrix with the vector \((C_1,...,C_1,...,C_G,...,C_G)^{\top}\) on the diagonal such that the hyper-parameters correspond to the \(\xi_i\) of the different groups. The number \(n_1 = n_f+1+n_d\) where \(n_f\) is the dimension of the feature space and \(n_d\) the number of data points in the sample.
 
 Then the lower level problem can be written as
 
 \begin{align}
 \begin{split}
 	\min_{\tilde{w},\xi} & \quad \frac{1}{2} (\tilde{w}^{\top},\xi^{\top}) H(C) \begin{pmatrix}\tilde{w}\\\xi\end{pmatrix} \\
-	\text{s.t.} & \quad A \begin{pmatrix}\tilde{w}\\\xi\end{pmatrix} \leq b.
+	\text{s.t.} & \quad A \begin{pmatrix}\tilde{w}\\\xi\end{pmatrix} \leq a.
 \end{split}
 \label{low_QP}
 \end{align}
 
 This formulation of the lower level problem corresponds to the one in Appendix A.1.3 in \cite{Outrata1998}. Only the objective function depends on the hyper-parameter \(C\), not the constraints.
 
-Problem (\ref{low_QP}) has a strictly convex function and therefore a unique global minimizer. Denoting the vector of all slack variables \(\xi_i\) with \(\xi\) this minimizer is given by \((\tilde{w}^*,\xi^*)^{\top}\). It depends on the vector of hyper-parameters \(C\).
+Problem (\ref{low_QP}) has a strictly convex objective function and linear constraints. Therefore it possesses a unique global minimizer. Denoting the vector of all slack variables \(\xi_i\) with \(\xi\) this minimizer is given by \(((\tilde{w}^*)^{\top},(\xi^*)^{\top})^{\top}\). It depends on the vector of hyper-parameters \(C\).
 
-Due to convexity for this problem the KKT conditions are necessary and sufficient. This means that at the minimum \((\tilde{w}^*,\xi^*)\) holds
+Due to convexity, for this problem the KKT conditions are necessary and sufficient. This means that at the minimum \(((\tilde{w}^*)^{\top},(\xi^*)^{\top})^{\top}\) holds
 
 \begin{align*}
-	& \text{there is a } \mu^* \in \R^{nd} \text{ such that} \\
+	& \text{there is } \mu^* \in \R^{nd} \text{ such that} \\
 	&\nabla_{(\tilde{w},\xi)} L(C,\tilde{w}^*,\xi^*,\mu^*) = 0 \\
-	& \mu^* \geq 0, \quad A \begin{pmatrix}\tilde{w}^*\\\xi^*\end{pmatrix} \leq b, \quad \Langle\mu^*,\left(A \begin{pmatrix}\tilde{w}^*\\\xi^*\end{pmatrix} - b\right)\Rangle = 0,
+	& \mu^* \geq 0, \quad A \begin{pmatrix}\tilde{w}^*\\\xi^*\end{pmatrix} \leq a, \quad \Langle\mu^*,\left(A \begin{pmatrix}\tilde{w}^*\\\xi^*\end{pmatrix} - a\right)\Rangle = 0,
 \end{align*}
 
-for a given \(C\), where \(L(C,\tilde{w},\xi,\mu) = \frac{1}{2}(\tilde{w}^{\top},\xi^{\top})H(C)(\tilde{w}^{\top},\xi^{\top})^{\top}+\Langle\mu,\left(A (\tilde{w}^{\top},\xi^{\top})^{\top} - b\right)\Rangle\) is the Lagrangian of the problem and \(\mu^*\) the multiplier corresponding to the inequality constraints.
+for a given \(C\), where \(L(C,\tilde{w},\xi,\mu) = \frac{1}{2}(\tilde{w}^{\top},\xi^{\top})H(C)(\tilde{w}^{\top},\xi^{\top})^{\top}+\Langle\mu,\left(A (\tilde{w}^{\top},\xi^{\top})^{\top} - a\right)\Rangle\) is the Lagrangian of the problem and \(\mu^*\) the multiplier corresponding to the inequality constraints.
 
 Using the KKT conditions a special GE can be derived for problem (\ref{low_QP}):
 
 \begin{equation}
-	0 \in \begin{bmatrix} \nabla_{(\tilde{w},\xi)}L(C,\tilde{w},\xi,\mu)\\ - A \left((\tilde{w})^{\top},(\xi)^{\top}\right)^{\top} + b\end{bmatrix} + N_{\R^{feat+1}\times\R^{nd}_+}.
+	0 \in \begin{bmatrix} \nabla_{(\tilde{w},\xi)}L(C,\tilde{w},\xi,\mu)\\ - A \left(\tilde{w}^{\top},\xi^{\top}\right)^{\top} + a\end{bmatrix} + N_{\R^{n_f+1}\times\R^{n_d}_+}.
 \label{GE}
 \end{equation}
 
-The derivation of this particular form is given in \cite[chapter 4, p. 71--72 and chapter 5, p. 92]{Outrata1998}.
+The derivation of this particular form of a GE is given in \cite[chapter 4, p. 71--72 and chapter 5, p. 92]{Outrata1998}.
 
-This new GE is very convenient due to the simple structure of the cone but it depends now also on the Lagrange multiplier \(\mu\). Therefore this multiplier also has to be unique at the solution \(\tilde{w}^*,\xi^*\).
+This new GE is very convenient due to the simple structure of the cone but it depends now also on the Lagrange multiplier \(\mu\). Therefore this multiplier also has to be unique at the solution \(((\tilde{w}^*)^{\top},(\xi^*)^{\top})^{\top}\).
 To check this introduce the following index sets:
 
 \begin{align*}
-	& I(\tilde{w},\xi) = \{i \in \{1,...,nd\} \mid A (\tilde{w},\xi)^{\top} - b = 0\} \\
-	& I_+(\tilde{w},\xi) = \{i\in I(\tilde{w},\xi) \mid \mu_i > 0\}
-\end{align*},
+	& I(\tilde{w},\xi) = \{i \in \{1,...,n_d\} \mid A (\tilde{w}^{\top},\xi^{\top})^{\top} - a = 0\} \\
+	& I_+(\tilde{w},\xi) = \{i\in I(\tilde{w},\xi) \mid \mu_i > 0\},
+\end{align*}
 
 which denote the set of \emph{active} and \emph{stronly acitve} inequality constraints respectively.
-The set \(I_+\) also depends on the multiplier \(\mu\). In cases where \(\mu\) is not unique, this has to be indicated by writing \(I_+(\tilde{w},\xi,\mu)\).  As it is shown in the following that for the presented problem the multiplier \(\mu\) is always unique, it is however omitted. 
+The set \(I_+\) also depends on the multiplier \(\mu\). In cases where \(\mu\) is not unique, this has to be indicated by writing \(I_+(\tilde{w},\xi,\mu)\).  As it is shown in the following that for the presented problem the multiplier \(\mu\) is always unique, it is however omitted in the specification of \(I_+\). 
 
-For the optimal Lagrange multiplier \(\mu^*\) to be unique the \emph{linear independence constraint qualification} (LICQ) has to hold in the minimum \cite[Theorem 4.8, p. 82]{Outrata1998}, \cite[Theorem 1, p. 3]{Wachsmuth2013}.
+To assure that the optimal Lagrange multiplier \(\mu^*\) is unique, we show that the \emph{linear independence constraint qualification} (LICQ) holds in every minimum  \(((\tilde{w}^*)^{\top},(\xi^*)^{\top})^{\top}\) \cite[Theorem 4.8, p. 82]{Outrata1998}, \cite[Theorem 1, p. 3]{Wachsmuth2013}.
 
-In the present case, where there are only inequality constraints, the LICQ holds at a point \((\tilde{w},\xi)\) if the rows of the matrix \(\mathcal{J}_{(\tilde{w},\xi)}\left(A(\tilde{w},\xi)^{\top} - b\right) = A\) that correspond to the indices in \(I(\tilde{w},\xi)\) are linearly independent \cite[p. 82, 96]{Outrata1998}.
+In the present case, where there are only inequality constraints, the LICQ holds at a point \((\tilde{w},\xi)\) if the rows of the matrix \(\mathcal{J}_{(\tilde{w},\xi)}\left(A(\tilde{w}^{\top},\xi^{\top})^{\top} - a\right) = A\) that correspond to the indices in \(I(\tilde{w},\xi)\) are linearly independent \cite[p. 82, 96]{Outrata1998}.
 
 For problem (\ref{low_QP}) the LICQ holds at every feasible point \((\tilde{w},\xi)\) because all rows of the matrix \(A\) are linearly independent. This means that linear independence particularly holds for all rows corresponding to the active constraints at any minimum \((\tilde{w}^*,\xi^*)\).
 Hence the lower level problem possesses a unique solution vector \((\tilde{w}^*,\xi^*)\) and a unique corresponding Lagrange multiplier \(\mu^*\) For every hyper-parameter (vector) \(C\). Thus assumption (A2) is fulfilled.
@@ -580,8 +581,8 @@ To assure that the Hessian of the Lagrangian is well defined, the lower level ob
 %From the LICQ follows that the KKT multiplier \(\mu^*\) at a minimum \((\tilde{w}^*,\xi^*)\) is unique.
 %The matrix \(A_{I_+(\tilde{w}^*,\xi^*,\mu^*)}\) contains only the rows of the matrix \(A\) corresponding to strongly active constraints. 
 
-Because all components of the vector \((C_1,...,C_1,...,C_G,...,C_G)^{\top}\) are greater than zero, this matrix is positive definite and as such strictly copositive on the whole \(\R^{feat+1+nd}\).
-This means that all necessary conditions are fulfilled in order to compute a subgradient with respect to \(C\) of the upper level objective function \(\mathcal{L}_{upp}(\tilde{C},\xi(C))\) in the way presented in \cite{Outrata1998}.
+Because all components of the vector \((C_1,...,C_1,...,C_G,...,C_G)^{\top}\) are greater than zero, this matrix is positive definite and as such strictly copositive on the whole \(\R^{n_f+1+n_d}\).
+This means that all necessary conditions are fulfilled in order to compute a subgradient with respect to \(C\) of the upper level objective function \(\mathcal{L}_{upp}(C,\tilde{w}(C))\) in the way presented in \cite{Outrata1998}.
 
 \subsubsection{The Adjoint Problem}
 
@@ -602,7 +603,7 @@ The set \(M_i(\tilde{w},\xi) \subset I(\tilde{w},\xi) \setminus I_+(\tilde{w},\x
 What this means is explained next.
 
 First introduce the notation \(I_0(\tilde{w},\xi) = I(\tilde{w},\xi) \setminus I_+(\tilde{w},\xi)\). Constraints whose indices are in this set are also calles \emph{weakly active}. Let \(\mathcal{P}(I_0(\tilde{w},\xi))\) be the power set of this index set and \(\mathbb{K}(\tilde{w},\xi)\) an index set that contains indices for all elements of the set \(\mathcal{P}(I_0(\tilde{w},\xi))\). The index set \(M_i(\tilde{w},\xi)\) is then the element of \(\mathcal{P}(I_0(\tilde{w},\xi))\) corresponding to the index \(i \in \mathbb{K}(\tilde{w},\xi)\).
-To ensure a proper choice of the index set \(M_i(\tilde{w},\xi)\) the book offers a theorem and a corollary that are applicable in the given context.
+To ensure a proper choice of the index set \(M_i(\tilde{w},\xi)\) \cite{Outrata1998} offers a theorem and a corollary that are applicable in the given context.
 
 For better readability the brackets behind the index sets are omitted. All index sets refer to the same point.
 
@@ -614,7 +615,7 @@ For better readability the brackets behind the index sets are omitted. All index
 		-(A_{I_0 \setminus M_i})^{\top}z_1+(H(C))^{\top}z_3-(A_{I_+\cup M})^{\top}z_4 &= 0 \\
 		z_2+A_{M_i}z_3 &= 0\\
 		\left(\mathcal{J}_C\left(H(C)(\tilde{w},\xi)^{\top}\right)\right)^{\top}z_3 &= 0 \\	
-		(z_1,z_2) \geq 0 \quad (z_1,z_2) &\neq 0 \\
+		(z_1,z_2) \geq 0, \quad (z_1,z_2) &\neq 0 \\
 		z_3 \in \ker(A_{I_+}).
 	\end{align*}
 	
@@ -624,7 +625,7 @@ For better readability the brackets behind the index sets are omitted. All index
 \begin{corollary}[c.f. {\cite[Corollary 7.12, p. 139]{Outrata1998}}]
 	Let the assumptions of Theorem \ref{theo_710} be fulfilled. Suppose that the constraints do not depend on the variable \(C\) and that 
 	
-	\[  \ker\left(\mathcal{J}_C\left(H(C)(\tilde{w},\xi)^{\top}\right)^{\top}\right) \cap \ker\left(A_{I_+}\right) = \{0\} .\]
+	\[  \ker\left(\mathcal{J}_C\left(H(C)(\tilde{w}^{\top},\xi^{\top})^{\top}\right)^{\top}\right) \cap \ker\left(A_{I_+}\right) = \{0\} .\]
 	
 	Then the subgradient can be calculated via the method above for each \(i \in \mathbb{K}(\tilde{w},\xi)\).
 \end{corollary}
@@ -680,12 +681,12 @@ In this case also the approximate minimizing point found by any algorithm can be
 
 It still can be assured, that the minimizer \(\tilde{w}\) found by an algorithm is not infinitely far away from the exact minimizer \(\tilde{w}^*\).
 This follows immediately if the constraint set is compact. If it is unbounded in any direction this follows from strict convexity.
-Without loss of generality instead of the KKT conditions one can consider the first order optimality condition in the unconstrained case, namely that the norm of the gradient at a minimizer is zero. (Due to unboundedness of the constraint set is the examined directions the problem can be treated as an unconstrained one for them. In the direction where the constraint set is bounded, possible choices for \(\tilde{w}\) are also bounded.)
+Without loss of generality instead of the KKT conditions one can consider the first order optimality condition in the unconstrained case, namely that the norm of the gradient at a minimizer is zero. (Due to unboundedness of the constraint set in the examined directions, the problem can be treated as an unconstrained one for them. In the direction where the constraint set is bounded, possible choices for \(\tilde{w}\) are also bounded.)
 For strictly convex functions the gradient is strictly monotone, hence the area where its norm is smaller or equal to any chosen tolerance is compact. This means that in this case all possible choices of \(\tilde{w}\) are bounded.
 
 Using local Lipschitz continuity of the upper level objective function on the admissible set we can conclude that
 
-\[ \Vert \mathcal{L}_{upp}(\tilde{w})-\mathcal{L}_{upp}(\tilde{w}^*) \Vert \leq L_{upp}\Vert \tilde{w}-\tilde{w}^* \Vert \leq  L_{upp} D_{\tilde{w}}(\mathtt{tol}) \]
+\[ \Vert \mathcal{L}_{upp}(\tilde{w})-\mathcal{L}_{upp}(\tilde{w}^*) \Vert \leq L_{upp}\Vert \tilde{w}-\tilde{w}^* \Vert \leq  L_{upp} D_{\tilde{w}}(\mathtt{tol}), \]
 
 where \(  L_{upp}\) is the Lipschitz constant of the upper level objective on the admissible set. The number \(D_{\tilde{w}}(\mathtt{tol})\) is the maximal distance of points \(\tilde{w}_1\) and \(\tilde{w}_2\) in the compact set originating from the intersection of the constraint set and the set where the lower level objective has a gradient smaller than the chosen tolerance \(\mathtt{tol}\). 
 %Observing this, it is known however from \textcolor{red}{\cite[chapter 5]{Outrata1998}} that in case of strong regularity the solution map \textcolor{red}{\(C = S(\tilde{w})\)} is single valued and Lipschitz on the admissible set \textcolor{red}{U_{\textup{ad}}}.
@@ -727,7 +728,7 @@ The sum of those bounds is the overall bound of the approximate subgradient erro
 
 \subsubsection{Regularity}
 
-For the proof of Lemma \ref{Lemma5} regularity of the upper level objective function with the solution map inserted is required.
+For the proof of Lemma \ref{Lemma5} subdifferential regularity of the upper level objective function with the solution map inserted is required.
 
 We have however to remark here, that from Proposition 7.4 in \cite{Outrata1998} only follows weak semismoothness of this function.
 In \cite[p. 82]{Spingarn1981} an example is given that semismooth, quasidifferentiable function does not have to be subdifferentially regular. As semismooth functions are a subset of weakly semismooth functions, we cannot conclude that the objective function of (\ref{bilevel_fin}) with the solution of the lower level plugged in is regular.
@@ -781,53 +782,53 @@ Proving regularity for the particular instance (\ref{bilevel_fin}) of a bilevel 
 %\end{center}
 %
 %
-%Plots
-%
-%\begin{figure}[H]
-	%\begin{subfigure}{0.49\textwidth}
-		%\includegraphics[width=\textwidth]{Pictures/Plots/lambda_vs_err_io_ca_final.eps}%
-	%\end{subfigure}
-	%\begin{subfigure}{0.49\textwidth}
-		%\includegraphics[width=\textwidth]{Pictures/Plots/lambda_vs_err_ss_sb_b5_final.eps}%
-	%\end{subfigure}
-	%\caption{Plots of the hingloss error for different $\lambda$ values. The figure on the right shows the plot for the \textup{\texttt{cancer}} (left axis) and \textup{\texttt{ionosphere}} (right axis) data sets. The blot on the left depicts the situation for the sythetic sets \textup{\texttt{syn small}}, \textup{\texttt{syn big}} (left axis) and \textup{\texttt{syn box}} (right axis).}%
-	%\label{fig_lambda_vs_err}%
-%\end{figure}
-%
-%
-%results
-%
-%\begin{center}
-%\begin{table}[H]%
-	%\begin{tabular}{llcccc}
-		%\hline
-    %Data set & algorithm & 0.1 & 1 & 10 & 100 \\
-		%\hline
-		%\texttt{cancer} & Bundle & 1.0975 & 1.0974 & 1.0974 & 1.1341 \\
-		 %& Noll Bundle & 1.0974 & 1.0974 & 1.0974 & 1.0974 \\
-		 %&  fminsearch & 1.0974 & 1.0974 & 1.0974 & -10 \\
-		 %& fmindnb & 1.0974 \\
-		%\texttt{ionosphere} & Bundle & 2.6081 & 2.3108 & 0.3953 & 4.7401 \\
-		 %& Noll Bundle & 3.5386 & 3.6521 & 10 & 8.2773 \\
-		 %& fminsearch & 3.5104 & 3.5104 & 3.5104 & 3.5104 \\
-		 %& fminbnd & 3.5104 \\
-		%\texttt{syn small} & Bundle & 0.0337 & 0.031 & 0.0329& 0.03 \\
-		 %& Bundle Noll & 0.0323 & 0.0352 & 0.0352 & 0 \\
-		 %& fminsearch & 0.0346 & -0.1939 & -1.79 & -3.5673 \\
-		 %& fminbnd & 0.0346 \\
-		%\texttt{syn big} & Bundle & 0.1 & 1 & 10 & 100 \\
-		 %& Bundle Noll & 0.0099 & 0.0108 & 0.0109 & 0.0086 \\
-		 %& fminsearch & 0.0114 & -0.8748 & -0.8748 & -0.8748 \\
-		 %& fminbnd & 0.0206 & plot: 0.0114\\
-		%\texttt{syn box} & Bundle & 0.1 & 1 & 4.8486 & 4.45336 \\
-		 %& Bundle Noll & 0.1 & 1 & 4.2760 & 0 \\
-		 %& fminsearch & 4.8950 & 4.8950 & 4.8950 & 4.8950 \\
-		 %& fminbnd & 4.8950 \\
-	%\end{tabular}
-	%\caption{}
-%\end{table}
-%\end{center}
-%
+Plots
+
+\begin{figure}[H]
+	\begin{subfigure}{0.49\textwidth}
+		\includegraphics[width=\textwidth]{Pictures/Plots/lambda_vs_err_io_ca_final.eps}%
+	\end{subfigure}
+	\begin{subfigure}{0.49\textwidth}
+		\includegraphics[width=\textwidth]{Pictures/Plots/lambda_vs_err_ss_sb_b5_final.eps}%
+	\end{subfigure}
+	\caption{Plots of the hingloss error for different $\lambda$ values. The figure on the right shows the plot for the \textup{\texttt{cancer}} (left axis) and \textup{\texttt{ionosphere}} (right axis) data sets. The blot on the left depicts the situation for the sythetic sets \textup{\texttt{syn small}}, \textup{\texttt{syn big}} (left axis) and \textup{\texttt{syn box}} (right axis).}%
+	\label{fig_lambda_vs_err}%
+\end{figure}
+
+
+results
+
+\begin{center}
+\begin{table}[H]%
+	\begin{tabular}{llcccc}
+		\hline
+    Data set & algorithm & 0.1 & 1 & 10 & 100 \\
+		\hline
+		\texttt{cancer} & Bundle & 1.0975 & 1.0974 & 1.0974 & 1.1341 \\
+		 & Noll Bundle & 1.0974 & 1.0974 & 1.0974 & 1.0974 \\
+		 &  fminsearch & 1.0974 & 1.0974 & 1.0974 & -10 \\
+		 & fmindnb & 1.0974 \\
+		\texttt{ionosphere} & Bundle & 2.6081 & 2.3108 & 0.3953 & 4.7401 \\
+		 & Noll Bundle & 3.5386 & 3.6521 & 10 & 8.2773 \\
+		 & fminsearch & 3.5104 & 3.5104 & 3.5104 & 3.5104 \\
+		 & fminbnd & 3.5104 \\
+		\texttt{syn small} & Bundle & 0.0337 & 0.031 & 0.0329& 0.03 \\
+		 & Bundle Noll & 0.0323 & 0.0352 & 0.0352 & 0 \\
+		 & fminsearch & 0.0346 & -0.1939 & -1.79 & -3.5673 \\
+		 & fminbnd & 0.0346 \\
+		\texttt{syn big} & Bundle & 0.1 & 1 & 10 & 100 \\
+		 & Bundle Noll & 0.0099 & 0.0108 & 0.0109 & 0.0086 \\
+		 & fminsearch & 0.0114 & -0.8748 & -0.8748 & -0.8748 \\
+		 & fminbnd & 0.0206 & plot: 0.0114\\
+		\texttt{syn box} & Bundle & 0.1 & 1 & 4.8486 & 4.45336 \\
+		 & Bundle Noll & 0.1 & 1 & 4.2760 & 0 \\
+		 & fminsearch & 4.8950 & 4.8950 & 4.8950 & 4.8950 \\
+		 & fminbnd & 4.8950 \\
+	\end{tabular}
+	\caption{}
+\end{table}
+\end{center}
+
 %times
 %
 %\begin{center}
