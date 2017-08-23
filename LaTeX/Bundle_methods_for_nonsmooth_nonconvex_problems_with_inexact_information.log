@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=latex 2017.6.11)  21 AUG 2017 19:30
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=latex 2017.6.11)  23 AUG 2017 12:52
 entering extended mode
 **Bundle_methods_for_nonsmooth_nonconvex_problems_with_inexact_information.tex
 
@@ -481,7 +481,7 @@ Package caption Info: End \AtBeginDocument code.
 
 bibgerm.sty: babel.sty detected
 
-LaTeX Font Info:    Try loading font information for T1+lmss on input line 142.
+LaTeX Font Info:    Try loading font information for T1+lmss on input line 143.
 ("C:\Program Files\Annika Programme\MiKTeX\tex\latex\lm\t1lmss.fd"
 File: t1lmss.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
@@ -580,18 +580,21 @@ l_Application.aux"))
 
 LaTeX Warning: There were undefined references.
 
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
  )
 (\end occurred inside a group at level 1)
 
 ### simple group (level 1) entered at line 1061 ({)
 ### bottom level 
 Here is how much of TeX's memory you used:
- 7887 strings out of 493922
- 124217 string characters out of 3142101
- 258496 words of memory out of 3000000
- 11014 multiletter control sequences out of 15000+200000
+ 7942 strings out of 493922
+ 124939 string characters out of 3142101
+ 258771 words of memory out of 3000000
+ 11069 multiletter control sequences out of 15000+200000
  74841 words of font info for 67 fonts, out of 3000000 for 9000
  841 hyphenation exceptions out of 8191
  40i,23n,48p,682b,2314s stack positions out of 5000i,500n,10000p,200000b,50000s
 
-Output written on Bundle_methods_for_nonsmooth_nonconvex_problems_with_inexact_information.dvi (23 pages, 81728 bytes).
+Output written on Bundle_methods_for_nonsmooth_nonconvex_problems_with_inexact_information.dvi (23 pages, 81752 bytes).

@@ -83,7 +83,7 @@ for t = 1:T
 %% calculate gradient of upper level objective with respect to w
     delta = (1-Yv.*(Xv'*W(:,t))) > 0;
     % *100 because of scaling of the objective function
-    grad_ul(:,t) = 100*2/(G*J)*sum(max(1-Yv.*(Xv'*W(:,t)),0)'.*(-(delta.*Yv)'.*Xv),2);
+    grad_ul(:,t) = 10000*2/(G*J)*sum(max(1-Yv.*(Xv'*W(:,t)),0)'.*(-(delta.*Yv)'.*Xv),2);
     
 %% calculate the subgradients for the different folds    
     % create matrices for use with quadprog

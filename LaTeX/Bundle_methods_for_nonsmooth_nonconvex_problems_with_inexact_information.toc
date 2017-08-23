@@ -1,6 +1,6 @@
 \select@language {english}
 \select@language {english}
-\contentsline {section}{Acknowledgments}{} \contentsline {section}{Abstract}{} \contentsline {section}{List of Symbols}{} \contentsline {section}{List of Figures}{} \contentsline {section}{List of Tables}{}
+\contentsline {section}{Acknowledgments}{} \contentsline {section}{Abstract}{} \contentsline {section}{German Summary}{} \contentsline {section}{List of Symbols}{} \contentsline {section}{List of Figures}{} \contentsline {section}{List of Tables}{}
 \contentsline {section}{\numberline {1}Application to Model Selection for Primal SVM}{1}
 \contentsline {subsection}{\numberline {1.1}Introduction}{1}
 \contentsline {subsection}{\numberline {1.2}Notation}{2}
@@ -16,4 +16,4 @@
 \contentsline {subsubsection}{\numberline {1.6.1}Error Bounds}{18}
 \contentsline {subsubsection}{\numberline {1.6.2}Regularity}{20}
 \contentsline {subsection}{\numberline {1.7}Numerical Experiments}{20}
-\contentsline {section}{German Summary}{} \contentsline {section}{References}{}
+\contentsline {section}{References}{}

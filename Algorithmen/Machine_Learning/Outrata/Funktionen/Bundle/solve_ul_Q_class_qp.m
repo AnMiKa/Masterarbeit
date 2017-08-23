@@ -36,7 +36,7 @@ H = [zeros(n + 1, 1), [zeros(1, n); Q + 1/t * eye(n)]];
 r = [1; zeros(n, 1)];
 A = [-ones(lJ, 1), s'];
 b = c;
-lb = [-Inf,-x_hat'+1e-9]';   % bounds for [xi, d=lambda]
+lb = [-Inf,-x_hat'+1e-5]';   % bounds for [xi, d=lambda]
 % problem has to be solved rather exact because the bundle algorithm
 % assumes d to be the argmin of the given subproblem
 options_ip = optimoptions(@quadprog, 'Algorithm', 'interior-point-convex',...

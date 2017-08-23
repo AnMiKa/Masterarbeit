@@ -35,6 +35,6 @@ for t =  1:T
 end
 % compute final function value
 % scale objective function by 100
-f = 100*1/T*sum(f,2);
+f = 10000*1/T*sum(f,2);
 end
 

@@ -1,4 +1,4 @@
-function [f_hat, x_hat, k, time] = bundle_bilevel_outr_noll(x0, X, Y, ...
+function [f_hat, x_hat, k, i_null, time, eta_max] = bundle_bilevel_outr_noll(x0, X, Y, ...
     Q_type, kmax, tol, m, t, gamma)
 
 % variable metric bundle algorihtm that can handle nonsmooth nonconvex functions with
@@ -58,7 +58,7 @@ end
 % gamma > 0     saveguarding parameter for calculating eta
 % Q_type        1: BFGS, 2: SR1, 3: LBFGS
 
-defaults = {1, 1000, 1e-15, 0.05, 0.1, 2};
+defaults = {1, 1000, 1e-9, 0.05, 0.1, 2};
 % set optional input arguments if not set by the user
 % Check number of inputs.
 if nargin > 9
@@ -94,6 +94,7 @@ i_null = 0;              % null-step counter
 x = x0;                  % initial bundle point
 x_hat = x;               % initial serious point
 x_hats = x0;
+eta_max = 0;
 J = 1;                   % index set defining bundle information
 lJ = 1;                  % size of the crrent bundle
 
@@ -133,6 +134,10 @@ C = alpha' * c;     % augmented aggregate error
 % delta = C + 1/t*sum(d.^2);
 % delta has to be changed according to stopping condition
 delta = C+d'*(Q+1/t*eye(n))*d;
+if delta < 0
+    x_hat = NaN;
+    break
+end
 % stopping conditions
 % if norm(1/t * d) <= tol && C <= tol;              % 1) like in Ulbrich lecture
 % if norm(C + 1/t*d' * x_hat) <= tol && C <= tol;   % 3) like in conv, inex
@@ -245,6 +250,7 @@ for j = 1:lJ
     end
 end
 eta = max(eta_vec) + gamma;
+eta_max = max(eta,eta_max);
 %fprintf('eta: %d \n', eta);
 
 b = zeros(lJ, 1);

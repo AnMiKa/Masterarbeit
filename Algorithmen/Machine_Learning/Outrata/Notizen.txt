@@ -185,13 +185,75 @@ Notizen Outrata Programmierung
 Hare / Noll Algorithmus laufen lassen
 erst Mal noch mit Skalierung
 
-	Datensatz	Hare	Noll
-	Cancer
+	Datensatz	Startwert	Hare
+	Cancer		2		1000 Schritte reichen nicht
+					nur 1 Null Step
+			2		3825 (7NS) -> C = 0.0596 -> passt
+					Noll
+					alpha schlecht (nicht = 1)
+					sehr viele Schritte -> läuft an Min vorbei
+					anderes Abbruchkriterium?
+					aber schließlich: 3698(?) -> C = 0.0603 -> passt
+					läuft wieder "zurück"
+
+					Hare				
+	Ionosphere	1		809(5) -> C = 0.0236 -> passt
+					Noll
+					C eird 0! dann gleich Abbruch aber richtiges Ergebnis
+					0.0236 -> andere Nebenbedingungen?
+					braucht sehr viele Schritte -> 1859(27)
+! Prüfen, ob Beschränkungen für C überhaupt eingebaut wurden -> ja, aber sehr klein,
+auf 1e-5 geändert
+					jetzt: 6908 (32) -> C = 0.0236 -> passt
+
+	Box		1		Hare
+					delta < 0! -> auch falsches Ergebnis (0.1248)
+			0.01		620 (15) -> C = 0.0134 passt
+					Extrem viele Schritte für so nahen Anfangswert
+					Noll
+			1		4900 (2) -> C = 0.0135 -> passt
+	
+	SynSmall	1		Hare
+					37(7) -> C = 4.7 nicht ganz
+					ist aber auch sehr flache Funktion
+					Stopping Tol = 1e-9: gleiches Ergebnis
+					höhere Skalierung (10000): 19 (4) -> C = 5.0228
+					Besser, aber immer noch nicht so gut
+					Noll (mit default tol)
+					5 (3) !dann delta < 0 aber C = 5.0108 auch nicht
+								schlechter als Hare
+					mit tol = 1e-9: 4 (2) -> 5.0108, delta > 0
+	!!! SynSmall, SynBig alles mit Skalierung 10000
+	SynBig 		10		Hare (default tol)
+					58 (11) -> C = 16.4589 passt
+					Noll
+					64 (12) -> 16.4594 passt
 
 
+					
 
 
+Möglichkeiten der Verbesserung:
+	u1/2 anders setzen
+	Menge D/X anders? - hab ich (lower 1e-5, upper im Moment nicht gesetzt, funktioniert
+	wenn man sich von oben annähert bzw. in Cancer, Ionosphere, Box)
 
+TODO: verschiedene Startwerte testen ->
+	dazu zB. Skript programmieren
+	!!! Achtung, auf unterschiedliche Skalierung achten
+	!!! Algorithmus abbrechen und Fehler kenntlich machen, falls zB. delta < 0 (zB C < 0)
+
+
+	Verschiedene Starwerte: 5: 1e-5 0.1 1 20 100
+	Schreibe upper bound für C -> wird eh von beiden Theorien gefordert (C_max = 100)
+
+
+!!! sollte gleiche Daten haben (auch wenn zB. Abbruchbedingungen unterschiedlich)
+
+	Bounds für C: 1e-4 - 1e4
+	Abbruchbedingungen: 1e-10
+	Skalierung: 10000
+	Schrittzahl: 10000
 
 
 

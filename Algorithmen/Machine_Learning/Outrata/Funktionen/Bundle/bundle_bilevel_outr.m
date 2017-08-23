@@ -1,4 +1,5 @@
-function [ f_hat, x_hat, k, time ] = bundle_bilevel_outr( x0, X, Y, kmax, m, t, tol, gamma)
+function [ f_hat, x_hat, k, i_null, time, eta_max ] = ...
+    bundle_bilevel_outr( x0, X, Y, kmax, tol, m, t, gamma)
 
 
 % Input arguments
@@ -40,7 +41,7 @@ end
 % tol           tolerance for terminating the algorithm
 % gamma > 0     saveguarding parameter for calculating eta
 
-defaults = {1000, 0.05, 0.1, 1e-15, 2};
+defaults = {1000, 1e-9, 0.05, 0.1, 2};
 % set optional input arguments if not set by the user
 % Check number of inputs.
 if nargin > 8
@@ -50,13 +51,13 @@ end
 % Fill in unset optional values.
 switch nargin
     case 3
-        [kmax, m, t, tol, gamma] = defaults{:};
+        [kmax, tol, m, t, gamma] = defaults{:};
     case 4
-        [m, t, tol, gamma] = defaults{2:5};
+        [tol, m, t, gamma] = defaults{2:5};
     case 5
-        [t, tol, gamma] = defaults{3:5};
+        [m, t, gamma] = defaults{3:5};
     case 6
-        [tol, gamma] = defaults{4:5};
+        [t, gamma] = defaults{4:5};
     case 7
         gamma = defaults{5};
 end
@@ -74,11 +75,12 @@ t_min = 0.03; % minimal t value to make sure that sequence does not have 0 as ac
 
 %n = length(x0);
 i_null = 0;              % null-step counter
-n = length(x0);
+%n = length(x0);
 
 x = x0;                  % trial point, important for bundle information
 x_hat = x0;              % serious point
-eta = 0;                 % convexification parameter for modelfunction
+%eta = 0;                 % convexification parameter for modelfunction
+eta_max = 0;
 c = 0;                   % augmented linearization error (error of convexified model-function)
 J = 1;                   % index set defining bundle information
 lJ = 1;                  % initial lenght of the index set J
@@ -114,11 +116,12 @@ C = alpha' * c;     % augmented aggregate error
 %delta = - xi + eta/2 * norm(d)^2;
 delta = C+1/t*sum(d.^2);
 if delta < 0
-    pause
+    x_hat = NaN;
+    break
 end
-if eta > 1e10
+%if eta > 1e10
 %    pause
-end
+%end
 % stopping conditions
 % if norm(1/t * d) <= tol && C <= tol;              % 1) like in Ulbrich lecture
 % if norm(C + 1/t*d' * x_hat) <= tol && C <= tol   % 3) like in conv, inex
@@ -126,7 +129,7 @@ end
 % if -xi + eta / 2 * norm(d)^2 <= tol;              % 4) like in nonconv, exact
 % if norm(C + d) <= tol;                            % 6) like in nonconv, inex, little reformulated
 if C+1/t*sum(d.^2) <= tol                             % 6a) like in nonconv, inex
-    fprintf('Algorithm stopped successfully by meeting tolerance after  %d  iterations and %d null-steps. \n', k-1, i_null);
+    %fprintf('Algorithm stopped successfully by meeting tolerance after  %d  iterations and %d null-steps. \n', k-1, i_null);
     break
 end
  
@@ -186,7 +189,8 @@ for j = 1:lJ
     end
 end
 eta = max(eta_vec) + gamma;
-fprintf('eta: %d \n', eta);
+eta_max = max(eta,eta_max);
+%fprintf('eta: %d \n', eta);
 
 b = zeros(lJ, 1);
 for j = 1:lJ
@@ -198,10 +202,10 @@ s = g + eta * bsxfun(@minus, x, x_hat);
 
 end
 time = toc;
-if k == kmax
-    warning('Algorithm stopped because the maximum number %d of iterations was reached \n', k);
-    fprintf('%d nullsteps were executed. \n', i_null)
-end
+%if k == kmax
+    %warning('Algorithm stopped because the maximum number %d of iterations was reached \n', k);
+    %fprintf('%d nullsteps were executed. \n', i_null)
+%end
 %% END of the algorithm
 end
 
