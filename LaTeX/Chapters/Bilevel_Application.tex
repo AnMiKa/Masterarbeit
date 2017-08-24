@@ -797,37 +797,145 @@ Plots
 
 
 results
+\textcolor{red}{Hinweise: fminbd ohne Startwert\\
+wie Funktionen funktionieren\\
+boundaries etc...\\
+suche bei plots noch mal min genauer raus \\
+beste Darstellungen ueberlegen}
+
 
 \begin{center}
 \begin{table}[H]%
-	\begin{tabular}{llcccc}
+	\begin{tabular}{|l|l|c|c|c|c|c|c|}
 		\hline
-    Data set & algorithm & 0.1 & 1 & 10 & 100 \\
+    Data set & algorithm & \(10^{-5}\) & 0.01 & 1 & 20 & 100 & Plot \\
 		\hline
-		\texttt{cancer} & Bundle & 1.0975 & 1.0974 & 1.0974 & 1.1341 \\
-		 & Noll Bundle & 1.0974 & 1.0974 & 1.0974 & 1.0974 \\
-		 &  fminsearch & 1.0974 & 1.0974 & 1.0974 & -10 \\
-		 & fmindnb & 1.0974 \\
-		\texttt{ionosphere} & Bundle & 2.6081 & 2.3108 & 0.3953 & 4.7401 \\
-		 & Noll Bundle & 3.5386 & 3.6521 & 10 & 8.2773 \\
-		 & fminsearch & 3.5104 & 3.5104 & 3.5104 & 3.5104 \\
-		 & fminbnd & 3.5104 \\
-		\texttt{syn small} & Bundle & 0.0337 & 0.031 & 0.0329& 0.03 \\
-		 & Bundle Noll & 0.0323 & 0.0352 & 0.0352 & 0 \\
-		 & fminsearch & 0.0346 & -0.1939 & -1.79 & -3.5673 \\
-		 & fminbnd & 0.0346 \\
-		\texttt{syn big} & Bundle & 0.1 & 1 & 10 & 100 \\
-		 & Bundle Noll & 0.0099 & 0.0108 & 0.0109 & 0.0086 \\
-		 & fminsearch & 0.0114 & -0.8748 & -0.8748 & -0.8748 \\
-		 & fminbnd & 0.0206 & plot: 0.0114\\
-		\texttt{syn box} & Bundle & 0.1 & 1 & 4.8486 & 4.45336 \\
-		 & Bundle Noll & 0.1 & 1 & 4.2760 & 0 \\
-		 & fminsearch & 4.8950 & 4.8950 & 4.8950 & 4.8950 \\
-		 & fminbnd & 4.8950 \\
+		\texttt{cancer} & Bundle &  & & 0.0239 & & & 0.0604\\
+		 & Noll Bundle &  & & 0.0602 & 0.0604 &&\\
+		 &  fminsearch &  0.0604 & 0.0604 & 0.0604 & 0.0604 & 0.0604&\\
+		 & fmindnb & 0.0604 &&&&&\\
+		\hline
+		\texttt{ionosphere} & Bundle & \(10^{-5}\)& 0.0234 & &  & & 0.0236 \\
+		 & Noll Bundle & \(10^{-5}\) &&&&& \\
+		 & fminsearch & 0.0236 & 0.0236 & 0.0236 & 0.0236 & 0.0236&\\
+		 & fminbnd &  0.0236&&&&&\\
+		\hline
+		\texttt{syn box} & Bundle & \(10^{-5}\) & 0.0102 & & & & 0.0135 \\
+		 & Bundle Noll & \(10^{-5}\) & 0.0141 & 0.5040 & 0.5723 & 0.5738&\\
+		 & fminsearch & 0.0135 & 0.0135 & 0.0135 & 0.0135 & 0.0135&\\
+		 & fminbnd & 0.0135 &&&&& \\
+		\hline
+		\texttt{syn small} & Bundle & 5.0188 & 5.0140 & 5.0229 & 6.6372 & 6.6373 & 6.6372 \\
+		 & Bundle Noll & 5.0229 & 4.8850 & 5.0109 & 6.6361 & 6.6363&\\
+		 & fminsearch & 6.6372 & 6.6372 & 6.6372 & 6.6372 & 6.6372 &\\
+		 & fminbnd &  6.6372&&&&&\\
+		\hline
+		\texttt{syn big} & Bundle & \(10^{-5}\) & 16.4590 & 16.4595 & 16.4594 & 16.4595 & 16.4595 \\
+		 & Bundle Noll &  \(10^{-5}\) & 16.4595 & 16.4595 & 16.4594 & 16.3408&\\
+		 & fminsearch &  16.4595 & 16.4595 & 16.4595 & 16.4595 & 16.4595 &\\
+		 & fminbnd & 16.4595&&&&&\\
+		\hline
 	\end{tabular}
-	\caption{}
+	\caption{\(C_{min}\)}
 \end{table}
 \end{center}
+
+\textcolor{red}{syn small possesses two local minima> one at ca5 and one at ca 6}
+
+
+\begin{center}
+\begin{table}[H]%
+	\begin{tabular}{llccccc}
+		\hline
+    Data set & algorithm & \(10^{-5}\) & 0.01 & 1 & 20 & 100 \\
+		\hline
+		\texttt{cancer} & Bundle & & & 4.0782  \\
+		 & Noll Bundle & & & 2.3504 & 912.0496 \\
+		 &  fminsearch & 8.2208 & 6.0456 & 7.2394 & 8.3146 & 9.6156 \\
+		 & fmindnb & 7,9563 \\
+		\texttt{ionosphere} & Bundle & 1.1807 &	11.6802 \\
+		 & Noll & 0.6578 \\
+		 & fminsearch & 11.1885 & 7.6735 & 11.0497 & 11.1628 &	13.5294 \\
+		 & fminbnd & 6.3621 \\
+		\texttt{syn box} & Bundle & 0.2325 & 5.1452 \\
+		 & Bundle Noll & 0.4535 & 5.7817 &	3604.4947 &	3623.8675 & 	3623.9213 \\
+		 & fminsearch & 35.1377 & 27.1899 &	22.2921 & 20.7623 &	24.3706\\
+		 & fminbnd & 13.3115\\
+		\texttt{syn small} & Bundle & 4.6203 &	4.6932 &	3.3359 &	106.8108 &	34.2728 \\
+		 & Bundle Noll & 6.7204 &	5.1775 &	0.9986	& 4.7242 & 10.4157 \\
+		 & fminsearch & 17.5522 & 16.7165 &	15.5707 & 13.7467 &	15.1873 \\
+		 & fminbnd & 10.3158 \\
+		\texttt{syn big} & Bundle & 13.6750 & 1108.3399 & 1012.0873 &	1172.2093 &	1400.8681 \\
+		 & Bundle Noll & 12.6244 &	2738.4449 &	1157.8769 &	1334.4377 &	1386.9681\\
+		 & fminsearch & 1992.1726 &	1799.7163 &	1633.3407 & 1414.6651 &	1544.9985\\
+		 & fminbnd & 735.9754 \\
+	\end{tabular}
+	\caption{times}
+\end{table}
+\end{center}
+
+\begin{center}
+\begin{table}[H]%
+	\begin{tabular}{llccccc}
+		\hline
+    Data set & algorithm & \(10^{-5}\) & 0.01 & 1 & 20 & 100 \\
+		\hline
+		\texttt{cancer} & Bundle & 1196.4407 &	1196.4413 &	1254.2534 & 1196.4407 &	1196.4407 \\
+		 & Noll Bundle & 1196.4743 &	1196.4735 &	1196.4428 &	1196.4408 &	1511.8588   \\
+		 &  fminsearch & 1196.4406 &	1196.4406 &	1196.4406 &	1196.4406 &	1196.4406 \\
+		 & fmindnb & 1196.4406 \\
+		\texttt{ionosphere} & Bundle & 9942.3715& 4352.4393 &	5178.6824 &	9942.3715	& 9942.3715  \\
+		 & Noll & 9942.3715 & 4352.5364 &	4966.5512 &	9942.3715 & 	9942.3715 \\
+		 & fminsearch & 4352.4095 &	4352.4095 &	4352.4095 &	4352.4095 &	4352.4095 \\
+		 & fminbnd & 4352.4095 \\
+		\texttt{syn box} & Bundle &  9942.2776 &	5187.4794 &	6720.8960 &	6700.9415 & 6734.9763\\
+		 & Bundle Noll & 9942.2776 &	5171.0475 &	6612.8318 &	6662.9753 &	6663.9495  \\
+		 & fminsearch & 5170.7801 &	5170.7801 &	5170.7801 &	5170.7801 &	5170.7801\\
+		 & fminbnd & 5170.7801\\
+		\texttt{syn small} & Bundle & 165.2003 & 165.2018 &	165.1991 &	164.6987 &	164.6987 \\
+		 & Bundle Noll & 165.1991 &	165.2495 &	165.2028 &	164.6996	& 164.6994  \\
+		 & fminsearch & 164.6987 &	164.6987 &	164.6987 & 164.6987 & 164.6987 \\
+		 & fminbnd & 164.6987 \\
+		\texttt{syn big} & Bundle & 6282.5118 &	1.9261 &	1.9261 &	1.9261 & 1.9261 \\
+		 & Bundle Noll & 6282.5118 &	1.9261 &	1.9261 &	1.9261 &	1.9263 \\
+		 & fminsearch & 1.9261 & 1.9261 & 1.9261 & 1.9261 & 1.9261  \\
+		 & fminbnd & 1.9261  \\
+	\end{tabular}
+	\caption{function value}
+\end{table}
+\end{center}
+
+\begin{center}
+\begin{table}[H]%
+	\begin{tabular}{llccccc}
+		\hline
+    Data set & algorithm &  \\
+		\hline
+		\texttt{cancer} & Bundle & \\
+		 & Noll Bundle &   \\
+		 &  fminsearch & \\
+		 & fmindnb & \\
+		\texttt{ionosphere} & Bundle &  \\
+		 & Noll &  \\
+		 & fminsearch &\\
+		 & fminbnd &  \\
+		\texttt{syn box} & Bundle & \\
+		 & Bundle Noll &   \\
+		 & fminsearch &\\
+		 & fminbnd & 5170.7801\\
+		\texttt{syn small} & Bundle & \\
+		 & Bundle Noll &  \\
+		 & fminsearch &  \\
+		 & fminbnd & 164.6987 \\
+		\texttt{syn big} & Bundle &  \\
+		 & Bundle Noll & \\
+		 & fminsearch &   \\
+		 & fminbnd &   \\
+	\end{tabular}
+	\caption{steps and Null steps}
+\end{table}
+\end{center}
+
 
 %times
 %

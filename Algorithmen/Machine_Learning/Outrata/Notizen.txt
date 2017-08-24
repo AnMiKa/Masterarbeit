@@ -255,6 +255,36 @@ TODO: verschiedene Startwerte testen ->
 	Skalierung: 10000
 	Schrittzahl: 10000
 
+--------------------------------------------------------------------------------
+23.08.
+
+Tabellen mit den Daten aus den Testläufen erstellen -> bei Cancer, Ionosphere 
+relativ häufig delta < 0 -> noch mal anschauen.
+hab auch das Gefühl, dass schlechter als zuvor -> probiere Cancer, Ionosphere, Box
+noch mal mit kleinerer Skalierung?
+
+auch Vergleich der Funktionswerte wichtig! -> hierbei Skalierung beachten
+-> alle Werte *10000
+
+
+MultiGroup
+	"Parameter"
+	-> dupliziere einfach Datensätze, die ich habe und addiere verschieden starke Störung
+	-> Verschiedene Gruppenanzahl für verschiedene Datensätze
+		Cancer		4 -> erledigt
+		Ionosphere	4 -> erledigt
+		Box		3 -> erledigt
+		SynSmall	3 -> erledigt
+		SynBig		2 Gruppen, Datensatz dafür teilen -> erledigt
+	-> Noise: verschiedene für verschiedene Gruppen
+		G1: 0
+		G2: +-5%    0.05
+		G3: +-0.5%  0.005
+		G4: +-10%   0.1
+		des durchschnittlichen Datenwertes -> !wird ja auch noch weniger 
+						durch Rand-Befehl
+		!!! average ist 1, da Daten Standardisiert
+	-> am Ende alle Gruppen noch mal standardisieren?
 
 
 

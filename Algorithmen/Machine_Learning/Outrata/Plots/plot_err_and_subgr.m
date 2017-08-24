@@ -1,18 +1,18 @@
 % script for plotting the upper level objective of the bilevel function
 
 % Vector of C-values
-C = linspace(1,25,1000);
+C = 16.4593:0.00001:16.4596;
 
 % data set for which to plot
 X = Xtsyb;
 Y = Ytsyb;
 
-%errf = zeros(1,length(C));
+errf = zeros(1,length(C));
 %subgr = zeros(1,length(C));
 % calculate all errors for
 
-for c = 964:length(C)
-    [W,~,subgr(c)] = solve_ll_and_subgr(C(c),X,Y);
+for c = 1:length(C)
+    [W,~,~] = solve_ll_and_subgr(C(c),X,Y);
     %W = solve_ll_lambda(C(c),X,Y);
     errf(c) = ul_obj_class_hingequad(X,Y,W);
 end
