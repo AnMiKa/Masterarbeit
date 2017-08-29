@@ -26,7 +26,7 @@ function [ d, xi, alpha ] = solve_ul_Q_class_qp( x_hat, Q, s, c, t )
 %       lb <= x <= ub
 % incorporate additional constraints of the upper level problem
 
-fprintf('Solve the bundle subproblem for a trial step and Lagrange multipliers. \n')
+%fprintf('Solve the bundle subproblem for a trial step and Lagrange multipliers. \n')
 %tic
 
 [n,lJ] = size(s);
@@ -37,19 +37,20 @@ r = [1; zeros(n, 1)];
 A = [-ones(lJ, 1), s'];
 b = c;
 lb = [-Inf,-x_hat'+1e-5]';   % bounds for [xi, d=lambda]
+ub = [Inf,-x_hat'+1e4*ones(1,n)]';
 % problem has to be solved rather exact because the bundle algorithm
 % assumes d to be the argmin of the given subproblem
 options_ip = optimoptions(@quadprog, 'Algorithm', 'interior-point-convex',...
    'MaxIterations', 5000, 'ConstraintTolerance', 1.0000e-15, 'OptimalityTolerance', 1.0000e-15);
 % solve the actual subproblem
-[xi_d, ~, ~, ~, lambda] = quadprog(H, r, A, b, [], [], lb, [], [], options_ip);
+[xi_d, ~, ~, ~, lambda] = quadprog(H, r, A, b, [], [], lb, ub, [], options_ip);
 % extract the lagrange multipliers of the inequality constraints
 % corresponding to the affine linear approximation of the objective
 % function
 alpha = lambda.ineqlin(1:lJ);
 % gives a warnig if sum(alpha) not close enough to 1
 if abs(norm(alpha)-1) > 1e-15
-    warning('abs(norm(alpha)-1) > 1e-15')
+    warning('abs(norm(alpha)-1)  = %d',abs(norm(alpha)-1))
 end
 
 d = xi_d(2:end);

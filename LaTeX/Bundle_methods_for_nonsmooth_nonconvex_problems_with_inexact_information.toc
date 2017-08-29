@@ -67,11 +67,11 @@
 \contentsline {subsubsection}{\numberline {7.7.2}Choice of Parameters}{81}
 \contentsline {subsubsection}{\numberline {7.7.3}One-dimensional Optimization}{82}
 \contentsline {subsubsection}{\numberline {7.7.4}???}{85}
-\contentsline {section}{\numberline {8}Appendix}{90}
-\contentsline {subsection}{\numberline {8.1}Omitted Proofs}{90}
-\contentsline {subsubsection}{\numberline {8.1.1}Eigenvalues of the Metric Matrix}{90}
-\contentsline {subsubsection}{\numberline {8.1.2}Proof of Proposition \ref {prop_norm}}{90}
-\contentsline {subsection}{\numberline {8.2}Counterexaple to Strong Regularity}{91}
-\contentsline {subsection}{\numberline {8.3}Additional Figures}{92}
-\contentsline {subsubsection}{\numberline {8.3.1}Variable Metric Bundle Method}{92}
+\contentsline {section}{\numberline {A}Appendix}{90}
+\contentsline {subsection}{\numberline {A.1}Omitted Proofs}{90}
+\contentsline {subsubsection}{\numberline {A.1.1}Eigenvalues of the Metric Matrix}{90}
+\contentsline {subsubsection}{\numberline {A.1.2}Proof of Proposition \ref {prop_norm}}{90}
+\contentsline {subsection}{\numberline {A.2}Counterexaple to Strong Regularity}{91}
+\contentsline {subsection}{\numberline {A.3}Additional Figures}{92}
+\contentsline {subsubsection}{\numberline {A.3.1}Variable Metric Bundle Method}{92}
 \contentsline {section}{References}{}

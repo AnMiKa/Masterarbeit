@@ -1,7 +1,7 @@
 % algorithm to compare with my bilevel-bundle algorithm
 function [ C, time, fval ] = nullachtfunfzehn(obj_fun,C0)
 tic
-options = optimset('Tolfun',1e-10,'TolX',1e-10);
+options = optimset('Tolfun',1e-6,'TolX',1e-6);
 if nargin == 2
     % outer problem unconstrained (not really allowed)
     [C,fval] = fminsearch(obj_fun,C0,options);
