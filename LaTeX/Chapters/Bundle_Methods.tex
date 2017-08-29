@@ -56,7 +56,15 @@ This function is therefore also called \emph{model function}. Instead of working
 \label{cp_model_fun}
 \end{equation*}
 
-\textcolor{red}{Picture of function and cutting plane approximation of it}
+%\textcolor{red}{Picture of function and cutting plane approximation of it}
+
+\begin{figure}[ht]%
+\center
+	\input{Pictures/TikZ/cutting_plane.tex}
+\caption[Cutting plane model]{Cutting plane model \(m_k\) of a function $f$.}%
+\label{cutting_plane}%
+\end{figure}
+
 
 This subproblem should of course be easier to solve than the original task. A question that depends a lot on the structure of \(X\). If \(X = \R^n\) or a polyhedron, the problem can be solved easily. Still there are some major drawbacks to the idea. For example if \(X = \R^n\) the solution of the subproblem in the first iteration is always \(-\infty\).
 In general we can say that the subproblem does not necessarily have a solution.
@@ -187,7 +195,7 @@ We look again at a slightly different formulation of the bundle subproblem
 %\label{sub_prob_smooth_iX}
 \end{align*}
 
-As the objective function is still convex (\(X\) is a convex set) the following Karush-Kuhn-Tucker (KKT) conditions have to be valid for the minimizer \(\left(\xi_k,d^k\right)\) of the above subproblem \cite{Hiriart-Urruty1996} assuming a constraint qualification holds if the constraint set \(X\) makes it necessary \cite{Solodov2011}.
+As the objective function is still convex (\(X\) is a convex set) the following Karush-Kuhn-Tucker (KKT) conditions have to be valid for the minimizer \(\left(\xi_k,d^k\right)\) of the above subproblem \cite{Hiriart-Urruty1996} assuming a constraint qualification holds if the constraint set \(X\) makes it necessary.% \cite{Solodov2011}.
 
 There exist a subgradient \(\nu^k \in \partial \mathtt{i}_{X}(\hat{x}^{k}+d^k)\) and Lagrangian multipliers \(\alpha_j, ~j \in J^k\) such that
 

@@ -27,7 +27,6 @@ function [ d, xi, alpha ] = solve_ul_class_qp( x_hat, s, c, t )
 % incorporate additional constraints of the upper level problem
 
 fprintf('Solve the bundle subproblem for a trial step and Lagrange multipliers. \n')
-%tic
 
 [n,lJ] = size(s);
 
@@ -58,5 +57,4 @@ if d == 0
     warning('lambda = 0')
 end
 xi = xi_d(1);
-%toc
 end

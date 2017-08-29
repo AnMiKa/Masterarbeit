@@ -52,6 +52,30 @@ Finally positive definiteness of the scalar product follows directly from positi
 This means the scalar product \(\langle \cdot,\cdot \rangle_{Q_k+\frac{1}{t_k}\mathbb{I}}\) is well defined and thus induces the norm \(\Vert \cdot \Vert_{Q_k+\frac{1}{t_k}\mathbb{I}}\).
 \end{proof}
 
+\subsection{Counterexaple to Strong Regularity}
+\label{sec_counter_ex}
+In section \ref{sec_SVMs} of this thesis it is claimed that problem (\ref{SVM_1}) may not be strongly regular at its solution.
+
+It is remarked in \cite[p. 96]{Outrata1998} that if LICQ does not hold for a minimum \((w^{top},b,\xi^{top})\), then the GE coming from this problem is not strongly regular in this point.
+
+In order to show that a situation where LICQ is violated in the minimum can be easily constructed, consider \(w \in \R^{n_f}\). In a usable machine learning problem the number of data points \(n_d\) is much larger than the size \(n_f\) of the feature space, in order to achieve reliable generalization.
+
+Consider now, that \(n_f+2\) of the data points, that correspond to active constraints are correctly classified and sit directly on the margin. (This means, they are so called \emph{support vectors}. Refer to section 6.1.1 of \cite{Cristianini2000} for more information on this.)
+For those points both of the constraints 
+
+\[ y_i\left(\Langle w,x^i\Rangle-b\right) \geq 1-\xi_i \quad \text{and} \xi_i \geq 0 \]
+
+hold with equality.
+
+This means, that by renumbering these constraints the matrix with the derivatives of them has the following form:
+
+\[  \tilde{A} = \begin{pmatrix} -y_1(x^1)^{\top} & 1 & -1 \\
+                     \vdots & \vdots & & \ddots \\
+										-y_{n_f+2}(x^{n_f+2})^{\top} & 1 & & & -1\\										0 & 0 & -1 \\
+										\vdots & \vdots & & \ddots \\
+										0 & 0 & & & -1\end{pmatrix}.\]
+										
+As it was assumed that there are \(n_f+2\) such data points, this matrix cannot have linearly independent rows. This means that LICQ does not hold in the given solution and therefore also strong regularity is violated.
 
 \subsection{Additional Figures}
 
@@ -69,7 +93,7 @@ The two plots below depict the situation for \(x \in \R^n\) for \(n = 2,3,...,15
 	\begin{subfigure}{0.49\textwidth}
 		%\includegraphics[width=\textwidth]{Pictures/Plots/steps_constant_gradient_noise.eps}%
 	\end{subfigure}
-	\caption{Comparison of accuracy and number of steps for the proximal bundle algorithm and the variable metric bundle algorithm in the case of constant gradient noise}%
+	\caption[Accuracy and number of steps for: constant gradient noise]{Comparison of accuracy and number of steps for the proximal bundle algorithm and the variable metric bundle algorithm in the case of constant gradient noise}%
 	\label{fig_const_grad_noise}%
 \end{figure}
 
@@ -82,7 +106,7 @@ The two plots below depict the situation for \(x \in \R^n\) for \(n = 2,3,...,15
 	\begin{subfigure}{0.49\textwidth}
 		%\includegraphics[width=\textwidth]{Pictures/Plots/steps_vanishing_gradient_noise.eps}%
 	\end{subfigure}
-	\caption{Comparison of accuracy and number of steps for the proximal bundle algorithm and the variable metric bundle algorithm in the case of vanishing gradient noise}%
+	\caption[Accuracy and number of steps: vanishing gradient noise]{Comparison of accuracy and number of steps for the proximal bundle algorithm and the variable metric bundle algorithm in the case of vanishing gradient noise}%
 	\label{fig_van_grad_noise}%
 \end{figure}
 
@@ -97,7 +121,7 @@ The following plots show the situation for larger dimensions \(n = \{20,25,30,40
 	\begin{subfigure}{0.49\textwidth}
 		%\includegraphics[width=\textwidth]{Pictures/Plots/steps_no_noise_b.eps}%
 	\end{subfigure}
-	\caption{Comparison of accuracy and number of steps for the proximal bundle algorithm and the variable metric bundle algorithm in the case of no noise}
+	\caption[Accuracy and number of steps: no noise, higher dimensions]{Comparison of accuracy and number of steps for the proximal bundle algorithm and the variable metric bundle algorithm in the case of no noise}
 	\label{fig_no_noise_large}
 
 \end{figure}
@@ -112,7 +136,7 @@ The following plots show the situation for larger dimensions \(n = \{20,25,30,40
 		%\includegraphics[width=\textwidth]{Pictures/Plots/steps_constant_noise_b.eps}%
 	\end{subfigure}
 	\vspace{-.5em}
-	\caption{Comparison of accuracy and number of steps for the proximal bundle algorithm and the variable metric bundle algorithm in the case of constant noise}%
+	\caption[Accuracy and number of steps:constant noise, higher dimensions]{Comparison of accuracy and number of steps for the proximal bundle algorithm and the variable metric bundle algorithm in the case of constant noise}%
 	\label{fig_const_noise_large}%
 \end{figure}
 
@@ -125,7 +149,7 @@ The following plots show the situation for larger dimensions \(n = \{20,25,30,40
 	\begin{subfigure}{0.49\textwidth}
 		%\includegraphics[width=\textwidth]{Pictures/Plots/steps_vanishing_noise_b.eps}%
 	\end{subfigure}
-	\caption{Comparison of accuracy and number of steps for the proximal bundle algorithm and the variable metric bundle algorithm in the case of vanishing noise}%
+	\caption[Accuracy and number of steps: vanishing noise, higher dimensions]{Comparison of accuracy and number of steps for the proximal bundle algorithm and the variable metric bundle algorithm in the case of vanishing noise}%
 	\label{fig_van_noise_large}%
 \end{figure}
 
@@ -138,7 +162,7 @@ The following plots show the situation for larger dimensions \(n = \{20,25,30,40
 	\begin{subfigure}{0.49\textwidth}
 		%\includegraphics[width=\textwidth]{Pictures/Plots/steps_constant_gradient_noise_b.eps}%
 	\end{subfigure}
-	\caption{Comparison of accuracy and number of steps for the proximal bundle algorithm and the variable metric bundle algorithm in the case of constant gradient noise}%
+	\caption[Accuracy and number of steps: constant gradient noise, higher dimensions]{Comparison of accuracy and number of steps for the proximal bundle algorithm and the variable metric bundle algorithm in the case of constant gradient noise}%
 	\label{fig_const_grad_noise_large}%
 \end{figure}
 
@@ -151,7 +175,7 @@ The following plots show the situation for larger dimensions \(n = \{20,25,30,40
 	\begin{subfigure}{0.49\textwidth}
 		%\includegraphics[width=\textwidth]{Pictures/Plots/steps_vanishing_gradient_noise_b.eps}%
 	\end{subfigure}
-	\caption{Comparison of accuracy and number of steps for the proximal bundle algorithm and the variable metric bundle algorithm in the case of vanishing gradient noise}%
+	\caption[Accuracy and number of steps: vanishing gradient noise, higher dimensions]{Comparison of accuracy and number of steps for the proximal bundle algorithm and the variable metric bundle algorithm in the case of vanishing gradient noise}%
 	\label{fig_van_grad_noise_large}%
 \end{figure}
 
@@ -178,7 +202,7 @@ Next come the figures that illustrate the difference in behavior for different s
 	\begin{subfigure}{0.49\textwidth}
 		%\includegraphics[width=\textwidth]{Pictures/Plots/steps_vanishing_noise_comp.eps}%
 	\end{subfigure}
-	\caption{Influence of the step size updating parameter \(\kappa_+ = 1.2\) and \(\kappa_+ =2 \) and performance of the hybrid method for vanishing noise.}%
+	\caption[Influence of the step size updating parameter and hybrid method: vanishing noise]{Influence of the step size updating parameter \(\kappa_+ = 1.2\) and \(\kappa_+ =2 \) and performance of the hybrid method for vanishing noise.}%
 	\label{fig_van_noise_comp}%
 \end{figure}
 
@@ -191,7 +215,7 @@ Next come the figures that illustrate the difference in behavior for different s
 	\begin{subfigure}{0.49\textwidth}
 		%\includegraphics[width=\textwidth]{Pictures/Plots/steps_constant_gradient_noise_comp.eps}%
 	\end{subfigure}
-	\caption{Influence of the step size updating parameter \(\kappa_+ = 1.2\) and \(\kappa_+ =2 \) and performance of the hybrid method for constant gradient noise.}%
+	\caption[Influence of the step size updating parameter and hybrid method: constant gradient noise]{Influence of the step size updating parameter \(\kappa_+ = 1.2\) and \(\kappa_+ =2 \) and performance of the hybrid method for constant gradient noise.}%
 	\label{fig_const_grad_noise_comp}%
 \end{figure}
 
@@ -204,7 +228,7 @@ Next come the figures that illustrate the difference in behavior for different s
 	\begin{subfigure}{0.49\textwidth}
 		%\includegraphics[width=\textwidth]{Pictures/Plots/steps_vanishing_gradient_noise_comp.eps}%
 	\end{subfigure}
-	\caption{Influence of the step size updating parameter \(\kappa_+ = 1.2\) and \(\kappa_+ =2 \) and performance of the hybrid method for vanishing gradient noise.}%
+	\caption[Influence of the step size updating parameter and hybrid method: vanishing gradient noise]{Influence of the step size updating parameter \(\kappa_+ = 1.2\) and \(\kappa_+ =2 \) and performance of the hybrid method for vanishing gradient noise.}%
 	\label{fig_van_grad_noise_comp}%
 \end{figure}
 
@@ -220,7 +244,7 @@ Next come the figures that illustrate the difference in behavior for different s
 		%\includegraphics[width=\textwidth]{Pictures/Plots/steps_no_noise_compb.eps}%
 	\end{subfigure}
 	\label{fig_no_noise_comp_large}
-	\caption{Influence of the step size updating parameter \(\kappa_+ = 1.2\) and \(\kappa_+ =2 \) and performance of the hybrid method for the exact case for higher \(x\)-dimensions. The reached accuracy is depicted on the left, the needed number of steps on the right.}
+	\caption[Influence of the step size updating parameter and hybrid method: vanishing noise, higher dimensions]{Influence of the step size updating parameter \(\kappa_+ = 1.2\) and \(\kappa_+ =2 \) and performance of the hybrid method for the exact case for higher \(x\)-dimensions. The reached accuracy is depicted on the left, the needed number of steps on the right.}
 \end{figure}
 
 \vspace{-1.5em}
@@ -232,7 +256,7 @@ Next come the figures that illustrate the difference in behavior for different s
 	\begin{subfigure}{0.49\textwidth}
 		%\includegraphics[width=\textwidth]{Pictures/Plots/steps_constant_noise_compb.eps}%
 	\end{subfigure}
-	\caption{Influence of the step size updating parameter \(\kappa_+ = 1.2\) and \(\kappa_+ =2 \) and performance of the hybrid method for constant noise.}%
+	\caption[Influence of the step size updating parameter and hybrid method: constant noise, higher dimensions]{Influence of the step size updating parameter \(\kappa_+ = 1.2\) and \(\kappa_+ =2 \) and performance of the hybrid method for constant noise.}%
 	\label{fig_const_noise_comp_large}%
 \end{figure}
 
@@ -245,7 +269,7 @@ Next come the figures that illustrate the difference in behavior for different s
 	\begin{subfigure}{0.49\textwidth}
 		%\includegraphics[width=\textwidth]{Pictures/Plots/steps_vanishing_noise_compb.eps}%
 	\end{subfigure}
-	\caption{Influence of the step size updating parameter \(\kappa_+ = 1.2\) and \(\kappa_+ =2 \) and performance of the hybrid method for vanishing noise.}%
+	\caption[Influence of the step size updating parameter and hybrid method: vanishing noise, higher dimensions]{Influence of the step size updating parameter \(\kappa_+ = 1.2\) and \(\kappa_+ =2 \) and performance of the hybrid method for vanishing noise.}%
 	\label{fig_van_noise_comp_large}%
 \end{figure}
 
@@ -258,7 +282,7 @@ Next come the figures that illustrate the difference in behavior for different s
 	\begin{subfigure}{0.49\textwidth}
 		%\includegraphics[width=\textwidth]{Pictures/Plots/steps_constant_gradient_noise_compb.eps}%
 	\end{subfigure}
-	\caption{Influence of the step size updating parameter \(\kappa_+ = 1.2\) and \(\kappa_+ =2 \) and performance of the hybrid method for constant gradient noise.}%
+	\caption[Influence of the step size updating parameter and hybrid method: constant gradient noise, higher dimensions]{Influence of the step size updating parameter \(\kappa_+ = 1.2\) and \(\kappa_+ =2 \) and performance of the hybrid method for constant gradient noise.}%
 	\label{fig_const_grad_noise_comp_large}%
 \end{figure}
 
@@ -271,7 +295,7 @@ Next come the figures that illustrate the difference in behavior for different s
 	\begin{subfigure}{0.49\textwidth}
 		%\includegraphics[width=\textwidth]{Pictures/Plots/steps_vanishing_gradient_noise_compb.eps}%
 	\end{subfigure}
-	\caption{Influence of the step size updating parameter \(\kappa_+ = 1.2\) and \(\kappa_+ =2 \) and performance of the hybrid method for vanishing gradient noise.}%
+	\caption[Influence of the step size updating parameter and hybrid method: vanishing gradient noise, higher dimensions]{Influence of the step size updating parameter \(\kappa_+ = 1.2\) and \(\kappa_+ =2 \) and performance of the hybrid method for vanishing gradient noise.}%
 	\label{fig_van_grad_noise_comp_large}%
 \end{figure}
 

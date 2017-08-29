@@ -29,28 +29,28 @@ for c = 1:length(C)
         bundle_bilevel_outr(C(c),Xtsyb,Ytsyb,10000,1e-10);
 end
 
-% Noll Algorithm
-% Preallocation for C, fval, time, steps, null steps
-
-CminN = zeros(5);
-fvalN = zeros(5);
-timeN = zeros(5);
-stepsN = zeros(5);
-nullstepsN = zeros(5);
-eta_maxN = zeros(5);
-
-for c = 1:length(C)
-    [~,~,~,~,~,eta_maxN(1,c)] =...
-        bundle_bilevel_outr_noll(C(c),Xtcan,Ytcan,1,10000,1e-10);
-    [~,~,~,~,~,eta_maxN(2,c)] =...
-        bundle_bilevel_outr_noll(C(c),Xtion,Ytion,1,10000,1e-10);
-    [~,~,~,~,~,eta_maxN(3,c)] =...
-        bundle_bilevel_outr_noll(C(c),Xtbox,Ytbox,1,10000,1e-10);
-    [~,~,~,~,~,eta_maxN(4,c)] =...
-        bundle_bilevel_outr_noll(C(c),Xtsys,Ytsys,1,10000,1e-10);
-    [~,~,~,~,~,eta_maxN(5,c)] =...
-        bundle_bilevel_outr_noll(C(c),Xtsyb,Ytsyb,1,10000,1e-10);
-end
+% % Noll Algorithm
+% % Preallocation for C, fval, time, steps, null steps
+% 
+% CminN = zeros(5);
+% fvalN = zeros(5);
+% timeN = zeros(5);
+% stepsN = zeros(5);
+% nullstepsN = zeros(5);
+% eta_maxN = zeros(5);
+% 
+% for c = 1:length(C)
+%     [~,~,~,~,~,eta_maxN(1,c)] =...
+%         bundle_bilevel_outr_noll(C(c),Xtcan,Ytcan,1,10000,1e-10);
+%     [~,~,~,~,~,eta_maxN(2,c)] =...
+%         bundle_bilevel_outr_noll(C(c),Xtion,Ytion,1,10000,1e-10);
+%     [~,~,~,~,~,eta_maxN(3,c)] =...
+%         bundle_bilevel_outr_noll(C(c),Xtbox,Ytbox,1,10000,1e-10);
+%     [~,~,~,~,~,eta_maxN(4,c)] =...
+%         bundle_bilevel_outr_noll(C(c),Xtsys,Ytsys,1,10000,1e-10);
+%     [~,~,~,~,~,eta_maxN(5,c)] =...
+%         bundle_bilevel_outr_noll(C(c),Xtsyb,Ytsyb,1,10000,1e-10);
+% end
 
 % %% nullachtfunfzeh-part
 % obj_fun1 = @(C) overall_obj(C,Xtcan,Ytcan);

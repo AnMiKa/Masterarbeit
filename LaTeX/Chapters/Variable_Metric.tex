@@ -85,7 +85,7 @@ The decomposition of the stabilization term into a curvature approximation and a
 One the one hand, curvature of the objective can be approximated only under the conditions of the boundedness and symmetry of \(Q_k\). No positive definiteness has to be ensured for convergence.
 On the other hand the proximal term can be used in the trust region inspired way to make a line search obsolete. As already mentioned in section \ref{sec_simplifications} this is an advantage especially when working with inexact functions where a line search is not useable.
 
-\textcolor{red}{comment on line search and curve search in \cite{Lemarechal1994,Lemarechal1997,Vlcek2001}?}
+%\textcolor{red}{comment on line search and curve search in \cite{Lemarechal1994,Lemarechal1997,Vlcek2001}?}
 
 \subsubsection{The Descent Measure}
 
@@ -866,6 +866,7 @@ To compare the performance of the different methods the accuracy is measured by
 
 Here \(\hat{f}_{\bar{k}}\) is the current \(\hat{f}_k\) when the algorithm stops.
 
+All calculations were performed on an Intel i5 2.6~GHz with four kernels.
 
 
 \subsubsection{Academic Test Examples}
@@ -899,7 +900,7 @@ It approaches the minimum almost in a straight line. The difference in behavior 
 			%\includegraphics[width=\textwidth]{Pictures/Plots/final_parab_detail.eps}
 			%\subcaption{detail, many steps of Hare in the end}
 	\end{subfigure}
-	\caption{Sequences of serious steps constructed by the proximal bundle algorithm and the variable metric algorithm respectively on the level lines of parabola \(p\). The right image is a detail of the plot on the left.\\
+	\caption[Serious steps on parabola]{Sequences of serious steps constructed by the proximal bundle algorithm and the variable metric algorithm respectively on the level lines of parabola \(p\). The right image is a detail of the plot on the left.\\
 	Step size parameter: \(\kappa_+ = 2\) for both algorithms.}
 	\label{fig_contour_parab}
 \end{figure}
@@ -920,7 +921,7 @@ It is interesting to note, that the sequence provided by the proximal bundle alg
 			%\includegraphics[width=\textwidth]{Pictures/Plots/final_nonsm_parab_detail.eps}
 			%\subcaption{detail}
 	\end{subfigure}
-	\caption{Sequences of serious steps constructed by the proximal bundle algorithm and the variable metric algorithm respectively on the level lines of the nonsmooth quadratic function \(p_n\). The right image is a detail of the plot on the left.\\
+	\caption[Serious steps on nonsmooth quadratic]{Sequences of serious steps constructed by the proximal bundle algorithm and the variable metric algorithm respectively on the level lines of the nonsmooth quadratic function \(p_n\). The right image is a detail of the plot on the left.\\
 	Step size parameter: \(\kappa_+ = 2\) for both algorithms.}
 	\label{fig_contour_nonsm_parab}
 \end{figure}
@@ -939,7 +940,7 @@ To address the random nature of the noise the tests are performed 20 times and t
 			%\includegraphics[width=\textwidth]{Pictures/Plots/steps_bar_parab_u_1-2.eps}
 	%		\subcaption{}
 	\end{subfigure}
-	\caption{Left: Accuracy of the solution computed by the different versions of the variable metric bundle algorithm compared to the proximal bundle algorithm for the parabola \(p\) under different form of noise.\\
+	\caption[Accuracy and number of steps for the parabola]{Left: Accuracy of the solution computed by the different versions of the variable metric bundle algorithm compared to the proximal bundle algorithm for the parabola \(p\) under different form of noise.\\
 	Right: Comparison of the number of steps for the three algorithms.\\
 	Step size parameters: \(\kappa_+ = 1.2\) for the proximal bundle method and \(\kappa_+ = 2\) for the variable metric algorithm. }
 	\label{fig_bar_parab}
@@ -960,7 +961,7 @@ The difference in steps between the two update variants of the variable metric a
 			%\includegraphics[width=\textwidth]{Pictures/Plots/steps_bar_nonsm_parab_u_1-2.eps}
 			%\subcaption{}
 	\end{subfigure}
-	\caption{Left: Accuracy of the solution computed by the different versions of the variable metric bundle algorithm compared to the proximal bundle algorithm for the nonsmooth quadratic function \(p_n\) under different form of noise.\\
+	\caption[Accuracy and number of steps for a nonsmooth quadratic]{Left: Accuracy of the solution computed by the different versions of the variable metric bundle algorithm compared to the proximal bundle algorithm for the nonsmooth quadratic function \(p_n\) under different form of noise.\\
 	Right: Comparison of the number of steps for the three algorithms. The left bar for the number of steps in the case of constant noise is cropped.\\
 	Step size parameters: \(\kappa_+ = 1.2\) for the proximal bundle method and \(\kappa_+ = 2\) for the variable metric algorithm.}
 	\label{fig_bar_nonsm_parab}
@@ -1060,7 +1061,7 @@ The graphs of the Ferrier polynomials for \(x \in \R^2\) are shown in figure \re
 		%\includegraphics[width=0.65\textwidth]{Pictures/Plots/testfun_f5}
 		%\end{flushleft}
 	\end{subfigure}
-	\caption{Graphs of the testfunctions $f_1$ to $f_5$ for $x\in\R^2$}
+	\caption[Ferrier polynomials]{Graphs of the testfunctions $f_1$ to $f_5$ for $x\in\R^2$}
 	\label{fig_ferr_pol}
 \end{figure}
 
@@ -1081,7 +1082,7 @@ The accuracy measures absolute logarithmic distance to the global minimum. In ca
 	\begin{subfigure}{0.49\textwidth}
 		%\includegraphics[width=\textwidth]{Pictures/Plots/steps_no_noise.eps}%
 	\end{subfigure}
-	\caption{Comparison of accuracy and number of steps for the proximal bundle algorithm and the variable metric bundle algorithm in the case of no noise.}
+	\caption[Accuracy and number of steps: no noise]{Comparison of accuracy and number of steps for the proximal bundle algorithm and the variable metric bundle algorithm in the case of no noise.}
 	\label{fig_no_noise}
 \end{figure}
 
@@ -1097,12 +1098,12 @@ The performance of the two variants of the two versions of the variable metric m
 
 \begin{figure}[ht]
 	\begin{subfigure}{0.49\textwidth}
-		%\includegraphics[width=\textwidth]{Pictures/Plots/constant_noise.eps}%
+		\includegraphics[width=\textwidth]{Pictures/Plots/constant_noise.eps}%
 	\end{subfigure}
 	\begin{subfigure}{0.49\textwidth}
-		%\includegraphics[width=\textwidth]{Pictures/Plots/steps_constant_noise.eps}%
+		\includegraphics[width=\textwidth]{Pictures/Plots/steps_constant_noise.eps}%
 	\end{subfigure}
-	\caption{Comparison of accuracy and number of steps for the proximal bundle algorithm and the variable metric bundle algorithm in the case of constant noise}%
+	\caption[Accuracy and number of steps: constant noise]{Comparison of accuracy and number of steps for the proximal bundle algorithm and the variable metric bundle algorithm in the case of constant noise}%
 	\label{fig_const_noise}%
 \end{figure}
 
@@ -1115,7 +1116,7 @@ In the case of constant noise the variable bundle methods perform better than th
 	\begin{subfigure}{0.49\textwidth}
 		%\includegraphics[width=\textwidth]{Pictures/Plots/steps_vanishing_noise.eps}%
 	\end{subfigure}
-	\caption{Comparison of accuracy and number of steps for the proximal bundle algorithm and the variable metric bundle algorithm in the case of vanishing noise}%
+	\caption[Accuracy and number of steps: vanishing noise]{Comparison of accuracy and number of steps for the proximal bundle algorithm and the variable metric bundle algorithm in the case of vanishing noise}%
 	\label{fig_van_noise}%
 \end{figure}
 
@@ -1143,7 +1144,7 @@ Here only the exact case and the case of constant noise for the lower dimensions
 	\begin{subfigure}{0.49\textwidth}
 		%\includegraphics[width=\textwidth]{Pictures/Plots/steps_no_noise_comp.eps}%
 	\end{subfigure}
-	\caption{Influence of the step size updating parameter \(\kappa_+ = 1.2\) and \(\kappa_+ =2 \) and performance of the hybrid method in the exact case. The reached accuracy is depicted on the left, the needed number of steps on the right.}
+	\caption[Influence of the step size updating parameter and hybrid method: no noise]{Influence of the step size updating parameter \(\kappa_+ = 1.2\) and \(\kappa_+ =2 \) and performance of the hybrid method in the exact case. The reached accuracy is depicted on the left, the needed number of steps on the right.}
 	\label{fig_no_noise_comp}
 \end{figure}
 
@@ -1154,7 +1155,7 @@ Here only the exact case and the case of constant noise for the lower dimensions
 	\begin{subfigure}{0.49\textwidth}
 		%\includegraphics[width=\textwidth]{Pictures/Plots/steps_constant_noise_comp.eps}%
 	\end{subfigure}
-	\caption{Influence of the step size updating parameter \(\kappa_+ = 1.2\) and \(\kappa_+ =2 \) and performance of the hybrid method for constant noise. The reached accuracy is depicted on the left, the needed number of steps on the right.}
+	\caption[Influence of the step size updating parameter and hybrid method: constant noise]{Influence of the step size updating parameter \(\kappa_+ = 1.2\) and \(\kappa_+ =2 \) and performance of the hybrid method for constant noise. The reached accuracy is depicted on the left, the needed number of steps on the right.}
 	\label{fig_const_noise_comp}
 \end{figure}
 
@@ -1164,7 +1165,7 @@ In the case of constant noise the numbers of steps are similar.
 As  expected the accuracy of the two methods is very similar, because only one parameter is changed. The number of steps shows however that parameter tuning can be useful. Here it is important to keep in mind that the optimal parameter depends on the objective function and the noise form.
 
 The performance of the hybrid method is, as can be expected, similar to the proximal bundle method. As the scaling is quite strong the influence of the metric matrix decreases rather quickly.
-This means that in cases where the proximal bundle method performed better, the same is true for the hybrid method. The increase in the number of steps is only minor. Likewise in the case of constant noise (figure \ref{fig_const_noise_comp}) for example, where the proximal bundle method needed a lot of steps, these steps are also needed by the hybrid method. Two advantages of the hybrid method still come into play for this noise form: The significant decrease in the number of steps starts only in higher dimensions, where the total number of steps grows larger. Here a 'slower' scaling could yield even better numbers.
+This means that in cases where the proximal bundle method performed better, the same is true for the hybrid method. The increase in the number of steps is only minor. Likewise in the case of constant noise (Figure \ref{fig_const_noise_comp}) for example, where the proximal bundle method needed a lot of steps, these steps are also needed by the hybrid method. Two advantages of the hybrid method still come into play for this noise form: The significant decrease in the number of steps starts only in higher dimensions, where the total number of steps grows larger. Here a 'slower' scaling could yield even better numbers.
 The other advantage is the more stable accuracy. This holds true for all dimensions.
 %
 %

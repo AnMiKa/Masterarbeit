@@ -106,7 +106,8 @@ for k = 1 : kmax
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %% 2nd step: aggregated objects
-C = alpha' * c;     % augmented aggregate error
+alpha = abs(alpha);
+C = abs(alpha)' * c;     % augmented aggregate error
 %G = g * alpha;      % aggregate subgradient
 %S = s * alpha;      % augmented aggregate subgradient
 
@@ -116,8 +117,8 @@ C = alpha' * c;     % augmented aggregate error
 %delta = - xi + eta/2 * norm(d)^2;
 delta = C+1/t*sum(d.^2);
 if delta < 0
-    x_hat = NaN;
-    break
+    %x_hat = NaN;
+    %break
 end
 %if eta > 1e10
 %    pause

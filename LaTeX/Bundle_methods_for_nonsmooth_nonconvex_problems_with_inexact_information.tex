@@ -22,11 +22,20 @@
 \usepackage{algpseudocode} % Pseudocode
 \usepackage{bm} % fett schreiben in Matheumgebung
 
+\usepackage{tikz}
+%\usepackage{standalone}
+\usetikzlibrary{arrows,shapes,shapes.misc,fit,decorations}
+\tikzset{cross/.style={cross out, draw=blue, minimum size=2*(#1-\pgflinewidth), inner sep=0pt, outer sep=0pt},
+%default radius will be 1pt. 
+cross/.default={3pt}}
+
+
+
+
 \usepackage[onehalfspacing]{setspace}
 % um Zeilenabstand zu setzen
 
 %\usepackage{bibgerm} % Für das Literaturverzeichnis
-
 
 
 %Definition der gewünschten Theorem-Stile:
@@ -119,42 +128,53 @@
 %TODO
  %% check command for ,...,
 
-%\input{First_Pages/Coverpage}
+\include{First_Pages/Coverpage}
 %\textcolor{red}{second title page} \\
 %\textcolor{red}{Author and title on back of thesis}
-%\include{First_Pages/Declaration}
-%\include{First_Pages/Acknowledgment}
-%\include{First_Pages/Abstract}
-%\include{First_Pages/Summary}
+\pagenumbering{roman}
+%\pagestyle{empty}
+\include{First_Pages/Declaration}
+%\addcontentsline{toc}{section}{Acknowledgments}
+\include{First_Pages/Acknowledgment}
+\addcontentsline{toc}{section}{Abstract}
+\include{First_Pages/Abstract}
+\addcontentsline{toc}{section}{German Summary}
+\include{First_Pages/Summary}
+%\addtocontents{toc}{%
+  %\protect\contentsline{section}{Abstract}{}
+	%\protect\contentsline{section}{Germal Summary}{}}
 
-%\include{First_Pages/List_of_Symbols}
 
-%{\singlespacing
+{\singlespacing
 \setcounter{tocdepth}{3} % Im Inhaltsverzeichnis werden nur section und subsection berücksichtigt, keine tieferen Ebenen
 %\thispagestyle{empty} % keine Seitenzahl
-\pagestyle{empty} %keine Seitenzahlen
-\addtocontents{toc}{%
-  \protect\contentsline{section}{Acknowledgments}{}
-	\protect\contentsline{section}{Abstract}{}
-	\protect\contentsline{section}{German Summary}{}
-	\protect\contentsline{section}{List of Symbols}{}
-	\protect\contentsline{section}{List of Figures}{}
-	\protect\contentsline{section}{List of Tables}{}}
-\tableofcontents%}
+%\pagestyle{empty} %keine Seitenzahlen
+\tableofcontents}
+\newpage
+
+\addcontentsline{toc}{section}{List of Symbols}
+\include{First_Pages/List_of_Symbols}
+
+\addcontentsline{toc}{section}{List of Tables}
+\addcontentsline{toc}{section}{List of Figures}
+
+\listoftables
+\newpage
+\listoffigures
 \newpage
 
 \pagestyle{plain}
 \pagenumbering{arabic}
-%\include{Chapters/Introduction}
-%\include{Chapters/Preliminaries}
-%\include{Chapters/Bundle_Methods}
-%\include{Chapters/Simplifications}
-%\include{Chapters/Bundle_Method_nonconv_inex}
-%\include{Chapters/Variable_Metric}
+\include{Chapters/Introduction}
+\include{Chapters/Preliminaries}
+\include{Chapters/Bundle_Methods}
+\include{Chapters/Simplifications}
+\include{Chapters/Bundle_Method_nonconv_inex}
+\include{Chapters/Variable_Metric}
 \include{Chapters/Bilevel_Application}
 %%\include{Chapters/Outrata}
 %%\include{Chapters/Bilevel_Application_2}
-%\include{Chapters/Appendix}
+\include{Chapters/Appendix}
 
 \newpage
 \addtocontents{toc}{%

@@ -250,7 +250,7 @@ TODO: verschiedene Startwerte testen ->
 
 !!! sollte gleiche Daten haben (auch wenn zB. Abbruchbedingungen unterschiedlich)
 
-	Bounds für C: 1e-4 - 1e4
+	Bounds für C: 1e-5 - 1e4
 	Abbruchbedingungen: 1e-10
 	Skalierung: 10000
 	Schrittzahl: 10000
@@ -285,6 +285,11 @@ MultiGroup
 						durch Rand-Befehl
 		!!! average ist 1, da Daten Standardisiert
 	-> am Ende alle Gruppen noch mal standardisieren?
+
+--------------------------------------------------------------------------------
+26.08.
+
+!!! MultiGroup nicht möglich mit großem Datensatz (SysBig), Memory Overflow
 
 
 
