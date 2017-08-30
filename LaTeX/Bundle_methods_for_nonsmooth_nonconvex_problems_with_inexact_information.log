@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=latex 2017.6.11)  29 AUG 2017 13:16
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=latex 2017.6.11)  30 AUG 2017 11:08
 entering extended mode
 **Bundle_methods_for_nonsmooth_nonconvex_problems_with_inexact_information.tex
 
@@ -911,15 +911,15 @@ Overfull \hbox (1.73416pt too wide) in paragraph at lines 5--156
 
 ]
 ("D:\Annika\Uni\10. Semester\Masterarbeit\Proximal Bundle Inexact Information\Git Hub\Masterarbeit\LaTeX\Bundle_methods_
+for_nonsmooth_nonconvex_problems_with_inexact_information.lof")
+\tf@lof=\write5
+
+("D:\Annika\Uni\10. Semester\Masterarbeit\Proximal Bundle Inexact Information\Git Hub\Masterarbeit\LaTeX\Bundle_methods_
 for_nonsmooth_nonconvex_problems_with_inexact_information.lot")
-\tf@lot=\write5
+\tf@lot=\write6
  [8
 
 ]
-("D:\Annika\Uni\10. Semester\Masterarbeit\Proximal Bundle Inexact Information\Git Hub\Masterarbeit\LaTeX\Bundle_methods_
-for_nonsmooth_nonconvex_problems_with_inexact_information.lof" [9])
-\tf@lof=\write6
- [10]
 ("D:\Annika\Uni\10. Semester\Masterarbeit\Proximal Bundle Inexact Information\Git Hub\Masterarbeit\LaTeX\Chapters/Introd
 uction.tex" [1
 
@@ -982,34 +982,85 @@ Overfull \hbox (4.89206pt too wide) in paragraph at lines 856--857
 /m/it/12 x[]\OMS/lmsy/m/n/12 k\OML/lmm/m/it/12 =\OT1/lmr/m/n/12 100\OMS/lmsy/m/n/12 g$
  []
 
-[50] [51] [52] [53] [54]
+[50]
+File: Pictures/Plots/final_parab.eps Graphic file (type eps)
+ <Pictures/Plots/final_parab.eps>
+File: Pictures/Plots/final_parab_detail.eps Graphic file (type eps)
+ <Pictures/Plots/final_parab_detail.eps>
+File: Pictures/Plots/final_nonsm_parab.eps Graphic file (type eps)
+ <Pictures/Plots/final_nonsm_parab.eps>
+File: Pictures/Plots/final_nonsm_parab_detail.eps Graphic file (type eps)
+
+<Pictures/Plots/final_nonsm_parab_detail.eps> [51]
+File: Pictures/Plots/accuracy_bar_parab_u_1-2.eps Graphic file (type eps)
+ <Pictures/Plots/accuracy_bar_parab_u_1-2.eps>
+File: Pictures/Plots/steps_bar_parab_u_1-2.eps Graphic file (type eps)
+
+<Pictures/Plots/steps_bar_parab_u_1-2.eps> [52]
+File: Pictures/Plots/accuracy_bar_nonsm_parab_u_1-2.eps Graphic file (type eps)
+ <Pictures/Plots/accuracy_bar_nonsm_parab_u_1-2.eps>
+File: Pictures/Plots/steps_bar_nonsm_parab_u_1-2.eps Graphic file (type eps)
+
+<Pictures/Plots/steps_bar_nonsm_parab_u_1-2.eps> [53] [54]
+File: Pictures/Plots/testfun_f1.eps Graphic file (type eps)
+ <Pictures/Plots/testfun_f1.eps>
+File: Pictures/Plots/testfun_f2.eps Graphic file (type eps)
+
+<Pictures/Plots/testfun_f2.eps>
+File: Pictures/Plots/testfun_f3.eps Graphic file (type eps)
+ <Pictures/Plots/testfun_f3.eps>
+File: Pictures/Plots/testfun_f4.eps Graphic file (type eps)
+ <Pictures/Plots/testfun_f4.eps>
+File: Pictures/Plots/testfun_f5.eps Graphic file (type eps)
+
+<Pictures/Plots/testfun_f5.eps> [55]
+File: Pictures/Plots/no_noise.eps Graphic file (type eps)
+ <Pictures/Plots/no_noise.eps>
+File: Pictures/Plots/steps_no_noise.eps Graphic file (type eps)
+ <Pictures/Plots/steps_no_noise.eps>
 File: Pictures/Plots/constant_noise.eps Graphic file (type eps)
- <Pictures/Plots/constant_noise.eps>
+
+<Pictures/Plots/constant_noise.eps>
 File: Pictures/Plots/steps_constant_noise.eps Graphic file (type eps)
- <Pictures/Plots/steps_constant_noise.eps> [55]) [56]
-[57]
+ <Pictures/Plots/steps_constant_noise.eps>
+File: Pictures/Plots/vanishing_noise.eps Graphic file (type eps)
+ <Pictures/Plots/vanishing_noise.eps>
+File: Pictures/Plots/steps_vanishing_noise.eps Graphic file (type eps)
+
+<Pictures/Plots/steps_vanishing_noise.eps> [56] [57]
+File: Pictures/Plots/no_noise_comp.eps Graphic file (type eps)
+ <Pictures/Plots/no_noise_comp.eps>
+File: Pictures/Plots/steps_no_noise_comp.eps Graphic file (type eps)
+
+<Pictures/Plots/steps_no_noise_comp.eps>
+File: Pictures/Plots/constant_noise_comp.eps Graphic file (type eps)
+ <Pictures/Plots/constant_noise_comp.eps>
+File: Pictures/Plots/steps_constant_noise_comp.eps Graphic file (type eps)
+
+<Pictures/Plots/steps_constant_noise_comp.eps> [58]) [59]
 ("D:\Annika\Uni\10. Semester\Masterarbeit\Proximal Bundle Inexact Information\Git Hub\Masterarbeit\LaTeX\Chapters/Bileve
-l_Application.tex" [58
+l_Application.tex" [60
 
 
-] [59] [60] [61]
+] [61] [62] [63]
 ("D:\Annika\Uni\10. Semester\Masterarbeit\Proximal Bundle Inexact Information\Git Hub\Masterarbeit\LaTeX\Pictures/TikZ/h
-yperplane.tex") [62] [63] [64] [65] [66] [67] [68] [69] [70] [71] [72] [73] [74] [75]
-LaTeX Font Info:    Try loading font information for T1+lmtt on input line 702.
+yperplane.tex") [64] [65] [66] [67] [68] [69] [70] [71] [72] [73] [74] [75] [76]
+LaTeX Font Info:    Try loading font information for T1+lmtt on input line 700.
 
 ("C:\Program Files\Annika Programme\MiKTeX\tex\latex\lm\t1lmtt.fd"
 File: t1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
-) [76] [77]
+) [77] [78] [79]
 File: Pictures/Plots/plot_all_data_all_w.eps Graphic file (type eps)
- <Pictures/Plots/plot_all_data_all_w.eps>
-File: Pictures/Plots/Fold_1.eps Graphic file (type eps)
 
-<Pictures/Plots/Fold_1.eps>
+<Pictures/Plots/plot_all_data_all_w.eps>
+File: Pictures/Plots/Fold_1.eps Graphic file (type eps)
+ <Pictures/Plots/Fold_1.eps>
 File: Pictures/Plots/Fold_2.eps Graphic file (type eps)
  <Pictures/Plots/Fold_2.eps>
 File: Pictures/Plots/Fold_3.eps Graphic file (type eps)
- <Pictures/Plots/Fold_3.eps>
-Underfull \hbox (badness 1803) in paragraph at lines 794--806
+
+<Pictures/Plots/Fold_3.eps>
+Underfull \hbox (badness 1803) in paragraph at lines 792--804
 [][] []
  []
 
@@ -1021,43 +1072,77 @@ Overfull \hbox (5.41344pt too wide) in paragraph at lines 821--823
 $\OML/lmm/m/it/12 W \OT1/lmr/m/n/12 = (\OML/lmm/m/it/12 w[]; w[]; w[]\OT1/lmr/m/n/12 )$\T1/lmr/m/n/12 .
  []
 
-[78] [79] [80] [81]
+[80] [81] [82] [83]
 File: Pictures/Plots/CanIonBox_fin.eps Graphic file (type eps)
  <Pictures/Plots/CanIonBox_fin.eps>
 File: Pictures/Plots/SysSyb_fin.eps Graphic file (type eps)
- <Pictures/Plots/SysSyb_fin.eps> [82] [83]
-LaTeX Font Info:    Try loading font information for OMS+lmr on input line 991.
+ <Pictures/Plots/SysSyb_fin.eps> [84]
+File: Pictures/Plots/Scal1_ll-15C.eps Graphic file (type eps)
 
-("C:\Program Files\Annika Programme\MiKTeX\tex\latex\lm\omslmr.fd"
-File: omslmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
-)
-LaTeX Font Info:    Font shape `OMS/lmr/m/n' in size <12> not available
-(Font)              Font shape `OMS/lmsy/m/n' tried instead on input line 991.
- [84]
-Overfull \hbox (0.98396pt too wide) in paragraph at lines 1058--1088
- [] 
- []
+<Pictures/Plots/Scal1_ll-15C.eps>
+File: Pictures/Plots/Scal100_ll-15C.eps Graphic file (type eps)
+ <Pictures/Plots/Scal100_ll-15C.eps>
+File: Pictures/Plots/Scal1_ll-15f.eps Graphic file (type eps)
+ <Pictures/Plots/Scal1_ll-15f.eps>
+File: Pictures/Plots/Scal100_ll-15f.eps Graphic file (type eps)
 
-[85]
-Overfull \hbox (5.61996pt too wide) in paragraph at lines 1097--1122
- [] 
- []
+<Pictures/Plots/Scal100_ll-15f.eps> [85] [86] [87]
+File: Pictures/Plots/Scal100_llad-8C.eps Graphic file (type eps)
+ <Pictures/Plots/Scal100_llad-8C.eps>
+File: Pictures/Plots/Scal100_llad-4C.eps Graphic file (type eps)
 
-[86]
-Overfull \hbox (5.61996pt too wide) in paragraph at lines 1128--1153
- [] 
- []
+<Pictures/Plots/Scal100_llad-4C.eps>
+File: Pictures/Plots/Scal100_llad-8f.eps Graphic file (type eps)
+ <Pictures/Plots/Scal100_llad-8f.eps>
+File: Pictures/Plots/Scal100_llad-4f.eps Graphic file (type eps)
+ <Pictures/Plots/Scal100_llad-4f.eps> [88]
 
-[87] [88]) [89]
+LaTeX Warning: Reference `sec_noconv_inex' on page 89 undefined on input line 1088.
+
+[89]) [90]
 ("D:\Annika\Uni\10. Semester\Masterarbeit\Proximal Bundle Inexact Information\Git Hub\Masterarbeit\LaTeX\Chapters/Append
-ix.tex" [90
+ix.tex" [91
 
 
-] [91] [92]) [93]
+] [92]
+File: Pictures/Plots/constant_gradient_noise.eps Graphic file (type eps)
+ <Pictures/Plots/constant_gradient_noise.eps>
+File: Pictures/Plots/steps_constant_gradient_noise.eps Graphic file (type eps)
+ <Pictures/Plots/steps_constant_gradient_noise.eps>
+File: Pictures/Plots/vanishing_gradient_noise.eps Graphic file (type eps)
+
+<Pictures/Plots/vanishing_gradient_noise.eps>
+File: Pictures/Plots/steps_vanishing_gradient_noise.eps Graphic file (type eps)
+ <Pictures/Plots/steps_vanishing_gradient_noise.eps> [93]
+File: Pictures/Plots/no_noise_b.eps Graphic file (type eps)
+
+<Pictures/Plots/no_noise_b.eps>
+File: Pictures/Plots/steps_no_noise_b.eps Graphic file (type eps)
+ <Pictures/Plots/steps_no_noise_b.eps>
+File: Pictures/Plots/constant_noise_b.eps Graphic file (type eps)
+ <Pictures/Plots/constant_noise_b.eps>
+File: Pictures/Plots/steps_constant_noise_b.eps Graphic file (type eps)
+
+<Pictures/Plots/steps_constant_noise_b.eps> [94]
+File: Pictures/Plots/vanishing_noise_b.eps Graphic file (type eps)
+ <Pictures/Plots/vanishing_noise_b.eps>
+File: Pictures/Plots/steps_vanishing_noise_b.eps Graphic file (type eps)
+
+<Pictures/Plots/steps_vanishing_noise_b.eps>
+File: Pictures/Plots/constant_gradient_noise_b.eps Graphic file (type eps)
+ <Pictures/Plots/constant_gradient_noise_b.eps>
+File: Pictures/Plots/steps_constant_gradient_noise_b.eps Graphic file (type eps)
+
+<Pictures/Plots/steps_constant_gradient_noise_b.eps>
+File: Pictures/Plots/vanishing_gradient_noise_b.eps Graphic file (type eps)
+ <Pictures/Plots/vanishing_gradient_noise_b.eps>
+File: Pictures/Plots/steps_vanishing_gradient_noise_b.eps Graphic file (type eps)
+
+<Pictures/Plots/steps_vanishing_gradient_noise_b.eps> [95]) [96]
 ("D:\Annika\Uni\10. Semester\Masterarbeit\Proximal Bundle Inexact Information\Git Hub\Masterarbeit\LaTeX\Bundle_methods_
-for_nonsmooth_nonconvex_problems_with_inexact_information.bbl" [94
+for_nonsmooth_nonconvex_problems_with_inexact_information.bbl" [97
 
-] [95] [96]) [97]
+] [98] [99]) [100]
 ("D:\Annika\Uni\10. Semester\Masterarbeit\Proximal Bundle Inexact Information\Git Hub\Masterarbeit\LaTeX\Bundle_methods_
 for_nonsmooth_nonconvex_problems_with_inexact_information.aux"
 ("D:\Annika\Uni\10. Semester\Masterarbeit\Proximal Bundle Inexact Information\Git Hub\Masterarbeit\LaTeX\First_Pages/Cov
@@ -1087,19 +1172,26 @@ le_Metric.aux")
 ("D:\Annika\Uni\10. Semester\Masterarbeit\Proximal Bundle Inexact Information\Git Hub\Masterarbeit\LaTeX\Chapters/Bileve
 l_Application.aux")
 ("D:\Annika\Uni\10. Semester\Masterarbeit\Proximal Bundle Inexact Information\Git Hub\Masterarbeit\LaTeX\Chapters/Append
-ix.aux")) )
+ix.aux"))
+
+LaTeX Warning: There were undefined references.
+
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
+ )
 (\end occurred inside a group at level 1)
 
 ### simple group (level 1) entered at line 1061 ({)
 ### bottom level 
 Here is how much of TeX's memory you used:
- 20616 strings out of 493922
- 433100 string characters out of 3142101
- 550962 words of memory out of 3000000
- 23361 multiletter control sequences out of 15000+200000
- 99156 words of font info for 77 fonts, out of 3000000 for 9000
+ 20678 strings out of 493922
+ 435168 string characters out of 3142101
+ 550900 words of memory out of 3000000
+ 23384 multiletter control sequences out of 15000+200000
+ 98837 words of font info for 76 fonts, out of 3000000 for 9000
  841 hyphenation exceptions out of 8191
- 64i,23n,67p,773b,12237s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 64i,23n,67p,828b,12237s stack positions out of 5000i,500n,10000p,200000b,50000s
 
-Output written on Bundle_methods_for_nonsmooth_nonconvex_problems_with_inexact_information.dvi (108 pages, 399644 bytes)
+Output written on Bundle_methods_for_nonsmooth_nonconvex_problems_with_inexact_information.dvi (109 pages, 397240 bytes)
 .

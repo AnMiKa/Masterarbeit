@@ -1,15 +1,15 @@
 \section{Application to Model Selection for Primal SVM}
 \label{sec_bilevel}
 
-\textcolor{red}{Skalarprodukt anpassen, Vektoren nicht fett oder neue definition, notation, \(\lambda \in \Lambda\) einfugen\\
-Vektoren (in gesamter Arbeit) in runden Klammern}
+%\textcolor{red}{Skalarprodukt anpassen, Vektoren nicht fett oder neue definition, notation, \(\lambda \in \Lambda\) einfugen\\
+%Vektoren (in gesamter Arbeit) in runden Klammern}
 
 \subsection{Introduction}
 
 In this part of the thesis the nonconvex inexact bundle algorithms \ref{sec_nonconv_inex}.1 and \ref{sec_variable_metric}.1 is applied to the problem of model selection for \emph{support vector machines} (SVMs) solving classification tasks.
 It relies on a bilevel formulation proposed by Kunapuli in \cite{Kunapuli2008} and Moore et al. in \cite{Moore2011}.
 
-A natural application for the inexact bundle algorithm is an optimization problem where the objective function value and subgradient can only be computed by numerical approximation. This is for example the case in bilevel optimization.
+A natural application for the inexact bundle algorithm is an optimization problem where the objective function value and the subgradient can only be computed by numerical approximation. This is for example the case in bilevel optimization.
 %If this objective function is iteratively optimized, the function value i never exact. But by the stopping condition it is (often???) possible to have the needed error bound on the function value (what about the gradient???). (Comment on asymptotical exactness?)
 
 %A general bilevel problem can be formulated as 
@@ -39,7 +39,7 @@ The second approach is the implicit one. Here the lower level problem is solved 
 Obviously if the inner level problem is solved numerically, the solution cannot be exact. Additionally the \emph{solution map} \( S(C) = \{w\in \R^k \mid w\) solves the lower level problem for a given \(C\}\), can be nondifferentiable \cite{Outrata1998} and since elements of  the solution map are plugged into the outer level objective function in the implicit approach, the outer level function then becomes nonsmooth itself. This is why the inexact bundle algorithm seems a natural choice to tackle these bilevel problems. 
 
 Moore et al. use the implicit approach in \cite{Moore2011} for support vector regression. However they use a gradient descent method which is not guaranteed to stop at an optimal solution.
-In \cite{Moore2010a} it is also suggested to use the nonconvex exact bundle algorithm of Fuduli et al. \cite{Fuduli2004a} for solving the bilevel regression problem. This method allows for nonsmooth inner problems and can theoretically solve some of the issues of the gradient descent method. It ignores however, that the objective function values can only be calculated approximately. A fact which is not addressed in Fuduli's algorithm.
+In \cite{Moore2010a} it is suggested to use the nonconvex exact bundle algorithm of Fuduli et al. \cite{Fuduli2004a} for solving the bilevel regression problem. This method allows for nonsmooth inner problems and can theoretically solve some of the issues of the gradient descent method. It ignores however, that the objective function values can only be calculated approximately. A fact which is not addressed in Fuduli's algorithm.
 
 %\subsection{Notation and Expressions}
 
@@ -47,7 +47,7 @@ In \cite{Moore2010a} it is also suggested to use the nonconvex exact bundle algo
 
 \subsection{Notation}
 
-As short remark on the notation in this chapter is required.
+A short remark on the notation in this chapter is required.
 
 Due to standard notation in the field of SVM, the variables \(x\) and \(y\) are used in this chapter in a different manner than before.
 %In the setting of bilevel problems as used in (\ref{bilevel}) \(x \in X \subset \R^n\) and \(y \in \R^k\) are the optimization variables of the bilevel problem.
@@ -432,8 +432,6 @@ Obviously this bilevel problem contains the usual support vector classification 
 
 \subsection{Solution with the Inexact Bundle Algorithm}
 
-\textcolor{red}{more introduction?}
-
 The bilevel problem (\ref{bilevel_fin}) derived above is to be solved with the two bundle algorithms \ref{sec_nonconv_inex}.1 and \ref{sec_variable_metric}.1.
 This requires having in every iteration an approximate value of the upper level objective function and an approximate subgradient of the upper level objective.
 
@@ -778,14 +776,14 @@ Proving regularity for the particular instance (\ref{bilevel_fin}) of a bilevel 
 In this section the two bundle algorithms \ref{sec_nonconv_inex}.1 and \ref{sec_variable_metric}.1 are applied to solve the classification tasks described above.
 The algorithms are compared to the MATLAB routines \texttt{fminsearch} and \texttt{fminbnd} in the one dimensional case and to \texttt{fmincon} for the multiGroup application.
 
-\textcolor{red}{more}
+%\textcolor{red}{more}
 
 \subsubsection{The Data}
-There are five data sets used from which two are real world data sets available on the UCI Machine Learning repository \cite{Lichman2013} and two synthetic data sets.
+There are five data sets used. Two of them are real world data sets available on the UCI Machine Learning repository \cite{Lichman2013} and three synthetic data sets.
 The synthetic data sets were particularly designed for the optimization of the hyper-parameter \(C\).
 
-A correct choice of the hyper-parameter is especially important in the case were the data of the different folds is especially sensitive to overfitting.
-This is the case in the following situation: The data of each of the different folds in nearly separable, but only with a rather small margin. Additionally, the optimal hyperplanes for the different folds have different directions from the optimal hyperplane, because they are only fitted to minimize the error on the training set.
+A correct choice of the hyper-parameter is particularly important in the case were the data of the different folds is especially sensitive to overfitting.
+This is the case in the following situation: The data of each of the different folds is nearly separable, but only with a rather small margin. Additionally, the optimal hyperplanes for the different folds have different directions from the optimal hyperplane, because they are only fitted to minimize the error on the training set.
 
 This situation is shown in the figures below for the synthetic data set \texttt{synsmall}.
 
@@ -804,31 +802,33 @@ This situation is shown in the figures below for the synthetic data set \texttt{
 			\includegraphics[width=\textwidth]{Pictures/Plots/Fold_3.eps}
 	\end{subfigure}
 
-	\caption[Overfitting]{The figure on the top left shows the \texttt{synsmall} data set. The solid line is the optimal decision line, with the margin indicated as dotted lines on either side of it. The unregularized decision boundaries for the single folds are drawn with dashed lines. \\
-	The other three plots show the training data corresponding to the first to third fold of the \texttt{synsmall} set and the corresponding unregularized decision lines.}
+	\caption[Overfitting]{The figure on the top left shows the \textup{\texttt{synsmall}} data set. The solid line is the optimal decision line, with the margin indicated as dotted lines on either side of it. The unregularized decision boundaries for the single folds are drawn with dashed lines. \\
+	The other three plots show the training data corresponding to the first to third fold of the \textup{\texttt{synsmall}} set and the corresponding unregularized decision lines.}
 	\label{fig_synsmall}
 \end{figure}
 
 It can be seen, that the data sets of the different folds are all linearly separable, but only for very specific hyperplanes with a small margin.
 These hyperplanes can be found by leaving the regularization term \(\frac{1}{2}\Vert \tilde{w}\Vert\) out of the objective function.
-It can also be seen, that the optimal hyperplane found if \(C\) is chosen optimally is only similar to two of the dashed lines. The line found for the second fold is very different to those.
+It can also be seen, that the optimal hyperplane found if \(C\) is chosen optimally, is similar to only two of the dashed lines. The line found for the second fold is very different to those.
 
-The situation shown in the plots can also be expressed n numbers. Remember that the margin is proportional to the inverse of the norm of the vector \(w\). The matrix containing the vectors for the different folds is given as
+The situation shown in the plots can also be expressed in numbers. Remember that the margin is proportional to the inverse of the norm of the vector \(w\). The matrix containing the vectors for the different folds is given as
 
 \[ W = \begin{pmatrix} 116.7223 & 10.2238 & 26.9331 \\
-                      -103.4875 & -19.8813& -26.6014\end{pmatrix} \text{ and the bias } b = \begin{pmatrix} 20.2872 & 0.7818 & 0.6791	\end{pmatrix}. \]
+                      -103.4875 & -19.8813& -26.6014\end{pmatrix}\]
+
+and the bias as \(b = ( 20.2872, 0.7818, 0.679)\).
 											
 One can already see that the norms of the vectors are rather large: The norms are \(\textup{norm}(w^1)= 155.9928\), \(\textup{norm}(w^2)= 22.3560\) and \(\textup{norm}(w^1)= 37.8554\) for \(W = (w^{1},w^2,w^3)\).
 Compare this to the optimal plane \((w,b)\): Here \(w = (2.7842, -2.9033)\), \(b =0.2239\) and \(\textup{norm}(w)=4.0226\).
 
-For linear classification, the danger of overfitting is rather small. This is also indicated that from a group of different real world data sets only the two used here provided better results with the regularization term than without it.
+For linear classification, the danger of overfitting is rather small. This is also indicated by the fact that from a group of different real world data sets, only the two used here provide better results with the regularization term than without it.
 However, the chance of overfitting is higher the richer the class of functions is, that is used to separate the two classes \cite[p. 2-4]{Kunapuli2008}. This means, that in case of nonlinear classification overfitting can become a problem. 
 There is also a third situation where overfitting can occur more often. This is when the data set consists of relatively little data compared to the number of features. In this case overfitting can happen more often already for linear classification, because the high dimensional space in which the hyperplane lies offers more degrees of freedom to fit the plane to the data.
 
-The two real world data sets used in this thesis are the Breast Cancer Wisconsin data set and Johns Hopkins University Ionosphere database. We refer to them as \texttt{cancer} and \texttt{ionosphere} respectively.
+The two real world data sets used in this thesis are the Breast Cancer Wisconsin data set and Johns Hopkins University Ionosphere database. We refer to them as \texttt{cancer} and \texttt{ionosphere}, respectively.
 The three two dimensional synthetic data sets are called \texttt{synbox}, \texttt{synsmall} and \texttt{synbig}.
 
-For the \texttt{synbox} data set, two groups of data were uniformly distributed over a two boxes of size \(4\times2\). For the four different folds the boxes are located differently: In the first fold, the boxes are positioned directly above each other, without any overlapping. This means that the data in this fold is linearly separable.
+For the \texttt{synbox} data set, two groups of data were uniformly distributed over two boxes of size \(4\times2\). For the four different folds the boxes are located differently: In the first fold, the boxes are positioned directly above each other, without any overlapping. This means that the data in this fold is linearly separable.
 For the second to fourth fold, the upper box  is gradually pushed down 'into' the lower box, such that the data is not linearly separable any more.
 
 For the \texttt{synsmall} and the \texttt{synbig} data sets,  the two groups are normally distributed in two dimensions with mean being \(\mu^1 = (2,3)^{\top}\)for the first group and \(\mu^2 = (-1,9)^{\top}\) for the second group. The covariance is given by
@@ -836,7 +836,7 @@ For the \texttt{synsmall} and the \texttt{synbig} data sets,  the two groups are
 The data set \texttt{synbig} is a very large data set to test the performance of the different algorithm when handeling such data sets.
 For both sets the different folds are chosen in a way that they are separable but the separating hyperplane does not give a good generalization.
 
-All data sets were standardized to have a zero norm and unit standard deviation. Then all data sets were split up into three folds of equal size. It is shown in \cite[p. 47]{Kunapuli2008} that this is a reasonable number of folds.
+All data sets were standardized to have a zero mean and unit standard deviation. Then all data sets were split up into three folds of equal size. It is shown in \cite[p. 47]{Kunapuli2008} that this is a reasonable number of folds.
 The real world data sets were randomly put into the folds. For the synthetic data sets the folds were selected as described above. The number of instances and number of features of every data set is given in Table \ref{tab_set_props}. 
 
 \begin{center}
@@ -897,7 +897,7 @@ Finally the overall optimization variable \(C\) is constrained component wise to
 
 
 The bundle methods \ref{sec_nonconv_inex}.1 and \ref{sec_variable_metric}.1 are compared to different MATLAB routines.
-These only work with the function values and do not have to have a derivative or subgradient provided by the user.
+These only work with the function values and do not need to have a derivative or subgradient provided by the user.
 For every evaluation of the upper level objective function first the \(T\) lower level problems are solved. Then the resulting hyperplanes \(\tilde{w}^t\), \(t=1,...,T\) are plugged into the upper level objective to calculate the loss.
 
 All calculations were done on an Intel i5 2.6~GHz with four kernels.
@@ -906,7 +906,7 @@ All calculations were done on an Intel i5 2.6~GHz with four kernels.
 \subsubsection{One-dimensional Optimization}
 
 First the algorithms are tested for the one-dimensional case.
-Here the bundle methods are compared to the \texttt{fminbnd} algorithm \texttt{fminsearch}.
+Here the bundle methods are compared to the \texttt{fminbnd} algorithm \texttt{fminsearch}. Both can solve one-dimensional optimization problems.
 It has to be remarked here, that the \texttt{fminsearch} routine does not accept any bounds on the optimization variable. Strictly speaking it could thus give negative values for \(C\), which are infeasible. This did however not happen in any of the experiments.
 
 In the one dimensional case it is possible to plot the objective functions values of the bilevel problem. The plots are given in Figure \ref{fig_C_vs_err}.
@@ -928,56 +928,186 @@ Different aspects of the algorithms are compared for various choices  of the sta
 
 At first the behavior of the different algorithms regarding differently scaled upper level objective functions and the sensitivity of the different methods towards the starting value are analyzed.
 
-The starting values are taken from the set \( C_0 \in \{10^{-5},0.01,1,20,100\}\) respectively. The \texttt{fminbnd} algorithm does not need any starting value.
-Compared are the unscaled version of the hingequadloss and a scaled version with scaling factor 100.
+The starting values \(C_0 \) are taken from the set \(\{10^{-5},0.01,1,20,100\}\). The \texttt{fminbnd} algorithm does not need any starting value.
+In Figure \ref{fig_C_vs_err} it can be seen, that especially for the sets \texttt{synsmall} and \texttt{synbig} the objective functions are very flat. In order to increase the accuracy, the objective functions are scaled in the following experiment.
+We compare the unscaled version of the hingequadloss and a scaled version with scaling factor 100.
 The stopping tolerance of all methods is set to \(\texttt{tol} = 10^{-6}\).
-The results are presented in tables \textcolor{red}{...}
 
-For this comparison the lower level problem as well as the adjoint problem for the bundle methods are solved with a tolerance of \(10^{-15}\) for the constraints and optimality condition.
+For this comparison the lower level problem as well as the adjoint problem of the bundle methods are solved with a tolerance of \(10^{-15}\) for the constraints and optimality condition.
 Both problems are solved with the MATLAB QP solver \texttt{quadprog} which stops after meeting the tolerance or after a limit of 1000 iterations is reached.
 
-\textcolor{red}{tables (eine Auswahl)}
+\begin{figure}[ht]
+	\begin{subfigure}{0.49\textwidth}
+		\includegraphics[width=\textwidth]{Pictures/Plots/Scal1_ll-15C.eps}%
+	\end{subfigure}
+	\begin{subfigure}{0.49\textwidth}
+		\includegraphics[width=\textwidth]{Pictures/Plots/Scal100_ll-15C.eps}%
+	\end{subfigure}
+	\caption[Minimizer for different starting values and scalings]{The plots show the minimizers found by \textup{\texttt{fminseach}} and the two bundle methods for different starting values on the different data sets. For each data set, the lines next to each other show the result for the starting values \(C_0 = (10^{-5},0.01,1,20,100)\).\\
+	The Plot on the left shows the situation for the unscaled objective function. For the plot on the right the objective is scaled by 100.\\
+	The first three data sets are measured with the scale on the left, the other two data sets with the scale on the right.}%
+	\label{fig_ll15_sc1100_C}%
+\end{figure}
 
-The MATLAB methods \texttt{fminsearch} and \texttt{fminbnd} solved the problem very accurately and reached the same values to the order depicted here, this is why the results are presented in only one row.
-One can see, that \texttt{fminsearch} arrived at the same minimizer for every starting value. It needed however often more time than \texttt{fminbnd}. This is particularly notable for the data set \texttt{synbig}, where \texttt{fminbnd} needs less than half of the solution time of \texttt{fminsearch}.
-Both algorithm reach the minimizers that can be identified from the plots to an accuracy of about \(10^{-6}\). For the \texttt{synsmall} data set they find the global minimum instead of the local one.
+\begin{figure}[ht]
+	\begin{subfigure}{0.49\textwidth}
+		\includegraphics[width=\textwidth]{Pictures/Plots/Scal1_ll-15f.eps}%
+	\end{subfigure}
+	\begin{subfigure}{0.49\textwidth}
+		\includegraphics[width=\textwidth]{Pictures/Plots/Scal100_ll-15f.eps}%
+	\end{subfigure}
+	\caption[Minimium for different starting values and scalings]{The plots show the minimal value found by \textup{\texttt{fminseach}} and the two bundle methods for different starting values on the different data sets. For each data set, the lines next to each other show the result for the starting values \(C_0 = (10^{-5},0.01,1,20,100)\).\\
+	The Plot on the left shows the situation for the unscaled objective function. For the plot on the right the objective is scaled by 100.\\
+	The first three data sets are measured with the scale on the left, the other two data sets with the scale on the right.}%
+	\label{fig_ll15_sc1100_f}%
+\end{figure}
 
-Both bundle algorithms performed rather badly compared to the MATLAB routines. Although the bundle algorithms can use subgradient information which the MATLAB routines lack.
-It can be observed, that for the \texttt{cancer} data set and the \texttt{synsmall} data set, the bundle methods solve the task faster, but the solutions are never as exact as the ones obtained by the MATLAB solvers.
+In figures \ref{fig_ll15_sc1100_C} and \ref{fig_ll15_sc1100_f} the minimizers and function values found for the different starting values and scaling factors are depicted for the different solution mehtods.
+It can be observed from the plots, that \texttt{fminsearch} finds the same minimizers for all starting values and both scaling functions.
+For the two bundle methods, it depends on the starting value, whether a good minimizer is computed. For the unscaled version of the objective function, the bundle methods often stop without any calculations, reporting the starting value as optimal. This happens more often for the larger starting values 20 and 100.
+For the \texttt{synsmall} data set it depends on the starting value, weather the local or the global minimum is found.
+
+For the starting value value \(C_0 =1\) and the scaling factor 100 decent results are achieved.
+Hence for this parameter combination the results of all four methods used, are presented more accurately in table \ref{scal_100_ll15}.
+
+\begin{table}[ht]%
+\centering
+\begin{tabular}{|l|c|c|c|c|c|}
+	\hline
+	Data set &  & Bundle \ref{sec_nonconv_inex}.1 & Bundle \ref{sec_variable_metric}.1 & \texttt{fminsearch/bnd} \\
+	\hline
+	\texttt{cancer} & \(C_{min}\) & 0.0603 & 0.0603 & 0.0604\\
+		& \(f\) value & 11.9644 & 11.9644 & 11.9644\\
+		& time & 5 & 13 & 4/2\\
+		\hline
+	\texttt{ionosphere} & \(C_{min}\) & 0.0281 & 0.0238 & 0.0236\\
+		& \(f\) value & 43.5899 & 43.5242 & 43.5241\\ 
+		& time & 2284 & 1729 & 6/30\\
+		\hline
+	\texttt{synbox} & \(C_{min}\) & 0.1592 & 0.1535 & 0.0135\\
+		& \(f\) value & 60.4899 & 60.2966 & 51.7078 \\
+		& time & 255 & 331 & 26/549 \\
+		\hline
+	\texttt{synsmall} &  \(C_{min}\) & 5.0112 & 5.0228 & 6.6372\\
+		& \(f\) value & 1.6520 & 1.6520 & 1.6470 \\
+		& time & 4 & 6 & 11/7\\
+		\hline
+	\texttt{synbig} & \(C_{min}\) & 16.4743 & 16.4965 & 16.4595 \\
+		& \(f\) value & 0.0193 & 0.0193 & 0.0193\\
+		& time & 593 & 595 & 673/306\\
+		\hline
+\end{tabular}
+\caption[Minimizer, function value and computation time for accurately solved subproblems]{This table shows the minimizer, corresponding minimal function value and the needed computation time of the four tested routines \textup{\texttt{fminsearch}}, \textup{\texttt{fminbnd}}, algorithm \ref{sec_nonconv_inex}.1 and \ref{sec_variable_metric}.1.\\
+The starting value is \(C_0 = 1\) and the used objective function is scaled with 100.}
+\label{scal_100_ll15}
+\end{table}
+
+
+One can see that the MATLAB methods \texttt{fminsearch} and \texttt{fminbnd} solve the problem very accurately.% and reached the same values to the order depicted here, this is why the results are presented in only one row.
+The routine \texttt{fminsearch} arrives at the same minimizers as \texttt{fminbnd}. Sometimes it needs however more computation time. This is particularly notable for the data set \texttt{synbig}, where \texttt{fminbnd} needs less than half of the solution time of \texttt{fminsearch}.
+Both algorithm reach the minimizers that can be identified from the plots to an accuracy of about \(10^{-6}\). For the \texttt{synsmall} data set they find the global minimum, not the local one.
+
+Both bundle algorithms perform rather badly compared to the MATLAB routines. Although the bundle algorithms can use subgradient information which the MATLAB routines lack.
+It can be observed, that for the \texttt{synsmall} data set, the bundle methods solve the task faster, but the solutions are not as exact as the ones obtained by the MATLAB solvers.
 For the \texttt{synbig} data set, all algorithms need considerably more time solving the optimization problem than for the other data sets.
 A reason for this is, that the lower level problem needs more solution time due to its increased size.
 As also the adjoint problem increases in size (the constraints of both, the lower level and the adjoint problem, scale with the number of data points) the bundle methods need more time solving the bilevel program.
 It can be seen, that the approach to find the subgradient via the adjoint problem is not appropriate for larger data sets.
 
-In terms of accuracy the results achieved for the different starting values vary a lot more than for the MATLAB solvers. Often for more than half of the chosen starting values the methods even stopped after the first step.
-For the \texttt{synsmall} data set it depends on the starting value, weather the local or the global minimum is found.
-
-The bundle algorithms \ref{sec_nonconv_inex}.1 and \ref{sec_variable_metric}.1 show similar results. Algorithm  \ref{sec_nonconv_inex}.1 needs slightly less steps and therefore also less time than algorithm  \ref{sec_variable_metric}.1 for most of the optimization tasks. Still the values are comparable. 
-The method \ref{sec_variable_metric}.1 is a bit more stable in the results for the minimizer \(C_{min}\). Both algorithms reach an accuracy of about \(10^{-3}\) of the minimizer compared to the MATLAB routines.
-
-For the objective function scaled with 100 both bundle algorithms stop less often after the first step. On the other hand for this scaling there are tree times, when a bundle algorithm stopped due to the number of steps. This does not happen with the unscaled objective.
-The accuracy of the optimal found function value lies around \(10^{-6}\) (\(10^{-4}\) for the objective scaled with 100) if a correct minimizer was found.
-
-The convexification parameter \(\eta_k\) is assumed to stay bounded in \cite[p. 11]{Hare2016}. Although all of the objective functions have a ``generally convex'' form, the maximum \(\eta_k\) occurring in the algorithms is of order \(10^{6}\). Generally \(\eta_k\) seems to reach higher values for the scaled objective function.
-
-Next we compare different stopping tolerances of the bundle algorithm.
-For this comparison only the starting value \(C_0 = 1\) and the scaled objective function are taken, as this combination provided decent results in the above experiments.
-The lower level and adjoint problems are still solved to an accuracy of \(10^{-15}\). The accuracy of the overall method is increased to \(10^{-7}\) and \(10^{-10}\).
-
-For an accuracy of \(10-7\) there is almost no difference to the results from above. The bundle algorithms need up to one step more for the smaller data sets and up to four steps more for the \texttt{synbig} set to reach the desired tolerance. For the latter set the difference in the minimal \(C\) is of order \(10^{-2}\), but the resulting difference in the function value amounts only to \(10^{-8}\).
-The results in \(C\) and the function value are exactly the same for the smaller dater sets. 
-
-\textcolor{red}{The full results can be found in table ... in the Appendix???}
+The bundle algorithms \ref{sec_nonconv_inex}.1 and \ref{sec_variable_metric}.1 show similar results in terms of computation time. Here the second order information used by algorithm \ref{sec_variable_metric}.1 has no measurable influence.
+Both algorithms reach an accuracy of about \(10^{-3}\) of the minimizer compared to the MATLAB routines. The accuracy of the optimal found function value lies around \(10^{-4}\) for the objective scaled with 100 if a correct minimizer is found.
 
 
+%. Algorithm  \ref{sec_nonconv_inex}.1 needs slightly less steps and therefore also less time than algorithm  for most of the optimization tasks. Still the values are comparable. 
+%The method \ref{sec_variable_metric}.1 is a bit more stable in the results for the minimizer \(C_{min}\). 
+
+%For the objective function scaled with 100 both bundle algorithms stop less often after the first step. On the other hand for this scaling it occurs tree times, that a bundle algorithm stops due to the number of steps. This does not happen with the unscaled objective.
+
+The convexification parameter \(\eta_k\) is assumed to stay bounded in \cite[p. 11]{Hare2016}. Although all of the objective functions have a ``generally convex'' form, the maximum \(\eta_k\) occurring in the algorithms is of order \(10^{6}\). Generally \(\eta_k\) seems to reach higher values for the scaled objective function as it can be seen in Table \ref{scal_100_ll15}.
+
+It is now tested, if a lower stopping tolerance of the bundle methods can increase their accuracy.
+For this experiment only the starting value \(C_0 = 1\) and the scaled objective function are taken.
+The lower level and adjoint problems are still solved to an accuracy of \(10^{-15}\). The accuracy of the overall method is increased from \(10^{-6}\) to \(10^{-10}\).
+
+Interestingly it can be observed, that for algorithm \ref{sec_nonconv_inex}.1 the minimizer that is found by the algorithm only changes for the \texttt{synbig} data set. For all other sets, the exact same results are found.
+This is not the case for method \ref{sec_variable_metric}.1. Here better results are found for the data sets \texttt{synbox}, \texttt{synsmall} and \texttt{synbig}.
+However the effective accuracy of the function value does not change compared to the case when the stopping tolerance is \(10^{-6}\). The extra computation time needed for the more exact case is comparatively low.
+We conclude from that, that for most of the data sets the calculations of both methods (\ref{sec_nonconv_inex}.1 and \ref{sec_variable_metric}.1) are already much below the tolerance of \(10^{-6}\) when the algorithms stop. This means, that no, or only a few more calculations are  needed to meet also a smaller stopping tolerance.
+All in all these insights suggest, that it is not possible, to achieve as exact solutions of the bilevel problems as the MATLAB procedures do with the bundle algorithms, even if the stopping tolerance is lowered.
+%For an accuracy of \(10^{-7}\) there is almost no difference to the results from above. The bundle algorithms need up to one step more for the smaller data sets and up to four steps more for the \texttt{synbig} set to reach the desired tolerance. For the latter set the difference in the minimal \(C\) is of order \(10^{-2}\), but the resulting difference in the function value amounts only to \(10^{-8}\).
+%The results in \(C\) and the function value are exactly the same for the smaller dater sets. 
 
 Finally the performance of the methods for different levels of accuracy is tested.
 To do this, algorithms \ref{sec_nonconv_inex}.1 and \ref{sec_variable_metric}.1 run with the lower level and adjoint problem only solved inaccurately.
 The different tolerances that are used are \(10^{-4}\) and \(10^{-8}\)  
 
-The other parameters are set in a way that achieved the best results in the comparison before.
-Precisely this means that the objective function is scaled by 100 and the bundle methods start with value \(C_0 = 1\). 
+\begin{figure}[ht]
+	\begin{subfigure}{0.49\textwidth}
+		\includegraphics[width=\textwidth]{Pictures/Plots/Scal100_llad-8C.eps}%
+	\end{subfigure}
+	\begin{subfigure}{0.49\textwidth}
+		\includegraphics[width=\textwidth]{Pictures/Plots/Scal100_llad-4C.eps}%
+	\end{subfigure}
+	\caption[Minimizer for different stopping tolerances of the lower level and adjoint program]{The Plots show the minimizers that are found for different stopping tolerances of the adjoint and lower level program.\\
+	The black bar over each set shows the result that is achieved with the \textup{\texttt{fminbnd}} method if the lower level problem is solved to a tolerance of \(10^{-15}\). The pink stem shows the result of \textup{\texttt{fminbnd}} for a tolerance of the lower level of \(10^{-8}\) in the left plot and \(10^{-4}\) in the right plot. The four following stems for each data set show the results of the combinations (from left to right): Lower level and adjoint problem solved for tolerance \(10^{-15}\); lower level solved for \(10^{15}\), adjoint for \(10^{-8}, 10^{-4}\); lower level solved for \(10^{-8},10^{-4}\) adjoint for \(10^{-15}\); lower level and adjoint problem solved for \(10^{-8},10^{-4}\)\\
+	The first three data sets are measured with the scale on the left, the other two data sets with the scale on the right.}%
+	\label{fig_llad84C}%
+\end{figure}
 
+\begin{figure}[ht]
+	\begin{subfigure}{0.49\textwidth}
+		\includegraphics[width=\textwidth]{Pictures/Plots/Scal100_llad-8f.eps}%
+	\end{subfigure}
+	\begin{subfigure}{0.49\textwidth}
+		\includegraphics[width=\textwidth]{Pictures/Plots/Scal100_llad-4f.eps}%
+	\end{subfigure}
+	\caption[Minimal value for different stopping tolerances of the lower level and adjoint program]{The Plots show the minimial function values that are found for different stopping tolerances of the adjoint and lower level program.\\
+	The black bar over each set shows the result that is achieved with the \textup{\texttt{fminbnd}} method if the lower level problem is solved to a tolerance of \(10^{-15}\). The pink stem shows the result of \textup{\texttt{fminbnd}} for a tolerance of the lower level of \(10^{-8}\) in the left plot and \(10^{-4}\) in the right plot. The four following stems for each data set show the results of the combinations (from left to right): Lower level and adjoint problem solved for tolerance \(10^{-15}\); lower level solved for \(10^{15}\), adjoint for \(10^{-8}, 10^{-4}\); lower level solved for \(10^{-8},10^{-4}\) adjoint for \(10^{-15}\); lower level and adjoint problem solved for \(10^{-8},10^{-4}\).\\
+	The first three data sets are measured with the scale on the left, the other two data sets with the scale on the right.}%
+	\label{fig_llad84f}%
+\end{figure}
+
+The other parameters are set in a way that achieved good results in the comparison before.
+Precisely this means that the objective function is scaled by 100 and the bundle methods start with value \(C_0 = 1\). 
+The found minimizers and minimal function values for the different combination of tolerances are depicted in figures \ref{fig_llad84C} and \ref{fig_llad84f} respectively.
+
+What can be seen is, that the solution tolerance of the adjoint problem does not any influence on the accuracy of the bundle algorithms. The minimizer and the function value basically stay the same, no matter if the adjoint problem is solved for an accuracy of \(10^{-4}\), \(10^{-8}\) or \(10^{-15}\).
+The reason for this is, that the adjoint problem calculates the subgradient. It could already be seen in section \ref{sec_num_test_ferr}, that inexactness of the subgradient has a relatively small influence on the overall solution.
+
+The plots also show, that the solution accuracy of the lower level can have big influence on the value of the minimizer. This is also true for the results found by \texttt{fminbnd}.
+This results from the little change in the objective function values. It can be observed, that although the value of the minimizer is sometimes far away from the correct one, the resulting function value is still near the optimum.
+
+To summarize this section it can be said, that in the one-dimensional case, the MATLAB routines outplay the bundle methods. The algorithm \texttt{fminbnd} finds very accurate results, often in less time than the bundle methods. Additionally it does not need a starting value.
+We can conclude, that in the one-dimensional case, the bundle algorithms work for solving the presented problem, but there are better options available.
+
+\subsubsection{Multi-dimensional Optimization}
+
+In the multigroup approach, the data set is partitioned into different groups, that are each weighted with their own parameter \(C_g\).
+To calculate the optimal value of all these parameter results in a multi-dimensional optimization problem.
+
+In this section the bundle algorithms \ref{sec_noconv_inex}.1 and \ref{sec_variable_metric}.1 are compared to the matlab method \texttt{fmincon}. This method is suitable for the solution of a very wide range of constrained multi-dimensional optimization problems. They can be nonlinear and do not have to be convex.
+
+The following data sets wre used for the comparison:
+
+\begin{table}%
+\begin{tabular}{lcr}
+
+\end{tabular}
+\caption[]{}
+\label{}
+\end{table}
+
+\textcolor{red}{data sets\\
+Parameters: starting value, stopping condition \\
+ll, ad solution \\
+}
+
+The methods are compared with the following parameters: The starting value 
+
+
+
+%The computation time becomes lower as the tolerances increase, because the subproblems take less time to be computed.
+%It can be seen, that method \ref{sec_nonconv_inex}.1 is generally a bit slower, than method \ref{sec_variable_metric}.1.
 
 
 %For all algorithms the accuracy to which the lower level problem is solve is \textcolor{red}{accuracy/accuracies???} for the constraints and optimality. For the bundle algorithm the adjoint problem is solved with an accuracy of \textcolor{red}{accuracy/accuracies???}.
@@ -986,22 +1116,26 @@ Precisely this means that the objective function is scaled by 100 and the bundle
 %\textcolor{red}{Weglassen? (ganze Funktion?)\\
 %Note that the \texttt{fminsearch} method cannot be provided with any bounds. This means, that when optimizing the given bilevel problem with this method, nonpositive values for \(C\) can occur which is not allowed in theory. This happend however in none of the tests done in this thesis.}.
 
-Parameters of the algorithms:
-\begin{itemize}
-	\item stopping condition bundle algo: \(10^{-?}\) or steps: 
-	\item stopping lower level: 
-	\item stopping adjiont problem:
-	\item starting points
-	\item scaling of the objective function
-\end{itemize}
-
-
-\subsubsection{???}
 
 
 
-\textcolor{red}{Ergebnisse in Tabellenform und beschreiben, was man sieht\\
-description of starting values and remark that \texttt{fminbnd} does not need a starting value}
+
+%Parameters of the algorithms:
+%\begin{itemize}
+	%\item stopping condition bundle algo: \(10^{-?}\) or steps: 
+	%\item stopping lower level: 
+	%\item stopping adjiont problem:
+	%\item starting points
+	%\item scaling of the objective function
+%\end{itemize}
+%
+%
+%\subsubsection{???}
+%
+%
+%
+%\textcolor{red}{Ergebnisse in Tabellenform und beschreiben, was man sieht\\
+%description of starting values and remark that \texttt{fminbnd} does not need a starting value}
 
 
 
@@ -1025,166 +1159,113 @@ description of starting values and remark that \texttt{fminbnd} does not need a 
 %
 %
 %
-\textbf{Gliederung:}\\
-Einleitung\\
-%Datensaetze beschreiben\\
-%erklaerung welche Art von Datensaetzen sinnvoll waere und dass nichtlineare Trennung ``besser'' -> mit Bildern von Daten und optimalem w???\\
-was genau gemacht wurde (worauf gerechnet, Zielfunktionen,...) 
--> mit bildern der Zielfunktionen (Plots)\\
-Auswertung als Tabellen
+%\textbf{Gliederung:}\\
+%Einleitung\\
+%%Datensaetze beschreiben\\
+%%erklaerung welche Art von Datensaetzen sinnvoll waere und dass nichtlineare Trennung ``besser'' -> mit Bildern von Daten und optimalem w???\\
+%was genau gemacht wurde (worauf gerechnet, Zielfunktionen,...) 
+%-> mit bildern der Zielfunktionen (Plots)\\
+%Auswertung als Tabellen
+
+
+%
+%Plots
+%Plots, that I want (red) / have (green)\\
+%\textcolor{green}{Plots der Monogroup Datensaetze\\
+%plot von Box?SynSmall? mit w um Spezifisches zu zeigen fuer sinnvolle regularisierung}\\
+%\textcolor{red}{plot mit zwei gruppen ?}
 
 
 
-Plots
-Plots, that I want (red) / have (green)\\
-\textcolor{green}{Plots der Monogroup Datensaetze\\
-plot von Box?SynSmall? mit w um Spezifisches zu zeigen fuer sinnvolle regularisierung}\\
-\textcolor{red}{plot mit zwei gruppen ?}
 
 
+%results
+%\textcolor{red}{Hinweise: fminbd ohne Startwert\\
+%wie Funktionen funktionieren\\
+%boundaries etc...\\
+%suche bei plots noch mal min genauer raus \\
+%beste Darstellungen ueberlegen}
+
+%\begin{table}%
+%\begin{tabular}{|l|c|c|c|c|c|}
+	%\hline
+	%Data set & \(C_0\) & Bundle \ref{sec_nonconv_inex}.1 & Bundle \ref{sec_variable_metric}.1 & \texttt{fminsearch/bnd} \\
+	%\hline
+	%\texttt{cancer} & \(10^{-5}\) & 0.0601 & 0.0607 & 0.0604 \\
+		%& 0.01 & 0.0601 & 0.0602 &  \\
+		%& 1 & 0.0604 & 0.0604 &  \\
+		%& 20 & 0.0606 & 0.0600 &  \\
+		%& 100 & 100 & 100 &  \\
+		%\hline
+	%\texttt{ionosphere} & \(10^{-5}\) & \(10^{-5}\) & \(10^{-5}\) & 0.0236 \\
+		%& 0.01 & 0.0235 & 0.0237 & \\
+		%& 1 & 0.0245 & 0.0236 &  \\
+		%& 20 & 0.0246 & \(10^{-5}\) &  \\
+		%& 100 & \(10^{-5}\) & \(10^{-5}\) & \\
+		%\hline
+	%\texttt{synbox} & \(10^{-5}\) & \(10^{-5}\) & \(10^{-5}\) &  \\
+		%& 0.01 & 0.0135 & 0.0135 &  \\
+		%& 1 & 0.0160 & 0.0135 &  \\
+		%& 20 & 20 & 20 &  \\
+		%& 100 & 100 & 100 &  \\
+		%\hline
+	%\texttt{synsmall} & \(10^{-5}\) & 5.0215 & 4.8053 & 6.6372 \\
+		%& 0.01 & 4.7123 & 4.9525 &  \\
+		%& 1 & 4.8286 & 5.0210 &  \\
+		%& 20 & 20 & 20 &  \\
+		%& 100 & 100 & 100 &  \\
+		%\hline
+	%\texttt{synbig} & \(10^{-5}\) & \(10^{-5}\) & \(10^{-5}\) & 16.4595 \\
+		%& 0.01 & 11.8456 & 12.0395 &  \\
+		%& 1 & 1 & 1 &  \\
+		%& 20 & 20 & 20 &  \\
+		%& 100 & 100 & 100 &  \\
+		%\hline
+%\end{tabular}
+%\caption[]{C, scal 1}
+%\label{}
+%\end{table}
 
 
-
-results
-\textcolor{red}{Hinweise: fminbd ohne Startwert\\
-wie Funktionen funktionieren\\
-boundaries etc...\\
-suche bei plots noch mal min genauer raus \\
-beste Darstellungen ueberlegen}
-
-
-\begin{center}
-\begin{table}[H]%
-	\begin{tabular}{|l|l|c|c|c|c|c|c|}
-		\hline
-    Data set & algorithm & \(10^{-5}\) & 0.01 & 1 & 20 & 100 & Plot \\
-		\hline
-		\texttt{cancer} & Bundle &  & & 0.0239 & & & 0.0604\\
-		 & Noll Bundle &  & & 0.0602 & 0.0604 &&\\
-		 &  fminsearch &  0.0604 & 0.0604 & 0.0604 & 0.0604 & 0.0604&\\
-		 & fmindnb & 0.0604 &&&&&\\
-		\hline
-		\texttt{ionosphere} & Bundle & \(10^{-5}\)& 0.0234 & &  & & 0.0236 \\
-		 & Noll Bundle & \(10^{-5}\) &&&&& \\
-		 & fminsearch & 0.0236 & 0.0236 & 0.0236 & 0.0236 & 0.0236&\\
-		 & fminbnd &  0.0236&&&&&\\
-		\hline
-		\texttt{syn box} & Bundle & \(10^{-5}\) & 0.0102 & & & & 0.0135 \\
-		 & Bundle Noll & \(10^{-5}\) & 0.0141 & 0.5040 & 0.5723 & 0.5738&\\
-		 & fminsearch & 0.0135 & 0.0135 & 0.0135 & 0.0135 & 0.0135&\\
-		 & fminbnd & 0.0135 &&&&& \\
-		\hline
-		\texttt{syn small} & Bundle & 5.0188 & 5.0140 & 5.0229 & 6.6372 & 6.6373 & 6.6372 \\
-		 & Bundle Noll & 5.0229 & 4.8850 & 5.0109 & 6.6361 & 6.6363&\\
-		 & fminsearch & 6.6372 & 6.6372 & 6.6372 & 6.6372 & 6.6372 &\\
-		 & fminbnd &  6.6372&&&&&\\
-		\hline
-		\texttt{syn big} & Bundle & \(10^{-5}\) & 16.4590 & 16.4595 & 16.4594 & 16.4595 & 16.4595 \\
-		 & Bundle Noll &  \(10^{-5}\) & 16.4595 & 16.4595 & 16.4594 & 16.3408&\\
-		 & fminsearch &  16.4595 & 16.4595 & 16.4595 & 16.4595 & 16.4595 &\\
-		 & fminbnd & 16.4595&&&&&\\
-		\hline
-	\end{tabular}
-	\caption[C]{\(C_{min}\)}
-\end{table}
-\end{center}
-
-\textcolor{red}{syn small possesses two local minima> one at ca5 and one at ca 6}
-
-
-\begin{center}
-\begin{table}[H]%
-	\begin{tabular}{llccccc}
-		\hline
-    Data set & algorithm & \(10^{-5}\) & 0.01 & 1 & 20 & 100 \\
-		\hline
-		\texttt{cancer} & Bundle & & & 4.0782  \\
-		 & Noll Bundle & & & 2.3504 & 912.0496 \\
-		 &  fminsearch & 8.2208 & 6.0456 & 7.2394 & 8.3146 & 9.6156 \\
-		 & fmindnb & 7,9563 \\
-		\texttt{ionosphere} & Bundle & 1.1807 &	11.6802 \\
-		 & Noll & 0.6578 \\
-		 & fminsearch & 11.1885 & 7.6735 & 11.0497 & 11.1628 &	13.5294 \\
-		 & fminbnd & 6.3621 \\
-		\texttt{syn box} & Bundle & 0.2325 & 5.1452 \\
-		 & Bundle Noll & 0.4535 & 5.7817 &	3604.4947 &	3623.8675 & 	3623.9213 \\
-		 & fminsearch & 35.1377 & 27.1899 &	22.2921 & 20.7623 &	24.3706\\
-		 & fminbnd & 13.3115\\
-		\texttt{syn small} & Bundle & 4.6203 &	4.6932 &	3.3359 &	106.8108 &	34.2728 \\
-		 & Bundle Noll & 6.7204 &	5.1775 &	0.9986	& 4.7242 & 10.4157 \\
-		 & fminsearch & 17.5522 & 16.7165 &	15.5707 & 13.7467 &	15.1873 \\
-		 & fminbnd & 10.3158 \\
-		\texttt{syn big} & Bundle & 13.6750 & 1108.3399 & 1012.0873 &	1172.2093 &	1400.8681 \\
-		 & Bundle Noll & 12.6244 &	2738.4449 &	1157.8769 &	1334.4377 &	1386.9681\\
-		 & fminsearch & 1992.1726 &	1799.7163 &	1633.3407 & 1414.6651 &	1544.9985\\
-		 & fminbnd & 735.9754 \\
-	\end{tabular}
-	\caption[times]{times}
-\end{table}
-\end{center}
-
-\begin{center}
-\begin{table}[H]%
-	\begin{tabular}{llccccc}
-		\hline
-    Data set & algorithm & \(10^{-5}\) & 0.01 & 1 & 20 & 100 \\
-		\hline
-		\texttt{cancer} & Bundle & 1196.4407 &	1196.4413 &	1254.2534 & 1196.4407 &	1196.4407 \\
-		 & Noll Bundle & 1196.4743 &	1196.4735 &	1196.4428 &	1196.4408 &	1511.8588   \\
-		 &  fminsearch & 1196.4406 &	1196.4406 &	1196.4406 &	1196.4406 &	1196.4406 \\
-		 & fmindnb & 1196.4406 \\
-		\texttt{ionosphere} & Bundle & 9942.3715& 4352.4393 &	5178.6824 &	9942.3715	& 9942.3715  \\
-		 & Noll & 9942.3715 & 4352.5364 &	4966.5512 &	9942.3715 & 	9942.3715 \\
-		 & fminsearch & 4352.4095 &	4352.4095 &	4352.4095 &	4352.4095 &	4352.4095 \\
-		 & fminbnd & 4352.4095 \\
-		\texttt{syn box} & Bundle &  9942.2776 &	5187.4794 &	6720.8960 &	6700.9415 & 6734.9763\\
-		 & Bundle Noll & 9942.2776 &	5171.0475 &	6612.8318 &	6662.9753 &	6663.9495  \\
-		 & fminsearch & 5170.7801 &	5170.7801 &	5170.7801 &	5170.7801 &	5170.7801\\
-		 & fminbnd & 5170.7801\\
-		\texttt{syn small} & Bundle & 165.2003 & 165.2018 &	165.1991 &	164.6987 &	164.6987 \\
-		 & Bundle Noll & 165.1991 &	165.2495 &	165.2028 &	164.6996	& 164.6994  \\
-		 & fminsearch & 164.6987 &	164.6987 &	164.6987 & 164.6987 & 164.6987 \\
-		 & fminbnd & 164.6987 \\
-		\texttt{syn big} & Bundle & 6282.5118 &	1.9261 &	1.9261 &	1.9261 & 1.9261 \\
-		 & Bundle Noll & 6282.5118 &	1.9261 &	1.9261 &	1.9261 &	1.9263 \\
-		 & fminsearch & 1.9261 & 1.9261 & 1.9261 & 1.9261 & 1.9261  \\
-		 & fminbnd & 1.9261  \\
-	\end{tabular}
-	\caption[fvals]{function value}
-\end{table}
-\end{center}
-
-\begin{center}
-\begin{table}[H]%
-	\begin{tabular}{llccccc}
-		\hline
-    Data set & algorithm &  \\
-		\hline
-		\texttt{cancer} & Bundle & \\
-		 & Noll Bundle &   \\
-		 &  fminsearch & \\
-		 & fmindnb & \\
-		\texttt{ionosphere} & Bundle &  \\
-		 & Noll &  \\
-		 & fminsearch &\\
-		 & fminbnd &  \\
-		\texttt{syn box} & Bundle & \\
-		 & Bundle Noll &   \\
-		 & fminsearch &\\
-		 & fminbnd & 5170.7801\\
-		\texttt{syn small} & Bundle & \\
-		 & Bundle Noll &  \\
-		 & fminsearch &  \\
-		 & fminbnd & 164.6987 \\
-		\texttt{syn big} & Bundle &  \\
-		 & Bundle Noll & \\
-		 & fminsearch &   \\
-		 & fminbnd &   \\
-	\end{tabular}
-	\caption[steps]{steps and Null steps}
-\end{table}
-\end{center}
-
+%\begin{table}%
+%\begin{tabular}{|l|c|c|c|c|c|}
+	%\hline
+	%Data set & \(C_0\) & Bundle \ref{sec_nonconv_inex}.1 & Bundle \ref{sec_variable_metric}.1 & \texttt{fminsearch/bnd} \\
+	%\hline
+	%\texttt{cancer} & \(10^{-5}\) &  0.1196 & 0.1196 & 0.1196\\
+		%& 0.01 &  0.1196 & 0.1196 & \\
+		%& 1 &  0.1196 & 0.1196& \\
+		%& 20 &  0.1196  & 0.1196&\\
+		%& 100 &  1.0041  & 1.0041& \\
+		%\hline
+	%\texttt{ionosphere} & \(10^{-5}\) & 0.9942 & 0.9942 & 0.4352\\
+		%& 0.01 & 0.4352 & 0.4352 & \\
+		%& 1 & 0.4353 & 0.4352 &\\
+		%& 20 &  0.4353 & 0.9942 &\\
+		%& 100 & 0.9942 & 0.9942&\\
+		%\hline
+	%\texttt{synbox} & \(10^{-5}\) & 0.9942 & 0.9942 & 0.5171\\
+		%& 0.01 & 0.5171 & 0.5171&\\
+		%& 1 & 0.5176 & 0.5171&\\ 
+		%& 20 & 0.7103 & 0.7103&\\
+		%& 100 &  0.7116 & 0.7116&\\
+		%\hline
+	%\texttt{synsmall} &  \(10^{-5}\) & 0.0165 & 0.0165&0.0165\\
+		%& 0.01 &  0.0165 & 0.0165 &\\
+		%& 1 &  0.0165 & 0.0165 &\\
+		%& 20 &  0.0197 & 0.0197 &\\ 
+		%& 100 &  0.0335 & 0.0335&\\
+		%\hline
+	%\texttt{synbig} & \(10^{-5}\) & 0.6283 & 0.6283&1.9261\cdot\(10^{-4}\) \\
+		%& 0.01 & 1.9487\cdot\(10^{-4}\) & 1.9466\cdot\(10^{-4}\) & \\
+		%& 1 & 3.5143\cdot\(10^{-4}\) & 3.5143\cdot\(10^{-4}\) &\\
+		%& 20 & 1.9348\cdot\(10^{-4}\) & 1.9348\cdot\(10^{-4}\)& \\
+		%& 100 & 2.6452\cdot\(10^{-4}\) & 2.6452\cdot\(10^{-4}\)& \\
+		%\hline
+%\end{tabular}
+%\caption[]{fval, 1}
+%\label{}
+%\end{table}
 
 %times
 %

@@ -47,31 +47,31 @@
 \contentsline {subsubsection}{\numberline {6.4.3}Other Updating Possibilities}{48}
 \contentsline {subsection}{\numberline {6.5}Numerical Tests}{49}
 \contentsline {subsubsection}{\numberline {6.5.1}Academic Test Examples}{50}
-\contentsline {subsubsection}{\numberline {6.5.2}Test Examples in Higher Dimensions}{53}
-\contentsline {section}{\numberline {7}Application to Model Selection for Primal SVM}{58}
-\contentsline {subsection}{\numberline {7.1}Introduction}{58}
-\contentsline {subsection}{\numberline {7.2}Notation}{59}
-\contentsline {subsection}{\numberline {7.3}Introduction to Support Vector Machines}{60}
-\contentsline {subsubsection}{\numberline {7.3.1}Risk minimization}{60}
-\contentsline {subsubsection}{\numberline {7.3.2}Support Vector Machines}{62}
-\contentsline {subsubsection}{\numberline {7.3.3}Multiple Hyper-parameters}{65}
-\contentsline {subsection}{\numberline {7.4}Formulation of the Bilevel Problem}{66}
-\contentsline {subsection}{\numberline {7.5}Solution with the Inexact Bundle Algorithm}{68}
-\contentsline {subsubsection}{\numberline {7.5.1}Assumptions}{69}
-\contentsline {subsubsection}{\numberline {7.5.2}The Adjoint Problem}{74}
-\contentsline {subsection}{\numberline {7.6}On Error Bounds and Regularity}{75}
-\contentsline {subsubsection}{\numberline {7.6.1}Error Bounds}{75}
-\contentsline {subsubsection}{\numberline {7.6.2}Regularity}{77}
-\contentsline {subsection}{\numberline {7.7}Numerical Experiments}{78}
-\contentsline {subsubsection}{\numberline {7.7.1}The Data}{78}
-\contentsline {subsubsection}{\numberline {7.7.2}Choice of Parameters}{81}
-\contentsline {subsubsection}{\numberline {7.7.3}One-dimensional Optimization}{82}
-\contentsline {subsubsection}{\numberline {7.7.4}???}{85}
-\contentsline {section}{\numberline {A}Appendix}{90}
-\contentsline {subsection}{\numberline {A.1}Omitted Proofs}{90}
-\contentsline {subsubsection}{\numberline {A.1.1}Eigenvalues of the Metric Matrix}{90}
-\contentsline {subsubsection}{\numberline {A.1.2}Proof of Proposition \ref {prop_norm}}{90}
-\contentsline {subsection}{\numberline {A.2}Counterexaple to Strong Regularity}{91}
-\contentsline {subsection}{\numberline {A.3}Additional Figures}{92}
-\contentsline {subsubsection}{\numberline {A.3.1}Variable Metric Bundle Method}{92}
+\contentsline {subsubsection}{\numberline {6.5.2}Test Examples in Higher Dimensions}{54}
+\contentsline {section}{\numberline {7}Application to Model Selection for Primal SVM}{60}
+\contentsline {subsection}{\numberline {7.1}Introduction}{60}
+\contentsline {subsection}{\numberline {7.2}Notation}{61}
+\contentsline {subsection}{\numberline {7.3}Introduction to Support Vector Machines}{62}
+\contentsline {subsubsection}{\numberline {7.3.1}Risk minimization}{62}
+\contentsline {subsubsection}{\numberline {7.3.2}Support Vector Machines}{63}
+\contentsline {subsubsection}{\numberline {7.3.3}Multiple Hyper-parameters}{67}
+\contentsline {subsection}{\numberline {7.4}Formulation of the Bilevel Problem}{67}
+\contentsline {subsection}{\numberline {7.5}Solution with the Inexact Bundle Algorithm}{70}
+\contentsline {subsubsection}{\numberline {7.5.1}Assumptions}{70}
+\contentsline {subsubsection}{\numberline {7.5.2}The Adjoint Problem}{75}
+\contentsline {subsection}{\numberline {7.6}On Error Bounds and Regularity}{77}
+\contentsline {subsubsection}{\numberline {7.6.1}Error Bounds}{77}
+\contentsline {subsubsection}{\numberline {7.6.2}Regularity}{79}
+\contentsline {subsection}{\numberline {7.7}Numerical Experiments}{79}
+\contentsline {subsubsection}{\numberline {7.7.1}The Data}{80}
+\contentsline {subsubsection}{\numberline {7.7.2}Choice of Parameters}{82}
+\contentsline {subsubsection}{\numberline {7.7.3}One-dimensional Optimization}{84}
+\contentsline {subsubsection}{\numberline {7.7.4}Multi-dimensional Optimization}{89}
+\contentsline {section}{\numberline {A}Appendix}{91}
+\contentsline {subsection}{\numberline {A.1}Omitted Proofs}{91}
+\contentsline {subsubsection}{\numberline {A.1.1}Eigenvalues of the Metric Matrix}{91}
+\contentsline {subsubsection}{\numberline {A.1.2}Proof of Proposition \ref {prop_norm}}{91}
+\contentsline {subsection}{\numberline {A.2}Counterexaple to Strong Regularity}{92}
+\contentsline {subsection}{\numberline {A.3}Additional Figures}{93}
+\contentsline {subsubsection}{\numberline {A.3.1}Variable Metric Bundle Method}{93}
 \contentsline {section}{References}{}

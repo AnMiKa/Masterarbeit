@@ -458,13 +458,13 @@ In case of convex objective functions with inexact information stronger converge
 In \cite{Hare2016} it is assumed, that the set \(\{j \in J^k \mid \alpha^k_j > 0\}\) is uniformly bounded for all \(k\).
 In Remark 2 in \cite[p. 11]{Hare2016} it is mentioned that this is possible if the set \(X\) is polyhedral and an active-set solver is used to solve the subproblem.
 
-Another possibility to assure boundedness of the set is the aggregation technique mentioned in section \ref{sec_agg}.
-In this context is has however to be mentioned that it is not immediately clear if the proof of Lemma 5 in \cite[p. 11]{Hare2016} still holds in that case.
-For exact function and subgradient information convergence of a very similar method to algorithm \ref{sec_nonconv_inex}.1 is proven also with use of the aggregation technique in \cite{Hare2010}.
+Another possibility to assure boundedness of the set, is the aggregation technique mentioned in section \ref{sec_agg}.
+In this context is has however to be mentioned, that it is not immediately clear if the proof of Lemma 5 in \cite[p. 11]{Hare2016} still holds in that case.
+For exact function and subgradient information convergence, of a very similar method to algorithm \ref{sec_nonconv_inex}.1 is proven also using of the aggregation technique in \cite{Hare2010}.
 %For algorithm \ref{sec_nonconv_inex}.1 this lies beyond the scope of this thesis.
 
 The lemma states the following results:
-\begin{lemma}[{\cite[Lemma 5]{Hare2016}}]\label{Lemma5}
+\begin{lemma}[{\cite[Lemma 5, p. 11]{Hare2016}}]\label{Lemma5}
 	Suppose that the cardinality of the set \(\{j \in J^k\mid \alpha_j^k > 0\}\) is uniformly bounded in \(k\).
 	
 	(i) If \(C^k \to 0\) as \(k \to \infty\), then 
@@ -488,11 +488,11 @@ The lemma states the following results:
 \end{lemma}
 
 For algorithm \ref{sec_nonconv_inex}.1 it has to be shown that item (ii) of this lemma also holds if there are aggregate subgradients in the bundle.
-Here only the missing links are sketched to extend the proof to this case.
+Here only the missing links are sketched to extend the proof to this case. The full proof can be found in \cite[p. 12]{Hare2016}
 
 Therefore let (as in \cite{Hare2016}) \(p^j\) denote for each \(j\)  the orthogonal projection of the approximate subgradient \(g^j\) on the closed convex set \(\partial f(x^j)\). Then it holds by assumption on the approximate subgradient that \(\Vert g^j-p^j\Vert \leq \theta_j \leq \bar{\theta}\).
 Furthermore let \(S^k_n\) denote the (augmented) aggregate subgradients in the \(k\)'th bundle.
-Without loss of generality we can assume that there is only one aggregate subgradient in the bundle. (If there are more, this results merely in more aggregate terms of the same form and behavior in the convex sum, so it does not alter the argumentation.)
+Without loss of generality we can assume that there is only one aggregate subgradient in the bundle. (If there are more, this results just in more aggregate terms of the same form and behavior in the convex sum, so it does not alter the argumentation.)
 The subscript \(n\) of \(S^k_n\) signals, that already \(n\) aggregate subgradients were incorporated in the current aggregate subgradient.
 
 The proof works with induction over the number of aggregate subgradients contained in the current subgradient.
@@ -512,7 +512,7 @@ From this follows that
 \end{split}
 \end{align}
 
-As it is explained in the paper due to the uniform boundedness of the set \(J^k\) it is possible to consider it as some fixed index set (for example \(\{1,...,N\}\)). Unused indices are filled with \(\alpha^k_j=0\). Let then \(J\) be the set of all \(j\in J^k\) such that \(\liminf_{k\to\infty}\alpha^k_j >0\). From item (i) of Lemma \ref{Lemma5} follows then that \(\Vert x^j-\hat{x}^k\Vert \to 0\). Hence also \(\Vert x^j-\bar{x}\Vert \leq \Vert x^j-\hat{x}^k\Vert + \Vert \hat{x}^k-\bar{x}\Vert \to 0 \).
+As it is explained in the paper, due to the uniform boundedness of the set \(J^k\) it is possible to consider this set as some fixed index set (for example \(\{1,...,N\}\)). Unused indices are filled with \(\alpha^k_j=0\). Let then \(J\) be the set of all \(j\in J^k\) such that \(\liminf_{k\to\infty}\alpha^k_j >0\). From item (i) of Lemma \ref{Lemma5} follows then that \(\Vert x^j-\hat{x}^k\Vert \to 0\). Hence also \(\Vert x^j-\bar{x}\Vert \leq \Vert x^j-\hat{x}^k\Vert + \Vert \hat{x}^k-\bar{x}\Vert \to 0 \).
 It holds that \(p^j \in \partial f(x^j)\) and \(x^j \to \bar{x}\) for \(j \in J\) and \(\{\alpha^k_j\} \to 0 \) for \(j \notin J\). Due to the boundedness of the subdifferentials (this follows from Lipschitz continuity of the function \(f\) and is explained in more detail for example in the proof of Theorem \ref{theo_inf_ser_steps}) passing on a subsequence \(K \subset \{1,2,...\}\) yields that there exists \(\bar{p}\) with \(p^j \to \bar{p}\) for \(j \in J\) and \(k \in K\).
 The second and fifth term in the third equation of equation \ref{calc_lem5_1} are in \(B_{\bar{\theta}}(0)\) and the third and sixth term go to zero.
 Then 
@@ -542,7 +542,8 @@ The inductive step gives then:
 \end{split}
 \end{align}
 
-With the same argumentation as above follows that in the limit the first tow terms of the second equation in (\ref{calc_lem5_2}) are in \(\partial f(\bar{x})+B_{\bar{\theta}}(0)\) and from the induction assumption follows that also the last term is.
+With the same argumentation as above it follows that in the limit the first tow terms of the second equation in (\ref{calc_lem5_2}) are in \(\partial f(\bar{x})+B_{\bar{\theta}}(0)\). 
+From the induction assumption follows that also the last term is in \(\partial f(\bar{x})+B_{\bar{\theta}}(0)\).
 This proves item (ii) also for the use of aggregation technique.
 
 %first show that also for aggregate gradients \(G^j\) one can find vectors \(P^j\) such that \(\Vert G^j-P^j\Vert \leq \bar{\theta}\).

@@ -378,7 +378,7 @@ As we only consider the subsequence of serious steps it follows from \(\{\hat{x}
 		\[ \partial f(x^k) = \conv\{\lim \nabla f(y) \mid y \to x^k, y \notin \Omega_{\text{nd}}\}. \]
 		
 		This means that also all subgradients on \(\Omega\) are bounded. As the subgradient error is assumed to be bounded by \(\bar{\theta}\) the set of approximate subgradients \(\{g^j, j \in J^k\}\) contained in the bundle is bounded as well.
-		From this follows that also the augmented subgradients \(s_j^k = g^j+\eta_k(x^j-\hat{x}^k)\) are bounded because \(\eta^k\) is bounded by assumption and \(x^j, \hat{x}^k \in X\).		
+		From this follows that also the augmented subgradients \(s_j^k = g^j+\eta_k(x^j-\hat{x}^k)\) are bounded because \(\eta_k\) is bounded by assumption and \(x^j, \hat{x}^k \in X\).		
 Defining \(s:= \max_{k,j}\|s^k_j\|\) this yields that 
 		
 		\[\Vert S^k\Vert = \bigg\Vert\sum_{j \in J^k}{\alpha_j^k s_j^k}\bigg\Vert \leq  \sum_{j \in J^k}{\Vert\alpha_j^k\Vert\underbrace{\Vert s^k_j\Vert}_{\leq s \in \R}} \leq s\underbrace{\sum_{j \in J^k}{\alpha_j^k}}_{=1} < \infty \quad \forall k. \]
@@ -637,7 +637,7 @@ Consider from now on the function \(f\) on the set \(\Omega\).
 At points where the maximum in (\ref{max_rep}) is only attained by a single function \(f_t\) the function \(f\) is twice continuously differentiable and hence provides curvature information. At points where the are more than one function attaining the same value this does not have to be the case. At those points \(f\) can be nondifferentiable.
 
 Consider a nondifferentiable point and denote it as \(x_{\text{kink}} \in \Omega\).
-As \(f\) is locally Lipschitz continuous Rademacher's theorem yields that the points in \(\Omega\) where the function \(f\) is nondifferentiable are a set of zero Lebesgue measure. This means that there exists an open interval with length \(2r, r >0 \), around  the point \(x_{\text{kink}}\) such that \((x_{\text{kink}} \pm r) \in \Omega\) and the function \(f\) is differentiable on the two open intervals \((x_{\text{kink}}-r,x_{\text{kink}})\)  and \((x_{\text{kink}},x_{\text{kink}}+r)\). Assume, that \(f\) is is \emph{directionally differentiable} in \(x_{\text{kink}}\) and that all the directional derivatives in that point are finite.
+As \(f\) is locally Lipschitz continuous Rademacher's theorem yields that the points in \(\Omega\) where the function \(f\) is nondifferentiable are a set of zero Lebesgue measure. This means that there exists an open interval with length \(2r, ~r >0 \), around  the point \(x_{\text{kink}}\) such that \((x_{\text{kink}} \pm r) \in \Omega\) and the function \(f\) is differentiable on the two open intervals \((x_{\text{kink}}-r,x_{\text{kink}})\)  and \((x_{\text{kink}},x_{\text{kink}}+r)\). Assume, that \(f\) is is \emph{directionally differentiable} in \(x_{\text{kink}}\) and that all the directional derivatives in that point are finite.
 The directional derivative with respect to the direction \(d \in \R^n\) is defined as \cite[p. 213]{Rockafellar1970}
 
 \[ f'(x,d) = \lim_{h \searrow 0} \frac{f(x+h d)-f(x)}{h}. \]
@@ -890,14 +890,14 @@ It approaches the minimum almost in a straight line. The difference in behavior 
 %this means: no zigzagging, less overall steps and less null steps, Hare Algorithm much more steps near the minimum, also many null steps there\\
 %\textcolor{red}{plot, evtl: plot von Minimum}
 
-\begin{figure}[H]
+\begin{figure}[ht]
 	\begin{subfigure}[t]{0.49\textwidth}
-		%\includegraphics[width=\textwidth]{Pictures/Plots/final_parab.eps}
+		\includegraphics[width=\textwidth]{Pictures/Plots/final_parab.eps}
 		%\subcaption{}
 		%Parabola, \(kappa = 2\), sequwnces of \(x_{hats}\); Noll:\(10|1\), Hare: \(28|12\)
 	\end{subfigure}
 	\begin{subfigure}[t]{0.49\textwidth}
-			%\includegraphics[width=\textwidth]{Pictures/Plots/final_parab_detail.eps}
+			\includegraphics[width=\textwidth]{Pictures/Plots/final_parab_detail.eps}
 			%\subcaption{detail, many steps of Hare in the end}
 	\end{subfigure}
 	\caption[Serious steps on parabola]{Sequences of serious steps constructed by the proximal bundle algorithm and the variable metric algorithm respectively on the level lines of parabola \(p\). The right image is a detail of the plot on the left.\\
@@ -914,11 +914,11 @@ It is interesting to note, that the sequence provided by the proximal bundle alg
 
 \begin{figure}[H]
 	\begin{subfigure}[t]{0.49\textwidth}
-		%\includegraphics[width=\textwidth]{Pictures/Plots/final_nonsm_parab.eps}
+		\includegraphics[width=\textwidth]{Pictures/Plots/final_nonsm_parab.eps}
 		%\subcaption{Parabola, \(kappa = 2\), sequwnces of \(x_{hats}\); Noll:\(21|9\), same for adapted, Hare: \(28|12\)}
 	\end{subfigure}
 	\begin{subfigure}[t]{0.49\textwidth}
-			%\includegraphics[width=\textwidth]{Pictures/Plots/final_nonsm_parab_detail.eps}
+			\includegraphics[width=\textwidth]{Pictures/Plots/final_nonsm_parab_detail.eps}
 			%\subcaption{detail}
 	\end{subfigure}
 	\caption[Serious steps on nonsmooth quadratic]{Sequences of serious steps constructed by the proximal bundle algorithm and the variable metric algorithm respectively on the level lines of the nonsmooth quadratic function \(p_n\). The right image is a detail of the plot on the left.\\
@@ -933,11 +933,11 @@ To address the random nature of the noise the tests are performed 20 times and t
 
 \begin{figure}[ht]
 	\begin{subfigure}[t]{0.49\textwidth}
-		%\includegraphics[width=\textwidth]{Pictures/Plots/accuracy_bar_parab_u_1-2.eps}
+		\includegraphics[width=\textwidth]{Pictures/Plots/accuracy_bar_parab_u_1-2.eps}
 		%\subcaption{Parabola, \(kappa = 2\)}
 	\end{subfigure}
 	\begin{subfigure}[t]{0.49\textwidth}
-			%\includegraphics[width=\textwidth]{Pictures/Plots/steps_bar_parab_u_1-2.eps}
+			\includegraphics[width=\textwidth]{Pictures/Plots/steps_bar_parab_u_1-2.eps}
 	%		\subcaption{}
 	\end{subfigure}
 	\caption[Accuracy and number of steps for the parabola]{Left: Accuracy of the solution computed by the different versions of the variable metric bundle algorithm compared to the proximal bundle algorithm for the parabola \(p\) under different form of noise.\\
@@ -954,11 +954,11 @@ The difference in steps between the two update variants of the variable metric a
 
 \begin{figure}[ht]
 	\begin{subfigure}[t]{0.49\textwidth}
-		%\includegraphics[width=\textwidth]{Pictures/Plots/accuracy_bar_nonsm_parab_u_1-2.eps}
+		\includegraphics[width=\textwidth]{Pictures/Plots/accuracy_bar_nonsm_parab_u_1-2.eps}
 		%\subcaption{Parabola, \(kappa = 2\)}
 	\end{subfigure}
 	\begin{subfigure}[t]{0.49\textwidth}
-			%\includegraphics[width=\textwidth]{Pictures/Plots/steps_bar_nonsm_parab_u_1-2.eps}
+			\includegraphics[width=\textwidth]{Pictures/Plots/steps_bar_nonsm_parab_u_1-2.eps}
 			%\subcaption{}
 	\end{subfigure}
 	\caption[Accuracy and number of steps for a nonsmooth quadratic]{Left: Accuracy of the solution computed by the different versions of the variable metric bundle algorithm compared to the proximal bundle algorithm for the nonsmooth quadratic function \(p_n\) under different form of noise.\\
@@ -969,7 +969,7 @@ The difference in steps between the two update variants of the variable metric a
 
 In the nonsmooth case (shown in figure \ref{fig_bar_nonsm_parab}) the accuracy of all algorithms is very similar. The difference in the number of steps is now very small as well.
 Only in the case of constant noise the proximal bundle algorithm performs rather badly. Here the number of steps is extremely large (over 250) in order to gain the same accuracy as the other algorithms.
-The difference between the two update versions of the variable metric algorithm is still very small. It seems that the different scaling strategies have only a minor influence on the algorithm for this kind of objective function. Other tests showed that for example the choice of the step size updating parameters \(\kappa_+, \kappa_-\) have a lot more influence on the algorithm than the tested updating strategies. This can be seen in figures \ref{fig_no_noise_comp}  and \ref{fig_const_noise_comp} and figures \ref{fig_van_noise_comp} to \ref{fig_van_grad_noise_comp_large} in the appendix.
+The difference between the two update versions of the variable metric algorithm is still very small. It seems that the different scaling strategies have only a minor influence on the algorithm for this kind of objective function. Other tests showed that for example the choice of the step size updating parameters \(\kappa_+, \kappa_-\) have a lot more influence on the algorithm than the tested updating strategies. This can be seen in figures \ref{fig_no_noise_comp}  and \ref{fig_const_noise_comp}.% and figures \ref{fig_van_noise_comp} to \ref{fig_van_grad_noise_comp_large} in the appendix.
 
 
 %\textcolor{red}{Noise form \(\text{N}_{\text{v}}^{\text{g}}\) is the one that is most similar to no noise; one can see: gradient noise has not as much impact as inexact function value (makes sense because only calculating with subgradients) -> in those cases variable metric algorithm more exact, but all over desired tolerance
@@ -1041,24 +1041,24 @@ The graphs of the Ferrier polynomials for \(x \in \R^2\) are shown in figure \re
 
 \begin{figure}[ht]%
 	\begin{subfigure}[t]{0.32\textwidth}
-		%\includegraphics[width=\textwidth]{Pictures/Plots/testfun_f1.eps}
+		\includegraphics[width=\textwidth]{Pictures/Plots/testfun_f1.eps}
 	\end{subfigure}
 	\begin{subfigure}[t]{0.32\textwidth}
-		%\includegraphics[width=\textwidth]{Pictures/Plots/testfun_f2.eps}
+		\includegraphics[width=\textwidth]{Pictures/Plots/testfun_f2.eps}
 	\end{subfigure}
 	\begin{subfigure}[t]{0.32\textwidth}
-		%\includegraphics[width=\textwidth]{Pictures/Plots/testfun_f3.eps}
+		\includegraphics[width=\textwidth]{Pictures/Plots/testfun_f3.eps}
 	\end{subfigure}
 	\newline
 	\begin{subfigure}{0.47\textwidth}
 		\begin{flushright}
-		%\includegraphics[width=0.68\textwidth]{Pictures/Plots/testfun_f4}
+		\includegraphics[width=0.68\textwidth]{Pictures/Plots/testfun_f4}
 		\end{flushright}
 		\vfil
 	\end{subfigure}
 	\begin{subfigure}{0.49\textwidth}
 		%\begin{flushleft}
-		%\includegraphics[width=0.65\textwidth]{Pictures/Plots/testfun_f5}
+		\includegraphics[width=0.65\textwidth]{Pictures/Plots/testfun_f5}
 		%\end{flushleft}
 	\end{subfigure}
 	\caption[Ferrier polynomials]{Graphs of the testfunctions $f_1$ to $f_5$ for $x\in\R^2$}
@@ -1077,10 +1077,10 @@ The accuracy measures absolute logarithmic distance to the global minimum. In ca
 
 \begin{figure}[ht]%
 	\begin{subfigure}{0.49\textwidth}
-		%\includegraphics[width=\textwidth]{Pictures/Plots/no_noise.eps}%
+		\includegraphics[width=\textwidth]{Pictures/Plots/no_noise.eps}%
 	\end{subfigure}
 	\begin{subfigure}{0.49\textwidth}
-		%\includegraphics[width=\textwidth]{Pictures/Plots/steps_no_noise.eps}%
+		\includegraphics[width=\textwidth]{Pictures/Plots/steps_no_noise.eps}%
 	\end{subfigure}
 	\caption[Accuracy and number of steps: no noise]{Comparison of accuracy and number of steps for the proximal bundle algorithm and the variable metric bundle algorithm in the case of no noise.}
 	\label{fig_no_noise}
@@ -1111,10 +1111,10 @@ In the case of constant noise the variable bundle methods perform better than th
 
 \begin{figure}[ht]
 	\begin{subfigure}{0.49\textwidth}
-		%\includegraphics[width=\textwidth]{Pictures/Plots/vanishing_noise.eps}%
+		\includegraphics[width=\textwidth]{Pictures/Plots/vanishing_noise.eps}%
 	\end{subfigure}
 	\begin{subfigure}{0.49\textwidth}
-		%\includegraphics[width=\textwidth]{Pictures/Plots/steps_vanishing_noise.eps}%
+		\includegraphics[width=\textwidth]{Pictures/Plots/steps_vanishing_noise.eps}%
 	\end{subfigure}
 	\caption[Accuracy and number of steps: vanishing noise]{Comparison of accuracy and number of steps for the proximal bundle algorithm and the variable metric bundle algorithm in the case of vanishing noise}%
 	\label{fig_van_noise}%
@@ -1135,14 +1135,14 @@ This shows that the additional curvature information can make a considerable dif
 It is therefore an interesting but still open question if such matrix updates can be found.
 
 The algorithms used for the comparison of the different \(\kappa_+\) are endowed with the scaled BFGS update from section \ref{update_1}. The parameters \(\kappa_+ = 1.2\) and \(\kappa_+ = 2\) are compared.
-Here only the exact case and the case of constant noise for the lower dimensions are depicted in figure \ref{fig_no_noise_comp} and \ref{fig_const_noise_comp}. The situation for the other noise forms is shown in figures \ref{fig_van_noise_comp} to \ref{fig_van_grad_noise_comp_large}  in the appendix.
+Here only the exact case and the case of constant noise for the lower dimensions are depicted in figure \ref{fig_no_noise_comp} and \ref{fig_const_noise_comp}.% The situation for the other noise forms is shown in figures \ref{fig_van_noise_comp} to \ref{fig_van_grad_noise_comp_large}  in the appendix.
 
 \begin{figure}[ht]%
 	\begin{subfigure}{0.49\textwidth}
-		%\includegraphics[width=\textwidth]{Pictures/Plots/no_noise_comp.eps}%
+		\includegraphics[width=\textwidth]{Pictures/Plots/no_noise_comp.eps}%
 	\end{subfigure}
 	\begin{subfigure}{0.49\textwidth}
-		%\includegraphics[width=\textwidth]{Pictures/Plots/steps_no_noise_comp.eps}%
+		\includegraphics[width=\textwidth]{Pictures/Plots/steps_no_noise_comp.eps}%
 	\end{subfigure}
 	\caption[Influence of the step size updating parameter and hybrid method: no noise]{Influence of the step size updating parameter \(\kappa_+ = 1.2\) and \(\kappa_+ =2 \) and performance of the hybrid method in the exact case. The reached accuracy is depicted on the left, the needed number of steps on the right.}
 	\label{fig_no_noise_comp}
@@ -1150,10 +1150,10 @@ Here only the exact case and the case of constant noise for the lower dimensions
 
 \begin{figure}[ht]%
 	\begin{subfigure}{0.49\textwidth}
-		%\includegraphics[width=\textwidth]{Pictures/Plots/constant_noise_comp.eps}%
+		\includegraphics[width=\textwidth]{Pictures/Plots/constant_noise_comp.eps}%
 	\end{subfigure}
 	\begin{subfigure}{0.49\textwidth}
-		%\includegraphics[width=\textwidth]{Pictures/Plots/steps_constant_noise_comp.eps}%
+		\includegraphics[width=\textwidth]{Pictures/Plots/steps_constant_noise_comp.eps}%
 	\end{subfigure}
 	\caption[Influence of the step size updating parameter and hybrid method: constant noise]{Influence of the step size updating parameter \(\kappa_+ = 1.2\) and \(\kappa_+ =2 \) and performance of the hybrid method for constant noise. The reached accuracy is depicted on the left, the needed number of steps on the right.}
 	\label{fig_const_noise_comp}
