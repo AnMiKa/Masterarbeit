@@ -2,9 +2,9 @@
 \select@language {english}
 \contentsline {section}{Abstract}{iii}
 \contentsline {section}{German Summary}{iv}
-\contentsline {section}{List of Symbols}{vii}
-\contentsline {section}{List of Tables}{viii}
-\contentsline {section}{List of Figures}{viii}
+\contentsline {section}{List of Symbols}{viii}
+\contentsline {section}{List of Tables}{x}
+\contentsline {section}{List of Figures}{x}
 \contentsline {section}{\numberline {1}Introduction}{1}
 \contentsline {section}{\numberline {2}Preliminaries}{3}
 \contentsline {subsection}{\numberline {2.1}Notation}{3}
@@ -66,12 +66,13 @@
 \contentsline {subsubsection}{\numberline {7.7.1}The Data}{80}
 \contentsline {subsubsection}{\numberline {7.7.2}Choice of Parameters}{82}
 \contentsline {subsubsection}{\numberline {7.7.3}One-dimensional Optimization}{84}
-\contentsline {subsubsection}{\numberline {7.7.4}Multi-dimensional Optimization}{89}
-\contentsline {section}{\numberline {A}Appendix}{91}
-\contentsline {subsection}{\numberline {A.1}Omitted Proofs}{91}
-\contentsline {subsubsection}{\numberline {A.1.1}Eigenvalues of the Metric Matrix}{91}
-\contentsline {subsubsection}{\numberline {A.1.2}Proof of Proposition \ref {prop_norm}}{91}
-\contentsline {subsection}{\numberline {A.2}Counterexaple to Strong Regularity}{92}
-\contentsline {subsection}{\numberline {A.3}Additional Figures}{93}
-\contentsline {subsubsection}{\numberline {A.3.1}Variable Metric Bundle Method}{93}
+\contentsline {subsubsection}{\numberline {7.7.4}Multi-dimensional Optimization}{90}
+\contentsline {section}{\numberline {8}Conclusion}{94}
+\contentsline {section}{\numberline {A}Appendix}{95}
+\contentsline {subsection}{\numberline {A.1}Omitted Proofs}{95}
+\contentsline {subsubsection}{\numberline {A.1.1}Eigenvalues of the Metric Matrix}{95}
+\contentsline {subsubsection}{\numberline {A.1.2}Proof of Proposition \ref {prop_norm}}{95}
+\contentsline {subsection}{\numberline {A.2}Counterexample to Strong Regularity}{96}
+\contentsline {subsection}{\numberline {A.3}Additional Figures}{97}
+\contentsline {subsubsection}{\numberline {A.3.1}Variable Metric Bundle Method}{97}
 \contentsline {section}{References}{}

@@ -4,19 +4,19 @@
 After their discovery in 1975 bundle methods soon became very successful. Only a few years later they were generalized to be used also with nonconvex objective functions. Early works that contain fundamental ideas still used for these algorithms are \cite{Mifflin1982} and \cite{Kiwiel1985}.
 It then took over 25 years that bundle methods were again generalized to the use of inexact information, first works on this subject being \cite{Hintermueller2001,Kiwiel2006} and \cite{Solodov2003}.
 
-This section of the thesis shortly presents the key ideas of those two kinds of generalizations and different types of bundle methods that realize them.
+This chapter of the thesis shortly presents the key ideas of those two kinds of generalizations and different types of bundle methods that realize them.
 This is first done for the case of convex objective functions with inexact function values and/or subgradient information and then for nonconvex objective functions. 
 
 \subsection{Convex Bundle Methods with Inexact Information}
 
 We focus here on \emph{convex} bundle methods with inexact information. The reason for this is that there is a fundamental difference in treating inexactness between methods that assume convex and those that assume nonconvex objective functions.
 When dealing with nonconvex objective functions inexactness is treated as some additional nonconvexity therefore no additional strategies are used to cope with the noise. This is not possible if the convexity property is to be exploited for better convergence results.
-A throughout study on this subject including a synthetic convergence theory is done in \cite{Oliveira2014}. Here the most important aspects %\textcolor{red}{in view of the following chapters}
+A thorough study on this subject including a synthetic convergence theory is done in \cite{Oliveira2014}. Here the most important aspects %\textcolor{red}{in view of the following chapters}
 of that paper are reviewed.
 
 \subsubsection{Different Types of Inexactness}
 
-Throughout this section we consider the unconstrained optimization problem
+Throughout this chapter we consider the unconstrained optimization problem
 
 \begin{equation}
 	\min_{x \in \R^n} f(x)
@@ -186,7 +186,7 @@ If the method uses a line search additionally semismoothness of the objective fu
 In \cite{Noll2013} the second order approach of \cite{Noll2012} is extended to functions with inexact information.
 As far as we know this is the only other bundle method that can deal with nonconvexity and inexactness in both the function value and subgradient. In this method a lower-\(\mathcal{C}^1\) objective function and some assumptions on the form of inexactness are needed to prove convergence.
 
-The above algorithm inspires the variable metric variation of the method used by Hare et al. in \cite{Hare2016} that is presented in section \ref{sec_variable_metric} of this thesis.
+The above algorithm inspires the variable metric variation of the method used by Hare et al. in \cite{Hare2016} that is presented in chapter \ref{sec_variable_metric} of this thesis.
 
 
 %To conclude this section we can say: At the moment there exist two fundamentally different approaches to tackle inexactness in various bundle methods depending on if the method is developed for convex or nonconvex objective functions.

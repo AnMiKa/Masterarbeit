@@ -1,6 +1,6 @@
 \section{Introduction}
 
-There exists a sound and board theory of classical nonlinear optimization. However, this theory puts strong differentiability requirements on the given problem. Requirements that cannot always be fulfilled in practice.
+There exists a sound and broad theory of classical nonlinear optimization. However, this theory puts strong differentiability requirements on the given problem. Requirements that cannot always be fulfilled in practice.
 Examples for such nondifferentiable applications reach from problems in physics and mechanical engineering \cite{Clarke1990} over optimal control problems up to data analysis \cite{Bagirov2014} and machine learning \cite{Smola2007}.
 Other possible fields of applications are risk management and financial calculations \cite{Nesterov2016,Teo2010}. 
 %Additionally there exist so called stiff problems that are theoretically smooth but numerically nonsmooth due to rapid changes in the gradient \cite{Maekelae1992}.
@@ -21,8 +21,8 @@ The basic idea of bundle methods is to model the original problem by a simpler f
 The computed iterate is tested for sufficient descent and depending on the result is either taken as the new iterate or the model is enhanced.
 
 There exist different types of bundle methods, a widely used one being the proximal bundle method.
-In this thesis two types bundle methods are worked with. One is of the proximal type and one uses a variable stabilization term that makes it possible to make use of curvature information in order to accelerate the convergence speed.
-The development of the algorithm 
+In this thesis two types of bundle methods are worked with. One is of the proximal type and one uses a variable stabilization term that makes it possible to make use of curvature information in order to accelerate the convergence speed.
+The development of the algorithm \textcolor{red}{NOCHETWAS SCHREIBEN}
 
 The first half of this work puts particular attention on the theoretical concepts to use bundle methods with nonconvex and inexact objectives and how to incorporate the curvature information into the method.
 
@@ -32,11 +32,12 @@ Here the bilevel problem is derived from the hyper-parameter optimization for su
 In the application both nonconvexity of the objective function and inexactness in the function value and subgradient calculation are addressed.
 
 The remainder of the thesis is organized as follows:
-After a short introduction of the most important definitions and results from nonsmooth analysis in section \ref{sec_prelim} a basic bundle algorithm for exact convex functions is stated in order to introduce the important concepts of this method in section \ref{sec_basic_bundle}. A survey of different methods to tackle inexactness and nonconvex objective functions i then presented in section \ref{sec_simplifications}.
-Section \ref{sec_nonconv_inex} reviews the proximal bundle algorithm for nonconvex inexact functions presented in \cite{Hare2016} and contains some closer analysis of the method. In section \ref{sec_variable_metric} a variable metric variant of that algorithm is developed using the nonsmooth second model suggested in \cite{Noll2012} and \cite{Noll2013}.
+After a short introduction of the most important definitions and results from nonsmooth analysis in chapter \ref{sec_prelim} a basic bundle algorithm for exact convex functions is stated in order to introduce the important concepts of this method in chapter \ref{sec_basic_bundle}. A survey of different methods to tackle inexactness and nonconvex objective functions is then presented in chapter \ref{sec_simplifications}.
+Chapter \ref{sec_nonconv_inex} reviews the proximal bundle algorithm for nonconvex inexact functions presented in \cite{Hare2016} and contains some closer analysis of the method. In chapter \ref{sec_variable_metric} a variable metric variant of that algorithm is developed using the nonsmooth second model suggested in \cite{Noll2012} and \cite{Noll2013}.
 This method makes it possible to incorporate second order information into the algorithm in order to speed up convergence.
 The two methods are compared on different academic examples.
-At last the nonconvex inexact bundle method is used on the application of parameter optimization in support vector classification.  
+At last the bundle method is used on the application of parameter optimization in support vector classification in chapter \ref{sec_bilevel}.  
+%This thesis is written with the acedemic 'we'.
 
  
 %\textcolor{orange}{Adapt this part to what I finally really do: \\
@@ -52,7 +53,6 @@ At last the nonconvex inexact bundle method is used on the application of parame
 %Numerical testing \\ 
 %discussion}
 
-This thesis is written with the acedemic 'we'.
 
 
 %First a proximal bundle method \textcolor{red}{Difference between different regularizations explained before}...

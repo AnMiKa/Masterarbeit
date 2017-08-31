@@ -35,7 +35,7 @@ for t = 1:T
     % solve QP with quadprog
     options = optimoptions('quadprog','MaxIterations',1000,'OptimalityTolerance',...
         tol,'ConstraintTolerance',tol);
-    w = quadprog(H,[],A,b,[],[],[],[],[],options);
+    [w,f] = quadprog(H,[],A,b,[],[],[],[],[],options);
     % solution and multipliers
     W(:,t) = w(1:feat);
 end

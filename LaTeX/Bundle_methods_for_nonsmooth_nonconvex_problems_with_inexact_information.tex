@@ -15,6 +15,7 @@
 \usepackage{enumerate} % mehr Optionen (z.B. fur Symbole) bei emumerate
 \usepackage{enumitem} % mehr Optionen für Itemize
 \usepackage{tabularx} % erwiterte Tabelleneigenschaften
+\usepackage{longtable}
 \usepackage{here} % erzwingen der Position von Float-Objekten
 \usepackage{bibgerm} % Für das Literaturverzeichnis
 % \usepackage{extarrows} % Pfeile mit Beschriftung, deren Länge automatisch angepasst wird
@@ -134,7 +135,7 @@ cross/.default={3pt}}
 \pagenumbering{roman}
 %\pagestyle{empty}
 \include{First_Pages/Declaration}
-%\addcontentsline{toc}{section}{Acknowledgments}
+%%%\addcontentsline{toc}{section}{Acknowledgments}
 \include{First_Pages/Acknowledgment}
 \addcontentsline{toc}{section}{Abstract}
 \include{First_Pages/Abstract}
@@ -145,7 +146,7 @@ cross/.default={3pt}}
 	%\protect\contentsline{section}{Germal Summary}{}}
 
 
-{\singlespacing
+{%\singlespacing
 \setcounter{tocdepth}{3} % Im Inhaltsverzeichnis werden nur section und subsection berücksichtigt, keine tieferen Ebenen
 %\thispagestyle{empty} % keine Seitenzahl
 %\pagestyle{empty} %keine Seitenzahlen
@@ -159,6 +160,7 @@ cross/.default={3pt}}
 \addcontentsline{toc}{section}{List of Figures}
 
 \listoffigures
+\newpage
 \listoftables
 \newpage
 
@@ -171,6 +173,7 @@ cross/.default={3pt}}
 \include{Chapters/Bundle_Method_nonconv_inex}
 \include{Chapters/Variable_Metric}
 \include{Chapters/Bilevel_Application}
+\include{Chapters/Conclusion}
 %%\include{Chapters/Outrata}
 %%\include{Chapters/Bilevel_Application_2}
 \include{Chapters/Appendix}
@@ -180,7 +183,7 @@ cross/.default={3pt}}
   \protect\contentsline{section}{References}{}}
 \newpage
 \singlespacing
-\textcolor{red}{Rechtschreibfehler, Namen, Stil überprüfen}
+%\textcolor{red}{Rechtschreibfehler, Namen, Stil überprüfen}
 \bibliography{Bibliography}
 	\bibliographystyle{abbrv}
 

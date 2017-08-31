@@ -6,7 +6,7 @@
 
 \subsection{Introduction}
 
-In this part of the thesis the nonconvex inexact bundle algorithms \ref{sec_nonconv_inex}.1 and \ref{sec_variable_metric}.1 is applied to the problem of model selection for \emph{support vector machines} (SVMs) solving classification tasks.
+In this part of the thesis the nonconvex inexact bundle algorithms \ref{sec_nonconv_inex}.1 and \ref{sec_variable_metric}.1 are applied to the problem of model selection for \emph{support vector machines} (SVMs) solving classification tasks.
 It relies on a bilevel formulation proposed by Kunapuli in \cite{Kunapuli2008} and Moore et al. in \cite{Moore2011}.
 
 A natural application for the inexact bundle algorithm is an optimization problem where the objective function value and the subgradient can only be computed by numerical approximation. This is for example the case in bilevel optimization.
@@ -27,19 +27,19 @@ A general bilevel program can be formulated as in \cite[p. 20]{Kunapuli2008}
 	\label{bilevel}
 \end{equation}
 
-The two objecective functions \(\mathcal{L}_{upp}\) and \(\mathcal{L}_{low}\) map from \(\R^n\times\R^k\) into \(\R\) and the constraint functions \(\mathcal{G}_{upp}\) and \(\mathcal{G}_{low}\) map from \(\R^n\times\R^k\) into \(\R^l\) and \(\R^s\) respectively. 
+The two objective functions \(\mathcal{L}_{upp}\) and \(\mathcal{L}_{low}\) map from \(\R^n\times\R^k\) into \(\R\) and the constraint functions \(\mathcal{G}_{upp}\) and \(\mathcal{G}_{low}\) map from \(\R^n\times\R^k\) into \(\R^l\) and \(\R^s\) respectively. 
 
-The problem consists of an \emph{upper} or \emph{outer level} which is the overall function to be optimized. Contrary to usual constrained optimization problems which are constrained by explicitly given equalities and inequalities a  bilevel program is additionally constrained by a second optimization problem, the \emph{lower} or \emph{inner level} problem.
+The problem consists of an \emph{upper} or \emph{outer level} which is the overall function to be optimized. Contrary to usual constrained optimization problems which are constrained by explicitly given equalities and inequalities, a  bilevel program is additionally constrained by a second optimization problem, the \emph{lower} or \emph{inner level} problem.
 
 Solving bilevel problems can be divided roughly in two classes: implicit and explicit solution methods. 
-In the explicit methods the lower level problem is usually rewritten by its KKT conditions, these are then added as constraints to the upper level problem. With this solution method the upper and lower level are solved simultaneously. For the setting of model selection for support vector machines as it is used here, this method is described in detail in \cite{Kunapuli2008}.
+In the explicit methods the lower level problem is usually rewritten by its KKT conditions, these are then added as constraints to the upper level problem. Using this solution method the upper and lower level are solved simultaneously. For the setting of model selection for support vector machines as it is used here, this method is described in detail in \cite{Kunapuli2008}.
 
 The second approach is the implicit one. Here the lower level problem is solved directly in every iteration of the outer optimization algorithm and the solution is plugged into the upper level objective. 
 
 Obviously if the inner level problem is solved numerically, the solution cannot be exact. Additionally the \emph{solution map} \( S(C) = \{w\in \R^k \mid w\) solves the lower level problem for a given \(C\}\), can be nondifferentiable \cite{Outrata1998} and since elements of  the solution map are plugged into the outer level objective function in the implicit approach, the outer level function then becomes nonsmooth itself. This is why the inexact bundle algorithm seems a natural choice to tackle these bilevel problems. 
 
 Moore et al. use the implicit approach in \cite{Moore2011} for support vector regression. However they use a gradient descent method which is not guaranteed to stop at an optimal solution.
-In \cite{Moore2010a} it is suggested to use the nonconvex exact bundle algorithm of Fuduli et al. \cite{Fuduli2004a} for solving the bilevel regression problem. This method allows for nonsmooth inner problems and can theoretically solve some of the issues of the gradient descent method. It ignores however, that the objective function values can only be calculated approximately. A fact which is not addressed in Fuduli's algorithm.
+In \cite{Moore2010a} it is suggested to use the nonconvex exact bundle algorithm of Fuduli et al. \cite{Fuduli2004a} for solving the bilevel regression problem. This method allows for nonsmooth inner problems and can theoretically solve some of the issues of the gradient descent method. It ignores however, that the objective function values can only be calculated approximately; a fact which is not addressed in Fuduli's algorithm.
 
 %\subsection{Notation and Expressions}
 
@@ -58,7 +58,7 @@ The optimization variable of the bundle method is denoted by \(C\) during this c
 
 %During the most part of the chapter, \(x^i\) and \(y^i\) are used as in the context of SVMs. In the cases where they are used to describe the variables of an optimization problem, this is clearly indicated.
 
-There appear also different derivatives in this chapter.
+In this chapter there appear also different derivatives.
 For a continuously differentiable function \(f:\R^n \times \R^k \to \R\) we denote the \emph{gradient} at \((\bar{C},\bar{\tilde{w}})\) by \(\nabla f(\bar{C},\bar{\tilde{w}}) \in \R^{n+k}\). The partial gradient with respect to \(\tilde{w}\) is indicated by \(\nabla_{\tilde{w}}f(\bar{C},\bar{\tilde{w}}) \in \R^k \). %If \(f\) is twice continuously differentiable the \emph{Hessian matrix} at the point \((\bar{x},\bar{y})\) is given by \(\nabla^2 f(\bar{x},\bar{y}) \in \R^{n+m \times n+m}\).
 For a continuously differentiable vector valued function \(F:\R^n \times \R^k \to \R^m\) the \emph{Jacobian matrix} is given by \( \mathcal{J}F(\bar{C},\bar{\tilde{w}}) \in \R^{m \times (n+k)}\). The partial Jacobian with respect to the variable \(\tilde{w}\) is denoted \(\mathcal{J}_{\tilde{w}} F(\bar{C},\bar{\tilde{w}}) \in \R^{m \times k}\).
 
@@ -75,7 +75,7 @@ Finally let \(M \in \R^{n\times k}\) be a matrix and \(I \subset \{1,...,n\}\) a
 Support vector machines are linear learning machines that were developed in the 1990's by Vapnik and co-workers (see \cite{Boser1992}, where SWMs were introduced). Soon they could outperform several other programs in this area \cite{Cristianini2000} and the subsequent interest in SVMs led to a very versatile application of these machines \cite{Kunapuli2008}.
 
 The case that is considered here is binary support vector classification using supervised learning. 
-For a throughout introduction to this subject see also \cite{Cristianini2000}. Here a summary of the most important expressions and results is given.
+For a thorough introduction to this subject see also \cite{Cristianini2000}. Here a summary of the most important expressions and results is given.
 
 In classification data from a possibly high dimensional vector space \(\tilde{X} \subset \R^{n_f}\), the feature or \emph{input space} is divided into two classes. These lie in the output domain \(\tilde{Y} = \{-1,1\}\). Elements from the feature space will mostly be called \emph{data points} here. They get \emph{labels} from the feature space. Labeled data points are called \emph{examples}.
 The functional relation between the features and the class of an example is given by the usually unknown \emph{response} or \emph{target function} \(f(x)\).
@@ -85,7 +85,7 @@ The overall goal is then to optimize the generalization ability, meaning the abi
 %task is to find a mapping that predicts the output given unlabeled input as good as possible \cite{Cristianini2000}. 
 
 \subsubsection{Risk minimization}
-The concept of SVM's was originally inspired by the statistical learning theory developed by Vapnik. A detailed examination of the subject is given in \cite{Vapnik1998}. In \cite{Vapnik2013} the subject is approached from a more explaining point of view.
+The concept of SVMs was originally inspired by the statistical learning theory developed by Vapnik. A detailed examination of the subject is given in \cite{Vapnik1998}. In \cite{Vapnik2013} the subject is approached from a more explaining point of view.
 
 %from: Vapnik - Statistical Learning Theory overview \cite{Vapnik1998}
 The idea of \emph{risk minimization} is to find from a fixed set or class of functions the one that is the best approximation to the response function. This is done by minimizing a loss function that compares the given labels of the examples to the response of the learning machine.
@@ -129,7 +129,7 @@ Support vector machines fulfill all conditions of the SRM principle. Due to the 
 \subsubsection{Support Vector Machines}
 \label{sec_SVMs}
 
-In the case of linear binary classification one searches for a an affine hyperplane \(w \in \R^{n_f}\) shifted by \(b \in \R\) to separate the given data. The vector \(w\) is called weight vector and \(b\) is the bias.
+In the case of linear binary classification one searches for an affine hyperplane \(w \in \R^{n_f}\) shifted by \(b \in \R\) to separate the given data. The vector \(w\) is called weight vector and \(b\) is the bias.
 
 Let the data be linearly separable. This means, that there exists an affine hyperplane \((w,b)\) such that all data points from one class are on the same side of the hyperplane. The function deciding how the data is classified can be written as
 
@@ -141,7 +141,7 @@ Support vector machines aim at finding such a hyperplane that separates also uns
 One problem of this approach is that the representation of a hyperplane is not unique. If the plane described by \((w,b)\) separates the data, there exist infinitely many hyperplanes \((tw,b)\), \(t>0\), that separate the data in the same way.
 To have a unique description of a separating hyperplane the \emph{canonical hyperplane for given data} \(x \in X\) is defined by
  
-\[ f(x) = \Langle w, x\Rangle - b  \quad \text{s.t.} \quad \min_i \vert\Langle w,x^i\Rangle -b\vert = 1.\] 
+\[ f(x) = \Langle w, x\Rangle - b  \quad \text{s.t.} \quad \min_i \left\vert\Langle w,x^i\Rangle -b\right\vert = 1.\] 
 
 To find such a hyperplane is always possible in the case where the data is  linearly separable. It means that the inverse of the norm of the weight vector is equal to the distance of the closest point \(x \in X \) to  the hyperplane \cite[p. 10]{Kunapuli2008}.
 
@@ -160,7 +160,7 @@ A \emph{maximal margin hyperplane} is the hyperplane that realizes the maximal p
 \begin{proposition}[{\cite[Proposition 6.1]{Cristianini2000}}]
 Given a linearly separable training sample \ \(\Omega = \{(x^1,y_1),...,(x^{n_d},y_{n_d})\}\) the hyperplane \((w,b)\) that solves the optimization problem
 
-\[\|w\|^2 \quad \text{s.t.} \quad y_i(\Langle w,x^i\Rangle-b)\geq 1, \quad i = 1,...,n_d, \]
+\[\|w\|^2 \quad \text{s.t.} \quad y_i\left(\Langle w,x^i\Rangle-b\right)\geq 1, \quad i = 1,...,n_d, \]
 
 realizes a maximal margin hyperplane.
 \end{proposition}
@@ -183,7 +183,7 @@ Generally one cannot assume the data to be linearly separable. This is why in mo
 %\begin{definition} \cite{Cristianini2000}
 Fix \(\gamma > 0\). A \emph{margin slack variable of the example} \((x^i,y_i)\) with respect to the hyperplane \((w,b)\) and target margin \(\gamma\) is 
 
-\[\xi_i = \max(0, \gamma - y_i(\Langle w,x^i\Rangle+b))\] 
+\[\xi_i = \max\left\{0, \gamma - y_i\left(\Langle w,x^i\Rangle+b\right)\right\}\] 
 
 %\end{definition}  
 If \(\xi_i > \gamma\) the point is considered misclassified. 
@@ -214,7 +214,7 @@ The first part of the objective function is the regularization, the second part 
 The parameter \(C > 0\) gives a trade-off between the richness of the chosen set of functions \(f_{\lambda}\) to reduce the error on the training data and the danger of overfitting to have good generalization. It has to be chosen a priori \cite{Kunapuli2008}.
 %The two optimization problems only differ in the norm chosen for the loss function. In (\ref{SVM_1}) the one-norm is chosen, in (\ref{SVM_2}) the squared two-norm is used.
 
-Instead of the Euclidean norm it is also possible to use the 1-norm in the loss function. Then the resulting optimization problem reads
+Instead of the Euclidean norm it is also possible to use the 1-norm in the loss function. Then the resulting optimization problem reads:
 
 \begin{align}
 \begin{split}
@@ -311,7 +311,7 @@ For a general machine learning problem with upper and lower loss function \(\mat
 	\displaystyle\min_{\lambda, f^t} & \mathcal{L}_{upp}\left(\lambda,f^1|_{\Omega_1},...,f^T|_{\Omega_T}\right) & \text{upper level} \vspace{0.5ex}\\
 	\text{s.t.} & \lambda \in \Lambda & \vspace{1em}\\
 	& \text{for } t = 1,...,T: & \\
-	& f^t \in \begin{Bmatrix} \displaystyle\argmin_{f\in \mathcal{F}} & \mathcal{L}_{low}(\lambda,f,(x^i,y_i)_{i = 1}^l\in \bar{\Omega}_t) \vspace{0.5ex}\\
+	& f^t \in \begin{Bmatrix} \displaystyle\argmin_{f\in \mathcal{F}} & \mathcal{L}_{low}\left(\lambda,f,(x^i,y_i)_{i = 1}^l\in \bar{\Omega}_t\right) \vspace{0.5ex}\\
 	                        \text{s.t.} & \mathcal{G}_{low}(\lambda,f) \leq 0 
 													\end{Bmatrix}. & \text{lower level}
 	\end{array}
@@ -441,7 +441,7 @@ At the current iterate \(C^k\) the function value of the upper level objective f
 The resulting solution \(\tilde{w}^k = (\tilde{w}^{1,k},...,\tilde{w}^{T,k})\) is then inserted into the upper level objective and its value can be calculated.
 
 For computing a subgradient, it is not that simple. Additionally to the variation of the upper level function \(\mathcal{L}_{upp}\) with respect to the variable \(\tilde{w}\) also the variation of the solution \(\tilde{w}^k\) with respect to \(C\) has to be considered.
-To do this we follow the strategy described in \cite{Outrata1998}. Refer there also for a more throughout analysis on this subject.
+To do this we follow the strategy described in \cite{Outrata1998}. Refer there also for a more thorough analysis on this subject.
 
 \subsubsection{Assumptions}
 \label{sec_str_reg}
@@ -585,7 +585,7 @@ To assure that the optimal Lagrange multiplier \(\mu^*\) is unique, we show that
 In the present case, where there are only inequality constraints, the LICQ holds at a point \((\tilde{w},\xi)\) if the rows of the matrix \(\mathcal{J}_{(\tilde{w},\xi)}\left(A(\tilde{w}^{\top},\xi^{\top})^{\top} - a\right) = A\) that correspond to the indices in \(I(\tilde{w},\xi)\) are linearly independent \cite[p. 82, 96]{Outrata1998}.
 
 For problem (\ref{low_QP}) the LICQ holds at every feasible point \((\tilde{w},\xi)\) because all rows of the matrix \(A\) are linearly independent. This means that linear independence particularly holds for all rows corresponding to the active constraints at any minimum \((\tilde{w}^*,\xi^*)\).
-Hence the lower level problem possesses a unique solution vector \((\tilde{w}^*,\xi^*)\) and a unique corresponding Lagrange multiplier \(\mu^*\) For every hyper-parameter (vector) \(C\). Thus assumption (A2) is fulfilled.
+Hence the lower level problem possesses a unique solution vector \((\tilde{w}^*,\xi^*)\) and a unique corresponding Lagrange multiplier \(\mu^*\) for every hyper-parameter (vector) \(C\). Thus assumption (A2) is fulfilled.
 
 
 Finally to show that assumption (A3) holds, strong regularity has to be shown for the generalized equation (\ref{GE}).
@@ -613,7 +613,7 @@ This means that all necessary conditions are fulfilled in order to compute a sub
 
 \subsubsection{The Adjoint Problem}
 
-In order to calculate the needed subgradient of bilevel problem the technique of \emph{adjoint equations} is used. This technique is well known from optimal control (c.f. \cite[p. 126]{Outrata1998} and references therein). For the derivation of the adjoint problem and the relults used below, refer to chapters 6 and 7 of \cite{Outrata1998}. 
+In order to calculate the needed subgradient of bilevel problem the technique of \emph{adjoint equations} is used. This technique is well known from optimal control (c.f. \cite[p. 126]{Outrata1998} and references therein). For the derivation of the adjoint problem and the results used below, refer to chapters 6 and 7 of \cite{Outrata1998}. 
 
 The adjoint problem to the given bilevel problem (\ref{bilevel_fin}) can be stated as the following constrained quadratic problem using the expressions defined in (\ref{matrices}):
 
@@ -833,25 +833,27 @@ For the second to fourth fold, the upper box  is gradually pushed down 'into' th
 
 For the \texttt{synsmall} and the \texttt{synbig} data sets,  the two groups are normally distributed in two dimensions with mean being \(\mu^1 = (2,3)^{\top}\)for the first group and \(\mu^2 = (-1,9)^{\top}\) for the second group. The covariance is given by
  \[\Sigma = \begin{pmatrix}1.5 & 1.5\\1.5 & 3\end{pmatrix}\] for both groups. 
-The data set \texttt{synbig} is a very large data set to test the performance of the different algorithm when handeling such data sets.
+The data set \texttt{synbig} is a very large data set to test the performance of the different algorithm when handling such data sets.
 For both sets the different folds are chosen in a way that they are separable but the separating hyperplane does not give a good generalization.
 
-All data sets were standardized to have a zero mean and unit standard deviation. Then all data sets were split up into three folds of equal size. It is shown in \cite[p. 47]{Kunapuli2008} that this is a reasonable number of folds.
+All data sets were standardized to have a zero mean and unit standard deviation. Then the data sets were split up into three (four) folds of equal size. It is shown in \cite[p. 47]{Kunapuli2008} that this is a reasonable number of folds.
+From the two real world data sets, a part of the data is hold back for validation purposes (in table \ref{tab_set_props} marked with \(n_v\)).
 The real world data sets were randomly put into the folds. For the synthetic data sets the folds were selected as described above. The number of instances and number of features of every data set is given in Table \ref{tab_set_props}. 
 
 \begin{center}
 \begin{table}[H]%
-	\begin{tabular}{lccc}
+	\begin{tabular}{|lcccc|}
 		\hline
-    Data set & \(n_d\) &  \(n_f\) & \(T\) \\
+    Data set & \(n_d\) & \(n_v\) &  \(n_f\) & \(T\) \\
 		\hline
-		\texttt{cancer} & 240 & 9 & 3 \\
-		\texttt{ionosphere} & 240 & 33 & 3 \\
-		\texttt{synbox} & 600 & 2 & 3 \\
-		\texttt{synsmall} & 600 & 2 & 3 \\
-		\texttt{synbig} & 30000 & 2 & 3
+		\texttt{cancer} & 240 & 443 & 9 & 3 \\
+		\texttt{ionosphere} & 240 & 111 & 33 & 3 \\
+		\texttt{synbox} & 600 && 2 & 4 \\
+		\texttt{synsmall} & 600 && 2 & 3 \\
+		\texttt{synbig} & 30000 && 2 & 3 \\
+		\hline
 	\end{tabular}
-	\caption[Properties of data sets]{Properties of the used data sets}
+	\caption[Properties of data sets, 1D]{Properties of the used data sets for one-dimensional optimization.}
 	\label{tab_set_props}
 \end{table}
 \end{center}
@@ -859,7 +861,7 @@ The real world data sets were randomly put into the folds. For the synthetic dat
 \subsubsection{Choice of Parameters}
 
 The bilevel problem (\ref{bilevel_fin}) is solved with the two presented bundle algorithms \ref{sec_nonconv_inex}.1 and \ref{sec_variable_metric}.1.
-For bilevel problems it is not possible to evaluate the upper level objective without solving the lover level problem first. Also additional steps are necessary to calculate a subgradient.
+For bilevel problems it is not possible to evaluate the upper level objective without solving the lower level problem first. Also additional steps are necessary to calculate a subgradient.
 
 For the numerical calculations done in this sections, the bundle algorithms therefore work after the following algorithmic pattern, which is inserted into the respective routines described in chapters \ref{sec_nonconv_inex} and \ref{sec_variable_metric}.
 
@@ -909,7 +911,7 @@ First the algorithms are tested for the one-dimensional case.
 Here the bundle methods are compared to the \texttt{fminbnd} algorithm \texttt{fminsearch}. Both can solve one-dimensional optimization problems.
 It has to be remarked here, that the \texttt{fminsearch} routine does not accept any bounds on the optimization variable. Strictly speaking it could thus give negative values for \(C\), which are infeasible. This did however not happen in any of the experiments.
 
-In the one dimensional case it is possible to plot the objective functions values of the bilevel problem. The plots are given in Figure \ref{fig_C_vs_err}.
+In the one dimensional case it is possible to plot the objective function values of the bilevel problem. The plots are given in Figure \ref{fig_C_vs_err}.
 
 \begin{figure}[ht]
 	\begin{subfigure}{0.46\textwidth}
@@ -918,7 +920,7 @@ In the one dimensional case it is possible to plot the objective functions value
 	\begin{subfigure}{0.52\textwidth}
 		\includegraphics[width=\textwidth]{Pictures/Plots/SysSyb_fin.eps}%
 	\end{subfigure}
-	\caption[Objective function values]{Plots of the hingquad error for different $C$-values values. The figure on the right shows the plot for the \textup{\texttt{cancer}}, \textup{\texttt{ionosphere}} and \textup{\texttt{syn box}} data sets. The plot on the left depicts the situation for the sets \textup{\texttt{synsmall}} (left axis) and \textup{\texttt{synbig}} (right axis).}%
+	\caption[Objective function values]{Plots of the hingquad error for different $C$-values values. The figure on the left shows the plot for the \textup{\texttt{cancer}}, \textup{\texttt{ionosphere}} and \textup{\texttt{syn box}} data sets. The plot on the right depicts the situation for the sets \textup{\texttt{synsmall}} (left axis) and \textup{\texttt{synbig}} (right axis).}%
 	\label{fig_C_vs_err}%
 \end{figure}
 
@@ -962,12 +964,12 @@ Both problems are solved with the MATLAB QP solver \texttt{quadprog} which stops
 	\label{fig_ll15_sc1100_f}%
 \end{figure}
 
-In figures \ref{fig_ll15_sc1100_C} and \ref{fig_ll15_sc1100_f} the minimizers and function values found for the different starting values and scaling factors are depicted for the different solution mehtods.
+In figures \ref{fig_ll15_sc1100_C} and \ref{fig_ll15_sc1100_f} the minimizers and function values found for the different starting values and scaling factors are depicted for the different solution methods.
 It can be observed from the plots, that \texttt{fminsearch} finds the same minimizers for all starting values and both scaling functions.
 For the two bundle methods, it depends on the starting value, whether a good minimizer is computed. For the unscaled version of the objective function, the bundle methods often stop without any calculations, reporting the starting value as optimal. This happens more often for the larger starting values 20 and 100.
 For the \texttt{synsmall} data set it depends on the starting value, weather the local or the global minimum is found.
 
-For the starting value value \(C_0 =1\) and the scaling factor 100 decent results are achieved.
+For the starting value \(C_0 =1\) and the scaling factor 100 decent results are achieved.
 Hence for this parameter combination the results of all four methods used, are presented more accurately in table \ref{scal_100_ll15}.
 
 \begin{table}[ht]%
@@ -978,23 +980,23 @@ Hence for this parameter combination the results of all four methods used, are p
 	\hline
 	\texttt{cancer} & \(C_{min}\) & 0.0603 & 0.0603 & 0.0604\\
 		& \(f\) value & 11.9644 & 11.9644 & 11.9644\\
-		& time & 5 & 13 & 4/2\\
+		& time (s)& 5 & 13 & 4/2\\
 		\hline
 	\texttt{ionosphere} & \(C_{min}\) & 0.0281 & 0.0238 & 0.0236\\
 		& \(f\) value & 43.5899 & 43.5242 & 43.5241\\ 
-		& time & 2284 & 1729 & 6/30\\
+		& time (s)& 2284 & 1729 & 6/30\\
 		\hline
 	\texttt{synbox} & \(C_{min}\) & 0.1592 & 0.1535 & 0.0135\\
 		& \(f\) value & 60.4899 & 60.2966 & 51.7078 \\
-		& time & 255 & 331 & 26/549 \\
+		& time (s)& 255 & 331 & 26/549 \\
 		\hline
 	\texttt{synsmall} &  \(C_{min}\) & 5.0112 & 5.0228 & 6.6372\\
 		& \(f\) value & 1.6520 & 1.6520 & 1.6470 \\
-		& time & 4 & 6 & 11/7\\
+		& time (s)& 4 & 6 & 11/7\\
 		\hline
 	\texttt{synbig} & \(C_{min}\) & 16.4743 & 16.4965 & 16.4595 \\
 		& \(f\) value & 0.0193 & 0.0193 & 0.0193\\
-		& time & 593 & 595 & 673/306\\
+		& time (s)& 593 & 595 & 673/306\\
 		\hline
 \end{tabular}
 \caption[Minimizer, function value and computation time for accurately solved subproblems]{This table shows the minimizer, corresponding minimal function value and the needed computation time of the four tested routines \textup{\texttt{fminsearch}}, \textup{\texttt{fminbnd}}, algorithm \ref{sec_nonconv_inex}.1 and \ref{sec_variable_metric}.1.\\
@@ -1071,13 +1073,36 @@ The other parameters are set in a way that achieved good results in the comparis
 Precisely this means that the objective function is scaled by 100 and the bundle methods start with value \(C_0 = 1\). 
 The found minimizers and minimal function values for the different combination of tolerances are depicted in figures \ref{fig_llad84C} and \ref{fig_llad84f} respectively.
 
-What can be seen is, that the solution tolerance of the adjoint problem does not any influence on the accuracy of the bundle algorithms. The minimizer and the function value basically stay the same, no matter if the adjoint problem is solved for an accuracy of \(10^{-4}\), \(10^{-8}\) or \(10^{-15}\).
+What can be seen is, that the solution tolerance of the adjoint problem does not show any influence on the accuracy of the bundle algorithms. The minimizer and the function value basically stay the same, no matter if the adjoint problem is solved for an accuracy of \(10^{-4}\), \(10^{-8}\) or \(10^{-15}\).
 The reason for this is, that the adjoint problem calculates the subgradient. It could already be seen in section \ref{sec_num_test_ferr}, that inexactness of the subgradient has a relatively small influence on the overall solution.
 
 The plots also show, that the solution accuracy of the lower level can have big influence on the value of the minimizer. This is also true for the results found by \texttt{fminbnd}.
 This results from the little change in the objective function values. It can be observed, that although the value of the minimizer is sometimes far away from the correct one, the resulting function value is still near the optimum.
 
-To summarize this section it can be said, that in the one-dimensional case, the MATLAB routines outplay the bundle methods. The algorithm \texttt{fminbnd} finds very accurate results, often in less time than the bundle methods. Additionally it does not need a starting value.
+The final step of this analysis of the one-dimensional case is to study how much the 'worse' results of the bundle methods actually influence the generalization ability of the optimal model.
+This is tested by calculating the misclassification error on the validation sets of the \texttt{cancer} and \texttt{ionosphere} data.
+Therefore, an optimal separating hyperplane \(\tilde{w}\) is calculated, given the optimal hyper-parameter \(C_{min}\). For this calculation all training data is used. The hyper-parameter has to be scaled by \(\frac{T}{T-1}, T >1\) \cite[p. 47]{Kunapuli2008} for the use with only one fold. 
+As mentioned before, we use the misclassification loss as given in (\ref{misclass_loss}) to calculate the fraction of the data that is misclassified.
+%This result is compared to the minimal possible linear misclassification error on the validation data set.
+
+\begin{table}%
+\centering
+\begin{tabular}{|l|c|c|c|}
+	\hline
+	Data set & Bundle \ref{sec_nonconv_inex}.1 & Bundle \ref{sec_variable_metric}.1 & \texttt{fminbnd}\\
+	\hline
+	\texttt{cancer} & 0.038374 & 0.038374 & 0.038374 \\
+	\texttt{ionosphere} & 0.153153 & 0.162162 & 0.162162 \\
+	\hline
+\end{tabular}
+\caption[Misclassification error for 1D data]{Misclassification error on the validation data. The separating hyperplane is generated using the \(C_{min}\) value found by the respective optimization algorithm.}
+\label{misclass_1D}
+\end{table}
+
+One can see, that the SVM problem itself is not too sensitive to the choice of the hyper-parameter.
+This means, that despite the fact, that the MATLAB routines provide better results in numbers, the bundle methods find an equally good hyperplane.
+
+To summarize this section it can be said, that in the one-dimensional case, the MATLAB routines outperform the bundle methods. The algorithm \texttt{fminbnd} finds very accurate results, often in less time than the bundle methods. Additionally it does not need a starting value.
 We can conclude, that in the one-dimensional case, the bundle algorithms work for solving the presented problem, but there are better options available.
 
 \subsubsection{Multi-dimensional Optimization}
@@ -1085,25 +1110,130 @@ We can conclude, that in the one-dimensional case, the bundle algorithms work fo
 In the multigroup approach, the data set is partitioned into different groups, that are each weighted with their own parameter \(C_g\).
 To calculate the optimal value of all these parameter results in a multi-dimensional optimization problem.
 
-In this section the bundle algorithms \ref{sec_noconv_inex}.1 and \ref{sec_variable_metric}.1 are compared to the matlab method \texttt{fmincon}. This method is suitable for the solution of a very wide range of constrained multi-dimensional optimization problems. They can be nonlinear and do not have to be convex.
+In this section the bundle algorithms \ref{sec_nonconv_inex}.1 and \ref{sec_variable_metric}.1 are compared to the matlab method \texttt{fmincon}. This method is suitable for the solution of a very wide range of constrained multi-dimensional optimization problems. They can be nonlinear and do not have to be convex.
 
-The following data sets wre used for the comparison:
+The following data sets are used for the comparison:
 
-\begin{table}%
-\begin{tabular}{lcr}
-
+\begin{table}[H]%
+\centering
+\begin{tabular}{|lcccc|}
+	\hline
+	Data set & \(n_d\) & \(n_f\) & T & G \\
+	\hline
+	\texttt{cancer1} & 960 & 9 & 3 & 4\\
+	\texttt{cancer2} & 678 & 9 & 3 & 2\\
+	\texttt{cancer3} & 678 & 9 & 3 & 2\\
+	\texttt{cancer4} & 675 & 9 & 3 & 3\\
+	\texttt{ionospere1} & 960 & 33 & 3 & 4\\
+	\texttt{ionosphere2} & 348 & 33 & 3 & 2 \\
+	%\texttt{synsmall1} & 1800 & 2 & 2 & 3 \\
+	%\texttt{synbox1} & 2400 & 2 & 4 & 3 \\
+	\hline
 \end{tabular}
-\caption[]{}
+\caption[Properties of the data sets for multi-dimensional optimization]{Properties of the data sets for multi-dimensional optimization.}
 \label{}
 \end{table}
 
-\textcolor{red}{data sets\\
-Parameters: starting value, stopping condition \\
-ll, ad solution \\
-}
+They are constructed in the following ways:
+The sets \texttt{cancer1}, and \texttt{ionosphere1} are constructed by duplicating the original data sets \(G\) and adding different amounts of uniformly distributed noise on the data of the different groups.
+The sets \texttt{cancer2}, \texttt{cancer3}, \texttt{cancer4} and \texttt{ionosphere2} are constructed by using also the validation data of the original data sets and partitioning it  randomly in \(G\) groups of equal size.
+For the \texttt{cancer2} data set, there is additionally noise added to the second group.
 
-The methods are compared with the following parameters: The starting value 
+First the multigroup bilevel problem is solved by the three algorithms \texttt{fmincon}, \ref{sec_nonconv_inex}.1 and \ref{sec_variable_metric}.1 for all data sets. The objective function is again scaled by 100. The stopping conditions are meeting the stopping tolerance \texttt{tol} \(=10^{-6}\) and exceeding the maximal number of steps (1000).
+All subproblems are calculated to a  tolerance of \(10^{-10}\).
+The starting values for the different dimensions are set to 
+\(C_{0,2} = (5,0.5)^{\top}\), \(C_{0,3} = (5,0.5,0.05)^{\top}\) and \(C_{0,4} = (5,0.5,0.05,1)^{\top}\). 
 
+Table \ref{tab_MG} show the results for the different algorithms.
+
+\begin{table}[ht]%
+\centering
+\begin{tabular}{|l|c|c|c|c|}
+	\hline
+	Data set & & Bundle \ref{sec_nonconv_inex}.1 & Bundle \ref{sec_variable_metric}.1 & \texttt{fmincon} \\
+	\hline
+	\texttt{cancer1} & \(C_{min}\) & \(\begin{pmatrix}0.1525\\1.01\cdot10^{-5}\\10^{-5}\\4.5948\end{pmatrix}\) & \(\begin{pmatrix}0.1642\\10^{-5}\\10^{-5}\\5.5829\end{pmatrix}\) & \(\begin{pmatrix}0.3149\\0.5369\\1.3596\\8.22\cdot10^{3}\end{pmatrix}\) \\
+	& \(f\) value & 49.7412 & 49.7381 & 49.7105\\
+	& time (s) & 23 & 16 & 146\\ 
+	\hline
+	\texttt{cancer2} & \(C_{min}\) & \(\begin{pmatrix}10^{-5}\\0.0421\end{pmatrix}\) & \(\begin{pmatrix}0.0714\\1.06\cdot10^{-4}\end{pmatrix}\) & \(\begin{pmatrix}0.0693\\0.0259\end{pmatrix}\) \\
+	& \(f\) value & 10.7188 & 10.2587 & 10.1394\\
+	& time (s)& 5 & 7 & 9\\
+	\hline
+	\texttt{cancer3}& \(C_{min}\) & \(\begin{pmatrix}0.0389\\0.0573	\end{pmatrix}\) & \(\begin{pmatrix}0.0550\\0.0165\end{pmatrix}\) & \(\begin{pmatrix}0.0555\\0.0386\end{pmatrix}\) \\
+	& \(f\) value & 11.3871 & 11.4340 & 11.3438\\
+	& time (s)& 71 & 9 & 15\\
+	\hline
+	\texttt{cancer4}& \(C_{min}\) & \(\begin{pmatrix}0.0476\\0.2342\\0.1778\end{pmatrix}\) & \(\begin{pmatrix}0.0219\\0.0829\\0.0679\end{pmatrix}\) & \(\begin{pmatrix}0.0202\\0.0771\\0.0642\end{pmatrix}\) \\
+	& \(f\) value & 9.8094 & 9.6319 & 9.6308\\
+	& time (s)& 134 & 27 & 16\\
+	\hline
+	\texttt{ionosphere1}& \(C_{min}\) & \(\begin{pmatrix}0.0078\\0.0169\\0.0282\\10^{-5}\end{pmatrix}\) & \(\begin{pmatrix}10^{-5}\\0.0478\\10^{-5}\\10^{-5}\end{pmatrix}\) & \(\begin{pmatrix}0.0074\\0.0455\\10^{-5}\\10^{-5}\end{pmatrix}\) \\
+	& \(f\) value & 44.1661 & 46.6613 & 44.0434\\
+	& time (s)& 246 & 7 & 59\\
+	\hline
+	\texttt{ionosphere2}& \(C_{min}\) & \(\begin{pmatrix}0.0116\\0.0189\end{pmatrix}\) & \(\begin{pmatrix}10^{-5}\\0.0215\end{pmatrix}\) & \(\begin{pmatrix}0.0116\\0.0189\end{pmatrix}\) \\
+	& \(f\) value & 47.3260 & 49.7165 & 47.3260\\
+	& time (s)& 10 & 4 & 9\\
+	\hline
+	%\texttt{synsmall1}& \(C_{min}\) & \(\begin{pmatrix}0.4011\\1.01\cdot10^{-5}\\1.01\cdot10^{-5}\end{pmatrix}\) & \(\begin{pmatrix}0.3872\\10^{-5}\\10^{-5}\end{pmatrix}\) & \(\begin{pmatrix}0.4027\\1.03\cdot10^{-5}\\1.03\cdot10^{-5}\end{pmatrix}\) \\
+	%& \(f\) value & \\
+	%& time (s)& \\
+	%\hline
+	%\texttt{synbox1}& \(C_{min}\) & \(\begin{pmatrix}0.0257\\4.1791\\3.7443\end{pmatrix}\) & \(\begin{pmatrix}0.0178\\4.2698\\3.7326\end{pmatrix}\) & \(\begin{pmatrix}0.0227\\0.1696\\1.42\cdot10^{-5}\end{pmatrix}\) \\
+	%& \(f\) value & \\
+	%& time & \\
+	%\hline
+\end{tabular}
+\caption[Minimizer, function value and computation time for the multigroup problem]{This table shows the minimizer, corresponding minimal function value and the needed computation time of the three tested routines \textup{\texttt{fmincon}}, algorithm \ref{sec_nonconv_inex}.1 and \ref{sec_variable_metric}.1.\\
+The used objective function is scaled with 100.}
+\label{tab_MG}
+\end{table}
+
+It can be seen, that again the MATLAB routine \texttt{fmincon} reaches the lowest function values. However often the computation time is also longer than the ones of the two bundle methods.
+An interesting fact is, that the various found minimizers are very different from each other.
+This might be due to the flat shape of the objective functions, which can be observed in the two-dimensional case.
+However, scaling the objective function with higher numbers gives even worse results for the bundle methods.
+For the sets \texttt{cancer1}, \texttt{cancer3} and \texttt{ionosphere1} it can not be detected, that the groups with the added noise are weighted consistently lower, than the exact group.
+
+The function values decrease for the bundle methods if the subproblem is solved to a higher accuracy (here \(10^{-15}\)). For \texttt{fmincon} this effect is barely measurable. 
+However, the computation time is about doubled for \texttt{fmincon} in that case, whereas it does not rise for the bundle algorithms.
+This indicates, that in the nearly exact case, the bundle algorithm may profit from the subgradient information.
+Like in the one-dimensional case, it does not influence the results if the adjoint problem is computed to a lower tolerance.
+The same holds true if the stopping tolerance is lowered.
+This is as expected, since the same behavior can also be seen in the one-dimensional case.
+
+We remark that the parameter \(\eta_k\) reaches high values up to \(10^8\) for both bundle methods.
+
+As in the one-dimensional case we close this analysis by comparing how well the generated models work on unseen data.
+Therefore we compute the optimal hyperplanes, given the optimal hyper-parameters \(C_{min}\), on the whole set of training data.
+Then this hyperplane is used to classify the validation set and the numbers of misclassified points are compared.
+The hyper-parameters are scaled in the same way as above to compensate for using only one fold.
+
+\begin{table}[ht]%
+\centering
+\begin{tabular}{|l|c|c|c|}
+	\hline
+	Data set & Bundle \ref{sec_nonconv_inex}.1 & Bundle \ref{sec_variable_metric} & \texttt{fmincon} \\
+	\hline
+	\texttt{cancer1} & 0.038374 & 0.038374 & 0.036117\\
+	\texttt{cancer2} & 0.027088 & 0.033860 & 0.031602\\
+	\texttt{cancer3} & 0.029345 & 0.029345 & 0.029345\\
+	\texttt{cancer4} & 0.027088 & 0.029345 & 0.0293453\\
+	\texttt{ionosphere1} & 0.198198 & 0.216216 & 0.198198\\
+	\texttt{ionosphere2} & 0.144144 & 0.135135 & 0.144144\\
+	\hline
+\end{tabular}
+\caption[Misclassification error for multi-dimensional data]{Misclassification error on the validation data. The separating hyperplane is generated using the \(C_{min}\) value found by the respective optimization algorithm.}
+\label{misclass_mD}
+\end{table}
+
+Again it can be observed, that the variance in the hyper-parameter does not result in an equally board variance of the misclassification error.
+
+All in all, we conclude that again both bundle algorithms, \ref{sec_nonconv_inex}.1 and \ref{sec_variable_metric}.1, are able to solve the given bilevel problem.
+The minimizers, that are found by the various algorithms, are very different. Still the computed loss function values are close together. The \texttt{fmincon} routine is able to generate the lowest function values.
+The bundle algorithms can compare to the computation time of the MATLAB algorithm and for very accurately calculated inner level problems, they outperform \texttt{fmincon} in terms of computation time.
+%A possible reason for this could be the special form of the objective functions, which is really flat with very high peaks or edges.
 
 
 %The computation time becomes lower as the tolerances increase, because the subproblems take less time to be computed.

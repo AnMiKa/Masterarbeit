@@ -2,32 +2,69 @@
 
 %\thispagestyle{empty}
 
-\begin{tabular}{c@{}c@{} l@{}}
-	\(x^k\) && iterates \\
-	\(\hat{x}^k\) && current stability center \\
+\begin{longtable}{c@{}c@{} l@{}}
+	 \(\alpha_j^k\) & \(\geq 0\)& Lagrange multipliers of the bundle subproblem \\
+	\(a_k\) && aggregate linearization \\
+	\(A_k\) && augmented aggregate linearization \\
+	\(b\) && bias (chapter \ref{sec_bilevel}) \\
+	\(b^k_j\) && convexification term of the augmented linearization error \\
+	\(B_r(x)\) && open ball with radius \(r\) around the point \(x\) \\
+	\(c_j^k\) & \(\geq 0\)& augmented linearization error \\
+	\(C\) && hyper-parameter (chapter \ref{sec_bilevel}) \\
+	\(C^k\)	&\(\geq 0\)& augmented aggregate error \\
+	\(d^k\) && step in bundle method / minimizer of the bundle subproblem \\
+	\(\delta_k\) && decrease measure \\
+	\(\delta^M_k\) & \(\geq 0\) & model decrease \\
+	\(e_j^k\) & \(\geq 0 \)& linearization error \\
+	\(\tilde{e}^k_j\) & \(\geq 0\) & subgradient locality measure \\
+	\(E^k\) & \(\geq 0\) & aggregate (linearization) error \\
+	\(\eta_k\) & \(\geq 0\) & convexification parameter \\
 	\(f(x)\) && exact evaluation of \(f\) at point \(x\) \\
 	\(f_k\) && value of \(f\) at point \(x^k\) from the oracle, may be inexact \\
-	\(\hat{f}_k\) && value of \(f\) at stability center \(\hat{x}^k\) from the oracle, may be inexact \\
-	\(g^k\) && a subgradient of \(f\) at \(x^k\) (can be exact or inexact) \\
-	\(s^k\) && a subgradient of the convexified objective at \(x^k\) (can be exact or inexact) \\
-	\(m_k\) && cutting plane model of the objective function \(f\) \\
-	\(M_k\) && cutting plane model of the convexified objective function \\
-	\(e_j^k\) && linearization error \\
-	\(c_j^k\) && linearization error of the convexified objective function \\
-	\(\eta_k\) && convexification parameter \\
-	\(\gamma\) & \(>0\) & safeguarding parameter for \(\eta\)-calculation \\
-  \(\alpha_j^k\) && Lagrange multipliers of the subproblem \\
-	\(d^k\) && minimizer of the subproblem \\
-	\(\xi\) && variable from reformulation of the subproblem \\
-	\(J_k\) && index set at iteration \(k\) \\
-	\(t_k\) &\(>0\)& prox-parameter \\
-	\(\delta_k\) && nominal decrease \\
-	\(m\) &\(\in (0,1) \quad\)& decrease parameter \\
+	\(\hat{f}_k\) && value of \(f\) at stability center \(\hat{x}^k\), may be inexact \\
+	\(g^k\) && subgradient at point \(x^k\), can be exact or inexact \\
+	\(G\) && number of groups (chapter \ref{sec_bilevel}) \\
 	\(G^k\) && aggregate subgradient \\
-	\(S^k\) && aggregate subgradient of convexified objective \\
-	\(E^k\) && aggregate error \\
-	\(C^k\)	&& aggregate error of convexified objective \\
-	\(\rho\) & \(\in (0,\frac{1}{2}) \quad \) & correction parameter \\
-	K & \(>0\) & control parameter for length of direction vector \\ 
-	\(\theta_k\) && length control factor
-\end{tabular}
+	\(\gamma\) & \(>0\) & safeguarding parameter for \(\eta\)-calculation; in chapter \ref{sec_bilevel}: margin \\
+	\(\mathtt{i}_X\) && indicator function of the set \(X\) \\
+	\(\mathbb{I}\) && identity matrix \\
+	\(J_k\) && bundle index set at iteration \(k\) \\
+	\(\mathcal{J}F\) && Jacobian of function \(F\) (chapter \ref{sec_bilevel})\\
+	\(\mathcal{J}_wF\) && partial Jacobian of \(F\) with respect to \(w\) (chapter \ref{sec_bilevel})\\
+	\(\kappa_{+,-}\) && step size updating parameters \\
+	\(l_j\) && linear function (cutting plane) \\
+	\(L\) && Lagrangian (chapter \ref{sec_bilevel}) \\
+	\(\mathcal{L}\) && loss function (chapter \ref{sec_bilevel}) \\
+	\(\lambda\) && hyper-parameter in risk minimization (chapter \ref{sec_bilevel}) \\
+	\(m\) &\(\in (0,1) \quad\)& decrease parameter \\
+	\(m_k\) && cutting plane model \\
+	\(\tilde{m}_k\) && regularized cutting plane model \\
+	\(M_k\) && (augmented) cutting plane model of the convexified objective function \\
+	\(\mu\) && Lagrange multiplier (chapter \ref{sec_bilevel}) \\
+	\(n_d\) && number of data points (chapter \ref{sec_bilevel}) \\
+	\(n_f\) && size of feature space (chapter \ref{sec_bilevel}) \\
+	\(N_U\) && normal cone of set \(U\) (chapter \ref{sec_bilevel}) \\
+	\(\mathcal{\bar{N}}\) && index set of training data (chapter \ref{sec_bilevel}) \\
+	\(\mathcal{N}\) && index set of validation data \\
+	\(\nu^k\) && subgradient of the constraint set \\
+	\(Q_k\) && metric matrix \\
+	\(s^k\) && augmented subgradient at \(x^k\) \\
+	\(S\) && solution map (chapter \ref{sec_bilevel}) \\
+	\(S^k\) && augmented aggregate subgradient \\
+	\(\bar{\sigma}\) && error bound on approximate function value \\
+	\(t_k\) &\(>0\)& prox-parameter \\
+	\(T\) && number of folds (chapter \ref{sec_bilevel}) \\
+	\(\bar{\theta}\) && error bound on approximate subgradient \\
+	\(U_{ad}\) && feasible set (chapter \ref{sec_bilevel}) \\
+	\(w, \tilde{w}\) && separating hyperplane (chapter \ref{sec_bilevel}) \\
+	\(x^i\) && data point (chapter \ref{sec_bilevel}) \\ 
+	\(x^k\) && iterate of bundle algorithm \\
+	\(\hat{x}^k\) && current stability center \\
+	\(\xi,\tilde{\xi}\) && slack variable from reformulation of subproblems \\
+	\(y_i\) && class label (chapter \ref{sec_bilevel}) \\
+	\(\nabla f\) && gradient of function \(f\) (chapter \ref{sec_bilevel})\\
+	\(\nabla_{w}f\) && partial gradient of \(f\) with respect to \(w\) (chapter \ref{sec_bilevel}) \\
+	\(\partial f\) && subdifferential of function \(f\) \\
+	\(\partial_{\varepsilon}f\) && \(\varepsilon\)-subdifferential of function \(f\) \\
+	\(\partial_{[\varepsilon]}f\) && Fr{\'e}chet \(\varepsilon\)-subdifferential \\
+\end{longtable}

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=latex 2017.6.11)  30 AUG 2017 11:08
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=latex 2017.6.11)  31 AUG 2017 04:03
 entering extended mode
 **Bundle_methods_for_nonsmooth_nonconvex_problems_with_inexact_information.tex
 
@@ -359,6 +359,26 @@ Package: tabularx 1999/01/07 v2.07 `tabularx' package (DPC)
 \TX@cols=\count106
 \TX@ftn=\toks31
 )
+("C:\Program Files\Annika Programme\MiKTeX\tex\latex\tools\longtable.sty"
+Package: longtable 2004/02/01 v4.11 Multi-page Table package (DPC)
+\LTleft=\skip58
+\LTright=\skip59
+\LTpre=\skip60
+\LTpost=\skip61
+\LTchunksize=\count107
+\LTcapwidth=\dimen130
+\LT@head=\box30
+\LT@firsthead=\box31
+\LT@foot=\box32
+\LT@lastfoot=\box33
+\LT@cols=\count108
+\LT@rows=\count109
+\c@LT@tables=\count110
+\c@LT@chunks=\count111
+\LT@p@ftn=\toks32
+)
+Class scrartcl Info: longtable captions redefined on input line 19.
+
 ("C:\Program Files\Annika Programme\MiKTeX\tex\latex\ltxmisc\here.sty")
 (C:\Users\as\AppData\Roaming\MiKTeX\2.9\tex\latex\germbib\bibgerm.sty
 Package: bibgerm 2000/08/18 v0.1 Support for mixed language bibliographies
@@ -369,12 +389,12 @@ Package: bibgerm 2000/08/18 v0.1 Support for mixed language bibliographies
 ** Modified for ngerman.sty and babel.sty by H. Harders 21 August 2000 **)
 (C:\Users\as\AppData\Roaming\MiKTeX\2.9\tex\latex\algorithm2e\algorithm2e.sty
 Package: algorithm2e 2013/01/06 v5.00 algorithms environments
-\c@AlgoLine=\count107
+\c@AlgoLine=\count112
 
 ("C:\Program Files\Annika Programme\MiKTeX\tex\latex\base\ifthen.sty"
 Package: ifthen 2001/05/26 v1.1c Standard LaTeX ifthen package (DPC)
 )
-\algocf@hangindent=\skip58
+\algocf@hangindent=\skip62
 
 ("C:\Program Files\Annika Programme\MiKTeX\tex\latex\tools\xspace.sty"
 Package: xspace 2009/10/20 v1.13 Space after command names (DPC,MH)
@@ -389,40 +409,40 @@ Package `algorithm2e' Release 5.1 -- october 19 2015 --
 subscribe by emailing sympa@lirmm.fr with 'subscribe <list> <firstname name>'
 - Author: Christophe Fiorio (christophe.fiorio@umontpellier.fr)
 ********************************************************
-\skiptotal=\skip59
-\skiplinenumber=\skip60
-\skiprule=\skip61
-\skiphlne=\skip62
-\skiptext=\skip63
-\skiplength=\skip64
-\algomargin=\skip65
-\skipalgocfslide=\skip66
-\algowidth=\dimen130
-\inoutsize=\dimen131
-\inoutindent=\dimen132
-\interspacetitleruled=\dimen133
-\interspacealgoruled=\dimen134
-\interspacetitleboxruled=\dimen135
-\algocf@ruledwidth=\skip67
-\algocf@inoutbox=\box30
-\algocf@inputbox=\box31
-\AlCapSkip=\skip68
-\AlCapHSkip=\skip69
-\algoskipindent=\skip70
-\algocf@nlbox=\box32
-\algocf@hangingbox=\box33
-\algocf@untilbox=\box34
-\algocf@skipuntil=\skip71
-\algocf@capbox=\box35
-\algoheightruledefault=\skip72
-\algoheightrule=\skip73
-\algotitleheightruledefault=\skip74
-\algotitleheightrule=\skip75
-\c@algocfline=\count108
-\c@algocfproc=\count109
-\c@algocf=\count110
-\algocf@algoframe=\box36
-\algocf@algobox=\box37
+\skiptotal=\skip63
+\skiplinenumber=\skip64
+\skiprule=\skip65
+\skiphlne=\skip66
+\skiptext=\skip67
+\skiplength=\skip68
+\algomargin=\skip69
+\skipalgocfslide=\skip70
+\algowidth=\dimen131
+\inoutsize=\dimen132
+\inoutindent=\dimen133
+\interspacetitleruled=\dimen134
+\interspacealgoruled=\dimen135
+\interspacetitleboxruled=\dimen136
+\algocf@ruledwidth=\skip71
+\algocf@inoutbox=\box34
+\algocf@inputbox=\box35
+\AlCapSkip=\skip72
+\AlCapHSkip=\skip73
+\algoskipindent=\skip74
+\algocf@nlbox=\box36
+\algocf@hangingbox=\box37
+\algocf@untilbox=\box38
+\algocf@skipuntil=\skip75
+\algocf@capbox=\box39
+\algoheightruledefault=\skip76
+\algoheightrule=\skip77
+\algotitleheightruledefault=\skip78
+\algotitleheightrule=\skip79
+\c@algocfline=\count113
+\c@algocfproc=\count114
+\c@algocf=\count115
+\algocf@algoframe=\box40
+\algocf@algobox=\box41
 ) (C:\Users\as\AppData\Roaming\MiKTeX\2.9\tex\latex\algorithmicx\algpseudocode.sty
 Package: algpseudocode 
 
@@ -430,16 +450,16 @@ Package: algpseudocode
 Package: algorithmicx 2005/04/27 v1.2 Algorithmicx
 
 Document Style algorithmicx 1.2 - a greatly improved `algorithmic' style
-\c@ALG@line=\count111
-\c@ALG@rem=\count112
-\c@ALG@nested=\count113
-\ALG@tlm=\skip76
-\ALG@thistlm=\skip77
-\c@ALG@Lnr=\count114
-\c@ALG@blocknr=\count115
-\c@ALG@storecount=\count116
-\c@ALG@tmpcounter=\count117
-\ALG@tmplength=\skip78
+\c@ALG@line=\count116
+\c@ALG@rem=\count117
+\c@ALG@nested=\count118
+\ALG@tlm=\skip80
+\ALG@thistlm=\skip81
+\c@ALG@Lnr=\count119
+\c@ALG@blocknr=\count120
+\c@ALG@storecount=\count121
+\c@ALG@tmpcounter=\count122
+\ALG@tmplength=\skip82
 )
 Document Style - pseudocode environments for use with the `algorithmicx' style
 ) ("C:\Program Files\Annika Programme\MiKTeX\tex\latex\tools\bm.sty"
@@ -454,13 +474,13 @@ LaTeX Info: Redefining \bm on input line 204.
 (C:\Users\as\AppData\Roaming\MiKTeX\2.9\tex\latex\pgf\basiclayer\pgf.sty
 (C:\Users\as\AppData\Roaming\MiKTeX\2.9\tex\latex\pgf\utilities\pgfrcs.sty
 (C:\Users\as\AppData\Roaming\MiKTeX\2.9\tex\generic\pgf\utilities\pgfutil-common.tex
-\pgfutil@everybye=\toks32
-\pgfutil@tempdima=\dimen136
-\pgfutil@tempdimb=\dimen137
+\pgfutil@everybye=\toks33
+\pgfutil@tempdima=\dimen137
+\pgfutil@tempdimb=\dimen138
 
 (C:\Users\as\AppData\Roaming\MiKTeX\2.9\tex\generic\pgf\utilities\pgfutil-common-lists.tex))
 (C:\Users\as\AppData\Roaming\MiKTeX\2.9\tex\generic\pgf\utilities\pgfutil-latex.def
-\pgfutil@abb=\box38
+\pgfutil@abb=\box42
 
 (C:\Users\as\AppData\Roaming\MiKTeX\2.9\tex\latex\ms\everyshi.sty
 Package: everyshi 2001/05/15 v3.00 EveryShipout Package (MS)
@@ -476,29 +496,29 @@ Package: pgf 2013/12/18 v3.0.0 (rcs-revision 1.14)
 Package: pgfsys 2013/11/30 v3.0.0 (rcs-revision 1.47)
 
 (C:\Users\as\AppData\Roaming\MiKTeX\2.9\tex\generic\pgf\utilities\pgfkeys.code.tex
-\pgfkeys@pathtoks=\toks33
-\pgfkeys@temptoks=\toks34
+\pgfkeys@pathtoks=\toks34
+\pgfkeys@temptoks=\toks35
 
 (C:\Users\as\AppData\Roaming\MiKTeX\2.9\tex\generic\pgf\utilities\pgfkeysfiltered.code.tex
-\pgfkeys@tmptoks=\toks35
+\pgfkeys@tmptoks=\toks36
 ))
-\pgf@x=\dimen138
-\pgf@y=\dimen139
-\pgf@xa=\dimen140
-\pgf@ya=\dimen141
-\pgf@xb=\dimen142
-\pgf@yb=\dimen143
-\pgf@xc=\dimen144
-\pgf@yc=\dimen145
+\pgf@x=\dimen139
+\pgf@y=\dimen140
+\pgf@xa=\dimen141
+\pgf@ya=\dimen142
+\pgf@xb=\dimen143
+\pgf@yb=\dimen144
+\pgf@xc=\dimen145
+\pgf@yc=\dimen146
 \w@pgf@writea=\write3
 \r@pgf@reada=\read1
-\c@pgf@counta=\count118
-\c@pgf@countb=\count119
-\c@pgf@countc=\count120
-\c@pgf@countd=\count121
-\t@pgf@toka=\toks36
-\t@pgf@tokb=\toks37
-\t@pgf@tokc=\toks38
+\c@pgf@counta=\count123
+\c@pgf@countb=\count124
+\c@pgf@countc=\count125
+\c@pgf@countd=\count126
+\t@pgf@toka=\toks37
+\t@pgf@tokb=\toks38
+\t@pgf@tokc=\toks39
 
 (C:\Users\as\AppData\Roaming\MiKTeX\2.9\tex\generic\pgf\systemlayer\pgf.cfg
 File: pgf.cfg 2008/05/14  (rcs-revision 1.7)
@@ -510,12 +530,12 @@ File: pgfsys-dvips.def 2013/07/16  (rcs-revision 1.23)
 
 (C:\Users\as\AppData\Roaming\MiKTeX\2.9\tex\generic\pgf\systemlayer\pgfsys-common-postscript.def
 File: pgfsys-common-postscript.def 2008/10/01  (rcs-revision 1.22)
-\pgf@objectcount=\count122
+\pgf@objectcount=\count127
 )))
 (C:\Users\as\AppData\Roaming\MiKTeX\2.9\tex\generic\pgf\systemlayer\pgfsyssoftpath.code.tex
 File: pgfsyssoftpath.code.tex 2013/09/09  (rcs-revision 1.9)
-\pgfsyssoftpath@smallbuffer@items=\count123
-\pgfsyssoftpath@bigbuffer@items=\count124
+\pgfsyssoftpath@smallbuffer@items=\count128
+\pgfsyssoftpath@bigbuffer@items=\count129
 )
 (C:\Users\as\AppData\Roaming\MiKTeX\2.9\tex\generic\pgf\systemlayer\pgfsysprotocol.code.tex
 File: pgfsysprotocol.code.tex 2006/10/16  (rcs-revision 1.4)
@@ -527,12 +547,12 @@ Package: pgfcore 2010/04/11 v3.0.0 (rcs-revision 1.7)
 (C:\Users\as\AppData\Roaming\MiKTeX\2.9\tex\generic\pgf\math\pgfmathcalc.code.tex
 (C:\Users\as\AppData\Roaming\MiKTeX\2.9\tex\generic\pgf\math\pgfmathutil.code.tex)
 (C:\Users\as\AppData\Roaming\MiKTeX\2.9\tex\generic\pgf\math\pgfmathparser.code.tex
-\pgfmath@dimen=\dimen146
-\pgfmath@count=\count125
-\pgfmath@box=\box39
-\pgfmath@toks=\toks39
-\pgfmath@stack@operand=\toks40
-\pgfmath@stack@operation=\toks41
+\pgfmath@dimen=\dimen147
+\pgfmath@count=\count130
+\pgfmath@box=\box43
+\pgfmath@toks=\toks40
+\pgfmath@stack@operand=\toks41
+\pgfmath@stack@operation=\toks42
 )
 (C:\Users\as\AppData\Roaming\MiKTeX\2.9\tex\generic\pgf\math\pgfmathfunctions.code.tex
 (C:\Users\as\AppData\Roaming\MiKTeX\2.9\tex\generic\pgf\math\pgfmathfunctions.basic.code.tex)
@@ -544,51 +564,51 @@ Package: pgfcore 2010/04/11 v3.0.0 (rcs-revision 1.7)
 (C:\Users\as\AppData\Roaming\MiKTeX\2.9\tex\generic\pgf\math\pgfmathfunctions.misc.code.tex)
 (C:\Users\as\AppData\Roaming\MiKTeX\2.9\tex\generic\pgf\math\pgfmathfunctions.integerarithmetics.code.tex)))
 (C:\Users\as\AppData\Roaming\MiKTeX\2.9\tex\generic\pgf\math\pgfmathfloat.code.tex
-\c@pgfmathroundto@lastzeros=\count126
+\c@pgfmathroundto@lastzeros=\count131
 ))
 (C:\Users\as\AppData\Roaming\MiKTeX\2.9\tex\generic\pgf\basiclayer\pgfcorepoints.code.tex
 File: pgfcorepoints.code.tex 2013/10/07  (rcs-revision 1.27)
-\pgf@picminx=\dimen147
-\pgf@picmaxx=\dimen148
-\pgf@picminy=\dimen149
-\pgf@picmaxy=\dimen150
-\pgf@pathminx=\dimen151
-\pgf@pathmaxx=\dimen152
-\pgf@pathminy=\dimen153
-\pgf@pathmaxy=\dimen154
-\pgf@xx=\dimen155
-\pgf@xy=\dimen156
-\pgf@yx=\dimen157
-\pgf@yy=\dimen158
-\pgf@zx=\dimen159
-\pgf@zy=\dimen160
+\pgf@picminx=\dimen148
+\pgf@picmaxx=\dimen149
+\pgf@picminy=\dimen150
+\pgf@picmaxy=\dimen151
+\pgf@pathminx=\dimen152
+\pgf@pathmaxx=\dimen153
+\pgf@pathminy=\dimen154
+\pgf@pathmaxy=\dimen155
+\pgf@xx=\dimen156
+\pgf@xy=\dimen157
+\pgf@yx=\dimen158
+\pgf@yy=\dimen159
+\pgf@zx=\dimen160
+\pgf@zy=\dimen161
 )
 (C:\Users\as\AppData\Roaming\MiKTeX\2.9\tex\generic\pgf\basiclayer\pgfcorepathconstruct.code.tex
 File: pgfcorepathconstruct.code.tex 2013/10/07  (rcs-revision 1.29)
-\pgf@path@lastx=\dimen161
-\pgf@path@lasty=\dimen162
+\pgf@path@lastx=\dimen162
+\pgf@path@lasty=\dimen163
 )
 (C:\Users\as\AppData\Roaming\MiKTeX\2.9\tex\generic\pgf\basiclayer\pgfcorepathusage.code.tex
 File: pgfcorepathusage.code.tex 2013/12/13  (rcs-revision 1.23)
-\pgf@shorten@end@additional=\dimen163
-\pgf@shorten@start@additional=\dimen164
+\pgf@shorten@end@additional=\dimen164
+\pgf@shorten@start@additional=\dimen165
 )
 (C:\Users\as\AppData\Roaming\MiKTeX\2.9\tex\generic\pgf\basiclayer\pgfcorescopes.code.tex
 File: pgfcorescopes.code.tex 2013/10/09  (rcs-revision 1.44)
-\pgfpic=\box40
-\pgf@hbox=\box41
-\pgf@layerbox@main=\box42
-\pgf@picture@serial@count=\count127
+\pgfpic=\box44
+\pgf@hbox=\box45
+\pgf@layerbox@main=\box46
+\pgf@picture@serial@count=\count132
 )
 (C:\Users\as\AppData\Roaming\MiKTeX\2.9\tex\generic\pgf\basiclayer\pgfcoregraphicstate.code.tex
 File: pgfcoregraphicstate.code.tex 2013/09/19  (rcs-revision 1.11)
-\pgflinewidth=\dimen165
+\pgflinewidth=\dimen166
 )
 (C:\Users\as\AppData\Roaming\MiKTeX\2.9\tex\generic\pgf\basiclayer\pgfcoretransformations.code.tex
 File: pgfcoretransformations.code.tex 2013/10/10  (rcs-revision 1.17)
-\pgf@pt@x=\dimen166
-\pgf@pt@y=\dimen167
-\pgf@pt@temp=\dimen168
+\pgf@pt@x=\dimen167
+\pgf@pt@y=\dimen168
+\pgf@pt@temp=\dimen169
 )
 (C:\Users\as\AppData\Roaming\MiKTeX\2.9\tex\generic\pgf\basiclayer\pgfcorequick.code.tex
 File: pgfcorequick.code.tex 2008/10/09  (rcs-revision 1.3)
@@ -601,19 +621,19 @@ File: pgfcorepathprocessing.code.tex 2013/09/09  (rcs-revision 1.9)
 )
 (C:\Users\as\AppData\Roaming\MiKTeX\2.9\tex\generic\pgf\basiclayer\pgfcorearrows.code.tex
 File: pgfcorearrows.code.tex 2013/11/07  (rcs-revision 1.40)
-\pgfarrowsep=\dimen169
+\pgfarrowsep=\dimen170
 )
 (C:\Users\as\AppData\Roaming\MiKTeX\2.9\tex\generic\pgf\basiclayer\pgfcoreshade.code.tex
 File: pgfcoreshade.code.tex 2013/07/15  (rcs-revision 1.15)
-\pgf@max=\dimen170
-\pgf@sys@shading@range@num=\count128
+\pgf@max=\dimen171
+\pgf@sys@shading@range@num=\count133
 )
 (C:\Users\as\AppData\Roaming\MiKTeX\2.9\tex\generic\pgf\basiclayer\pgfcoreimage.code.tex
 File: pgfcoreimage.code.tex 2013/07/15  (rcs-revision 1.18)
 
 (C:\Users\as\AppData\Roaming\MiKTeX\2.9\tex\generic\pgf\basiclayer\pgfcoreexternal.code.tex
 File: pgfcoreexternal.code.tex 2013/07/15  (rcs-revision 1.20)
-\pgfexternal@startupbox=\box43
+\pgfexternal@startupbox=\box47
 ))
 (C:\Users\as\AppData\Roaming\MiKTeX\2.9\tex\generic\pgf\basiclayer\pgfcorelayers.code.tex
 File: pgfcorelayers.code.tex 2013/07/18  (rcs-revision 1.7)
@@ -626,15 +646,15 @@ File: pgfcorepatterns.code.tex 2013/11/07  (rcs-revision 1.5)
 )))
 (C:\Users\as\AppData\Roaming\MiKTeX\2.9\tex\generic\pgf\modules\pgfmoduleshapes.code.tex
 File: pgfmoduleshapes.code.tex 2013/10/31  (rcs-revision 1.34)
-\pgfnodeparttextbox=\box44
+\pgfnodeparttextbox=\box48
 )
 (C:\Users\as\AppData\Roaming\MiKTeX\2.9\tex\generic\pgf\modules\pgfmoduleplot.code.tex
 File: pgfmoduleplot.code.tex 2013/07/31  (rcs-revision 1.12)
 )
 (C:\Users\as\AppData\Roaming\MiKTeX\2.9\tex\latex\pgf\compatibility\pgfcomp-version-0-65.sty
 Package: pgfcomp-version-0-65 2007/07/03 v3.0.0 (rcs-revision 1.7)
-\pgf@nodesepstart=\dimen171
-\pgf@nodesepend=\dimen172
+\pgf@nodesepstart=\dimen172
+\pgf@nodesepend=\dimen173
 )
 (C:\Users\as\AppData\Roaming\MiKTeX\2.9\tex\latex\pgf\compatibility\pgfcomp-version-1-18.sty
 Package: pgfcomp-version-1-18 2007/07/23 v3.0.0 (rcs-revision 1.1)
@@ -648,41 +668,41 @@ Package: pgfcomp-version-1-18 2007/07/23 v3.0.0 (rcs-revision 1.1)
 Package: pgffor 2013/12/13 v3.0.0 (rcs-revision 1.25)
 
 (C:\Users\as\AppData\Roaming\MiKTeX\2.9\tex\generic\pgf\math\pgfmath.code.tex)
-\pgffor@iter=\dimen173
-\pgffor@skip=\dimen174
-\pgffor@stack=\toks42
-\pgffor@toks=\toks43
+\pgffor@iter=\dimen174
+\pgffor@skip=\dimen175
+\pgffor@stack=\toks43
+\pgffor@toks=\toks44
 ))
 (C:\Users\as\AppData\Roaming\MiKTeX\2.9\tex\generic\pgf\frontendlayer\tikz\tikz.code.tex
 Package: tikz 2013/12/13 v3.0.0 (rcs-revision 1.142)
 
 (C:\Users\as\AppData\Roaming\MiKTeX\2.9\tex\generic\pgf\libraries\pgflibraryplothandlers.code.tex
 File: pgflibraryplothandlers.code.tex 2013/08/31 v3.0.0 (rcs-revision 1.20)
-\pgf@plot@mark@count=\count129
-\pgfplotmarksize=\dimen175
+\pgf@plot@mark@count=\count134
+\pgfplotmarksize=\dimen176
 )
-\tikz@lastx=\dimen176
-\tikz@lasty=\dimen177
-\tikz@lastxsaved=\dimen178
-\tikz@lastysaved=\dimen179
-\tikzleveldistance=\dimen180
-\tikzsiblingdistance=\dimen181
-\tikz@figbox=\box45
-\tikz@figbox@bg=\box46
-\tikz@tempbox=\box47
-\tikz@tempbox@bg=\box48
-\tikztreelevel=\count130
-\tikznumberofchildren=\count131
-\tikznumberofcurrentchild=\count132
-\tikz@fig@count=\count133
+\tikz@lastx=\dimen177
+\tikz@lasty=\dimen178
+\tikz@lastxsaved=\dimen179
+\tikz@lastysaved=\dimen180
+\tikzleveldistance=\dimen181
+\tikzsiblingdistance=\dimen182
+\tikz@figbox=\box49
+\tikz@figbox@bg=\box50
+\tikz@tempbox=\box51
+\tikz@tempbox@bg=\box52
+\tikztreelevel=\count135
+\tikznumberofchildren=\count136
+\tikznumberofcurrentchild=\count137
+\tikz@fig@count=\count138
 
 (C:\Users\as\AppData\Roaming\MiKTeX\2.9\tex\generic\pgf\modules\pgfmodulematrix.code.tex
 File: pgfmodulematrix.code.tex 2013/09/17  (rcs-revision 1.8)
-\pgfmatrixcurrentrow=\count134
-\pgfmatrixcurrentcolumn=\count135
-\pgf@matrix@numberofcolumns=\count136
+\pgfmatrixcurrentrow=\count139
+\pgfmatrixcurrentcolumn=\count140
+\pgf@matrix@numberofcolumns=\count141
 )
-\tikz@expandcount=\count137
+\tikz@expandcount=\count142
 
 (C:\Users\as\AppData\Roaming\MiKTeX\2.9\tex\generic\pgf\frontendlayer\tikz\libraries\tikzlibrarytopaths.code.tex
 File: tikzlibrarytopaths.code.tex 2008/06/17 v3.0.0 (rcs-revision 1.2)
@@ -692,7 +712,7 @@ File: tikzlibraryarrows.code.tex 2008/01/09 v3.0.0 (rcs-revision 1.1)
 
 (C:\Users\as\AppData\Roaming\MiKTeX\2.9\tex\generic\pgf\libraries\pgflibraryarrows.code.tex
 File: pgflibraryarrows.code.tex 2013/09/23 v3.0.0 (rcs-revision 1.16)
-\arrowsize=\dimen182
+\arrowsize=\dimen183
 ))
 (C:\Users\as\AppData\Roaming\MiKTeX\2.9\tex\generic\pgf\frontendlayer\tikz\libraries\tikzlibraryshapes.code.tex
 File: tikzlibraryshapes.code.tex 2008/01/09 v3.0.0 (rcs-revision 1.1)
@@ -728,47 +748,47 @@ x
 File: tikzlibraryshapes.multipart.code.tex 2008/01/09 v3.0.0 (rcs-revision 1.1)
  (C:\Users\as\AppData\Roaming\MiKTeX\2.9\tex\generic\pgf\libraries\shapes\pgflibraryshapes.multipart.code.tex
 File: pgflibraryshapes.multipart.code.tex 2010/01/07 v3.0.0 (rcs-revision 1.2)
-\pgfnodepartlowerbox=\box49
-\pgfnodeparttwobox=\box50
-\pgfnodepartthreebox=\box51
-\pgfnodepartfourbox=\box52
-\pgfnodeparttwentybox=\box53
-\pgfnodepartnineteenbox=\box54
-\pgfnodeparteighteenbox=\box55
-\pgfnodepartseventeenbox=\box56
-\pgfnodepartsixteenbox=\box57
-\pgfnodepartfifteenbox=\box58
-\pgfnodepartfourteenbox=\box59
-\pgfnodepartthirteenbox=\box60
-\pgfnodeparttwelvebox=\box61
-\pgfnodepartelevenbox=\box62
-\pgfnodeparttenbox=\box63
-\pgfnodepartninebox=\box64
-\pgfnodeparteightbox=\box65
-\pgfnodepartsevenbox=\box66
-\pgfnodepartsixbox=\box67
-\pgfnodepartfivebox=\box68
+\pgfnodepartlowerbox=\box53
+\pgfnodeparttwobox=\box54
+\pgfnodepartthreebox=\box55
+\pgfnodepartfourbox=\box56
+\pgfnodeparttwentybox=\box57
+\pgfnodepartnineteenbox=\box58
+\pgfnodeparteighteenbox=\box59
+\pgfnodepartseventeenbox=\box60
+\pgfnodepartsixteenbox=\box61
+\pgfnodepartfifteenbox=\box62
+\pgfnodepartfourteenbox=\box63
+\pgfnodepartthirteenbox=\box64
+\pgfnodeparttwelvebox=\box65
+\pgfnodepartelevenbox=\box66
+\pgfnodeparttenbox=\box67
+\pgfnodepartninebox=\box68
+\pgfnodeparteightbox=\box69
+\pgfnodepartsevenbox=\box70
+\pgfnodepartsixbox=\box71
+\pgfnodepartfivebox=\box72
 )))
 (C:\Users\as\AppData\Roaming\MiKTeX\2.9\tex\generic\pgf\frontendlayer\tikz\libraries\tikzlibraryfit.code.tex
 File: tikzlibraryfit.code.tex 2013/07/12 v3.0.0 (rcs-revision 1.5)
 )
 (C:\Users\as\AppData\Roaming\MiKTeX\2.9\tex\generic\pgf\frontendlayer\tikz\libraries\tikzlibrarydecorations.code.tex
 (C:\Users\as\AppData\Roaming\MiKTeX\2.9\tex\generic\pgf\modules\pgfmoduledecorations.code.tex
-\pgfdecoratedcompleteddistance=\dimen183
-\pgfdecoratedremainingdistance=\dimen184
-\pgfdecoratedinputsegmentcompleteddistance=\dimen185
-\pgfdecoratedinputsegmentremainingdistance=\dimen186
-\pgf@decorate@distancetomove=\dimen187
-\pgf@decorate@repeatstate=\count138
-\pgfdecorationsegmentamplitude=\dimen188
-\pgfdecorationsegmentlength=\dimen189
+\pgfdecoratedcompleteddistance=\dimen184
+\pgfdecoratedremainingdistance=\dimen185
+\pgfdecoratedinputsegmentcompleteddistance=\dimen186
+\pgfdecoratedinputsegmentremainingdistance=\dimen187
+\pgf@decorate@distancetomove=\dimen188
+\pgf@decorate@repeatstate=\count143
+\pgfdecorationsegmentamplitude=\dimen189
+\pgfdecorationsegmentlength=\dimen190
 )
-\tikz@lib@dec@box=\box69
+\tikz@lib@dec@box=\box73
 )
 (C:\Users\as\AppData\Roaming\MiKTeX\2.9\tex\latex\setspace\setspace.sty
 Package: setspace 2011/12/19 v6.7a set line spacing
 )
-\c@theorem=\count139
+\c@theorem=\count144
 
 ("D:\Annika\Uni\10. Semester\Masterarbeit\Proximal Bundle Inexact Information\Git Hub\Masterarbeit\LaTeX\Bundle_methods_
 for_nonsmooth_nonconvex_problems_with_inexact_information.aux"
@@ -798,25 +818,32 @@ _Method_nonconv_inex.aux")
 le_Metric.aux")
 ("D:\Annika\Uni\10. Semester\Masterarbeit\Proximal Bundle Inexact Information\Git Hub\Masterarbeit\LaTeX\Chapters/Bileve
 l_Application.aux")
+("D:\Annika\Uni\10. Semester\Masterarbeit\Proximal Bundle Inexact Information\Git Hub\Masterarbeit\LaTeX\Chapters/Conclu
+sion.aux")
 ("D:\Annika\Uni\10. Semester\Masterarbeit\Proximal Bundle Inexact Information\Git Hub\Masterarbeit\LaTeX\Chapters/Append
 ix.aux"))
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 126.
-LaTeX Font Info:    ... okay on input line 126.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 126.
-LaTeX Font Info:    ... okay on input line 126.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 126.
-LaTeX Font Info:    ... okay on input line 126.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 126.
-LaTeX Font Info:    ... okay on input line 126.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 126.
-LaTeX Font Info:    ... okay on input line 126.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 126.
-LaTeX Font Info:    ... okay on input line 126.
-LaTeX Font Info:    Try loading font information for T1+lmr on input line 126.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 127.
+LaTeX Font Info:    ... okay on input line 127.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 127.
+LaTeX Font Info:    ... okay on input line 127.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 127.
+LaTeX Font Info:    ... okay on input line 127.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 127.
+LaTeX Font Info:    ... okay on input line 127.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 127.
+LaTeX Font Info:    ... okay on input line 127.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 127.
+LaTeX Font Info:    ... okay on input line 127.
+LaTeX Font Info:    Try loading font information for T1+lmr on input line 127.
  ("C:\Program Files\Annika Programme\MiKTeX\tex\latex\lm\t1lmr.fd"
 File: t1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 Package caption Info: Begin \AtBeginDocument code.
+Package caption Info: longtable package is loaded.
+
+(C:\Users\as\AppData\Roaming\MiKTeX\2.9\tex\latex\caption\ltcaption.sty
+Package: ltcaption 2013/06/09 v1.4-94 longtable captions (AR)
+)
 Package caption Info: End \AtBeginDocument code.
 
 
@@ -898,28 +925,27 @@ mary.tex") [4
 ("D:\Annika\Uni\10. Semester\Masterarbeit\Proximal Bundle Inexact Information\Git Hub\Masterarbeit\LaTeX\Bundle_methods_
 for_nonsmooth_nonconvex_problems_with_inexact_information.toc" [5
 
-])
+] [6])
 \tf@toc=\write4
- [6]
+ [7]
 ("D:\Annika\Uni\10. Semester\Masterarbeit\Proximal Bundle Inexact Information\Git Hub\Masterarbeit\LaTeX\First_Pages/Lis
-t_of_Symbols.tex")
-Overfull \hbox (1.73416pt too wide) in paragraph at lines 5--156
-[] 
- []
+t_of_Symbols.tex"
+LaTeX Font Info:    Try loading font information for OT1+lmtt on input line 29.
+ ("C:\Program Files\Annika Programme\MiKTeX\tex\latex\lm\ot1lmtt.fd"
+File: ot1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
+) [8
 
-[7
-
-]
+]) [9]
 ("D:\Annika\Uni\10. Semester\Masterarbeit\Proximal Bundle Inexact Information\Git Hub\Masterarbeit\LaTeX\Bundle_methods_
 for_nonsmooth_nonconvex_problems_with_inexact_information.lof")
 \tf@lof=\write5
+ [10
 
+]
 ("D:\Annika\Uni\10. Semester\Masterarbeit\Proximal Bundle Inexact Information\Git Hub\Masterarbeit\LaTeX\Bundle_methods_
 for_nonsmooth_nonconvex_problems_with_inexact_information.lot")
 \tf@lot=\write6
- [8
-
-]
+ [11]
 ("D:\Annika\Uni\10. Semester\Masterarbeit\Proximal Bundle Inexact Information\Git Hub\Masterarbeit\LaTeX\Chapters/Introd
 uction.tex" [1
 
@@ -938,12 +964,7 @@ _Methods.tex" [6
 utting_plane.tex")
 LaTeX Font Info:    External font `lmex10' loaded for size
 (Font)              <10.95> on input line 64.
- [7] [8]
-LaTeX Font Info:    Try loading font information for OT1+lmtt on input line 156.
- ("C:\Program Files\Annika Programme\MiKTeX\tex\latex\lm\ot1lmtt.fd"
-File: ot1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
-) [9] [10] [11] [12]
-[13] [14]) [15]
+ [7] [8] [9] [10] [11] [12] [13] [14]) [15]
 ("D:\Annika\Uni\10. Semester\Masterarbeit\Proximal Bundle Inexact Information\Git Hub\Masterarbeit\LaTeX\Chapters/Simpli
 fications.tex" [16
 
@@ -1013,16 +1034,24 @@ File: Pictures/Plots/testfun_f4.eps Graphic file (type eps)
  <Pictures/Plots/testfun_f4.eps>
 File: Pictures/Plots/testfun_f5.eps Graphic file (type eps)
 
-<Pictures/Plots/testfun_f5.eps> [55]
+<Pictures/Plots/testfun_f5.eps>
+Overfull \hbox (15.27388pt too wide) in paragraph at lines 1070--1072
+\OMS/lmsy/m/n/12 f\OT1/lmr/m/n/12 20\OML/lmm/m/it/12 ; \OT1/lmr/m/n/12 25\OML/lmm/m/it/12 ; \OT1/lmr/m/n/12 30\OML/lmm/m
+/it/12 ; \OT1/lmr/m/n/12 40\OML/lmm/m/it/12 ; \OT1/lmr/m/n/12 50\OMS/lmsy/m/n/12 g$\T1/lmr/m/n/12 . The start-ing value 
+for each test prob-lem is $\OML/lmm/m/it/12 x[] \OT1/lmr/m/n/12 = \OML/lmm/m/it/12 left\OT1/lmr/m/n/12 (1\OML/lmm/m/it/1
+2 ; []; []; :::; []right\OT1/lmr/m/n/12 )[]$\T1/lmr/m/n/12 . 
+ []
+
+[55]
 File: Pictures/Plots/no_noise.eps Graphic file (type eps)
  <Pictures/Plots/no_noise.eps>
 File: Pictures/Plots/steps_no_noise.eps Graphic file (type eps)
  <Pictures/Plots/steps_no_noise.eps>
 File: Pictures/Plots/constant_noise.eps Graphic file (type eps)
-
-<Pictures/Plots/constant_noise.eps>
+ <Pictures/Plots/constant_noise.eps>
 File: Pictures/Plots/steps_constant_noise.eps Graphic file (type eps)
- <Pictures/Plots/steps_constant_noise.eps>
+
+<Pictures/Plots/steps_constant_noise.eps>
 File: Pictures/Plots/vanishing_noise.eps Graphic file (type eps)
  <Pictures/Plots/vanishing_noise.eps>
 File: Pictures/Plots/steps_vanishing_noise.eps Graphic file (type eps)
@@ -1096,15 +1125,17 @@ File: Pictures/Plots/Scal100_llad-8f.eps Graphic file (type eps)
  <Pictures/Plots/Scal100_llad-8f.eps>
 File: Pictures/Plots/Scal100_llad-4f.eps Graphic file (type eps)
  <Pictures/Plots/Scal100_llad-4f.eps> [88]
+[89] [90] [91]) [92] [93]
+("D:\Annika\Uni\10. Semester\Masterarbeit\Proximal Bundle Inexact Information\Git Hub\Masterarbeit\LaTeX\Chapters/Conclu
+sion.tex") [94
 
-LaTeX Warning: Reference `sec_noconv_inex' on page 89 undefined on input line 1088.
 
-[89]) [90]
+]
 ("D:\Annika\Uni\10. Semester\Masterarbeit\Proximal Bundle Inexact Information\Git Hub\Masterarbeit\LaTeX\Chapters/Append
-ix.tex" [91
+ix.tex" [95
 
 
-] [92]
+] [96]
 File: Pictures/Plots/constant_gradient_noise.eps Graphic file (type eps)
  <Pictures/Plots/constant_gradient_noise.eps>
 File: Pictures/Plots/steps_constant_gradient_noise.eps Graphic file (type eps)
@@ -1113,7 +1144,7 @@ File: Pictures/Plots/vanishing_gradient_noise.eps Graphic file (type eps)
 
 <Pictures/Plots/vanishing_gradient_noise.eps>
 File: Pictures/Plots/steps_vanishing_gradient_noise.eps Graphic file (type eps)
- <Pictures/Plots/steps_vanishing_gradient_noise.eps> [93]
+ <Pictures/Plots/steps_vanishing_gradient_noise.eps> [97]
 File: Pictures/Plots/no_noise_b.eps Graphic file (type eps)
 
 <Pictures/Plots/no_noise_b.eps>
@@ -1123,7 +1154,7 @@ File: Pictures/Plots/constant_noise_b.eps Graphic file (type eps)
  <Pictures/Plots/constant_noise_b.eps>
 File: Pictures/Plots/steps_constant_noise_b.eps Graphic file (type eps)
 
-<Pictures/Plots/steps_constant_noise_b.eps> [94]
+<Pictures/Plots/steps_constant_noise_b.eps> [98]
 File: Pictures/Plots/vanishing_noise_b.eps Graphic file (type eps)
  <Pictures/Plots/vanishing_noise_b.eps>
 File: Pictures/Plots/steps_vanishing_noise_b.eps Graphic file (type eps)
@@ -1138,11 +1169,11 @@ File: Pictures/Plots/vanishing_gradient_noise_b.eps Graphic file (type eps)
  <Pictures/Plots/vanishing_gradient_noise_b.eps>
 File: Pictures/Plots/steps_vanishing_gradient_noise_b.eps Graphic file (type eps)
 
-<Pictures/Plots/steps_vanishing_gradient_noise_b.eps> [95]) [96]
+<Pictures/Plots/steps_vanishing_gradient_noise_b.eps> [99]) [100]
 ("D:\Annika\Uni\10. Semester\Masterarbeit\Proximal Bundle Inexact Information\Git Hub\Masterarbeit\LaTeX\Bundle_methods_
-for_nonsmooth_nonconvex_problems_with_inexact_information.bbl" [97
+for_nonsmooth_nonconvex_problems_with_inexact_information.bbl" [101
 
-] [98] [99]) [100]
+] [102] [103]) [104]
 ("D:\Annika\Uni\10. Semester\Masterarbeit\Proximal Bundle Inexact Information\Git Hub\Masterarbeit\LaTeX\Bundle_methods_
 for_nonsmooth_nonconvex_problems_with_inexact_information.aux"
 ("D:\Annika\Uni\10. Semester\Masterarbeit\Proximal Bundle Inexact Information\Git Hub\Masterarbeit\LaTeX\First_Pages/Cov
@@ -1171,27 +1202,22 @@ _Method_nonconv_inex.aux")
 le_Metric.aux")
 ("D:\Annika\Uni\10. Semester\Masterarbeit\Proximal Bundle Inexact Information\Git Hub\Masterarbeit\LaTeX\Chapters/Bileve
 l_Application.aux")
+("D:\Annika\Uni\10. Semester\Masterarbeit\Proximal Bundle Inexact Information\Git Hub\Masterarbeit\LaTeX\Chapters/Conclu
+sion.aux")
 ("D:\Annika\Uni\10. Semester\Masterarbeit\Proximal Bundle Inexact Information\Git Hub\Masterarbeit\LaTeX\Chapters/Append
-ix.aux"))
-
-LaTeX Warning: There were undefined references.
-
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
- )
+ix.aux")) )
 (\end occurred inside a group at level 1)
 
 ### simple group (level 1) entered at line 1061 ({)
 ### bottom level 
 Here is how much of TeX's memory you used:
- 20678 strings out of 493922
- 435168 string characters out of 3142101
- 550900 words of memory out of 3000000
- 23384 multiletter control sequences out of 15000+200000
+ 20819 strings out of 493922
+ 437897 string characters out of 3142101
+ 557422 words of memory out of 3000000
+ 23512 multiletter control sequences out of 15000+200000
  98837 words of font info for 76 fonts, out of 3000000 for 9000
  841 hyphenation exceptions out of 8191
- 64i,23n,67p,828b,12237s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 64i,23n,67p,828b,12267s stack positions out of 5000i,500n,10000p,200000b,50000s
 
-Output written on Bundle_methods_for_nonsmooth_nonconvex_problems_with_inexact_information.dvi (109 pages, 397240 bytes)
+Output written on Bundle_methods_for_nonsmooth_nonconvex_problems_with_inexact_information.dvi (116 pages, 419652 bytes)
 .

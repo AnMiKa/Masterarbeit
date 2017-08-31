@@ -1,0 +1,15 @@
+% Comclusion
+
+\section{Conclusion}
+
+In this thesis, bundle methods, that are suitable to solve optimization problems with nonsmooth, nonconvex objective functions and inexact function and subgradient information, are investigated.
+
+In chapter \ref{sec_simplifications} it was investigated how different bundle methods tackle inexactness and nonconvexity. With the help of these insights, the bundle algorithm \ref{sec_nonconv_inex}.1 was analyzed for possible simplifications and extensions. Different special cases were stated under which the convergence proof provides stronger results.
+Additionally it was possible to show that the aggregation technique works with the presented algorithm.
+
+In chapter \ref{sec_variable_metric} algorithm \ref{sec_nonconv_inex}.1 was extended to use also approximate second order information of the objective function. A convergence proof of the method was provided and the new method \ref{sec_variable_metric}.1 was compared to algorithm \ref{sec_nonconv_inex}.1 for different updating procedures. 
+We found, that both methods perform rather similar. For some academic test examples, the second order information could enhance the performance of algorithm \ref{sec_variable_metric}.1.
+
+In the last chapter the former two bundle methods were used to solve model selection problem for support vector classification.
+The emerging optimization problems could be solved by both bundle methods. However, it seems that for the calculation strategies used in this thesis, other algorithms can provide more accurate results.
+We concluded, that the assets of the presented bundle methods lie in different fields of applications.

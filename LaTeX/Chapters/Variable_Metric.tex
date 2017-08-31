@@ -5,16 +5,16 @@
 %\textcolor{blue}{introduction}
 
 A way to extend the proximal bundle method is to use an arbitrary metric \(\frac{1}{2}\Langle d,W_kd \Rangle\) with a symmetric and positive definite matrix \(W_k\) instead of the Euclidean metric for the stabilization term \(\frac{1}{2t_k}\|d\|^2\). Methods doing so are called \emph{variable metric bundle methods}.
-This section combines the method of Hare et al. presented in section \ref{sec_nonconv_inex} with the second order model function used by Noll in \cite{Noll2013} to a metric bundle method suitable for nonconvex functions with noise.
+This chapter combines the method of Hare et al. presented in chapter \ref{sec_nonconv_inex} with the second order model function used by Noll in \cite{Noll2013} to a metric bundle method suitable for nonconvex functions with noise.
 
-The section starts by explaining the ideas from \cite{Noll2013} used to extend the method presented above. It then gives a convergence proof for the developed method and concludes with an explicit strategy how to update the metric during the steps of the algorithm.
+The chapter starts by explaining the ideas from \cite{Noll2013} used to extend the method presented above. It then gives a convergence proof for the developed method and concludes with an explicit strategy how to update the metric during the steps of the algorithm.
 
-Throughout this section we still consider the optimization problem (\ref{opt_prob_nonconv_inex}). We also keep the names and definitions of the objects used in section \ref{sec_nonconv_inex}.
+Throughout this chapter we still consider the optimization problem (\ref{opt_prob_nonconv_inex}). We also keep the names and definitions of the objects used in chapter \ref{sec_nonconv_inex}.
 
 \subsection{Main Ingredients to the Method}
 %\textcolor{blue}{explanation}
 
-As already mentioned in section \ref{sec_basic_bundle} the stabilization term can be interpreted in many different ways. In the context of this section we can understand it as a pretty rough approximation of the curvature of the objective function.
+As already mentioned in chapter \ref{sec_basic_bundle} the stabilization term can be interpreted in many different ways. In the context of this chapter we can understand it as a pretty rough approximation of the curvature of the objective function.
 In this thesis we work with locally Lipschitz continuous functions. Rademacher's theorem \cite[Theorem 3.1, p. 18]{Heinonen2004} states that on any open set \(U \subset \R^n\) such a function is differentiable at almost every point in \(U\). The set of points where the function is nondifferentiable is of zero Lebesgue measure.
 This means that between those points curvature information can be present and can be used to speed up convergence.
 
@@ -83,7 +83,7 @@ The final subproblem of this variable metric bundle algorithm is then
 The decomposition of the stabilization term into a curvature approximation and a proximal term makes is easier to reach two goals at the same time:
 
 One the one hand, curvature of the objective can be approximated only under the conditions of the boundedness and symmetry of \(Q_k\). No positive definiteness has to be ensured for convergence.
-On the other hand the proximal term can be used in the trust region inspired way to make a line search obsolete. As already mentioned in section \ref{sec_simplifications} this is an advantage especially when working with inexact functions where a line search is not useable.
+On the other hand the proximal term can be used in the trust region inspired way to make a line search obsolete. As already mentioned in chapter \ref{sec_simplifications} this is an advantage especially when working with inexact functions where a line search is not useable.
 
 %\textcolor{red}{comment on line search and curve search in \cite{Lemarechal1994,Lemarechal1997,Vlcek2001}?}
 
@@ -121,7 +121,7 @@ From this the model decrease (\ref{mod_dec2}) can be calculated using (\ref{aug_
 
 The new \(\delta_k\) is used in the same way as in algorithm \ref{sec_nonconv_inex}.1 for the descent test and stopping conditions.
 
-Because the changes in the algorithm concern only the stabilization and the decrease measure \(\delta_k\) all other relations that were obtained for the different parts of the model \(M_k\) in section \ref{sec_nonconv_inex} are still valid.
+Because the changes in the algorithm concern only the stabilization and the decrease measure \(\delta_k\) all other relations that were obtained for the different parts of the model \(M_k\) in chapter \ref{sec_nonconv_inex} are still valid.
 
 \subsection{The Variable Metric Bundle Algorithm}
 
@@ -172,7 +172,7 @@ For \(k = 1,2,3,  \dotsc \)
 
 \subsection{Convergence Analysis}
 
-In this section the convergence properties of the new method are analyzed. We do this the same way it is done by Hare et al. in \cite{Hare2016}.
+In this chapter the convergence properties of the new method are analyzed. We do this the same way it is done by Hare et al. in \cite{Hare2016}.
 
 In the paper all convergence properties are first stated in \cite[Lemma 5]{Hare2016}. It is then shown that all sequences generated by the method meet the requirements of this lemma which is stated as Lemma \ref{Lemma5} in this thesis.
 
@@ -882,9 +882,9 @@ The smooth test function is
 
 where the matrix is chosen as \(A = \begin{pmatrix} 1&0 \\ 0&50\end{pmatrix}\). The condition number of this matrix is \(\kappa_A = \frac{\lambda_{max}}{\lambda{min}} = 50\), where \(\lambda_{min}, \lambda_{max}\) are the smallest and largest eigenvalue of \(A\) respectively. From smooth optimization it is known that gradient descent methods have a rather poor convergence rate for such badly conditioned matrices (c.f. chapter 7.4 in \cite{Ulbrich2012}).
 Figure \ref{fig_contour_parab} shows the sequences of serious iterates resulting from the two algorithms on the contour lines of the parabola. On the left the complete sequence is depicted. The plot on the right shows a detail of the left figure near the minimum of the objective.
-As the descent direction taken in algorithm \ref{sec_nonconv_inex}.1 is an aggregate subgradient and second order information is only provided by the stabilization term \(\frac{1}{t_k}\Vert d\Vert^2\) we can see a zig-zagging behavior of the sequence for the parabola in figure \ref{fig_contour_parab}.
+As the descent direction taken in algorithm \ref{sec_nonconv_inex}.1 is an aggregate subgradient and second order information is only provided by the stabilization term \(\frac{1}{t_k}\Vert d\Vert^2\) we can see a zig-zagging behavior of the sequence for the parabola in Figure \ref{fig_contour_parab}.
 Contrary to that the sequence of serous iterates provided by algorithm \ref{sec_variable_metric}.1 can take advantage of the second order information provided by \(Q_k\).
-It approaches the minimum almost in a straight line. The difference in behavior of the two algorithms is especially visible on the detail plot of figure \ref{fig_contour_parab} that shows the situation near the minimum: The proximal bundle algorithm needs a lot of steps circling around the minimum whereas the variable metric algorithm approaches the minimum directly. The resulting advantage of this behavior is the smaller number of steps needed by the variable metric algorithm. 
+It approaches the minimum almost in a straight line. The difference in behavior of the two algorithms is especially visible on the detail plot of Figure \ref{fig_contour_parab} that shows the situation near the minimum: The proximal bundle algorithm needs a lot of steps circling around the minimum whereas the variable metric algorithm approaches the minimum directly. The resulting advantage of this behavior is the smaller number of steps needed by the variable metric algorithm. 
 
 
 %this means: no zigzagging, less overall steps and less null steps, Hare Algorithm much more steps near the minimum, also many null steps there\\
@@ -967,7 +967,7 @@ The difference in steps between the two update variants of the variable metric a
 	\label{fig_bar_nonsm_parab}
 \end{figure}
 
-In the nonsmooth case (shown in figure \ref{fig_bar_nonsm_parab}) the accuracy of all algorithms is very similar. The difference in the number of steps is now very small as well.
+In the nonsmooth case (shown in Figure \ref{fig_bar_nonsm_parab}) the accuracy of all algorithms is very similar. The difference in the number of steps is now very small as well.
 Only in the case of constant noise the proximal bundle algorithm performs rather badly. Here the number of steps is extremely large (over 250) in order to gain the same accuracy as the other algorithms.
 The difference between the two update versions of the variable metric algorithm is still very small. It seems that the different scaling strategies have only a minor influence on the algorithm for this kind of objective function. Other tests showed that for example the choice of the step size updating parameters \(\kappa_+, \kappa_-\) have a lot more influence on the algorithm than the tested updating strategies. This can be seen in figures \ref{fig_no_noise_comp}  and \ref{fig_const_noise_comp}.% and figures \ref{fig_van_noise_comp} to \ref{fig_van_grad_noise_comp_large} in the appendix.
 
@@ -1037,7 +1037,7 @@ These functions are used to define
 
 %\textcolor{red}{plots of graphs???}
 
-The graphs of the Ferrier polynomials for \(x \in \R^2\) are shown in figure \ref{fig_ferr_pol}.
+The graphs of the Ferrier polynomials for \(x \in \R^2\) are shown in Figure \ref{fig_ferr_pol}.
 
 \begin{figure}[ht]%
 	\begin{subfigure}[t]{0.32\textwidth}
@@ -1068,7 +1068,7 @@ The graphs of the Ferrier polynomials for \(x \in \R^2\) are shown in figure \re
 Ferrier polynomials are nonconvex, nonsmooth (except for \(f_2\)) and lower-\(\mathcal{C}^2\). They all have \(0\) as a global minimizer \cite[p. 23]{Hare2016}. The compact constraint set is \(X=\{x \in \R^n|\lvert x_i\rvert \leq 10, i = 1,...,n \}\).
 
 The five test functions \(f_1\) to \(f_5\) are optimized for the dimensions \(n=\{2,3,...,15\} \cup \{20,25,30,40,50\}\).
-The starting value for each test problem is \(x^1=[1,\frac{1}{4},\frac{1}{9},...,\frac{1}{n^2}]^{\top}\).
+The starting value for each test problem is \(x^1=left(1,\frac{1}{4},\frac{1}{9},...,\frac{1}{n^2}right)^{\top}\).
 
 For the tests the step size of all algorithms is updated with \(\kappa_+ = 1.2\), which provided better results for these specific test functions.
 
