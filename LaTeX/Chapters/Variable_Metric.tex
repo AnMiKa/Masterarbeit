@@ -99,6 +99,7 @@ In the same way as for (\ref{agg_subgr_dk}) from the optimality condition
 \end{align*}
 
 it follows that 
+
 \begin{equation}
 	S^k+\nu^k = -\left(Q_k+\frac{1}{t_k}\mathbb{I}\right)d^k,
 	\label{subgr_Q}
@@ -372,12 +373,12 @@ As we only consider the subsequence of serious steps it follows from \(\{\hat{x}
 	
 	Here the last inequality follows from (\ref{rel_bound}).
 	The implication \(S^{\tilde{k}} \to \bar{S}\) for \({\tilde{k}} \in \tilde{K}\) follows from local Lipschitz continuity of \(f\).
-	By Rademacher's theorem this property yields that on any open set \(\Omega\) the function \(f\) is differentiable except on a set \(\Omega_{\text{nd}}\) of zero Lebesgue measure. As \(f\) is also Lipschitz continuous on any closed set containing such an open set \(\Omega\), the gradient of \(f\) on \(\Omega\) is bounded.
-	Let \(X \subset \Omega\). By theorem 2.5.1 in \cite[p. 63]{Clarke1990} the subdifferential of \(f\) at any point \(x^k \in \Omega\) is the convex hull of the limits of gradients \(\nabla f\) of \(f\) on the set \(\Omega\setminus \Omega_{\text{nd}}\)
+	By Rademacher's theorem this property yields that on any open set \(U\) the function \(f\) is differentiable except on a set \(U_{nd}\) of zero Lebesgue measure. As \(f\) is also Lipschitz continuous on any closed set containing such an open set \(U\), the gradient of \(f\) on \(U\) is bounded.
+	Let \(X \subset U\). By Theorem 2.5.1 in \cite[p. 63]{Clarke1990} the subdifferential of \(f\) at any point \(x^k \in U\) is the convex hull of the limits of gradients \(\nabla f\) of \(f\) on the set \(U\setminus U_{nd}\)
 	
-		\[ \partial f(x^k) = \conv\{\lim \nabla f(y) \mid y \to x^k, y \notin \Omega_{\text{nd}}\}. \]
+		\[ \partial f(x^k) = \conv\{\lim \nabla f(y) \mid y \to x^k, y \notin U_{nd}\}. \]
 		
-		This means that also all subgradients on \(\Omega\) are bounded. As the subgradient error is assumed to be bounded by \(\bar{\theta}\) the set of approximate subgradients \(\{g^j, j \in J^k\}\) contained in the bundle is bounded as well.
+		This means that also all subgradients on \(U\) are bounded. As the subgradient error is assumed to be bounded by \(\bar{\theta}\) the set of approximate subgradients \(\{g^j, j \in J^k\}\) contained in the bundle is bounded as well.
 		From this follows that also the augmented subgradients \(s_j^k = g^j+\eta_k(x^j-\hat{x}^k)\) are bounded because \(\eta_k\) is bounded by assumption and \(x^j, \hat{x}^k \in X\).		
 Defining \(s:= \max_{k,j}\|s^k_j\|\) this yields that 
 		
@@ -624,7 +625,7 @@ The second method is motivated by some properties of lower-\(\mathcal{C}^2\) fun
 
 Lower-\(\mathcal{C}^2\) functions can locally be written as the maximum over finitely many \(\mathcal{C}^2\) functions.
 
-For the following motivation let us consider a lower-\(\mathcal{C}^2\) function \(f:\R \to \R\) on an open set \(\Omega \subset \R\) that can be written as
+For the following motivation let us consider a lower-\(\mathcal{C}^2\) function \(f:\R \to \R\) on an open set \(U \subset \R\) that can be written as
 
 \begin{equation}
 	f(x) = \max_{t \in T} f_t(x)
@@ -633,40 +634,40 @@ For the following motivation let us consider a lower-\(\mathcal{C}^2\) function 
 
 for a finite index set \(T\) fulfilling the conditions of Definition \ref{def_low_C2}.
 
-Consider from now on the function \(f\) on the set \(\Omega\).
+Consider from now on the function \(f\) on the set \(U\).
 At points where the maximum in (\ref{max_rep}) is only attained by a single function \(f_t\) the function \(f\) is twice continuously differentiable and hence provides curvature information. At points where the are more than one function attaining the same value this does not have to be the case. At those points \(f\) can be nondifferentiable.
 
-Consider a nondifferentiable point and denote it as \(x_{\text{kink}} \in \Omega\).
-As \(f\) is locally Lipschitz continuous Rademacher's theorem yields that the points in \(\Omega\) where the function \(f\) is nondifferentiable are a set of zero Lebesgue measure. This means that there exists an open interval with length \(2r, ~r >0 \), around  the point \(x_{\text{kink}}\) such that \((x_{\text{kink}} \pm r) \in \Omega\) and the function \(f\) is differentiable on the two open intervals \((x_{\text{kink}}-r,x_{\text{kink}})\)  and \((x_{\text{kink}},x_{\text{kink}}+r)\). Assume, that \(f\) is is \emph{directionally differentiable} in \(x_{\text{kink}}\) and that all the directional derivatives in that point are finite.
+Consider a nondifferentiable point and denote it as \(x_{{kink}} \in U\).
+As \(f\) is locally Lipschitz continuous Rademacher's theorem yields that the points in \(U\) where the function \(f\) is nondifferentiable are a set of zero Lebesgue measure. This means that there exists an open interval with length \(2r, ~r >0 \), around  the point \(x_{{kink}}\) such that \((x_{{kink}} \pm r) \in U\) and the function \(f\) is differentiable on the two open intervals \((x_{{kink}}-r,x_{{kink}})\)  and \((x_{{kink}},x_{{kink}}+r)\). Assume, that \(f\) is is \emph{directionally differentiable} in \(x_{{kink}}\) and that all the directional derivatives in that point are finite.
 The directional derivative with respect to the direction \(d \in \R^n\) is defined as \cite[p. 213]{Rockafellar1970}
 
 \[ f'(x,d) = \lim_{h \searrow 0} \frac{f(x+h d)-f(x)}{h}. \]
 
-The function \(f\) has for example finite directional derivatives in \(x_{\text{kink}}\), if it is convex on \(\Omega\) \cite[p. 144]{Stoer1970}.
+The function \(f\) has for example finite directional derivatives in \(x_{{kink}}\), if it is convex on \(U\) \cite[p. 144]{Stoer1970}.
 
-In the one dimensional case this means that we can denote the \emph{right derivative} \(f(x_{\text{kink}},1) := a\) and the \emph{left derivative} \(-f(x_{\text{kink}},-1) := b\). As \(f\) was assumed to be nondifferentiable in \(x_{\text{kink}}\) it holds that \(a \neq b\) \cite[p. 213]{Rockafellar1970}.
+In the one dimensional case this means that we can denote the \emph{right derivative} \(f(x_{{kink}},1) := a\) and the \emph{left derivative} \(-f(x_{{kink}},-1) := b\). As \(f\) was assumed to be nondifferentiable in \(x_{{kink}}\) it holds that \(a \neq b\) \cite[p. 213]{Rockafellar1970}.
 
 
 %For locally Lipschitz functions the number of kinks is finite and in between the kinks the function is smooth.
 %This means, that there is indeed curvature information present in the smooth parts of the functions. At the kinks however the curvature is not defined. Taking a look at the one-sided differential quotient for \(x \in \R\) shows that it diverges at such points:
-%Let a kink be at \(x_{\text{kink}} \in \R\) and the left sided limiting value of the derivative be \(f'(x_{\text{kink}}) = a\) the right-sided one \(f'(x_{\text{kink}}) = b \neq a\). Because \(f\) was assumed to be locally Lipschitz both limits exist and are finite.
+%Let a kink be at \(x_{{kink}} \in \R\) and the left sided limiting value of the derivative be \(f'(x_{{kink}}) = a\) the right-sided one \(f'(x_{{kink}}) = b \neq a\). Because \(f\) was assumed to be locally Lipschitz both limits exist and are finite.
 
 To get a hint on what we can expect from the 'curvature' at that kink the following quotient is examined:
 
 %The following quotient can then be stated:
 
-\[ \lim_{h \searrow 0} \frac{\overbrace{f'(x_{\text{kink}}-h,1)}^{\to a}+\overbrace{f'(x_{\text{kink}}+h,-1)}^{\to b}}{h} = \pm \infty. \]
+\[ \lim_{h \searrow 0} \frac{\overbrace{f'(x_{{kink}}-h,1)}^{\to a}+\overbrace{f'(x_{{kink}}+h,-1)}^{\to b}}{h} = \pm \infty. \]
 
 This holds by continuity of the of the derivatives on both sides of the kink and the directional derivatives being the respective limits at the kink.
-%\[ \lim_{h \searrow 0} \frac{f'(x_{\text{kink}}+h)-f'(x_{\text{kink}})}{h} = \frac{\overbrace{f'(x_{\text{kink}}+h)}^{\to b}-a}{h} = \pm t\infty, \]
+%\[ \lim_{h \searrow 0} \frac{f'(x_{{kink}}+h)-f'(x_{{kink}})}{h} = \frac{\overbrace{f'(x_{{kink}}+h)}^{\to b}-a}{h} = \pm t\infty, \]
 The sign depends on the signs of \(a\) and \(b\). 
 
 In more dimensions this is the same for the components of the metric matrix \(Q_k\) corresponding to the direction where the kink occurs. This supports also to the intuitive thought that at a kink the slope changes 'infinitely fast'.
 Numerically the BFGS-update (\ref{BFGS_update}) can result in very large values for the entries of \(Q_k\) corresponding to points near the kink.
 
-On the other hand due to the local Lipschitz property the slope of the objective function is always finite on closed sets. This means that there exists an interval \((x_{\text{kink}}-r',x_{\text{kink}}+r')\), \(r' \in \R\), where the function \(f\) behaves similar to the scaled modulus \(a|\cdot|\), \(a \in \R\), in the direction perpendicular to the kink. Therefore in this neighborhood almost no curvature is present.
+On the other hand due to the local Lipschitz property the slope of the objective function is always finite on closed sets. This means that there exists an interval \((x_{{kink}}-r',x_{{kink}}+r')\), \(r' \in \R\), where the function \(f\) behaves similar to the scaled modulus \(a|\cdot|\), \(a \in \R\), in the direction perpendicular to the kink. Therefore in this neighborhood almost no curvature is present.
 
-Summarized this means that on the one hand, the matrix \(Q_k\) should be close to zero in the components representing the directions perpendicular to the kink as soon as the iterates approach \(x_{\text{kink}}\). But contrary to that the method that constructs \(Q_k\) can give very high values for those components.
+Summarized this means that on the one hand, the matrix \(Q_k\) should be close to zero in the components representing the directions perpendicular to the kink as soon as the iterates approach \(x_{{kink}}\). But contrary to that the method that constructs \(Q_k\) can give very high values for those components.
 
 \begin{remark}
 	The above considerations are only a motivation for the following practical matrix update. A more rigorous theoretical background for the update is still open.
@@ -687,15 +688,15 @@ Let \(D\) denote the matrix with the scaled eigenvalues on the diagonal. The mat
 
 
  %To lower the probability that eigenvalues are chosen which represent a really existing large curvature of of the objective function at the observed point, the change of the eigenvalues is viewed in relation to the step size \(d^k\).
-%As the eigenvalues of a matrix \(A \in \R^n\) depend continuously on the entries of the matrix (see for example \cite[Theorem 1.2]{Werner1992}) the change in the eigenvalues could be calculated by ordering them by size and then calculating \(\text{diff}_{\lambda_i}=|\lambda_i^{k-1}-\lambda_i^{k}|, i = 1,...,n\), where \(\lambda^{k-1}\) and \(\lambda^{k} \in \R^n\) are vectors with the sorted eigenvalues of \(Q_{k-1}\) and \(Q_{k}\) respectively as components.
-%If \(\frac{\text{diff}_{\lambda_i}}{\|d^k\|} > q\) for a threshold \(q < \infty\) and any \(i = 1,...,n\), indicating that the \(i\)'th eigenvalue changes much while only a small step is done, the \(i\)'th eigenvalue is set to \(\lambda_i^{k}=\frac{1}{2}\lambda_1^{k-1}\) (remember that we stated before that near a kink there is often a very small curvature, hence halving the eigenvalue of the  matrix of the step before).
+%As the eigenvalues of a matrix \(A \in \R^n\) depend continuously on the entries of the matrix (see for example \cite[Theorem 1.2]{Werner1992}) the change in the eigenvalues could be calculated by ordering them by size and then calculating \({diff}_{\lambda_i}=|\lambda_i^{k-1}-\lambda_i^{k}|, i = 1,...,n\), where \(\lambda^{k-1}\) and \(\lambda^{k} \in \R^n\) are vectors with the sorted eigenvalues of \(Q_{k-1}\) and \(Q_{k}\) respectively as components.
+%If \(\frac{{diff}_{\lambda_i}}{\|d^k\|} > q\) for a threshold \(q < \infty\) and any \(i = 1,...,n\), indicating that the \(i\)'th eigenvalue changes much while only a small step is done, the \(i\)'th eigenvalue is set to \(\lambda_i^{k}=\frac{1}{2}\lambda_1^{k-1}\) (remember that we stated before that near a kink there is often a very small curvature, hence halving the eigenvalue of the  matrix of the step before).
 
 %Because this method considers only the relative change of the eigenvalues, it is still possible that one or more of them is larger than the threshold \(q\). If this is the case, the whole matrix can be scaled as described above.
 %
 %This technique however lacks a practical method of implementation and has also some theoretical issues.
 %The most important issue is that eigenvalues do not have any intrinsic order. Sorting them by size may work in most cases due to continuity but at least in the situation when an eigenvalue is scaled this is not a continuous operation any more. This can result in the eigenvalues being sorted differently in the next iteration such that all differences of eigenvalues that follow the one that contains the scaled one are not differences of corresponding eigenvalues.
 %
-%\textcolor{red}{write only the thing below; write things above as comment in third part of this section???}
+%color{red}{write only the thing below; write things above as comment in third part of this section???}
 
 %Another possibility is to not work with the change of the eigenvalues but with their absolute size like in the method presented before;  advantage: no additional scaling necessary any more
 The above two methods were tested in practice and the results of the algorithm are shown in section \ref{sec_num_testing}. We also compare them to a hybrid method where the first approach is used for the updates and the matrix is additionally scaled by the stepsize such that the final metric matrix is \(Q_k = \frac{1}{k}\bar{Q}_k\) with \(\bar{Q}_k\) being the scaled BFGS update suggested in section \ref{update_1}. This way the method starts out as the variable metric method but becomes more equal to the proximal bundle method \ref{sec_nonconv_inex}.1 as the algorithm continues.
@@ -713,6 +714,7 @@ is rather small indicating that the current iterate lies within a region with on
 It is also possible to alter the updates presented above by a special choice of the subgradients. For example trying to compute the directional derivative or using more information by considering more subgradients of the bundle.
  
 Another updating method is using the symmetric-rank-1 (SR1) update
+
 \[ \tilde{Q}_k = Q_{k-1}+\frac{(y^k-Q_kd^k)(y^k-Q_kd^k)^{\top}}{\Langle y^k-Q_kd^k,d^k \Rangle}. \]
 
 Boundedness can be assured in the same way as for the BFGS update.
@@ -733,7 +735,7 @@ As a last remark on this topic we want to say that although in this thesis the a
 Although it is argued for example in \cite{Lewis2008} that locally Lipschitz functions are differentiable almost everywhere and with an adequate linesearch it is improbable to arrive at an iterate that is a nondifferentiable point of the objective function this can still happen. Especially if such a linesearch is not used like in the algorithm presented here.
 So despite the promising practical behavior this area is still open to research.
 
-%\textcolor{red}{remark that convergence can depend a lot on the threshold and how the matrix/eigenvalue is scaled in the two methods}
+%color{red}{remark that convergence can depend a lot on the threshold and how the matrix/eigenvalue is scaled in the two methods}
 
 
 
@@ -855,6 +857,7 @@ Five different forms of noise are tested:
 	\item \(\text{N}_{\text{c}}^{\text{g}}\): Constant subgradient noise, \(\bar{\sigma}=\sigma_k=0\) and \(\bar{\theta}=\theta_k=0.01\) for all \(k\) and 
 	\item \(\text{N}_{\text{v}}^{\text{g}}\): Vanishing subgradient noise, \(\bar{\sigma}=\sigma_k=0\) and \(\bar{\theta}=0.01, \theta_k=\min\{0.01,\Vert x^k\Vert/100\}\) for all \(k\).
 \end{itemize}
+
 The exact case is used for comparison. The constant noise forms represent cases where the inexactness is outside of the optimizer's control. The vanishing noise forms represent cases where the noise can be controlled  but the mechanism is considered expensive, so it is only used when approaching the minimum.
 The two forms of subgradient noise represent the case where the subgradient is approximated numerically.
 
@@ -895,7 +898,8 @@ It approaches the minimum almost in a straight line. The difference in behavior 
 		\includegraphics[width=\textwidth]{Pictures/Plots/final_parab.eps}
 		%\subcaption{}
 		%Parabola, \(kappa = 2\), sequwnces of \(x_{hats}\); Noll:\(10|1\), Hare: \(28|12\)
-	\end{subfigure}
+	\end{subfigure}%
+	\hfill
 	\begin{subfigure}[t]{0.49\textwidth}
 			\includegraphics[width=\textwidth]{Pictures/Plots/final_parab_detail.eps}
 			%\subcaption{detail, many steps of Hare in the end}
@@ -906,6 +910,7 @@ It approaches the minimum almost in a straight line. The difference in behavior 
 \end{figure}
 
 The second test function is a nonsmooth version of the above parabola. The function is given by 
+
 \[ p_n(x): \R^2 \to \R, \quad x \mapsto \frac{1}{2}\Langle x, Ax \Rangle + \frac{1}{2}|x_1|+25|x_2|. \]
 
 Due to the kink along the \(x_1\)-axis the curvature information supplied by \(Q_k\) is less reliable than for the smooth parabola.
@@ -916,7 +921,8 @@ It is interesting to note, that the sequence provided by the proximal bundle alg
 	\begin{subfigure}[t]{0.49\textwidth}
 		\includegraphics[width=\textwidth]{Pictures/Plots/final_nonsm_parab.eps}
 		%\subcaption{Parabola, \(kappa = 2\), sequwnces of \(x_{hats}\); Noll:\(21|9\), same for adapted, Hare: \(28|12\)}
-	\end{subfigure}
+	\end{subfigure}%
+	\hfill
 	\begin{subfigure}[t]{0.49\textwidth}
 			\includegraphics[width=\textwidth]{Pictures/Plots/final_nonsm_parab_detail.eps}
 			%\subcaption{detail}
@@ -935,7 +941,8 @@ To address the random nature of the noise the tests are performed 20 times and t
 	\begin{subfigure}[t]{0.49\textwidth}
 		\includegraphics[width=\textwidth]{Pictures/Plots/accuracy_bar_parab_u_1-2.eps}
 		%\subcaption{Parabola, \(kappa = 2\)}
-	\end{subfigure}
+	\end{subfigure}%
+	\hfill
 	\begin{subfigure}[t]{0.49\textwidth}
 			\includegraphics[width=\textwidth]{Pictures/Plots/steps_bar_parab_u_1-2.eps}
 	%		\subcaption{}
@@ -956,7 +963,8 @@ The difference in steps between the two update variants of the variable metric a
 	\begin{subfigure}[t]{0.49\textwidth}
 		\includegraphics[width=\textwidth]{Pictures/Plots/accuracy_bar_nonsm_parab_u_1-2.eps}
 		%\subcaption{Parabola, \(kappa = 2\)}
-	\end{subfigure}
+	\end{subfigure}%
+	\hfill
 	\begin{subfigure}[t]{0.49\textwidth}
 			\includegraphics[width=\textwidth]{Pictures/Plots/steps_bar_nonsm_parab_u_1-2.eps}
 			%\subcaption{}
@@ -1078,7 +1086,8 @@ The accuracy measures absolute logarithmic distance to the global minimum. In ca
 \begin{figure}[ht]%
 	\begin{subfigure}{0.49\textwidth}
 		\includegraphics[width=\textwidth]{Pictures/Plots/no_noise.eps}%
-	\end{subfigure}
+	\end{subfigure}%
+	\hfill
 	\begin{subfigure}{0.49\textwidth}
 		\includegraphics[width=\textwidth]{Pictures/Plots/steps_no_noise.eps}%
 	\end{subfigure}
@@ -1099,11 +1108,12 @@ The performance of the two variants of the two versions of the variable metric m
 \begin{figure}[ht]
 	\begin{subfigure}{0.49\textwidth}
 		\includegraphics[width=\textwidth]{Pictures/Plots/constant_noise.eps}%
-	\end{subfigure}
+	\end{subfigure}%
+	\hfill
 	\begin{subfigure}{0.49\textwidth}
 		\includegraphics[width=\textwidth]{Pictures/Plots/steps_constant_noise.eps}%
 	\end{subfigure}
-	\caption[Accuracy and number of steps: constant noise]{Comparison of accuracy and number of steps for the proximal bundle algorithm and the variable metric bundle algorithm in the case of constant noise}%
+	\caption[Accuracy and number of steps: constant noise]{Comparison of accuracy and number of steps for the proximal bundle algorithm and the variable metric bundle algorithm in the case of constant noise.}%
 	\label{fig_const_noise}%
 \end{figure}
 
@@ -1112,11 +1122,12 @@ In the case of constant noise the variable bundle methods perform better than th
 \begin{figure}[ht]
 	\begin{subfigure}{0.49\textwidth}
 		\includegraphics[width=\textwidth]{Pictures/Plots/vanishing_noise.eps}%
-	\end{subfigure}
+	\end{subfigure}%
+	\hfill
 	\begin{subfigure}{0.49\textwidth}
 		\includegraphics[width=\textwidth]{Pictures/Plots/steps_vanishing_noise.eps}%
 	\end{subfigure}
-	\caption[Accuracy and number of steps: vanishing noise]{Comparison of accuracy and number of steps for the proximal bundle algorithm and the variable metric bundle algorithm in the case of vanishing noise}%
+	\caption[Accuracy and number of steps: vanishing noise]{Comparison of accuracy and number of steps for the proximal bundle algorithm and the variable metric bundle algorithm in the case of vanishing noise.}%
 	\label{fig_van_noise}%
 \end{figure}
 
@@ -1137,10 +1148,11 @@ It is therefore an interesting but still open question if such matrix updates ca
 The algorithms used for the comparison of the different \(\kappa_+\) are endowed with the scaled BFGS update from section \ref{update_1}. The parameters \(\kappa_+ = 1.2\) and \(\kappa_+ = 2\) are compared.
 Here only the exact case and the case of constant noise for the lower dimensions are depicted in figure \ref{fig_no_noise_comp} and \ref{fig_const_noise_comp}.% The situation for the other noise forms is shown in figures \ref{fig_van_noise_comp} to \ref{fig_van_grad_noise_comp_large}  in the appendix.
 
-\begin{figure}[ht]%
+\begin{figure}[H]%
 	\begin{subfigure}{0.49\textwidth}
 		\includegraphics[width=\textwidth]{Pictures/Plots/no_noise_comp.eps}%
-	\end{subfigure}
+	\end{subfigure}%
+	\hfill
 	\begin{subfigure}{0.49\textwidth}
 		\includegraphics[width=\textwidth]{Pictures/Plots/steps_no_noise_comp.eps}%
 	\end{subfigure}
@@ -1151,7 +1163,8 @@ Here only the exact case and the case of constant noise for the lower dimensions
 \begin{figure}[ht]%
 	\begin{subfigure}{0.49\textwidth}
 		\includegraphics[width=\textwidth]{Pictures/Plots/constant_noise_comp.eps}%
-	\end{subfigure}
+	\end{subfigure}%
+	\hfill
 	\begin{subfigure}{0.49\textwidth}
 		\includegraphics[width=\textwidth]{Pictures/Plots/steps_constant_noise_comp.eps}%
 	\end{subfigure}

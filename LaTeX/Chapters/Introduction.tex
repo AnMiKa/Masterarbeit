@@ -10,7 +10,7 @@ There is hence a need for nonsmooth optimization algorithms.
 A lot of the underlying theory was developed in the 1970's also driven by the ``First World Conference on Nonsmooth Optimization'' taking place in 1977 \cite{Mifflin2012}.
 These days, there exists a well understood theoretical framework of nonsmooth analysis to create the basis for practical algorithms \cite{Rockafellar2009}.
 
-The most popular methods to tackle nonsmooth problems at the moment are bundle methods \cite{Hare2016}. First developed only for convex functions \cite{Lemarechal1978} these methods were soon extended to cope also with nonconvex objective functions \cite{Mifflin1982}.
+The most popular methods to tackle nonsmooth problems at the moment are bundle methods \cite{Hare2016}. First developed only for convex functions \cite{Lemarechal1978}, these methods were soon extended to cope also with nonconvex objective functions \cite{Mifflin1982}.
 Some time later the algorithms were again enhanced to deal with inexact information of the function value, the subgradient or both.
 Some natural applications for these cases are derivative free optimization and stochastic simulations \cite{Hare2016}.
 
@@ -18,22 +18,22 @@ Some natural applications for these cases are derivative free optimization and s
 
 
 The basic idea of bundle methods is to model the original problem by a simpler function, often some sort of stabilized cutting plane model, that is minimized as a subproblem of the algorithm \cite[chapter XV]{Hiriart-Urruty1993}. 
-The computed iterate is tested for sufficient descent and depending on the result is either taken as the new iterate or the model is enhanced.
+The computed iterate is tested for sufficient descent and, depending on the result, is either taken as the new iterate or the model is enhanced.
 
 There exist different types of bundle methods, a widely used one being the proximal bundle method.
 In this thesis two types of bundle methods are worked with. One is of the proximal type and one uses a variable stabilization term that makes it possible to make use of curvature information in order to accelerate the convergence speed.
-The development of the algorithm \textcolor{red}{NOCHETWAS SCHREIBEN}
+%The development of the algorithm \textcolor{red}{NOCHETWAS SCHREIBEN}
 
 The first half of this work puts particular attention on the theoretical concepts to use bundle methods with nonconvex and inexact objectives and how to incorporate the curvature information into the method.
 
-In the second half of the thesis the usability of bundle algorithms for bilevel programs is explored. Bilevel problems consist of an upper level problem constrained by an additional optimization problem, the lower level.
-These problems occur in a variety of applications such as game theory (see \cite[section 2.1]{Colson2007} for a variety of applications).
-Here the bilevel problem is derived from the hyper-parameter optimization for support vector machines. 
+In the second half of the thesis the usability of bundle algorithms for bilevel programs is explored. Bilevel problems consist of an upper level problem that is constrained by an additional optimization problem, the lower level.
+These problems occur in a variety of applications, such as game theory and revenue management (see \cite[section 2.1]{Colson2007} for a variety of applications).
+Here, the bilevel problem is derived from the hyper-parameter optimization for support vector machines. 
 In the application both nonconvexity of the objective function and inexactness in the function value and subgradient calculation are addressed.
 
-The remainder of the thesis is organized as follows:
-After a short introduction of the most important definitions and results from nonsmooth analysis in chapter \ref{sec_prelim} a basic bundle algorithm for exact convex functions is stated in order to introduce the important concepts of this method in chapter \ref{sec_basic_bundle}. A survey of different methods to tackle inexactness and nonconvex objective functions is then presented in chapter \ref{sec_simplifications}.
-Chapter \ref{sec_nonconv_inex} reviews the proximal bundle algorithm for nonconvex inexact functions presented in \cite{Hare2016} and contains some closer analysis of the method. In chapter \ref{sec_variable_metric} a variable metric variant of that algorithm is developed using the nonsmooth second model suggested in \cite{Noll2012} and \cite{Noll2013}.
+The remainder of this thesis is organized as follows:
+After a short introduction of the most important definitions and results from nonsmooth analysis in chapter \ref{sec_prelim}, a basic bundle algorithm for exact convex functions is stated in order to introduce the important concepts of this method in chapter \ref{sec_basic_bundle}. A survey of different methods to tackle inexactness and nonconvex objective functions is then presented in chapter \ref{sec_simplifications}.
+Chapter \ref{sec_nonconv_inex} reviews the proximal bundle algorithm for nonconvex inexact functions presented in \cite{Hare2016} and contains some closer analysis of the method. In chapter \ref{sec_variable_metric} a variable metric variant of that algorithm is developed using the nonsmooth second order model suggested in \cite{Noll2012} and \cite{Noll2013}.
 This method makes it possible to incorporate second order information into the algorithm in order to speed up convergence.
 The two methods are compared on different academic examples.
 At last the bundle method is used on the application of parameter optimization in support vector classification in chapter \ref{sec_bilevel}.  

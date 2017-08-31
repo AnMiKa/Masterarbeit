@@ -63,7 +63,7 @@ It is also possible to define a subdifferential for nonconvex functions. This is
 \[ \partial f(x) := \left\{g \in \R^n \biggm| \limsup_{y \to x,~ h \searrow 0}\frac{f(y+hv)-f(y)}{h} \geq \Langle g, v\Rangle \quad \forall v \in \R^n \right\}. \]
 \end{definition} 
 
-All convex functions are locally Lipschitz \cite[Theorem 3.1.1, p. 16]{Hiriart-Urruty1996} so the above definition holds also for convex functions. In fact if the function is convex the subdifferential from definition \ref{nonconv_subdiff} is equivalent to the one from definition \ref{conv_subdiff} \cite[Proposition 2.2.7, p. 36]{Clarke1990}.
+All convex functions are locally Lipschitz \cite[Theorem 3.1.1, p. 16]{Hiriart-Urruty1996} so the above definition holds also for convex functions. In fact if the function is convex the subdifferential from Definition \ref{nonconv_subdiff} is equivalent to the one from definition \ref{conv_subdiff} \cite[Proposition 2.2.7, p. 36]{Clarke1990}.
 Due to this equivalence we call elements from both subdifferentials subgradients.
 
 \begin{remark}
@@ -99,12 +99,14 @@ For convex functions an \(\varepsilon\)-\emph{subgradient} of \(f(x)\) is define
 \[ f(y)-f(x) \geq \Langle g,y-x \Rangle - \varepsilon \quad \forall y \in \R^n.\]
 
 The \(\varepsilon\)-subdifferential is then the set
+
 \[ \partial_{\varepsilon} f(x) := \left\{g \in \R^n \mid g \text{ is an } \varepsilon \text{-subgradient of } f(x) \right\}. \]
 
 For nonconvex functions the subdifferential that is used in this thesis is the \emph{Fr\'{e}chet} \(\varepsilon\)-\emph{subdifferential}.
 
 \begin{definition}[c.f. {\cite[p. 73]{Jofre1998}}]
 	The Fr\'{e}chet \(\varepsilon\)-subdifferential of \(f(x)\) is
+	
 	\[ \partial_{[\varepsilon]}f(x) := \left\{ g \in \R^n \biggm| \liminf_{\|h\| \to 0} \frac{f(x+h)-f(x)-\langle g,h\rangle}{\|h\|}  \geq -\varepsilon\right\}. \]
 \end{definition}
 
@@ -115,11 +117,11 @@ In the course of this thesis we sometimes derive stronger results for a smaller 
 
 \begin{definition}[c.f. Definition 10.29, p. 447 in {\cite{Rockafellar2009}}]
 \label{def_low_C2}
-	A function \(f:\R^n \to \R\) is \emph{lower-}\(\mathcal{C}^2\), if on some neighborhood \(\Omega\) of each \(\bar{x} \in \R^n\) there exists a representation 
+	A function \(f:\R^n \to \R\) is \emph{lower-}\(\mathcal{C}^2\), if on some neighborhood \(U\) of each \(\bar{x} \in \R^n\) there exists a representation 
 	
 	\[ f(x) = \max_{t\in T}f_t(x) \]
 	
-	where the functions \(f_t\) are of class \(\mathcal{C}^2\) on \(\Omega\) and \(f_t(x)\) and all its first and second partial derivatives depend continuously on both \(x\) and \((x,t) \in \Omega \times T\).
+	where the functions \(f_t\) are of class \(\mathcal{C}^2\) on \(U\) and \(f_t(x)\) and all its first and second partial derivatives depend continuously on both \(x\) and \((x,t) \in U \times T\).
 	The index set \(T\) is a compact space.
 \end{definition}
 

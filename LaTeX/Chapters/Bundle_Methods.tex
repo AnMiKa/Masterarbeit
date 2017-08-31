@@ -20,10 +20,12 @@ Bundle methods can be interpreted in two different ways: From the dual point of 
 This section gives a short summery of the derivations and results of chapter XV in \cite{Hiriart-Urruty1993} where a primal bundle method is derived as a stabilized version of the cutting plane method. If not otherwise indicated the results in this section are therefore taken from chapter XV in \cite{Hiriart-Urruty1993}.
 
 The optimization problem considered in this chapter is 
+
 \begin{equation}
   \min_{x} f(x) \quad \text{s.t.} \quad x \in X
 \label{min_prob_basic}
 \end{equation}
+
 where \(f\) is a convex but possibly nondifferentiable function and \(X \subset \R^n\) is a  closed and convex set.
 
 %\textcolor{red}{Define Problem again?? Incorporate ``set-constraint'' by writing \(h(x):= f(x)+\mathtt{i}_X\). \(\rightarrow\) later???}
@@ -118,6 +120,7 @@ The subproblem to be solved to find the next iterate can be rewritten as a smoot
 \end{align*}	
 
 where
+
 \begin{equation}
 	e^k_j := f(\hat{x}^k)-f(x^j) + \Langle g^j,x^j-\hat{x}^k\Rangle \geq 0 \quad \forall j \in J_k
 \label{lin_err}

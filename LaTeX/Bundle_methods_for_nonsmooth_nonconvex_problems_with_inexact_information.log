@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=latex 2017.6.11)  31 AUG 2017 04:03
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=latex 2017.6.11)  31 AUG 2017 12:57
 entering extended mode
 **Bundle_methods_for_nonsmooth_nonconvex_problems_with_inexact_information.tex
 
@@ -923,28 +923,28 @@ mary.tex") [4
 
 ]
 ("D:\Annika\Uni\10. Semester\Masterarbeit\Proximal Bundle Inexact Information\Git Hub\Masterarbeit\LaTeX\Bundle_methods_
-for_nonsmooth_nonconvex_problems_with_inexact_information.toc" [5
+for_nonsmooth_nonconvex_problems_with_inexact_information.lof")
+\tf@lof=\write4
+ [5
 
-] [6])
-\tf@toc=\write4
- [7]
+]
+("D:\Annika\Uni\10. Semester\Masterarbeit\Proximal Bundle Inexact Information\Git Hub\Masterarbeit\LaTeX\Bundle_methods_
+for_nonsmooth_nonconvex_problems_with_inexact_information.lot")
+\tf@lot=\write5
+ [6]
 ("D:\Annika\Uni\10. Semester\Masterarbeit\Proximal Bundle Inexact Information\Git Hub\Masterarbeit\LaTeX\First_Pages/Lis
 t_of_Symbols.tex"
 LaTeX Font Info:    Try loading font information for OT1+lmtt on input line 29.
  ("C:\Program Files\Annika Programme\MiKTeX\tex\latex\lm\ot1lmtt.fd"
 File: ot1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
-) [8
+) [7
 
-]) [9]
+]) [8]
 ("D:\Annika\Uni\10. Semester\Masterarbeit\Proximal Bundle Inexact Information\Git Hub\Masterarbeit\LaTeX\Bundle_methods_
-for_nonsmooth_nonconvex_problems_with_inexact_information.lof")
-\tf@lof=\write5
- [10
+for_nonsmooth_nonconvex_problems_with_inexact_information.toc" [9
 
-]
-("D:\Annika\Uni\10. Semester\Masterarbeit\Proximal Bundle Inexact Information\Git Hub\Masterarbeit\LaTeX\Bundle_methods_
-for_nonsmooth_nonconvex_problems_with_inexact_information.lot")
-\tf@lot=\write6
+] [10])
+\tf@toc=\write6
  [11]
 ("D:\Annika\Uni\10. Semester\Masterarbeit\Proximal Bundle Inexact Information\Git Hub\Masterarbeit\LaTeX\Chapters/Introd
 uction.tex" [1
@@ -963,7 +963,7 @@ _Methods.tex" [6
 ("D:\Annika\Uni\10. Semester\Masterarbeit\Proximal Bundle Inexact Information\Git Hub\Masterarbeit\LaTeX\Pictures/TikZ/c
 utting_plane.tex")
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10.95> on input line 64.
+(Font)              <10.95> on input line 66.
  [7] [8] [9] [10] [11] [12] [13] [14]) [15]
 ("D:\Annika\Uni\10. Semester\Masterarbeit\Proximal Bundle Inexact Information\Git Hub\Masterarbeit\LaTeX\Chapters/Simpli
 fications.tex" [16
@@ -975,12 +975,12 @@ _Method_nonconv_inex.tex" [21
 
 
 ] [22] [23] [24] [25] [26] [27] [28] [29]
-Overfull \hbox (10.06355pt too wide) in paragraph at lines 525--525
+Overfull \hbox (10.06355pt too wide) in paragraph at lines 543--543
 [] 
  []
 
 [30]
-Overfull \hbox (10.01024pt too wide) in paragraph at lines 543--543
+Overfull \hbox (10.01024pt too wide) in paragraph at lines 561--561
 [] 
  []
 
@@ -990,13 +990,13 @@ le_Metric.tex" [32
 
 
 ] [33] [34] [35] [36] [37] [38] [39] [40] [41] [42] [43] [44] [45]
-Overfull \hbox (4.51106pt too wide) in paragraph at lines 647--648
+Overfull \hbox (5.7849pt too wide) in paragraph at lines 648--649
 []\T1/lmr/m/n/12 In the one di-men-sional case this means that we can de-note the \T1/lmr/m/it/12 right deriva-tive $\OM
 L/lmm/m/it/12 f\OT1/lmr/m/n/12 (\OML/lmm/m/it/12 x[]; \OT1/lmr/m/n/12 1) :=
  []
 
 [46] [47] [48] [49]
-Overfull \hbox (4.89206pt too wide) in paragraph at lines 856--857
+Overfull \hbox (4.89206pt too wide) in paragraph at lines 858--859
 []$[][]$\T1/lmr/m/n/12 : Van-ish-ing sub-gra-di-ent noise, $[] \OT1/lmr/m/n/12 = \OML/lmm/m/it/12 [] \OT1/lmr/m/n/12 = 
 0$ \T1/lmr/m/n/12 and $[] \OT1/lmr/m/n/12 = 0\OML/lmm/m/it/12 :\OT1/lmr/m/n/12 01\OML/lmm/m/it/12 ; [] \OT1/lmr/m/n/12 
 = []\OMS/lmsy/m/n/12 f\OT1/lmr/m/n/12 0\OML/lmm/m/it/12 :\OT1/lmr/m/n/12 01\OML/lmm/m/it/12 ; \OMS/lmsy/m/n/12 k\OML/lmm
@@ -1007,35 +1007,35 @@ Overfull \hbox (4.89206pt too wide) in paragraph at lines 856--857
 File: Pictures/Plots/final_parab.eps Graphic file (type eps)
  <Pictures/Plots/final_parab.eps>
 File: Pictures/Plots/final_parab_detail.eps Graphic file (type eps)
- <Pictures/Plots/final_parab_detail.eps>
+ <Pictures/Plots/final_parab_detail.eps> [51]
 File: Pictures/Plots/final_nonsm_parab.eps Graphic file (type eps)
- <Pictures/Plots/final_nonsm_parab.eps>
+
+<Pictures/Plots/final_nonsm_parab.eps>
 File: Pictures/Plots/final_nonsm_parab_detail.eps Graphic file (type eps)
-
-<Pictures/Plots/final_nonsm_parab_detail.eps> [51]
+ <Pictures/Plots/final_nonsm_parab_detail.eps> [52]
 File: Pictures/Plots/accuracy_bar_parab_u_1-2.eps Graphic file (type eps)
- <Pictures/Plots/accuracy_bar_parab_u_1-2.eps>
+
+<Pictures/Plots/accuracy_bar_parab_u_1-2.eps>
 File: Pictures/Plots/steps_bar_parab_u_1-2.eps Graphic file (type eps)
-
-<Pictures/Plots/steps_bar_parab_u_1-2.eps> [52]
+ <Pictures/Plots/steps_bar_parab_u_1-2.eps>
 File: Pictures/Plots/accuracy_bar_nonsm_parab_u_1-2.eps Graphic file (type eps)
- <Pictures/Plots/accuracy_bar_nonsm_parab_u_1-2.eps>
+
+<Pictures/Plots/accuracy_bar_nonsm_parab_u_1-2.eps>
 File: Pictures/Plots/steps_bar_nonsm_parab_u_1-2.eps Graphic file (type eps)
-
-<Pictures/Plots/steps_bar_nonsm_parab_u_1-2.eps> [53] [54]
+ <Pictures/Plots/steps_bar_nonsm_parab_u_1-2.eps> [53] [54]
 File: Pictures/Plots/testfun_f1.eps Graphic file (type eps)
- <Pictures/Plots/testfun_f1.eps>
-File: Pictures/Plots/testfun_f2.eps Graphic file (type eps)
 
-<Pictures/Plots/testfun_f2.eps>
+<Pictures/Plots/testfun_f1.eps>
+File: Pictures/Plots/testfun_f2.eps Graphic file (type eps)
+ <Pictures/Plots/testfun_f2.eps>
 File: Pictures/Plots/testfun_f3.eps Graphic file (type eps)
  <Pictures/Plots/testfun_f3.eps>
 File: Pictures/Plots/testfun_f4.eps Graphic file (type eps)
- <Pictures/Plots/testfun_f4.eps>
-File: Pictures/Plots/testfun_f5.eps Graphic file (type eps)
 
-<Pictures/Plots/testfun_f5.eps>
-Overfull \hbox (15.27388pt too wide) in paragraph at lines 1070--1072
+<Pictures/Plots/testfun_f4.eps>
+File: Pictures/Plots/testfun_f5.eps Graphic file (type eps)
+ <Pictures/Plots/testfun_f5.eps>
+Overfull \hbox (15.27388pt too wide) in paragraph at lines 1078--1080
 \OMS/lmsy/m/n/12 f\OT1/lmr/m/n/12 20\OML/lmm/m/it/12 ; \OT1/lmr/m/n/12 25\OML/lmm/m/it/12 ; \OT1/lmr/m/n/12 30\OML/lmm/m
 /it/12 ; \OT1/lmr/m/n/12 40\OML/lmm/m/it/12 ; \OT1/lmr/m/n/12 50\OMS/lmsy/m/n/12 g$\T1/lmr/m/n/12 . The start-ing value 
 for each test prob-lem is $\OML/lmm/m/it/12 x[] \OT1/lmr/m/n/12 = \OML/lmm/m/it/12 left\OT1/lmr/m/n/12 (1\OML/lmm/m/it/1
@@ -1051,12 +1051,12 @@ File: Pictures/Plots/constant_noise.eps Graphic file (type eps)
  <Pictures/Plots/constant_noise.eps>
 File: Pictures/Plots/steps_constant_noise.eps Graphic file (type eps)
 
-<Pictures/Plots/steps_constant_noise.eps>
+<Pictures/Plots/steps_constant_noise.eps> [56]
 File: Pictures/Plots/vanishing_noise.eps Graphic file (type eps)
  <Pictures/Plots/vanishing_noise.eps>
 File: Pictures/Plots/steps_vanishing_noise.eps Graphic file (type eps)
 
-<Pictures/Plots/steps_vanishing_noise.eps> [56] [57]
+<Pictures/Plots/steps_vanishing_noise.eps> [57]
 File: Pictures/Plots/no_noise_comp.eps Graphic file (type eps)
  <Pictures/Plots/no_noise_comp.eps>
 File: Pictures/Plots/steps_no_noise_comp.eps Graphic file (type eps)
@@ -1089,12 +1089,7 @@ File: Pictures/Plots/Fold_2.eps Graphic file (type eps)
 File: Pictures/Plots/Fold_3.eps Graphic file (type eps)
 
 <Pictures/Plots/Fold_3.eps>
-Underfull \hbox (badness 1803) in paragraph at lines 792--804
-[][] []
- []
-
-
-Overfull \hbox (5.41344pt too wide) in paragraph at lines 821--823
+Overfull \hbox (5.41344pt too wide) in paragraph at lines 822--824
 []\OT1/lmr/m/n/12 (\OML/lmm/m/it/12 w[]\OT1/lmr/m/n/12 ) = 155\OML/lmm/m/it/12 :\OT1/lmr/m/n/12 9928$\T1/lmr/m/n/12 , $[
 ]\OT1/lmr/m/n/12 (\OML/lmm/m/it/12 w[]\OT1/lmr/m/n/12 ) = 22\OML/lmm/m/it/12 :\OT1/lmr/m/n/12 3560$ \T1/lmr/m/n/12 and $
 []\OT1/lmr/m/n/12 (\OML/lmm/m/it/12 w[]\OT1/lmr/m/n/12 ) = 37\OML/lmm/m/it/12 :\OT1/lmr/m/n/12 8554$ \T1/lmr/m/n/12 for 
@@ -1125,7 +1120,7 @@ File: Pictures/Plots/Scal100_llad-8f.eps Graphic file (type eps)
  <Pictures/Plots/Scal100_llad-8f.eps>
 File: Pictures/Plots/Scal100_llad-4f.eps Graphic file (type eps)
  <Pictures/Plots/Scal100_llad-4f.eps> [88]
-[89] [90] [91]) [92] [93]
+[89] [90] [91] [92]) [93]
 ("D:\Annika\Uni\10. Semester\Masterarbeit\Proximal Bundle Inexact Information\Git Hub\Masterarbeit\LaTeX\Chapters/Conclu
 sion.tex") [94
 
@@ -1212,12 +1207,12 @@ ix.aux")) )
 ### bottom level 
 Here is how much of TeX's memory you used:
  20819 strings out of 493922
- 437897 string characters out of 3142101
- 557422 words of memory out of 3000000
+ 437904 string characters out of 3142101
+ 555422 words of memory out of 3000000
  23512 multiletter control sequences out of 15000+200000
  98837 words of font info for 76 fonts, out of 3000000 for 9000
  841 hyphenation exceptions out of 8191
- 64i,23n,67p,828b,12267s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 64i,23n,67p,843b,12267s stack positions out of 5000i,500n,10000p,200000b,50000s
 
-Output written on Bundle_methods_for_nonsmooth_nonconvex_problems_with_inexact_information.dvi (116 pages, 419652 bytes)
+Output written on Bundle_methods_for_nonsmooth_nonconvex_problems_with_inexact_information.dvi (116 pages, 420412 bytes)
 .

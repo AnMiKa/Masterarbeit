@@ -38,6 +38,7 @@ Clarke regularity basicly means, that epigraph of a function \(f\) does not have
 
 It is assumed that both the function value as well as one element of the subdifferential can be provided in an inexact form.
 For the function value inexactness is defined straight forwardly: If 
+
 \begin{equation*}
 	\|f_x - f(x)\| \leq \sigma_x,
 \label{fun_inex}
@@ -46,6 +47,7 @@ For the function value inexactness is defined straight forwardly: If
 then \(f_x\) approximates the value \(f(x)\) within \(\sigma_x\). This is slightly different from the definition in (\ref{conv_inexactness_1}). In the convex case it follows from (\ref{sig_p_thet_subgr}) that \( \bar{\sigma} \geq \sigma_x \geq -\theta_x \geq - \bar{\theta}\) and therefore \(f_x \in [f(x)-\bar{\theta},f(x)+\bar{\sigma}]\) for the overall error bounds \(\bar{\sigma}\) and \(\bar{\theta}\).
 
 As the 'normal' \(\varepsilon\)-subdifferential is not defined for nonconvex functions we adopt the notation used in \cite{Noll2013} and interpret inexactness in the following way: \(g \in \R^n\) approximates a subgradient  of \( \partial f(x)\) within \(\theta \geq 0\) if
+
 \begin{equation*}
 	g_x \in \partial f(x) + B_{\theta}(0) =: \partial_{[\theta]}f(x)
 \label{subgr_inex}
@@ -55,7 +57,9 @@ where \(\partial f(x)\) is the Clarke subdifferential %\textcolor{red}{defined i
 of \(f\).
 
 The given definition of the inexactness can be motivated by the relation 
+
 	\[ g_x \in \partial_{[\theta]}f(x)\Leftrightarrow g_x \in \partial(f+\theta\|\cdot-x\|)(x) \]
+	
 noticed in \cite{Treiman1986}. It means that the approximation of the subgradient of \(f(x)\) is an exact subgradient of a small perturbation of \(f\) at \(x\).
 The set \(\partial_{[\varepsilon]}f(x)\) is also known as the Fréchet \(\varepsilon\)-subdifferential of \(f(x)\).
 
@@ -156,6 +160,7 @@ As already pointed out in section \ref{subsec_prox_op} the bundle subproblem can
 %\textcolor{red}{explain in much more detail when read about calculation of proximal points for nonconvex functions. At the moment just main ideas.}
 
 The idea is to use the relation
+
 \begin{equation*}
 	prox_{T = \frac{1}{\eta}+t, f}(x) = prox_{t,f+\eta/2\|\cdot - x\|^2}(x).
 \label{prox_relation}
@@ -204,6 +209,7 @@ The parameter \(\gamma \geq 0\) is a safeguarding parameter to keep the calculat
 
 
 The new model function can therefore be written as
+
 \begin{equation}
   M_k(\hat{x}^k +d) := \hat{f}_k + \max_{j \in J_k} \left\{\Langle s^k_j,d\Rangle -c^k_j \right\}.
 \label{aug_model}
@@ -222,6 +228,7 @@ The definitions of the \emph{augmented aggregate subgradient} \(S^k\),  \emph{er
 \end{align}
 
 The model decrease is
+
 \begin{equation}
 	\delta^k := C_k + t_k \|S^k + \nu^k\|^2 = C_k+\frac{1}{t_k}\|
 	d^k\|^2,
@@ -229,10 +236,12 @@ The model decrease is
 \end{equation}
 
 which contains the normal vector 
+
 \begin{equation}
 	\nu^k \in \partial\mathtt{i}_X(x^{k+1})
 	\label{nu}
 \end{equation}
+
 of the constraint set \(X\).
 
 The second formulation in (\ref{mod_dec2}) follows from the relation \(d^k = -t_k(S^k+\nu^k)\) which itself comes from the KKT-conditions.
@@ -337,7 +346,9 @@ This is not possible in the case of inexact information even for convex objectiv
 
 For asymptotically vanishing errors, meaning \(\lim_{k \to \infty} \sigma_k = 0 \) and \(\lim_{k \to \infty} \theta_k = 0 \) the convergence theory holds equally well with error bounds \(\bar{\sigma} = \bar{\theta} = 0\) in \cite[Lemma 5, p. 11]{Hare2016}. Still it is difficult if not impossible to show that the sequence \(\{\eta_k\}\) is bounded without further assumptions.
 Under the assumption that \(f\) is lower-\(\mathcal{C}^2\) and some continuity bounds on the errors
+
 \[ \frac{|\sigma_j-\hat{\sigma}_k|}{\|x^j-\hat{x}^k\|^2} \leq L_{\sigma}, \qquad \frac{\theta_j}{\|x^j-\hat{x}^k\|} \leq L_{\theta} \quad \forall k \text{ and } \forall j \in J_k\]
+
 boundedness of the sequence \(\{\eta_k\}\) can be shown. The question remains however if those assumptions are possible to be assured in practice.
 
 %\textcolor{red}{remark on \(\eta_k\)? how does it behave in my applications???}
@@ -459,36 +470,42 @@ In \cite{Hare2016} it is assumed, that the set \(\{j \in J^k \mid \alpha^k_j > 0
 In Remark 2 in \cite[p. 11]{Hare2016} it is mentioned that this is possible if the set \(X\) is polyhedral and an active-set solver is used to solve the subproblem.
 
 Another possibility to assure boundedness of the set, is the aggregation technique mentioned in section \ref{sec_agg}.
-In this context is has however to be mentioned, that it is not immediately clear if the proof of Lemma 5 in \cite[p. 11]{Hare2016} still holds in that case.
-For exact function and subgradient information convergence, of a very similar method to algorithm \ref{sec_nonconv_inex}.1 is proven also using of the aggregation technique in \cite{Hare2010}.
+It has however to be mentioned, that it is not immediately clear if the proof of Lemma 5 in \cite[p. 11]{Hare2016} still holds in that case.
+For exact function and subgradient information, convergence of a very similar method to algorithm \ref{sec_nonconv_inex}.1 is proven also using of the aggregation technique in \cite{Hare2010}.
 %For algorithm \ref{sec_nonconv_inex}.1 this lies beyond the scope of this thesis.
 
-The lemma states the following results:
+The lemma in question states the following results:
 \begin{lemma}[{\cite[Lemma 5, p. 11]{Hare2016}}]\label{Lemma5}
 	Suppose that the cardinality of the set \(\{j \in J^k\mid \alpha_j^k > 0\}\) is uniformly bounded in \(k\).
 	
 	(i) If \(C^k \to 0\) as \(k \to \infty\), then 
+	
 	\[ \sum_{j \in J^k}\alpha_j^k\|x^j-\hat{x}^k\| \to 0 \text{ as } k \to \infty. \]
 	
 	(ii) If additionally for some subset \(\tilde{K} \subset \{1,2,\dots\}\),
+	
 	\[\hat{x}^k \to \bar{x}, S^k \to \bar{S} \text{ as } K \ni k \to \infty, \text{ with } \{\eta_k\mid k \in \tilde{K}\} \text{ bounded,} \]
 	
 	then we also have 
+	
 	\[\bar{S} \in \partial f(\bar{x})+B_{\bar{\theta}}(0).\]
 	
 	(iii) If in addition \(S^k + \nu^k \to 0\) as \(\tilde{K} \in k \to \infty\), then \(\bar{x}\) satisfies the approximate stationarity condition 
+	
 	\begin{equation}
 		0 \in \left(\partial f(\bar{x}) + \partial \mathtt{i}_X(\bar{x}) \right) + B_{\bar{\theta}}(0).
 	\end{equation}
 	
 	(iv) Finally if \(f\) is also lower-\(\mathcal{C}^1\), then for each \(\varepsilon > 0\) there exists \(\rho > 0\) such that
+	
 	\begin{equation}
 		f(y) \geq f(\bar{x})-(\bar{\theta}+\varepsilon)\|y-\bar{x}\|-2\bar{\sigma}, \quad \text{ for all } y \in X\cap B_{\rho}(\bar{x}).
 	\end{equation}
+	
 \end{lemma}
 
 For algorithm \ref{sec_nonconv_inex}.1 it has to be shown that item (ii) of this lemma also holds if there are aggregate subgradients in the bundle.
-Here only the missing links are sketched to extend the proof to this case. The full proof can be found in \cite[p. 12]{Hare2016}
+Here only the missing links are sketched to extend the proof to this case. The full proof can be found in \cite[p. 12]{Hare2016}.
 
 Therefore let (as in \cite{Hare2016}) \(p^j\) denote for each \(j\)  the orthogonal projection of the approximate subgradient \(g^j\) on the closed convex set \(\partial f(x^j)\). Then it holds by assumption on the approximate subgradient that \(\Vert g^j-p^j\Vert \leq \theta_j \leq \bar{\theta}\).
 Furthermore let \(S^k_n\) denote the (augmented) aggregate subgradients in the \(k\)'th bundle.
@@ -497,11 +514,12 @@ The subscript \(n\) of \(S^k_n\) signals, that already \(n\) aggregate subgradie
 
 The proof works with induction over the number of aggregate subgradients contained in the current subgradient.
 
-Denote the multiplier of the \(k\)'th index set corresponding to the aggregate subgradient \(\alpha^k_n\). The remainder of the index set \(J^k\), corresponding to the approximate subgradients, is denoted by \(J^k_g\).
+Denote the multipliers of the \(k\)'th index set corresponding to the aggregate subgradient by \(\alpha^k_n\). The remainder of the index set \(J^k\), corresponding to the approximate subgradients, is denoted by \(J^k_g\).
 
-To begin the induction recall that at iteration \(k\) \(S^k_0 = \sum_{j \in J^k_g} \alpha^k_j(g^j+\eta_k(x^j-\hat{x}^k))\) by (\ref{aug_subgr}) and (\ref{aug_agg_subgr}) and that \(J^k_g = J^k\) in this case.
+To begin the induction recall that at iteration \(k\), \(S^k_0 = \sum_{j \in J^k_g} \alpha^k_j(g^j+\eta_k(x^j-\hat{x}^k))\) by (\ref{aug_subgr}) and (\ref{aug_agg_subgr}) and that \(J^k_g = J^k\) in this case.
 
 From this follows that
+
 \begin{align}
 \begin{split}
 	S^k_1 &= \sum_{j \in J^k_g}\alpha_j^k\left(g^j+\eta_k(x^j-\hat{x}^k)\right) + \alpha^k_n S^k_0 \\
@@ -514,7 +532,7 @@ From this follows that
 
 As it is explained in the paper, due to the uniform boundedness of the set \(J^k\) it is possible to consider this set as some fixed index set (for example \(\{1,...,N\}\)). Unused indices are filled with \(\alpha^k_j=0\). Let then \(J\) be the set of all \(j\in J^k\) such that \(\liminf_{k\to\infty}\alpha^k_j >0\). From item (i) of Lemma \ref{Lemma5} follows then that \(\Vert x^j-\hat{x}^k\Vert \to 0\). Hence also \(\Vert x^j-\bar{x}\Vert \leq \Vert x^j-\hat{x}^k\Vert + \Vert \hat{x}^k-\bar{x}\Vert \to 0 \).
 It holds that \(p^j \in \partial f(x^j)\) and \(x^j \to \bar{x}\) for \(j \in J\) and \(\{\alpha^k_j\} \to 0 \) for \(j \notin J\). Due to the boundedness of the subdifferentials (this follows from Lipschitz continuity of the function \(f\) and is explained in more detail for example in the proof of Theorem \ref{theo_inf_ser_steps}) passing on a subsequence \(K \subset \{1,2,...\}\) yields that there exists \(\bar{p}\) with \(p^j \to \bar{p}\) for \(j \in J\) and \(k \in K\).
-The second and fifth term in the third equation of equation \ref{calc_lem5_1} are in \(B_{\bar{\theta}}(0)\) and the third and sixth term go to zero.
+The second and fifth term in the third equation of equation (\ref{calc_lem5_1}) are in \(B_{\bar{\theta}}(0)\) and the third and sixth term go to zero.
 Then 
 
 \begin{align*}
@@ -542,9 +560,9 @@ The inductive step gives then:
 \end{split}
 \end{align}
 
-With the same argumentation as above it follows that in the limit the first tow terms of the second equation in (\ref{calc_lem5_2}) are in \(\partial f(\bar{x})+B_{\bar{\theta}}(0)\). 
+With the same argumentation as above it follows that in the limit the first two terms of the second equation in (\ref{calc_lem5_2}) are in \(\partial f(\bar{x})+B_{\bar{\theta}}(0)\). 
 From the induction assumption follows that also the last term is in \(\partial f(\bar{x})+B_{\bar{\theta}}(0)\).
-This proves item (ii) also for the use of aggregation technique.
+This proves item (ii) also for the use of the aggregation technique.
 
 %first show that also for aggregate gradients \(G^j\) one can find vectors \(P^j\) such that \(\Vert G^j-P^j\Vert \leq \bar{\theta}\).
 %

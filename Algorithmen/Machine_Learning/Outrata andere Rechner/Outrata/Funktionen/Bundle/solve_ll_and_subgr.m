@@ -1,11 +1,14 @@
-function [ W, grad_ul, subgr_ul ] = solve_ll_and_subgr( C, X, Y, tol )
+function [ W, grad_ul, subgr_ul ] = solve_ll_and_subgr( C, X, Y)
 %UNTITLED2 Summary of this function goes here
 %   Detailed explanation goes here
 
 %% General
-if nargin == 3
-    tol = 1e-15;
-end
+% if nargin == 3
+%     tol = 1e-15;
+% end
+
+tolll = 1e-10;
+tolad = 1e-5;
 
 [feat,J,T,G] = size(X);
 % number of features is actually feat+1 because of implicit bias
@@ -44,7 +47,7 @@ for t = 1:T
     b = (-ones(J*G*max(1,(T-1)),1));
     % solve QP with quadprog
     options = optimoptions('quadprog','MaxIterations',1000,'OptimalityTolerance',...
-        tol,'ConstraintTolerance',tol);
+        tolll,'ConstraintTolerance',tolll);
     [w,~,~,~,mult] = quadprog(H,[],A,b,[],[],[],[],[],options);
     % solution and multipliers
     W(:,t) = w(1:feat);
@@ -54,9 +57,9 @@ for t = 1:T
     
 %% find suitable set of weakly active indices M 
     % acitve indices
-    acalc0 = find(abs(Acalc) < 10*tol);
+    acalc0 = find(abs(Acalc) < 10*tolll);
     % multipliers = 0
-    mult0 = find(Mult < 10*tol);
+    mult0 = find(Mult < 10*tolll);
     % weakly active indices
     weakac = intersect(acalc0,mult0);
     % if no weakly active constraints, then M is empty
@@ -69,7 +72,7 @@ for t = 1:T
                 Xi((g-1)*J*max(1,(T-1))+1:g*J*max(1,(T-1)));
         end
         kerJCH  = null(JCHt);
-        cond = find(sum(Acalc(Mult(:,t) >= 10*tol,t)*kerJCH,1)> 1e-12);
+        cond = find(sum(Acalc(Mult(:,t) >= 10*tolll,t)*kerJCH,1)> 1e-12);
         if abs(sum(cond)-T) > 0 % what do I do if for all M possible? At the moment empty M
             % if corollary does not hold check theorem for all possible M
             % can use combnk to create power set but only if weakly active indices
@@ -85,7 +88,8 @@ for t = 1:T
     % *100 because of scaling of the objective function
     grad_ul(:,t) = 100*2/(G*J)*sum(max(1-Yv.*(Xv'*W(:,t)),0)'.*(-(delta.*Yv)'.*Xv),2);
     
-%% calculate the subgradients for the different folds    
+%% calculate the subgradients for the different folds 
+% contains solution of adjoint program
     % create matrices for use with quadprog
     % strongly active constraints
     strac = setdiff(acalc0,mult0);
@@ -95,7 +99,7 @@ for t = 1:T
     h = sparse([-grad_ul(:,t);zeros(J*G*max(1,(T-1)),1)]);
     % solve QP with quadprog
     options = optimoptions('quadprog','MaxIterations',1000,'OptimalityTolerance',...
-        tol,'ConstraintTolerance',tol);
+        tolad,'ConstraintTolerance',tolad);
     % solution of the adjoint problem
     p = quadprog(H,h,[],[],Aeq,beq,[],[],[],options);
     % calculation of the subgradient for the t'th fold

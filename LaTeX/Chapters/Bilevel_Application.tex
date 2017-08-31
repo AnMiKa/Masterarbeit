@@ -598,7 +598,7 @@ For stating the theorem the following definition is needed:
 \end{definition}
 
 \begin{theorem}[c.f. {\cite[Theorem 5.8, p. 96]{Outrata1998}}]
-	Suppose that LICQ holds at \((\tilde{w},\xi)\) and that the matrix \(\mathcal{J}_{(\tilde{w},\xi)}\left(\nabla_{(\tilde{w},\xi)}L(C,\tilde{w},\xi,\mu)\right)\) is strictly copositive with respect to the kernel of the matrix \(A_{I_+}\). \\
+	Suppose that the LICQ holds at \((\tilde{w},\xi)\) and that the matrix \(\mathcal{J}_{(\tilde{w},\xi)}\left(\nabla_{(\tilde{w},\xi)}L(C,\tilde{w},\xi,\mu)\right)\) is strictly copositive with respect to the kernel of the matrix \(A_{I_+}\). \\
 	Then the GE (\ref{GE}) is strongly regular at \((C,\tilde{w},\xi,\mu)\).
 \end{theorem}
 
@@ -774,44 +774,45 @@ Proving regularity for the particular instance (\ref{bilevel_fin}) of a bilevel 
 \subsection{Numerical Experiments}
 
 In this section the two bundle algorithms \ref{sec_nonconv_inex}.1 and \ref{sec_variable_metric}.1 are applied to solve the classification tasks described above.
-The algorithms are compared to the MATLAB routines \texttt{fminsearch} and \texttt{fminbnd} in the one dimensional case and to \texttt{fmincon} for the multiGroup application.
+The algorithms are compared to the MATLAB routines \texttt{fminsearch} and \texttt{fminbnd} in the one dimensional case and to \texttt{fmincon} for the multigroup application.
 
 %\textcolor{red}{more}
 
 \subsubsection{The Data}
-There are five data sets used. Two of them are real world data sets available on the UCI Machine Learning repository \cite{Lichman2013} and three synthetic data sets.
-The synthetic data sets were particularly designed for the optimization of the hyper-parameter \(C\).
+There are five data sets used. Two of them are real world data sets available on the UCI Machine Learning repository \cite{Lichman2013} and three are synthetic data sets.
+The synthetic data sets are particularly designed for the optimization of the hyper-parameter \(C\).
 
-A correct choice of the hyper-parameter is particularly important in the case were the data of the different folds is especially sensitive to overfitting.
+A correct choice of the hyper-parameter is particularly important in the case where the data of the different folds is especially sensitive to overfitting.
 This is the case in the following situation: The data of each of the different folds is nearly separable, but only with a rather small margin. Additionally, the optimal hyperplanes for the different folds have different directions from the optimal hyperplane, because they are only fitted to minimize the error on the training set.
 
-This situation is shown in the figures below for the synthetic data set \texttt{synsmall}.
+This situation is shown in the Figure \ref{fig_synsmall} below for the synthetic data set \texttt{synsmall}.
 
 
 \begin{figure}[ht]
 	\begin{subfigure}[t]{0.49\textwidth}
 		\includegraphics[width=\textwidth]{Pictures/Plots/plot_all_data_all_w.eps}
-	\end{subfigure}
+	\end{subfigure}%
+	\hfill
 	\begin{subfigure}[t]{0.49\textwidth}
 			\includegraphics[width=\textwidth]{Pictures/Plots/Fold_1.eps}
-	\end{subfigure}
+	\end{subfigure}\\
 	\begin{subfigure}[t]{0.49\textwidth}
 		\includegraphics[width=\textwidth]{Pictures/Plots/Fold_2.eps}
-	\end{subfigure}
+	\end{subfigure}%
+	\hfill
 	\begin{subfigure}[t]{0.49\textwidth}
 			\includegraphics[width=\textwidth]{Pictures/Plots/Fold_3.eps}
-	\end{subfigure}
-
-	\caption[Overfitting]{The figure on the top left shows the \textup{\texttt{synsmall}} data set. The solid line is the optimal decision line, with the margin indicated as dotted lines on either side of it. The unregularized decision boundaries for the single folds are drawn with dashed lines. \\
+	\end{subfigure}%
+	\caption[Overfitting]{The figure on the top left shows the \textup{\texttt{synsmall}} data set. The solid line is the optimal decision line with the margin indicated as dotted lines on either side of it. The unregularized decision boundaries for the single folds are drawn with dashed lines. \\
 	The other three plots show the training data corresponding to the first to third fold of the \textup{\texttt{synsmall}} set and the corresponding unregularized decision lines.}
 	\label{fig_synsmall}
 \end{figure}
 
 It can be seen, that the data sets of the different folds are all linearly separable, but only for very specific hyperplanes with a small margin.
 These hyperplanes can be found by leaving the regularization term \(\frac{1}{2}\Vert \tilde{w}\Vert\) out of the objective function.
-It can also be seen, that the optimal hyperplane found if \(C\) is chosen optimally, is similar to only two of the dashed lines. The line found for the second fold is very different to those.
+It can also be seen, that the optimal hyperplane found if \(C\) is chosen optimally, is similar to only two of the optimal planes of the folds. The hyperplane found for the second fold is very different to those two.
 
-The situation shown in the plots can also be expressed in numbers. Remember that the margin is proportional to the inverse of the norm of the vector \(w\). The matrix containing the vectors for the different folds is given as
+The situation shown in the plots can also be expressed in numbers. Recall that the margin is proportional to the inverse of the norm of the vector \(w\). The matrix containing the vectors for the different folds is given as
 
 \[ W = \begin{pmatrix} 116.7223 & 10.2238 & 26.9331 \\
                       -103.4875 & -19.8813& -26.6014\end{pmatrix}\]
@@ -821,23 +822,26 @@ and the bias as \(b = ( 20.2872, 0.7818, 0.679)\).
 One can already see that the norms of the vectors are rather large: The norms are \(\textup{norm}(w^1)= 155.9928\), \(\textup{norm}(w^2)= 22.3560\) and \(\textup{norm}(w^1)= 37.8554\) for \(W = (w^{1},w^2,w^3)\).
 Compare this to the optimal plane \((w,b)\): Here \(w = (2.7842, -2.9033)\), \(b =0.2239\) and \(\textup{norm}(w)=4.0226\).
 
-For linear classification, the danger of overfitting is rather small. This is also indicated by the fact that from a group of different real world data sets, only the two used here provide better results with the regularization term than without it.
+For linear classification, the danger of overfitting is relatively small, due to the simplicity of the class of linear functions. This is also indicated by the fact that, from a group of different real world data sets, only the two used here provide better results with the regularization term than without it.
 However, the chance of overfitting is higher the richer the class of functions is, that is used to separate the two classes \cite[p. 2-4]{Kunapuli2008}. This means, that in case of nonlinear classification overfitting can become a problem. 
 There is also a third situation where overfitting can occur more often. This is when the data set consists of relatively little data compared to the number of features. In this case overfitting can happen more often already for linear classification, because the high dimensional space in which the hyperplane lies offers more degrees of freedom to fit the plane to the data.
 
 The two real world data sets used in this thesis are the Breast Cancer Wisconsin data set and Johns Hopkins University Ionosphere database. We refer to them as \texttt{cancer} and \texttt{ionosphere}, respectively.
 The three two dimensional synthetic data sets are called \texttt{synbox}, \texttt{synsmall} and \texttt{synbig}.
 
-For the \texttt{synbox} data set, two groups of data were uniformly distributed over two boxes of size \(4\times2\). For the four different folds the boxes are located differently: In the first fold, the boxes are positioned directly above each other, without any overlapping. This means that the data in this fold is linearly separable.
+For the \texttt{synbox} data set, two groups of data are uniformly distributed over two boxes of size \(4\times2\). For the four different folds the boxes are located differently: In the first fold, the boxes are positioned directly above each other, without any overlapping. This means that the data in this fold is linearly separable.
 For the second to fourth fold, the upper box  is gradually pushed down 'into' the lower box, such that the data is not linearly separable any more.
 
-For the \texttt{synsmall} and the \texttt{synbig} data sets,  the two groups are normally distributed in two dimensions with mean being \(\mu^1 = (2,3)^{\top}\)for the first group and \(\mu^2 = (-1,9)^{\top}\) for the second group. The covariance is given by
- \[\Sigma = \begin{pmatrix}1.5 & 1.5\\1.5 & 3\end{pmatrix}\] for both groups. 
-The data set \texttt{synbig} is a very large data set to test the performance of the different algorithm when handling such data sets.
+For the \texttt{synsmall} and the \texttt{synbig} data sets,  the two classes are normally distributed in two dimensions with the mean being \(\mu^1 = (2,3)^{\top}\) for the first class and \(\mu^2 = (-1,9)^{\top}\) for the second class. The covariance is given by
+
+ \[\Sigma = \begin{pmatrix}1.5 & 1.5\\1.5 & 3\end{pmatrix}\]
+
+for both classes. 
+The data set \texttt{synbig} is a very large data set to test the performance of the different algorithms when handling such data sets.
 For both sets the different folds are chosen in a way that they are separable but the separating hyperplane does not give a good generalization.
 
-All data sets were standardized to have a zero mean and unit standard deviation. Then the data sets were split up into three (four) folds of equal size. It is shown in \cite[p. 47]{Kunapuli2008} that this is a reasonable number of folds.
-From the two real world data sets, a part of the data is hold back for validation purposes (in table \ref{tab_set_props} marked with \(n_v\)).
+All data sets were standardized to have a zero mean and unit standard deviation. Then the data sets were split up into three (or four) folds of equal size. It is shown in \cite[p. 47]{Kunapuli2008} that this is a reasonable number of folds.
+From the two real world data sets, a part of the data was held back for validation purposes (in Table \ref{tab_set_props} marked with \(n_v\)).
 The real world data sets were randomly put into the folds. For the synthetic data sets the folds were selected as described above. The number of instances and number of features of every data set is given in Table \ref{tab_set_props}. 
 
 \begin{center}
@@ -863,7 +867,7 @@ The real world data sets were randomly put into the folds. For the synthetic dat
 The bilevel problem (\ref{bilevel_fin}) is solved with the two presented bundle algorithms \ref{sec_nonconv_inex}.1 and \ref{sec_variable_metric}.1.
 For bilevel problems it is not possible to evaluate the upper level objective without solving the lower level problem first. Also additional steps are necessary to calculate a subgradient.
 
-For the numerical calculations done in this sections, the bundle algorithms therefore work after the following algorithmic pattern, which is inserted into the respective routines described in chapters \ref{sec_nonconv_inex} and \ref{sec_variable_metric}.
+For the numerical calculations done in this section, the bundle algorithms therefore work after the following algorithmic pattern, which is inserted into the respective routines described in chapters \ref{sec_nonconv_inex} and \ref{sec_variable_metric}.
 
 \begin{minipage}\linewidth
 \vspace{1em}
@@ -880,7 +884,7 @@ For \(k = 1,2,3,  \dotsc \)
 
 \begin{enumerate}
 	\item Calculate the step \(d^k\) by solving bundle subproblem (\ref{bundle_subprob_noncnov_inex}) or (\ref{Q_subprob}) and the new iterate \(C^{k+1} = C^k+d^k\).
-		\item Solve the lower level of bilevel problem (\ref{bilevel_fin}) with a QP solver for \(C^{k+1}\). 
+		\item Solve the lower level of bilevel problem (\ref{bilevel_fin}) with a QP solver for the given \(C^{k+1}\). 
 	\item Calculate a subgradient of the upper level function by solving the adjoint problem (\ref{adj_prob}).
 	\item Calculate the aggregate objects, update all necessary variables and test for a serious step as given in the respective bundle algorithm.
 	\item STOP if a stopping condition is matched.
@@ -895,7 +899,7 @@ Elements are added to the bundle if the corresponding Lagrange multiplier \(\alp
 %The constraint set that assures that all iterates of the bundle algorithms are bounded is the set \(\{\tilde{w} \in \R^{n_f} \mid \tilde{w}  \}\).
 For method \ref{sec_variable_metric}.1 the scaled BFGS update is used with the threshold being \(q=10^8\).
 Both algorithms stop if either the decrease measure \(\delta_k\) is smaller than a certain tolerance or if a maximum number of steps of 1000 is reached. The bundle subproblems are solved to a tolerance of \(10^{-15}\) or stop after 5000 iterations. They are solved with MATLAB's \texttt{quadprog}.
-Finally the overall optimization variable \(C\) is constrained component wise to \(10^{-5} < C < 10^4\).
+Finally, the overall optimization variable \(C\) is constrained component wise to \(10^{-5} < C < 10^4\).
 
 
 The bundle methods \ref{sec_nonconv_inex}.1 and \ref{sec_variable_metric}.1 are compared to different MATLAB routines.
@@ -907,8 +911,8 @@ All calculations were done on an Intel i5 2.6~GHz with four kernels.
 
 \subsubsection{One-dimensional Optimization}
 
-First the algorithms are tested for the one-dimensional case.
-Here the bundle methods are compared to the \texttt{fminbnd} algorithm \texttt{fminsearch}. Both can solve one-dimensional optimization problems.
+First, the algorithms are tested for the one-dimensional case.
+Here the bundle methods are compared to the \texttt{fminbnd} and \texttt{fminsearch}algorithms. Both can solve one-dimensional optimization problems only given the objective function.
 It has to be remarked here, that the \texttt{fminsearch} routine does not accept any bounds on the optimization variable. Strictly speaking it could thus give negative values for \(C\), which are infeasible. This did however not happen in any of the experiments.
 
 In the one dimensional case it is possible to plot the objective function values of the bilevel problem. The plots are given in Figure \ref{fig_C_vs_err}.
@@ -916,11 +920,12 @@ In the one dimensional case it is possible to plot the objective function values
 \begin{figure}[ht]
 	\begin{subfigure}{0.46\textwidth}
 		\includegraphics[width=\textwidth]{Pictures/Plots/CanIonBox_fin.eps}%
-	\end{subfigure}
+	\end{subfigure}%
+	\hfill
 	\begin{subfigure}{0.52\textwidth}
 		\includegraphics[width=\textwidth]{Pictures/Plots/SysSyb_fin.eps}%
 	\end{subfigure}
-	\caption[Objective function values]{Plots of the hingquad error for different $C$-values values. The figure on the left shows the plot for the \textup{\texttt{cancer}}, \textup{\texttt{ionosphere}} and \textup{\texttt{syn box}} data sets. The plot on the right depicts the situation for the sets \textup{\texttt{synsmall}} (left axis) and \textup{\texttt{synbig}} (right axis).}%
+	\caption[Objective function values]{Plots of the hingequad error for different $C$-values. The figure on the left shows the plot for the \textup{\texttt{cancer}}, \textup{\texttt{ionosphere}} and \textup{\texttt{synbox}} data sets. The plot on the right depicts the situation for the sets \textup{\texttt{synsmall}} (left axis) and \textup{\texttt{synbig}} (right axis).}%
 	\label{fig_C_vs_err}%
 \end{figure}
 
@@ -932,7 +937,7 @@ At first the behavior of the different algorithms regarding differently scaled u
 
 The starting values \(C_0 \) are taken from the set \(\{10^{-5},0.01,1,20,100\}\). The \texttt{fminbnd} algorithm does not need any starting value.
 In Figure \ref{fig_C_vs_err} it can be seen, that especially for the sets \texttt{synsmall} and \texttt{synbig} the objective functions are very flat. In order to increase the accuracy, the objective functions are scaled in the following experiment.
-We compare the unscaled version of the hingequadloss and a scaled version with scaling factor 100.
+We compare the unscaled version of the hingequad loss and a scaled version with scaling factor 100.
 The stopping tolerance of all methods is set to \(\texttt{tol} = 10^{-6}\).
 
 For this comparison the lower level problem as well as the adjoint problem of the bundle methods are solved with a tolerance of \(10^{-15}\) for the constraints and optimality condition.
@@ -941,12 +946,13 @@ Both problems are solved with the MATLAB QP solver \texttt{quadprog} which stops
 \begin{figure}[ht]
 	\begin{subfigure}{0.49\textwidth}
 		\includegraphics[width=\textwidth]{Pictures/Plots/Scal1_ll-15C.eps}%
-	\end{subfigure}
+	\end{subfigure}%
+	\hfill
 	\begin{subfigure}{0.49\textwidth}
 		\includegraphics[width=\textwidth]{Pictures/Plots/Scal100_ll-15C.eps}%
 	\end{subfigure}
-	\caption[Minimizer for different starting values and scalings]{The plots show the minimizers found by \textup{\texttt{fminseach}} and the two bundle methods for different starting values on the different data sets. For each data set, the lines next to each other show the result for the starting values \(C_0 = (10^{-5},0.01,1,20,100)\).\\
-	The Plot on the left shows the situation for the unscaled objective function. For the plot on the right the objective is scaled by 100.\\
+	\caption[Minimizers for different starting values and scalings]{The plots show the minimizers found by \textup{\texttt{fminseach}} and the two bundle methods for different starting values on the different data sets. For each data set, the lines next to each other show the result for the starting values \(C_0 = (10^{-5},0.01,1,20,100)\).\\
+	The plot on the left shows the situation for the unscaled objective function. For the plot on the right the objective is scaled by 100.\\
 	The first three data sets are measured with the scale on the left, the other two data sets with the scale on the right.}%
 	\label{fig_ll15_sc1100_C}%
 \end{figure}
@@ -954,12 +960,13 @@ Both problems are solved with the MATLAB QP solver \texttt{quadprog} which stops
 \begin{figure}[ht]
 	\begin{subfigure}{0.49\textwidth}
 		\includegraphics[width=\textwidth]{Pictures/Plots/Scal1_ll-15f.eps}%
-	\end{subfigure}
+	\end{subfigure}%
+	\hfill
 	\begin{subfigure}{0.49\textwidth}
 		\includegraphics[width=\textwidth]{Pictures/Plots/Scal100_ll-15f.eps}%
 	\end{subfigure}
-	\caption[Minimium for different starting values and scalings]{The plots show the minimal value found by \textup{\texttt{fminseach}} and the two bundle methods for different starting values on the different data sets. For each data set, the lines next to each other show the result for the starting values \(C_0 = (10^{-5},0.01,1,20,100)\).\\
-	The Plot on the left shows the situation for the unscaled objective function. For the plot on the right the objective is scaled by 100.\\
+	\caption[Minimal values for different starting values and scalings]{The plots show the minimal values found by \textup{\texttt{fminseach}} and the two bundle methods for different starting values on the different data sets. For each data set, the lines next to each other show the result for the starting values \(C_0 = (10^{-5},0.01,1,20,100)\).\\
+	The plot on the left shows the situation for the unscaled objective function. For the plot on the right the objective is scaled by 100.\\
 	The first three data sets are measured with the scale on the left, the other two data sets with the scale on the right.}%
 	\label{fig_ll15_sc1100_f}%
 \end{figure}
@@ -970,7 +977,7 @@ For the two bundle methods, it depends on the starting value, whether a good min
 For the \texttt{synsmall} data set it depends on the starting value, weather the local or the global minimum is found.
 
 For the starting value \(C_0 =1\) and the scaling factor 100 decent results are achieved.
-Hence for this parameter combination the results of all four methods used, are presented more accurately in table \ref{scal_100_ll15}.
+Hence for this parameter combination the results of all four methods used, are presented more accurately in Table \ref{scal_100_ll15}.
 
 \begin{table}[ht]%
 \centering
@@ -999,13 +1006,14 @@ Hence for this parameter combination the results of all four methods used, are p
 		& time (s)& 593 & 595 & 673/306\\
 		\hline
 \end{tabular}
-\caption[Minimizer, function value and computation time for accurately solved subproblems]{This table shows the minimizer, corresponding minimal function value and the needed computation time of the four tested routines \textup{\texttt{fminsearch}}, \textup{\texttt{fminbnd}}, algorithm \ref{sec_nonconv_inex}.1 and \ref{sec_variable_metric}.1.\\
+\caption[Minimizer, function value and computation time for accurately solved subproblems]{This table shows the minimizer, corresponding minimal function value and the needed computation time (in seconds) of the four tested routines \textup{\texttt{fminsearch}}, \textup{\texttt{fminbnd}}, algorithm \ref{sec_nonconv_inex}.1 and \ref{sec_variable_metric}.1.\\
 The starting value is \(C_0 = 1\) and the used objective function is scaled with 100.}
 \label{scal_100_ll15}
 \end{table}
 
 
-One can see that the MATLAB methods \texttt{fminsearch} and \texttt{fminbnd} solve the problem very accurately.% and reached the same values to the order depicted here, this is why the results are presented in only one row.
+One can see that the MATLAB methods \texttt{fminsearch} and \texttt{fminbnd} solve the problem very accurately.
+% and reached the same values to the order depicted here, this is why the results are presented in only one row.
 The routine \texttt{fminsearch} arrives at the same minimizers as \texttt{fminbnd}. Sometimes it needs however more computation time. This is particularly notable for the data set \texttt{synbig}, where \texttt{fminbnd} needs less than half of the solution time of \texttt{fminsearch}.
 Both algorithm reach the minimizers that can be identified from the plots to an accuracy of about \(10^{-6}\). For the \texttt{synsmall} data set they find the global minimum, not the local one.
 
@@ -1016,7 +1024,7 @@ A reason for this is, that the lower level problem needs more solution time due 
 As also the adjoint problem increases in size (the constraints of both, the lower level and the adjoint problem, scale with the number of data points) the bundle methods need more time solving the bilevel program.
 It can be seen, that the approach to find the subgradient via the adjoint problem is not appropriate for larger data sets.
 
-The bundle algorithms \ref{sec_nonconv_inex}.1 and \ref{sec_variable_metric}.1 show similar results in terms of computation time. Here the second order information used by algorithm \ref{sec_variable_metric}.1 has no measurable influence.
+The bundle algorithms \ref{sec_nonconv_inex}.1 and \ref{sec_variable_metric}.1 show similar results in terms of computation time. Here the second order information used by algorithm \ref{sec_variable_metric}.1 has no measurable influence although Figure \ref{fig_C_vs_err} suggests, that all objective functions are smooth.
 Both algorithms reach an accuracy of about \(10^{-3}\) of the minimizer compared to the MATLAB routines. The accuracy of the optimal found function value lies around \(10^{-4}\) for the objective scaled with 100 if a correct minimizer is found.
 
 
@@ -1025,7 +1033,8 @@ Both algorithms reach an accuracy of about \(10^{-3}\) of the minimizer compared
 
 %For the objective function scaled with 100 both bundle algorithms stop less often after the first step. On the other hand for this scaling it occurs tree times, that a bundle algorithm stops due to the number of steps. This does not happen with the unscaled objective.
 
-The convexification parameter \(\eta_k\) is assumed to stay bounded in \cite[p. 11]{Hare2016}. Although all of the objective functions have a ``generally convex'' form, the maximum \(\eta_k\) occurring in the algorithms is of order \(10^{6}\). Generally \(\eta_k\) seems to reach higher values for the scaled objective function as it can be seen in Table \ref{scal_100_ll15}.
+The convexification parameter \(\eta_k\) is assumed to stay bounded in \cite[p. 11]{Hare2016}. Although all of the objective functions have a ``generally convex'' form, the maximum \(\eta_k\) occurring in the algorithms is of order \(10^{6}\). Generally \(\eta_k\) seems to reach higher values for the scaled objective function.
+% as it can be seen in Table \ref{scal_100_ll15}.
 
 It is now tested, if a lower stopping tolerance of the bundle methods can increase their accuracy.
 For this experiment only the starting value \(C_0 = 1\) and the scaled objective function are taken.
@@ -1041,17 +1050,18 @@ All in all these insights suggest, that it is not possible, to achieve as exact 
 
 Finally the performance of the methods for different levels of accuracy is tested.
 To do this, algorithms \ref{sec_nonconv_inex}.1 and \ref{sec_variable_metric}.1 run with the lower level and adjoint problem only solved inaccurately.
-The different tolerances that are used are \(10^{-4}\) and \(10^{-8}\)  
+The different tolerances that are used are \(10^{-4}\) and \(10^{-8}\).  
 
 \begin{figure}[ht]
 	\begin{subfigure}{0.49\textwidth}
 		\includegraphics[width=\textwidth]{Pictures/Plots/Scal100_llad-8C.eps}%
-	\end{subfigure}
+	\end{subfigure}%
+	\hfill
 	\begin{subfigure}{0.49\textwidth}
 		\includegraphics[width=\textwidth]{Pictures/Plots/Scal100_llad-4C.eps}%
 	\end{subfigure}
-	\caption[Minimizer for different stopping tolerances of the lower level and adjoint program]{The Plots show the minimizers that are found for different stopping tolerances of the adjoint and lower level program.\\
-	The black bar over each set shows the result that is achieved with the \textup{\texttt{fminbnd}} method if the lower level problem is solved to a tolerance of \(10^{-15}\). The pink stem shows the result of \textup{\texttt{fminbnd}} for a tolerance of the lower level of \(10^{-8}\) in the left plot and \(10^{-4}\) in the right plot. The four following stems for each data set show the results of the combinations (from left to right): Lower level and adjoint problem solved for tolerance \(10^{-15}\); lower level solved for \(10^{15}\), adjoint for \(10^{-8}, 10^{-4}\); lower level solved for \(10^{-8},10^{-4}\) adjoint for \(10^{-15}\); lower level and adjoint problem solved for \(10^{-8},10^{-4}\)\\
+	\caption[Minimizers for different stopping tolerances of the lower level and adjoint program]{The plots show the minimizers that are found for different stopping tolerances of the adjoint and lower level program.\\
+	The black bar over each set shows the result that is achieved with the \textup{\texttt{fminbnd}} method if the lower level problem is solved to a tolerance of \(10^{-15}\). The pink stem shows the result of \textup{\texttt{fminbnd}} for a tolerance of the lower level of \(10^{-8}\) in the left plot and \(10^{-4}\) in the right plot. The four following stems for each data set show the results of the combinations (from left to right): Lower level and adjoint problem solved for tolerance \(10^{-15}\); lower level solved for \(10^{-15}\), adjoint for \(10^{-8}, 10^{-4}\); lower level solved for \(10^{-8},10^{-4}\) adjoint for \(10^{-15}\); lower level and adjoint problem solved for \(10^{-8},10^{-4}\), respectively.\\
 	The first three data sets are measured with the scale on the left, the other two data sets with the scale on the right.}%
 	\label{fig_llad84C}%
 \end{figure}
@@ -1059,29 +1069,30 @@ The different tolerances that are used are \(10^{-4}\) and \(10^{-8}\)
 \begin{figure}[ht]
 	\begin{subfigure}{0.49\textwidth}
 		\includegraphics[width=\textwidth]{Pictures/Plots/Scal100_llad-8f.eps}%
-	\end{subfigure}
+	\end{subfigure}%
+	\hfill
 	\begin{subfigure}{0.49\textwidth}
 		\includegraphics[width=\textwidth]{Pictures/Plots/Scal100_llad-4f.eps}%
 	\end{subfigure}
-	\caption[Minimal value for different stopping tolerances of the lower level and adjoint program]{The Plots show the minimial function values that are found for different stopping tolerances of the adjoint and lower level program.\\
-	The black bar over each set shows the result that is achieved with the \textup{\texttt{fminbnd}} method if the lower level problem is solved to a tolerance of \(10^{-15}\). The pink stem shows the result of \textup{\texttt{fminbnd}} for a tolerance of the lower level of \(10^{-8}\) in the left plot and \(10^{-4}\) in the right plot. The four following stems for each data set show the results of the combinations (from left to right): Lower level and adjoint problem solved for tolerance \(10^{-15}\); lower level solved for \(10^{15}\), adjoint for \(10^{-8}, 10^{-4}\); lower level solved for \(10^{-8},10^{-4}\) adjoint for \(10^{-15}\); lower level and adjoint problem solved for \(10^{-8},10^{-4}\).\\
+	\caption[Minimal values for different stopping tolerances of the lower level and adjoint program]{The plots show the minimial function values that are found for different stopping tolerances of the adjoint and lower level program.\\
+	The black bar over each set shows the result that is achieved with the \textup{\texttt{fminbnd}} method if the lower level problem is solved to a tolerance of \(10^{-15}\). The pink stem shows the result of \textup{\texttt{fminbnd}} for a tolerance of the lower level of \(10^{-8}\) in the left plot and \(10^{-4}\) in the right plot. The four following stems for each data set show the results of the combinations (from left to right): Lower level and adjoint problem solved for tolerance \(10^{-15}\); lower level solved for \(10^{-15}\), adjoint for \(10^{-8}, 10^{-4}\); lower level solved for \(10^{-8},10^{-4}\) adjoint for \(10^{-15}\); lower level and adjoint problem solved for \(10^{-8},10^{-4}\), respectively.\\
 	The first three data sets are measured with the scale on the left, the other two data sets with the scale on the right.}%
 	\label{fig_llad84f}%
 \end{figure}
 
 The other parameters are set in a way that achieved good results in the comparison before.
 Precisely this means that the objective function is scaled by 100 and the bundle methods start with value \(C_0 = 1\). 
-The found minimizers and minimal function values for the different combination of tolerances are depicted in figures \ref{fig_llad84C} and \ref{fig_llad84f} respectively.
+The found minimizers and minimal function values for the different combinations of tolerances are depicted in figures \ref{fig_llad84C} and \ref{fig_llad84f}, respectively.
 
 What can be seen is, that the solution tolerance of the adjoint problem does not show any influence on the accuracy of the bundle algorithms. The minimizer and the function value basically stay the same, no matter if the adjoint problem is solved for an accuracy of \(10^{-4}\), \(10^{-8}\) or \(10^{-15}\).
 The reason for this is, that the adjoint problem calculates the subgradient. It could already be seen in section \ref{sec_num_test_ferr}, that inexactness of the subgradient has a relatively small influence on the overall solution.
 
-The plots also show, that the solution accuracy of the lower level can have big influence on the value of the minimizer. This is also true for the results found by \texttt{fminbnd}.
+The plots also show, that the solution accuracy of the lower level can have a big influence on the value of the minimizer. This is also true for the results found by \texttt{fminbnd}.
 This results from the little change in the objective function values. It can be observed, that although the value of the minimizer is sometimes far away from the correct one, the resulting function value is still near the optimum.
 
-The final step of this analysis of the one-dimensional case is to study how much the 'worse' results of the bundle methods actually influence the generalization ability of the optimal model.
+The final step of this analysis of the one-dimensional case is to study how much the inexact results of the bundle methods actually influence the generalization ability of the optimal model.
 This is tested by calculating the misclassification error on the validation sets of the \texttt{cancer} and \texttt{ionosphere} data.
-Therefore, an optimal separating hyperplane \(\tilde{w}\) is calculated, given the optimal hyper-parameter \(C_{min}\). For this calculation all training data is used. The hyper-parameter has to be scaled by \(\frac{T}{T-1}, T >1\) \cite[p. 47]{Kunapuli2008} for the use with only one fold. 
+Therefore, an optimal separating hyperplane \(\tilde{w}\) is calculated, given the optimal hyper-parameter \(C_{min}\). For this calculation all training data is used. The hyper-parameter has thus to be scaled by \(\frac{T}{T-1}, T >1\) \cite[p. 47]{Kunapuli2008}. 
 As mentioned before, we use the misclassification loss as given in (\ref{misclass_loss}) to calculate the fraction of the data that is misclassified.
 %This result is compared to the minimal possible linear misclassification error on the validation data set.
 
@@ -1102,13 +1113,14 @@ As mentioned before, we use the misclassification loss as given in (\ref{misclas
 One can see, that the SVM problem itself is not too sensitive to the choice of the hyper-parameter.
 This means, that despite the fact, that the MATLAB routines provide better results in numbers, the bundle methods find an equally good hyperplane.
 
-To summarize this section it can be said, that in the one-dimensional case, the MATLAB routines outperform the bundle methods. The algorithm \texttt{fminbnd} finds very accurate results, often in less time than the bundle methods. Additionally it does not need a starting value.
-We can conclude, that in the one-dimensional case, the bundle algorithms work for solving the presented problem, but there are better options available.
+To summarize this section it can be said, that in the one-dimensional case, the MATLAB routines outperform the bundle methods in terms of reliability. The algorithm \texttt{fminbnd} finds very accurate results, often in less time than the bundle methods. Additionally it does not need a starting value.
+Nevertheless, also the bundle methods can provide hyper-parameters, that lead to good separating hyperplanes.
+We still conclude, that in the one-dimensional case, the bundle algorithms work for solving the presented problem, but there are better options available.
 
 \subsubsection{Multi-dimensional Optimization}
 
-In the multigroup approach, the data set is partitioned into different groups, that are each weighted with their own parameter \(C_g\).
-To calculate the optimal value of all these parameter results in a multi-dimensional optimization problem.
+In the multigroup approach, the data set is partitioned into different groups, that are each weighted with their own hyper-parameter \(C_g\).
+To calculate the optimal value of all these parameters results in a multi-dimensional optimization problem.
 
 In this section the bundle algorithms \ref{sec_nonconv_inex}.1 and \ref{sec_variable_metric}.1 are compared to the matlab method \texttt{fmincon}. This method is suitable for the solution of a very wide range of constrained multi-dimensional optimization problems. They can be nonlinear and do not have to be convex.
 
@@ -1124,20 +1136,21 @@ The following data sets are used for the comparison:
 	\texttt{cancer2} & 678 & 9 & 3 & 2\\
 	\texttt{cancer3} & 678 & 9 & 3 & 2\\
 	\texttt{cancer4} & 675 & 9 & 3 & 3\\
-	\texttt{ionospere1} & 960 & 33 & 3 & 4\\
+	\texttt{ionosphere1} & 960 & 33 & 3 & 4\\
 	\texttt{ionosphere2} & 348 & 33 & 3 & 2 \\
 	%\texttt{synsmall1} & 1800 & 2 & 2 & 3 \\
 	%\texttt{synbox1} & 2400 & 2 & 4 & 3 \\
 	\hline
 \end{tabular}
-\caption[Properties of the data sets for multi-dimensional optimization]{Properties of the data sets for multi-dimensional optimization.}
-\label{}
+\caption[Properties of data sets, multi-dimensional optimization]{Properties of the data sets for multi-dimensional optimization.}
+\label{Prop_mD}
 \end{table}
 
 They are constructed in the following ways:
-The sets \texttt{cancer1}, and \texttt{ionosphere1} are constructed by duplicating the original data sets \(G\) and adding different amounts of uniformly distributed noise on the data of the different groups.
+The sets \texttt{cancer1}, and \texttt{ionosphere1} are constructed by duplicating the original data sets \(G\) times and adding different amounts of uniformly distributed noise on the data of the different groups.
+The noise is not added to the first group.
 The sets \texttt{cancer2}, \texttt{cancer3}, \texttt{cancer4} and \texttt{ionosphere2} are constructed by using also the validation data of the original data sets and partitioning it  randomly in \(G\) groups of equal size.
-For the \texttt{cancer2} data set, there is additionally noise added to the second group.
+For the \texttt{cancer2} data set, there is additionally uniformly distributed noise added to the second group.
 
 First the multigroup bilevel problem is solved by the three algorithms \texttt{fmincon}, \ref{sec_nonconv_inex}.1 and \ref{sec_variable_metric}.1 for all data sets. The objective function is again scaled by 100. The stopping conditions are meeting the stopping tolerance \texttt{tol} \(=10^{-6}\) and exceeding the maximal number of steps (1000).
 All subproblems are calculated to a  tolerance of \(10^{-10}\).
@@ -1146,7 +1159,24 @@ The starting values for the different dimensions are set to
 
 Table \ref{tab_MG} show the results for the different algorithms.
 
-\begin{table}[ht]%
+
+It can be seen, that again the MATLAB routine \texttt{fmincon} reaches the lowest function values. However often the computation time takes also longer than the ones of the two bundle methods.
+An interesting fact is, that the various found minimizers are very different from each other.
+This might be due to the flat shape of the objective functions, which can be observed in the two-dimensional case.
+However, scaling the objective function with higher numbers gives no better results for the bundle methods.
+For the sets \texttt{cancer1}, \texttt{cancer3} and \texttt{ionosphere1} it can not be detected, that the groups with the added noise are weighted consistently lower, than the exact group.
+
+The function values decrease for the bundle methods if the subproblem is solved to a higher accuracy (here \(10^{-15}\)). For \texttt{fmincon} this effect is barely measurable. 
+However, the computation time is about doubled for \texttt{fmincon} in that case, whereas it does not rise for the bundle algorithms.
+This indicates, that in the nearly exact case, the bundle algorithm may profit from the subgradient information.
+Like in the one-dimensional case, it does not influence the results if the adjoint problem is computed to a lower tolerance.
+The same holds true if the stopping tolerance is lowered.
+This is also as expected, since the same behavior can also be seen in the one-dimensional case.
+
+We remark that the parameter \(\eta_k\) reaches high values up to \(10^8\) for both bundle methods.
+
+
+\begin{table}[H]%
 \centering
 \begin{tabular}{|l|c|c|c|c|}
 	\hline
@@ -1185,30 +1215,18 @@ Table \ref{tab_MG} show the results for the different algorithms.
 	%& time & \\
 	%\hline
 \end{tabular}
-\caption[Minimizer, function value and computation time for the multigroup problem]{This table shows the minimizer, corresponding minimal function value and the needed computation time of the three tested routines \textup{\texttt{fmincon}}, algorithm \ref{sec_nonconv_inex}.1 and \ref{sec_variable_metric}.1.\\
+\caption[Minimizer, function value and computation time for the multigroup problem]{This table shows the minimizer, corresponding minimal function value and the needed computation time (in seconds) of the three tested routines \textup{\texttt{fmincon}}, algorithm \ref{sec_nonconv_inex}.1 and \ref{sec_variable_metric}.1.\\
 The used objective function is scaled with 100.}
 \label{tab_MG}
-\end{table}
+\end{table}%
 
-It can be seen, that again the MATLAB routine \texttt{fmincon} reaches the lowest function values. However often the computation time is also longer than the ones of the two bundle methods.
-An interesting fact is, that the various found minimizers are very different from each other.
-This might be due to the flat shape of the objective functions, which can be observed in the two-dimensional case.
-However, scaling the objective function with higher numbers gives even worse results for the bundle methods.
-For the sets \texttt{cancer1}, \texttt{cancer3} and \texttt{ionosphere1} it can not be detected, that the groups with the added noise are weighted consistently lower, than the exact group.
-
-The function values decrease for the bundle methods if the subproblem is solved to a higher accuracy (here \(10^{-15}\)). For \texttt{fmincon} this effect is barely measurable. 
-However, the computation time is about doubled for \texttt{fmincon} in that case, whereas it does not rise for the bundle algorithms.
-This indicates, that in the nearly exact case, the bundle algorithm may profit from the subgradient information.
-Like in the one-dimensional case, it does not influence the results if the adjoint problem is computed to a lower tolerance.
-The same holds true if the stopping tolerance is lowered.
-This is as expected, since the same behavior can also be seen in the one-dimensional case.
-
-We remark that the parameter \(\eta_k\) reaches high values up to \(10^8\) for both bundle methods.
 
 As in the one-dimensional case we close this analysis by comparing how well the generated models work on unseen data.
 Therefore we compute the optimal hyperplanes, given the optimal hyper-parameters \(C_{min}\), on the whole set of training data.
 Then this hyperplane is used to classify the validation set and the numbers of misclassified points are compared.
 The hyper-parameters are scaled in the same way as above to compensate for using only one fold.
+
+
 
 \begin{table}[ht]%
 \centering
@@ -1219,20 +1237,21 @@ The hyper-parameters are scaled in the same way as above to compensate for using
 	\texttt{cancer1} & 0.038374 & 0.038374 & 0.036117\\
 	\texttt{cancer2} & 0.027088 & 0.033860 & 0.031602\\
 	\texttt{cancer3} & 0.029345 & 0.029345 & 0.029345\\
-	\texttt{cancer4} & 0.027088 & 0.029345 & 0.0293453\\
+	\texttt{cancer4} & 0.027088 & 0.029345 & 0.029345\\
 	\texttt{ionosphere1} & 0.198198 & 0.216216 & 0.198198\\
 	\texttt{ionosphere2} & 0.144144 & 0.135135 & 0.144144\\
 	\hline
 \end{tabular}
-\caption[Misclassification error for multi-dimensional data]{Misclassification error on the validation data. The separating hyperplane is generated using the \(C_{min}\) value found by the respective optimization algorithm.}
+\caption[Misclassification error for multigroup problem]{Misclassification error on the validation data. The separating hyperplane is generated using the \(C_{min}\) value found by the respective optimization algorithm.}
 \label{misclass_mD}
 \end{table}
 
-Again it can be observed, that the variance in the hyper-parameter does not result in an equally board variance of the misclassification error.
+Again it can be observed, that the variance in the hyper-parameter does not result in an equally broad variance of the misclassification error.
 
 All in all, we conclude that again both bundle algorithms, \ref{sec_nonconv_inex}.1 and \ref{sec_variable_metric}.1, are able to solve the given bilevel problem.
-The minimizers, that are found by the various algorithms, are very different. Still the computed loss function values are close together. The \texttt{fmincon} routine is able to generate the lowest function values.
+The minimizers, that are found by the various algorithms, are very different. Still, the computed loss function values are close together. The \texttt{fmincon} routine is able to generate the lowest function values.
 The bundle algorithms can compare to the computation time of the MATLAB algorithm and for very accurately calculated inner level problems, they outperform \texttt{fmincon} in terms of computation time.
+The generalization ability of all methods is similar.
 %A possible reason for this could be the special form of the objective functions, which is really flat with very high peaks or edges.
 
 

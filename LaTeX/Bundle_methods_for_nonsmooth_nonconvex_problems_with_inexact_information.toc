@@ -2,9 +2,9 @@
 \select@language {english}
 \contentsline {section}{Abstract}{iii}
 \contentsline {section}{German Summary}{iv}
-\contentsline {section}{List of Symbols}{viii}
-\contentsline {section}{List of Tables}{x}
-\contentsline {section}{List of Figures}{x}
+\contentsline {section}{List of Figures}{v}
+\contentsline {section}{List of Tables}{vi}
+\contentsline {section}{List of Symbols}{vii}
 \contentsline {section}{\numberline {1}Introduction}{1}
 \contentsline {section}{\numberline {2}Preliminaries}{3}
 \contentsline {subsection}{\numberline {2.1}Notation}{3}
@@ -46,7 +46,7 @@
 \contentsline {subsubsection}{\numberline {6.4.2}Adaptive Scaling of Single Eigenvalues}{46}
 \contentsline {subsubsection}{\numberline {6.4.3}Other Updating Possibilities}{48}
 \contentsline {subsection}{\numberline {6.5}Numerical Tests}{49}
-\contentsline {subsubsection}{\numberline {6.5.1}Academic Test Examples}{50}
+\contentsline {subsubsection}{\numberline {6.5.1}Academic Test Examples}{51}
 \contentsline {subsubsection}{\numberline {6.5.2}Test Examples in Higher Dimensions}{54}
 \contentsline {section}{\numberline {7}Application to Model Selection for Primal SVM}{60}
 \contentsline {subsection}{\numberline {7.1}Introduction}{60}
